@@ -383,7 +383,7 @@ function LinkObject(root_object_val, my_name_val, link_id_val, link_id_index_val
                 if (data.c_data === "job is done") {
                     //this.ajaxObject().getSessionData(session);
                 }
-                session.receiveData(data.res_data, data.c_data);
+                //session.receiveData(data.res_data, data.c_data);
                 this.ajaxObject().getSessionData(session);
             }
         }
@@ -393,11 +393,10 @@ function LinkObject(root_object_val, my_name_val, link_id_val, link_id_index_val
         this.debug(false, "getSessionDataResponse", "data=" + json_data_val);
         var data = JSON.parse(json_data_val);
         if (data) {
-            this.debug(true, "getSessionDataResponse", "data=" + data.res_data);
             this.debug(true, "getSessionDataResponse", "data=" + data.c_data);
             var session = this.getSession(data.session_id);
             if (session) {
-                session.receiveData(data.c_data, data.c_data);
+                session.receiveData(data.c_data);
             }
         }
     };

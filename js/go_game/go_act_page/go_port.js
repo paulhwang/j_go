@@ -66,7 +66,7 @@ function GoPlayPortObject(root_val) {
         this.sessionObject().transmitData(data_val);
     };
 
-    this.receiveData = function (res_data_val, c_data_val) {
+    this.receiveData = function (c_data_val) {
         this.debug(true, "receiveData", "c_data_val=" + c_data_val);
         this.boardObject().decodeBoard(c_data_val);
         this.displayObject().drawBoard();
