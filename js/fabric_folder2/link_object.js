@@ -140,7 +140,7 @@ function LinkObject(root_object_val, my_name_val, link_id_val, link_id_index_val
         if (!session) {
             return null;
         }
-        this.sessionIndexArray().push(session.sessionId());
+        this.sessionIndexArray().push(session.sessionIdIndex());
         this.sessionTableArray().push(session);
         return session;
     };
@@ -378,7 +378,7 @@ function LinkObject(root_object_val, my_name_val, link_id_val, link_id_index_val
         this.debug(true, "putSessionDataResponse", "data=" + json_data_val);
         var data = JSON.parse(json_data_val);
         if (data) {
-            var session = this.getSession(data.session_id);
+            var session = this.getSession(data.session_id_index);
             if (session) {
                 if (data.c_data === "job is done") {
                     //this.ajaxObject().getSessionData(session);
@@ -390,11 +390,11 @@ function LinkObject(root_object_val, my_name_val, link_id_val, link_id_index_val
     };
 
     this.getSessionDataResponse = function (json_data_val) {
-        this.debug(false, "getSessionDataResponse", "data=" + json_data_val);
+        this.debug(true, "getSessionDataResponse", "data=" + json_data_val);
         var data = JSON.parse(json_data_val);
         if (data) {
             this.debug(true, "getSessionDataResponse", "data=" + data.c_data);
-            var session = this.getSession(data.session_id);
+            var session = this.getSession(data.session_id_index);
             if (session) {
                 session.receiveData(data.c_data);
             }
