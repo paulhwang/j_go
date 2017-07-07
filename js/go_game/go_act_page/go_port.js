@@ -67,37 +67,10 @@ function GoPlayPortObject(root_val) {
     };
 
     this.receiveData = function (res_data_val, c_data_val) {
-        this.debug(true, "receiveData", "res_data_val=" + res_data_val);
-
-        var res_data = JSON.parse(res_data_val);
-
-        if (res_data.board_data !== null) {
-            var board_data = res_data.board_data.slice(this.GO_PROTOCOL_CODE_SIZE);
-            board_data = c_data_val;
-            this.debug(true, "receiveData", "board_data=" + board_data);
-            this.boardObject().decodeBoard(board_data);
-            this.displayObject().drawBoard();
-        }
-
-        if (res_data.game_is_over === false) {
-            this.gameObject().clearGameIsOver();
-        } else if (res_data.game_is_over === true) {
-            this.gameObject().setGameIsOver();
-        } else {
-            this.abend("receiveData", "game_is_over");
-        }
-
-        if (res_data.black_score !== null) {
-            this.gameObject().setBlackScoreString(res_data.black_score);
-        }
-
-        if (res_data.white_score !== null) {
-            this.gameObject().setWhiteScoreString(res_data.white_score);
-        }
-
-        if (res_data.final_score !== null) {
-            this.gameObject().setFinalScoreString(res_data.final_score);
-        }
+        this.debug(true, "receiveData", "c_data_val=" + c_data_val);
+        this.boardObject().decodeBoard(c_data_val);
+        this.displayObject().drawBoard();
+        return;
     };
 
     this.debug = function (debug_val, str1_val, str2_val) {
