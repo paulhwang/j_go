@@ -88,11 +88,11 @@ function SessionObject(link_object_val, session_id_index_val) {
         return  this.linkObject().linkIdIndex() + ":" + this.sessionIdIndex();
     };
 
-    this.setSessionId = function (val) {
-        if (this.sessionId()) {
-            this.abend("setSessionId", "already exist");
+    this.setSessionIdIndex = function (val) {
+        if (this.sessionIdIndex()) {
+            this.abend("setSessionIdIndex", "already exist");
         }
-        this.theSessionId = val;
+        this.theSessionIdIndex = val;
     };
 
     this.transmitData = function (data_val) {
