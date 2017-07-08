@@ -88,7 +88,7 @@ function LinkObject(root_object_val, my_name_val, link_id_val, link_id_index_val
     };
 
     this.verifyLinkId = function (id_val) {
-        if (this.linkId() === id_val) {
+        if (this.linkIdIndex() === id_val) {
             return true;
         } else {
             return false;
@@ -171,7 +171,7 @@ function LinkObject(root_object_val, my_name_val, link_id_val, link_id_index_val
         if (!data) {
             return;
         }
-        if (!this.verifyLinkId(data.link_id)) {
+        if (!this.verifyLinkId(data.link_id_index)) {
             this.abend("parseAjaxResponseData", "link_id=" + data.link_id);
             return;
         }
