@@ -131,7 +131,7 @@ function LinkObject(root_object_val, my_name_val, link_id_val, link_id_index_val
     };
 
     this.mallocSessionAndInsert = function (session_id_val, session_id_index_val) {
-        var session = new SessionObject(this, session_id_val, session_id_index_val);
+        var session = new SessionObject(this, session_id_index_val);
         if (!session) {
             return null;
         }
@@ -188,11 +188,6 @@ function LinkObject(root_object_val, my_name_val, link_id_val, link_id_index_val
         var data = JSON.parse(input_val);
         if (data) {
             this.setLinkUpdateInterval(data.interval);
-
-            //if (data.name_list) {
-            //    this.debug(true, "getLinkDataResponse", "name_list=" + data.name_list);
-            //    this.ajaxObject().getNameList(this);
-            //}
 
             if (data.pending_session_data) {
                 this.debug(true, "getLinkDataResponse", "pending_session_data=" + data.pending_session_data);
