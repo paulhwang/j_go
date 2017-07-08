@@ -130,7 +130,7 @@ function LinkObject(root_object_val, my_name_val, link_id_val, link_id_index_val
         this.nameList()[index_val] = data_val;
     };
 
-    this.mallocSessionAndInsert = function (session_id_val, session_id_index_val) {
+    this.mallocSessionAndInsert = function (session_id_index_val) {
         var session = new SessionObject(this, session_id_index_val);
         if (!session) {
             return null;

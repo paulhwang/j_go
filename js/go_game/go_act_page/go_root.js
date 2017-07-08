@@ -20,7 +20,7 @@ function GoPlayRootObject() {
         this.theInputObject = new GoPlayInputObject(this);
         this.theDisplayObject = new GoPlayDisplayObject(this);
 
-        this.theSessionObject = this.linkObject().mallocSessionAndInsert(this.sessionStorageObject().sessionId(), this.sessionStorageObject().sessionIdIndex());
+        this.theSessionObject = this.linkObject().mallocSessionAndInsert(this.sessionStorageObject().sessionIdIndex());
         this.sessionObject().setTopicObject(this.portObject());
 
         this.debug(true, "init__", "userName=" + this.linkStorageObject().userName() + " linkId=" + this.linkStorageObject().linkId() + " sessionId=" + this.sessionStorageObject().sessionId());
