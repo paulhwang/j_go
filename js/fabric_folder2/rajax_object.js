@@ -9,7 +9,6 @@ function RAjaxObject(root_object_val) {
     this.init__ = function (root_object_val) {
         this.theRootObject = root_object_val;
         this.initSwitchTable();
-        this.ajaxObject().getLinkData(this);
         this.debug(true, "init__", "");
     };
 
@@ -21,8 +20,8 @@ function RAjaxObject(root_object_val) {
         return this.theRootObject;
     };
 
-    this.ajaxObject = function () {
-        return this.rootObject().ajaxObject();
+    this.tAjaxObject = function () {
+        return this.rootObject().tAjaxObject();
     };
 
     this.switchTable = function () {

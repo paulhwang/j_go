@@ -7,6 +7,7 @@ function GoPlayRootObject() {
     "use strict";
 
     this.init__ = function () {
+        this.theRAjaxObject = new RAjaxObject(this);
         this.theTAjaxObject = new TAjaxObject(this);
         this.theLinkStorageObject = new LinkStorageObject();
         this.theLinkObject = new LinkObject(this, this.linkStorageObject().userName(), this.linkStorageObject().linkIdIndex());
@@ -65,6 +66,10 @@ function GoPlayRootObject() {
 
     this.tAjaxObject = function () {
         return this.theTAjaxObject;
+    };
+
+    this.rAjaxObject = function () {
+        return this.theRAjaxObject;
     };
 
     this.configObject = function () {
