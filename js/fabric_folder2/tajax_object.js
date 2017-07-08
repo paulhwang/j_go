@@ -1,10 +1,11 @@
 /*
   Copyrights reserved
-  Written by Paul Hwang since 2017
+  Written by Paul Hwang
+  File name: tajax_object.js
 */
 
 
-function AjaxObject(root_object_val) {
+function TAjaxObject(root_object_val) {
     "use strict";
 
     this.init__ = function (root_object_val) {
@@ -16,7 +17,7 @@ function AjaxObject(root_object_val) {
     };
 
     this.objectName = function () {
-        return "AjaxObject";
+        return "TSAjaxObject";
     };
 
     this.debugOutput = function () {

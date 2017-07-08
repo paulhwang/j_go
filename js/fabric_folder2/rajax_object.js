@@ -3,91 +3,26 @@
  * Written by Paul Hwang
  */
 
-function LinkObject(root_object_val, my_name_val, link_id_index_val) {
+function RAjaxObject(root_object_val) {
     "use strict";
 
-    this.init__ = function (root_object_val, my_name_val, link_id_index_val) {
+    this.init__ = function (root_object_val) {
         this.theRootObject = root_object_val;
-        this.theNameList = [];
-        this.theMyName = my_name_val;
-        this.theLinkIdIndex = link_id_index_val;
         this.initSwitchTable();
-        this.theNameListTag = 0;
-        this.theSessionIndexArray = [0];
-        this.theSessionTableArray = [null];
         this.ajaxObject().getLinkData(this);
-        this.debug(true, "init__", "linkIdIndex=" + this.linkIdIndex() + " myName=" + this.myName());
-    };
-
-    this.hisName = function () {//////////////////////
-        return "LinkObject";
-    };
-
-    this.gameName = function () {///////////////////////////
-        return "Go";
+        this.debug(true, "init__", "");
     };
 
     this.objectName = function () {
-        return "LinkObject";
+        return "RAjaxObject";
     };
 
     this.rootObject = function () {
         return this.theRootObject;
     };
 
-    this.linkStorageObject = function () {
-        return this.rootObject().linkStorageObject();
-    };
-
-    this.sessionStorageObject = function () {
-        return this.rootObject().sessionStorageObject();
-    };
-
-    this.htmlObject = function () {
-        return this.rootObject().htmlObject();
-    };
-
     this.ajaxObject = function () {
         return this.rootObject().ajaxObject();
-    };
-
-    this.myName = function () {
-        return this.theMyName;
-    };
-
-    this.linkIdIndex = function () {
-        return this.theLinkIdIndex;
-    };
-
-    this.sessionIndexArray = function () {
-        return this.theSessionIndexArray;
-    };
-
-    this.sessionTableArray = function () {
-        return this.theSessionTableArray;
-    };
-
-    this.sessionTableArrayLength = function () {
-        return this.sessionTableArray().length;
-    };
-
-    this.sessionTableArrayElement = function (val) {
-        return this.sessionTableArray()[val];
-    };
-
-    this.setLinkIdIndex = function (val) {
-        if (this.linkIdIndex()) {
-            this.abend("setLinkIdIndex", "already exist");
-        }
-        this.theLinkIdIndex = val;
-    };
-
-    this.verifyLinkIdIndex = function (id_val) {
-        if (this.linkIdIndex() === id_val) {
-            return true;
-        } else {
-            return false;
-        }
     };
 
     this.switchTable = function () {
@@ -128,26 +63,6 @@ function LinkObject(root_object_val, my_name_val, link_id_index_val) {
 
     this.setNameListElement = function (index_val, data_val) {
         this.nameList()[index_val] = data_val;
-    };
-
-    this.mallocSessionAndInsert = function (session_id_index_val) {
-        var session = new SessionObject(this, session_id_index_val);
-        if (!session) {
-            return null;
-        }
-        this.sessionIndexArray().push(session.sessionIdIndex());
-        this.sessionTableArray().push(session);
-        return session;
-    };
-
-    this.getSession = function (session_id_val) {
-        var index = this.sessionIndexArray().indexOf(session_id_val);
-        if (index === -1) {
-            return null;
-        } else {
-            var session =this.sessionTableArray()[index];
-            return session;
-        }
     };
 
     this.initSwitchTable = function () {
@@ -405,6 +320,6 @@ function LinkObject(root_object_val, my_name_val, link_id_index_val) {
         return ABEND(this.objectName() + "." + str1_val, str2_val);
     };
 
-    this.init__(root_object_val, my_name_val, link_id_index_val);
+    this.init__(root_object_val);
 }
 

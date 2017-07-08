@@ -15,7 +15,7 @@ function LinkObject(root_object_val, my_name_val, link_id_index_val) {
         this.theNameListTag = 0;
         this.theSessionIndexArray = [0];
         this.theSessionTableArray = [null];
-        this.ajaxObject().getLinkData(this);
+        this.tAjaxObject().getLinkData(this);
         this.debug(true, "init__", "linkIdIndex=" + this.linkIdIndex() + " myName=" + this.myName());
     };
 
@@ -47,8 +47,8 @@ function LinkObject(root_object_val, my_name_val, link_id_index_val) {
         return this.rootObject().htmlObject();
     };
 
-    this.ajaxObject = function () {
-        return this.rootObject().ajaxObject();
+    this.tAjaxObject = function () {
+        return this.rootObject().tAjaxObject();
     };
 
     this.myName = function () {
@@ -219,7 +219,7 @@ function LinkObject(root_object_val, my_name_val, link_id_index_val) {
                 this.debug(true, "getLinkDataResponse==============", "name_list_tag=" + name_list_tag);
                 if (name_list_tag > this.nameListTag()) {
                 this.debug(true, "getLinkDataResponse==============!!!", "name_list_tag=" + this.nameListTag());
-                    this.ajaxObject().getNameList(this);
+                    this.tAjaxObject().getNameList(this);
                 }
                 c_data = c_data.slice(3);
             }
@@ -232,14 +232,14 @@ function LinkObject(root_object_val, my_name_val, link_id_index_val) {
                 this.debug(true, "getLinkDataResponse==============!!!", "data_session_id_index=" + data_session_id_index);
                 this.debug(true, "getLinkDataResponse==============!!!", "theme_name=" + theme_name);
                 this.debug(true, "getLinkDataResponse==============!!!", "theme_config=" + theme_config);
-                this.ajaxObject().setupSessionReply(this, data.pending_session_setup, data_session_id_index);
+                this.tAjaxObject().setupSessionReply(this, data.pending_session_setup, data_session_id_index);
             }
 
         }
 
         setTimeout(function(link_val) {
             link_val.debug(false, "getLinkDataResponse:timer", "setTimeout");
-            link_val.ajaxObject().getLinkData(link_val);
+            link_val.tAjaxObject().getLinkData(link_val);
         }, this.linkUpdateInterval(), this);
     };
 
@@ -374,7 +374,7 @@ function LinkObject(root_object_val, my_name_val, link_id_index_val) {
                     //this.ajaxObject().getSessionData(session);
                 }
                 //session.receiveData(data.res_data, data.c_data);
-                this.ajaxObject().getSessionData(session);
+                this.tAjaxObject().getSessionData(session);
             }
         }
     };

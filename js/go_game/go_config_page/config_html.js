@@ -32,8 +32,8 @@ function ConfigHtmlObject(root_object_val) {
         return this.rootObject().configStorageObject();
     };
 
-    this.ajaxObject = function () {
-        return this.rootObject().ajaxObject();
+    this.tAjaxObject = function () {
+        return this.rootObject().tAjaxObject();
     };
 
     this.linkObject = function () {
@@ -76,7 +76,7 @@ function ConfigHtmlObject(root_object_val) {
                 theme_data = theme_data + 0;
             theme_data = theme_data + this0.configStorageObject().komi();
 
-            this0.ajaxObject().setupSession(this0.linkObject(), topic_data, theme_data, this0.sessionStorageObject().hisName());
+            this0.tAjaxObject().setupSession(this0.linkObject(), topic_data, theme_data, this0.sessionStorageObject().hisName());
         });
     };
 
