@@ -90,7 +90,7 @@ function SessionObject(link_object_val, session_id_val, session_id_index_val) {
     };
 
     this.sessionName = function () {
-        return  this.linkObject().linkId() + ":" + this.sessionId();
+        return  this.linkObject().linkIdIndex() + ":" + this.sessionIdIndex();
     };
 
     this.setSessionId = function (val) {

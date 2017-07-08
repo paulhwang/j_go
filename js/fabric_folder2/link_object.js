@@ -10,14 +10,13 @@ function LinkObject(root_object_val, my_name_val, link_id_val, link_id_index_val
         this.theRootObject = root_object_val;
         this.theNameList = [];
         this.theMyName = my_name_val;
-        this.theLinkId = link_id_val;
         this.theLinkIdIndex = link_id_index_val;
         this.initSwitchTable();
         this.theNameListTag = 0;
         this.theSessionIndexArray = [0];
         this.theSessionTableArray = [null];
         this.ajaxObject().getLinkData(this);
-        this.debug(true, "init__", "linkId=" + this.linkId() + " linkIdIndex=" + this.linkIdIndex() + " myName=" + this.myName());
+        this.debug(true, "init__", "linkIdIndex=" + this.linkIdIndex() + " myName=" + this.myName());
     };
 
     this.hisName = function () {//////////////////////
@@ -56,10 +55,6 @@ function LinkObject(root_object_val, my_name_val, link_id_val, link_id_index_val
         return this.theMyName;
     };
 
-    this.linkId = function () {
-        return this.theLinkId;
-    };
-
     this.linkIdIndex = function () {
         return this.theLinkIdIndex;
     };
@@ -80,11 +75,11 @@ function LinkObject(root_object_val, my_name_val, link_id_val, link_id_index_val
         return this.sessionTableArray()[val];
     };
 
-    this.setLinkId = function (val) {
-        if (this.linkId()) {
-            this.abend("setLinkId", "already exist");
+    this.setLinkIdIndex = function (val) {
+        if (this.linkIdIndex()) {
+            this.abend("setLinkIdIndex", "already exist");
         }
-        this.theLinkId = val;
+        this.theLinkIdIndex = val;
     };
 
     this.verifyLinkId = function (id_val) {
