@@ -4,7 +4,7 @@
  * File name: SessionObject.js
  */
 
-function SessionObject(link_object_val, session_id_index_val) {
+function PhwangSessionClass(link_object_val, session_id_index_val) {
     "use strict";
 
     this.init__ = function (link_object_val, session_id_index_val) {
@@ -17,7 +17,7 @@ function SessionObject(link_object_val, session_id_index_val) {
     };
 
     this.objectName = function () {
-        return "SessionObject";
+        return "PhwangSessionClass";
     };
 
     this.linkObject = function () {

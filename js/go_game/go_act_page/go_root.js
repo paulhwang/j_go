@@ -10,7 +10,7 @@ function GoPlayRootObject() {
         this.thePhwangObject = new PhwangClass(this);
         this.theRAjaxObject = new RAjaxObject(this);
         this.theLinkStorageObject = new LinkStorageObject();
-        this.theLinkObject = new LinkObject(this, this.linkStorageObject().userName(), this.linkStorageObject().linkIdIndex());
+        this.theLinkObject = new PhwangLinkClass(this, this.linkStorageObject().userName(), this.linkStorageObject().linkIdIndex());
         this.theSessionStorageObject = new SessionStorageObject();
         this.theConfigStorageObject = new GoConfigStorageObject();
         this.theHtmlObject = new GoPlayHtmlObject(this);

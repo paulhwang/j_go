@@ -3,7 +3,7 @@
  * Written by Paul Hwang
  */
 
-function LinkObject(root_object_val, my_name_val, link_id_index_val) {
+function PhwangLinkClass(root_object_val, my_name_val, link_id_index_val) {
     "use strict";
 
     this.init__ = function (root_object_val, my_name_val, link_id_index_val) {
@@ -20,7 +20,7 @@ function LinkObject(root_object_val, my_name_val, link_id_index_val) {
     };
 
     this.hisName = function () {//////////////////////
-        return "LinkObject";
+        return "PhwangLinkClass";
     };
 
     this.gameName = function () {///////////////////////////
@@ -135,7 +135,7 @@ function LinkObject(root_object_val, my_name_val, link_id_index_val) {
     };
 
     this.mallocSessionAndInsert = function (session_id_index_val) {
-        var session = new SessionObject(this, session_id_index_val);
+        var session = new PhwangSessionClass(this, session_id_index_val);
         if (!session) {
             return null;
         }
