@@ -46,7 +46,7 @@ function GoPlayRootObject() {
     };
 
     this.phwangSessionObject = function () {
-        return this.thePhwangSessionObject;
+        return this.phwangObject().phwangSessionObject();
     };
 
     this.phwangSessionStorageObject = function () {
