@@ -36,11 +36,11 @@ function LoginRootObject() {
     };
 
     this.phwangLinkObject = function () {
-        return this.thePhwangLinkObject;
+        return this.phwangObject().phwangLinkObject();
     };
 
     this.phwangSessionObject = function () {
-        return this.thePhwangSessionObject;
+        return this.phwangObject().phwangSessionObject();
     };
 
     this.phwangLinkStorageObject = function () {
