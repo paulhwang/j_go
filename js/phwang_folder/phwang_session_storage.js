@@ -32,12 +32,12 @@ function SessionStorageObject (phwang_object_val) {
         this.storage().his_name = val;
     };
 
-    this.sessionIdIndex = function () {
-        return this.storage().session_id_index;
+    this.sessionId = function () {
+        return this.storage().session_id;
     };
 
-    this.setSessionIdIndex = function (val) {
-        this.storage().session_id_index = val;
+    this.setSessionId = function (val) {
+        this.storage().session_id = val;
     };
 
     this.debug = function (debug_val, str1_val, str2_val) {

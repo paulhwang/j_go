@@ -19,10 +19,10 @@ function GoPlayRootObject() {
         this.theInputObject = new GoPlayInputObject(this);
         this.theDisplayObject = new GoPlayDisplayObject(this);
 
-        this.thePhwangSessionObject = this.phwangLinkObject().mallocSessionAndInsert(this.phwangSessionStorageObject().sessionIdIndex());
+        this.thePhwangSessionObject = this.phwangLinkObject().mallocSessionAndInsert(this.phwangSessionStorageObject().sessionId());
         this.phwangSessionObject().setTopicObject(this.portObject());
 
-        this.debug(true, "init__", "userName=" + this.phwangLinkStorageObject().userName() + " linkIdIndex=" + this.phwangLinkStorageObject().linkIdIndex() + " sessionIdIndex=" + this.phwangSessionStorageObject().sessionIdIndex());
+        this.debug(true, "init__", "userName=" + this.phwangLinkStorageObject().userName() + " linkIdIndex=" + this.phwangLinkStorageObject().linkIdIndex() + " sessionId=" + this.phwangSessionStorageObject().sessionId());
         this.debug(true, "init__", "boardSize=" + this.configStorageObject().boardSize() + " stoneColor=" + this.configStorageObject().stoneColor() + " komi=" + this.configStorageObject().komi() + " handicap=" + this.configStorageObject().handicap());
     };
 

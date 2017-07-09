@@ -229,8 +229,8 @@ function RAjaxObject(root_object_val) {
         this.debug(true, "setupSessionResponse", "input_val=" + input_val);
         var data = JSON.parse(input_val);
         if (data) {
-            this.phwangSessionStorageObject().setSessionIdIndex(data.session_id_index);
-            this.debug(true, "setupSessionResponse", "sessionIdIndex=" + this.phwangSessionStorageObject().sessionIdIndex());
+            this.phwangSessionStorageObject().setSessionId(data.session_id_index);
+            this.debug(true, "setupSessionResponse", "sessionId=" + this.phwangSessionStorageObject().sessionId());
             window.open(this.rootObject().nextPage(), "_self")
         }
     };
@@ -239,9 +239,8 @@ function RAjaxObject(root_object_val) {
         this.debug(true, "setupSessionReplyResponse", "data=" + json_data_val);
         var data = JSON.parse(json_data_val);
         if (data) {
-            this.sessionStorageObject().setSessionId(data.session_id);
-            this.sessionStorageObject().setSessionIdIndex(data.session_id_index.slice(8));
-            this.debug(true, "setupSessionReplyResponse", "sessionIdIndex=" + this.sessionStorageObject().sessionIdIndex());
+            this.phwangSessionStorageObject().setSessionId(data.session_id_index.slice(8));
+            this.debug(true, "setupSessionReplyResponse", "sessionId=" + this.sessionStorageObject().sessionId());
             window.open(this.rootObject().nextPage(), "_self")
             //var session = this.mallocSessionAndInsert(data.session_id);
             //if (data.topic_data) {
