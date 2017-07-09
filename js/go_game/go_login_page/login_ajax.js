@@ -24,8 +24,8 @@ function LoginAjaxObject(root_object_val) {
         return this.theAjaxUtilObject;
     };
 
-    this.linkStorageObject = function () {
-        return this.rootObject().linkStorageObject();
+    this.phwangLinkStorageObject = function () {
+        return this.rootObject().phwangLinkStorageObject();
     };
 
     this.switchAjaxResponseData = function (json_response_val) {
@@ -33,8 +33,8 @@ function LoginAjaxObject(root_object_val) {
         if (response.command === "setup_link") {
             this.debug(true, "switchAjaxResponseData", "command=" + response.command + " data=" + response.data);
             var data = JSON.parse(response.data);
-            this.linkStorageObject().setLinkId(data.link_id);
-            this.linkStorageObject().setLinkIdIndex(data.link_id_index);
+            this.phwangLinkStorageObject().setLinkId(data.link_id);
+            this.phwangLinkStorageObject().setLinkIdIndex(data.link_id_index);
             window.open(this.rootObject().nextPage(), "_self")
         } else {
             this.abend("switchAjaxResponseData", "not setup_link");
@@ -44,8 +44,8 @@ function LoginAjaxObject(root_object_val) {
     this.setupLink = function () {
         var output = JSON.stringify({
                         command: "setup_link",
-                        my_name: this.linkStorageObject().userName(),
-                        password: this.linkStorageObject().passWord(),
+                        my_name: this.phwangLinkStorageObject().userName(),
+                        password: this.phwangLinkStorageObject().passWord(),
                         });
         this.debug(true, "setupLink", "output=" + output);
         this.ajaxUtilObject().transmitAjaxRequest(output);

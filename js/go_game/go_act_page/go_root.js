@@ -22,7 +22,7 @@ function GoPlayRootObject() {
         this.thePhwangSessionObject = this.phwangLinkObject().mallocSessionAndInsert(this.phwangSessionStorageObject().sessionIdIndex());
         this.phwangSessionObject().setTopicObject(this.portObject());
 
-        this.debug(true, "init__", "userName=" + this.linkStorageObject().userName() + " linkId=" + this.linkStorageObject().linkId() + " sessionId=" + this.sessionStorageObject().sessionId());
+        this.debug(true, "init__", "userName=" + this.phwangLinkStorageObject().userName() + " linkIdIndex=" + this.phwangLinkStorageObject().linkIdIndex() + " sessionIdIndex=" + this.phwangSessionStorageObject().sessionIdIndex());
         this.debug(true, "init__", "boardSize=" + this.configStorageObject().boardSize() + " stoneColor=" + this.configStorageObject().stoneColor() + " komi=" + this.configStorageObject().komi() + " handicap=" + this.configStorageObject().handicap());
     };
 
@@ -53,7 +53,6 @@ function GoPlayRootObject() {
     this.phwangSessionStorageObject = function () {
         return this.phwangObject().phwangSessionStorageObject();
     };
-;
 
     this.configStorageObject = function () {
         return this.theConfigStorageObject;

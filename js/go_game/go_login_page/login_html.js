@@ -20,8 +20,8 @@ function LoginHtmlObject(root_object_val) {
         return this.theRootObject;
     };
 
-    this.linkStorageObject = function () {
-        return this.rootObject().linkStorageObject();
+    this.phwangLinkStorageObject = function () {
+        return this.rootObject().phwangLinkStorageObject();
     };
 
     this.ajaxObject = function () {
@@ -31,10 +31,10 @@ function LoginHtmlObject(root_object_val) {
     this.setupHtmlInput = function () {
         var this0 = this;
         $(".login_section .login_button").on("click", function() {
-            this0.linkStorageObject().setUserName($(".login_section .login_name").val());
-            this0.linkStorageObject().setPassWord($(".login_section .login_password").val());
-            this0.debug(true, "setupHtmlInput", "userName=" + this0.linkStorageObject().userName() + " passWord=" + this0.linkStorageObject().passWord());
-            if (this0.linkStorageObject().userName()) {
+            this0.phwangLinkStorageObject().setUserName($(".login_section .login_name").val());
+            this0.phwangLinkStorageObject().setPassWord($(".login_section .login_password").val());
+            this0.debug(true, "setupHtmlInput", "userName=" + this0.phwangLinkStorageObject().userName() + " passWord=" + this0.phwangLinkStorageObject().passWord());
+            if (this0.phwangLinkStorageObject().userName()) {
                 this0.ajaxObject().setupLink();
             }
         });
