@@ -3,7 +3,7 @@
   Written by Paul Hwang
 */
 
-function AjaxStorageObject (phwang_object_val) {
+function PhwangAjaxStorageObject (phwang_object_val) {
     "use strict";
 
     this.init__ = function (phwang_object_val) {
@@ -13,7 +13,7 @@ function AjaxStorageObject (phwang_object_val) {
     };
 
     this.objectName = function () {
-        return "AjaxStorageObject";
+        return "PhwangAjaxStorageObject";
     };
 
     this.phwangObject = function () {

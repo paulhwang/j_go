@@ -3,7 +3,7 @@
   Written by Paul Hwang
 */
 
-function LinkStorageObject(phwang_object_val) {
+function PhwangLinkStorageObject(phwang_object_val) {
     "use strict";
 
     this.init__ = function (phwang_object_val) {
@@ -13,7 +13,7 @@ function LinkStorageObject(phwang_object_val) {
     };
 
     this.objectName = function () {
-        return "LinkStorageObject";
+        return "PhwangLinkStorageObject";
     };
 
     this.phwangObject = function () {

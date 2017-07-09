@@ -3,7 +3,7 @@
   Written by Paul Hwang
 */
 
-function SessionStorageObject (phwang_object_val) {
+function PhwangSessionStorageObject (phwang_object_val) {
     "use strict";
 
     this.init__ = function (phwang_object_val) {
@@ -13,7 +13,7 @@ function SessionStorageObject (phwang_object_val) {
     };
 
     this.objectName = function () {
-        return "SessionStorageObject";
+        return "PhwangSessionStorageObject";
     };
 
     this.phwangObject = function () {
