@@ -12,7 +12,6 @@ function ConfigRootObject() {
         this.phwangAjaxObject().getLinkData(this.phwangLinkObject());
 
         this.theRAjaxObject = new RAjaxObject(this);
-        //this.thePhwangLinkObject = new PhwangLinkClass(this);
         this.theConfigStorageObject = new GoConfigStorageObject();
         this.theHtmlObject = new ConfigHtmlObject(this);
         this.debug(true, "init__", "myName=" + this.phwangLinkStorageObject().myName() + " linkId=" + this.phwangLinkStorageObject().linkId());
@@ -39,7 +38,7 @@ function ConfigRootObject() {
     };
 
     this.phwangSessionObject = function () {
-        return this.thePhwangSessionObject;
+        return this.phwangObject().phwangSessionObject();
     };
 
     this.phwangLinkStorageObject = function () {
