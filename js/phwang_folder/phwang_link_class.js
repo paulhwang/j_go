@@ -3,14 +3,12 @@
  * Written by Paul Hwang
  */
 
-function PhwangLinkClass(root_object_val, my_name_val, link_id_index_val) {
+function PhwangLinkClass(root_object_val) {
     "use strict";
 
-    this.init__ = function (root_object_val, my_name_val, link_id_index_val) {
+    this.init__ = function (root_object_val) {
         this.theRootObject = root_object_val;
         this.theNameList = [];
-        //this.theMyName = my_name_val;
-        //this.theLinkIdIndex = link_id_index_val;
         this.initSwitchTable();
         this.theNameListTag = 0;
         this.theSessionIndexArray = [0];
@@ -409,6 +407,6 @@ function PhwangLinkClass(root_object_val, my_name_val, link_id_index_val) {
         return this.phwangObject().ABEND(this.objectName() + "." + str1_val, str2_val);
     };
 
-    this.init__(root_object_val, my_name_val, link_id_index_val);
+    this.init__(root_object_val);
 }
 
