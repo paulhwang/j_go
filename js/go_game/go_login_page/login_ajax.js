@@ -24,8 +24,12 @@ function LoginAjaxObject(root_object_val) {
         return this.theAjaxUtilObject;
     };
 
-    this.phwangLinkStorageObject = function () {
-        return this.rootObject().phwangLinkStorageObject();
+    this.phwangObject = function () {
+        return this.rootObject().phwangObject();
+    };
+
+    this.phwangLinkObject = function () {
+        return this.phwangObject().phwangLinkObject();
     };
 
     this.switchAjaxResponseData = function (json_response_val) {
@@ -33,7 +37,7 @@ function LoginAjaxObject(root_object_val) {
         if (response.command === "setup_link") {
             this.debug(true, "switchAjaxResponseData", "command=" + response.command + " data=" + response.data);
             var data = JSON.parse(response.data);
-            this.phwangLinkStorageObject().setLinkId(data.link_id_index);
+            this.phwangLinkObject().setLinkId(data.link_id_index);
             window.open(this.rootObject().nextPage(), "_self")
         } else {
             this.abend("switchAjaxResponseData", "not setup_link");
@@ -43,8 +47,8 @@ function LoginAjaxObject(root_object_val) {
     this.setupLink = function () {
         var output = JSON.stringify({
                         command: "setup_link",
-                        my_name: this.phwangLinkStorageObject().myName(),
-                        password: this.phwangLinkStorageObject().passWord(),
+                        my_name: this.phwangLinkObject().myName(),
+                        password: this.phwangLinkObject().passWord(),
                         });
         this.debug(true, "setupLink", "output=" + output);
         this.ajaxUtilObject().transmitAjaxRequest(output);

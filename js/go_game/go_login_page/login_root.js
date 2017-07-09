@@ -10,13 +10,13 @@ function LoginRootObject() {
         this.thePhwangObject = new PhwangClass(this);
         this.phwangObject().initObject();
 
-        this.phwangLinkStorageObject().resetLinkStorage();
+        this.phwangLinkObject().resetLinkStorage();
 
         this.theAjaxObject = new LoginAjaxObject(this);
         this.theHtmlObject = new LoginHtmlObject(this);
-        this.debug(true, "init__", "myName=" + this.phwangLinkStorageObject().myName() + " linkId=" + this.phwangLinkStorageObject().linkId());
+        this.debug(true, "init__", "myName=" + this.phwangLinkObject().myName() + " linkId=" + this.phwangLinkObject().linkId());
 
-        this.phwangLinkStorageObject().setHttpInfo();
+        this.phwangLinkObject().setHttpInfo();
     };
 
     this.objectName = function () {
@@ -24,7 +24,7 @@ function LoginRootObject() {
     };
 
     this.nextPage = function () {
-        return this.phwangLinkStorageObject().serverHttpHeader() + "go_config.html";
+        return this.phwangLinkObject().serverHttpHeader() + "go_config.html";
     };
 
     this.phwangObject = function () {
@@ -41,10 +41,6 @@ function LoginRootObject() {
 
     this.phwangSessionObject = function () {
         return this.phwangObject().phwangSessionObject();
-    };
-
-    this.phwangLinkStorageObject = function () {
-        return this.phwangObject().phwangLinkStorageObject();
     };
 
     this.ajaxObject = function () {

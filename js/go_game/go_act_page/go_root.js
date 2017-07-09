@@ -25,7 +25,7 @@ function GoPlayRootObject() {
         this.phwangLinkObject().insertSession(this.phwangSessionObject());
         this.phwangSessionObject().setTopicObject(this.portObject());
 
-        this.debug(true, "init__", "myName=" + this.phwangLinkStorageObject().myName() + " linkId=" + this.phwangLinkStorageObject().linkId() + " sessionId=" + this.phwangSessionStorageObject().sessionId());
+        this.debug(true, "init__", "myName=" + this.phwangLinkObject().myName() + " linkId=" + this.phwangLinkObject().linkId() + " sessionId=" + this.phwangSessionStorageObject().sessionId());
         this.debug(true, "init__", "boardSize=" + this.configStorageObject().boardSize() + " stoneColor=" + this.configStorageObject().stoneColor() + " komi=" + this.configStorageObject().komi() + " handicap=" + this.configStorageObject().handicap());
     };
 
@@ -47,10 +47,6 @@ function GoPlayRootObject() {
 
     this.phwangSessionObject = function () {
         return this.thePhwangSessionObject;
-    };
-
-    this.phwangLinkStorageObject = function () {
-        return this.phwangObject().phwangLinkStorageObject();
     };
 
     this.phwangSessionStorageObject = function () {

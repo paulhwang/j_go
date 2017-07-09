@@ -8,6 +8,7 @@ function PhwangLinkClass(phwang_object_val) {
 
     this.init__ = function (phwang_object_val) {
         this.thePhwangObject = phwang_object_val;
+        this.thePhwangLinkStorageObject = new PhwangLinkStorageObject(this);
         this.theNameList = [];
         this.initSwitchTable();
         this.theNameListTag = 0;
@@ -26,7 +27,7 @@ function PhwangLinkClass(phwang_object_val) {
     };
 
     this.objectName = function () {
-        return "LinkObject";
+        return "PhwangLinkClass";
     };
 
     this.phwangObject = function () {
@@ -37,16 +38,16 @@ function PhwangLinkClass(phwang_object_val) {
         return this.phwangObject().rootObject();
     };
 
+    this.phwangLinkStorageObject = function () {
+        return this.thePhwangLinkStorageObject;
+    };
+
     this.phwangAjaxObject = function () {
         return this.phwangObject().phwangAjaxObject();
     };
 
     this.phwangLinkObject = function () {
         return this.phwangObject().phwangLinkObject();
-    };
-
-    this.phwangLinkStorageObject = function () {
-        return this.phwangObject().phwangLinkStorageObject();
     };
 
     this.phwangSessionStorageObject = function () {
@@ -63,6 +64,14 @@ function PhwangLinkClass(phwang_object_val) {
 
     this.setMyName = function (val) {
         this.phwangLinkStorageObject().setMyName(val);
+    };
+
+    this.passWord = function () {
+        return this.phwangLinkStorageObject().passWord();
+    };
+
+    this.setPassWord = function (val) {
+        this.phwangLinkStorageObject().setPassWord(val);
     };
 
     this.linkId = function () {
@@ -138,6 +147,22 @@ function PhwangLinkClass(phwang_object_val) {
 
     this.setNameListElement = function (index_val, data_val) {
         this.nameList()[index_val] = data_val;
+    };
+
+    this.resetLinkStorage = function () {
+        this.phwangLinkStorageObject().resetLinkStorage();
+    };
+
+    this.setHttpInfo = function () {
+        this.phwangLinkStorageObject().setHttpInfo();
+    };
+
+    this.serverHttpHeader = function () {
+        return this.phwangLinkStorageObject().serverHttpHeader();
+    };
+
+    this.serverHttpsHeader = function () {
+        return this.phwangLinkStorageObject().serverHttpsHeader();
     };
 
     this.mallocSessionAndInsert = function (session_id_val) {

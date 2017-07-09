@@ -14,7 +14,7 @@ function ConfigRootObject() {
         this.theRAjaxObject = new RAjaxObject(this);
         this.theConfigStorageObject = new GoConfigStorageObject();
         this.theHtmlObject = new ConfigHtmlObject(this);
-        this.debug(true, "init__", "myName=" + this.phwangLinkStorageObject().myName() + " linkId=" + this.phwangLinkStorageObject().linkId());
+        this.debug(true, "init__", "myName=" + this.phwangLinkObject().myName() + " linkId=" + this.phwangLinkObject().linkId());
     };
 
     this.objectName = function () {
@@ -22,7 +22,7 @@ function ConfigRootObject() {
     };
 
     this.nextPage = function () {
-        return this.phwangLinkStorageObject().serverHttpHeader() + "go_act.html";
+        return this.phwangLinkObject().serverHttpHeader() + "go_act.html";
     };
 
     this.phwangObject = function () {
