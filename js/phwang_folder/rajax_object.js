@@ -126,7 +126,7 @@ function RAjaxObject(root_object_val) {
 
         setTimeout(function(link_val) {
             link_val.debug(false, "getLinkDataResponse:timer", "setTimeout");
-            link_val.tAjaxObject().getLinkData(link_val);
+            link_val.phwangAjaxObject().getLinkData(link_val);
         }, this.linkUpdateInterval(), this.phwangLinkObject());
     };
 

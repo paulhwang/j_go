@@ -60,11 +60,11 @@ function LoginRootObject() {
     };
 
     this.logit = function (str1_val, str2_val) {
-        return LOG_IT(this.objectName() + "." + str1_val, str2_val);
+        return this.phwangObject().LOG_IT(this.objectName() + "." + str1_val, str2_val);
     };
 
     this.abend = function (str1_val, str2_val) {
-        return ABEND(this.objectName() + "." + str1_val, str2_val);
+        return this.phwangObject().ABEND(this.objectName() + "." + str1_val, str2_val);
     };
 
     this.init__();

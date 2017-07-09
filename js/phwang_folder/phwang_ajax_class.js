@@ -5,11 +5,11 @@
 */
 
 
-function PhwangAjaxClass(root_object_val) {
+function PhwangAjaxClass(phwang_object_val) {
     "use strict";
 
-    this.init__ = function (root_object_val) {
-        this.theRootObject = root_object_val;
+    this.init__ = function (phwang_object_val) {
+        this.thePhwangObject = phwang_object_val;
         this.thePacketId = 1;
         this.theHttpGetRequest = new XMLHttpRequest();
         this.setupReceiveAjaxResponse();
@@ -24,8 +24,12 @@ function PhwangAjaxClass(root_object_val) {
         return false;
     };
 
+    this.phwangObject = function () {
+        return this.thePhwangObject;
+    };
+
     this.rootObject = function () {
-        return this.theRootObject;
+        return this.phwangObject().rootObject();
     };
 
     this.rAjaxObject = function () {
@@ -186,13 +190,13 @@ function PhwangAjaxClass(root_object_val) {
     };
 
     this.logit = function (str1_val, str2_val) {
-        return LOG_IT(this.objectName() + "." + str1_val, str2_val);
+        return this.phwangObject().LOG_IT(this.objectName() + "." + str1_val, str2_val);
     };
 
     this.abend = function (str1_val, str2_val) {
-        return ABEND(this.objectName() + "." + str1_val, str2_val);
+        return this.phwangObject().ABEND(this.objectName() + "." + str1_val, str2_val);
     };
 
-    this.init__(root_object_val);
+    this.init__(phwang_object_val);
 }
 
