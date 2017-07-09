@@ -5,7 +5,7 @@
 */
 
 
-function TAjaxObject(root_object_val) {
+function PhwangAjaxObject(root_object_val) {
     "use strict";
 
     this.init__ = function (root_object_val) {
@@ -17,7 +17,7 @@ function TAjaxObject(root_object_val) {
     };
 
     this.objectName = function () {
-        return "TSAjaxObject";
+        return "PhwangAjaxObject";
     };
 
     this.debugOutput = function () {

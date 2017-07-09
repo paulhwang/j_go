@@ -3,15 +3,22 @@
   Written by Paul Hwang
 */
 
-function PhwangClass () {
+function PhwangClass (root_val) {
     "use strict";
 
-    this.init__ = function () {
+    this.init__ = function (root_val) {
+        this.theRootObject = root_val;
+        this.theTAjaxObject = new PhwangAjaxObject(this.rootObject());
+
         this.debug(true, "init__", "");
     };
 
     this.objectName = function () {
         return "PhwangClass";
+    };
+
+    this.rootObject = function () {
+        return this.theRootObject;
     };
 
     this.debug = function (debug_val, str1_val, str2_val) {
@@ -38,6 +45,6 @@ function PhwangClass () {
         var x = junk;
     };
 
-    this.init__();
+    this.init__(root_val);
 }
 
