@@ -32,8 +32,8 @@ function RAjaxObject(root_object_val) {
         return this.theSwitchTable;
     }
 
-    this.sessionStorageObject = function () {
-        return this.rootObject().sessionStorageObject();
+    this.phwangSessionStorageObject = function () {
+        return this.rootObject().phwangSessionStorageObject();
     };
 
     this.linkUpdateInterval = function () {
@@ -229,9 +229,9 @@ function RAjaxObject(root_object_val) {
         this.debug(true, "setupSessionResponse", "input_val=" + input_val);
         var data = JSON.parse(input_val);
         if (data) {
-            this.sessionStorageObject().setSessionId(data.session_id);
-            this.sessionStorageObject().setSessionIdIndex(data.session_id_index);
-            this.debug(true, "setupSessionResponse", "sessionId=" + this.sessionStorageObject().sessionId() + "sessionIdIndex=" + this.sessionStorageObject().sessionIdIndex());
+            this.phwangSessionStorageObject().setSessionId(data.session_id);
+            this.phwangSessionStorageObject().setSessionIdIndex(data.session_id_index);
+            this.debug(true, "setupSessionResponse", "sessionIdIndex=" + this.phwangSessionStorageObject().sessionIdIndex());
             window.open(this.rootObject().nextPage(), "_self")
         }
     };

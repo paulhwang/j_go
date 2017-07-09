@@ -9,12 +9,10 @@ function ConfigRootObject() {
     this.init__ = function () {
         this.thePhwangObject = new PhwangClass(this);
         this.theRAjaxObject = new RAjaxObject(this);
-        this.theLinkStorageObject = new LinkStorageObject();
-        this.thePhwangLinkObject = new PhwangLinkClass(this, this.linkStorageObject().userName(), this.linkStorageObject().linkIdIndex());
-        this.theSessionStorageObject = new SessionStorageObject();
+        this.thePhwangLinkObject = new PhwangLinkClass(this, this.phwangLinkStorageObject().userName(), this.phwangLinkStorageObject().linkIdIndex());
         this.theConfigStorageObject = new GoConfigStorageObject();
         this.theHtmlObject = new ConfigHtmlObject(this);
-        this.debug(true, "init__", "userName=" + this.linkStorageObject().userName() + " linkId=" + this.linkStorageObject().linkId() + " linkIdIndex=" + this.linkStorageObject().linkIdIndex());
+        this.debug(true, "init__", "userName=" + this.phwangLinkStorageObject().userName() + " linkIdIndex=" + this.phwangLinkStorageObject().linkIdIndex());
     };
 
     this.objectName = function () {
@@ -22,7 +20,7 @@ function ConfigRootObject() {
     };
 
     this.nextPage = function () {
-        return this.linkStorageObject().serverHttpHeader() + "go_act.html";
+        return this.phwangLinkStorageObject().serverHttpHeader() + "go_act.html";
     };
 
     this.phwangObject = function () {
@@ -41,12 +39,12 @@ function ConfigRootObject() {
         return this.thePhwangSessionObject;
     };
 
-    this.linkStorageObject = function () {
-        return this.theLinkStorageObject;
+    this.phwangLinkStorageObject = function () {
+        return this.phwangObject().phwangLinkStorageObject();
     };
 
-    this.sessionStorageObject = function () {
-        return this.theSessionStorageObject;
+    this.phwangSessionStorageObject = function () {
+        return this.phwangObject().phwangSessionStorageObject();
     };
 
     this.configStorageObject = function () {

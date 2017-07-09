@@ -20,12 +20,12 @@ function ConfigHtmlObject(root_object_val) {
         return this.theRootObject;
     };
 
-    this.linkStorageObject = function () {
-        return this.rootObject().linkStorageObject();
+    this.phwangLinkStorageObject = function () {
+        return this.rootObject().phwangLinkStorageObject();
     };
 
-    this.sessionStorageObject = function () {
-        return this.rootObject().sessionStorageObject();
+    this.phwangSessionStorageObject = function () {
+        return this.rootObject().phwangSessionStorageObject();
     };
 
     this.configStorageObject = function () {
@@ -52,7 +52,7 @@ function ConfigHtmlObject(root_object_val) {
         this.renderNameList();
         var this0 = this;
         $(".config_section .config_button").on("click", function() {
-            this0.sessionStorageObject().setHisName($(".peer_name_paragraph select").val());
+            this0.phwangSessionStorageObject().setHisName($(".peer_name_paragraph select").val());
             this0.configStorageObject().setBoardSize($(".config_section .go_config_section .board_size").val());
             this0.configStorageObject().setStoneColor($(".config_section .go_config_section .stone_color").val());
             this0.configStorageObject().setKomi($(".config_section .go_config_section .komi").val());
@@ -80,7 +80,7 @@ function ConfigHtmlObject(root_object_val) {
                 theme_data = theme_data + 0;
             theme_data = theme_data + this0.configStorageObject().komi();
 
-            this0.phwangAjaxObject().setupSession(this0.phwangLinkObject(), topic_data, theme_data, this0.sessionStorageObject().hisName());
+            this0.phwangAjaxObject().setupSession(this0.phwangLinkObject(), topic_data, theme_data, this0.phwangSessionStorageObject().hisName());
         });
     };
 
