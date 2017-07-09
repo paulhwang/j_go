@@ -229,7 +229,6 @@ function RAjaxObject(root_object_val) {
         this.debug(true, "setupSessionResponse", "input_val=" + input_val);
         var data = JSON.parse(input_val);
         if (data) {
-            this.phwangSessionStorageObject().setSessionId(data.session_id);
             this.phwangSessionStorageObject().setSessionIdIndex(data.session_id_index);
             this.debug(true, "setupSessionResponse", "sessionIdIndex=" + this.phwangSessionStorageObject().sessionIdIndex());
             window.open(this.rootObject().nextPage(), "_self")

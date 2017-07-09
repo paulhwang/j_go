@@ -40,14 +40,6 @@ function LinkStorageObject(phwang_object_val) {
         this.thePassWord = val;
     };
 
-    this.linkId = function () {
-        return Number(this.storage().link_id);
-    };
-
-    this.setLinkId = function (val) {
-        this.storage().link_id = val;
-    };
-
     this.linkIdIndex = function () {
         return this.storage().link_id_index;
     };
@@ -90,7 +82,6 @@ function LinkStorageObject(phwang_object_val) {
     };
 
     this.resetLinkStorage = function () {
-        this.setLinkId(0);
         this.setLinkIdIndex("");
         this.setUserName("");
         this.setPassWord("");
