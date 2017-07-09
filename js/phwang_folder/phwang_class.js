@@ -8,7 +8,7 @@ function PhwangClass (root_val) {
 
     this.init__ = function (root_val) {
         this.theRootObject = root_val;
-        this.theTAjaxObject = new PhwangAjaxObject(this.rootObject());
+        this.theTAjaxObject = new PhwangAjaxClass(this.rootObject());
 
         this.debug(true, "init__", "");
     };

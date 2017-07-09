@@ -9,7 +9,7 @@ function ConfigRootObject() {
     this.init__ = function () {
         this.thePhwangObject = new PhwangClass(this);
         this.theRAjaxObject = new RAjaxObject(this);
-        this.theTAjaxObject = new PhwangAjaxObject(this);
+        this.theTAjaxObject = new PhwangAjaxClass(this);
         this.theLinkStorageObject = new LinkStorageObject();
         this.theLinkObject = new LinkObject(this, this.linkStorageObject().userName(), this.linkStorageObject().linkIdIndex());
         this.theSessionStorageObject = new SessionStorageObject();

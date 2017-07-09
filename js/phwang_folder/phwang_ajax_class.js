@@ -5,7 +5,7 @@
 */
 
 
-function PhwangAjaxObject(root_object_val) {
+function PhwangAjaxClass(root_object_val) {
     "use strict";
 
     this.init__ = function (root_object_val) {
@@ -17,7 +17,7 @@ function PhwangAjaxObject(root_object_val) {
     };
 
     this.objectName = function () {
-        return "PhwangAjaxObject";
+        return "PhwangAjaxClass";
     };
 
     this.debugOutput = function () {
