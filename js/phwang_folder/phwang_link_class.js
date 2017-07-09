@@ -57,8 +57,19 @@ function PhwangLinkClass(root_object_val) {
         return this.phwangLinkStorageObject().userName();
     };
 
+    this.setMyName = function (val) {
+        this.phwangLinkStorageObject().setUserName(val);
+    };
+
     this.linkId = function () {
         return this.phwangLinkStorageObject().linkId();
+    };
+
+    this.setLinkId = function (val) {
+        if (this.linkId()) {
+            this.abend("setLinkIdIndex", "already exist");
+        }
+        this.phwangLinkStorageObject().setLinkId(val);
     };
 
     this.sessionIndexArray = function () {
@@ -75,13 +86,6 @@ function PhwangLinkClass(root_object_val) {
 
     this.sessionTableArrayElement = function (val) {
         return this.sessionTableArray()[val];
-    };
-
-    this.setLinkId = function (val) {
-        if (this.linkId()) {
-            this.abend("setLinkIdIndex", "already exist");
-        }
-        this.phwangLinkStorageObject().setLinkId(val);
     };
 
     this.verifyLinkIdIndex = function (id_val) {
