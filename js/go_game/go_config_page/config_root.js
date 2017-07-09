@@ -10,7 +10,7 @@ function ConfigRootObject() {
         this.thePhwangObject = new PhwangClass(this);
         this.theRAjaxObject = new RAjaxObject(this);
         this.theLinkStorageObject = new LinkStorageObject();
-        this.theLinkObject = new PhwangLinkClass(this, this.linkStorageObject().userName(), this.linkStorageObject().linkIdIndex());
+        this.thePhwangLinkObject = new PhwangLinkClass(this, this.linkStorageObject().userName(), this.linkStorageObject().linkIdIndex());
         this.theSessionStorageObject = new SessionStorageObject();
         this.theConfigStorageObject = new GoConfigStorageObject();
         this.theHtmlObject = new ConfigHtmlObject(this);
@@ -33,6 +33,14 @@ function ConfigRootObject() {
         return this.phwangObject().phwangAjaxObject();
     };
 
+    this.phwangLinkObject = function () {
+        return this.thePhwangLinkObject;
+    };
+
+    this.phwangSessionObject = function () {
+        return this.thePhwangSessionObject;
+    };
+
     this.linkStorageObject = function () {
         return this.theLinkStorageObject;
     };
@@ -45,20 +53,12 @@ function ConfigRootObject() {
         return this.theConfigStorageObject;
     };
 
-    this.tAjaxObject = function () {
-        return this.theTAjaxObject;
-    };
-
     this.rAjaxObject = function () {
         return this.theRAjaxObject;
     };
 
     this.htmlObject = function () {
         return this.theHtmlObject;
-    };
-
-    this.linkObject = function () {
-        return this.theLinkObject;
     };
 
     this.debug = function (debug_val, str1_val, str2_val) {

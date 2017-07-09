@@ -20,16 +20,12 @@ function RAjaxObject(root_object_val) {
         return this.theRootObject;
     };
 
-    this.linkObject = function () {
-        return this.rootObject().linkObject();
-    };
-
     this.phwangAjaxObject = function () {
         return this.rootObject().phwangAjaxObject();
     };
 
-    this.linkObject = function () {
-        return this.rootObject().linkObject();
+    this.phwangLinkObject = function () {
+        return this.rootObject().phwangLinkObject();
     };
 
     this.switchTable = function () {
@@ -64,7 +60,7 @@ function RAjaxObject(root_object_val) {
         if (!data) {
             return;
         }
-        if (!this.linkObject().verifyLinkIdIndex(data.link_id_index)) {
+        if (!this.phwangLinkObject().verifyLinkIdIndex(data.link_id_index)) {
             this.abend("parseAjaxResponseData", "link_id_index=" + data.link_id_index);
             return;
         }
@@ -113,11 +109,8 @@ function RAjaxObject(root_object_val) {
                 name_list_tag  = (c_data.charAt(index++) - '0') * 100;
                 name_list_tag += (c_data.charAt(index++) - '0') *  10;
                 name_list_tag += (c_data.charAt(index++) - '0');
-                this.debug(true, "getLinkDataResponse==============", "c_data=" + c_data);
-                this.debug(true, "getLinkDataResponse==============", "name_list_tag=" + name_list_tag);
-                if (name_list_tag > this.linkObject().nameListTag()) {
-                this.debug(true, "getLinkDataResponse==============!!!", "name_list_tag=" + this.linkObject().nameListTag());
-                    this.phwangAjaxObject().getNameList(this.linkObject());
+                if (name_list_tag > this.phwangLinkObject().nameListTag()) {
+                    this.phwangAjaxObject().getNameList(this.phwangLinkObject());
                 }
                 c_data = c_data.slice(3);
             }
@@ -126,10 +119,6 @@ function RAjaxObject(root_object_val) {
                 var data_session_id_index = data.c_pending_session_setup.slice(1, 9);
                 var theme_name = data.c_pending_session_setup.slice(9, 11);
                 var theme_config = data.c_pending_session_setup.slice(11);
-
-                this.debug(true, "getLinkDataResponse==============!!!", "data_session_id_index=" + data_session_id_index);
-                this.debug(true, "getLinkDataResponse==============!!!", "theme_name=" + theme_name);
-                this.debug(true, "getLinkDataResponse==============!!!", "theme_config=" + theme_config);
                 this.phwangAjaxObject().setupSessionReply(this, data.pending_session_setup, data_session_id_index);
             }
 
@@ -138,7 +127,7 @@ function RAjaxObject(root_object_val) {
         setTimeout(function(link_val) {
             link_val.debug(false, "getLinkDataResponse:timer", "setTimeout");
             link_val.tAjaxObject().getLinkData(link_val);
-        }, this.linkUpdateInterval(), this.linkObject());
+        }, this.linkUpdateInterval(), this.phwangLinkObject());
     };
 
     this.getNameListResponse___ = function (input_val) {
@@ -168,14 +157,14 @@ function RAjaxObject(root_object_val) {
                 name_list_tag  = (data.c_name_list.charAt(index++) - '0') * 100;
                 name_list_tag += (data.c_name_list.charAt(index++) - '0') * 10;
                 name_list_tag += (data.c_name_list.charAt(index++) - '0');
-                this.linkObject().setNameListTag(name_list_tag);
+                this.phwangLinkObject().setNameListTag(name_list_tag);
 
                 var name_list = data.c_name_list.slice(3);
                 this.debug(true, "getNameListResponse", "name_list_tag=" + name_list_tag);
                 this.debug(true, "getNameListResponse", "name_list=" + name_list);
                 var array = JSON.parse("[" + name_list + "]");
                 this.debug(true, "getNameListResponse", "array=" + array);
-                this.linkObject().setNameList(array);
+                this.phwangLinkObject().setNameList(array);
                 if (this.rootObject().htmlObject().renderNameListFuncExist()) {
                     this.rootObject().htmlObject().renderNameList();////////////////////////////
                 }
@@ -266,7 +255,7 @@ function RAjaxObject(root_object_val) {
         this.debug(true, "putSessionDataResponse", "data=" + json_data_val);
         var data = JSON.parse(json_data_val);
         if (data) {
-            var session = this.linkObject().getSession(data.session_id_index);
+            var session = this.phwangLinkObject().getSession(data.session_id_index);
             if (session) {
                 if (data.c_data === "job is done") {
                     //this.ajaxObject().getSessionData(session);
@@ -282,7 +271,7 @@ function RAjaxObject(root_object_val) {
         var data = JSON.parse(json_data_val);
         if (data) {
             this.debug(true, "getSessionDataResponse", "data=" + data.c_data);
-            var session = this.linkObject().getSession(data.session_id_index);
+            var session = this.phwangLinkObject().getSession(data.session_id_index);
             if (session) {
                 session.receiveData(data.c_data);
             }

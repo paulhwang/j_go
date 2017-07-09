@@ -10,7 +10,7 @@ function GoPlayRootObject() {
         this.thePhwangObject = new PhwangClass(this);
         this.theRAjaxObject = new RAjaxObject(this);
         this.theLinkStorageObject = new LinkStorageObject();
-        this.theLinkObject = new PhwangLinkClass(this, this.linkStorageObject().userName(), this.linkStorageObject().linkIdIndex());
+        this.thePhwangLinkObject = new PhwangLinkClass(this, this.linkStorageObject().userName(), this.linkStorageObject().linkIdIndex());
         this.theSessionStorageObject = new SessionStorageObject();
         this.theConfigStorageObject = new GoConfigStorageObject();
         this.theHtmlObject = new GoPlayHtmlObject(this);
@@ -21,8 +21,8 @@ function GoPlayRootObject() {
         this.theInputObject = new GoPlayInputObject(this);
         this.theDisplayObject = new GoPlayDisplayObject(this);
 
-        this.theSessionObject = this.linkObject().mallocSessionAndInsert(this.sessionStorageObject().sessionIdIndex());
-        this.sessionObject().setTopicObject(this.portObject());
+        this.thePhwangSessionObject = this.phwangLinkObject().mallocSessionAndInsert(this.sessionStorageObject().sessionIdIndex());
+        this.phwangSessionObject().setTopicObject(this.portObject());
 
         this.debug(true, "init__", "userName=" + this.linkStorageObject().userName() + " linkId=" + this.linkStorageObject().linkId() + " sessionId=" + this.sessionStorageObject().sessionId());
         this.debug(true, "init__", "boardSize=" + this.configStorageObject().boardSize() + " stoneColor=" + this.configStorageObject().stoneColor() + " komi=" + this.configStorageObject().komi() + " handicap=" + this.configStorageObject().handicap());
@@ -38,6 +38,14 @@ function GoPlayRootObject() {
 
     this.phwangAjaxObject = function () {
         return this.phwangObject().phwangAjaxObject();
+    };
+
+    this.phwangLinkObject = function () {
+        return this.thePhwangLinkObject;
+    };
+
+    this.phwangSessionObject = function () {
+        return this.thePhwangSessionObject;
     };
 
     this.linkStorageObject = function () {
@@ -62,14 +70,6 @@ function GoPlayRootObject() {
 
     this.htmlObject = function () {
         return this.theHtmlObject;
-    };
-
-    this.linkObject = function () {
-        return this.theLinkObject;
-    };
-
-    this.sessionObject = function () {
-        return this.theSessionObject;
     };
 
     this.rAjaxObject = function () {

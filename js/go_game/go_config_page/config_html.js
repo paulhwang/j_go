@@ -36,8 +36,12 @@ function ConfigHtmlObject(root_object_val) {
         return this.rootObject().phwangAjaxObject();
     };
 
-    this.linkObject = function () {
-        return this.rootObject().linkObject();
+    this.phwangLinkObject = function () {
+        return this.rootObject().phwangLinkObject();
+    };
+
+    this.phwangSessionObject = function () {
+        return this.rootObject().phwangSessionObject();
     };
 
     this.renderNameListFuncExist = function () {
@@ -76,14 +80,14 @@ function ConfigHtmlObject(root_object_val) {
                 theme_data = theme_data + 0;
             theme_data = theme_data + this0.configStorageObject().komi();
 
-            this0.phwangAjaxObject().setupSession(this0.linkObject(), topic_data, theme_data, this0.sessionStorageObject().hisName());
+            this0.phwangAjaxObject().setupSession(this0.phwangLinkObject(), topic_data, theme_data, this0.sessionStorageObject().hisName());
         });
     };
 
     this.renderNameList = function () {
         var i = 0;
-        while (i < this.linkObject().nameListLength()) {
-            $('.peer_name_paragraph select').append($('<option>', {value:this.linkObject().nameListElement(i), text:this.linkObject().nameListElement(i)}));
+        while (i < this.phwangLinkObject().nameListLength()) {
+            $('.peer_name_paragraph select').append($('<option>', {value:this.phwangLinkObject().nameListElement(i), text:this.phwangLinkObject().nameListElement(i)}));
             i += 1;
         }
     };

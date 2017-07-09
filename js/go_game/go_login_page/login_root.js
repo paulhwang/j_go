@@ -33,6 +33,14 @@ function LoginRootObject() {
         return this.phwangObject().phwangAjaxObject();
     };
 
+    this.phwangLinkObject = function () {
+        return this.thePhwangLinkObject;
+    };
+
+    this.phwangSessionObject = function () {
+        return this.thePhwangSessionObject;
+    };
+
     this.linkStorageObject = function () {
         return this.theLinkStorageObject;
     };

@@ -39,8 +39,8 @@ function GoPlayPortObject(root_val) {
         return this.rootObject().gameObject();
     };
 
-    this.sessionObject = function () {
-        return this.rootObject().sessionObject();
+    this.phwangSessionObject = function () {
+        return this.rootObject().phwangSessionObject();
     };
 
     this.boardObject = function () {
@@ -63,7 +63,7 @@ function GoPlayPortObject(root_val) {
 
     this.transmitData = function (data_val) {
         this.debug(true, "transmitData", "data_val=" + data_val);
-        this.sessionObject().transmitData(data_val);
+        this.phwangSessionObject().transmitData(data_val);
     };
 
     this.receiveData = function (c_data_val) {
