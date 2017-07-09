@@ -8,8 +8,11 @@ function GoPlayRootObject() {
 
     this.init__ = function () {
         this.thePhwangObject = new PhwangClass(this);
+        this.phwangObject().initObject();
+        this.phwangAjaxObject().getLinkData(this.phwangLinkObject());
+
         this.theRAjaxObject = new RAjaxObject(this);
-        this.thePhwangLinkObject = new PhwangLinkClass(this);
+        //this.thePhwangLinkObject = new PhwangLinkClass(this);
         this.theConfigStorageObject = new GoConfigStorageObject();
         this.theHtmlObject = new GoPlayHtmlObject(this);
         this.theConfigObject = new GoPlayConfigObject(this, this.configStorageObject().configInJson(), true);
@@ -39,7 +42,7 @@ function GoPlayRootObject() {
     };
 
     this.phwangLinkObject = function () {
-        return this.thePhwangLinkObject;
+        return this.phwangObject().phwangLinkObject();
     };
 
     this.phwangSessionObject = function () {

@@ -6,12 +6,18 @@
 function PhwangClass (root_val) {
     "use strict";
 
+    this.initObject = function () {
+        this.thePhwangAjaxObject = new PhwangAjaxClass(this);
+        this.thePhwangLinkObject = new PhwangLinkClass(this.rootObject());
+
+        this.debug(true, "initObject", "");
+    };
+
     this.init__ = function (root_val) {
         this.theRootObject = root_val;
         this.thePhwangAjaxStorageObject = new PhwangAjaxStorageObject(this);
         this.thePhwangLinkStorageObject = new PhwangLinkStorageObject(this);
         this.thePhwangSessionStorageObject = new PhwangSessionStorageObject(this);
-        this.thePhwangAjaxObject = new PhwangAjaxClass(this);
 
         this.debug(true, "init__", "");
     };
@@ -38,6 +44,10 @@ function PhwangClass (root_val) {
 
     this.phwangAjaxObject = function () {
         return this.thePhwangAjaxObject;
+    };
+
+    this.phwangLinkObject = function () {
+        return this.thePhwangLinkObject;
     };
 
     this.debug = function (debug_val, str1_val, str2_val) {

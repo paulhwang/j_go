@@ -8,8 +8,11 @@ function ConfigRootObject() {
 
     this.init__ = function () {
         this.thePhwangObject = new PhwangClass(this);
+        this.phwangObject().initObject();
+        this.phwangAjaxObject().getLinkData(this.phwangLinkObject());
+
         this.theRAjaxObject = new RAjaxObject(this);
-        this.thePhwangLinkObject = new PhwangLinkClass(this);
+        //this.thePhwangLinkObject = new PhwangLinkClass(this);
         this.theConfigStorageObject = new GoConfigStorageObject();
         this.theHtmlObject = new ConfigHtmlObject(this);
         this.debug(true, "init__", "myName=" + this.phwangLinkStorageObject().myName() + " linkId=" + this.phwangLinkStorageObject().linkId());
@@ -32,7 +35,7 @@ function ConfigRootObject() {
     };
 
     this.phwangLinkObject = function () {
-        return this.thePhwangLinkObject;
+        return this.phwangObject().phwangLinkObject();
     };
 
     this.phwangSessionObject = function () {

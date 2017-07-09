@@ -13,7 +13,7 @@ function PhwangLinkClass(root_object_val) {
         this.theNameListTag = 0;
         this.theSessionIndexArray = [0];
         this.theSessionTableArray = [null];
-        this.phwangAjaxObject().getLinkData(this);
+        //this.phwangAjaxObject().getLinkData(this);
         this.debug(true, "init__", "linkId=" + this.linkId() + " myName=" + this.myName());
     };
 
@@ -39,6 +39,10 @@ function PhwangLinkClass(root_object_val) {
 
     this.phwangAjaxObject = function () {
         return this.phwangObject().phwangAjaxObject();
+    };
+
+    this.phwangLinkObject = function () {
+        return this.phwangObject().phwangLinkObject();
     };
 
     this.phwangLinkStorageObject = function () {
