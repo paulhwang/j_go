@@ -21,11 +21,21 @@ function PhwangClass () {
     };
 
     this.logit = function (str1_val, str2_val) {
-        return LOG_IT(this.objectName() + "." + str1_val, str2_val);
+        return this.LOG_IT(this.objectName() + "." + str1_val, str2_val);
     };
 
     this.abend = function (str1_val, str2_val) {
-        return ABEND(this.objectName() + "." + str1_val, str2_val);
+        return this.ABEND(this.objectName() + "." + str1_val, str2_val);
+    };
+
+    this.LOG_IT = function (str1_val, str2_val) {
+        window.console.log(str1_val + "() " + str2_val);
+    };
+
+    this.ABEND = function (str1_val, str2_val) {
+        window.console.log("***ABEND*** " + str1_val + "() " + str2_val);
+        window.alert("***ABEND*** " + str1_val + "() " + str2_val);
+        var x = junk;
     };
 
     this.init__();
