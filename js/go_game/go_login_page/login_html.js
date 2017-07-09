@@ -31,10 +31,10 @@ function LoginHtmlObject(root_object_val) {
     this.setupHtmlInput = function () {
         var this0 = this;
         $(".login_section .login_button").on("click", function() {
-            this0.phwangLinkStorageObject().setUserName($(".login_section .login_name").val());
+            this0.phwangLinkStorageObject().setMyName($(".login_section .login_name").val());
             this0.phwangLinkStorageObject().setPassWord($(".login_section .login_password").val());
-            this0.debug(true, "setupHtmlInput", "userName=" + this0.phwangLinkStorageObject().userName() + " passWord=" + this0.phwangLinkStorageObject().passWord());
-            if (this0.phwangLinkStorageObject().userName()) {
+            this0.debug(true, "setupHtmlInput", "myName=" + this0.phwangLinkStorageObject().myName() + " passWord=" + this0.phwangLinkStorageObject().passWord());
+            if (this0.phwangLinkStorageObject().myName()) {
                 this0.ajaxObject().setupLink();
             }
         });

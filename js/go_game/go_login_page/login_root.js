@@ -11,7 +11,7 @@ function LoginRootObject() {
         this.phwangLinkStorageObject().resetLinkStorage();
         this.theAjaxObject = new LoginAjaxObject(this);
         this.theHtmlObject = new LoginHtmlObject(this);
-        this.debug(true, "init__", "userName=" + this.phwangLinkStorageObject().userName() + " linkId=" + this.phwangLinkStorageObject().linkId());
+        this.debug(true, "init__", "myName=" + this.phwangLinkStorageObject().myName() + " linkId=" + this.phwangLinkStorageObject().linkId());
 
         this.phwangLinkStorageObject().setHttpInfo();
     };

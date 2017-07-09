@@ -12,7 +12,7 @@ function ConfigRootObject() {
         this.thePhwangLinkObject = new PhwangLinkClass(this);
         this.theConfigStorageObject = new GoConfigStorageObject();
         this.theHtmlObject = new ConfigHtmlObject(this);
-        this.debug(true, "init__", "userName=" + this.phwangLinkStorageObject().userName() + " linkId=" + this.phwangLinkStorageObject().linkId());
+        this.debug(true, "init__", "myName=" + this.phwangLinkStorageObject().myName() + " linkId=" + this.phwangLinkStorageObject().linkId());
     };
 
     this.objectName = function () {

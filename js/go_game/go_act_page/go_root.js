@@ -22,7 +22,7 @@ function GoPlayRootObject() {
         this.thePhwangSessionObject = this.phwangLinkObject().mallocSessionAndInsert(this.phwangSessionStorageObject().sessionId());
         this.phwangSessionObject().setTopicObject(this.portObject());
 
-        this.debug(true, "init__", "userName=" + this.phwangLinkStorageObject().userName() + " linkId=" + this.phwangLinkStorageObject().linkId() + " sessionId=" + this.phwangSessionStorageObject().sessionId());
+        this.debug(true, "init__", "myName=" + this.phwangLinkStorageObject().myName() + " linkId=" + this.phwangLinkStorageObject().linkId() + " sessionId=" + this.phwangSessionStorageObject().sessionId());
         this.debug(true, "init__", "boardSize=" + this.configStorageObject().boardSize() + " stoneColor=" + this.configStorageObject().stoneColor() + " komi=" + this.configStorageObject().komi() + " handicap=" + this.configStorageObject().handicap());
     };
 

@@ -24,12 +24,12 @@ function PhwangLinkStorageObject(phwang_object_val) {
         return this.theStorage;
     };
 
-    this.userName = function () {
-        return this.storage().user_name;
+    this.myName = function () {
+        return this.storage().my_name;
     };
 
-    this.setUserName = function (val) {
-        this.storage().user_name = val;
+    this.setMyName = function (val) {
+        this.storage().my_name = val;
     };
 
     this.passWord = function () {
@@ -83,7 +83,7 @@ function PhwangLinkStorageObject(phwang_object_val) {
 
     this.resetLinkStorage = function () {
         this.setLinkId("");
-        this.setUserName("");
+        this.setMyName("");
         this.setPassWord("");
     };
 

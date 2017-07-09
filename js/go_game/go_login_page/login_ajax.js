@@ -43,7 +43,7 @@ function LoginAjaxObject(root_object_val) {
     this.setupLink = function () {
         var output = JSON.stringify({
                         command: "setup_link",
-                        my_name: this.phwangLinkStorageObject().userName(),
+                        my_name: this.phwangLinkStorageObject().myName(),
                         password: this.phwangLinkStorageObject().passWord(),
                         });
         this.debug(true, "setupLink", "output=" + output);

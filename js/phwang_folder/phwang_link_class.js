@@ -54,11 +54,11 @@ function PhwangLinkClass(root_object_val) {
     };
 
     this.myName = function () {
-        return this.phwangLinkStorageObject().userName();
+        return this.phwangLinkStorageObject().myName();
     };
 
     this.setMyName = function (val) {
-        this.phwangLinkStorageObject().setUserName(val);
+        this.phwangLinkStorageObject().setMyName(val);
     };
 
     this.linkId = function () {
