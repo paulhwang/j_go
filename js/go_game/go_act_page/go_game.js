@@ -30,12 +30,12 @@ function GoPlayGameObject(root_object_val) {
         return this.theRootObject;
     };
 
-    this.linkStorageObject = function () {
-        return this.rootObject().linkStorageObject();
+    this.phwangLinkStorageObject = function () {
+        return this.rootObject().phwangLinkStorageObject();
     };
 
-    this.sessionStorageObject = function () {
-        return this.rootObject().sessionStorageObject();
+    this.phwangSessionStorageObject = function () {
+        return this.rootObject().phwangSessionStorageObject();
     };
 
     this.storageObject = function () {
@@ -199,8 +199,8 @@ function GoPlayGameObject(root_object_val) {
     };
 
     this.playBothSides = function () {
-        this.logit("playBothSides", "userName=" + this.linkStorageObject().userName() + " hisName=" + this.sessionStorageObject().hisName());
-        return (this.linkStorageObject().userName() === this.sessionStorageObject().hisName());
+        this.logit("playBothSides", "userName=" + this.phwangLinkStorageObject().userName() + " hisName=" + this.phwangSessionStorageObject().hisName());
+        return (this.phwangLinkStorageObject().userName() === this.phwangSessionStorageObject().hisName());
     };
 
     this.isMyTurn = function () {

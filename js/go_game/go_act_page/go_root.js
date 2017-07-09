@@ -9,9 +9,7 @@ function GoPlayRootObject() {
     this.init__ = function () {
         this.thePhwangObject = new PhwangClass(this);
         this.theRAjaxObject = new RAjaxObject(this);
-        this.theLinkStorageObject = new LinkStorageObject();
-        this.thePhwangLinkObject = new PhwangLinkClass(this, this.linkStorageObject().userName(), this.linkStorageObject().linkIdIndex());
-        this.theSessionStorageObject = new SessionStorageObject();
+        this.thePhwangLinkObject = new PhwangLinkClass(this, this.phwangLinkStorageObject().userName(), this.phwangLinkStorageObject().linkIdIndex());
         this.theConfigStorageObject = new GoConfigStorageObject();
         this.theHtmlObject = new GoPlayHtmlObject(this);
         this.theConfigObject = new GoPlayConfigObject(this, this.configStorageObject().configInJson(), true);
@@ -21,7 +19,7 @@ function GoPlayRootObject() {
         this.theInputObject = new GoPlayInputObject(this);
         this.theDisplayObject = new GoPlayDisplayObject(this);
 
-        this.thePhwangSessionObject = this.phwangLinkObject().mallocSessionAndInsert(this.sessionStorageObject().sessionIdIndex());
+        this.thePhwangSessionObject = this.phwangLinkObject().mallocSessionAndInsert(this.phwangSessionStorageObject().sessionIdIndex());
         this.phwangSessionObject().setTopicObject(this.portObject());
 
         this.debug(true, "init__", "userName=" + this.linkStorageObject().userName() + " linkId=" + this.linkStorageObject().linkId() + " sessionId=" + this.sessionStorageObject().sessionId());
@@ -48,13 +46,14 @@ function GoPlayRootObject() {
         return this.thePhwangSessionObject;
     };
 
-    this.linkStorageObject = function () {
-        return this.theLinkStorageObject;
+    this.phwangLinkStorageObject = function () {
+        return this.phwangObject().phwangLinkStorageObject();
     };
 
-    this.sessionStorageObject = function () {
-        return this.theSessionStorageObject;
+    this.phwangSessionStorageObject = function () {
+        return this.phwangObject().phwangSessionStorageObject();
     };
+;
 
     this.configStorageObject = function () {
         return this.theConfigStorageObject;

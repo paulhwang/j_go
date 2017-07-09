@@ -8,6 +8,8 @@ function PhwangClass (root_val) {
 
     this.init__ = function (root_val) {
         this.theRootObject = root_val;
+        this.thePhwangLinkStorageObject = new LinkStorageObject();
+        this.thePhwangSessionStorageObject = new SessionStorageObject();
         this.thePhwangAjaxObject = new PhwangAjaxClass(this);
 
         this.debug(true, "init__", "");
@@ -19,6 +21,18 @@ function PhwangClass (root_val) {
 
     this.rootObject = function () {
         return this.theRootObject;
+    };
+
+    this.phwangAjaxStorageObject = function () {
+        return this.thePhwangAjaxStorageObject;
+    };
+
+    this.phwangLinkStorageObject = function () {
+        return this.thePhwangLinkStorageObject;
+    };
+
+    this.phwangSessionStorageObject = function () {
+        return this.thePhwangSessionStorageObject;
     };
 
     this.phwangAjaxObject = function () {
