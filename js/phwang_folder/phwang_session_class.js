@@ -36,6 +36,14 @@ function PhwangSessionClass(link_object_val, session_id_index_val) {
         return this.rootObject().phwangAjaxObject();
     };
 
+    this.phwangLinkStorageObject = function () {
+        return this.phwangObject().phwangLinkStorageObject();
+    };
+
+    this.phwangSessionStorageObject = function () {
+        return this.phwangObject().phwangSessionStorageObject();
+    };
+
     this.topicObject = function () {
         return this.theTopicObject;
     };
