@@ -28,6 +28,10 @@ function TAjaxObject(root_object_val) {
         return this.theRootObject;
     };
 
+    this.rAjaxObject = function () {
+        return this.rootObject().rAjaxObject();
+    };
+
     this.linkObject = function () {
         return this.rootObject().linkObject();
     };
@@ -72,7 +76,7 @@ function TAjaxObject(root_object_val) {
             var data = JSON.parse(response.data);
             this.rootObject().mallocLinkObject(data.my_name, data.link_id);
         } else {
-            this.linkObject().parseAjaxResponseData(response);
+            this.rAjaxObject().parseAjaxResponseData(response);
         }
     };
 

@@ -20,13 +20,25 @@ function RAjaxObject(root_object_val) {
         return this.theRootObject;
     };
 
+    this.linkObject = function () {
+        return this.rootObject().linkObject();
+    };
+
     this.tAjaxObject = function () {
         return this.rootObject().tAjaxObject();
+    };
+
+    this.linkObject = function () {
+        return this.rootObject().linkObject();
     };
 
     this.switchTable = function () {
         return this.theSwitchTable;
     }
+
+    this.sessionStorageObject = function () {
+        return this.rootObject().sessionStorageObject();
+    };
 
     this.linkUpdateInterval = function () {
         return this.theLinkUpdateInterval;
@@ -34,34 +46,6 @@ function RAjaxObject(root_object_val) {
 
     this.setLinkUpdateInterval = function (val) {
         this.theLinkUpdateInterval = val;
-    };
-
-    this.nameListTag = function () {
-        return this.theNameListTag;
-    };
-
-    this.setNameListTag = function (val) {
-        this.theNameListTag = val;
-    };
-
-    this.nameList = function () {
-        return this.theNameList;
-    };
-
-    this.setNameList = function (data_val) {
-        this.theNameList = data_val;
-    };
-
-    this.nameListLength = function () {
-        return this.nameList().length;
-    };
-
-    this.nameListElement = function (index_val) {
-        return this.nameList()[index_val];
-    };
-
-    this.setNameListElement = function (index_val, data_val) {
-        this.nameList()[index_val] = data_val;
     };
 
     this.initSwitchTable = function () {
@@ -80,7 +64,7 @@ function RAjaxObject(root_object_val) {
         if (!data) {
             return;
         }
-        if (!this.verifyLinkIdIndex(data.link_id_index)) {
+        if (!this.linkObject().verifyLinkIdIndex(data.link_id_index)) {
             this.abend("parseAjaxResponseData", "link_id_index=" + data.link_id_index);
             return;
         }
@@ -110,7 +94,7 @@ function RAjaxObject(root_object_val) {
                     var session_id = data.pending_session_data[i];
                     var session = this.sessionMgrObject().searchSessionBySessionId(session_id);
                     if (session) {
-                        this.ajaxObject().getSessionData(session);
+                        this.tAjaxObject().getSessionData(session);
                     }
                     i -= 1;
                 }
@@ -131,9 +115,9 @@ function RAjaxObject(root_object_val) {
                 name_list_tag += (c_data.charAt(index++) - '0');
                 this.debug(true, "getLinkDataResponse==============", "c_data=" + c_data);
                 this.debug(true, "getLinkDataResponse==============", "name_list_tag=" + name_list_tag);
-                if (name_list_tag > this.nameListTag()) {
-                this.debug(true, "getLinkDataResponse==============!!!", "name_list_tag=" + this.nameListTag());
-                    this.ajaxObject().getNameList(this);
+                if (name_list_tag > this.linkObject().nameListTag()) {
+                this.debug(true, "getLinkDataResponse==============!!!", "name_list_tag=" + this.linkObject().nameListTag());
+                    this.tAjaxObject().getNameList(this.linkObject());
                 }
                 c_data = c_data.slice(3);
             }
@@ -146,15 +130,15 @@ function RAjaxObject(root_object_val) {
                 this.debug(true, "getLinkDataResponse==============!!!", "data_session_id_index=" + data_session_id_index);
                 this.debug(true, "getLinkDataResponse==============!!!", "theme_name=" + theme_name);
                 this.debug(true, "getLinkDataResponse==============!!!", "theme_config=" + theme_config);
-                this.ajaxObject().setupSessionReply(this, data.pending_session_setup, data_session_id_index);
+                this.tAjaxObject().setupSessionReply(this, data.pending_session_setup, data_session_id_index);
             }
 
         }
 
         setTimeout(function(link_val) {
             link_val.debug(false, "getLinkDataResponse:timer", "setTimeout");
-            link_val.ajaxObject().getLinkData(link_val);
-        }, this.linkUpdateInterval(), this);
+            link_val.tAjaxObject().getLinkData(link_val);
+        }, this.linkUpdateInterval(), this.linkObject());
     };
 
     this.getNameListResponse___ = function (input_val) {
@@ -184,14 +168,14 @@ function RAjaxObject(root_object_val) {
                 name_list_tag  = (data.c_name_list.charAt(index++) - '0') * 100;
                 name_list_tag += (data.c_name_list.charAt(index++) - '0') * 10;
                 name_list_tag += (data.c_name_list.charAt(index++) - '0');
-                this.setNameListTag(name_list_tag);
+                this.linkObject().setNameListTag(name_list_tag);
 
                 var name_list = data.c_name_list.slice(3);
                 this.debug(true, "getNameListResponse", "name_list_tag=" + name_list_tag);
                 this.debug(true, "getNameListResponse", "name_list=" + name_list);
                 var array = JSON.parse("[" + name_list + "]");
                 this.debug(true, "getNameListResponse", "array=" + array);
-                this.setNameList(array);
+                this.linkObject().setNameList(array);
                 if (this.rootObject().htmlObject().renderNameListFuncExist()) {
                     this.rootObject().htmlObject().renderNameList();////////////////////////////
                 }
@@ -237,7 +221,7 @@ function RAjaxObject(root_object_val) {
                             title: title,
                             config: config,
                             });
-            this0.ajaxObject().setupSession(this0, topic_data, his_name);
+            this0.tAjaxObject().setupSession(this0, topic_data, his_name);
         });
     };
 
@@ -282,13 +266,13 @@ function RAjaxObject(root_object_val) {
         this.debug(true, "putSessionDataResponse", "data=" + json_data_val);
         var data = JSON.parse(json_data_val);
         if (data) {
-            var session = this.getSession(data.session_id_index);
+            var session = this.linkObject().getSession(data.session_id_index);
             if (session) {
                 if (data.c_data === "job is done") {
                     //this.ajaxObject().getSessionData(session);
                 }
                 //session.receiveData(data.res_data, data.c_data);
-                this.ajaxObject().getSessionData(session);
+                this.tAjaxObject().getSessionData(session);
             }
         }
     };
@@ -298,7 +282,7 @@ function RAjaxObject(root_object_val) {
         var data = JSON.parse(json_data_val);
         if (data) {
             this.debug(true, "getSessionDataResponse", "data=" + data.c_data);
-            var session = this.getSession(data.session_id_index);
+            var session = this.linkObject().getSession(data.session_id_index);
             if (session) {
                 session.receiveData(data.c_data);
             }
