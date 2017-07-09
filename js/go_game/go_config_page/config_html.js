@@ -32,8 +32,8 @@ function ConfigHtmlObject(root_object_val) {
         return this.rootObject().configStorageObject();
     };
 
-    this.tAjaxObject = function () {
-        return this.rootObject().tAjaxObject();
+    this.phwangAjaxObject = function () {
+        return this.rootObject().phwangAjaxObject();
     };
 
     this.linkObject = function () {
@@ -76,7 +76,7 @@ function ConfigHtmlObject(root_object_val) {
                 theme_data = theme_data + 0;
             theme_data = theme_data + this0.configStorageObject().komi();
 
-            this0.tAjaxObject().setupSession(this0.linkObject(), topic_data, theme_data, this0.sessionStorageObject().hisName());
+            this0.phwangAjaxObject().setupSession(this0.linkObject(), topic_data, theme_data, this0.sessionStorageObject().hisName());
         });
     };
 

@@ -24,8 +24,8 @@ function RAjaxObject(root_object_val) {
         return this.rootObject().linkObject();
     };
 
-    this.tAjaxObject = function () {
-        return this.rootObject().tAjaxObject();
+    this.phwangAjaxObject = function () {
+        return this.rootObject().phwangAjaxObject();
     };
 
     this.linkObject = function () {
@@ -117,7 +117,7 @@ function RAjaxObject(root_object_val) {
                 this.debug(true, "getLinkDataResponse==============", "name_list_tag=" + name_list_tag);
                 if (name_list_tag > this.linkObject().nameListTag()) {
                 this.debug(true, "getLinkDataResponse==============!!!", "name_list_tag=" + this.linkObject().nameListTag());
-                    this.tAjaxObject().getNameList(this.linkObject());
+                    this.phwangAjaxObject().getNameList(this.linkObject());
                 }
                 c_data = c_data.slice(3);
             }
@@ -130,7 +130,7 @@ function RAjaxObject(root_object_val) {
                 this.debug(true, "getLinkDataResponse==============!!!", "data_session_id_index=" + data_session_id_index);
                 this.debug(true, "getLinkDataResponse==============!!!", "theme_name=" + theme_name);
                 this.debug(true, "getLinkDataResponse==============!!!", "theme_config=" + theme_config);
-                this.tAjaxObject().setupSessionReply(this, data.pending_session_setup, data_session_id_index);
+                this.phwangAjaxObject().setupSessionReply(this, data.pending_session_setup, data_session_id_index);
             }
 
         }
@@ -221,7 +221,7 @@ function RAjaxObject(root_object_val) {
                             title: title,
                             config: config,
                             });
-            this0.tAjaxObject().setupSession(this0, topic_data, his_name);
+            this0.phwangAjaxObject().setupSession(this0, topic_data, his_name);
         });
     };
 
@@ -272,7 +272,7 @@ function RAjaxObject(root_object_val) {
                     //this.ajaxObject().getSessionData(session);
                 }
                 //session.receiveData(data.res_data, data.c_data);
-                this.tAjaxObject().getSessionData(session);
+                this.phwangAjaxObject().getSessionData(session);
             }
         }
     };

@@ -9,7 +9,6 @@ function GoPlayRootObject() {
     this.init__ = function () {
         this.thePhwangObject = new PhwangClass(this);
         this.theRAjaxObject = new RAjaxObject(this);
-        this.theTAjaxObject = new PhwangAjaxClass(this);
         this.theLinkStorageObject = new LinkStorageObject();
         this.theLinkObject = new LinkObject(this, this.linkStorageObject().userName(), this.linkStorageObject().linkIdIndex());
         this.theSessionStorageObject = new SessionStorageObject();
@@ -35,6 +34,10 @@ function GoPlayRootObject() {
 
     this.phwangObject = function () {
         return this.thePhwangObject;
+    };
+
+    this.phwangAjaxObject = function () {
+        return this.phwangObject().phwangAjaxObject();
     };
 
     this.linkStorageObject = function () {
@@ -67,10 +70,6 @@ function GoPlayRootObject() {
 
     this.sessionObject = function () {
         return this.theSessionObject;
-    };
-
-    this.tAjaxObject = function () {
-        return this.theTAjaxObject;
     };
 
     this.rAjaxObject = function () {

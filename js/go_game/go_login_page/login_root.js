@@ -29,6 +29,10 @@ function LoginRootObject() {
         return this.thePhwangObject;
     };
 
+    this.phwangAjaxObject = function () {
+        return this.phwangObject().phwangAjaxObject();
+    };
+
     this.linkStorageObject = function () {
         return this.theLinkStorageObject;
     };

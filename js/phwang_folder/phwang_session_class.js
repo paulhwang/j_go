@@ -32,8 +32,8 @@ function SessionObject(link_object_val, session_id_index_val) {
         return this.linkObject().rootObject();
     };
 
-    this.tAjaxObject = function () {
-        return this.rootObject().tAjaxObject();
+    this.phwangAjaxObject = function () {
+        return this.rootObject().phwangAjaxObject();
     };
 
     this.topicObject = function () {
@@ -96,7 +96,7 @@ function SessionObject(link_object_val, session_id_index_val) {
     };
 
     this.transmitData = function (data_val) {
-        this.tAjaxObject().putSessionData(this, data_val);
+        this.phwangAjaxObject().putSessionData(this, data_val);
     };
 
     this.receiveData = function (c_data_val) {

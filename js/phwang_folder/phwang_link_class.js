@@ -15,7 +15,7 @@ function LinkObject(root_object_val, my_name_val, link_id_index_val) {
         this.theNameListTag = 0;
         this.theSessionIndexArray = [0];
         this.theSessionTableArray = [null];
-        this.tAjaxObject().getLinkData(this);
+        this.phwangAjaxObject().getLinkData(this);
         this.debug(true, "init__", "linkIdIndex=" + this.linkIdIndex() + " myName=" + this.myName());
     };
 
@@ -35,6 +35,14 @@ function LinkObject(root_object_val, my_name_val, link_id_index_val) {
         return this.theRootObject;
     };
 
+    this.phwangObject = function () {
+        return this.rootObject().phwangObject();
+    };
+
+    this.phwangAjaxObject = function () {
+        return this.phwangObject().phwangAjaxObject();
+    };
+
     this.linkStorageObject = function () {
         return this.rootObject().linkStorageObject();
     };
@@ -45,10 +53,6 @@ function LinkObject(root_object_val, my_name_val, link_id_index_val) {
 
     this.htmlObject = function () {
         return this.rootObject().htmlObject();
-    };
-
-    this.tAjaxObject = function () {
-        return this.rootObject().tAjaxObject();
     };
 
     this.myName = function () {
