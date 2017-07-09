@@ -93,7 +93,7 @@ function PhwangSessionClass(link_object_val, session_id_index_val) {
     };
 
     this.sessionName = function () {
-        return  this.linkObject().linkIdIndex() + ":" + this.sessionIdIndex();
+        return  this.linkObject().linkId() + ":" + this.sessionIdIndex();
     };
 
     this.setSessionIdIndex = function (val) {

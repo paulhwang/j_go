@@ -9,14 +9,14 @@ function PhwangLinkClass(root_object_val, my_name_val, link_id_index_val) {
     this.init__ = function (root_object_val, my_name_val, link_id_index_val) {
         this.theRootObject = root_object_val;
         this.theNameList = [];
-        this.theMyName = my_name_val;
-        this.theLinkIdIndex = link_id_index_val;
+        //this.theMyName = my_name_val;
+        //this.theLinkIdIndex = link_id_index_val;
         this.initSwitchTable();
         this.theNameListTag = 0;
         this.theSessionIndexArray = [0];
         this.theSessionTableArray = [null];
         this.phwangAjaxObject().getLinkData(this);
-        this.debug(true, "init__", "linkIdIndex=" + this.linkIdIndex() + " myName=" + this.myName());
+        this.debug(true, "init__", "linkId=" + this.linkId() + " myName=" + this.myName());
     };
 
     this.hisName = function () {//////////////////////
@@ -56,11 +56,11 @@ function PhwangLinkClass(root_object_val, my_name_val, link_id_index_val) {
     };
 
     this.myName = function () {
-        return this.theMyName;
+        return this.phwangLinkStorageObject().userName();
     };
 
-    this.linkIdIndex = function () {
-        return this.theLinkIdIndex;
+    this.linkId = function () {
+        return this.phwangLinkStorageObject().linkId();
     };
 
     this.sessionIndexArray = function () {
@@ -79,15 +79,15 @@ function PhwangLinkClass(root_object_val, my_name_val, link_id_index_val) {
         return this.sessionTableArray()[val];
     };
 
-    this.setLinkIdIndex = function (val) {
-        if (this.linkIdIndex()) {
+    this.setLinkId = function (val) {
+        if (this.linkId()) {
             this.abend("setLinkIdIndex", "already exist");
         }
-        this.theLinkIdIndex = val;
+        this.phwangLinkStorageObject().setLinkId(val);
     };
 
     this.verifyLinkIdIndex = function (id_val) {
-        if (this.linkIdIndex() === id_val) {
+        if (this.linkId() === id_val) {
             return true;
         } else {
             return false;
