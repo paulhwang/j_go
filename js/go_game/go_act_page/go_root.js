@@ -9,7 +9,7 @@ function GoPlayRootObject() {
     this.init__ = function () {
         this.thePhwangObject = new PhwangClass(this);
         this.theRAjaxObject = new RAjaxObject(this);
-        this.thePhwangLinkObject = new PhwangLinkClass(this, this.phwangLinkStorageObject().userName(), this.phwangLinkStorageObject().linkIdIndex());
+        this.thePhwangLinkObject = new PhwangLinkClass(this, this.phwangLinkStorageObject().userName(), this.phwangLinkStorageObject().linkId());
         this.theConfigStorageObject = new GoConfigStorageObject();
         this.theHtmlObject = new GoPlayHtmlObject(this);
         this.theConfigObject = new GoPlayConfigObject(this, this.configStorageObject().configInJson(), true);
@@ -22,7 +22,7 @@ function GoPlayRootObject() {
         this.thePhwangSessionObject = this.phwangLinkObject().mallocSessionAndInsert(this.phwangSessionStorageObject().sessionId());
         this.phwangSessionObject().setTopicObject(this.portObject());
 
-        this.debug(true, "init__", "userName=" + this.phwangLinkStorageObject().userName() + " linkIdIndex=" + this.phwangLinkStorageObject().linkIdIndex() + " sessionId=" + this.phwangSessionStorageObject().sessionId());
+        this.debug(true, "init__", "userName=" + this.phwangLinkStorageObject().userName() + " linkId=" + this.phwangLinkStorageObject().linkId() + " sessionId=" + this.phwangSessionStorageObject().sessionId());
         this.debug(true, "init__", "boardSize=" + this.configStorageObject().boardSize() + " stoneColor=" + this.configStorageObject().stoneColor() + " komi=" + this.configStorageObject().komi() + " handicap=" + this.configStorageObject().handicap());
     };
 

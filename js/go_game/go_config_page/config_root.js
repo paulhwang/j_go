@@ -9,10 +9,10 @@ function ConfigRootObject() {
     this.init__ = function () {
         this.thePhwangObject = new PhwangClass(this);
         this.theRAjaxObject = new RAjaxObject(this);
-        this.thePhwangLinkObject = new PhwangLinkClass(this, this.phwangLinkStorageObject().userName(), this.phwangLinkStorageObject().linkIdIndex());
+        this.thePhwangLinkObject = new PhwangLinkClass(this, this.phwangLinkStorageObject().userName(), this.phwangLinkStorageObject().linkId());
         this.theConfigStorageObject = new GoConfigStorageObject();
         this.theHtmlObject = new ConfigHtmlObject(this);
-        this.debug(true, "init__", "userName=" + this.phwangLinkStorageObject().userName() + " linkIdIndex=" + this.phwangLinkStorageObject().linkIdIndex());
+        this.debug(true, "init__", "userName=" + this.phwangLinkStorageObject().userName() + " linkId=" + this.phwangLinkStorageObject().linkId());
     };
 
     this.objectName = function () {

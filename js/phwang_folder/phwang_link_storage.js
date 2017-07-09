@@ -40,12 +40,12 @@ function LinkStorageObject(phwang_object_val) {
         this.thePassWord = val;
     };
 
-    this.linkIdIndex = function () {
-        return this.storage().link_id_index;
+    this.linkId = function () {
+        return this.storage().link_id;
     };
 
-    this.setLinkIdIndex = function (val) {
-        this.storage().link_id_index = val;
+    this.setLinkId = function (val) {
+        this.storage().link_id = val;
     };
 
     this.serverIp = function () {
@@ -82,7 +82,7 @@ function LinkStorageObject(phwang_object_val) {
     };
 
     this.resetLinkStorage = function () {
-        this.setLinkIdIndex("");
+        this.setLinkId("");
         this.setUserName("");
         this.setPassWord("");
     };
