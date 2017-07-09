@@ -3,11 +3,11 @@
  * Written by Paul Hwang
  */
 
-function PhwangLinkClass(root_object_val) {
+function PhwangLinkClass(phwang_object_val) {
     "use strict";
 
-    this.init__ = function (root_object_val) {
-        this.theRootObject = root_object_val;
+    this.init__ = function (phwang_object_val) {
+        this.thePhwangObject = phwang_object_val;
         this.theNameList = [];
         this.initSwitchTable();
         this.theNameListTag = 0;
@@ -29,12 +29,12 @@ function PhwangLinkClass(root_object_val) {
         return "LinkObject";
     };
 
-    this.rootObject = function () {
-        return this.theRootObject;
+    this.phwangObject = function () {
+        return this.thePhwangObject;
     };
 
-    this.phwangObject = function () {
-        return this.rootObject().phwangObject();
+    this.rootObject = function () {
+        return this.phwangObject().rootObject();
     };
 
     this.phwangAjaxObject = function () {
@@ -416,6 +416,6 @@ function PhwangLinkClass(root_object_val) {
         return this.phwangObject().ABEND(this.objectName() + "." + str1_val, str2_val);
     };
 
-    this.init__(root_object_val);
+    this.init__(phwang_object_val);
 }
 

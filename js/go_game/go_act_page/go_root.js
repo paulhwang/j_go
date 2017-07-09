@@ -12,7 +12,6 @@ function GoPlayRootObject() {
         this.phwangAjaxObject().getLinkData(this.phwangLinkObject());
 
         this.theRAjaxObject = new RAjaxObject(this);
-        //this.thePhwangLinkObject = new PhwangLinkClass(this);
         this.theConfigStorageObject = new GoConfigStorageObject();
         this.theHtmlObject = new GoPlayHtmlObject(this);
         this.theConfigObject = new GoPlayConfigObject(this, this.configStorageObject().configInJson(), true);
