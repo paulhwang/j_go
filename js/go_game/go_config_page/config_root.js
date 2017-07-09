@@ -7,6 +7,7 @@ function ConfigRootObject() {
     "use strict";
 
     this.init__ = function () {
+        this.thePhwangObject = new PhwangClass(this);
         this.theRAjaxObject = new RAjaxObject(this);
         this.theTAjaxObject = new TAjaxObject(this);
         this.theLinkStorageObject = new LinkStorageObject();
@@ -23,6 +24,10 @@ function ConfigRootObject() {
 
     this.nextPage = function () {
         return this.linkStorageObject().serverHttpHeader() + "go_act.html";
+    };
+
+    this.phwangObject = function () {
+        return this.thePhwangObject;
     };
 
     this.linkStorageObject = function () {

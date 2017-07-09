@@ -7,6 +7,7 @@ function LoginRootObject() {
     "use strict";
 
     this.init__ = function () {
+        this.thePhwangObject = new PhwangClass(this);
         this.theLinkStorageObject = new LinkStorageObject();
         this.linkStorageObject().resetLinkStorage();
         this.theAjaxObject = new LoginAjaxObject(this);
@@ -22,6 +23,10 @@ function LoginRootObject() {
 
     this.nextPage = function () {
         return this.linkStorageObject().serverHttpHeader() + "go_config.html";
+    };
+
+    this.phwangObject = function () {
+        return this.thePhwangObject;
     };
 
     this.linkStorageObject = function () {
