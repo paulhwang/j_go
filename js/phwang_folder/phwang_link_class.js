@@ -43,12 +43,12 @@ function PhwangLinkClass(root_object_val, my_name_val, link_id_index_val) {
         return this.phwangObject().phwangAjaxObject();
     };
 
-    this.linkStorageObject = function () {
-        return this.rootObject().linkStorageObject();
+    this.phwangLinkStorageObject = function () {
+        return this.phwangObject().phwangLinkStorageObject();
     };
 
-    this.sessionStorageObject = function () {
-        return this.rootObject().sessionStorageObject();
+    this.phwangSessionStorageObject = function () {
+        return this.phwangObject().phwangSessionStorageObject();
     };
 
     this.htmlObject = function () {
