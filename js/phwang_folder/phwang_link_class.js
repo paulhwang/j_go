@@ -146,9 +146,12 @@ function PhwangLinkClass(phwang_object_val) {
         if (!session) {
             return null;
         }
-        this.sessionIndexArray().push(session.sessionId());
-        this.sessionTableArray().push(session);
         return session;
+    };
+
+    this.insertSession = function (session_val) {
+        this.sessionIndexArray().push(session_val.sessionId());
+        this.sessionTableArray().push(session_val);
     };
 
     this.getSession = function (session_id_val) {

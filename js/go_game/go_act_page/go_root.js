@@ -22,6 +22,7 @@ function GoPlayRootObject() {
         this.theDisplayObject = new GoPlayDisplayObject(this);
 
         this.thePhwangSessionObject = this.phwangLinkObject().mallocSessionAndInsert(this.phwangSessionStorageObject().sessionId());
+        this.phwangLinkObject().insertSession(this.phwangSessionObject());
         this.phwangSessionObject().setTopicObject(this.portObject());
 
         this.debug(true, "init__", "myName=" + this.phwangLinkStorageObject().myName() + " linkId=" + this.phwangLinkStorageObject().linkId() + " sessionId=" + this.phwangSessionStorageObject().sessionId());
