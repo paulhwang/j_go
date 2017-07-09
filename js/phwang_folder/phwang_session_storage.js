@@ -3,16 +3,21 @@
   Written by Paul Hwang
 */
 
-function SessionStorageObject() {
+function SessionStorageObject (phwang_object_val) {
     "use strict";
 
-    this.init__ = function () {
+    this.init__ = function (phwang_object_val) {
+        this.thePhwangObject = phwang_object_val;
         this.theStorage = localStorage;
         this.debug(true, "init__", "");
     };
 
     this.objectName = function () {
         return "SessionStorageObject";
+    };
+
+    this.phwangObject = function () {
+        return this.thePhwangObject;
     };
 
     this.storage = function () {
@@ -50,12 +55,12 @@ function SessionStorageObject() {
     };
 
     this.logit = function (str1_val, str2_val) {
-        return LOG_IT(this.objectName() + "." + str1_val, str2_val);
+        return this.phwangObject().LOG_IT(this.objectName() + "." + str1_val, str2_val);
     };
 
     this.abend = function (str1_val, str2_val) {
-        return ABEND(this.objectName() + "." + str1_val, str2_val);
+        return this.phwangObject().ABEND(this.objectName() + "." + str1_val, str2_val);
     };
 
-    this.init__();
+    this.init__(phwang_object_val);
 }
