@@ -9,7 +9,9 @@ function LoginRootObject() {
     this.init__ = function () {
         this.thePhwangObject = new PhwangClass(this);
         this.phwangObject().initObject();
+
         this.phwangLinkStorageObject().resetLinkStorage();
+
         this.theAjaxObject = new LoginAjaxObject(this);
         this.theHtmlObject = new LoginHtmlObject(this);
         this.debug(true, "init__", "myName=" + this.phwangLinkStorageObject().myName() + " linkId=" + this.phwangLinkStorageObject().linkId());

@@ -9,6 +9,7 @@ function PhwangClass (root_val) {
     this.initObject = function () {
         this.thePhwangAjaxObject = new PhwangAjaxClass(this);
         this.thePhwangLinkObject = new PhwangLinkClass(this);
+        this.thePhwangSessionObject = new PhwangSessionClass(this.phwangLinkObject());
 
         this.debug(true, "initObject", "");
     };
@@ -48,6 +49,10 @@ function PhwangClass (root_val) {
 
     this.phwangLinkObject = function () {
         return this.thePhwangLinkObject;
+    };
+
+    this.phwangSessionObject = function () {
+        return this.thePhwangSessionObject;
     };
 
     this.debug = function (debug_val, str1_val, str2_val) {
