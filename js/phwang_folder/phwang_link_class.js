@@ -136,12 +136,13 @@ function PhwangLinkClass(root_object_val) {
         this.nameList()[index_val] = data_val;
     };
 
-    this.mallocSessionAndInsert = function (session_id_index_val) {
-        var session = new PhwangSessionClass(this, session_id_index_val);
+    this.mallocSessionAndInsert = function (session_id_val) {
+        this.phwangSessionStorageObject().setSessionId(session_id_val);
+        var session = new PhwangSessionClass(this);
         if (!session) {
             return null;
         }
-        this.sessionIndexArray().push(session.sessionIdIndex());
+        this.sessionIndexArray().push(session.sessionId());
         this.sessionTableArray().push(session);
         return session;
     };

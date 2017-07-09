@@ -4,12 +4,11 @@
  * File name: SessionObject.js
  */
 
-function PhwangSessionClass(link_object_val, session_id_index_val) {
+function PhwangSessionClass(link_object_val) {
     "use strict";
 
-    this.init__ = function (link_object_val, session_id_index_val) {
+    this.init__ = function (link_object_val) {
         this.theLinkObject = link_object_val;
-        this.theSessionIdIndex = session_id_index_val;
         this.theXmtSeq = 0;
         this.theRcvSeq = 0;
         this.initSwitchTable();
@@ -24,12 +23,23 @@ function PhwangSessionClass(link_object_val, session_id_index_val) {
         return this.theLinkObject;
     };
 
-    this.sessionIdIndex = function () {
-        return this.theSessionIdIndex;
+    this.sessionId = function () {
+        return this.phwangObject().phwangSessionStorageObject().sessionId();
+    };
+
+    this.setSessionId = function (val) {
+        if (this.sessionId()) {
+            this.abend("setSessionId", "already exist");
+        }
+        this.phwangObject().phwangSessionStorageObject().sessionId(vak);
     };
 
     this.rootObject = function () {
         return this.linkObject().rootObject();
+    };
+
+    this.phwangObject = function () {
+        return this.rootObject().phwangObject();
     };
 
     this.phwangAjaxObject = function () {
@@ -93,14 +103,7 @@ function PhwangSessionClass(link_object_val, session_id_index_val) {
     };
 
     this.sessionName = function () {
-        return  this.linkObject().linkId() + ":" + this.sessionIdIndex();
-    };
-
-    this.setSessionIdIndex = function (val) {
-        if (this.sessionIdIndex()) {
-            this.abend("setSessionIdIndex", "already exist");
-        }
-        this.theSessionIdIndex = val;
+        return  this.linkObject().linkId() + ":" + this.sessionId();
     };
 
     this.transmitData = function (data_val) {
@@ -151,6 +154,6 @@ function PhwangSessionClass(link_object_val, session_id_index_val) {
         return this.phwangObject().ABEND(this.objectName() + "." + str1_val, str2_val);
     };
 
-    this.init__(link_object_val, session_id_index_val);
+    this.init__(link_object_val);
 }
 
