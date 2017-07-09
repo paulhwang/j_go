@@ -8,7 +8,7 @@ function PhwangClass (root_val) {
 
     this.init__ = function (root_val) {
         this.theRootObject = root_val;
-        //this.thePhwangAjaxStorageObject = new AjaxStorageObject(this);
+        this.thePhwangAjaxStorageObject = new AjaxStorageObject(this);
         this.thePhwangLinkStorageObject = new LinkStorageObject(this);
         this.thePhwangSessionStorageObject = new SessionStorageObject(this);
         this.thePhwangAjaxObject = new PhwangAjaxClass(this);
