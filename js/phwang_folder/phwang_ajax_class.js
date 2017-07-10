@@ -173,12 +173,12 @@ function PhwangAjaxClass(phwang_object_val) {
 
 
             if (data.c_data) {
-                var c_data = data.c_data;
                 var name_list_tag  = this.phwangObject().decodeNumber(data.c_data, 3);
                 if (name_list_tag > this.phwangLinkObject().nameListTag()) {
                     this.getNameList(this.phwangLinkObject());
                 }
-                c_data = c_data.slice(3);
+
+                var c_data = data.c_data.slice(3);
             }
 
             if (data.c_pending_session_setup != "") {
