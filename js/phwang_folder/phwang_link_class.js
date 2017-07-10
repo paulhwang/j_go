@@ -278,48 +278,6 @@ function PhwangLinkClass(phwang_object_val) {
         }, this.linkUpdateInterval(), this);
     };
 
-    this.getNameListResponse___ = function (input_val) {
-        this.debug(true, "getNameListResponse", "input_val=" + input_val);
-        var data = JSON.parse(input_val);
-        if (data) {
-            if (data.name_list) {
-                this.setNameList(data.name_list);
-                if (this.myName() !== "z") {
-                    this.getConfigAndSetupSession();
-                }
-            }
-        }
-    };
-
-    this.getNameListResponse = function (input_val) {
-        this.debug(true, "getNameListResponse", "input_val=" + input_val);
-        var data = JSON.parse(input_val);
-        if (data) {
-            if (data.name_list) {
-                //this.setNameList(data.name_list);
-                //this.rootObject().htmlObject().renderNameList();////////////////////////////
-            }
-            if (data.c_name_list) {
-                var name_list_tag;
-                var index = 0;
-                name_list_tag  = (data.c_name_list.charAt(index++) - '0') * 100;
-                name_list_tag += (data.c_name_list.charAt(index++) - '0') * 10;
-                name_list_tag += (data.c_name_list.charAt(index++) - '0');
-                this.setNameListTag(name_list_tag);
-
-                var name_list = data.c_name_list.slice(3);
-                this.debug(true, "getNameListResponse", "name_list_tag=" + name_list_tag);
-                this.debug(true, "getNameListResponse", "name_list=" + name_list);
-                var array = JSON.parse("[" + name_list + "]");
-                this.debug(true, "getNameListResponse", "array=" + array);
-                this.setNameList(array);
-                if (this.rootObject().htmlObject().renderNameListFuncExist()) {
-                    this.rootObject().htmlObject().renderNameList();////////////////////////////
-                }
-            }
-        }
-    };
-
     this.getConfigAndSetupSession = function () {
         var this0 = this;
         var title = "go";
