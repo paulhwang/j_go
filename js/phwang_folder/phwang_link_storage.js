@@ -85,8 +85,20 @@ function PhwangLinkStorageObject(phwang_link_object_val) {
     };
 
     this.resetLinkStorage = function () {
+        this.resetLinkId();
+        this.resetMyName();
+        this.resetPassWord();
+    };
+
+    this.resetLinkId = function () {
         this.setLinkId("");
+    };
+
+    this.resetMyName = function () {
         this.setMyName("");
+    };
+
+    this.resetPassWord = function () {
         this.setPassWord("");
     };
 

@@ -12,7 +12,7 @@ function PhwangAjaxStorageObject (phwang_ajax_object_val) {
 
     this.init__ = function (phwang_ajax_object_val) {
         this.thePhwangAjaxObject = phwang_ajax_object_val;
-
+        this.resetAjaxStorage();
         this.debug(true, "init__", "");
     };
 
@@ -26,6 +26,29 @@ function PhwangAjaxStorageObject (phwang_ajax_object_val) {
 
     this.phwangObject = function () {
         return this.phwangAjaxObject().phwangObject();
+    };
+
+    this.ajaxPacketId = function () {
+        return this.storage().ajax_packet_id;
+    };
+
+    this.incrementAjaxPacketId = function () {
+        var i = Number(this.storage().ajax_packet_id) + 1;
+        if (i !== 1 + Number(this.storage().ajax_packet_id)) {
+            this.abend("incrementAjaxPacketId", "fix it");
+        }
+        this.storage().ajax_packet_id = i;
+    };
+
+    this.resetAjaxStorage = function () {
+        this.resetAjaxPacketId();
+    };
+
+    this.resetAjaxPacketId = function () {
+        var i = Number(this.storage().ajax_packet_id);
+        if (i === NaN) {
+            this.storage().ajax_packet_id = 0;
+        }
     };
 
     this.debug = function (debug_val, str1_val, str2_val) {

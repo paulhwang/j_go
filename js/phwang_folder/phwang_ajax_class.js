@@ -66,6 +66,7 @@ function PhwangAjaxClass(phwang_object_val) {
     };
 
     this.incrementPacketId = function () {
+        this.phwangAjaxStorageObject().incrementAjaxPacketId();
         this.thePacketId += 1;
     };
 
