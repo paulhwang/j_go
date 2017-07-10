@@ -179,6 +179,9 @@ function PhwangAjaxClass(phwang_object_val) {
                 name_list_tag  = (c_data.charAt(index++) - '0') * 100;
                 name_list_tag += (c_data.charAt(index++) - '0') *  10;
                 name_list_tag += (c_data.charAt(index++) - '0');
+                if (this.phwangObject().decodeNumber(data.c_data, 3) !== name_list_tag) {
+                    this.abend("getLinkDataResponse", "decodeNumber");
+                }
                 if (name_list_tag > this.phwangLinkObject().nameListTag()) {
                     this.getNameList(this.phwangLinkObject());
                 }

@@ -52,6 +52,17 @@ function PhwangClass (root_val) {
         return this.thePhwangSessionObject;
     };
 
+    this.decodeNumber = function (input_val, size_val) {
+        var index = 0;
+        var output = 0;
+        while (index < size_val) {
+            output *= 10;
+            output += input_val.charAt(index) - '0';
+            index += 1;
+        }
+        return output;
+    };
+
     this.debug = function (debug_val, str1_val, str2_val) {
         if (debug_val) {
             this.logit(str1_val, str2_val);
