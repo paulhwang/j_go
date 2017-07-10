@@ -12,7 +12,8 @@ function PhwangAjaxStorageObject (phwang_ajax_object_val) {
 
     this.init__ = function (phwang_ajax_object_val) {
         this.thePhwangAjaxObject = phwang_ajax_object_val;
-        this.debug(false, "init__", "");
+
+        this.debug(true, "init__", "");
     };
 
     this.objectName = function () {

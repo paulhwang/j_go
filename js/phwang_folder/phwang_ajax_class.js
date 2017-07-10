@@ -15,7 +15,7 @@ function PhwangAjaxClass(phwang_object_val) {
         this.thePacketId = 1;
         this.theHttpGetRequest = new XMLHttpRequest();
         this.setupReceiveAjaxResponse();
-        this.debug(false, "init__", "");
+        this.debug(true, "init__", "");
     };
 
     this.objectName = function () {
