@@ -12,6 +12,7 @@ function PhwangSessionStorageObject (phwang_session_object_val) {
 
     this.init__ = function (phwang_session_object_val) {
         this.thePhwangSessionObject = phwang_session_object_val;
+        this.resetSessionStorage();
         this.debug(true, "init__", "");
     };
 
@@ -41,6 +42,9 @@ function PhwangSessionStorageObject (phwang_session_object_val) {
 
     this.setSessionId = function (val) {
         this.storage().session_id = val;
+    };
+
+    this.resetSessionStorage = function () {
     };
 
     this.debug = function (debug_val, str1_val, str2_val) {
