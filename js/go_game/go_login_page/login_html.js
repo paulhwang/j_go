@@ -43,7 +43,7 @@ function LoginHtmlObject(root_object_val) {
             this0.phwangLinkObject().setPassWord($(".login_section .login_password").val());
             this0.debug(true, "setupHtmlInput", "myName=" + this0.phwangLinkObject().myName() + " passWord=" + this0.phwangLinkObject().passWord());
             if (this0.phwangLinkObject().myName()) {
-                this0.phwangAjaxObject().setupLink();
+                this0.phwangAjaxObject().setupLink(this0.phwangLinkObject());
             }
         });
     };

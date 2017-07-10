@@ -121,12 +121,32 @@ function PhwangAjaxClass(phwang_object_val) {
         };
      };
 
+    this.setupLink = function (link_val) {
+        var output = JSON.stringify({
+                        command: "setup_link",
+                        my_name: link_val.myName(),
+                        password: link_val.passWord(),
+                        });
+        this.debug_(true, this.debugOutput(), "setupLink", "output=" + output);
+        this.transmitAjaxRequest(output);
+    };
+
     this.setupLinkResponse = function (input_val) {
         this.debug(true, "setupLinkResponse", "input_val=" + input_val);
         var data = JSON.parse(input_val);
         this.phwangLinkObject().setLinkId(data.link_id);
-        window.open(this.rootObject().nextPage(), "_self")
-   };
+        this.rootObject().receiveSetupLinkResponse();
+    };
+
+    this.getLinkData = function (link_val) {
+        var output = JSON.stringify({
+                        command: "get_link_data",
+                        my_name: link_val.myName(),
+                        link_id: link_val.linkId(),
+                        });
+        this.debug_(false, this.debugOutput(), "getLinkData", "output=" + output);
+        this.transmitAjaxRequest(output);
+    };
 
     this.getLinkDataResponse = function (input_val) {
         this.debug(false, "getLinkDataResponse", "input_val=" + input_val);
@@ -176,9 +196,20 @@ function PhwangAjaxClass(phwang_object_val) {
         }
 
         setTimeout(function(link_val) {
-            link_val.debug(false, "getLinkDataResponse:timer", "setTimeout");
-            link_val.phwangAjaxObject().getLinkData(link_val);
-        }, this.linkUpdateInterval(), this.phwangLinkObject());
+                        link_val.debug(false, "getLinkDataResponse:timer", "setTimeout");
+                        link_val.phwangAjaxObject().getLinkData(link_val);
+                        }, this.linkUpdateInterval(), this.phwangLinkObject());
+    };
+
+    this.getNameList = function (link_val) {
+        var output = JSON.stringify({
+                        command: "get_name_list",
+                        my_name: link_val.myName(),
+                        link_id: link_val.linkId(),
+                        name_list_tag: link_val.nameListTag(),
+                        });
+        this.debug_(true, this.debugOutput(), "getNameList", "output=" + output);
+        this.transmitAjaxRequest(output);
     };
 
     this.getNameListResponse = function (input_val) {
@@ -206,80 +237,6 @@ function PhwangAjaxClass(phwang_object_val) {
         }
     };
 
-   this.setupSessionResponse = function (input_val) {
-        this.debug(true, "setupSessionResponse", "input_val=" + input_val);
-        var data = JSON.parse(input_val);
-        if (data) {
-            this.phwangSessionObject().setSessionId(data.session_id);
-            this.debug(true, "setupSessionResponse", "sessionId=" + this.phwangSessionObject().sessionId());
-            window.open(this.rootObject().nextPage(), "_self")
-        }
-    };
-
-    this.setupSessionReplyResponse = function (json_data_val) {
-        this.debug(true, "setupSessionReplyResponse", "data=" + json_data_val);
-        var data = JSON.parse(json_data_val);
-        if (data) {
-            this.phwangSessionStorageObject().setSessionId(data.session_id.slice(8));
-            this.debug(true, "setupSessionReplyResponse", "sessionId=" + this.sessionStorageObject().sessionId());
-            window.open(this.rootObject().nextPage(), "_self")
-        }
-    };
-
-    this.putSessionDataResponse = function (json_data_val) {
-        this.debug(true, "putSessionDataResponse", "data=" + json_data_val);
-        var data = JSON.parse(json_data_val);
-        if (data) {
-            var session = this.phwangLinkObject().getSession(data.session_id);
-            if (session) {
-                this.getSessionData(session);
-            }
-        }
-    };
-
-    this.getSessionDataResponse = function (json_data_val) {
-        this.debug(true, "getSessionDataResponse", "data=" + json_data_val);
-        var data = JSON.parse(json_data_val);
-        if (data) {
-            this.debug(true, "getSessionDataResponse", "data=" + data.c_data);
-            var session = this.phwangLinkObject().getSession(data.session_id);
-            if (session) {
-                session.receiveData(data.c_data);
-            }
-        }
-    };
-
-    this.setupLink = function () {
-        var output = JSON.stringify({
-                        command: "setup_link",
-                        my_name: this.phwangLinkObject().myName(),
-                        password: this.phwangLinkObject().passWord(),
-                        });
-        this.debug_(true, this.debugOutput(), "setupLink", "output=" + output);
-        this.transmitAjaxRequest(output);
-    };
-
-    this.getLinkData = function (link_val) {
-        var output = JSON.stringify({
-                        command: "get_link_data",
-                        my_name: link_val.myName(),
-                        link_id: link_val.linkId(),
-                        });
-        this.debug_(false, this.debugOutput(), "getLinkData", "output=" + output);
-        this.transmitAjaxRequest(output);
-    };
-
-    this.getNameList = function (link_val) {
-        var output = JSON.stringify({
-                        command: "get_name_list",
-                        my_name: link_val.myName(),
-                        link_id: link_val.linkId(),
-                        name_list_tag: link_val.nameListTag(),
-                        });
-        this.debug_(true, this.debugOutput(), "getNameList", "output=" + output);
-        this.transmitAjaxRequest(output);
-    };
-
     this.setupSession = function (link_val, topic_data_val, theme_data_val, his_name_val) {
         var output = JSON.stringify({
                         command: "setup_session",
@@ -291,6 +248,16 @@ function PhwangAjaxClass(phwang_object_val) {
                         });
         this.debug_(true, this.debugOutput(), "setupSession", "output=" + output);
         this.transmitAjaxRequest(output);
+    };
+
+   this.setupSessionResponse = function (input_val) {
+        this.debug(true, "setupSessionResponse", "input_val=" + input_val);
+        var data = JSON.parse(input_val);
+        if (data) {
+            this.phwangSessionObject().setSessionId(data.session_id);
+            this.debug(true, "setupSessionResponse", "sessionId=" + this.phwangSessionObject().sessionId());
+            window.open(this.rootObject().nextPage(), "_self")
+        }
     };
 
     this.setupSessionReply = function (link_val, data_val, session_id_index_val) {
@@ -307,19 +274,38 @@ function PhwangAjaxClass(phwang_object_val) {
         this.transmitAjaxRequest(output);
     };
 
+    this.setupSessionReplyResponse = function (json_data_val) {
+        this.debug(true, "setupSessionReplyResponse", "data=" + json_data_val);
+        var data = JSON.parse(json_data_val);
+        if (data) {
+            this.phwangSessionStorageObject().setSessionId(data.session_id.slice(8));
+            this.debug(true, "setupSessionReplyResponse", "sessionId=" + this.sessionStorageObject().sessionId());
+            window.open(this.rootObject().nextPage(), "_self")
+        }
+    };
+
     this.putSessionData = function (session_val, data_val) {
         var output = JSON.stringify({
                         command: "put_session_data",
-                        my_name: session_val.phwangLinkObject().myName(),
                         link_id: session_val.phwangLinkObject().linkId(),
                         session_id: session_val.sessionId(),
-                        his_name: session_val.hisName(),
                         xmt_seq: session_val.xmtSeq(),
                         data: data_val,
                         });
         session_val.incrementXmtSeq();
         this.debug_(true, this.debugOutput(), "putSessionData", "output=" + output);
         this.transmitAjaxRequest(output);
+    };
+
+    this.putSessionDataResponse = function (json_data_val) {
+        this.debug(true, "putSessionDataResponse", "data=" + json_data_val);
+        var data = JSON.parse(json_data_val);
+        if (data) {
+            var session = this.phwangLinkObject().getSession(data.session_id);
+            if (session) {
+                this.getSessionData(session);
+            }
+        }
     };
 
     this.getSessionData = function (session_val) {
@@ -330,6 +316,18 @@ function PhwangAjaxClass(phwang_object_val) {
                         });
         this.debug_(true, this.debugOutput(), "getSessionData", "output=" + output);
         this.transmitAjaxRequest(output);
+    };
+
+    this.getSessionDataResponse = function (json_data_val) {
+        this.debug(true, "getSessionDataResponse", "data=" + json_data_val);
+        var data = JSON.parse(json_data_val);
+        if (data) {
+            this.debug(true, "getSessionDataResponse", "data=" + data.c_data);
+            var session = this.phwangLinkObject().getSession(data.session_id);
+            if (session) {
+                session.receiveData(data.c_data);
+            }
+        }
     };
 
     this.transmitAjaxRequest = function (output_val) {

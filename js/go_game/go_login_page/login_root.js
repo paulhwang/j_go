@@ -43,6 +43,10 @@ function LoginRootObject() {
         return this.theHtmlObject;
     };
 
+    this.receiveSetupLinkResponse = function () {
+        window.open(this.nextPage(), "_self")
+    };
+
     this.debug = function (debug_val, str1_val, str2_val) {
         if (debug_val) {
             this.logit(str1_val, str2_val);
