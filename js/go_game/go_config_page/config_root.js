@@ -11,7 +11,7 @@ function ConfigRootObject() {
         this.phwangObject().initObject();
         this.phwangAjaxObject().getLinkData(this.phwangLinkObject());
 
-        this.theConfigStorageObject = new GoConfigStorageObject();
+        this.theConfigStorageObject = new GoConfigStorageObject(this);
         this.theHtmlObject = new ConfigHtmlObject(this);
         this.debug(true, "init__", "myName=" + this.phwangLinkObject().myName() + " linkId=" + this.phwangLinkObject().linkId());
     };

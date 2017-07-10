@@ -3,11 +3,15 @@
   Written by Paul Hwang
 */
 
-function GoConfigStorageObject() {
+function GoConfigStorageObject(root_val) {
     "use strict";
 
-    this.init__ = function () {
-        this.theStorage = localStorage;
+    this.storage = function () {
+        return localStorage;
+    };
+
+    this.init__ = function (root_val) {
+        this.theRootObject = root_val;
         this.debug(true, "init__", "");
     };
 
@@ -15,8 +19,12 @@ function GoConfigStorageObject() {
         return "GoConfigStorageObject";
     };
 
-    this.storage = function () {
-        return this.theStorage;
+    this.rootObject = function () {
+        return this.theRootObject;
+    };
+
+    this.phwangObject = function () {
+        return this.rootObject().phwangObject();
     };
 
     this.boardSize = function () {
@@ -67,13 +75,13 @@ function GoConfigStorageObject() {
     };
 
     this.logit = function (str1_val, str2_val) {
-        return LOG_IT(this.objectName() + "." + str1_val, str2_val);
+        return this.phwangObject().LOG_IT(this.objectName() + "." + str1_val, str2_val);
     };
 
     this.abend = function (str1_val, str2_val) {
-        return ABEND(this.objectName() + "." + str1_val, str2_val);
+        return this.phwangObject().ABEND(this.objectName() + "." + str1_val, str2_val);
     };
 
-    this.init__();
+    this.init__(root_val);
 }
 

@@ -11,7 +11,7 @@ function GoPlayRootObject() {
         this.phwangObject().initObject();
         this.phwangAjaxObject().getLinkData(this.phwangLinkObject());
 
-        this.theConfigStorageObject = new GoConfigStorageObject();
+        this.theConfigStorageObject = new GoConfigStorageObject(this);
         this.theHtmlObject = new GoPlayHtmlObject(this);
         this.theConfigObject = new GoPlayConfigObject(this, this.configStorageObject().configInJson(), true);
         this.theBoardObject = new GoPlayBoardObject(this);
