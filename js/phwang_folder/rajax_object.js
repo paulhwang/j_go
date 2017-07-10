@@ -130,27 +130,10 @@ function RAjaxObject(root_object_val) {
         }, this.linkUpdateInterval(), this.phwangLinkObject());
     };
 
-    this.getNameListResponse___ = function (input_val) {
-        this.debug(true, "getNameListResponse", "input_val=" + input_val);
-        var data = JSON.parse(input_val);
-        if (data) {
-            if (data.name_list) {
-                this.setNameList(data.name_list);
-                if (this.myName() !== "z") {
-                    this.getConfigAndSetupSession();
-                }
-            }
-        }
-    };
-
     this.getNameListResponse = function (input_val) {
         this.debug(true, "getNameListResponse", "input_val=" + input_val);
         var data = JSON.parse(input_val);
         if (data) {
-            if (data.name_list) {
-                //this.setNameList(data.name_list);
-                //this.rootObject().htmlObject().renderNameList();////////////////////////////
-            }
             if (data.c_name_list) {
                 var name_list_tag;
                 var index = 0;
@@ -214,18 +197,7 @@ function RAjaxObject(root_object_val) {
         });
     };
 
-    this.setupSessionResponse___ = function (input_val) {
-        this.debug(false, "setupSessionResponse", "input_val=" + input_val);
-        var data = JSON.parse(input_val);
-        if (data) {
-            var session = this.mallocSessionAndInsert(data.session_id);
-            if (data.topic_data) {
-                session.appendTopicToSession(data.topic_data, data.his_name, true);
-            }
-        }
-    };
-
-    this.setupSessionResponse = function (input_val) {
+   this.setupSessionResponse = function (input_val) {
         this.debug(true, "setupSessionResponse", "input_val=" + input_val);
         var data = JSON.parse(input_val);
         if (data) {
@@ -242,10 +214,6 @@ function RAjaxObject(root_object_val) {
             this.phwangSessionStorageObject().setSessionId(data.session_id_index.slice(8));
             this.debug(true, "setupSessionReplyResponse", "sessionId=" + this.sessionStorageObject().sessionId());
             window.open(this.rootObject().nextPage(), "_self")
-            //var session = this.mallocSessionAndInsert(data.session_id);
-            //if (data.topic_data) {
-            //    session.appendTopicToSession(data.topic_data, data.his_name, false);
-            //}
         }
     };
 
@@ -255,10 +223,6 @@ function RAjaxObject(root_object_val) {
         if (data) {
             var session = this.phwangLinkObject().getSession(data.session_id_index);
             if (session) {
-                if (data.c_data === "job is done") {
-                    //this.ajaxObject().getSessionData(session);
-                }
-                //session.receiveData(data.res_data, data.c_data);
                 this.phwangAjaxObject().getSessionData(session);
             }
         }
