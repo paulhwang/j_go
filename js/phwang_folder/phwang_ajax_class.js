@@ -85,13 +85,7 @@ function PhwangAjaxClass(phwang_object_val) {
 
     this.switchAjaxResponseData = function (json_response_val) {
         var response = JSON.parse(json_response_val);
-        if (response.command === "setup_link") {
-            this.debug(true, "switchAjaxResponseData", "command=" + response.command + " data=" + response.data);
-            var data = JSON.parse(response.data);
-            this.rootObject().mallocLinkObject(data.my_name, data.link_id);
-        } else {
             this.parseAjaxResponseData(response);
-        }
     };
 
     this.parseAjaxResponseData = function (response_val) {
@@ -99,7 +93,8 @@ function PhwangAjaxClass(phwang_object_val) {
         if (!data) {
             return;
         }
-        if (!this.phwangLinkObject().verifyLinkIdIndex(data.link_id_index)) {
+        if ((response_val.command !== "setup_link") &&
+            (!this.phwangLinkObject().verifyLinkIdIndex(data.link_id_index))) {
             this.abend("parseAjaxResponseData", "link_id_index=" + data.link_id_index);
             return;
         }
@@ -129,7 +124,10 @@ function PhwangAjaxClass(phwang_object_val) {
      };
 
     this.setupLinkResponse = function (input_val) {
-        this.debug(false, "setupLinkResponse", "input_val=" + input_val);
+        this.debug(true, "setupLinkResponse", "input_val=" + input_val);
+        var data = JSON.parse(input_val);
+        this.phwangLinkObject().setLinkId(data.link_id_index);
+        window.open(this.rootObject().nextPage(), "_self")
    };
 
     this.getLinkDataResponse = function (input_val) {
@@ -253,10 +251,11 @@ function PhwangAjaxClass(phwang_object_val) {
         }
     };
 
-    this.setupLink = function (root_val) {
+    this.setupLink = function () {
         var output = JSON.stringify({
                         command: "setup_link",
-                        my_name: root_val.myName(),
+                        my_name: this.phwangLinkObject().myName(),
+                        password: this.phwangLinkObject().passWord(),
                         });
         this.debug_(true, this.debugOutput(), "setupLink", "output=" + output);
         this.transmitAjaxRequest(output);
