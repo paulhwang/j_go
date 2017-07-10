@@ -28,13 +28,13 @@ function RAjaxObject(root_object_val) {
         return this.rootObject().phwangLinkObject();
     };
 
+    this.phwangSessionObject = function () {
+        return this.rootObject().phwangSessionObject();
+    };
+
     this.switchTable = function () {
         return this.theSwitchTable;
     }
-
-    this.phwangSessionStorageObject = function () {
-        return this.rootObject().phwangSessionStorageObject();
-    };
 
     this.linkUpdateInterval = function () {
         return this.theLinkUpdateInterval;
@@ -229,8 +229,8 @@ function RAjaxObject(root_object_val) {
         this.debug(true, "setupSessionResponse", "input_val=" + input_val);
         var data = JSON.parse(input_val);
         if (data) {
-            this.phwangSessionStorageObject().setSessionId(data.session_id_index);
-            this.debug(true, "setupSessionResponse", "sessionId=" + this.phwangSessionStorageObject().sessionId());
+            this.phwangSessionObject().setSessionId(data.session_id_index);
+            this.debug(true, "setupSessionResponse", "sessionId=" + this.phwangSessionObject().sessionId());
             window.open(this.rootObject().nextPage(), "_self")
         }
     };

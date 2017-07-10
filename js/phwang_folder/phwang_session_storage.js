@@ -3,11 +3,11 @@
   Written by Paul Hwang
 */
 
-function PhwangSessionStorageObject (phwang_object_val) {
+function PhwangSessionStorageObject (phwang_session_object_val) {
     "use strict";
 
-    this.init__ = function (phwang_object_val) {
-        this.thePhwangObject = phwang_object_val;
+    this.init__ = function (phwang_session_object_val) {
+        this.thePhwangSessionObject = phwang_session_object_val;
         this.theStorage = localStorage;
         this.debug(true, "init__", "");
     };
@@ -16,8 +16,12 @@ function PhwangSessionStorageObject (phwang_object_val) {
         return "PhwangSessionStorageObject";
     };
 
+    this.phwangSessionObject = function () {
+        return this.thePhwangSessionObject;
+    };
+
     this.phwangObject = function () {
-        return this.thePhwangObject;
+        return this.phwangSessionObject().phwangObject();
     };
 
     this.storage = function () {
@@ -54,5 +58,5 @@ function PhwangSessionStorageObject (phwang_object_val) {
         return this.phwangObject().ABEND(this.objectName() + "." + str1_val, str2_val);
     };
 
-    this.init__(phwang_object_val);
+    this.init__(phwang_session_object_val);
 }

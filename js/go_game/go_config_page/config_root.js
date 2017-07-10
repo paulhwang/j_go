@@ -41,14 +41,6 @@ function ConfigRootObject() {
         return this.phwangObject().phwangSessionObject();
     };
 
-    this.phwangLinkStorageObject = function () {
-        return this.phwangObject().phwangLinkStorageObject();
-    };
-
-    this.phwangSessionStorageObject = function () {
-        return this.phwangObject().phwangSessionStorageObject();
-    };
-
     this.configStorageObject = function () {
         return this.theConfigStorageObject;
     };

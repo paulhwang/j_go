@@ -32,12 +32,12 @@ function PhwangAjaxClass(phwang_object_val) {
         return this.phwangObject().rootObject();
     };
 
-    this.rAjaxObject = function () {
-        return this.rootObject().rAjaxObject();
+    this.phwangLinkObject = function () {
+        return this.phwangObject().phwangLinkObject();
     };
 
-    this.linkObject = function () {
-        return this.rootObject().linkObject();
+    this.rAjaxObject = function () {
+        return this.rootObject().rAjaxObject();
     };
 
     this.ajaxRoute = function () {
@@ -155,7 +155,7 @@ function PhwangAjaxClass(phwang_object_val) {
     this.getSessionData = function (session_val) {
         var output = JSON.stringify({
                         command: "get_session_data",
-                        link_id_index: session_val.linkObject().linkId(),
+                        link_id_index: session_val.phwangLinkObject().linkId(),
                         session_id_index: session_val.sessionId(),
                         });
         this.debug_(true, this.debugOutput(), "getSessionData", "output=" + output);
@@ -165,8 +165,8 @@ function PhwangAjaxClass(phwang_object_val) {
     this.putSessionData = function (session_val, data_val) {
         var output = JSON.stringify({
                         command: "put_session_data",
-                        my_name: session_val.linkObject().myName(),
-                        link_id_index: session_val.linkObject().linkId(),
+                        my_name: session_val.phwangLinkObject().myName(),
+                        link_id_index: session_val.phwangLinkObject().linkId(),
                         session_id_index: session_val.sessionId(),
                         his_name: session_val.hisName(),
                         xmt_seq: session_val.xmtSeq(),

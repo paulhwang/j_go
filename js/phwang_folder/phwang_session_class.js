@@ -8,7 +8,9 @@ function PhwangSessionClass(link_object_val) {
     "use strict";
 
     this.init__ = function (link_object_val) {
-        this.theLinkObject = link_object_val;
+        this.thePhwangLinkObject = link_object_val;
+        this.thePhwangSessionStorageObject = new PhwangSessionStorageObject(this);
+
         this.theXmtSeq = 0;
         this.theRcvSeq = 0;
         this.initSwitchTable();
@@ -19,39 +21,35 @@ function PhwangSessionClass(link_object_val) {
         return "PhwangSessionClass";
     };
 
-    this.linkObject = function () {
-        return this.theLinkObject;
+    this.phwangLinkObject = function () {
+        return this.thePhwangLinkObject;
+    };
+
+    this.phwangSessionStorageObject = function () {
+        return this.thePhwangSessionStorageObject;
+    };
+
+    this.phwangObject = function () {
+        return this.phwangLinkObject().phwangObject();
+    };
+
+    this.rootObject = function () {
+        return this.phwangObject().rootObject();
+    };
+
+    this.phwangAjaxObject = function () {
+        return this.phwangObject().phwangAjaxObject();
     };
 
     this.sessionId = function () {
-        return this.phwangObject().phwangSessionStorageObject().sessionId();
+        return this.phwangSessionStorageObject().sessionId();
     };
 
     this.setSessionId = function (val) {
         if (this.sessionId()) {
-            this.abend("setSessionId", "already exist");
+            //this.abend("setSessionId", "already exist");
         }
-        this.phwangObject().phwangSessionStorageObject().sessionId(vak);
-    };
-
-    this.rootObject = function () {
-        return this.linkObject().rootObject();
-    };
-
-    this.phwangObject = function () {
-        return this.rootObject().phwangObject();
-    };
-
-    this.phwangAjaxObject = function () {
-        return this.rootObject().phwangAjaxObject();
-    };
-
-    this.phwangLinkStorageObject = function () {
-        return this.phwangObject().phwangLinkStorageObject();
-    };
-
-    this.phwangSessionStorageObject = function () {
-        return this.phwangObject().phwangSessionStorageObject();
+        this.phwangSessionStorageObject().setSessionId(val);
     };
 
     this.topicObject = function () {
@@ -71,11 +69,11 @@ function PhwangSessionClass(link_object_val) {
     };
 
     this.hisName = function () {
-        return this.theHisName;
+        return this.phwangSessionStorageObject().hisName();
     };
 
     this.setHisName = function (val) {
-        this.theHisName = val;
+        this.phwangSessionStorageObject().setHisName(val);
     };
 
     this.gameName = function () {
@@ -103,7 +101,7 @@ function PhwangSessionClass(link_object_val) {
     };
 
     this.sessionName = function () {
-        return  this.linkObject().linkId() + ":" + this.sessionId();
+        return  this.phwangLinkObject().linkId() + ":" + this.sessionId();
     };
 
     this.transmitData = function (data_val) {

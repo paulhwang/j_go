@@ -34,24 +34,20 @@ function PhwangLinkClass(phwang_object_val) {
         return this.thePhwangObject;
     };
 
-    this.rootObject = function () {
-        return this.phwangObject().rootObject();
-    };
-
     this.phwangLinkStorageObject = function () {
         return this.thePhwangLinkStorageObject;
+    };
+
+    this.rootObject = function () {
+        return this.phwangObject().rootObject();
     };
 
     this.phwangAjaxObject = function () {
         return this.phwangObject().phwangAjaxObject();
     };
 
-    this.phwangLinkObject = function () {
-        return this.phwangObject().phwangLinkObject();
-    };
-
-    this.phwangSessionStorageObject = function () {
-        return this.phwangObject().phwangSessionStorageObject();
+    this.phwangSessionObject = function () {
+        return this.phwangObject().phwangSessionObject();
     };
 
     this.htmlObject = function () {
@@ -80,7 +76,7 @@ function PhwangLinkClass(phwang_object_val) {
 
     this.setLinkId = function (val) {
         if (this.linkId()) {
-            this.abend("setLinkIdIndex", "already exist");
+            //this.abend("setLinkIdIndex", "already exist");
         }
         this.phwangLinkStorageObject().setLinkId(val);
     };
@@ -166,7 +162,7 @@ function PhwangLinkClass(phwang_object_val) {
     };
 
     this.mallocSessionAndInsert = function (session_id_val) {
-        this.phwangSessionStorageObject().setSessionId(session_id_val);
+        this.phwangSessionObject().setSessionId(session_id_val);
         var session = new PhwangSessionClass(this);
         if (!session) {
             return null;
