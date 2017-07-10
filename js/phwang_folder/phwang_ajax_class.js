@@ -235,7 +235,7 @@ function PhwangAjaxClass(phwang_object_val) {
         }
     };
 
-    this.setupSession = function (link_val, topic_data_val, theme_data_val, his_name_val) {
+    this.setupSession = function (link_val, theme_data_val, his_name_val) {
         var output = JSON.stringify({
                         command: "setup_session",
                         link_id: link_val.linkId(),

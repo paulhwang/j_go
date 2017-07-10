@@ -69,6 +69,7 @@ function ConfigHtmlObject(root_object_val) {
             if (this0.configStorageObject().boardSize() < 10)
                 theme_data = theme_data + 0;
             theme_data = theme_data + this0.configStorageObject().boardSize();
+            //theme_data = theme_data + this0.configStorageObject().stoneColor();
             if (this0.configStorageObject().handicap() < 10)
                 theme_data = theme_data + 0;
             theme_data = theme_data + this0.configStorageObject().handicap();
@@ -76,7 +77,7 @@ function ConfigHtmlObject(root_object_val) {
                 theme_data = theme_data + 0;
             theme_data = theme_data + this0.configStorageObject().komi();
 
-            this0.phwangAjaxObject().setupSession(this0.phwangLinkObject(), topic_data, theme_data, this0.phwangSessionObject().hisName());
+            this0.phwangAjaxObject().setupSession(this0.phwangLinkObject(), theme_data, this0.phwangSessionObject().hisName());
         });
     };
 
