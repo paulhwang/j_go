@@ -203,7 +203,6 @@ function PhwangAjaxClass(phwang_object_val) {
     this.getNameList = function (link_val) {
         var output = JSON.stringify({
                         command: "get_name_list",
-                        my_name: link_val.myName(),
                         link_id: link_val.linkId(),
                         name_list_tag: link_val.nameListTag(),
                         });
@@ -239,11 +238,9 @@ function PhwangAjaxClass(phwang_object_val) {
     this.setupSession = function (link_val, topic_data_val, theme_data_val, his_name_val) {
         var output = JSON.stringify({
                         command: "setup_session",
-                        my_name: link_val.myName(),
                         link_id: link_val.linkId(),
                         his_name: his_name_val,
                         theme_data: theme_data_val,
-                        topic_data: topic_data_val,
                         });
         this.debug_(true, this.debugOutput(), "setupSession", "output=" + output);
         this.transmitAjaxRequest(output);
