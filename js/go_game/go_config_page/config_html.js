@@ -54,16 +54,6 @@ function ConfigHtmlObject(root_object_val) {
             this0.configStorageObject().setKomi($(".config_section .go_config_section .komi").val());
             this0.configStorageObject().setHandicap($(".config_section .go_config_section .handicap").val());
             this0.debug(true, "setupHtmlInput", "boardSize=" + this0.configStorageObject().boardSize() + " stoneColor=" + this0.configStorageObject().stoneColor() + " komi=" + this0.configStorageObject().komi() + " handicap=" + this0.configStorageObject().handicap());
-            var config = JSON.stringify({
-                            board_size: this0.configStorageObject().boardSize(),
-                            color: this0.configStorageObject().stoneColor(),
-                            komi: this0.configStorageObject().komi(),
-                            handicap: this0.configStorageObject().handicap(),
-                            });
-            var topic_data = JSON.stringify({
-                            title: "go",
-                            config: config,
-                            });
 
             var theme_data = "GO";
             if (this0.configStorageObject().boardSize() < 10)
