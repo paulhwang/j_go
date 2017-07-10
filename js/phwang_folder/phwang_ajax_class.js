@@ -61,12 +61,16 @@ function PhwangAjaxClass(phwang_object_val) {
         return this.theHttpGetRequest;
     };
 
-    this.ajaxPacketId = function () {
-        return this.phwangAjaxStorageObject().ajaxPacketId();
+    this.switchTable = function () {
+        return this.theSwitchTable;
+    }
+
+    this.linkUpdateInterval = function () {
+        return this.theLinkUpdateInterval;
     };
 
-    this.incrementAjaxPacketId = function () {
-        this.phwangAjaxStorageObject().incrementAjaxPacketId();
+    this.setLinkUpdateInterval = function (val) {
+        this.theLinkUpdateInterval = val;
     };
 
     this.setupReceiveAjaxResponse = function () {
@@ -90,125 +94,6 @@ function PhwangAjaxClass(phwang_object_val) {
         }
     };
 
-    this.transmitAjaxRequest = function (output_val) {
-        this.debug(true, "transmitAjaxRequest", "output=" + output_val);
-        this.httpGetRequest().open("GET", this.ajaxRoute(), true);
-        this.httpGetRequest().setRequestHeader("X-Requested-With", "XMLHttpRequest");
-        this.httpGetRequest().setRequestHeader("Content-Type", this.jsonContext());
-        this.httpGetRequest().setRequestHeader("gorequest", output_val);
-        this.httpGetRequest().setRequestHeader("GOPACKETID", this.ajaxPacketId());
-        this.incrementAjaxPacketId();
-        this.httpGetRequest().send(null);
-    };
-
-    this.setupLink = function (root_val) {
-        var output = JSON.stringify({
-                        command: "setup_link",
-                        my_name: root_val.myName(),
-                        });
-        this.debug_(true, this.debugOutput(), "setupLink", "output=" + output);
-        this.transmitAjaxRequest(output);
-    };
-
-    this.getLinkData = function (link_val) {
-        var output = JSON.stringify({
-                        command: "get_link_data",
-                        my_name: link_val.myName(),
-                        link_id_index: link_val.linkId(),
-                        });
-        this.debug_(false, this.debugOutput(), "getLinkData", "output=" + output);
-        this.transmitAjaxRequest(output);
-    };
-
-    this.getNameList = function (link_val) {
-        var output = JSON.stringify({
-                        command: "get_name_list",
-                        my_name: link_val.myName(),
-                        link_id_index: link_val.linkId(),
-                        name_list_tag: link_val.nameListTag(),
-                        });
-        this.debug_(true, this.debugOutput(), "getNameList", "output=" + output);
-        this.transmitAjaxRequest(output);
-    };
-
-    this.setupSession = function (link_val, topic_data_val, theme_data_val, his_name_val) {
-        var output = JSON.stringify({
-                        command: "setup_session",
-                        my_name: link_val.myName(),
-                        link_id_index: link_val.linkId(),
-                        his_name: his_name_val,
-                        theme_data: theme_data_val,
-                        topic_data: topic_data_val,
-                        });
-        this.debug_(true, this.debugOutput(), "setupSession", "output=" + output);
-        this.transmitAjaxRequest(output);
-    };
-
-    this.setupSessionReply = function (link_val, data_val, session_id_index_val) {
-        var data = JSON.parse(data_val);
-        var output = JSON.stringify({
-                        command: "setup_session_reply",
-                        my_name: link_val.myName(),
-                        link_id_index: link_val.linkId(),
-                        accept: "yes",
-                        topic_data: data.topic_data,
-                        session_id_index: session_id_index_val,
-                        });
-        this.debug_(true, this.debugOutput(), "setupSessionReply", "output=" + output);
-        this.transmitAjaxRequest(output);
-    };
-
-    this.getSessionData = function (session_val) {
-        var output = JSON.stringify({
-                        command: "get_session_data",
-                        link_id_index: session_val.phwangLinkObject().linkId(),
-                        session_id_index: session_val.sessionId(),
-                        });
-        this.debug_(true, this.debugOutput(), "getSessionData", "output=" + output);
-        this.transmitAjaxRequest(output);
-    };
-
-    this.putSessionData = function (session_val, data_val) {
-        var output = JSON.stringify({
-                        command: "put_session_data",
-                        my_name: session_val.phwangLinkObject().myName(),
-                        link_id_index: session_val.phwangLinkObject().linkId(),
-                        session_id_index: session_val.sessionId(),
-                        his_name: session_val.hisName(),
-                        xmt_seq: session_val.xmtSeq(),
-                        data: data_val,
-                        });
-        session_val.incrementXmtSeq();
-        this.debug_(true, this.debugOutput(), "putSessionData", "output=" + output);
-        this.transmitAjaxRequest(output);
-    };
-
-
-
-
-    this.switchTable = function () {
-        return this.theSwitchTable;
-    }
-
-    this.linkUpdateInterval = function () {
-        return this.theLinkUpdateInterval;
-    };
-
-    this.setLinkUpdateInterval = function (val) {
-        this.theLinkUpdateInterval = val;
-    };
-
-    this.initSwitchTable = function () {
-        this.theSwitchTable = {
-            "get_link_data": this.getLinkDataResponse,
-            "get_name_list": this.getNameListResponse,
-            "setup_session": this.setupSessionResponse,
-            "setup_session_reply": this.setupSessionReplyResponse,
-            "get_session_data": this.getSessionDataResponse,
-            "put_session_data": this.putSessionDataResponse,
-        };
-    };
-
     this.parseAjaxResponseData = function (response_val) {
         var data = JSON.parse(response_val.data);
         if (!data) {
@@ -230,6 +115,22 @@ function PhwangAjaxClass(phwang_object_val) {
             return;
         }
     };
+
+    this.initSwitchTable = function () {
+        this.theSwitchTable = {
+            "setup_link": this.setupLinkResponse,
+            "get_link_data": this.getLinkDataResponse,
+            "get_name_list": this.getNameListResponse,
+            "setup_session": this.setupSessionResponse,
+            "setup_session_reply": this.setupSessionReplyResponse,
+            "get_session_data": this.getSessionDataResponse,
+            "put_session_data": this.putSessionDataResponse,
+        };
+     };
+
+    this.setupLinkResponse = function (input_val) {
+        this.debug(false, "setupLinkResponse", "input_val=" + input_val);
+   };
 
     this.getLinkDataResponse = function (input_val) {
         this.debug(false, "getLinkDataResponse", "input_val=" + input_val);
@@ -350,6 +251,107 @@ function PhwangAjaxClass(phwang_object_val) {
                 session.receiveData(data.c_data);
             }
         }
+    };
+
+    this.setupLink = function (root_val) {
+        var output = JSON.stringify({
+                        command: "setup_link",
+                        my_name: root_val.myName(),
+                        });
+        this.debug_(true, this.debugOutput(), "setupLink", "output=" + output);
+        this.transmitAjaxRequest(output);
+    };
+
+    this.getLinkData = function (link_val) {
+        var output = JSON.stringify({
+                        command: "get_link_data",
+                        my_name: link_val.myName(),
+                        link_id_index: link_val.linkId(),
+                        });
+        this.debug_(false, this.debugOutput(), "getLinkData", "output=" + output);
+        this.transmitAjaxRequest(output);
+    };
+
+    this.getNameList = function (link_val) {
+        var output = JSON.stringify({
+                        command: "get_name_list",
+                        my_name: link_val.myName(),
+                        link_id_index: link_val.linkId(),
+                        name_list_tag: link_val.nameListTag(),
+                        });
+        this.debug_(true, this.debugOutput(), "getNameList", "output=" + output);
+        this.transmitAjaxRequest(output);
+    };
+
+    this.setupSession = function (link_val, topic_data_val, theme_data_val, his_name_val) {
+        var output = JSON.stringify({
+                        command: "setup_session",
+                        my_name: link_val.myName(),
+                        link_id_index: link_val.linkId(),
+                        his_name: his_name_val,
+                        theme_data: theme_data_val,
+                        topic_data: topic_data_val,
+                        });
+        this.debug_(true, this.debugOutput(), "setupSession", "output=" + output);
+        this.transmitAjaxRequest(output);
+    };
+
+    this.setupSessionReply = function (link_val, data_val, session_id_index_val) {
+        var data = JSON.parse(data_val);
+        var output = JSON.stringify({
+                        command: "setup_session_reply",
+                        my_name: link_val.myName(),
+                        link_id_index: link_val.linkId(),
+                        accept: "yes",
+                        topic_data: data.topic_data,
+                        session_id_index: session_id_index_val,
+                        });
+        this.debug_(true, this.debugOutput(), "setupSessionReply", "output=" + output);
+        this.transmitAjaxRequest(output);
+    };
+
+    this.putSessionData = function (session_val, data_val) {
+        var output = JSON.stringify({
+                        command: "put_session_data",
+                        my_name: session_val.phwangLinkObject().myName(),
+                        link_id_index: session_val.phwangLinkObject().linkId(),
+                        session_id_index: session_val.sessionId(),
+                        his_name: session_val.hisName(),
+                        xmt_seq: session_val.xmtSeq(),
+                        data: data_val,
+                        });
+        session_val.incrementXmtSeq();
+        this.debug_(true, this.debugOutput(), "putSessionData", "output=" + output);
+        this.transmitAjaxRequest(output);
+    };
+
+    this.getSessionData = function (session_val) {
+        var output = JSON.stringify({
+                        command: "get_session_data",
+                        link_id_index: session_val.phwangLinkObject().linkId(),
+                        session_id_index: session_val.sessionId(),
+                        });
+        this.debug_(true, this.debugOutput(), "getSessionData", "output=" + output);
+        this.transmitAjaxRequest(output);
+    };
+
+    this.transmitAjaxRequest = function (output_val) {
+        this.debug(true, "transmitAjaxRequest", "output=" + output_val);
+        this.httpGetRequest().open("GET", this.ajaxRoute(), true);
+        this.httpGetRequest().setRequestHeader("X-Requested-With", "XMLHttpRequest");
+        this.httpGetRequest().setRequestHeader("Content-Type", this.jsonContext());
+        this.httpGetRequest().setRequestHeader("gorequest", output_val);
+        this.httpGetRequest().setRequestHeader("GOPACKETID", this.ajaxPacketId());
+        this.incrementAjaxPacketId();
+        this.httpGetRequest().send(null);
+    };
+
+    this.ajaxPacketId = function () {
+        return this.phwangAjaxStorageObject().ajaxPacketId();
+    };
+
+    this.incrementAjaxPacketId = function () {
+        this.phwangAjaxStorageObject().incrementAjaxPacketId();
     };
 
     this.debug_ = function (debug_val, debug_val_, str1_val, str2_val) {
