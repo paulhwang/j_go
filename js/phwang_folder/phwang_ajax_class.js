@@ -12,7 +12,6 @@ function PhwangAjaxClass(phwang_object_val) {
         this.thePhwangObject = phwang_object_val;
         this.thePhwangAjaxStorageObject = new PhwangAjaxStorageObject(this);
 
-        this.thePacketId = 1;
         this.theHttpGetRequest = new XMLHttpRequest();
         this.setupReceiveAjaxResponse();
         this.debug(true, "init__", "");
@@ -61,13 +60,12 @@ function PhwangAjaxClass(phwang_object_val) {
         return this.theHttpGetRequest;
     };
 
-    this.packetId = function () {
-        return this.thePacketId;
+    this.ajaxPacketId = function () {
+        return this.phwangAjaxStorageObject().ajaxPacketId();
     };
 
-    this.incrementPacketId = function () {
+    this.incrementAjaxPacketId = function () {
         this.phwangAjaxStorageObject().incrementAjaxPacketId();
-        this.thePacketId += 1;
     };
 
     this.setupReceiveAjaxResponse = function () {
@@ -97,8 +95,8 @@ function PhwangAjaxClass(phwang_object_val) {
         this.httpGetRequest().setRequestHeader("X-Requested-With", "XMLHttpRequest");
         this.httpGetRequest().setRequestHeader("Content-Type", this.jsonContext());
         this.httpGetRequest().setRequestHeader("gorequest", output_val);
-        this.httpGetRequest().setRequestHeader("GOPACKETID", this.packetId());
-        this.incrementPacketId();
+        this.httpGetRequest().setRequestHeader("GOPACKETID", this.ajaxPacketId());
+        this.incrementAjaxPacketId();
         this.httpGetRequest().send(null);
     };
 
