@@ -22,6 +22,10 @@ function GoPlayHtmlObject(root_object_val) {
         return this.theRootObject;
     };
 
+    this.phwangObject = function () {
+        return this.rootObject().phwangObject();
+    };
+
     this.configStorageObject = function () {
         return this.rootObject().configStorageObject();
     };
@@ -115,11 +119,11 @@ function GoPlayHtmlObject(root_object_val) {
     };
 
     this.logit = function (str1_val, str2_val) {
-        return LOG_IT(this.objectName() + "." + str1_val, str2_val);
+        this.rootObject().logit_(this.objectName() + "." + str1_val, str2_val);
     };
 
     this.abend = function (str1_val, str2_val) {
-        return ABEND(this.objectName() + "." + str1_val, str2_val);
+        this.rootObject().abend_(this.objectName() + "." + str1_val, str2_val);
     };
 
     this.init__(root_object_val);

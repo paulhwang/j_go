@@ -50,11 +50,19 @@ function LoginRootObject() {
     };
 
     this.logit = function (str1_val, str2_val) {
-        return this.phwangObject().LOG_IT(this.objectName() + "." + str1_val, str2_val);
+        return this.logit_(this.objectName() + "." + str1_val, str2_val);
     };
 
     this.abend = function (str1_val, str2_val) {
-        return this.phwangObject().ABEND(this.objectName() + "." + str1_val, str2_val);
+        return this.abend_(this.objectName() + "." + str1_val, str2_val);
+    };
+
+    this.logit_ = function (str1_val, str2_val) {
+        this.phwangObject().LOG_IT(str1_val, str2_val);
+    };
+
+    this.abend_ = function (str1_val, str2_val) {
+        this.phwangObject().ABEND(str1_val, str2_val);
     };
 
     this.init__();

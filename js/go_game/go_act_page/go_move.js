@@ -102,11 +102,11 @@ function GoMoveObject(str_val, x_val, y_val, color_val, turn_val, container_val)
     };
 
     this.logit = function (str1_val, str2_val) {
-        return this.containerObject().goLogit(this.objectName() + "." + str1_val, str2_val);
+        this.rootObject().logit_(this.objectName() + "." + str1_val, str2_val);
     };
 
     this.abend = function (str1_val, str2_val) {
-        return this.containerObject().goAbend(this.objectName() + "." + str1_val, str2_val);
+        this.rootObject().abend_(this.objectName() + "." + str1_val, str2_val);
     };
 
     this.init__(str_val, x_val, y_val, color_val, container_val);

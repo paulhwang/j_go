@@ -148,11 +148,11 @@ function GoPlayConfigObject(root_val, config_val, initiater_val) {
     };
 
     this.logit = function (str1_val, str2_val) {
-        return LOG_IT(this.objectName() + "." + str1_val, str2_val);
+        this.rootObject().logit_(this.objectName() + "." + str1_val, str2_val);
     };
 
     this.abend = function (str1_val, str2_val) {
-        return ABEND(this.objectName() + "." + str1_val, str2_val);
+        this.rootObject().abend_(this.objectName() + "." + str1_val, str2_val);
     };
 
     this.init__(root_val, config_val, initiater_val);
