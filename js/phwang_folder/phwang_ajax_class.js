@@ -85,28 +85,26 @@ function PhwangAjaxClass(phwang_object_val) {
 
     this.switchAjaxResponseData = function (json_response_val) {
         var response = JSON.parse(json_response_val);
-            this.parseAjaxResponseData(response);
-    };
 
-    this.parseAjaxResponseData = function (response_val) {
-        var data = JSON.parse(response_val.data);
+        var data = JSON.parse(response.data);
         if (!data) {
             return;
         }
-        if ((response_val.command !== "setup_link") &&
+
+        if ((response.command !== "setup_link") &&
             (!this.phwangLinkObject().verifyLinkIdIndex(data.link_id_index))) {
             this.abend("parseAjaxResponseData", "link_id_index=" + data.link_id_index);
             return;
         }
 
-        this.debug(true, "parseAjaxResponseData", "command=" + response_val.command + " data=" + response_val.data);
+        this.debug(true, "parseAjaxResponseData", "command=" + response.command + " data=" + response.data);
 
-        var func = this.switchTable()[response_val.command];
+        var func = this.switchTable()[response.command];
         if (func) {
-            func.bind(this)(response_val.data);
+            func.bind(this)(response.data);
         }
         else {
-            this.abend("switchAjaxResponseData", "bad command=" + response_val.command);
+            this.abend("switchAjaxResponseData", "bad command=" + response.command);
             return;
         }
     };
