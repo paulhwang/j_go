@@ -141,7 +141,6 @@ function PhwangAjaxClass(phwang_object_val) {
     this.getLinkData = function (link_val) {
         var output = JSON.stringify({
                         command: "get_link_data",
-                        my_name: link_val.myName(),
                         link_id: link_val.linkId(),
                         });
         this.debug_(false, this.debugOutput(), "getLinkData", "output=" + output);
