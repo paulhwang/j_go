@@ -3,25 +3,28 @@
   Written by Paul Hwang
 */
 
-function PhwangAjaxStorageObject (phwang_object_val) {
+function PhwangAjaxStorageObject (phwang_ajax_object_val) {
     "use strict";
 
-    this.init__ = function (phwang_object_val) {
-        this.thePhwangObject = phwang_object_val;
-        this.theStorage = localStorage;
-        this.debug(true, "init__", "");
+    this.storage = function () {
+        return localStorage;
+    };
+
+    this.init__ = function (phwang_ajax_object_val) {
+        this.thePhwangAjaxObject = phwang_ajax_object_val;
+        this.debug(false, "init__", "");
     };
 
     this.objectName = function () {
         return "PhwangAjaxStorageObject";
     };
 
-    this.phwangObject = function () {
-        return this.thePhwangObject;
+    this.phwangAjaxObject = function () {
+        return this.thePhwangAjaxObject;
     };
 
-    this.storage = function () {
-        return this.theStorage;
+    this.phwangObject = function () {
+        return this.phwangAjaxObject().phwangObject();
     };
 
     this.debug = function (debug_val, str1_val, str2_val) {
@@ -38,5 +41,5 @@ function PhwangAjaxStorageObject (phwang_object_val) {
         return this.phwangObject().ABEND(this.objectName() + "." + str1_val, str2_val);
     };
 
-    this.init__(phwang_object_val);
+    this.init__(phwang_ajax_object_val);
 }

@@ -6,9 +6,12 @@
 function PhwangSessionStorageObject (phwang_session_object_val) {
     "use strict";
 
+    this.storage = function () {
+        return localStorage;
+    };
+
     this.init__ = function (phwang_session_object_val) {
         this.thePhwangSessionObject = phwang_session_object_val;
-        this.theStorage = localStorage;
         this.debug(true, "init__", "");
     };
 
@@ -22,10 +25,6 @@ function PhwangSessionStorageObject (phwang_session_object_val) {
 
     this.phwangObject = function () {
         return this.phwangSessionObject().phwangObject();
-    };
-
-    this.storage = function () {
-        return this.theStorage;
     };
 
     this.hisName = function () {

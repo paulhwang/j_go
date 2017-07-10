@@ -10,6 +10,8 @@ function PhwangAjaxClass(phwang_object_val) {
 
     this.init__ = function (phwang_object_val) {
         this.thePhwangObject = phwang_object_val;
+        this.thePhwangAjaxStorageObject = new PhwangAjaxStorageObject(this);
+
         this.thePacketId = 1;
         this.theHttpGetRequest = new XMLHttpRequest();
         this.setupReceiveAjaxResponse();
@@ -26,6 +28,10 @@ function PhwangAjaxClass(phwang_object_val) {
 
     this.phwangObject = function () {
         return this.thePhwangObject;
+    };
+
+    this.phwangAjaxStorageObject = function () {
+        return this.thePhwangAjaxStorageObject;
     };
 
     this.rootObject = function () {

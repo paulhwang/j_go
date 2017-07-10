@@ -6,9 +6,12 @@
 function PhwangLinkStorageObject(phwang_link_object_val) {
     "use strict";
 
+    this.storage = function () {
+        return localStorage;
+    };
+
     this.init__ = function (phwang_link_object_val) {
         this.thePhwangLinkObject = phwang_link_object_val;
-        this.theStorage = localStorage;
         this.debug(true, "init__", "");
     };
 
@@ -22,10 +25,6 @@ function PhwangLinkStorageObject(phwang_link_object_val) {
 
     this.phwangObject = function () {
         return this.phwangLinkObject().phwangObject();
-    };
-
-    this.storage = function () {
-        return this.theStorage;
     };
 
     this.myName = function () {
