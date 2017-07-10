@@ -174,14 +174,7 @@ function PhwangAjaxClass(phwang_object_val) {
 
             if (data.c_data) {
                 var c_data = data.c_data;
-                var name_list_tag;
-                var index = 0;
-                name_list_tag  = (c_data.charAt(index++) - '0') * 100;
-                name_list_tag += (c_data.charAt(index++) - '0') *  10;
-                name_list_tag += (c_data.charAt(index++) - '0');
-                if (this.phwangObject().decodeNumber(data.c_data, 3) !== name_list_tag) {
-                    this.abend("getLinkDataResponse", "decodeNumber");
-                }
+                var name_list_tag  = this.phwangObject().decodeNumber(data.c_data, 3);
                 if (name_list_tag > this.phwangLinkObject().nameListTag()) {
                     this.getNameList(this.phwangLinkObject());
                 }
@@ -218,11 +211,7 @@ function PhwangAjaxClass(phwang_object_val) {
         var data = JSON.parse(input_val);
         if (data) {
             if (data.c_name_list) {
-                var name_list_tag;
-                var index = 0;
-                name_list_tag  = (data.c_name_list.charAt(index++) - '0') * 100;
-                name_list_tag += (data.c_name_list.charAt(index++) - '0') * 10;
-                name_list_tag += (data.c_name_list.charAt(index++) - '0');
+                var name_list_tag  = this.phwangObject().decodeNumber(data.c_name_list, 3);
                 this.phwangLinkObject().setNameListTag(name_list_tag);
 
                 var name_list = data.c_name_list.slice(3);
