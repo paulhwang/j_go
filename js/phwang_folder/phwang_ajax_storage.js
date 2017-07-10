@@ -45,8 +45,7 @@ function PhwangAjaxStorageObject (phwang_ajax_object_val) {
     };
 
     this.resetAjaxPacketId = function () {
-        var i = Number(this.storage().ajax_packet_id);
-        if (i === NaN) {
+        if (this.ajaxPacketId() === undefined) {
             this.storage().ajax_packet_id = 0;
         }
     };
