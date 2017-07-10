@@ -10,7 +10,6 @@ function PhwangLinkClass(phwang_object_val) {
         this.thePhwangObject = phwang_object_val;
         this.thePhwangLinkStorageObject = new PhwangLinkStorageObject(this);
         this.theNameList = [];
-        this.initSwitchTable();
         this.theNameListTag = 0;
         this.theSessionIndexArray = [0];
         this.theSessionTableArray = [null];
@@ -183,99 +182,6 @@ function PhwangLinkClass(phwang_object_val) {
             var session =this.sessionTableArray()[index];
             return session;
         }
-    };
-
-    this.initSwitchTable = function () {
-        this.theSwitchTable = {
-            "get_link_data": this.getLinkDataResponse,
-            "get_name_list": this.getNameListResponse,
-            "setup_session": this.setupSessionResponse,
-            "setup_session_reply": this.setupSessionReplyResponse,
-            "get_session_data": this.getSessionDataResponse,
-            "put_session_data": this.putSessionDataResponse,
-        };
-    };
-
-    this.parseAjaxResponseData = function (response_val) {
-        var data = JSON.parse(response_val.data);
-        if (!data) {
-            return;
-        }
-        if (!this.verifyLinkIdIndex(data.link_id_index)) {
-            this.abend("parseAjaxResponseData", "link_id_index=" + data.link_id_index);
-            return;
-        }
-
-        this.debug(true, "parseAjaxResponseData", "command=" + response_val.command + " data=" + response_val.data);
-
-        var func = this.switchTable()[response_val.command];
-        if (func) {
-            func.bind(this)(response_val.data);
-        }
-        else {
-            this.abend("switchAjaxResponseData", "bad command=" + response_val.command);
-            return;
-        }
-    };
-
-    this.getLinkDataResponse = function (input_val) {
-        this.debug(false, "getLinkDataResponse", "input_val=" + input_val);
-        var data = JSON.parse(input_val);
-        if (data) {
-            this.setLinkUpdateInterval(data.interval);
-
-            if (data.pending_session_data) {
-                this.debug(true, "getLinkDataResponse", "pending_session_data=" + data.pending_session_data);
-                var i = 0;
-                while (i >= 0) {
-                    var session_id = data.pending_session_data[i];
-                    var session = this.sessionMgrObject().searchSessionBySessionId(session_id);
-                    if (session) {
-                        this.ajaxObject().getSessionData(session);
-                    }
-                    i -= 1;
-                }
-            }
-
-            if (data.pending_session_setup) {
-                this.debug(true, "getLinkDataResponse", "pending_session_setup=" + data.pending_session_setup);
-                //this.ajaxObject().setupSessionReply(this, data.pending_session_setup, null);
-            }
-
-
-            if (data.c_data) {
-                var c_data = data.c_data;
-                var name_list_tag;
-                var index = 0;
-                name_list_tag  = (c_data.charAt(index++) - '0') * 100;
-                name_list_tag += (c_data.charAt(index++) - '0') *  10;
-                name_list_tag += (c_data.charAt(index++) - '0');
-                this.debug(true, "getLinkDataResponse==============", "c_data=" + c_data);
-                this.debug(true, "getLinkDataResponse==============", "name_list_tag=" + name_list_tag);
-                if (name_list_tag > this.nameListTag()) {
-                this.debug(true, "getLinkDataResponse==============!!!", "name_list_tag=" + this.nameListTag());
-                    this.tAjaxObject().getNameList(this);
-                }
-                c_data = c_data.slice(3);
-            }
-
-            if (data.c_pending_session_setup != "") {
-                var data_session_id_index = data.c_pending_session_setup.slice(1, 9);
-                var theme_name = data.c_pending_session_setup.slice(9, 11);
-                var theme_config = data.c_pending_session_setup.slice(11);
-
-                this.debug(true, "getLinkDataResponse==============!!!", "data_session_id_index=" + data_session_id_index);
-                this.debug(true, "getLinkDataResponse==============!!!", "theme_name=" + theme_name);
-                this.debug(true, "getLinkDataResponse==============!!!", "theme_config=" + theme_config);
-                this.tAjaxObject().setupSessionReply(this, data.pending_session_setup, data_session_id_index);
-            }
-
-        }
-
-        setTimeout(function(link_val) {
-            link_val.debug(false, "getLinkDataResponse:timer", "setTimeout");
-            link_val.tAjaxObject().getLinkData(link_val);
-        }, this.linkUpdateInterval(), this);
     };
 
     this.getConfigAndSetupSession = function () {
