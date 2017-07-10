@@ -12,6 +12,7 @@ function PhwangAjaxClass(phwang_object_val) {
         this.thePhwangObject = phwang_object_val;
         this.thePhwangAjaxStorageObject = new PhwangAjaxStorageObject(this);
 
+        this.initSwitchTable();
         this.theHttpGetRequest = new XMLHttpRequest();
         this.setupReceiveAjaxResponse();
         this.debug(true, "init__", "");
@@ -41,8 +42,8 @@ function PhwangAjaxClass(phwang_object_val) {
         return this.phwangObject().phwangLinkObject();
     };
 
-    this.rAjaxObject = function () {
-        return this.rootObject().rAjaxObject();
+    this.phwangSessionObject = function () {
+        return this.rootObject().phwangSessionObject();
     };
 
     this.ajaxRoute = function () {
@@ -85,7 +86,7 @@ function PhwangAjaxClass(phwang_object_val) {
             var data = JSON.parse(response.data);
             this.rootObject().mallocLinkObject(data.my_name, data.link_id);
         } else {
-            this.rAjaxObject().parseAjaxResponseData(response);
+            this.parseAjaxResponseData(response);
         }
     };
 
@@ -180,6 +181,175 @@ function PhwangAjaxClass(phwang_object_val) {
         session_val.incrementXmtSeq();
         this.debug_(true, this.debugOutput(), "putSessionData", "output=" + output);
         this.transmitAjaxRequest(output);
+    };
+
+
+
+
+    this.switchTable = function () {
+        return this.theSwitchTable;
+    }
+
+    this.linkUpdateInterval = function () {
+        return this.theLinkUpdateInterval;
+    };
+
+    this.setLinkUpdateInterval = function (val) {
+        this.theLinkUpdateInterval = val;
+    };
+
+    this.initSwitchTable = function () {
+        this.theSwitchTable = {
+            "get_link_data": this.getLinkDataResponse,
+            "get_name_list": this.getNameListResponse,
+            "setup_session": this.setupSessionResponse,
+            "setup_session_reply": this.setupSessionReplyResponse,
+            "get_session_data": this.getSessionDataResponse,
+            "put_session_data": this.putSessionDataResponse,
+        };
+    };
+
+    this.parseAjaxResponseData = function (response_val) {
+        var data = JSON.parse(response_val.data);
+        if (!data) {
+            return;
+        }
+        if (!this.phwangLinkObject().verifyLinkIdIndex(data.link_id_index)) {
+            this.abend("parseAjaxResponseData", "link_id_index=" + data.link_id_index);
+            return;
+        }
+
+        this.debug(true, "parseAjaxResponseData", "command=" + response_val.command + " data=" + response_val.data);
+
+        var func = this.switchTable()[response_val.command];
+        if (func) {
+            func.bind(this)(response_val.data);
+        }
+        else {
+            this.abend("switchAjaxResponseData", "bad command=" + response_val.command);
+            return;
+        }
+    };
+
+    this.getLinkDataResponse = function (input_val) {
+        this.debug(false, "getLinkDataResponse", "input_val=" + input_val);
+        var data = JSON.parse(input_val);
+        if (data) {
+            this.setLinkUpdateInterval(data.interval);
+
+            if (data.pending_session_data) {
+                this.debug(true, "getLinkDataResponse", "pending_session_data=" + data.pending_session_data);
+                var i = 0;
+                while (i >= 0) {
+                    var session_id = data.pending_session_data[i];
+                    var session = this.sessionMgrObject().searchSessionBySessionId(session_id);
+                    if (session) {
+                        this.tAjaxObject().getSessionData(session);
+                    }
+                    i -= 1;
+                }
+            }
+
+            if (data.pending_session_setup) {
+                this.debug(true, "getLinkDataResponse", "pending_session_setup=" + data.pending_session_setup);
+                //this.ajaxObject().setupSessionReply(this, data.pending_session_setup, null);
+            }
+
+
+            if (data.c_data) {
+                var c_data = data.c_data;
+                var name_list_tag;
+                var index = 0;
+                name_list_tag  = (c_data.charAt(index++) - '0') * 100;
+                name_list_tag += (c_data.charAt(index++) - '0') *  10;
+                name_list_tag += (c_data.charAt(index++) - '0');
+                if (name_list_tag > this.phwangLinkObject().nameListTag()) {
+                    this.getNameList(this.phwangLinkObject());
+                }
+                c_data = c_data.slice(3);
+            }
+
+            if (data.c_pending_session_setup != "") {
+                var data_session_id_index = data.c_pending_session_setup.slice(1, 9);
+                var theme_name = data.c_pending_session_setup.slice(9, 11);
+                var theme_config = data.c_pending_session_setup.slice(11);
+                this.setupSessionReply(this, data.pending_session_setup, data_session_id_index);
+            }
+
+        }
+
+        setTimeout(function(link_val) {
+            link_val.debug(false, "getLinkDataResponse:timer", "setTimeout");
+            link_val.phwangAjaxObject().getLinkData(link_val);
+        }, this.linkUpdateInterval(), this.phwangLinkObject());
+    };
+
+    this.getNameListResponse = function (input_val) {
+        this.debug(true, "getNameListResponse", "input_val=" + input_val);
+        var data = JSON.parse(input_val);
+        if (data) {
+            if (data.c_name_list) {
+                var name_list_tag;
+                var index = 0;
+                name_list_tag  = (data.c_name_list.charAt(index++) - '0') * 100;
+                name_list_tag += (data.c_name_list.charAt(index++) - '0') * 10;
+                name_list_tag += (data.c_name_list.charAt(index++) - '0');
+                this.phwangLinkObject().setNameListTag(name_list_tag);
+
+                var name_list = data.c_name_list.slice(3);
+                this.debug(true, "getNameListResponse", "name_list_tag=" + name_list_tag);
+                this.debug(true, "getNameListResponse", "name_list=" + name_list);
+                var array = JSON.parse("[" + name_list + "]");
+                this.debug(true, "getNameListResponse", "array=" + array);
+                this.phwangLinkObject().setNameList(array);
+                if (this.rootObject().htmlObject().renderNameListFuncExist()) {
+                    this.rootObject().htmlObject().renderNameList();////////////////////////////
+                }
+            }
+        }
+    };
+
+   this.setupSessionResponse = function (input_val) {
+        this.debug(true, "setupSessionResponse", "input_val=" + input_val);
+        var data = JSON.parse(input_val);
+        if (data) {
+            this.phwangSessionObject().setSessionId(data.session_id_index);
+            this.debug(true, "setupSessionResponse", "sessionId=" + this.phwangSessionObject().sessionId());
+            window.open(this.rootObject().nextPage(), "_self")
+        }
+    };
+
+    this.setupSessionReplyResponse = function (json_data_val) {
+        this.debug(true, "setupSessionReplyResponse", "data=" + json_data_val);
+        var data = JSON.parse(json_data_val);
+        if (data) {
+            this.phwangSessionStorageObject().setSessionId(data.session_id_index.slice(8));
+            this.debug(true, "setupSessionReplyResponse", "sessionId=" + this.sessionStorageObject().sessionId());
+            window.open(this.rootObject().nextPage(), "_self")
+        }
+    };
+
+    this.putSessionDataResponse = function (json_data_val) {
+        this.debug(true, "putSessionDataResponse", "data=" + json_data_val);
+        var data = JSON.parse(json_data_val);
+        if (data) {
+            var session = this.phwangLinkObject().getSession(data.session_id_index);
+            if (session) {
+                this.getSessionData(session);
+            }
+        }
+    };
+
+    this.getSessionDataResponse = function (json_data_val) {
+        this.debug(true, "getSessionDataResponse", "data=" + json_data_val);
+        var data = JSON.parse(json_data_val);
+        if (data) {
+            this.debug(true, "getSessionDataResponse", "data=" + data.c_data);
+            var session = this.phwangLinkObject().getSession(data.session_id_index);
+            if (session) {
+                session.receiveData(data.c_data);
+            }
+        }
     };
 
     this.debug_ = function (debug_val, debug_val_, str1_val, str2_val) {
