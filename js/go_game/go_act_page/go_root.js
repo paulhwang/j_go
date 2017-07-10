@@ -11,7 +11,6 @@ function GoPlayRootObject() {
         this.phwangObject().initObject();
         this.phwangAjaxObject().getLinkData(this.phwangLinkObject());
 
-        this.theRAjaxObject = new RAjaxObject(this);
         this.theConfigStorageObject = new GoConfigStorageObject();
         this.theHtmlObject = new GoPlayHtmlObject(this);
         this.theConfigObject = new GoPlayConfigObject(this, this.configStorageObject().configInJson(), true);
@@ -63,10 +62,6 @@ function GoPlayRootObject() {
 
     this.htmlObject = function () {
         return this.theHtmlObject;
-    };
-
-    this.rAjaxObject = function () {
-        return this.theRAjaxObject;
     };
 
     this.configObject = function () {
