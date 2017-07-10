@@ -9,10 +9,6 @@ function LoginRootObject() {
     this.init__ = function () {
         this.thePhwangObject = new PhwangClass(this);
         this.phwangObject().initObject();
-
-        //this.phwangLinkObject().resetLinkStorage();
-
-        this.theAjaxObject = new LoginAjaxObject(this);
         this.theHtmlObject = new LoginHtmlObject(this);
         this.debug(true, "init__", "myName=" + this.phwangLinkObject().myName() + " linkId=" + this.phwangLinkObject().linkId());
 
@@ -41,10 +37,6 @@ function LoginRootObject() {
 
     this.phwangSessionObject = function () {
         return this.phwangObject().phwangSessionObject();
-    };
-
-    this.ajaxObject = function () {
-        return this.theAjaxObject;
     };
 
     this.htmlObject = function () {
