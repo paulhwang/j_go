@@ -67,7 +67,7 @@ function ConfigHtmlObject(root_object_val) {
                 theme_data = theme_data + 0;
             theme_data = theme_data + this0.configStorageObject().komi();
 
-            this0.phwangAjaxObject().setupSession(this0.phwangLinkObject(), theme_data, this0.phwangSessionObject().hisName());
+            this0.phwangAjaxObject().setupSession(this0.phwangLinkObject(), this0.phwangSessionObject().hisName(), theme_data, this0.configStorageObject().stoneColor());
         });
     };
 
