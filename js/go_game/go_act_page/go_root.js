@@ -9,6 +9,7 @@ function GoPlayRootObject() {
     this.init__ = function () {
         this.thePhwangObject = new PhwangClass(this);
         this.phwangObject().initObject();
+        this.phwangLinkObject().setIsActive(true);
         this.phwangAjaxObject().getLinkData(this.phwangLinkObject());
 
         this.theConfigStorageObject = new GoConfigStorageObject(this);

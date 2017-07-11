@@ -88,7 +88,8 @@ function PhwangAjaxClass(phwang_object_val) {
 
     this.checkPendingAjaxRequestCommand = function () {
         if (this.pendingAjaxRequestCommand() !== "") {
-            this.abend("checkPendingAjaxRequestCommand", this.pendingAjaxRequestCommand());
+            this.logit("********************************", "__________________________________");
+            this.logit("checkPendingAjaxRequestCommand", this.pendingAjaxRequestCommand());
         }
     };
 
@@ -160,7 +161,7 @@ function PhwangAjaxClass(phwang_object_val) {
         setTimeout(function(link_val) {
                         link_val.debug(false, "resetKeepAliveTimer", "setTimeout");
                         link_val.phwangAjaxObject().getLinkData(link_val);
-                        }, this.linkUpdateInterval(), this.phwangLinkObject());
+                        }, this.linkUpdateInterval() * 30, this.phwangLinkObject());
     };
 
     this.initSwitchTable = function () {
@@ -332,7 +333,7 @@ function PhwangAjaxClass(phwang_object_val) {
 
         if (this.putSessionDataPending() ||
             this.getSessionDataPending()) {
-            this.abend("getLinkData", "Pending");
+            this.logit("getLinkData=========================================", "Pending");
         }
 
         var output = JSON.stringify({
