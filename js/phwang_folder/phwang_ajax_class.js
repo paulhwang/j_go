@@ -30,14 +30,7 @@ function PhwangAjaxClass(phwang_object_val) {
     this.setWatchDog = function (link_val) {
         setInterval(function (link_val) {
             var ajax_object = link_val.phwangAjaxObject();
-
-            link_val.debug(true, "PhwangAjaxClassWatchDog", ajax_object.pendingAjaxRequestCommand());
-
-            if (!link_val.isActive()) {
-                //link_val.debug(true, "PhwangAjaxClassWatchDog", "not active");
-                //return;
-            }
-            if (ajax_object.pendingAjaxRequestCommand() === "") {
+            if (ajax_object.noPendingAjaxRequestCommand()) {
                 var output = ajax_object.dequeueAjaxRequest();
                 if (output) {
                     ajax_object.transmitAjaxRequest_(output);
@@ -45,6 +38,9 @@ function PhwangAjaxClass(phwang_object_val) {
                 else {
                     ajax_object.getLinkData(link_val);
                 }
+            }
+            else {
+                link_val.debug(true, "PhwangAjaxClassWatchDog", ajax_object.pendingAjaxRequestCommand());
             }
         }, 1000, link_val);
     };
