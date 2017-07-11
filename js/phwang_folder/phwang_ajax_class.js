@@ -420,6 +420,10 @@ function PhwangAjaxClass(phwang_object_val) {
     };
 
     this.enqueueAjaxRequest = function (output_val) {
+        if (this.theAjaxRequestQueue) {
+            this.abend("enqueueAjaxRequest", "queue full");
+            return;
+        }
         this.theAjaxRequestQueue = output_val;
     };
 
