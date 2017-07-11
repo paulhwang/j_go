@@ -9,7 +9,6 @@ function PhwangLinkClass(phwang_object_val) {
     this.init__ = function (phwang_object_val) {
         this.thePhwangObject = phwang_object_val;
         this.thePhwangLinkStorageObject = new PhwangLinkStorageObject(this);
-        this.theIsActive = false;
         this.theNameList = [];
         this.theNameListTag = 0;
         this.theSessionIndexArray = [0];
@@ -52,14 +51,6 @@ function PhwangLinkClass(phwang_object_val) {
 
     this.htmlObject = function () {
         return this.rootObject().htmlObject();
-    };
-
-    this.isActive = function () {
-        return this.theIsActive;
-    };
-
-    this.setIsActive = function (val) {
-        this.theIsActive = val;
     };
 
     this.myName = function () {

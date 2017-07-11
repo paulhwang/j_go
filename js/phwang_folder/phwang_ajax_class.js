@@ -42,7 +42,7 @@ function PhwangAjaxClass(phwang_object_val) {
             else {
                 link_val.debug(true, "PhwangAjaxClassWatchDog", ajax_object.pendingAjaxRequestCommand());
             }
-        }, 1000, link_val);
+        }, 100, link_val);
     };
 
     this.objectName = function () {
