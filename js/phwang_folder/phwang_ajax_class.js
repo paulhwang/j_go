@@ -40,7 +40,9 @@ function PhwangAjaxClass(phwang_object_val) {
                 }
             }
             else {
-                link_val.debug(true, "PhwangAjaxClassWatchDog", ajax_object.pendingAjaxRequestCommand());
+                if (ajax_object.pendingAjaxRequestCommand() !== ajax_object.getLinkDataCommand()) {
+                    link_val.debug(true, "PhwangAjaxClassWatchDog", ajax_object.pendingAjaxRequestCommand());
+                }
             }
         }, 100, link_val);
     };
@@ -100,6 +102,10 @@ function PhwangAjaxClass(phwang_object_val) {
         this.theLinkUpdateInterval = val;
     };
 
+    this.getLinkDataCommand = function () {
+        return "get_link_data";
+    };
+
     this.pendingAjaxRequestCommand = function () {
         return this.thePendingAjaxRequestCommand;
     };
@@ -139,7 +145,15 @@ function PhwangAjaxClass(phwang_object_val) {
     this.switchAjaxResponseData = function (json_response_val) {
         var response = JSON.parse(json_response_val);
 
-        this.debug(true, "switchAjaxResponseData", this.pendingAjaxRequestCommand());
+        if (response.command !== this.getLinkDataCommand()) {
+            this.debug(true, "switchAjaxResponseData", this.pendingAjaxRequestCommand());
+            this.debug(true, "switchAjaxResponseData", "command=" + response.command + " data=" + response.data);
+        }
+
+        if (response.command !== this.pendingAjaxRequestCommand()) {
+            this.abend("switchAjaxResponseData", "commands not match: " + this.pendingAjaxRequestCommand() + ", " + response.command);
+        }
+
         var data = JSON.parse(response.data);
         if (!data) {
             return;
@@ -147,12 +161,8 @@ function PhwangAjaxClass(phwang_object_val) {
 
         if ((response.command !== "setup_link") &&
             (!this.phwangLinkObject().verifyLinkIdIndex(data.link_id))) {
-            this.abend("parseAjaxResponseData", "link_id=" + data.link_id);
+            this.abend("switchAjaxResponseData", "link_id=" + data.link_id);
             return;
-        }
-
-        if (response.command !== "get_link_data") {
-            this.debug(true, "parseAjaxResponseData", "command=" + response.command + " data=" + response.data);
         }
 
         var func = this.switchTable()[response.command];
@@ -395,7 +405,7 @@ function PhwangAjaxClass(phwang_object_val) {
 
     this.transmitAjaxRequest_ = function (output_val) {
         var output = JSON.parse(output_val);
-        if (output.command !== "get_link_data") {
+        if (output.command !== this.getLinkDataCommand()) {
             this.debug(true, "transmitAjaxRequest_", "output=" + output_val);
         }
         this.setPendingAjaxRequestCommand(output.command);
@@ -407,7 +417,6 @@ function PhwangAjaxClass(phwang_object_val) {
         this.httpGetRequest().setRequestHeader("GOPACKETID", this.ajaxPacketId());
         this.incrementAjaxPacketId();
         this.httpGetRequest().send(null);
-        this.debug(true, "transmitAjaxRequest_", this.pendingAjaxRequestCommand());
     };
 
     this.enqueueAjaxRequest = function (output_val) {
