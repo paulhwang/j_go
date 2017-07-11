@@ -16,6 +16,7 @@ function PhwangAjaxClass(phwang_object_val) {
         this.theHttpGetRequest = new XMLHttpRequest();
         this.setupReceiveAjaxResponse();
         this.thePendingAjaxRequestCommand = "";
+        this.theAjaxRequestQueue = 0;
         this.debug(true, "init__", "");
     };
 
@@ -28,13 +29,22 @@ function PhwangAjaxClass(phwang_object_val) {
 
     this.setWatchDog = function (link_val) {
         setInterval(function (link_val) {
-            link_val.debug(true, "PhwangAjaxClassWatchDog", link_val.phwangAjaxObject().pendingAjaxRequestCommand());
+            var ajax_object = link_val.phwangAjaxObject();
+
+            link_val.debug(true, "PhwangAjaxClassWatchDog", ajax_object.pendingAjaxRequestCommand());
+
             if (!link_val.isActive()) {
                 //link_val.debug(true, "PhwangAjaxClassWatchDog", "not active");
                 //return;
             }
-            if (link_val.phwangAjaxObject().pendingAjaxRequestCommand() === "") {
-                link_val.phwangAjaxObject().getLinkData(link_val);
+            if (ajax_object.pendingAjaxRequestCommand() === "") {
+                var output = ajax_object.dequeueAjaxRequest();
+                if (output) {
+                    ajax_object.transmitAjaxRequest_(output);
+                }
+                else {
+                    ajax_object.getLinkData(link_val);
+                }
             }
         }, 1000, link_val);
     };
@@ -94,12 +104,16 @@ function PhwangAjaxClass(phwang_object_val) {
         this.theLinkUpdateInterval = val;
     };
 
-    this.pendingAjaxRequestCommand = function (command_val) {
+    this.pendingAjaxRequestCommand = function () {
         return this.thePendingAjaxRequestCommand;
     };
 
+    this.noPendingAjaxRequestCommand = function () {
+        return (this.pendingAjaxRequestCommand() === "");
+    };
+
     this.setPendingAjaxRequestCommand = function (command_val) {
-        if (this.pendingAjaxRequestCommand() !== "") {
+        if (!this.noPendingAjaxRequestCommand()) {
             this.abend("*****setPendingAjaxRequestCommand", "old=" + this.pendingAjaxRequestCommand() + "new=" + command_val);
         }
         this.thePendingAjaxRequestCommand = command_val;
@@ -371,9 +385,22 @@ function PhwangAjaxClass(phwang_object_val) {
     };
 
     this.transmitAjaxRequest = function (output_val) {
+        if (!this.noPendingAjaxRequestCommand()) {
+            this.logit("============================transmitAjaxRequest", this.pendingAjaxRequestCommand());
+            this.logit("============================transmitAjaxRequest", this.pendingAjaxRequestCommand());
+            this.logit("============================transmitAjaxRequest", this.pendingAjaxRequestCommand());
+            this.enqueueAjaxRequest(output_val);
+            return;
+        }
+
+        this.transmitAjaxRequest_(output_val);
+    };
+
+
+    this.transmitAjaxRequest_ = function (output_val) {
         var output = JSON.parse(output_val);
         if (output.command !== "get_link_data") {
-            this.debug(true, "transmitAjaxRequest", "output=" + output_val);
+            this.debug(true, "transmitAjaxRequest_", "output=" + output_val);
         }
         this.setPendingAjaxRequestCommand(output.command);
 
@@ -384,7 +411,20 @@ function PhwangAjaxClass(phwang_object_val) {
         this.httpGetRequest().setRequestHeader("GOPACKETID", this.ajaxPacketId());
         this.incrementAjaxPacketId();
         this.httpGetRequest().send(null);
-        this.debug(true, "transmitAjaxRequest", this.pendingAjaxRequestCommand());
+        this.debug(true, "transmitAjaxRequest_", this.pendingAjaxRequestCommand());
+    };
+
+    this.enqueueAjaxRequest = function (output_val) {
+        this.theAjaxRequestQueue = output_val;
+    };
+
+    this.dequeueAjaxRequest = function (output_val) {
+        if (!this.theAjaxRequestQueue) {
+            return 0;
+        }
+        var output = this.theAjaxRequestQueue;
+        this.theAjaxRequestQueue = 0;
+        return output;
     };
 
     this.ajaxPacketId = function () {
