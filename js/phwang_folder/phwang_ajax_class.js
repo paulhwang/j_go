@@ -292,7 +292,7 @@ function PhwangAjaxClass(phwang_object_val) {
         if (data) {
             this.phwangSessionObject().setSessionId(data.session_id);
             this.debug(true, "setupSessionResponse", "sessionId=" + this.phwangSessionObject().sessionId());
-            this.rootObject().gotoNextPage();
+            this.rootObject().receiveSetupSessionResponse();
         }
     };
 
@@ -317,7 +317,7 @@ function PhwangAjaxClass(phwang_object_val) {
         if (data) {
             this.phwangSessionStorageObject().setSessionId(data.session_id.slice(8));
             this.debug(true, "setupSessionReplyResponse", "sessionId=" + this.sessionStorageObject().sessionId());
-            window.open(this.rootObject().nextPage(), "_self")
+            this.rootObject().receiveSetupSessionPeplyResponse();
         }
     };
 

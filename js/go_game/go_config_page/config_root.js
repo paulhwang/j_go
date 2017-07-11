@@ -50,6 +50,14 @@ function ConfigRootObject() {
         return this.theHtmlObject;
     };
 
+    this.receiveSetupSessionResponse = function () {
+        this.gotoNextPage();
+    };
+
+    this.receiveSetupSessionReplyResponse = function () {
+        this.gotoNextPage();
+    };
+
     this.debug = function (debug_val, str1_val, str2_val) {
         if (debug_val) {
             this.logit(str1_val, str2_val);
