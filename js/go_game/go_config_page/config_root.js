@@ -10,7 +10,8 @@ function ConfigRootObject() {
         this.thePhwangObject = new PhwangClass(this);
         this.phwangObject().initObject();
         this.phwangLinkObject().setIsActive(true);
-        this.phwangAjaxObject().getLinkData(this.phwangLinkObject());
+        this.phwangAjaxObject().setWatchDog(this.phwangLinkObject());
+        //this.phwangAjaxObject().getLinkData(this.phwangLinkObject());
 
         this.theConfigStorageObject = new GoConfigStorageObject(this);
         this.theHtmlObject = new ConfigHtmlObject(this);
@@ -21,8 +22,8 @@ function ConfigRootObject() {
         return "ConfigRootObject";
     };
 
-    this.nextPage = function () {
-        return this.phwangLinkObject().serverHttpHeader() + "go_act.html";
+    this.gotoNextPage = function () {
+        window.open(this.phwangLinkObject().serverHttpHeader() + "go_act.html", "_self")
     };
 
     this.phwangObject = function () {

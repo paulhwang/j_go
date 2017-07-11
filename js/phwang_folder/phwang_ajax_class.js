@@ -19,6 +19,26 @@ function PhwangAjaxClass(phwang_object_val) {
         this.debug(true, "init__", "");
     };
 
+    this.resetKeepAliveTimer1 = function () {
+        setTimeout(function(link_val) {
+                        link_val.debug(false, "resetKeepAliveTimer", "setTimeout");
+                        link_val.phwangAjaxObject().getLinkData(link_val);
+                        }, this.linkUpdateInterval() * 30, this.phwangLinkObject());
+    };
+
+    this.setWatchDog = function (link_val) {
+        setInterval(function (link_val) {
+            link_val.debug(true, "PhwangAjaxClassWatchDog", link_val.phwangAjaxObject().pendingAjaxRequestCommand());
+            if (!link_val.isActive()) {
+                //link_val.debug(true, "PhwangAjaxClassWatchDog", "not active");
+                //return;
+            }
+            if (link_val.phwangAjaxObject().pendingAjaxRequestCommand() === "") {
+                link_val.phwangAjaxObject().getLinkData(link_val);
+            }
+        }, 1000, link_val);
+    };
+
     this.objectName = function () {
         return "PhwangAjaxClass";
     };
@@ -79,6 +99,9 @@ function PhwangAjaxClass(phwang_object_val) {
     };
 
     this.setPendingAjaxRequestCommand = function (command_val) {
+        if (this.pendingAjaxRequestCommand() !== "") {
+            this.abend("*****setPendingAjaxRequestCommand", "old=" + this.pendingAjaxRequestCommand() + "new=" + command_val);
+        }
         this.thePendingAjaxRequestCommand = command_val;
     };
 
@@ -93,30 +116,6 @@ function PhwangAjaxClass(phwang_object_val) {
         }
     };
 
-    this.putSessionDataPending = function () {
-        return this.thePutSessionDataPending;
-    }
-
-    this.setPutSessionDataPending = function () {
-        this.thePutSessionDataPending = 1;
-    }
-
-    this.clearPutSessionDataPending = function () {
-        this.thePutSessionDataPending = 0;
-    }
-
-    this.getSessionDataPending = function () {
-        return this.theGetSessionDataPending;
-    }
-
-    this.setGetSessionDataPending = function () {
-        this.theGetSessionDataPending = 1;
-    }
-
-    this.clearGetSessionDataPending = function () {
-        this.theGetSessionDataPending = 0;
-    }
-
     this.setupReceiveAjaxResponse = function () {
         var this0 = this;
         this.httpGetRequest().onreadystatechange = function() {
@@ -130,6 +129,7 @@ function PhwangAjaxClass(phwang_object_val) {
     this.switchAjaxResponseData = function (json_response_val) {
         var response = JSON.parse(json_response_val);
 
+        this.debug(true, "switchAjaxResponseData", this.pendingAjaxRequestCommand());
         var data = JSON.parse(response.data);
         if (!data) {
             return;
@@ -147,21 +147,14 @@ function PhwangAjaxClass(phwang_object_val) {
 
         var func = this.switchTable()[response.command];
         if (func) {
-            func.bind(this)(response.data);
-            this.resetKeepAliveTimer();
             this.clearPendingAjaxRequestCommand();
+            func.bind(this)(response.data);
+            //this.resetKeepAliveTimer();
         }
         else {
             this.abend("switchAjaxResponseData", "bad command=" + response.command);
             return;
         }
-    };
-
-    this.resetKeepAliveTimer = function () {
-        setTimeout(function(link_val) {
-                        link_val.debug(false, "resetKeepAliveTimer", "setTimeout");
-                        link_val.phwangAjaxObject().getLinkData(link_val);
-                        }, this.linkUpdateInterval() * 30, this.phwangLinkObject());
     };
 
     this.initSwitchTable = function () {
@@ -299,7 +292,7 @@ function PhwangAjaxClass(phwang_object_val) {
         if (data) {
             this.phwangSessionObject().setSessionId(data.session_id);
             this.debug(true, "setupSessionResponse", "sessionId=" + this.phwangSessionObject().sessionId());
-            window.open(this.rootObject().nextPage(), "_self")
+            this.rootObject().gotoNextPage();
         }
     };
 
@@ -331,11 +324,6 @@ function PhwangAjaxClass(phwang_object_val) {
     this.putSessionData = function (session_val, data_val) {
         this.checkPendingAjaxRequestCommand();
 
-        if (this.putSessionDataPending() ||
-            this.getSessionDataPending()) {
-            this.logit("getLinkData=========================================", "Pending");
-        }
-
         var output = JSON.stringify({
                         command: "put_session_data",
                         packet_id: this.ajaxPacketId(),
@@ -347,12 +335,10 @@ function PhwangAjaxClass(phwang_object_val) {
         session_val.incrementXmtSeq();
         this.debug_(false, this.debugOutput(), "putSessionData", "output=" + output);
         this.transmitAjaxRequest(output);
-        this.setPutSessionDataPending();
     };
 
     this.putSessionDataResponse = function (json_data_val) {
         this.debug(false, "putSessionDataResponse", "data=" + json_data_val);
-        this.clearPutSessionDataPending();
         var data = JSON.parse(json_data_val);
         if (data) {
             var session = this.phwangLinkObject().getSession(data.session_id);
@@ -371,12 +357,10 @@ function PhwangAjaxClass(phwang_object_val) {
                         });
         this.debug_(false, this.debugOutput(), "getSessionData", "output=" + output);
         this.transmitAjaxRequest(output);
-        this.setGetSessionDataPending();
     };
 
     this.getSessionDataResponse = function (json_data_val) {
         this.debug(false, "getSessionDataResponse", "data=" + json_data_val);
-        this.clearGetSessionDataPending();
         var data = JSON.parse(json_data_val);
         if (data) {
             var session = this.phwangLinkObject().getSession(data.session_id);
@@ -400,6 +384,7 @@ function PhwangAjaxClass(phwang_object_val) {
         this.httpGetRequest().setRequestHeader("GOPACKETID", this.ajaxPacketId());
         this.incrementAjaxPacketId();
         this.httpGetRequest().send(null);
+        this.debug(true, "transmitAjaxRequest", this.pendingAjaxRequestCommand());
     };
 
     this.ajaxPacketId = function () {

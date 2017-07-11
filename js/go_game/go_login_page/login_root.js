@@ -19,8 +19,8 @@ function LoginRootObject() {
         return "LoginRootObject";
     };
 
-    this.nextPage = function () {
-        return this.phwangLinkObject().serverHttpHeader() + "go_config.html";
+    this.gotoNextPage = function () {
+        window.open(this.phwangLinkObject().serverHttpHeader() + "go_config.html", "_self")
     };
 
     this.phwangObject = function () {
@@ -44,7 +44,7 @@ function LoginRootObject() {
     };
 
     this.receiveSetupLinkResponse = function () {
-        window.open(this.nextPage(), "_self")
+        this.gotoNextPage();
     };
 
     this.debug = function (debug_val, str1_val, str2_val) {

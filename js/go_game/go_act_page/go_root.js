@@ -10,7 +10,8 @@ function GoPlayRootObject() {
         this.thePhwangObject = new PhwangClass(this);
         this.phwangObject().initObject();
         this.phwangLinkObject().setIsActive(true);
-        this.phwangAjaxObject().getLinkData(this.phwangLinkObject());
+        this.phwangAjaxObject().setWatchDog(this.phwangLinkObject());
+        //this.phwangAjaxObject().getLinkData(this.phwangLinkObject());
 
         this.theConfigStorageObject = new GoConfigStorageObject(this);
         this.theHtmlObject = new GoPlayHtmlObject(this);
