@@ -42,6 +42,11 @@ function PhwangAjaxClass(phwang_object_val) {
                 return;
             }
 
+            if (link_val.serverNameListTag() > link_val.nameListTag()) {
+                ajax_object.getNameList(link_val);
+                return;
+            }
+
             ajax_object.getLinkData(link_val);
         }, 100, link_val);
     };
@@ -177,7 +182,8 @@ function PhwangAjaxClass(phwang_object_val) {
             if (data.c_data) {
                 var name_list_tag  = this.phwangObject().decodeNumber(data.c_data, 3);
                 if (name_list_tag > this.phwangLinkObject().nameListTag()) {
-                    this.getNameList(this.phwangLinkObject());
+                    this.phwangLinkObject().setServerNameListTag(name_list_tag);
+                    //this.getNameList(this.phwangLinkObject());
                 }
 
                 var c_data = data.c_data.slice(3);
