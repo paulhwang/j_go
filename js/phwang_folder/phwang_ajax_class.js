@@ -51,14 +51,6 @@ function PhwangAjaxClass(phwang_object_val) {
         return false;
     };
 
-    this.objectName = function () {return "PhwangAjaxClass";};
-    this.phwangAjaxStorageObject = function () {return this.thePhwangAjaxStorageObject;};
-    this.phwangObject = function () {return this.thePhwangObject;};
-    this.rootObject = function () {return this.phwangObject().rootObject();};
-    this.phwangLinkObject = function () {return this.phwangObject().phwangLinkObject();};
-    this.phwangSessionObject = function () {return this.rootObject().phwangSessionObject();};
-    this.phwangPortObject = function () {return this.phwangObject().phwangPortObject();};
-
     this.ajaxRoute = function () {return "/django_go/go_ajax/";};
     this.jsonContext = function () {return "application/json; charset=utf-8";}
     this.plainTextContext = function () {return "text/plain; charset=utf-8";}
@@ -412,18 +404,24 @@ function PhwangAjaxClass(phwang_object_val) {
         return output;
     };
 
-    this.ajaxPacketId = function () {return this.phwangAjaxStorageObject().ajaxPacketId();};
-    this.incrementAjaxPacketId = function () {this.phwangAjaxStorageObject().incrementAjaxPacketId();};
-
     this.debug_ = function (debug_val, debug_val_, str1_val, str2_val) {
         if (debug_val && debug_val_) {
             this.logit(str1_val, str2_val);
         }
     };
 
+    this.objectName = function () {return "PhwangAjaxClass";};
+    this.phwangAjaxStorageObject = function () {return this.thePhwangAjaxStorageObject;};
+    this.phwangObject = function () {return this.thePhwangObject;};
+    this.rootObject = function () {return this.phwangObject().rootObject();};
+    this.phwangLinkObject = function () {return this.phwangObject().phwangLinkObject();};
+    this.phwangSessionObject = function () {return this.rootObject().phwangSessionObject();};
+    this.phwangPortObject = function () {return this.phwangObject().phwangPortObject();};
     this.debug = function(debug_val, str1_val, str2_val) {if (debug_val) {this.logit(str1_val, str2_val);}};
     this.logit = function(str1_val, str2_val) {return this.phwangObject().LOG_IT(this.objectName() + "." + str1_val, str2_val);};
     this.abend = function(str1_val, str2_val) {return this.phwangObject().ABEND(this.objectName() + "." + str1_val, str2_val);};
+    this.ajaxPacketId = function () {return this.phwangAjaxStorageObject().ajaxPacketId();};
+    this.incrementAjaxPacketId = function () {this.phwangAjaxStorageObject().incrementAjaxPacketId();};
     this.init__(phwang_object_val);
 }
 

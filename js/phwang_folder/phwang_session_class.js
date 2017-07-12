@@ -17,41 +17,6 @@ function PhwangSessionClass(link_object_val) {
         this.debug(false, "init__", "session=" + this.sessionName());
     };
 
-    this.objectName = function () {
-        return "PhwangSessionClass";
-    };
-
-    this.phwangLinkObject = function () {
-        return this.thePhwangLinkObject;
-    };
-
-    this.phwangSessionStorageObject = function () {
-        return this.thePhwangSessionStorageObject;
-    };
-
-    this.phwangObject = function () {
-        return this.phwangLinkObject().phwangObject();
-    };
-
-    this.rootObject = function () {
-        return this.phwangObject().rootObject();
-    };
-
-    this.phwangAjaxObject = function () {
-        return this.phwangObject().phwangAjaxObject();
-    };
-
-    this.sessionId = function () {
-        return this.phwangSessionStorageObject().sessionId();
-    };
-
-    this.setSessionId = function (val) {
-        if (this.sessionId()) {
-            //this.abend("setSessionId", "already exist");
-        }
-        this.phwangSessionStorageObject().setSessionId(val);
-    };
-
     this.topicObject = function () {
         return this.theTopicObject;
     };
@@ -138,9 +103,17 @@ function PhwangSessionClass(link_object_val) {
         this.tAjaxObject().getSessionData(this);
     };
 
+    this.objectName = function () {return "PhwangSessionClass";};
+    this.phwangLinkObject = function () {return this.thePhwangLinkObject;};
+    this.phwangSessionStorageObject = function () {return this.thePhwangSessionStorageObject;};
+    this.phwangObject = function () {return this.phwangLinkObject().phwangObject();};
+    this.rootObject = function () {return this.phwangObject().rootObject();};
+    this.phwangAjaxObject = function () {return this.phwangObject().phwangAjaxObject();};
     this.debug = function(debug_val, str1_val, str2_val) {if (debug_val) {this.logit(str1_val, str2_val);}};
     this.logit = function(str1_val, str2_val) {return this.phwangObject().LOG_IT(this.objectName() + "." + str1_val, str2_val);};
     this.abend = function(str1_val, str2_val) {return this.phwangObject().ABEND(this.objectName() + "." + str1_val, str2_val);};
+    this.sessionId = function () {return this.phwangSessionStorageObject().sessionId();};
+    this.setSessionId = function (val) {this.phwangSessionStorageObject().setSessionId(val);};
     this.init__(link_object_val);
 }
 

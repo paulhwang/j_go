@@ -25,17 +25,6 @@ function PhwangLinkClass(phwang_object_val) {
         return "Go";
     };
 
-    this.objectName = function () {return "PhwangLinkClass";};
-    this.phwangLinkStorageObject = function () {return this.thePhwangLinkStorageObject;};
-    this.phwangObject = function () {return this.thePhwangObject;};
-    this.rootObject = function () {return this.phwangObject().rootObject();};
-    this.phwangAjaxObject = function () {return this.phwangObject().phwangAjaxObject();};
-    this.phwangSessionObject = function () {return this.phwangObject().phwangSessionObject();};
-
-    this.htmlObject = function () {
-        return this.rootObject().htmlObject();
-    };
-
     this.myName = function () {
         return this.phwangLinkStorageObject().myName();
     };
@@ -209,6 +198,11 @@ function PhwangLinkClass(phwang_object_val) {
         });
     };
 
+    this.objectName = function () {return "PhwangLinkClass";};
+    this.phwangLinkStorageObject = function () {return this.thePhwangLinkStorageObject;};
+    this.phwangObject = function () {return this.thePhwangObject;};
+    this.phwangAjaxObject = function () {return this.phwangObject().phwangAjaxObject();};
+    this.phwangSessionObject = function () {return this.phwangObject().phwangSessionObject();};
     this.debug = function(debug_val, str1_val, str2_val) {if (debug_val) {this.logit(str1_val, str2_val);}};
     this.logit = function(str1_val, str2_val) {return this.phwangObject().LOG_IT(this.objectName() + "." + str1_val, str2_val);};
     this.abend = function(str1_val, str2_val) {return this.phwangObject().ABEND(this.objectName() + "." + str1_val, str2_val);};
