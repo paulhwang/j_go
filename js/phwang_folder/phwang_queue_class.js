@@ -17,7 +17,7 @@ function PhwangQueueClass (phwang_object_val) {
             this.abend("enqueueData", "queue full");
             return;
         }
-        this.queueArray()[0] = data_val;
+        this.queueArray()[this.queueLength()] = data_val;
         this.incrementQueueLength();
     };
 
@@ -28,6 +28,9 @@ function PhwangQueueClass (phwang_object_val) {
 
         var data = this.queueArray()[0];
         this.decrementQueueLength();
+        if (this.queueLength() > 0) {
+
+        }
         return data;
     };
 
