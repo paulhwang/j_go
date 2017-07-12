@@ -58,24 +58,12 @@ function PhwangAjaxClass(phwang_object_val) {
     this.phwangLinkObject = function () {return this.phwangObject().phwangLinkObject();};
     this.phwangSessionObject = function () {return this.rootObject().phwangSessionObject();};
 
-    this.ajaxRoute = function () {
-        return "/django_go/go_ajax/";
-    };
+    this.ajaxRoute = function () {return "/django_go/go_ajax/";};
+    this.jsonContext = function () {return "application/json; charset=utf-8";}
+    this.plainTextContext = function () {return "text/plain; charset=utf-8";}
 
-    this.jsonContext = function () {
-        return "application/json; charset=utf-8";
-    }
-    this.plainTextContext = function () {
-        return "text/plain; charset=utf-8";
-    }
-
-    this.httpGetRequest = function () {
-        return this.theHttpGetRequest;
-    };
-
-    this.switchTable = function () {
-        return this.theSwitchTable;
-    }
+    this.httpGetRequest = function () {return this.theHttpGetRequest;};
+    this.switchTable = function () {return this.theSwitchTable;}
 
     this.linkUpdateInterval = function () {
         return this.theLinkUpdateInterval;
@@ -83,10 +71,6 @@ function PhwangAjaxClass(phwang_object_val) {
 
     this.setLinkUpdateInterval = function (val) {
         this.theLinkUpdateInterval = val;
-    };
-
-    this.getLinkDataCommand = function () {
-        return "get_link_data";
     };
 
     this.pendingAjaxRequestCommand = function () {
@@ -159,6 +143,8 @@ function PhwangAjaxClass(phwang_object_val) {
             return;
         }
     };
+
+    this.getLinkDataCommand = function () {return "get_link_data";};
 
     this.initSwitchTable = function () {
         this.theSwitchTable = {
