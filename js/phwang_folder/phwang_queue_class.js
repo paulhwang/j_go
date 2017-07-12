@@ -7,17 +7,18 @@ function PhwangQueueClass (phwang_object_val) {
     "use strict";
     this.init__ = function (phwang_object_val) {
         this.thePhwangObject = phwang_object_val;
-        this.theMaxQueueLength = 32;
+        this.theMaxQueueLength = 1;
         this.theQueueLength = 0;
         this.theQueueArray = [this.maxQueueLength()];
     };
 
     this.enqueueData = function (data_val) {
-        if (this.theAjaxRequestQueue) {
-            this.abend("enqueueAjaxRequest", "queue full");
+        if (this.queueLength() >= this.maxQueueLength()) {
+            this.abend("enqueueData", "queue full");
             return;
         }
-        this.theAjaxRequestQueue = output_val;
+        this.queueArray()[0] = data_val;
+        this.incrementQueueLength();
     };
 
     this.dequeueData = function () {
@@ -25,13 +26,16 @@ function PhwangQueueClass (phwang_object_val) {
             return 0;
         }
 
-        var data = this.theAjaxRequestQueue;
-        this.theAjaxRequestQueue = 0;
-        return output;
+        var data = this.this.queueArray()[0];
+        this.decrementQueueLength();
+        return data;
     };
 
     this.maxQueueLength = function () {return this.theMaxQueueLength};
     this.queueLength = function () {return this.theQueueLength};
+    this.incrementQueueLength = function () {this.theQueueLength += 1};
+    this.decrementQueueLength = function () {this.theQueueLength -= 1};
+    this.queueArray = function () {return this.theQueueArray;}
     this.objectName = function() {return "PhwangQueueClass";};
     this.phwangObject = function() {return this.thePhwangObject;};
     this.debug = function(debug_val, str1_val, str2_val) {if (debug_val) {this.logit(str1_val, str2_val);}};
