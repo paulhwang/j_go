@@ -20,11 +20,11 @@ function PhwangPortClass(phwang_object_val) {
     };
 
     this.receiveSetupSessionResponse = function () {
-        this.rootObject().receiveSetupSessionResponse();
+        this.rootObject().ajaxObject().receiveSetupSessionResponse();
     };
 
     this.receiveSetupSessionReplyResponse = function () {
-        this.rootObject().receiveSetupSessionResponse();
+        this.rootObject().ajaxObject().receiveSetupSessionReplyResponse();
     };
 
     this.receiveGetSessionDataResponse = function (data_val) {

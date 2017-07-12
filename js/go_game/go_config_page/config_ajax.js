@@ -18,9 +18,11 @@ function ConfigAjaxClass(root_object_val) {
     };
 
     this.receiveSetupSessionResponse = function () {
+        this.htmlObject().gotoNextPage();
     };
 
     this.receiveSetupSessionReplyResponse = function () {
+        this.htmlObject().gotoNextPage();
     };
 
     this.receiveGetSessionDataResponse = function (data_val) {
@@ -29,6 +31,7 @@ function ConfigAjaxClass(root_object_val) {
     this.objectName = function() {return "ConfigAjaxClass";};
     this.rootObject = function () {return this.theRootObject;};
     this.phwangObject = function () {return this.rootObject().phwangObject();};
+    this.htmlObject = function () {return this.rootObject().htmlObject();};
     this.debug = function(debug_val, str1_val, str2_val) {if (debug_val) {this.logit(str1_val, str2_val);}};
     this.logit = function(str1_val, str2_val) {return this.phwangObject().LOG_IT(this.objectName() + "." + str1_val, str2_val);};
     this.abend = function(str1_val, str2_val) {return this.phwangObject().ABEND(this.objectName() + "." + str1_val, str2_val);};

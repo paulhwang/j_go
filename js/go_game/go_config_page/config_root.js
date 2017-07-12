@@ -17,14 +17,6 @@ function ConfigRootObject() {
         this.debug(true, "init__", "myName=" + this.phwangLinkObject().myName() + " linkId=" + this.phwangLinkObject().linkId());
     };
 
-    this.receiveSetupSessionResponse = function () {
-        this.htmlObject().gotoNextPage();
-    };
-
-    this.receiveSetupSessionReplyResponse = function () {
-        this.htmlObject().gotoNextPage();
-    };
-
     this.mallocLinkObject = function (name_val, id_val) {
         /* nothing is done here */
     };
