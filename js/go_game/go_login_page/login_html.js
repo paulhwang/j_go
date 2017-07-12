@@ -12,25 +12,11 @@ function LoginHtmlObject(root_object_val) {
         this.debug(true, "init__", "");
     };
 
-    this.objectName = function () {
-        return "LoginHtmlObject";
-    };
-
-    this.rootObject = function () {
-        return this.theRootObject;
-    };
-
-    this.phwangObject = function () {
-        return this.rootObject().phwangObject();
-    };
-
-    this.phwangAjaxObject = function () {
-        return this.phwangObject().phwangAjaxObject();
-    };
-
-    this.phwangLinkObject = function () {
-        return this.phwangObject().phwangLinkObject();
-    };
+    this.objectName = function () {return "LoginHtmlObject";};
+    this.rootObject = function () {return this.theRootObject;};
+    this.phwangObject = function () {return this.rootObject().phwangObject();};
+    this.phwangAjaxObject = function () {return this.phwangObject().phwangAjaxObject();};
+    this.phwangLinkObject = function () {return this.phwangObject().phwangLinkObject();};
 
     this.ajaxObject = function () {
         return this.rootObject().ajaxObject();
@@ -46,6 +32,10 @@ function LoginHtmlObject(root_object_val) {
                 this0.phwangAjaxObject().setupLink(this0.phwangLinkObject());
             }
         });
+    };
+
+    this.gotoNextPage = function () {
+        window.open(this.phwangLinkObject().serverHttpHeader() + "go_config.html", "_self")
     };
 
     this.debug = function (debug_val, str1_val, str2_val) {

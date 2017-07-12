@@ -16,10 +16,6 @@ function LoginRootObject() {
         this.phwangLinkObject().setHttpInfo();
     };
 
-    this.gotoNextPage = function () {
-        window.open(this.phwangLinkObject().serverHttpHeader() + "go_config.html", "_self")
-    };
-
     this.objectName = function () {return "LoginRootObject";};
     this.phwangObject = function () {return this.thePhwangObject;};
     this.phwangAjaxObject = function () {return this.phwangObject().phwangAjaxObject();};
