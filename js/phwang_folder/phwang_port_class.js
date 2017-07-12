@@ -15,12 +15,20 @@ function PhwangPortClass(phwang_object_val) {
         this.rootObject().receiveSetupLinkResponse();
     };
 
+    this.receiveGetNameListResponse = function () {
+        this.rootObject().receiveGetNameListResponse();
+    };
+
     this.receiveSetupSessionResponse = function () {
         this.rootObject().receiveSetupSessionResponse();
     };
 
     this.receiveSetupSessionReplyResponse = function () {
         this.rootObject().receiveSetupSessionResponse();
+    };
+
+    this.receiveGetSessionDataResponse = function (data_val) {
+        this.rootObject().receiveSetupSessionResponse(data_val);
     };
 
     this.objectName = function() {return "PhwangPortClass";};
