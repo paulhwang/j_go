@@ -28,8 +28,8 @@ function PhwangQueueClass (phwang_object_val) {
 
         var data = this.queueArray()[0];
         this.decrementQueueLength();
-        if (this.queueLength() > 0) {
-
+        for (var i = 0; i < this.queueLength(); i++) {
+            this.queueArray()[i] = this.queueArray()[i + 1];
         }
         return data;
     };
