@@ -370,13 +370,15 @@ function PhwangAjaxClass(phwang_object_val) {
             return;
         }
         this.theAjaxRequestQueue = output_val;
+        this.transmitQueueObject().enqueueData(output_val);
     };
 
     this.dequeueAjaxRequest = function (output_val) {
+        var output = this.transmitQueueObject().dequeueData();
         if (!this.theAjaxRequestQueue) {
             return 0;
         }
-        var output = this.theAjaxRequestQueue;
+        output = this.theAjaxRequestQueue;
         this.theAjaxRequestQueue = 0;
         return output;
     };
@@ -410,6 +412,7 @@ function PhwangAjaxClass(phwang_object_val) {
     this.switchTable = function () {return this.theSwitchTable;}
     this.objectName = function () {return "PhwangAjaxClass";};
     this.phwangAjaxStorageObject = function () {return this.thePhwangAjaxStorageObject;};
+    this.transmitQueueObject = function () {return this.theTransmitQueueObject;}
     this.phwangObject = function () {return this.thePhwangObject;};
     this.rootObject = function () {return this.phwangObject().rootObject();};
     this.phwangLinkObject = function () {return this.phwangObject().phwangLinkObject();};

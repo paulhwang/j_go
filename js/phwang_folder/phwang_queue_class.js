@@ -26,7 +26,7 @@ function PhwangQueueClass (phwang_object_val) {
             return 0;
         }
 
-        var data = this.this.queueArray()[0];
+        var data = this.queueArray()[0];
         this.decrementQueueLength();
         return data;
     };
