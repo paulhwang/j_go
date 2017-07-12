@@ -29,19 +29,19 @@ function PhwangAjaxClass(phwang_object_val) {
     this.setWatchDog = function (link_val) {
         setInterval(function (link_val) {
             var ajax_object = link_val.phwangAjaxObject();
-            if (ajax_object.noPendingAjaxRequestCommand()) {
-                var output = ajax_object.transmitQueueObject().dequeueData();
-                if (output) {
-                    ajax_object.transmitAjaxRequest_(output);
-                }
-                else {
-                    ajax_object.getLinkData(link_val);
-                }
-            }
-            else {
+            if (ajax_object.pendingAjaxRequestCommandExist()) {
                 if (ajax_object.pendingAjaxRequestCommand() !== ajax_object.getLinkDataCommand()) {
                     link_val.debug(true, "PhwangAjaxClassWatchDog", ajax_object.pendingAjaxRequestCommand());
                 }
+                return;
+            }
+
+            var output = ajax_object.transmitQueueObject().dequeueData();
+            if (output) {
+                ajax_object.transmitAjaxRequest_(output);
+            }
+            else {
+                ajax_object.getLinkData(link_val);
             }
         }, 100, link_val);
     };
@@ -59,11 +59,11 @@ function PhwangAjaxClass(phwang_object_val) {
     };
 
     this.pendingAjaxRequestCommand = function () {return this.thePendingAjaxRequestCommand;};
-    this.noPendingAjaxRequestCommand = function () {return (this.pendingAjaxRequestCommand() === "");};
+    this.pendingAjaxRequestCommandExist = function () {return (this.pendingAjaxRequestCommand() !== "");};
     this.clearPendingAjaxRequestCommand = function () {this.thePendingAjaxRequestCommand = "";};
 
     this.setPendingAjaxRequestCommand = function (command_val) {
-        if (!this.noPendingAjaxRequestCommand()) {
+        if (this.pendingAjaxRequestCommand()) {
             this.abend("*****setPendingAjaxRequestCommand", "old=" + this.pendingAjaxRequestCommand() + "new=" + command_val);
         }
         this.thePendingAjaxRequestCommand = command_val;
@@ -323,10 +323,8 @@ function PhwangAjaxClass(phwang_object_val) {
     };
 
     this.transmitAjaxRequest = function (output_val) {
-        if (!this.noPendingAjaxRequestCommand()) {
-            this.logit("============================transmitAjaxRequest", this.pendingAjaxRequestCommand());
-            this.logit("============================transmitAjaxRequest", this.pendingAjaxRequestCommand());
-            this.logit("============================transmitAjaxRequest", this.pendingAjaxRequestCommand());
+        if (this.pendingAjaxRequestCommandExist()) {
+            this.logit("============================transmitAjaxRequest", "pendingAjaxRequestCommand=" + this.pendingAjaxRequestCommand());
             this.transmitQueueObject().enqueueData(output_val);
             return;
         }
