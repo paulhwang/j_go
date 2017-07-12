@@ -11,8 +11,17 @@ function PhwangPortClass(phwang_object_val) {
         this.debug(true, "init__", "");
     };
 
+    this.receiveSetupSessionResponse = function () {
+        this.rootObject().receiveSetupSessionResponse();
+    };
+
+    this.receiveSetupSessionReplyResponse = function () {
+        this.rootObject().receiveSetupSessionResponse();
+    };
+
     this.objectName = function() {return "PhwangPortClass";};
     this.phwangObject = function() {return this.thePhwangObject;};
+    this.rootObject = function () {return this.phwangObject().rootObject();};
     this.phwangAjaxObject = function() {return this.phwangObject().phwangAjaxObject();};
     this.phwangSessionObject = function() {return this.phwangObject().phwangSessionObject();};
     this.debug = function(debug_val, str1_val, str2_val) {if (debug_val) {this.logit(str1_val, str2_val);}};
