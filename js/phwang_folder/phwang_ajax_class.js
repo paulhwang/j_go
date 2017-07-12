@@ -11,7 +11,7 @@ function PhwangAjaxClass(phwang_object_val) {
     this.init__ = function (phwang_object_val) {
         this.thePhwangObject = phwang_object_val;
         this.thePhwangAjaxStorageObject = new PhwangAjaxStorageObject(this);
-
+        this.theTransmitQueueObject = new PhwangQueueClass(this.phwangObject());
         this.initSwitchTable();
         this.theHttpGetRequest = new XMLHttpRequest();
         this.setupReceiveAjaxResponse();
