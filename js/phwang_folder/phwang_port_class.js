@@ -11,6 +11,10 @@ function PhwangPortClass(phwang_object_val) {
         this.debug(true, "init__", "");
     };
 
+    this.receiveSetupLinkResponse = function () {
+        this.rootObject().receiveSetupLinkResponse();
+    };
+
     this.receiveSetupSessionResponse = function () {
         this.rootObject().receiveSetupSessionResponse();
     };

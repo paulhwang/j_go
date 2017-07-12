@@ -180,7 +180,7 @@ function PhwangAjaxClass(phwang_object_val) {
         this.debug(true, "setupLinkResponse", "input_val=" + input_val);
         var data = JSON.parse(input_val);
         this.phwangLinkObject().setLinkId(data.link_id);
-        this.rootObject().receiveSetupLinkResponse();
+        this.phwangPortObject().receiveSetupLinkResponse();
     };
 
 
