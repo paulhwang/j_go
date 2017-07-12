@@ -12,6 +12,7 @@ function LoginAjaxClass(root_object_val) {
     };
 
     this.receiveSetupLinkResponse = function () {
+        this.rootObject().gotoNextPage();
     };
 
     this.receiveGetNameListResponse = function () {

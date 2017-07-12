@@ -20,17 +20,13 @@ function LoginRootObject() {
         window.open(this.phwangLinkObject().serverHttpHeader() + "go_config.html", "_self")
     };
 
-    this.receiveSetupLinkResponse = function () {
-        this.gotoNextPage();
-    };
-
     this.objectName = function () {return "LoginRootObject";};
     this.phwangObject = function () {return this.thePhwangObject;};
     this.phwangAjaxObject = function () {return this.phwangObject().phwangAjaxObject();};
     this.phwangLinkObject = function () {return this.phwangObject().phwangLinkObject();};
     this.phwangSessionObject = function () {return this.phwangObject().phwangSessionObject();};
-    this.ajaxObject = function () {return this.theAjaxObject;};
     this.htmlObject = function () {return this.theHtmlObject;};
+    this.ajaxObject = function () {return this.theAjaxObject;};
     this.debug = function (debug_val, str1_val, str2_val) {if (debug_val) {this.logit(str1_val, str2_val);}};
     this.logit = function (str1_val, str2_val) {return this.logit_(this.objectName() + "." + str1_val, str2_val);};
     this.abend = function (str1_val, str2_val) {return this.abend_(this.objectName() + "." + str1_val, str2_val);};

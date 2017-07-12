@@ -12,7 +12,7 @@ function PhwangPortClass(phwang_object_val) {
     };
 
     this.receiveSetupLinkResponse = function () {
-        this.rootObject().receiveSetupLinkResponse();
+        this.rootObject().ajaxObject().receiveSetupLinkResponse();
     };
 
     this.receiveGetNameListResponse = function () {
