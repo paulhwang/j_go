@@ -223,7 +223,7 @@ function PhwangAjaxClass(phwang_object_val) {
                 var array = JSON.parse("[" + name_list + "]");
                 this.debug(true, "getNameListResponse", "array=" + array);
                 this.phwangLinkObject().setNameList(array);
-                this.phwangPortObject().receiveGetNameListResponse(this.phwangLinkObject().nameList());
+                this.phwangPortObject().receiveGetNameListResponse(this.phwangLinkObject().nameList(), this.phwangLinkObject().nameList().length);
             }
         }
     };
