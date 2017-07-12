@@ -5,11 +5,7 @@
 
 function PhwangClass (root_val) {
     "use strict";
-
-    this.init__ = function (root_val) {
-        this.theRootObject = root_val;
-        this.debug(true, "init__", "");
-    };
+    this.init__ = function (root_val) {this.theRootObject = root_val;};
 
     this.initObject = function () {
         this.thePhwangAjaxObject = new PhwangAjaxClass(this);

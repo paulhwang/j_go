@@ -3,14 +3,9 @@
  * Written by Paul Hwang
  */
 
-function PhwangQueueClass(phwang_object_val) {
+function PhwangQueueClass (phwang_object_val) {
     "use strict";
-
-    this.init__ = function (phwang_object_val) {
-        this.thePhwangObject = phwang_object_val;
-        this.debug(true, "init__", "");
-    };
-
+    this.init__ = function (phwang_object_val) {this.thePhwangObject = phwang_object_val;};
     this.objectName = function() {return "PhwangQueueClass";};
     this.phwangObject = function() {return this.thePhwangObject;};
     this.debug = function(debug_val, str1_val, str2_val) {if (debug_val) {this.logit(str1_val, str2_val);}};
