@@ -47,33 +47,16 @@ function PhwangAjaxClass(phwang_object_val) {
         }, 100, link_val);
     };
 
-    this.objectName = function () {
-        return "PhwangAjaxClass";
-    };
-
     this.debugOutput = function () {
         return false;
     };
 
-    this.phwangObject = function () {
-        return this.thePhwangObject;
-    };
-
-    this.phwangAjaxStorageObject = function () {
-        return this.thePhwangAjaxStorageObject;
-    };
-
-    this.rootObject = function () {
-        return this.phwangObject().rootObject();
-    };
-
-    this.phwangLinkObject = function () {
-        return this.phwangObject().phwangLinkObject();
-    };
-
-    this.phwangSessionObject = function () {
-        return this.rootObject().phwangSessionObject();
-    };
+    this.objectName = function () {return "PhwangAjaxClass";};
+    this.phwangAjaxStorageObject = function () {return this.thePhwangAjaxStorageObject;};
+    this.phwangObject = function () {return this.thePhwangObject;};
+    this.rootObject = function () {return this.phwangObject().rootObject();};
+    this.phwangLinkObject = function () {return this.phwangObject().phwangLinkObject();};
+    this.phwangSessionObject = function () {return this.rootObject().phwangSessionObject();};
 
     this.ajaxRoute = function () {
         return "/django_go/go_ajax/";
