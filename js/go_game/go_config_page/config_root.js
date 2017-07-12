@@ -10,15 +10,10 @@ function ConfigRootObject() {
         this.thePhwangObject = new PhwangClass(this);
         this.phwangObject().initObject();
         this.phwangAjaxObject().setWatchDog(this.phwangLinkObject());
-
         this.theConfigStorageObject = new GoConfigStorageObject(this);
         this.theAjaxObject = new ConfigAjaxClass(this);
         this.theHtmlObject = new ConfigHtmlObject(this);
         this.debug(true, "init__", "myName=" + this.phwangLinkObject().myName() + " linkId=" + this.phwangLinkObject().linkId());
-    };
-
-    this.mallocLinkObject = function (name_val, id_val) {
-        /* nothing is done here */
     };
 
     this.objectName = function () {return "ConfigRootObject";};
