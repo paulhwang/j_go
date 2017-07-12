@@ -144,14 +144,6 @@ function PhwangAjaxClass(phwang_object_val) {
         }
     };
 
-    this.setupLinkCommand = function () {return "setup_link";};
-    this.getLinkDataCommand = function () {return "get_link_data";};
-    this.getNameListCommand = function () {return "get_name_list";};
-    this.setupSessionCommand = function () {return "setup_session";};
-    this.setupSessionReplyCommand = function () {return "setup_session_reply";};
-    this.putSessionDataCommand = function () {return "put_session_data";};
-    this.getSessionDataCommand = function () {return "get_session_data";};
-
     this.initSwitchTable = function () {
         this.theSwitchTable = {
             "setup_link": this.setupLinkResponse,
@@ -291,10 +283,18 @@ function PhwangAjaxClass(phwang_object_val) {
         }
     };
 
+    this.setupLinkCommand = function () {return "setup_link";};
+    this.getLinkDataCommand = function () {return "get_link_data";};
+    this.getNameListCommand = function () {return "get_name_list";};
+    this.setupSessionCommand = function () {return "setup_session";};
+    this.setupSessionReplyCommand = function () {return "setup_session_reply";};
+    this.putSessionDataCommand = function () {return "put_session_data";};
+    this.getSessionDataCommand = function () {return "get_session_data";};
+
     this.setupSessionReply = function (link_val, data_val, session_id_index_val) {
         var data = JSON.parse(data_val);
         var output = JSON.stringify({
-                        command: "setup_session_reply",
+                        command: this.setupSessionReplyCommand(),
                         packet_id: this.ajaxPacketId(),
                         my_name: link_val.myName(),
                         link_id: link_val.linkId(),
@@ -320,7 +320,7 @@ function PhwangAjaxClass(phwang_object_val) {
         this.checkPendingAjaxRequestCommand();
 
         var output = JSON.stringify({
-                        command: "put_session_data",
+                        command: this.putSessionDataCommand(),
                         packet_id: this.ajaxPacketId(),
                         link_id: session_val.phwangLinkObject().linkId(),
                         session_id: session_val.sessionId(),
@@ -345,7 +345,7 @@ function PhwangAjaxClass(phwang_object_val) {
 
     this.getSessionData = function (session_val) {
         var output = JSON.stringify({
-                        command: "get_session_data",
+                        command: this.getSessionDataCommand(),
                         packet_id: this.ajaxPacketId(),
                         link_id: session_val.phwangLinkObject().linkId(),
                         session_id: session_val.sessionId(),
