@@ -11,6 +11,7 @@ function PhwangLinkClass(phwang_object_val) {
         this.thePhwangLinkStorageObject = new PhwangLinkStorageObject(this);
         this.theNameList = [];
         this.theNameListTag = 0;
+        this.theServerNameListTag = 0;
         this.theSessionIndexArray = [0];
         this.theSessionTableArray = [null];
         //this.phwangAjaxObject().getLinkData(this);
@@ -88,33 +89,15 @@ function PhwangLinkClass(phwang_object_val) {
         this.theLinkUpdateInterval = val;
     };
 
-    this.nameListTag = function () {
-        return this.theNameListTag;
-    };
-
-    this.setNameListTag = function (val) {
-        this.theNameListTag = val;
-    };
-
-    this.nameList = function () {
-        return this.theNameList;
-    };
-
-    this.setNameList = function (data_val) {
-        this.theNameList = data_val;
-    };
-
-    this.nameListLength = function () {
-        return this.nameList().length;
-    };
-
-    this.nameListElement = function (index_val) {
-        return this.nameList()[index_val];
-    };
-
-    this.setNameListElement = function (index_val, data_val) {
-        this.nameList()[index_val] = data_val;
-    };
+    this.nameListTag = function () {return this.theNameListTag;};
+    this.setNameListTag = function (val) {this.theNameListTag = val;};
+    this.serverNameListTag = function () {return this.theServerNameListTag;};
+    this.setServerNameListTag = function (val) {this.theServerNameListTag = val;};
+    this.nameList = function () {return this.theNameList;};
+    this.setNameList = function (data_val) {this.theNameList = data_val;};
+    this.nameListLength = function () {return this.nameList().length;};
+    this.nameListElement = function (index_val) {return this.nameList()[index_val];};
+    this.setNameListElement = function (index_val, data_val) {this.nameList()[index_val] = data_val;};
 
     this.resetLinkStorage = function () {
         this.phwangLinkStorageObject().resetLinkStorage();
