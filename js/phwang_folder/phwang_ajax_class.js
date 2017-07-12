@@ -58,23 +58,15 @@ function PhwangAjaxClass(phwang_object_val) {
         this.theLinkUpdateInterval = val;
     };
 
-    this.pendingAjaxRequestCommand = function () {
-        return this.thePendingAjaxRequestCommand;
-    };
-
-    this.noPendingAjaxRequestCommand = function () {
-        return (this.pendingAjaxRequestCommand() === "");
-    };
+    this.pendingAjaxRequestCommand = function () {return this.thePendingAjaxRequestCommand;};
+    this.noPendingAjaxRequestCommand = function () {return (this.pendingAjaxRequestCommand() === "");};
+    this.clearPendingAjaxRequestCommand = function () {this.thePendingAjaxRequestCommand = "";};
 
     this.setPendingAjaxRequestCommand = function (command_val) {
         if (!this.noPendingAjaxRequestCommand()) {
             this.abend("*****setPendingAjaxRequestCommand", "old=" + this.pendingAjaxRequestCommand() + "new=" + command_val);
         }
         this.thePendingAjaxRequestCommand = command_val;
-    };
-
-    this.clearPendingAjaxRequestCommand = function () {
-        this.thePendingAjaxRequestCommand = "";
     };
 
     this.checkPendingAjaxRequestCommand = function () {

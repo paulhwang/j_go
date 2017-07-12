@@ -25,7 +25,6 @@ function PhwangQueueClass (phwang_object_val) {
         if (this.queueLength() === 0) {
             return 0;
         }
-
         var data = this.queueArray()[0];
         this.decrementQueueLength();
         for (var i = 0; i < this.queueLength(); i++) {
