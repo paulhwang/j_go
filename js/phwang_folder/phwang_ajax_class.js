@@ -39,10 +39,10 @@ function PhwangAjaxClass(phwang_object_val) {
             var output = ajax_object.transmitQueueObject().dequeueData();
             if (output) {
                 ajax_object.transmitAjaxRequest_(output);
+                return;
             }
-            else {
-                ajax_object.getLinkData(link_val);
-            }
+
+            ajax_object.getLinkData(link_val);
         }, 100, link_val);
     };
 
