@@ -39,4 +39,3 @@ function LoginHtmlObject(root_object_val) {
     this.abend = function (str1_val, str2_val) {return this.rootObject().abend_(this.objectName() + "." + str1_val, str2_val);};
     this.init__(root_object_val);
 }
-

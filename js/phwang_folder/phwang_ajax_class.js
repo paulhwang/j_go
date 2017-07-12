@@ -51,13 +51,6 @@ function PhwangAjaxClass(phwang_object_val) {
         return false;
     };
 
-    this.ajaxRoute = function () {return "/django_go/go_ajax/";};
-    this.jsonContext = function () {return "application/json; charset=utf-8";}
-    this.plainTextContext = function () {return "text/plain; charset=utf-8";}
-
-    this.httpGetRequest = function () {return this.theHttpGetRequest;};
-    this.switchTable = function () {return this.theSwitchTable;}
-
     this.linkUpdateInterval = function () {
         return this.theLinkUpdateInterval;
     };
@@ -136,26 +129,6 @@ function PhwangAjaxClass(phwang_object_val) {
             return;
         }
     };
-
-    this.setupLinkCommand = function () {return "setup_link";};
-    this.getLinkDataCommand = function () {return "get_link_data";};
-    this.getNameListCommand = function () {return "get_name_list";};
-    this.setupSessionCommand = function () {return "setup_session";};
-    this.setupSessionReplyCommand = function () {return "setup_session_reply";};
-    this.putSessionDataCommand = function () {return "put_session_data";};
-    this.getSessionDataCommand = function () {return "get_session_data";};
-
-    this.initSwitchTable = function () {
-        this.theSwitchTable = {
-            "setup_link": this.setupLinkResponse,
-            "get_link_data": this.getLinkDataResponse,
-            "get_name_list": this.getNameListResponse,
-            "setup_session": this.setupSessionResponse,
-            "setup_session_reply": this.setupSessionReplyResponse,
-            "get_session_data": this.getSessionDataResponse,
-            "put_session_data": this.putSessionDataResponse,
-        };
-     };
 
     this.setupLink = function (link_val) {
         var output = JSON.stringify({
@@ -387,6 +360,10 @@ function PhwangAjaxClass(phwang_object_val) {
         this.httpGetRequest().send(null);
     };
 
+    this.ajaxRoute = function () {return "/django_go/go_ajax/";};
+    this.jsonContext = function () {return "application/json; charset=utf-8";}
+    this.plainTextContext = function () {return "text/plain; charset=utf-8";}
+
     this.enqueueAjaxRequest = function (output_val) {
         if (this.theAjaxRequestQueue) {
             this.abend("enqueueAjaxRequest", "queue full");
@@ -410,6 +387,27 @@ function PhwangAjaxClass(phwang_object_val) {
         }
     };
 
+    this.initSwitchTable = function () {
+        this.theSwitchTable = {
+            "setup_link": this.setupLinkResponse,
+            "get_link_data": this.getLinkDataResponse,
+            "get_name_list": this.getNameListResponse,
+            "setup_session": this.setupSessionResponse,
+            "setup_session_reply": this.setupSessionReplyResponse,
+            "get_session_data": this.getSessionDataResponse,
+            "put_session_data": this.putSessionDataResponse,
+        };
+     };
+
+    this.setupLinkCommand = function () {return "setup_link";};
+    this.getLinkDataCommand = function () {return "get_link_data";};
+    this.getNameListCommand = function () {return "get_name_list";};
+    this.setupSessionCommand = function () {return "setup_session";};
+    this.setupSessionReplyCommand = function () {return "setup_session_reply";};
+    this.putSessionDataCommand = function () {return "put_session_data";};
+    this.getSessionDataCommand = function () {return "get_session_data";};
+    this.httpGetRequest = function () {return this.theHttpGetRequest;};
+    this.switchTable = function () {return this.theSwitchTable;}
     this.objectName = function () {return "PhwangAjaxClass";};
     this.phwangAjaxStorageObject = function () {return this.thePhwangAjaxStorageObject;};
     this.phwangObject = function () {return this.thePhwangObject;};
