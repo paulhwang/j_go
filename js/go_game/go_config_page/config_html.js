@@ -17,7 +17,7 @@ function ConfigHtmlObject(root_object_val) {
     };
 
     this.setupHtmlInputFunction = function () {
-        this.renderNameList(0, 0);
+        this.renderNameList();
         var this0 = this;
         $(".config_section .config_button").on("click", function() {
             this0.phwangSessionObject().setHisName($(".peer_name_paragraph select").val());
@@ -43,9 +43,11 @@ function ConfigHtmlObject(root_object_val) {
         });
     };
 
-    this.renderNameList = function (name_list_array_val, length_val) {
-        for (var i = 0; i < length_val; i++) {
-            $('.peer_name_paragraph select').append($('<option>', {value:name_list_array_val[i], text:name_list_array_val[i]}));
+    this.renderNameList = function () {
+        var i = 0;
+        while (i < this.phwangLinkObject().nameListLength()) {
+            $('.peer_name_paragraph select').append($('<option>', {value:this.phwangLinkObject().nameListElement(i), text:this.phwangLinkObject().nameListElement(i)}));
+            i += 1;
         }
     };
 
