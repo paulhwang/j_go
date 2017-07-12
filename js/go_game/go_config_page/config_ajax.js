@@ -7,7 +7,7 @@ function ConfigAjaxClass(root_object_val) {
     "use strict";
     this.init__ = function (root_object_val) {this.theRootObject = root_object_val;};
     this.receiveSetupLinkResponse = function () {};
-    this.receiveGetNameListResponse = function () {};
+    this.receiveGetNameListResponse = function (name_list_array_val) {this.htmlObject().renderNameList(name_list_array_val);};
     this.receiveSetupSessionResponse = function () {this.htmlObject().gotoNextPage();};
     this.receiveSetupSessionReplyResponse = function () {this.htmlObject().gotoNextPage();};
     this.receiveGetSessionDataResponse = function (data_val) {};

@@ -43,10 +43,10 @@ function ConfigHtmlObject(root_object_val) {
         });
     };
 
-    this.renderNameList = function () {
+    this.renderNameList = function (name_list_array_val) {
         var i = 0;
         while (i < this.phwangLinkObject().nameListLength()) {
-            $('.peer_name_paragraph select').append($('<option>', {value:this.phwangLinkObject().nameListElement(i), text:this.phwangLinkObject().nameListElement(i)}));
+            $('.peer_name_paragraph select').append($('<option>', {value:name_list_array_val[i], text:name_list_array_val[i]}));
             i += 1;
         }
     };

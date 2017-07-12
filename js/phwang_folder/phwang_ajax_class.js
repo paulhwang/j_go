@@ -185,7 +185,6 @@ function PhwangAjaxClass(phwang_object_val) {
                     this.phwangLinkObject().setServerNameListTag(name_list_tag);
                     //this.getNameList(this.phwangLinkObject());
                 }
-
                 var c_data = data.c_data.slice(3);
             }
 
@@ -224,9 +223,7 @@ function PhwangAjaxClass(phwang_object_val) {
                 var array = JSON.parse("[" + name_list + "]");
                 this.debug(true, "getNameListResponse", "array=" + array);
                 this.phwangLinkObject().setNameList(array);
-                if (this.rootObject().htmlObject().renderNameListFuncExist()) {
-                    this.rootObject().htmlObject().renderNameList();////////////////////////////
-                }
+                this.phwangPortObject().receiveGetNameListResponse(this.phwangLinkObject().nameList());
             }
         }
     };

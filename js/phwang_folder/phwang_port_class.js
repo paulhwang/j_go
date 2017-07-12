@@ -7,7 +7,7 @@ function PhwangPortClass (phwang_object_val) {
     "use strict";
     this.init__ = function (phwang_object_val) {this.thePhwangObject = phwang_object_val;};
     this.receiveSetupLinkResponse = function () {this.rootObject().ajaxObject().receiveSetupLinkResponse();};
-    this.receiveGetNameListResponse = function () {this.rootObject().ajaxObject().receiveGetNameListResponse();};
+    this.receiveGetNameListResponse = function (name_list_array_val) {this.rootObject().ajaxObject().receiveGetNameListResponse(name_list_array_val);};
     this.receiveSetupSessionResponse = function () {this.rootObject().ajaxObject().receiveSetupSessionResponse();};
     this.receiveSetupSessionReplyResponse = function () {this.rootObject().ajaxObject().receiveSetupSessionReplyResponse();};
     this.receiveGetSessionDataResponse = function (data_val) {this.rootObject().ajaxObject().receiveSetupSessionResponse(data_val);};
