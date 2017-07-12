@@ -12,38 +12,6 @@ function ConfigHtmlObject(root_object_val) {
         this.debug(true, "init__", "");
     };
 
-    this.gotoNextPage = function () {
-        window.open(this.phwangLinkObject().serverHttpHeader() + "go_act.html", "_self")
-    };
-
-    this.objectName = function () {
-        return "ConfigHtmlObject";
-    };
-
-    this.rootObject = function () {
-        return this.theRootObject;
-    };
-
-    this.configStorageObject = function () {
-        return this.rootObject().configStorageObject();
-    };
-
-    this.phwangObject = function () {
-        return this.rootObject().phwangObject();
-    };
-
-    this.phwangAjaxObject = function () {
-        return this.phwangObject().phwangAjaxObject();
-    };
-
-    this.phwangLinkObject = function () {
-        return this.phwangObject().phwangLinkObject();
-    };
-
-    this.phwangSessionObject = function () {
-        return this.phwangObject().phwangSessionObject();
-    };
-
     this.renderNameListFuncExist = function () {
         return true;
     };
@@ -83,20 +51,16 @@ function ConfigHtmlObject(root_object_val) {
         }
     };
 
-    this.debug = function (debug_val, str1_val, str2_val) {
-        if (debug_val) {
-            this.logit(str1_val, str2_val);
-        }
-    };
-
-    this.logit = function (str1_val, str2_val) {
-        this.rootObject().logit_(this.objectName() + "." + str1_val, str2_val);
-    };
-
-    this.abend = function (str1_val, str2_val) {
-        this.rootObject().abend_(this.objectName() + "." + str1_val, str2_val);
-    };
-
+    this.gotoNextPage = function () {window.open(this.phwangLinkObject().serverHttpHeader() + "go_act.html", "_self")};
+    this.configStorageObject = function () {return this.rootObject().configStorageObject();};
+    this.objectName = function () {return "ConfigHtmlObject";};
+    this.rootObject = function () {return this.theRootObject;};
+    this.phwangObject = function () {return this.rootObject().phwangObject();};
+    this.phwangAjaxObject = function () {return this.phwangObject().phwangAjaxObject();};
+    this.phwangLinkObject = function () {return this.phwangObject().phwangLinkObject();};
+    this.phwangSessionObject = function () {return this.phwangObject().phwangSessionObject();};
+    this.debug = function (debug_val, str1_val, str2_val) {if (debug_val) {this.logit(str1_val, str2_val);}};
+    this.logit = function (str1_val, str2_val) {this.rootObject().logit_(this.objectName() + "." + str1_val, str2_val);};
+    this.abend = function (str1_val, str2_val) {this.rootObject().abend_(this.objectName() + "." + str1_val, str2_val);};
     this.init__(root_object_val);
 }
-

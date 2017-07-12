@@ -5,27 +5,12 @@
 
 function GoAjaxClass(root_object_val) {
     "use strict";
-
-    this.init__ = function (root_object_val) {
-        this.theRootObject = root_object_val;
-        this.debug(true, "init__", "");
-    };
-
-    this.receiveSetupLinkResponse = function () {
-    };
-
-    this.receiveGetNameListResponse = function () {
-    };
-
-    this.receiveSetupSessionResponse = function () {
-    };
-
-    this.receiveSetupSessionReplyResponse = function () {
-    };
-
-    this.receiveGetSessionDataResponse = function (data_val) {
-    };
-
+    this.init__ = function (root_object_val) {this.theRootObject = root_object_val;};
+    this.receiveSetupLinkResponse = function () {};
+    this.receiveGetNameListResponse = function () {};
+    this.receiveSetupSessionResponse = function () {};
+    this.receiveSetupSessionReplyResponse = function () {};
+    this.receiveGetSessionDataResponse = function (data_val) {};
     this.objectName = function() {return "GoAjaxClass";};
     this.rootObject = function () {return this.theRootObject;};
     this.phwangObject = function () {return this.rootObject().phwangObject();};
