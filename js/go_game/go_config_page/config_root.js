@@ -17,8 +17,16 @@ function ConfigRootObject() {
         this.debug(true, "init__", "myName=" + this.phwangLinkObject().myName() + " linkId=" + this.phwangLinkObject().linkId());
     };
 
-    this.gotoNextPage = function () {
-        window.open(this.phwangLinkObject().serverHttpHeader() + "go_act.html", "_self")
+    this.receiveSetupSessionResponse = function () {
+        this.htmlObject().gotoNextPage();
+    };
+
+    this.receiveSetupSessionReplyResponse = function () {
+        this.htmlObject().gotoNextPage();
+    };
+
+    this.mallocLinkObject = function (name_val, id_val) {
+        /* nothing is done here */
     };
 
     this.objectName = function () {return "ConfigRootObject";};
@@ -29,19 +37,6 @@ function ConfigRootObject() {
     this.configStorageObject = function () {return this.theConfigStorageObject;};
     this.ajaxObject = function () {return this.theAjaxObject;};
     this.htmlObject = function () {return this.theHtmlObject;};
-
-    this.receiveSetupSessionResponse = function () {
-        this.gotoNextPage();
-    };
-
-    this.receiveSetupSessionReplyResponse = function () {
-        this.gotoNextPage();
-    };
-
-    this.mallocLinkObject = function (name_val, id_val) {
-        /* nothing is done here */
-    };
-
     this.debug = function (debug_val, str1_val, str2_val) {if (debug_val) {this.logit(str1_val, str2_val);}};
     this.logit = function (str1_val, str2_val) {return this.logit_(this.objectName() + "." + str1_val, str2_val);};
     this.abend = function (str1_val, str2_val) {return this.abend_(this.objectName() + "." + str1_val, str2_val);};

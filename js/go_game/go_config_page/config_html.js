@@ -12,6 +12,10 @@ function ConfigHtmlObject(root_object_val) {
         this.debug(true, "init__", "");
     };
 
+    this.gotoNextPage = function () {
+        window.open(this.phwangLinkObject().serverHttpHeader() + "go_act.html", "_self")
+    };
+
     this.objectName = function () {
         return "ConfigHtmlObject";
     };

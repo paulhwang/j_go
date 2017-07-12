@@ -10,7 +10,6 @@ function GoPlayRootObject() {
         this.thePhwangObject = new PhwangClass(this);
         this.phwangObject().initObject();
         this.phwangAjaxObject().setWatchDog(this.phwangLinkObject());
-
         this.theAjaxObject = new GoAjaxClass(this);
         this.theConfigStorageObject = new GoConfigStorageObject(this);
         this.theHtmlObject = new GoPlayHtmlObject(this);
@@ -20,11 +19,9 @@ function GoPlayRootObject() {
         this.theGameObject = new GoPlayGameObject(this);
         this.theInputObject = new GoPlayInputObject(this);
         this.theDisplayObject = new GoPlayDisplayObject(this);
-
         this.thePhwangSessionObject = this.phwangLinkObject().mallocSessionAndInsert(this.phwangSessionObject().sessionId());
         this.phwangLinkObject().insertSession(this.phwangSessionObject());
         this.phwangSessionObject().setTopicObject(this.portObject());
-
         this.debug(true, "init__", "myName=" + this.phwangLinkObject().myName() + " linkId=" + this.phwangLinkObject().linkId() + " sessionId=" + this.phwangSessionObject().sessionId());
         this.debug(true, "init__", "boardSize=" + this.configStorageObject().boardSize() + " stoneColor=" + this.configStorageObject().stoneColor() + " komi=" + this.configStorageObject().komi() + " handicap=" + this.configStorageObject().handicap());
     };
