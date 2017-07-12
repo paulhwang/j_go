@@ -16,7 +16,6 @@ function PhwangAjaxClass(phwang_object_val) {
         this.theHttpGetRequest = new XMLHttpRequest();
         this.setupReceiveAjaxResponse();
         this.thePendingAjaxRequestCommand = "";
-        this.theAjaxRequestQueue = 0;
         this.debug(true, "init__", "");
     };
 
@@ -31,7 +30,7 @@ function PhwangAjaxClass(phwang_object_val) {
         setInterval(function (link_val) {
             var ajax_object = link_val.phwangAjaxObject();
             if (ajax_object.noPendingAjaxRequestCommand()) {
-                var output = ajax_object.dequeueAjaxRequest();
+                var output = ajax_object.transmitQueueObject().dequeueData();
                 if (output) {
                     ajax_object.transmitAjaxRequest_(output);
                 }
@@ -336,7 +335,7 @@ function PhwangAjaxClass(phwang_object_val) {
             this.logit("============================transmitAjaxRequest", this.pendingAjaxRequestCommand());
             this.logit("============================transmitAjaxRequest", this.pendingAjaxRequestCommand());
             this.logit("============================transmitAjaxRequest", this.pendingAjaxRequestCommand());
-            this.enqueueAjaxRequest(output_val);
+            this.transmitQueueObject().enqueueData(output_val);
             return;
         }
 
@@ -363,25 +362,6 @@ function PhwangAjaxClass(phwang_object_val) {
     this.ajaxRoute = function () {return "/django_go/go_ajax/";};
     this.jsonContext = function () {return "application/json; charset=utf-8";}
     this.plainTextContext = function () {return "text/plain; charset=utf-8";}
-
-    this.enqueueAjaxRequest = function (output_val) {
-        if (this.theAjaxRequestQueue) {
-            this.abend("enqueueAjaxRequest", "queue full");
-            return;
-        }
-        this.theAjaxRequestQueue = output_val;
-        this.transmitQueueObject().enqueueData(output_val);
-    };
-
-    this.dequeueAjaxRequest = function (output_val) {
-        var output = this.transmitQueueObject().dequeueData();
-        if (!this.theAjaxRequestQueue) {
-            return 0;
-        }
-        output = this.theAjaxRequestQueue;
-        this.theAjaxRequestQueue = 0;
-        return output;
-    };
 
     this.debug_ = function (debug_val, debug_val_, str1_val, str2_val) {
         if (debug_val && debug_val_) {
