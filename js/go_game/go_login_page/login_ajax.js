@@ -34,4 +34,3 @@ function LoginAjaxClass(root_object_val) {
     this.abend = function(str1_val, str2_val) {return this.phwangObject().ABEND(this.objectName() + "." + str1_val, str2_val);};
     this.init__(root_object_val);
 }
-

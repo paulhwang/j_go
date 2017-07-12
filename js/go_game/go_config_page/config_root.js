@@ -10,9 +10,9 @@ function ConfigRootObject() {
         this.thePhwangObject = new PhwangClass(this);
         this.phwangObject().initObject();
         this.phwangAjaxObject().setWatchDog(this.phwangLinkObject());
-        //this.phwangAjaxObject().getLinkData(this.phwangLinkObject());
 
         this.theConfigStorageObject = new GoConfigStorageObject(this);
+        this.theAjaxObject = new ConfigAjaxClass(this);
         this.theHtmlObject = new ConfigHtmlObject(this);
         this.debug(true, "init__", "myName=" + this.phwangLinkObject().myName() + " linkId=" + this.phwangLinkObject().linkId());
     };
@@ -44,6 +44,7 @@ function ConfigRootObject() {
     this.configStorageObject = function () {
         return this.theConfigStorageObject;
     };
+    this.ajaxObject = function () {return this.theAjaxObject;};
 
     this.htmlObject = function () {
         return this.theHtmlObject;

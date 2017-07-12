@@ -11,6 +11,7 @@ function GoPlayRootObject() {
         this.phwangObject().initObject();
         this.phwangAjaxObject().setWatchDog(this.phwangLinkObject());
 
+        this.theAjaxObject = new GoAjaxClass(this);
         this.theConfigStorageObject = new GoConfigStorageObject(this);
         this.theHtmlObject = new GoPlayHtmlObject(this);
         this.theConfigObject = new GoPlayConfigObject(this, this.configStorageObject().configInJson(), true);
@@ -48,20 +49,18 @@ function GoPlayRootObject() {
         return this.phwangObject().phwangSessionObject();
     };
 
+    this.ajaxObject = function () {return this.theAjaxObject;};
+    this.htmlObject = function () {return this.theHtmlObject;};
+
     this.configStorageObject = function () {
         return this.theConfigStorageObject;
     };
-
     this.inputObject = function () {
         return this.theInputObject;
     };
 
     this.displayObject = function () {
         return this.theDisplayObject;
-    };
-
-    this.htmlObject = function () {
-        return this.theHtmlObject;
     };
 
     this.configObject = function () {
