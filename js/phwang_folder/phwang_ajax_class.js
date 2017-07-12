@@ -144,7 +144,13 @@ function PhwangAjaxClass(phwang_object_val) {
         }
     };
 
+    this.setupLinkCommand = function () {return "setup_link";};
     this.getLinkDataCommand = function () {return "get_link_data";};
+    this.getNameListCommand = function () {return "get_name_list";};
+    this.setupSessionCommand = function () {return "setup_session";};
+    this.setupSessionReplyCommand = function () {return "setup_session_reply";};
+    this.putSessionDataCommand = function () {return "put_session_data";};
+    this.getSessionDataCommand = function () {return "get_session_data";};
 
     this.initSwitchTable = function () {
         this.theSwitchTable = {
@@ -160,7 +166,7 @@ function PhwangAjaxClass(phwang_object_val) {
 
     this.setupLink = function (link_val) {
         var output = JSON.stringify({
-                        command: "setup_link",
+                        command: this.setupLinkCommand(),
                         packet_id: this.ajaxPacketId(),
                         my_name: link_val.myName(),
                         password: link_val.passWord(),
@@ -179,7 +185,7 @@ function PhwangAjaxClass(phwang_object_val) {
 
     this.getLinkData = function (link_val) {
         var output = JSON.stringify({
-                        command: "get_link_data",
+                        command: this.getLinkDataCommand(),
                         packet_id: this.ajaxPacketId(),
                         link_id: link_val.linkId(),
                         });
@@ -232,7 +238,7 @@ function PhwangAjaxClass(phwang_object_val) {
 
     this.getNameList = function (link_val) {
         var output = JSON.stringify({
-                        command: "get_name_list",
+                        command: this.getNameListCommand(),
                         packet_id: this.ajaxPacketId(),
                         link_id: link_val.linkId(),
                         name_list_tag: link_val.nameListTag(),
@@ -264,7 +270,7 @@ function PhwangAjaxClass(phwang_object_val) {
 
     this.setupSession = function (link_val, his_name_val, theme_data_val, play_color_val) {
         var output = JSON.stringify({
-                        command: "setup_session",
+                        command: this.setupSessionCommand(),
                         packet_id: this.ajaxPacketId(),
                         link_id: link_val.linkId(),
                         his_name: his_name_val,
