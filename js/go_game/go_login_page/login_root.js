@@ -30,4 +30,3 @@ function LoginRootObject() {
     this.abend_ = function (str1_val, str2_val) {this.phwangObject().ABEND(str1_val, str2_val);};
     this.init__();
 }
-
