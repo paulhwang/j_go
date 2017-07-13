@@ -8,6 +8,7 @@ function PhwangAjaxClass(phwang_object_val) {
 
     this.init__ = function (phwang_object_val) {
         this.thePhwangObject = phwang_object_val;
+        this.thePhwangAjaxProtocolObject = new PhwangAjaxProtocolClass();
         this.thePhwangAjaxStorageObject = new PhwangAjaxStorageObject(this);
         this.theTransmitQueueObject = new PhwangQueueClass(this.phwangObject());
         this.thePhwangAjaxEngineObject = new PhwangAjaxEngineClass(this);
@@ -269,7 +270,7 @@ function PhwangAjaxClass(phwang_object_val) {
             var ajax_object = link_val.phwangAjaxObject();
             if (ajax_object.pendingAjaxRequestCommandExist()) {
                 if (ajax_object.pendingAjaxRequestCommand() !== ajax_object.getLinkDataCommand()) {
-                    link_val.debug(true, "PhwangAjaxClassWatchDog", ajax_object.pendingAjaxRequestCommand() + " is pending");
+                    link_val.debug(false, "PhwangAjaxClassWatchDog", ajax_object.pendingAjaxRequestCommand() + " is pending");
                 }
                 return;
             }
@@ -293,7 +294,6 @@ function PhwangAjaxClass(phwang_object_val) {
     this.pendingAjaxRequestCommandExist = function () {return (this.pendingAjaxRequestCommand() !== "");};
     this.clearPendingAjaxRequestCommand = function () {this.thePendingAjaxRequestCommand = "";};
     this.setPendingAjaxRequestCommand = function (command_val) {if (this.pendingAjaxRequestCommand()) {this.abend("setPendingAjaxRequestCommand", "old=" + this.pendingAjaxRequestCommand() + "new=" + command_val);} this.thePendingAjaxRequestCommand = command_val;};
-
     this.setupLinkCommand = function () {return "setup_link";};
     this.getLinkDataCommand = function () {return "get_link_data";};
     this.getNameListCommand = function () {return "get_name_list";};
