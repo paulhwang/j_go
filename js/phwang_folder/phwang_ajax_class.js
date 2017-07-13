@@ -90,13 +90,13 @@ function PhwangAjaxClass(phwang_object_val) {
 
     this.getLinkDataResponse = function (input_val) {
         this.debug(false, "getLinkDataResponse", "input_val=" + input_val);
-        var data = JSON.parse(input_val);
-        if (data) {
-            if (data.pending_session_data) {
-                this.debug(true, "getLinkDataResponse", "pending_session_data=" + data.pending_session_data);
+        var input = JSON.parse(input_val);
+        if (input) {
+            if (input.pending_session_data) {
+                this.debug(true, "getLinkDataResponse", "pending_session_data=" + input.pending_session_data);
                 var i = 0;
                 while (i >= 0) {
-                    var session_id = data.pending_session_data[i];
+                    var session_id = input.pending_session_data[i];
                     var session = this.sessionMgrObject().searchSessionBySessionId(session_id);
                     if (session) {
                         this.tAjaxObject().getSessionData(session);
@@ -105,21 +105,20 @@ function PhwangAjaxClass(phwang_object_val) {
                 }
             }
 
-            if (data.c_data) {
-                var name_list_tag  = this.phwangObject().decodeNumber(data.c_data, 3);
+            if (input.pending_session_setup != "") {
+                var data_session_id_index = input.pending_session_setup.slice(1, 9);
+                var theme_name = input.pending_session_setup.slice(9, 11);
+                var theme_config = input.pending_session_setup.slice(11);
+                this.setupSessionReply(this, input.pending_session_setup, data_session_id_index);
+            }
+
+            if (input.data) {
+                var name_list_tag  = this.phwangObject().decodeNumber(input.data, 3);
                 if (name_list_tag > this.phwangLinkObject().nameListTag()) {
                     this.phwangLinkObject().setServerNameListTag(name_list_tag);
                 }
-                var c_data = data.c_data.slice(3);
+                var data = input.data.slice(3);
             }
-
-            if (data.c_pending_session_setup != "") {
-                var data_session_id_index = data.c_pending_session_setup.slice(1, 9);
-                var theme_name = data.c_pending_session_setup.slice(9, 11);
-                var theme_config = data.c_pending_session_setup.slice(11);
-                this.setupSessionReply(this, data.pending_session_setup, data_session_id_index);
-            }
-
         }
     };
 
