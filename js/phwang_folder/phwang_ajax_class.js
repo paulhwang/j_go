@@ -113,12 +113,13 @@ function PhwangAjaxClass(phwang_object_val) {
                 this.setupSessionReply(this, input.pending_session_setup, data_session_id_index);
             }
 
-            if (input.data) {
-                var name_list_tag  = this.phwangObject().decodeNumber(input.data, 3);
+            var data = input.data;
+            if (data) {
+                var name_list_tag  = this.phwangObject().decodeNumber(data, 3);
                 if (name_list_tag > this.phwangLinkObject().nameListTag()) {
                     this.phwangLinkObject().setServerNameListTag(name_list_tag);
                 }
-                var data = input.data.slice(3);
+                data = data.slice(3);
             }
         }
     };
