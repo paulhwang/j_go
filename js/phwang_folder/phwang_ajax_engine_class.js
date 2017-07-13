@@ -18,7 +18,7 @@ function PhwangAjaxEngineClass(phwang_ajax_object_val) {
         this.httpGetRequest().onreadystatechange = function() {
             if ((this0.httpGetRequest().readyState === 4) &&
                 (this0.httpGetRequest().status === 200)) {
-                this0.phwangAjaxObject().switchAjaxResponseData(this0.httpGetRequest().responseText);
+                this0.phwangAjaxObject().parseAndSwitchAjaxResponse(this0.httpGetRequest().responseText);
             }
         };
     };

@@ -52,30 +52,12 @@ function PhwangAjaxClass(phwang_object_val) {
         return false;
     };
 
-    this.pendingAjaxRequestCommand = function () {return this.thePendingAjaxRequestCommand;};
-    this.pendingAjaxRequestCommandExist = function () {return (this.pendingAjaxRequestCommand() !== "");};
-    this.clearPendingAjaxRequestCommand = function () {this.thePendingAjaxRequestCommand = "";};
-
-    this.setPendingAjaxRequestCommand = function (command_val) {
-        if (this.pendingAjaxRequestCommand()) {
-            this.abend("*****setPendingAjaxRequestCommand", "old=" + this.pendingAjaxRequestCommand() + "new=" + command_val);
-        }
-        this.thePendingAjaxRequestCommand = command_val;
-    };
-
-    this.checkPendingAjaxRequestCommand = function () {
-        if (this.pendingAjaxRequestCommand() !== "") {
-            this.logit("********************************", "__________________________________");
-            this.logit("checkPendingAjaxRequestCommand", this.pendingAjaxRequestCommand());
-        }
-    };
-
-    this.switchAjaxResponseData = function (json_response_val) {
+    this.parseAndSwitchAjaxResponse = function (json_response_val) {
         var response = JSON.parse(json_response_val);
 
         if (response.command !== this.getLinkDataCommand()) {
-            this.debug(true, "switchAjaxResponseData", this.pendingAjaxRequestCommand());
-            this.debug(true, "switchAjaxResponseData", "command=" + response.command + " data=" + response.data);
+            this.debug(true, "parseAndSwitchAjaxResponse", this.pendingAjaxRequestCommand());
+            this.debug(true, "parseAndSwitchAjaxResponse", "command=" + response.command + " data=" + response.data);
         }
 
         if (response.command !== this.pendingAjaxRequestCommand()) {
@@ -89,7 +71,7 @@ function PhwangAjaxClass(phwang_object_val) {
 
         if ((response.command !== "setup_link") &&
             (!this.phwangLinkObject().verifyLinkIdIndex(data.link_id))) {
-            this.abend("switchAjaxResponseData", "link_id=" + data.link_id);
+            this.abend("parseAndSwitchAjaxResponse", "link_id=" + data.link_id);
             return;
         }
 
@@ -100,10 +82,22 @@ function PhwangAjaxClass(phwang_object_val) {
             //this.resetKeepAliveTimer();
         }
         else {
-            this.abend("switchAjaxResponseData", "bad command=" + response.command);
+            this.abend("parseAndSwitchAjaxResponse", "bad command=" + response.command);
             return;
         }
     };
+
+    this.initSwitchTable = function () {
+        this.theSwitchTable = {
+            "setup_link": this.setupLinkResponse,
+            "get_link_data": this.getLinkDataResponse,
+            "get_name_list": this.getNameListResponse,
+            "setup_session": this.setupSessionResponse,
+            "setup_session_reply": this.setupSessionReplyResponse,
+            "get_session_data": this.getSessionDataResponse,
+            "put_session_data": this.putSessionDataResponse,
+        };
+     };
 
     this.setupLink = function (link_val) {
         var output = JSON.stringify({
@@ -322,17 +316,23 @@ function PhwangAjaxClass(phwang_object_val) {
         }
     };
 
-    this.initSwitchTable = function () {
-        this.theSwitchTable = {
-            "setup_link": this.setupLinkResponse,
-            "get_link_data": this.getLinkDataResponse,
-            "get_name_list": this.getNameListResponse,
-            "setup_session": this.setupSessionResponse,
-            "setup_session_reply": this.setupSessionReplyResponse,
-            "get_session_data": this.getSessionDataResponse,
-            "put_session_data": this.putSessionDataResponse,
-        };
-     };
+    this.pendingAjaxRequestCommand = function () {return this.thePendingAjaxRequestCommand;};
+    this.pendingAjaxRequestCommandExist = function () {return (this.pendingAjaxRequestCommand() !== "");};
+    this.clearPendingAjaxRequestCommand = function () {this.thePendingAjaxRequestCommand = "";};
+
+    this.setPendingAjaxRequestCommand = function (command_val) {
+        if (this.pendingAjaxRequestCommand()) {
+            this.abend("*****setPendingAjaxRequestCommand", "old=" + this.pendingAjaxRequestCommand() + "new=" + command_val);
+        }
+        this.thePendingAjaxRequestCommand = command_val;
+    };
+
+    this.checkPendingAjaxRequestCommand = function () {
+        if (this.pendingAjaxRequestCommand() !== "") {
+            this.logit("********************************", "__________________________________");
+            this.logit("checkPendingAjaxRequestCommand", this.pendingAjaxRequestCommand());
+        }
+    };
 
     this.setupLinkCommand = function () {return "setup_link";};
     this.getLinkDataCommand = function () {return "get_link_data";};
