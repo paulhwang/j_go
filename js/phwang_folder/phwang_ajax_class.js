@@ -4,7 +4,6 @@
   File name: tajax_object.js
 */
 
-
 function PhwangAjaxClass(phwang_object_val) {
     "use strict";
 
@@ -12,9 +11,8 @@ function PhwangAjaxClass(phwang_object_val) {
         this.thePhwangObject = phwang_object_val;
         this.thePhwangAjaxStorageObject = new PhwangAjaxStorageObject(this);
         this.theTransmitQueueObject = new PhwangQueueClass(this.phwangObject());
-        this.initSwitchTable();
         this.theHttpGetRequest = new XMLHttpRequest();
-        this.setupReceiveAjaxResponse();
+        this.initAjaxResponseReceivePath();
         this.thePendingAjaxRequestCommand = "";
         this.debug(true, "init__", "");
     };
@@ -31,7 +29,7 @@ function PhwangAjaxClass(phwang_object_val) {
             var ajax_object = link_val.phwangAjaxObject();
             if (ajax_object.pendingAjaxRequestCommandExist()) {
                 if (ajax_object.pendingAjaxRequestCommand() !== ajax_object.getLinkDataCommand()) {
-                    link_val.debug(true, "PhwangAjaxClassWatchDog", ajax_object.pendingAjaxRequestCommand());
+                    link_val.debug(true, "PhwangAjaxClassWatchDog", ajax_object.pendingAjaxRequestCommand() + " is pending");
                 }
                 return;
             }
@@ -55,14 +53,6 @@ function PhwangAjaxClass(phwang_object_val) {
         return false;
     };
 
-    this.linkUpdateInterval = function () {
-        return this.theLinkUpdateInterval;
-    };
-
-    this.setLinkUpdateInterval = function (val) {
-        this.theLinkUpdateInterval = val;
-    };
-
     this.pendingAjaxRequestCommand = function () {return this.thePendingAjaxRequestCommand;};
     this.pendingAjaxRequestCommandExist = function () {return (this.pendingAjaxRequestCommand() !== "");};
     this.clearPendingAjaxRequestCommand = function () {this.thePendingAjaxRequestCommand = "";};
@@ -81,7 +71,8 @@ function PhwangAjaxClass(phwang_object_val) {
         }
     };
 
-    this.setupReceiveAjaxResponse = function () {
+    this.initAjaxResponseReceivePath = function () {
+        this.initSwitchTable();
         var this0 = this;
         this.httpGetRequest().onreadystatechange = function() {
             if ((this0.httpGetRequest().readyState === 4) &&
@@ -159,8 +150,6 @@ function PhwangAjaxClass(phwang_object_val) {
         this.debug(false, "getLinkDataResponse", "input_val=" + input_val);
         var data = JSON.parse(input_val);
         if (data) {
-            this.setLinkUpdateInterval(data.interval);
-
             if (data.pending_session_data) {
                 this.debug(true, "getLinkDataResponse", "pending_session_data=" + data.pending_session_data);
                 var i = 0;
@@ -174,16 +163,10 @@ function PhwangAjaxClass(phwang_object_val) {
                 }
             }
 
-            if (data.pending_session_setup) {
-                this.debug(true, "getLinkDataResponse", "pending_session_setup=" + data.pending_session_setup);
-                //this.ajaxObject().setupSessionReply(this, data.pending_session_setup, null);
-            }
-
             if (data.c_data) {
                 var name_list_tag  = this.phwangObject().decodeNumber(data.c_data, 3);
                 if (name_list_tag > this.phwangLinkObject().nameListTag()) {
                     this.phwangLinkObject().setServerNameListTag(name_list_tag);
-                    //this.getNameList(this.phwangLinkObject());
                 }
                 var c_data = data.c_data.slice(3);
             }
