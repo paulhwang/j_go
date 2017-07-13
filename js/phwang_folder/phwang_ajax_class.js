@@ -313,7 +313,7 @@ function PhwangAjaxClass(phwang_object_val) {
             this.debug(true, "transmitAjaxRequest_", "output=" + output_val);
         }
         this.setPendingAjaxRequestCommand(output.command);
-        this.phwangAjaxEngineObject().transmitAjaxRequest_(output_val);
+        this.phwangAjaxEngineObject().sendAjaxRequest(output_val);
     };
 
     this.debug_ = function (debug_val, debug_val_, str1_val, str2_val) {

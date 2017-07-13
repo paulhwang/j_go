@@ -23,7 +23,7 @@ function PhwangAjaxEngineClass(phwang_ajax_object_val) {
         };
     };
 
-    this.transmitAjaxRequest_ = function (output_val) {
+    this.sendAjaxRequest = function (output_val) {
         this.httpGetRequest().open("GET", this.ajaxRoute(), true);
         this.httpGetRequest().setRequestHeader("X-Requested-With", "XMLHttpRequest");
         this.httpGetRequest().setRequestHeader("Content-Type", this.jsonContext());
@@ -50,4 +50,3 @@ function PhwangAjaxEngineClass(phwang_ajax_object_val) {
     this.incrementAjaxPacketId = function () {this.phwangAjaxObject().incrementAjaxPacketId();};
     this.init__(phwang_ajax_object_val);
 }
-
