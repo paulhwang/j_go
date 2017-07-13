@@ -24,12 +24,6 @@ function PhwangAjaxEngineClass(phwang_ajax_object_val) {
     };
 
     this.transmitAjaxRequest_ = function (output_val) {
-        //var output = JSON.parse(output_val);
-        //if (output.command !== this.getLinkDataCommand()) {
-        //    this.debug(true, "transmitAjaxRequest_", "output=" + output_val);
-        //}
-        //this.setPendingAjaxRequestCommand(output.command);
-
         this.httpGetRequest().open("GET", this.ajaxRoute(), true);
         this.httpGetRequest().setRequestHeader("X-Requested-With", "XMLHttpRequest");
         this.httpGetRequest().setRequestHeader("Content-Type", this.jsonContext());
@@ -47,6 +41,7 @@ function PhwangAjaxEngineClass(phwang_ajax_object_val) {
     this.switchTable = function () {return this.theSwitchTable;}
     this.objectName = function () {return "PhwangAjaxEngineClass";};
     this.phwangAjaxObject = function () {return this.thePhwangAjaxObject;};
+    this.phwangAjaxStorageObject = function () {return this.phwangAjaxObject().phwangAjaxStorageObject();};
     this.phwangObject = function () {return this.phwangAjaxObject().phwangObject();};
     this.debug = function(debug_val, str1_val, str2_val) {if (debug_val) {this.logit(str1_val, str2_val);}};
     this.logit = function(str1_val, str2_val) {return this.phwangObject().LOG_IT(this.objectName() + "." + str1_val, str2_val);};

@@ -11,9 +11,7 @@ function PhwangAjaxClass(phwang_object_val) {
         this.thePhwangAjaxStorageObject = new PhwangAjaxStorageObject(this);
         this.theTransmitQueueObject = new PhwangQueueClass(this.phwangObject());
         this.thePhwangAjaxEngineObject = new PhwangAjaxEngineClass(this);
-        this.theHttpGetRequest = new XMLHttpRequest();
         this.initSwitchTable();
-        this.initAjaxResponseReceivePath();
         this.thePendingAjaxRequestCommand = "";
         this.debug(true, "init__", "");
     };
@@ -70,16 +68,6 @@ function PhwangAjaxClass(phwang_object_val) {
             this.logit("********************************", "__________________________________");
             this.logit("checkPendingAjaxRequestCommand", this.pendingAjaxRequestCommand());
         }
-    };
-
-    this.initAjaxResponseReceivePath = function () {
-        var this0 = this;
-        this.httpGetRequest().onreadystatechange = function() {
-            if ((this0.httpGetRequest().readyState === 4) &&
-                (this0.httpGetRequest().status === 200)) {
-                this0.switchAjaxResponseData(this0.httpGetRequest().responseText);
-            }
-        };
     };
 
     this.switchAjaxResponseData = function (json_response_val) {
@@ -326,19 +314,7 @@ function PhwangAjaxClass(phwang_object_val) {
         }
         this.setPendingAjaxRequestCommand(output.command);
         this.phwangAjaxEngineObject().transmitAjaxRequest_(output_val);
-        return;
-        this.httpGetRequest().open("GET", this.ajaxRoute(), true);
-        this.httpGetRequest().setRequestHeader("X-Requested-With", "XMLHttpRequest");
-        this.httpGetRequest().setRequestHeader("Content-Type", this.jsonContext());
-        this.httpGetRequest().setRequestHeader("gorequest", output_val);
-        this.httpGetRequest().setRequestHeader("GOPACKETID", this.ajaxPacketId());
-        this.incrementAjaxPacketId();
-        this.httpGetRequest().send(null);
     };
-
-    this.ajaxRoute = function () {return "/django_go/go_ajax/";};
-    this.jsonContext = function () {return "application/json; charset=utf-8";}
-    this.plainTextContext = function () {return "text/plain; charset=utf-8";}
 
     this.debug_ = function (debug_val, debug_val_, str1_val, str2_val) {
         if (debug_val && debug_val_) {
@@ -365,7 +341,6 @@ function PhwangAjaxClass(phwang_object_val) {
     this.setupSessionReplyCommand = function () {return "setup_session_reply";};
     this.putSessionDataCommand = function () {return "put_session_data";};
     this.getSessionDataCommand = function () {return "get_session_data";};
-    this.httpGetRequest = function () {return this.theHttpGetRequest;};
     this.switchTable = function () {return this.theSwitchTable;}
     this.objectName = function () {return "PhwangAjaxClass";};
     this.phwangAjaxStorageObject = function () {return this.thePhwangAjaxStorageObject;};
