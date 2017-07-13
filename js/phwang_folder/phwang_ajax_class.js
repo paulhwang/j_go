@@ -1,7 +1,6 @@
 /*
   Copyrights reserved
   Written by Paul Hwang
-  File name: tajax_object.js
 */
 
 function PhwangAjaxClass(phwang_object_val) {
@@ -11,7 +10,9 @@ function PhwangAjaxClass(phwang_object_val) {
         this.thePhwangObject = phwang_object_val;
         this.thePhwangAjaxStorageObject = new PhwangAjaxStorageObject(this);
         this.theTransmitQueueObject = new PhwangQueueClass(this.phwangObject());
+        this.thePhwangAjaxEngineObject = new PhwangAjaxEngineClass(this);
         this.theHttpGetRequest = new XMLHttpRequest();
+        this.initSwitchTable();
         this.initAjaxResponseReceivePath();
         this.thePendingAjaxRequestCommand = "";
         this.debug(true, "init__", "");
@@ -72,7 +73,6 @@ function PhwangAjaxClass(phwang_object_val) {
     };
 
     this.initAjaxResponseReceivePath = function () {
-        this.initSwitchTable();
         var this0 = this;
         this.httpGetRequest().onreadystatechange = function() {
             if ((this0.httpGetRequest().readyState === 4) &&
@@ -381,4 +381,3 @@ function PhwangAjaxClass(phwang_object_val) {
     this.incrementAjaxPacketId = function () {this.phwangAjaxStorageObject().incrementAjaxPacketId();};
     this.init__(phwang_object_val);
 }
-
