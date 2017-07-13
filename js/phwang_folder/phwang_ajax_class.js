@@ -20,7 +20,7 @@ function PhwangAjaxClass(phwang_object_val) {
     this.parseAndSwitchAjaxResponse = function (json_response_val) {
         var response = JSON.parse(json_response_val);
 
-        if (response.command !== this.getLinkDataCommand()) {
+        if (response.command !== this.phwangAjaxProtocolObject().getLinkDataCommand()) {
             this.debug(true, "parseAndSwitchAjaxResponse", "command=" + response.command + " data=" + response.data);
         }
 
@@ -34,7 +34,7 @@ function PhwangAjaxClass(phwang_object_val) {
             return;
         }
 
-        if ((response.command !== this.setupLinkCommand()) && (!this.phwangLinkObject().verifyLinkIdIndex(data.link_id))) {
+        if ((response.command !== this.phwangAjaxProtocolObject().setupLinkCommand()) && (!this.phwangLinkObject().verifyLinkIdIndex(data.link_id))) {
             this.abend("parseAndSwitchAjaxResponse", "link_id=" + data.link_id);
             return;
         }
@@ -294,13 +294,6 @@ function PhwangAjaxClass(phwang_object_val) {
     this.pendingAjaxRequestCommandExist = function () {return (this.pendingAjaxRequestCommand() !== "");};
     this.clearPendingAjaxRequestCommand = function () {this.thePendingAjaxRequestCommand = "";};
     this.setPendingAjaxRequestCommand = function (command_val) {if (this.pendingAjaxRequestCommand()) {this.abend("setPendingAjaxRequestCommand", "old=" + this.pendingAjaxRequestCommand() + "new=" + command_val);} this.thePendingAjaxRequestCommand = command_val;};
-    this.setupLinkCommand = function () {return "setup_link";};
-    this.getLinkDataCommand = function () {return "get_link_data";};
-    this.getNameListCommand = function () {return "get_name_list";};
-    this.setupSessionCommand = function () {return "setup_session";};
-    this.setupSessionReplyCommand = function () {return "setup_session_reply";};
-    this.putSessionDataCommand = function () {return "put_session_data";};
-    this.getSessionDataCommand = function () {return "get_session_data";};
     this.switchTable = function () {return this.theSwitchTable;}
     this.objectName = function () {return "PhwangAjaxClass";};
     this.phwangAjaxProtocolObject = function () {return this.thePhwangAjaxProtocolObject;};
