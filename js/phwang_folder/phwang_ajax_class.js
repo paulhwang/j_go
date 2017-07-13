@@ -13,14 +13,14 @@ function PhwangAjaxClass(phwang_object_val) {
         this.thePhwangAjaxEngineObject = new PhwangAjaxEngineClass(this);
         this.initSwitchTable();
         this.thePendingAjaxRequestCommand = "";
-        this.debug(true, "init__", "");
+        this.debug(false, "init__", "");
     };
 
     this.parseAndSwitchAjaxResponse = function (json_response_val) {
         var response = JSON.parse(json_response_val);
 
         if (response.command !== this.getLinkDataCommand()) {
-            this.debug(true, "parseAndSwitchAjaxResponse", this.pendingAjaxRequestCommand());
+            this.debug(false, "parseAndSwitchAjaxResponse", this.pendingAjaxRequestCommand());
             this.debug(true, "parseAndSwitchAjaxResponse", "command=" + response.command + " data=" + response.data);
         }
 
