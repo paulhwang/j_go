@@ -113,13 +113,22 @@ function PhwangAjaxClass(phwang_object_val) {
                 this.setupSessionReply(this, input.pending_session_setup, data_session_id_index);
             }
 
-            var data = input.data;
-            if (data) {
-                var name_list_tag  = this.phwangObject().decodeNumber(data, 3);
-                if (name_list_tag > this.phwangLinkObject().nameListTag()) {
-                    this.phwangLinkObject().setServerNameListTag(name_list_tag);
+            if (input.data) {
+                var data = input.data;
+                while (data.length > 0) {
+                    if (data.charAt(0) === this.phwangAjaxProtocolObject().WEB_FABRIC_PROTOCOL_RESPOND_IS_GET_LINK_DATA_NAME_LIST()) {
+                        data = data.slice(1);
+                        var name_list_tag  = this.phwangObject().decodeNumber(data, this.phwangAjaxProtocolObject().WEB_FABRIC_PROTOCOL_NAME_LIST_TAG_SIZE());
+                        if (name_list_tag > this.phwangLinkObject().nameListTag()) {
+                            this.phwangLinkObject().setServerNameListTag(name_list_tag);
+                        }
+                        data = data.slice(this.phwangAjaxProtocolObject().WEB_FABRIC_PROTOCOL_NAME_LIST_TAG_SIZE());
+                    }
                 }
-                data = data.slice(3);
+
+                if (data.length !== 0) {
+                    this.abend("getLinkDataResponse", "length=" + data.length);
+                }
             }
         }
     };
