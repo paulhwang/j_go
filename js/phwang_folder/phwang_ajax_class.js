@@ -325,7 +325,8 @@ function PhwangAjaxClass(phwang_object_val) {
             this.debug(true, "transmitAjaxRequest_", "output=" + output_val);
         }
         this.setPendingAjaxRequestCommand(output.command);
-
+        this.phwangAjaxEngineObject().transmitAjaxRequest_(output_val);
+        return;
         this.httpGetRequest().open("GET", this.ajaxRoute(), true);
         this.httpGetRequest().setRequestHeader("X-Requested-With", "XMLHttpRequest");
         this.httpGetRequest().setRequestHeader("Content-Type", this.jsonContext());
@@ -368,6 +369,7 @@ function PhwangAjaxClass(phwang_object_val) {
     this.switchTable = function () {return this.theSwitchTable;}
     this.objectName = function () {return "PhwangAjaxClass";};
     this.phwangAjaxStorageObject = function () {return this.thePhwangAjaxStorageObject;};
+    this.phwangAjaxEngineObject = function () {return this.thePhwangAjaxEngineObject;};
     this.transmitQueueObject = function () {return this.theTransmitQueueObject;}
     this.phwangObject = function () {return this.thePhwangObject;};
     this.rootObject = function () {return this.phwangObject().rootObject();};
