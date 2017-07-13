@@ -5,12 +5,15 @@
 
 function PhwangAjaxEngineClass(phwang_ajax_object_val) {
     "use strict";
+    this.ajaxRoute = function () {return "/django_go/go_ajax/";};
+    this.jsonContext = function () {return "application/json; charset=utf-8";}
+    this.plainTextContext = function () {return "text/plain; charset=utf-8";}
 
     this.init__ = function (phwang_ajax_object_val) {
         this.thePhwangAjaxObject = phwang_ajax_object_val;
         this.theHttpGetRequest = new XMLHttpRequest();
         this.initAjaxResponseReceivePath();
-        this.debug(true, "init__", "");
+        this.debug(false, "init__", "");
     };
 
     this.initAjaxResponseReceivePath = function () {
@@ -33,12 +36,7 @@ function PhwangAjaxEngineClass(phwang_ajax_object_val) {
         this.httpGetRequest().send(null);
     };
 
-    this.ajaxRoute = function () {return "/django_go/go_ajax/";};
-    this.jsonContext = function () {return "application/json; charset=utf-8";}
-    this.plainTextContext = function () {return "text/plain; charset=utf-8";}
-
     this.httpGetRequest = function () {return this.theHttpGetRequest;};
-    this.switchTable = function () {return this.theSwitchTable;}
     this.objectName = function () {return "PhwangAjaxEngineClass";};
     this.phwangAjaxObject = function () {return this.thePhwangAjaxObject;};
     this.phwangAjaxStorageObject = function () {return this.phwangAjaxObject().phwangAjaxStorageObject();};
