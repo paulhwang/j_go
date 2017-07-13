@@ -12,11 +12,11 @@ function PhwangAjaxEngineClass(phwang_ajax_object_val) {
     this.init__ = function (phwang_ajax_object_val) {
         this.thePhwangAjaxObject = phwang_ajax_object_val;
         this.theHttpGetRequest = new XMLHttpRequest();
-        this.initAjaxResponseReceivePath();
+        this.startAjaxResponseProcess();
         this.debug(false, "init__", "");
     };
 
-    this.initAjaxResponseReceivePath = function () {
+    this.startAjaxResponseProcess = function () {
         var this0 = this;
         this.httpGetRequest().onreadystatechange = function() {
             if ((this0.httpGetRequest().readyState === 4) &&
@@ -31,14 +31,14 @@ function PhwangAjaxEngineClass(phwang_ajax_object_val) {
         this.httpGetRequest().setRequestHeader("X-Requested-With", "XMLHttpRequest");
         this.httpGetRequest().setRequestHeader("Content-Type", this.jsonContext());
         this.httpGetRequest().setRequestHeader("phwangajaxrequest", output_val);
-        this.httpGetRequest().setRequestHeader("phwangpacketid", this.ajaxPacketId());
+        this.httpGetRequest().setRequestHeader("phwangajaxpacketid", this.ajaxPacketId());
         this.incrementAjaxPacketId();
         this.httpGetRequest().send(null);
     };
 
-    this.httpGetRequest = function () {return this.theHttpGetRequest;};
     this.objectName = function () {return "PhwangAjaxEngineClass";};
     this.phwangAjaxObject = function () {return this.thePhwangAjaxObject;};
+    this.httpGetRequest = function () {return this.theHttpGetRequest;};
     this.phwangAjaxStorageObject = function () {return this.phwangAjaxObject().phwangAjaxStorageObject();};
     this.phwangObject = function () {return this.phwangAjaxObject().phwangObject();};
     this.debug = function(debug_val, str1_val, str2_val) {if (debug_val) {this.logit(str1_val, str2_val);}};

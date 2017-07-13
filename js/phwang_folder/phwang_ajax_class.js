@@ -81,7 +81,6 @@ function PhwangAjaxClass(phwang_object_val) {
         this.phwangPortObject().receiveSetupLinkResponse();
     };
 
-
     this.getLinkData = function (link_val) {
         var output = JSON.stringify({
                         command: this.getLinkDataCommand(),
@@ -170,7 +169,7 @@ function PhwangAjaxClass(phwang_object_val) {
         this.transmitAjaxRequest(output);
     };
 
-   this.setupSessionResponse = function (input_val) {
+    this.setupSessionResponse = function (input_val) {
         this.debug(true, "setupSessionResponse", "input_val=" + input_val);
         var data = JSON.parse(input_val);
         if (data) {
@@ -263,7 +262,6 @@ function PhwangAjaxClass(phwang_object_val) {
 
         this.transmitAjaxRequest_(output_val);
     };
-
 
     this.transmitAjaxRequest_ = function (output_val) {
         var output = JSON.parse(output_val);
