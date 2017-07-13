@@ -20,12 +20,12 @@ function PhwangAjaxClass(phwang_object_val) {
         var response = JSON.parse(json_response_val);
 
         if (response.command !== this.getLinkDataCommand()) {
-            this.debug(false, "parseAndSwitchAjaxResponse", this.pendingAjaxRequestCommand());
             this.debug(true, "parseAndSwitchAjaxResponse", "command=" + response.command + " data=" + response.data);
         }
 
         if (response.command !== this.pendingAjaxRequestCommand()) {
             this.abend("parseAndSwitchAjaxResponse", "commands not match: " + this.pendingAjaxRequestCommand() + ", " + response.command);
+            return;
         }
 
         var data = JSON.parse(response.data);
@@ -33,22 +33,19 @@ function PhwangAjaxClass(phwang_object_val) {
             return;
         }
 
-        if ((response.command !== "setup_link") &&
-            (!this.phwangLinkObject().verifyLinkIdIndex(data.link_id))) {
+        if ((response.command !== this.setupLinkCommand()) && (!this.phwangLinkObject().verifyLinkIdIndex(data.link_id))) {
             this.abend("parseAndSwitchAjaxResponse", "link_id=" + data.link_id);
             return;
         }
 
         var func = this.switchTable()[response.command];
-        if (func) {
-            this.clearPendingAjaxRequestCommand();
-            func.bind(this)(response.data);
-            //this.resetKeepAliveTimer();
-        }
-        else {
+        if (!func) {
             this.abend("parseAndSwitchAjaxResponse", "bad command=" + response.command);
             return;
         }
+
+        this.clearPendingAjaxRequestCommand();
+        func.bind(this)(response.data);
     };
 
     this.initSwitchTable = function () {
@@ -256,13 +253,13 @@ function PhwangAjaxClass(phwang_object_val) {
             this.transmitQueueObject().enqueueData(output_val);
             return;
         }
-        this.transmitAjaxRequest_(output_val);
+        this.xmtAjaxRequest(output_val);
     };
 
-    this.transmitAjaxRequest_ = function (output_val) {
+    this.xmtAjaxRequest = function (output_val) {
         var output = JSON.parse(output_val);
         if (output.command !== this.getLinkDataCommand()) {
-            this.debug(true, "transmitAjaxRequest_", "output=" + output_val);
+            this.debug(true, "xmtAjaxRequest", "output=" + output_val);
         }
         this.setPendingAjaxRequestCommand(output.command);
         this.phwangAjaxEngineObject().sendAjaxRequest(output_val);
@@ -280,7 +277,7 @@ function PhwangAjaxClass(phwang_object_val) {
 
             var output = ajax_object.transmitQueueObject().dequeueData();
             if (output) {
-                ajax_object.transmitAjaxRequest_(output);
+                ajax_object.xmtAjaxRequest(output);
                 return;
             }
 
