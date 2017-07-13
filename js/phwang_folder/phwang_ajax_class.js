@@ -25,7 +25,7 @@ function PhwangAjaxClass(phwang_object_val) {
         }
 
         if (response.command !== this.pendingAjaxRequestCommand()) {
-            this.abend("switchAjaxResponseData", "commands not match: " + this.pendingAjaxRequestCommand() + ", " + response.command);
+            this.abend("parseAndSwitchAjaxResponse", "commands not match: " + this.pendingAjaxRequestCommand() + ", " + response.command);
         }
 
         var data = JSON.parse(response.data);
