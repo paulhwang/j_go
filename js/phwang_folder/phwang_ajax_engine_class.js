@@ -31,7 +31,7 @@ function PhwangAjaxEngineClass(phwang_ajax_object_val) {
         this.httpGetRequest().setRequestHeader("X-Requested-With", "XMLHttpRequest");
         this.httpGetRequest().setRequestHeader("Content-Type", this.jsonContext());
         this.httpGetRequest().setRequestHeader("gorequest", output_val);
-        this.httpGetRequest().setRequestHeader("GOPACKETID", this.ajaxPacketId());
+        this.httpGetRequest().setRequestHeader("phwangpacketid", this.ajaxPacketId());
         this.incrementAjaxPacketId();
         this.httpGetRequest().send(null);
     };
