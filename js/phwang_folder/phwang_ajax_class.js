@@ -61,7 +61,7 @@ function PhwangAjaxClass(phwang_object_val) {
             "get_session_data": this.getSessionDataResponse,
             "put_session_data": this.putSessionDataResponse,
         };
-     };
+    };
 
     this.setupLink = function (link_val) {
         var output = JSON.stringify({
@@ -205,8 +205,6 @@ function PhwangAjaxClass(phwang_object_val) {
     };
 
     this.putSessionData = function (session_val, data_val) {
-        this.checkPendingAjaxRequestCommand();
-
         var output = JSON.stringify({
                         command: this.putSessionDataCommand(),
                         packet_id: this.ajaxPacketId(),
@@ -255,11 +253,9 @@ function PhwangAjaxClass(phwang_object_val) {
 
     this.transmitAjaxRequest = function (output_val) {
         if (this.pendingAjaxRequestCommandExist()) {
-            this.logit("============================transmitAjaxRequest", "pendingAjaxRequestCommand=" + this.pendingAjaxRequestCommand());
             this.transmitQueueObject().enqueueData(output_val);
             return;
         }
-
         this.transmitAjaxRequest_(output_val);
     };
 
@@ -300,20 +296,7 @@ function PhwangAjaxClass(phwang_object_val) {
     this.pendingAjaxRequestCommand = function () {return this.thePendingAjaxRequestCommand;};
     this.pendingAjaxRequestCommandExist = function () {return (this.pendingAjaxRequestCommand() !== "");};
     this.clearPendingAjaxRequestCommand = function () {this.thePendingAjaxRequestCommand = "";};
-
-    this.setPendingAjaxRequestCommand = function (command_val) {
-        if (this.pendingAjaxRequestCommand()) {
-            this.abend("*****setPendingAjaxRequestCommand", "old=" + this.pendingAjaxRequestCommand() + "new=" + command_val);
-        }
-        this.thePendingAjaxRequestCommand = command_val;
-    };
-
-    this.checkPendingAjaxRequestCommand = function () {
-        if (this.pendingAjaxRequestCommand() !== "") {
-            this.logit("********************************", "__________________________________");
-            this.logit("checkPendingAjaxRequestCommand", this.pendingAjaxRequestCommand());
-        }
-    };
+    this.setPendingAjaxRequestCommand = function (command_val) {if (this.pendingAjaxRequestCommand()) {this.abend("setPendingAjaxRequestCommand", "old=" + this.pendingAjaxRequestCommand() + "new=" + command_val);} this.thePendingAjaxRequestCommand = command_val;};
 
     this.setupLinkCommand = function () {return "setup_link";};
     this.getLinkDataCommand = function () {return "get_link_data";};
