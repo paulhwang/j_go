@@ -124,6 +124,16 @@ function PhwangAjaxClass(phwang_object_val) {
                         }
                         data = data.slice(this.phwangAjaxProtocolObject().WEB_FABRIC_PROTOCOL_NAME_LIST_TAG_SIZE());
                     }
+
+                    if (data.charAt(0) === this.phwangAjaxProtocolObject().WEB_FABRIC_PROTOCOL_RESPOND_IS_GET_LINK_DATA_PENDING_SESSION()) {
+                        var data_session_id_index = data.slice(1, 9);
+                        var theme_name = data.slice(9, 11);
+                        var theme_config = data.slice(11);
+                        this.setupSessionReply(this, data, data_session_id_index);
+                    }
+
+                    if (data.charAt(0) === this.phwangAjaxProtocolObject().WEB_FABRIC_PROTOCOL_RESPOND_IS_GET_LINK_DATA_PENDING_DATA()) {
+                    }
                 }
 
                 if (data.length !== 0) {
