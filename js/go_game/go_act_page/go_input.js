@@ -119,7 +119,7 @@ function GoPlayInputObject(root_object_val) {
             return;
         }
 
-        this.gameObject().enterGameFromUi(x, y);
+        this.gameObject().processNewMove(x, y);
     };
 
     this.boardSize = function () {return this.configStorageObject().boardSize();};

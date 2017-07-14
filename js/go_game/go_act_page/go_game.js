@@ -22,8 +22,8 @@ function GoPlayGameObject(root_object_val) {
         this.debug(false, "init__", "");
     };
 
-    this.enterGameFromUi = function (x_val, y_val) {
-        this.debug(false, "enterGameFromUi", "(" + x_val + "," + y_val + ")");
+    this.processNewMove = function (x_val, y_val) {
+        this.debug(false, "processNewMove", "(" + x_val + "," + y_val + ")");
 
         if (this.gameIsOver()) {
             var move = new GoMoveObject(null, x_val, y_val, GO.THE_MARK_DEAD_STONE_DIFF, this.totalMoves(), this.containerObject());
