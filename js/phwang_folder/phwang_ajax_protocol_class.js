@@ -21,4 +21,5 @@ function PhwangAjaxProtocolClass() {
 
     this.WEB_FABRIC_PROTOCOL_LINK_ID_SIZE = function () {return 8;}
     this.WEB_FABRIC_PROTOCOL_SESSION_ID_SIZE = function () {return 8;}
+    this.WEB_FABRIC_PROTOCOL_LINK_SESSION_ID_SIZE = function () {return this.WEB_FABRIC_PROTOCOL_LINK_ID_SIZE() + this.WEB_FABRIC_PROTOCOL_SESSION_ID_SIZE();}
 }

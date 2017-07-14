@@ -106,14 +106,14 @@ function PhwangAjaxClass(phwang_object_val) {
                     i -= 1;
                 }
             }
-
+/*
             if (input.pending_session_setup != "") {
                 var data_session_id_index = input.pending_session_setup.slice(1, 9);
                 var theme_name = input.pending_session_setup.slice(9, 11);
                 var theme_config = input.pending_session_setup.slice(11);
                 this.setupSessionReply(this, input.pending_session_setup, data_session_id_index);
             }
-
+*/
             if (input.data) {
                 var data = input.data;
                 while (data.length > 0) {
@@ -134,9 +134,10 @@ function PhwangAjaxClass(phwang_object_val) {
                     }
 
                     if (data.charAt(0) === this.phwangAjaxProtocolObject().WEB_FABRIC_PROTOCOL_RESPOND_IS_GET_LINK_DATA_PENDING_DATA()) {
-                        var link_session_id = data.slice(1, this.phwangAjaxProtocolObject().WEB_FABRIC_PROTOCOL_LINK_SESSION_ID_SIZE + 1);
+                        var link_session_id = data.slice(1, this.phwangAjaxProtocolObject().WEB_FABRIC_PROTOCOL_LINK_SESSION_ID_SIZE() + 1);
+                        this.debug(true, "getLinkDataResponse", "link_session_id=" + link_session_id);
                         this.pendingSessionDataQueueObject().enqueueData(link_session_id);
-                        data = data.slice(this.phwangAjaxProtocolObject().WEB_FABRIC_PROTOCOL_LINK_SESSION_ID_SIZE + 1);
+                        data = data.slice(this.phwangAjaxProtocolObject().WEB_FABRIC_PROTOCOL_LINK_SESSION_ID_SIZE() + 1);
                     }
                 }
 
@@ -245,27 +246,17 @@ function PhwangAjaxClass(phwang_object_val) {
         if (data) {
             var session = this.phwangLinkObject().getSession(data.session_id);
             if (session) {
-                this.getSessionData(session);
+                //this.getSessionData(session);
             }
         }
     };
 
-    this.getSessionData = function (session_val) {
+    this.getSessionData = function (link_session_id_val) {
         var output = JSON.stringify({
                         command: this.phwangAjaxProtocolObject().GET_SESSION_DATA_COMMAND(),
                         packet_id: this.ajaxPacketId(),
-                        link_id: session_val.phwangLinkObject().linkId(),
-                        session_id: session_val.sessionId(),
-                        });
-        this.debug(false, "getSessionData", "output=" + output);
-        this.transmitAjaxRequest(output);
-    };
-
-    this.getSessionData1 = function (link_session_id_val) {
-        var output = JSON.stringify({
-                        command: this.phwangAjaxProtocolObject().GET_SESSION_DATA_COMMAND(),
-                        packet_id: this.ajaxPacketId(),
-                        link_session_id: link_session_id_val,
+                        link_id: link_session_id_val.slice(0, 8),
+                        session_id: link_session_id_val.slice(8),
                         });
         this.debug(false, "getSessionData", "output=" + output);
         this.transmitAjaxRequest(output);
@@ -317,7 +308,7 @@ function PhwangAjaxClass(phwang_object_val) {
 
             var link_session_id = ajax_object.pendingSessionDataQueueObject().dequeueData();
             if (link_session_id) {
-                this.getSessionData1(link_session_id);
+                ajax_object.getSessionData(link_session_id);
                 return;
             }
 
