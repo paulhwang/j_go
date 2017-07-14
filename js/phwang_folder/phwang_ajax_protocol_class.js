@@ -16,5 +16,9 @@ function PhwangAjaxProtocolClass() {
     this.WEB_FABRIC_PROTOCOL_RESPOND_IS_GET_LINK_DATA_PENDING_SESSION = function () {return 'S';}
     this.WEB_FABRIC_PROTOCOL_RESPOND_IS_GET_LINK_DATA_PENDING_DATA = function () {return 'D';}
     this.WEB_FABRIC_PROTOCOL_RESPOND_IS_GET_LINK_DATA_NAME_LIST = function () {return 'N';}
+
     this.WEB_FABRIC_PROTOCOL_NAME_LIST_TAG_SIZE = function () {return 3;}
+
+    this.WEB_FABRIC_PROTOCOL_LINK_ID_SIZE = function () {return 8;}
+    this.WEB_FABRIC_PROTOCOL_SESSION_ID_SIZE = function () {return 8;}
 }
