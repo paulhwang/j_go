@@ -4,11 +4,11 @@
  * File name: go_move.js
  */
 
-function GoMoveObject(str_val, x_val, y_val, color_val, turn_val, container_val) {
+function GoMoveObject(str_val, x_val, y_val, color_val, turn_val, root_object_val) {
     "use strict";
 
-    this.init__ = function (str_val, x_val, y_val, color_val, container_val) {
-        this.theContainerObject = container_val;
+    this.init__ = function (str_val, x_val, y_val, color_val, root_object_val) {
+        this.theRootObject = root_object_val;
 
         if (!str_val) {
             this.theX = x_val;
@@ -18,7 +18,7 @@ function GoMoveObject(str_val, x_val, y_val, color_val, turn_val, container_val)
         } else {
             this.moveObjectDecode(str_val);
         }
-        this.debug(false, "init__", "(" + this.xX() + "," + this.yY() + ") color=" + this.myColor() + " turn=" + this.turnIndex());
+        this.debug(true, "init__", "(" + this.xX() + "," + this.yY() + ") color=" + this.myColor() + " turn=" + this.turnIndex());
     };
 
     this.encodeMove = function () {
@@ -59,7 +59,7 @@ function GoMoveObject(str_val, x_val, y_val, color_val, turn_val, container_val)
     };
 
     this.objectName = function () {return "GoMoveObject";};
-    this.containerObject = function () {return this.theContainerObject;};
+    this.rootObject = function () {return this.theRootObject;};
     this.xX = function () {return this.theX;};
     this.yY = function () {return this.theY;};
     this.myColor = function () {return this.theMyColor;};
@@ -67,5 +67,5 @@ function GoMoveObject(str_val, x_val, y_val, color_val, turn_val, container_val)
     this.debug = function (debug_val, str1_val, str2_val) {if (debug_val) {this.logit(str1_val, str2_val);}};
     this.logit = function (str1_val, str2_val) {this.rootObject().logit_(this.objectName() + "." + str1_val, str2_val);};
     this.abend = function (str1_val, str2_val) {this.rootObject().abend_(this.objectName() + "." + str1_val, str2_val);};
-    this.init__(str_val, x_val, y_val, color_val, container_val);
+    this.init__(str_val, x_val, y_val, color_val, root_object_val);
 }
