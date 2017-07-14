@@ -255,8 +255,8 @@ function PhwangAjaxClass(phwang_object_val) {
         var output = JSON.stringify({
                         command: this.phwangAjaxProtocolObject().GET_SESSION_DATA_COMMAND(),
                         packet_id: this.ajaxPacketId(),
-                        link_id: link_session_id_val.slice(0, 8),
-                        session_id: link_session_id_val.slice(8),
+                        link_id: link_session_id_val.slice(0, this.phwangAjaxProtocolObject().WEB_FABRIC_PROTOCOL_LINK_ID_SIZE()),
+                        session_id: link_session_id_val.slice(this.phwangAjaxProtocolObject().WEB_FABRIC_PROTOCOL_LINK_ID_SIZE()),
                         });
         this.debug(false, "getSessionData", "output=" + output);
         this.transmitAjaxRequest(output);
