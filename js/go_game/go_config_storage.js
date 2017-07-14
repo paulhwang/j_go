@@ -27,6 +27,14 @@ function GoConfigStorageObject(root_val) {
         return this.rootObject().phwangObject();
     };
 
+    this.configInputData = function () {
+        return this.storage().config_input_data;
+    };
+
+    this.setConfigInputData = function (val) {
+        this.storage().config_input_data = val;
+    };
+
     this.boardSize = function () {
         return Number(this.storage().board_size);
     };
