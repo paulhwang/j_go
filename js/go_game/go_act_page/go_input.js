@@ -10,63 +10,7 @@ function GoPlayInputObject(root_object_val) {
         this.theRootObject = root_object_val;
         this.theLastMouseX = 9;
         this.theLastMouseY = 9;
-        this.debug(true, "init__", "");
-    };
-
-    this.objectName = function () {
-        return "GoPlayInputObject";
-    };
-
-    this.rootObject = function () {
-        return this.theRootObject;
-    };
-
-    this.configStorageObject = function () {
-        return this.rootObject().configStorageObject();
-    };
-
-    this.htmlObject = function () {
-        return this.rootObject().htmlObject();
-    };
-
-    this.displayObject = function () {
-        return this.rootObject().displayObject();
-    };
-
-    this.gameObject = function () {
-        return this.rootObject().gameObject();
-    };
-
-    this.boardSize = function () {
-        return this.configStorageObject().boardSize();
-    };
-
-    this.canvasElement = function () {
-        return this.htmlObject().canvasElement();
-    };
-
-    this.getGridLength = function () {
-        return this.htmlObject().getGridLength();
-    };
-
-    this.getArrowUnitLength = function () {
-        return this.htmlObject().getArrowUnitLength();
-    };
-
-    this.lastMouseX = function () {
-        return this.theLastMouseX;
-    };
-
-    this.setLastMouseX = function (val) {
-        this.theLastMouseX = val;
-    };
-
-    this.lastMouseY = function () {
-        return this.theLastMouseY;
-    };
-
-    this.setLastMouseY = function (val) {
-        this.theLastMouseY = val;
+        this.debug(false, "init__", "");
     };
 
     this.uiMouseMove = function (event_x, event_y) {
@@ -173,7 +117,7 @@ function GoPlayInputObject(root_object_val) {
             return;
         }
 
-        this.debug(true, "uiClick", "(" + x + "," + y + ")");
+        this.debug(false, "uiClick", "(" + x + "," + y + ")");
 
         if (!this.gameObject().isMyTurn()) {
             this.debug(true, "uiClick", "not my turn");
@@ -183,19 +127,22 @@ function GoPlayInputObject(root_object_val) {
         this.gameObject().enterGameFromUi(x, y);
     };
 
-    this.debug = function (debug_val, str1_val, str2_val) {
-        if (debug_val) {
-            this.logit(str1_val, str2_val);
-        }
-    };
-
-    this.logit = function (str1_val, str2_val) {
-        this.rootObject().logit_(this.objectName() + "." + str1_val, str2_val);
-    };
-
-    this.abend = function (str1_val, str2_val) {
-        this.rootObject().abend_(this.objectName() + "." + str1_val, str2_val);
-    };
-
+    this.boardSize = function () {return this.configStorageObject().boardSize();};
+    this.canvasElement = function () {return this.htmlObject().canvasElement();};
+    this.getGridLength = function () {return this.htmlObject().getGridLength();};
+    this.getArrowUnitLength = function () {return this.htmlObject().getArrowUnitLength();};
+    this.lastMouseX = function () {return this.theLastMouseX;};
+    this.setLastMouseX = function (val) {this.theLastMouseX = val;};
+    this.lastMouseY = function () {return this.theLastMouseY;};
+    this.setLastMouseY = function (val) {this.theLastMouseY = val;};
+    this.objectName = function () {return "GoPlayInputObject";};
+    this.rootObject = function () {return this.theRootObject;};
+    this.configStorageObject = function () {return this.rootObject().configStorageObject();};
+    this.htmlObject = function () {return this.rootObject().htmlObject();};
+    this.displayObject = function () {return this.rootObject().displayObject();};
+    this.gameObject = function () {return this.rootObject().gameObject();};
+    this.debug = function (debug_val, str1_val, str2_val) {if (debug_val) {this.logit(str1_val, str2_val);}};
+    this.logit = function (str1_val, str2_val) {this.rootObject().logit_(this.objectName() + "." + str1_val, str2_val);};
+    this.abend = function (str1_val, str2_val) {this.rootObject().abend_(this.objectName() + "." + str1_val, str2_val);};
     this.init__(root_object_val);
 }

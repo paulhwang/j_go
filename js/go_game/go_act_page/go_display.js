@@ -10,7 +10,7 @@ function GoPlayDisplayObject(root_object_val) {
         this.theRootObject = root_object_val;
         this.drawArrows();
         this.drawBoard();
-        this.debug(true, "init__", "");
+        this.debug(false, "init__", "");
     };
 
     this.objectName = function () {

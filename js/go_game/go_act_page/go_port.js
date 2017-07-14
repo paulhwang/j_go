@@ -16,7 +16,7 @@ function GoPlayPortObject(root_val) {
 
     this.init__ = function (root_val) {
         this.theRootObject = root_val;
-        this.debug(true, "init__", "");
+        this.debug(false, "init__", "");
     };
 
     this.objectName = function () {
@@ -67,7 +67,7 @@ function GoPlayPortObject(root_val) {
     };
 
     this.receiveData = function (c_data_val) {
-        this.debug(true, "receiveData", "c_data_val=" + c_data_val);
+        this.debug(false, "receiveData", "c_data_val=" + c_data_val);
         this.boardObject().decodeBoard(c_data_val);
         this.displayObject().drawBoard();
         return;

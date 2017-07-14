@@ -19,7 +19,7 @@ function GoPlayGameObject(root_object_val) {
         this.theTotalMoves = 0;
         this.theNextColor = GO.BLACK_STONE();
         this.theGameIsOver = false;
-        this.debug(true, "init__", "");
+        this.debug(false, "init__", "");
     };
 
     this.objectName = function () {
