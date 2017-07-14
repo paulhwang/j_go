@@ -94,18 +94,6 @@ function PhwangAjaxClass(phwang_object_val) {
         this.debug(false, "getLinkDataResponse", "input_val=" + input_val);
         var input = JSON.parse(input_val);
         if (input) {
-            if (input.pending_session_data) {
-                this.debug(true, "getLinkDataResponse", "pending_session_data=" + input.pending_session_data);
-                var i = 0;
-                while (i >= 0) {
-                    var session_id = input.pending_session_data[i];
-                    var session = this.sessionMgrObject().searchSessionBySessionId(session_id);
-                    if (session) {
-                        this.tAjaxObject().getSessionData(session);
-                    }
-                    i -= 1;
-                }
-            }
 /*
             if (input.pending_session_setup != "") {
                 var data_session_id_index = input.pending_session_setup.slice(1, 9);
@@ -127,10 +115,16 @@ function PhwangAjaxClass(phwang_object_val) {
                     }
 
                     if (data.charAt(0) === this.phwangAjaxProtocolObject().WEB_FABRIC_PROTOCOL_RESPOND_IS_GET_LINK_DATA_PENDING_SESSION()) {
-                        var data_session_id_index = data.slice(1, 9);
-                        var theme_name = data.slice(9, 11);
-                        var theme_config = data.slice(11);
-                        this.setupSessionReply(this, data, data_session_id_index);
+                        var session_id = data.slice(1, this.phwangAjaxProtocolObject().WEB_FABRIC_PROTOCOL_SESSION_ID_SIZE() + 1);
+                        this.debug(true, "getLinkDataResponse", "session_id=" + session_id);
+                        data = data.slice(1 + this.phwangAjaxProtocolObject().WEB_FABRIC_PROTOCOL_SESSION_ID_SIZE());
+                        var theme_name = data.slice(0, 2);
+                        this.debug(true, "getLinkDataResponse", "theme_name=" + theme_name);
+                        data = data.slice(2);
+                        var theme_config = data.slice(0, 6);
+                        data = data.slice(6);
+                        this.debug(true, "getLinkDataResponse", "theme_config=" + theme_config);
+                        this.setupSessionReply(this.phwangLinkObject(), data, session_id);
                     }
 
                     if (data.charAt(0) === this.phwangAjaxProtocolObject().WEB_FABRIC_PROTOCOL_RESPOND_IS_GET_LINK_DATA_PENDING_DATA()) {
@@ -201,16 +195,16 @@ function PhwangAjaxClass(phwang_object_val) {
         }
     };
 
-    this.setupSessionReply = function (link_val, data_val, session_id_index_val) {
-        var data = JSON.parse(data_val);
+    this.setupSessionReply = function (link_val, data_val, session_id_val) {
+        //var data = JSON.parse(data_val);
         var output = JSON.stringify({
                         command: this.phwangAjaxProtocolObject().SETUP_SESSION_REPLY_COMMAND(),
                         packet_id: this.ajaxPacketId(),
-                        my_name: link_val.myName(),
+                        //my_name: link_val.myName(),
                         link_id: link_val.linkId(),
                         accept: "yes",
-                        topic_data: data.topic_data,
-                        session_id: session_id_index_val,
+                        //topic_data: data.topic_data,
+                        session_id: session_id_val,
                         });
         this.debug(true, "setupSessionReply", "output=" + output);
         this.transmitAjaxRequest(output);
@@ -220,9 +214,9 @@ function PhwangAjaxClass(phwang_object_val) {
         this.debug(true, "setupSessionReplyResponse", "data=" + json_data_val);
         var data = JSON.parse(json_data_val);
         if (data) {
-            this.phwangSessionStorageObject().setSessionId(data.session_id.slice(8));
-            this.debug(true, "setupSessionReplyResponse", "sessionId=" + this.sessionStorageObject().sessionId());
-            this.phwangPortObject().receiveSetupSessionPeplyResponse();
+            this.phwangSessionObject().setSessionId(data.session_id.slice(8));
+            this.debug(true, "setupSessionReplyResponse", "sessionId=" + this.phwangSessionObject().sessionId());
+            this.phwangPortObject().receiveSetupSessionReplyResponse();
         }
     };
 
