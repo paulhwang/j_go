@@ -51,7 +51,7 @@ function GoPlayGameObject(root_object_val) {
     };
 
     this.playBothSides = function () {
-        this.debug(true, "playBothSides", "myName=" + this.phwangLinkObject().myName() + " hisName=" + this.phwangSessionObject().hisName());
+        this.debug(false, "playBothSides", "myName=" + this.phwangLinkObject().myName() + " hisName=" + this.phwangSessionObject().hisName());
         return (this.phwangLinkObject().myName() === this.phwangSessionObject().hisName());
     };
 
