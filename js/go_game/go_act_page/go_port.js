@@ -6,6 +6,7 @@
 
 function GoPlayPortObject(root_val) {
     "use strict";
+    this.GO_PROTOCOL_MOVE_COMMAND = "M";
     this.GO_PROTOCOL_CODE_SIZE = 7;
     this.GO_PROTOCOL_CODE_PROPOSE = "Propose";
     this.GO_PROTOCOL_CODE_ACCEPT = "Accept ";
@@ -20,7 +21,7 @@ function GoPlayPortObject(root_val) {
     };
 
     this.transmitMoveData = function (move_val) {
-        var data = this.GO_PROTOCOL_CODE_MOVE_DATA + move_val.encodeMove();
+        var data = this.GO_PROTOCOL_MOVE_COMMAND + move_val.encodeMove();
         this.transmitData(data);
     };
 
