@@ -13,62 +13,6 @@ function GoPlayDisplayObject(root_object_val) {
         this.debug(false, "init__", "");
     };
 
-    this.objectName = function () {
-        return "GoPlayDisplayObject";
-    };
-
-    this.rootObject = function () {
-        return this.theRootObject;
-    };
-
-    this.configStorageObject = function () {
-        return this.rootObject().configStorageObject();
-    };
-
-    this.htmlObject = function () {
-        return this.rootObject().htmlObject();
-    };
-
-    this.inputObject = function () {
-        return this.rootObject().inputObject();
-    };
-
-    this.boardObject = function () {
-        return this.rootObject().boardObject();
-    };
-
-    this.gameObject = function () {
-        return this.rootObject().gameObject();
-    };
-
-    this.boardSize = function () {
-        return this.configStorageObject().boardSize();
-    };
-
-    this.canvasElement = function () {
-        return this.htmlObject().canvasElement();
-    };
-
-    this.canvasContext = function () {
-        return this.htmlObject().canvasContext();
-    };
-
-    this.blackScoreElement = function () {
-        return this.htmlObject().blackScoreElement();
-    };
-
-    this.whiteScoreElement = function () {
-        return this.htmlObject().whiteScoreElement();
-    };
-
-    this.getGridLength = function () {
-        return this.htmlObject().getGridLength();
-    };
-
-    this.getArrowUnitLength = function () {
-        return this.htmlObject().getArrowUnitLength();
-    };
-
     this.drawBoard = function () {
         var arrow_color = "black";
         var grid_len = this.getGridLength();
@@ -311,19 +255,22 @@ function GoPlayDisplayObject(root_object_val) {
         this.whiteScoreElement().textContent = "White: " + this.boardObject().whiteCapturedStones();
     };
 
-    this.debug = function (debug_val, str1_val, str2_val) {
-        if (debug_val) {
-            this.logit(str1_val, str2_val);
-        }
-    };
-
-    this.logit = function (str1_val, str2_val) {
-        this.rootObject().logit_(this.objectName() + "." + str1_val, str2_val);
-    };
-
-    this.abend = function (str1_val, str2_val) {
-        this.rootObject().abend_(this.objectName() + "." + str1_val, str2_val);
-    };
-
+    this.boardSize = function () {return this.configStorageObject().boardSize();};
+    this.canvasElement = function () {return this.htmlObject().canvasElement();};
+    this.canvasContext = function () {return this.htmlObject().canvasContext();};
+    this.blackScoreElement = function () {return this.htmlObject().blackScoreElement();};
+    this.whiteScoreElement = function () {return this.htmlObject().whiteScoreElement();};
+    this.getGridLength = function () {return this.htmlObject().getGridLength();};
+    this.getArrowUnitLength = function () {return this.htmlObject().getArrowUnitLength();};
+    this.objectName = function () {return "GoPlayDisplayObject";};
+    this.rootObject = function () {return this.theRootObject;};
+    this.configStorageObject = function () {return this.rootObject().configStorageObject();};
+    this.htmlObject = function () {return this.rootObject().htmlObject();};
+    this.inputObject = function () {return this.rootObject().inputObject();};
+    this.boardObject = function () {return this.rootObject().boardObject();};
+    this.gameObject = function () {return this.rootObject().gameObject();};
+    this.debug = function (debug_val, str1_val, str2_val) {if (debug_val) {this.logit(str1_val, str2_val);}};
+    this.logit = function (str1_val, str2_val) {this.rootObject().logit_(this.objectName() + "." + str1_val, str2_val);};
+    this.abend = function (str1_val, str2_val) {this.rootObject().abend_(this.objectName() + "." + str1_val, str2_val);};
     this.init__(root_object_val);
 }
