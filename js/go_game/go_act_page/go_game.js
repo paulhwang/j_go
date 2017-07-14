@@ -68,16 +68,6 @@ function GoPlayGameObject(root_object_val) {
         }
     };
 
-    this.processDoubleBackwardMoveFromUi = function () {this.portObject().transmitSpecialMoveData(GO.DOUBLE_BACKWARD_MOVE());};
-    this.processBackwardMoveFromUi = function () {this.portObject().transmitSpecialMoveData(GO.BACKWARD_MOVE());};
-    this.processForwardMoveFromUi = function () {this.portObject().transmitSpecialMoveData(GO.FORWARD_MOVE());};
-    this.processDoubleForwardMoveFromUi = function () {this.portObject().transmitSpecialMoveData(GO.DOUBLE_FORWARD_MOVE());};
-    this.processPassMoveFromUi = function () {this.portObject().transmitSpecialMoveData(GO.PASS_MOVE());};
-    this.processConfirmMoveFromUi = function () {this.portObject().transmitSpecialMoveData(GO.CONFIRM_MOVE());};
-    this.processResignMoveFromUi = function () {this.portObject().transmitSpecialMoveData(GO.RESIGN_MOVE());};
-    this.processPlayAnotherGameMoveFromUi = function () {this.portObject().transmitSpecialMoveData(GO.PLAY_ANOTHER_GAME_MOVE());};
-    this.processBackToPlayMoveFromUi = function () {this.portObject().transmitSpecialMoveData(GO.BACK_TO_PLAY_MOVE());};
-
     this.totalMoves = function () {return this.theTotalMoves;};
     this.setTotalMoves = function (total_moves_val) {this.theTotalMoves = total_moves_val;};
     this.nextColor = function () {return this.theNextColor;};
