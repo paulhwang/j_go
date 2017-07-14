@@ -19,38 +19,6 @@ function GoPlayPortObject(root_val) {
         this.debug(false, "init__", "");
     };
 
-    this.objectName = function () {
-        return "GoPlayPortObject";
-    };
-
-    this.rootObject = function () {
-        return this.theRootObject;
-    };
-
-    this.ajxObject = function () {
-        return this.rootObject().ajxObject();
-    };
-
-    this.configObject = function () {
-        return this.rootObject().configObject();
-    };
-
-    this.gameObject = function () {
-        return this.rootObject().gameObject();
-    };
-
-    this.phwangSessionObject = function () {
-        return this.rootObject().phwangSessionObject();
-    };
-
-    this.boardObject = function () {
-        return this.rootObject().boardObject();
-    };
-
-    this.displayObject = function () {
-        return this.rootObject().displayObject();
-    };
-
     this.transmitMoveData = function (move_val) {
         var data = this.GO_PROTOCOL_CODE_MOVE_DATA + move_val.encodeMove();
         this.transmitData(data);
@@ -62,7 +30,7 @@ function GoPlayPortObject(root_val) {
     };
 
     this.transmitData = function (data_val) {
-        this.debug(true, "transmitData", "data_val=" + data_val);
+        this.debug(false, "transmitData", "data_val=" + data_val);
         this.phwangSessionObject().transmitData(data_val);
     };
 
@@ -73,20 +41,16 @@ function GoPlayPortObject(root_val) {
         return;
     };
 
-    this.debug = function (debug_val, str1_val, str2_val) {
-        if (debug_val) {
-            this.logit(str1_val, str2_val);
-        }
-    };
-
-    this.logit = function (str1_val, str2_val) {
-        this.rootObject().logit_(this.objectName() + "." + str1_val, str2_val);
-    };
-
-    this.abend = function (str1_val, str2_val) {
-        this.rootObject().abend_(this.objectName() + "." + str1_val, str2_val);
-    };
-
+    this.objectName = function () {return "GoPlayPortObject";};
+    this.rootObject = function () {return this.theRootObject;};
+    this.ajxObject = function () {return this.rootObject().ajxObject();};
+    this.configObject = function () {return this.rootObject().configObject(); };
+    this.gameObject = function () {return this.rootObject().gameObject();};
+    this.phwangSessionObject = function () {return this.rootObject().phwangSessionObject();};
+    this.boardObject = function () {return this.rootObject().boardObject();};
+    this.displayObject = function () {return this.rootObject().displayObject();};
+    this.debug = function (debug_val, str1_val, str2_val) {if (debug_val) {this.logit(str1_val, str2_val);}};
+    this.logit = function (str1_val, str2_val) {this.rootObject().logit_(this.objectName() + "." + str1_val, str2_val);};
+    this.abend = function (str1_val, str2_val) {this.rootObject().abend_(this.objectName() + "." + str1_val, str2_val);};
     this.init__(root_val);
 }
-
