@@ -45,7 +45,15 @@ function GoPlayPortObject(root_val) {
         this.debug(false, "receiveData", "data_val=" + data_val);
         if (data_val.charAt(0) === this.GO_PROTOCOL_GAME_INFO().charAt(0)) {
             this.receiveGameData(data_val.slice(1));
+            return;
         }
+        if (data_val.charAt(0) === this.GO_PROTOCOL_TIME_INFO().charAt(0)) {
+            return;
+        }
+        if (data_val.charAt(0) === this.GO_PROTOCOL_CHAT_INFO().charAt(0)) {
+            return;
+        }
+        this.abend("receiveData", "data_val=" + data_val);
     };
 
     this.receiveGameData = function (data_val) {
