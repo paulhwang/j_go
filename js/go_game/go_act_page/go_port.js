@@ -32,6 +32,7 @@ function GoPlayPortObject(root_val) {
 
     this.transmitGameData = function (data_val) {
         this.debug(false, "transmitGameData", "data_val=" + data_val);
+        this.inputObject().setPendingRequestExist();
         this.transmitData(this.GO_PROTOCOL_GAME_INFO() + data_val);
     };
 
@@ -42,6 +43,7 @@ function GoPlayPortObject(root_val) {
 
     this.receiveData = function (data_val) {
         this.debug(false, "receiveData", "data_val=" + data_val);
+        this.inputObject().clearPendingRequestExist();
         this.boardObject().decodeBoard(data_val);
         this.displayObject().drawBoard();
     };
@@ -51,6 +53,7 @@ function GoPlayPortObject(root_val) {
     this.ajxObject = function () {return this.rootObject().ajxObject();};
     this.configObject = function () {return this.rootObject().configObject(); };
     this.gameObject = function () {return this.rootObject().gameObject();};
+    this.inputObject = function () {return this.rootObject().inputObject();};
     this.phwangSessionObject = function () {return this.rootObject().phwangSessionObject();};
     this.boardObject = function () {return this.rootObject().boardObject();};
     this.displayObject = function () {return this.rootObject().displayObject();};
