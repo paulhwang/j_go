@@ -10,14 +10,12 @@ function GoPlayInputObject(root_object_val) {
         this.theRootObject = root_object_val;
         this.theLastMouseX = 9;
         this.theLastMouseY = 9;
+        this.clearPendingRequestExist();
         this.debug(false, "init__", "");
     };
 
     this.uiMouseMove = function (event_x, event_y) {
-        //if (!this.gameObject().isMyTurn()) {
-        //    return;
-        //}
-        //this.debug(false, "uiMouseMove", "raw_data=(" + event_x + "," + event_y + ")");
+        if (this.pendingRequestExist()) return;
 
         var grid_len = this.getGridLength();
         var x = Math.round((event_x - this.canvasElement().getBoundingClientRect().left) / grid_len) - 1;
@@ -35,6 +33,8 @@ function GoPlayInputObject(root_object_val) {
     };
 
     this.uiClick = function (event_x, event_y) {
+        if (this.pendingRequestExist()) return;
+
         var arrow_len = this.getArrowUnitLength();
         var grid_len = this.getGridLength();
 
@@ -122,6 +122,9 @@ function GoPlayInputObject(root_object_val) {
         this.gameObject().processNewMove(x, y);
     };
 
+    this.pendingRequestExist = function () {return this.thePendingRequestExist;};
+    this.setPendingRequestExist = function () {this.thePendingRequestExist = true;};
+    this.clearPendingRequestExist = function () {this.thePendingRequestExist = false;};
     this.boardSize = function () {return this.configStorageObject().boardSize();};
     this.canvasElement = function () {return this.htmlObject().canvasElement();};
     this.getGridLength = function () {return this.htmlObject().getGridLength();};

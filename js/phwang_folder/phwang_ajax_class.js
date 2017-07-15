@@ -318,7 +318,7 @@ function PhwangAjaxClass(phwang_object_val) {
             }
 
             ajax_object.getLinkData(link_val);
-        }, 100, link_val);
+        }, 10, link_val);
     };
 
     this.pendingAjaxRequestCommand = function () {return this.thePendingAjaxRequestCommand;};
