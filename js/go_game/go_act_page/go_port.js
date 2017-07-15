@@ -43,6 +43,10 @@ function GoPlayPortObject(root_val) {
 
     this.receiveData = function (data_val) {
         this.debug(false, "receiveData", "data_val=" + data_val);
+        this.receiveGameData(data_val);
+    };
+
+    this.receiveGameData = function (data_val) {
         this.inputObject().clearPendingRequestExist();
         this.boardObject().decodeBoard(data_val);
         this.displayObject().drawBoard();
