@@ -6,6 +6,9 @@
 
 function GoPlayPortObject(root_val) {
     "use strict";
+    this.GO_PROTOCOL_GAME_INFO = function () {return "G";};
+    this.GO_PROTOCOL_TIME_INFO = function () {return "T";};
+    this.GO_PROTOCOL_CHAT_INFO = function () {return "C";};
     this.GO_PROTOCOL_MOVE_COMMAND = function () {return "M";};
     this.GO_PROTOCOL_PASS_COMMAND = function () {return "P";};
     this.GO_PROTOCOL_BACKWARD_COMMAND = function () {return "b";};
@@ -17,15 +20,20 @@ function GoPlayPortObject(root_val) {
     this.GO_PROTOCOL_CONTINUE_COMMAND = function () {return "c";};
 
     this.init__ = function (root_val) {this.theRootObject = root_val;};
-    this.transmitMoveData = function (move_val) {this.transmitData(this.GO_PROTOCOL_MOVE_COMMAND() + move_val.encodeMove());};
-    this.transmitPassCommand = function () {this.transmitData(this.GO_PROTOCOL_PASS_COMMAND());};
-    this.transmitBackwardCommand = function () {this.transmitData(this.GO_PROTOCOL_BACKWARD_COMMAND());};
-    this.transmitDoubleBackwardCommand = function () {this.transmitData(this.GO_PROTOCOL_DOUBLE_BACKWARD_COMMAND());};
-    this.transmitForwardCommand = function () {this.transmitData(this.GO_PROTOCOL_FORWARD_COMMAND());};
-    this.transmitDoubleForwardCommand = function () {this.transmitData(this.GO_PROTOCOL_DOUBLE_FORWARD_COMMAND());};
-    this.transmitResignCommand = function () {this.transmitData(this.GO_PROTOCOL_RESIGN_COMMAND());};
-    this.transmitConfirmCommand = function () {this.transmitData(this.GO_PROTOCOL_CONFIRM_COMMAND());};
-    this.transmitContinueCommand = function () {this.transmitData(this.GO_PROTOCOL_CONTINUE_COMMAND());};
+    this.transmitMoveData = function (move_val) {this.transmitGameData(this.GO_PROTOCOL_MOVE_COMMAND() + move_val.encodeMove());};
+    this.transmitPassCommand = function () {this.transmitGameData(this.GO_PROTOCOL_PASS_COMMAND());};
+    this.transmitBackwardCommand = function () {this.transmitGameData(this.GO_PROTOCOL_BACKWARD_COMMAND());};
+    this.transmitDoubleBackwardCommand = function () {this.transmitGameData(this.GO_PROTOCOL_DOUBLE_BACKWARD_COMMAND());};
+    this.transmitForwardCommand = function () {this.transmitGameData(this.GO_PROTOCOL_FORWARD_COMMAND());};
+    this.transmitDoubleForwardCommand = function () {this.transmitGameData(this.GO_PROTOCOL_DOUBLE_FORWARD_COMMAND());};
+    this.transmitResignCommand = function () {this.transmitGameData(this.GO_PROTOCOL_RESIGN_COMMAND());};
+    this.transmitConfirmCommand = function () {this.transmitGameData(this.GO_PROTOCOL_CONFIRM_COMMAND());};
+    this.transmitContinueCommand = function () {this.transmitGameData(this.GO_PROTOCOL_CONTINUE_COMMAND());};
+
+    this.transmitGameData = function (data_val) {
+        this.debug(false, "transmitGameData", "data_val=" + data_val);
+        this.transmitData(this.GO_PROTOCOL_GAME_INFO() + data_val);
+    };
 
     this.transmitData = function (data_val) {
         this.debug(false, "transmitData", "data_val=" + data_val);
