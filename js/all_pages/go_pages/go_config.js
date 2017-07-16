@@ -10,6 +10,7 @@ function GoPlayConfigObject(root_val, config_val, initiater_val) {
         this.theRootObject = root_val;
         this.debug(true, "setupConfiguration", "config=" + config_val);
 
+        this.theEncodedConfig = "";
         var config = JSON.parse(config_val);
         this.setBoardSize(config.board_size);
         this.setKomiPoint(config.komi);
@@ -42,6 +43,11 @@ function GoPlayConfigObject(root_val, config_val, initiater_val) {
         return this.sessionObject().hisName();
     };
 
+    this.encodeConfig = function () {
+        this.theEncodedConfig = "aaaaa";
+    };
+
+    this.encodedConfig = function () {return this.theEncodedConfig;};
     this.boardSize = function () {return this.theBoardSize;};
     this.setBoardSize = function (val) {this.theBoardSize = Number(val);};
     this.myColor = function () {return this.theMyColor;};

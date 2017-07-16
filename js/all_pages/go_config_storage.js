@@ -27,6 +27,17 @@ function GoConfigStorageObject(root_val) {
         return this.rootObject().phwangObject();
     };
 
+
+    this.encodedGoConfig = function () {
+        return this.storage().encoded_go_config;
+    };
+
+    this.setEncodedGoConfig = function (val) {
+        this.storage().encoded_go_config = val;
+    };
+
+
+
     this.configInputData = function () {
         return this.storage().config_input_data;
     };

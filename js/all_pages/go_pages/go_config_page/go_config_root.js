@@ -23,6 +23,7 @@ function ConfigRootObject() {
     this.phwangLinkObject = function () {return this.phwangObject().phwangLinkObject();};
     this.phwangSessionObject = function () {return this.phwangObject().phwangSessionObject();};
     this.configStorageObject = function () {return this.theConfigStorageObject;};
+    this.configObject = function () {return this.theConfigObject;};
     this.ajaxObject = function () {return this.theAjaxObject;};
     this.htmlObject = function () {return this.theHtmlObject;};
     this.debug = function (debug_val, str1_val, str2_val) {if (debug_val) {this.logit(str1_val, str2_val);}};
