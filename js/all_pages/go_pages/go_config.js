@@ -14,12 +14,6 @@ function GoPlayConfigObject(root_val, config_val, encoded_config_val, initiater_
         this.theEncodedConfig = encoded_config_val;
         this.decodeConfig();
 
-        var config = JSON.parse(config_val);
-        this.setBoardSize(config.board_size);
-        this.setKomiPoint(config.komi);
-        this.setHandicapPoint(config.handicap);
-        this.setMyColor(config.color);
-
         if (!initiater_val) {
             this.setMyColor_(GO.getOppositeColor(this.myColor()));
         }
