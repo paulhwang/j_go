@@ -7,7 +7,7 @@ function GoConfigStorageObject(root_val) {
     "use strict";
     this.init__ = function (root_val) {
         this.theRootObject = root_val;
-        this.debug(true, "init__", "size=" + this.boardSize() + " color=" + this.myColor() + " handicap=" + this.handicapPoint() + " komi=" + this.komiPoint());
+        this.debug(true, "init__", "boardSize=" + this.boardSize() + " myColor=" + this.myColor() + " handicapPoint=" + this.handicapPoint() + " komiPoint=" + this.komiPoint());
     };
 
 
