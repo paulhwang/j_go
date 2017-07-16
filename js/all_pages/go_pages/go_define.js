@@ -5,32 +5,17 @@
  */
 
 var GO = new GoDefineObject;
-
 function GoDefineObject() {
-    this.objectName = "GoDefineObject";
-
-    this.THE_EMPTY_STONE = 0;
-    this.THE_BLACK_STONE = 1;
-    this.THE_WHITE_STONE = 2;
-    this.THE_BOTH_COLOR_STONE = 2;
-    this.THE_MARK_DEAD_STONE_DIFF = 4;
-    this.THE_MARK_EMPTY_STONE_DIFF = 6;
-    this.THE_MARKED_DEAD_BLACK_STONE  = (this.THE_BLACK_STONE + this.THE_MARK_DEAD_STONE_DIFF);
-    this.THE_MARKED_DEAD_WHITE_STONE  = (this.THE_WHITE_STONE + this.THE_MARK_DEAD_STONE_DIFF);
-    this.THE_MARKED_EMPTY_BLACK_STONE = (this.THE_BLACK_STONE + this.THE_MARK_EMPTY_STONE_DIFF);
-    this.THE_MARKED_EMPTY_WHITE_STONE = (this.THE_WHITE_STONE + this.THE_MARK_EMPTY_STONE_DIFF);
-
-    this.EMPTY_STONE = function () {return this.THE_EMPTY_STONE;};
-    this.BLACK_STONE = function () {return this.THE_BLACK_STONE;};
-    this.WHITE_STONE = function () {return this.THE_WHITE_STONE;};
-    this.BOTH_COLOR_STONE = function () {return this.THE_BOTH_COLOR_STONE;};
-    this.MARK_DEAD_STONE_DIFF = function () {return this.THE_MARK_DEAD_STONE_DIFF;};
-    this.MARK_EMPTY_STONE_DIFF = function () {return this.THE_MARK_EMPTY_STONE_DIFF;};
-
-    this.MARKED_DEAD_BLACK_STONE = function () {return this.THE_MARKED_DEAD_BLACK_STONE;};
-    this.MARKED_DEAD_WHITE_STONE = function () {return this.THE_MARKED_DEAD_WHITE_STONE;};
-    this.MARKED_EMPTY_BLACK_STONE = function () {return this.THE_MARKED_EMPTY_BLACK_STONE;};
-    this.MARKED_EMPTY_WHITE_STONE = function () {return this.THE_MARKED_EMPTY_WHITE_STONE;};
+    this.EMPTY_STONE = function () {return 0;};
+    this.BLACK_STONE = function () {return 1;};
+    this.WHITE_STONE = function () {return 2;};
+    this.BOTH_COLOR_STONE = function () {return 2;};
+    this.MARK_DEAD_STONE_DIFF = function () {return 4;};
+    this.MARK_EMPTY_STONE_DIFF = function () {return 6;};
+    this.MARKED_DEAD_BLACK_STONE = function () {return this.BLACK_STONE() + this.MARK_DEAD_STONE_DIFF();};
+    this.MARKED_DEAD_WHITE_STONE = function () {return this.WHITE_STONE() + this.MARK_DEAD_STONE_DIFF();};
+    this.MARKED_EMPTY_BLACK_STONE = function () {return this.BLACK_STONE() + this.MARK_EMPTY_STONE_DIFF();};
+    this.MARKED_EMPTY_WHITE_STONE = function () {return this.WHITE_STONE() + this.MARK_EMPTY_STONE_DIFF();};
 
     this.getOppositeColor = function (color_val) {
         switch (color_val) {
