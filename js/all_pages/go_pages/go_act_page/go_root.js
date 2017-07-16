@@ -15,7 +15,7 @@ function GoPlayRootObject() {
 
         this.logit("init__", "============" + this.configStorageObject().goEncodedConfig());
 
-        this.theConfigObject = new GoPlayConfigObject(this, this.configStorageObject().configInJson(), this.configStorageObject().goEncodedConfig(), true);
+        this.theConfigObject = new GoPlayConfigObject(this, this.configStorageObject().goEncodedConfig(), true);
         this.theHtmlObject = new GoPlayHtmlObject(this);
         this.theBoardObject = new GoPlayBoardObject(this);
         this.thePortObject = new GoPlayPortObject(this);

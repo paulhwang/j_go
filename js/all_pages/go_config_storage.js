@@ -32,15 +32,6 @@ function GoConfigStorageObject(root_val) {
         return this.storage().handicap;
     };
 
-    this.configInJson = function () {
-        return JSON.stringify({
-                            board_size: this.boardSize(),
-                            color: this.stoneColor(),
-                            komi: this.komi(),
-                            handicap: this.handicap(),
-                            });
-    };
-
     this.storage = function () {return localStorage;};
     this.hisName = function () {return this.storage().go_his_name;};
     this.setHisName = function (val) {this.storage().go_his_name = val;};
