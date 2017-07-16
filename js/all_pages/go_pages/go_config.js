@@ -3,7 +3,7 @@
  * Written by Paul Hwang
  */
 
-function GoPlayConfigObject(root_val, config_val, encoded_config_val, initiater_val) {
+function GoPlayConfigObject(root_val, config_val, encoded_config_val, his_name_val, my_color_val, initiater_val) {
     "use strict";
 
     this.init__ = function (root_val, encoded_config_val, initiater_val) {
@@ -13,9 +13,11 @@ function GoPlayConfigObject(root_val, config_val, encoded_config_val, initiater_
 
         this.theEncodedConfig = encoded_config_val;
         this.decodeConfig();
+        this.setHisName(his_name_val);
+        this.setMyColor_(my_color_val);
 
         if (!initiater_val) {
-            this.setMyColor_(GO.getOppositeColor(this.myColor()));
+            //this.setMyColor_(GO.getOppositeColor(this.myColor()));
         }
         this.debug(true, "init__", "size=" + this.boardSize() + " color=" + this.myColor() + " handicap=" + this.handicapPoint());
     };
@@ -79,6 +81,8 @@ function GoPlayConfigObject(root_val, config_val, encoded_config_val, initiater_
     };
 
     this.encodedConfig = function () {return this.theEncodedConfig;};
+    this.hisName = function () {return this.theHisName;};
+    this.setHisName = function (val) {this.theHisName = val;};
     this.boardSize = function () {return this.theBoardSize;};
     this.setBoardSize = function (val) {this.theBoardSize = Number(val);};
     this.myColor = function () {return this.theMyColor;};
