@@ -3,22 +3,18 @@
  * Written by Paul Hwang
  */
 
-function GoPlayConfigObject(root_val, config_val, encoded_config_val, his_name_val, my_color_val, initiater_val) {
+function GoPlayConfigObject(root_val) {
     "use strict";
 
-    this.init__ = function (root_val, encoded_config_val, initiater_val) {
+    this.init__ = function (root_val) {
         this.theRootObject = root_val;
-        this.debug(true, "setupConfiguration", "encoded_config_val=" + encoded_config_val);
-        this.debug(true, "setupConfiguration", "config=" + config_val);
 
+/*
         this.theEncodedConfig = encoded_config_val;
         this.decodeConfig();
         this.setHisName(his_name_val);
         this.setMyColor_(my_color_val);
-
-        if (!initiater_val) {
-            //this.setMyColor_(GO.getOppositeColor(this.myColor()));
-        }
+*/
         this.debug(true, "init__", "size=" + this.boardSize() + " color=" + this.myColor() + " handicap=" + this.handicapPoint() + " komi=" + this.komiPoint());
     };
 
@@ -101,5 +97,5 @@ function GoPlayConfigObject(root_val, config_val, encoded_config_val, his_name_v
     this.debug = function (debug_val, str1_val, str2_val) {if (debug_val) {this.logit(str1_val, str2_val);}};
     this.logit = function (str1_val, str2_val) {this.rootObject().logit_(this.objectName() + "." + str1_val, str2_val);};
     this.abend = function (str1_val, str2_val) {this.rootObject().abend_(this.objectName() + "." + str1_val, str2_val);};
-    this.init__(root_val, config_val, encoded_config_val, initiater_val);
+    this.init__(root_val);
 }

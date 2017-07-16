@@ -12,10 +12,7 @@ function GoPlayRootObject() {
         this.phwangAjaxObject().startWatchDog(this.phwangLinkObject());
         this.theAjaxObject = new GoAjaxClass(this);
         this.theConfigStorageObject = new GoConfigStorageObject(this);
-
-        this.logit("init__", "============" + this.configStorageObject().goEncodedConfig());
-
-        this.theConfigObject = new GoPlayConfigObject(this, this.configStorageObject().goEncodedConfig(), this.configStorageObject().hisName(), this.configStorageObject().myColor(), true);
+        this.theConfigObject = new GoPlayConfigObject(this);
         this.theBoardObject = new GoPlayBoardObject(this);
         this.thePortObject = new GoPlayPortObject(this);
         this.theGameObject = new GoPlayGameObject(this);
