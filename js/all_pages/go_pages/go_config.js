@@ -8,7 +8,7 @@ function GoPlayConfigObject(root_val) {
 
     this.init__ = function (root_val) {
         this.theRootObject = root_val;
-
+        this.setBoardSize(this.configStorageObject().boardSize());
 /*
         this.theEncodedConfig = encoded_config_val;
         this.decodeConfig();
@@ -79,8 +79,8 @@ function GoPlayConfigObject(root_val) {
     this.encodedConfig = function () {return this.theEncodedConfig;};
     this.hisName = function () {return this.theHisName;};
     this.setHisName = function (val) {this.theHisName = val;};
-    this.boardSize = function () {return this.configStorageObject().boardSize();};
-    this.setBoardSize = function (val) {this.theBoardSize = Number(val);};
+    this.boardSize = function () {return this.theBoardSize;};
+    this.setBoardSize = function (val) {this.theBoardSize = val;};
     this.myColor = function () {return this.configStorageObject().myColor();};
     this.hisColor = function () {if (this.myColor() === GO.BLACK_STONE()) {return GO.WHITE_STONE();} else {return GO.BLACK_STONE();}};
     this.setMyColor_ = function (val) {this.theMyColor = Number(val);};
