@@ -12,24 +12,12 @@ function GoPlayConfigObject(root_val) {
         this.debug(true, "init__", "size=" + this.boardSize() + " color=" + this.myColor() + " handicap=" + this.handicapPoint() + " komi=" + this.komiPoint());
     };
 
-    this.configStorageObject = function () {
-        return this.rootObject().configStorageObject();
-    };
-
     this.sessionObject = function () {
         return this.rootObject().sessionObject();
     };
 
-    this.gameObject = function () {
-        return this.rootObject().gameObject();
-    };
-
     this.myName = function () {
         return this.linkStorageObject().userName();
-    };
-
-    this.opponentName = function () {
-        return this.sessionObject().hisName();
     };
 
     this.hisName = function () {return this.theHisName;};
