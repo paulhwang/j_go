@@ -33,6 +33,8 @@ function GoConfigStorageObject(root_val) {
     };
 
     this.storage = function () {return localStorage;};
+    this.myColor = function () {return this.storage().go_my_color;};
+    this.setMyColor = function (val) {if (val === "black") {this.storage().go_my_color = GO.BLACK_STONE();} else if (val === "white") {this.storage().go_my_color = GO.WHITE_STONE();} else {this.abend("setMyColor", val);}};
     this.hisName = function () {return this.storage().go_his_name;};
     this.setHisName = function (val) {this.storage().go_his_name = val;};
     this.goEncodedConfig = function () {return this.storage().go_encoded_config;};
