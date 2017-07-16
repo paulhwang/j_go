@@ -5,30 +5,7 @@
 
 function GoConfigStorageObject(root_val) {
     "use strict";
-
-    this.storage = function () {
-        return localStorage;
-    };
-
-    this.init__ = function (root_val) {
-        this.theRootObject = root_val;
-    };
-
-    this.rootObject = function () {
-        return this.theRootObject;
-    };
-
-    this.hisName = function () {return this.storage().go_his_name;};
-    this.setHisName = function (val) {this.storage().go_his_name = val;};
-
-    this.goEncodedConfig = function () {
-        return this.storage().go_encoded_config;
-    };
-
-    this.setGoEncodedConfig = function (val) {
-        this.storage().go_encoded_config = val;
-    };
-
+    this.init__ = function (root_val) {this.theRootObject = root_val;};
 
 
     this.configInputData = function () {
@@ -55,22 +32,6 @@ function GoConfigStorageObject(root_val) {
         return this.storage().handicap;
     };
 
-    this.setBoardSize = function (val) {
-        this.storage().board_size = val;
-    };
-
-    this.setStoneColor = function (val) {
-        this.storage().stone_color = val;
-    };
-
-    this.setKomi = function (val) {
-        this.storage().komi = val;
-    };
-
-    this.setHandicap = function (val) {
-        this.storage().handicap = val;
-    };
-
     this.configInJson = function () {
         return JSON.stringify({
                             board_size: this.boardSize(),
@@ -80,6 +41,12 @@ function GoConfigStorageObject(root_val) {
                             });
     };
 
+    this.storage = function () {return localStorage;};
+    this.hisName = function () {return this.storage().go_his_name;};
+    this.setHisName = function (val) {this.storage().go_his_name = val;};
+    this.goEncodedConfig = function () {return this.storage().go_encoded_config;};
+    this.setGoEncodedConfig = function (val) {this.storage().go_encoded_config = val;};
+    this.rootObject = function () {return this.theRootObject;};
     this.init__(root_val);
 }
 

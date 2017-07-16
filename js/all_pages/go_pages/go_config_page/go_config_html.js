@@ -30,12 +30,7 @@ function ConfigHtmlObject(root_object_val) {
             this0.configObject().encodeConfig();
             this0.configStorageObject().setGoEncodedConfig(this0.configObject().encodedConfig());
 
-            this0.configStorageObject().setBoardSize($(".config_section .go_config_section .board_size").val());
-            this0.configStorageObject().setStoneColor($(".config_section .go_config_section .stone_color").val());
-            this0.configStorageObject().setKomi($(".config_section .go_config_section .komi").val());
-            this0.configStorageObject().setHandicap($(".config_section .go_config_section .handicap").val());
-
-            this0.debug(true, "setupHtmlInput", "boardSize=" + this0.configStorageObject().boardSize() + " stoneColor=" + this0.configStorageObject().stoneColor() + " komi=" + this0.configStorageObject().komi() + " handicap=" + this0.configStorageObject().handicap());
+            this0.debug(true, "setupHtmlInput", "boardSize=" + this0.configObject().boardSize() + " myColor=" + this0.configObject().myColor() + " komi=" + this0.configObject().komiPoint() + " handicap=" + this0.configObject().handicapPoint());
 
             var theme_data = "GO";
             if (this0.configStorageObject().boardSize() < 10)
@@ -49,7 +44,7 @@ function ConfigHtmlObject(root_object_val) {
                 theme_data = theme_data + 0;
             theme_data = theme_data + this0.configStorageObject().komi();
 
-            this0.phwangAjaxObject().setupSession(this0.phwangLinkObject(), this0.phwangSessionObject().hisName(), theme_data, this0.configStorageObject().stoneColor());
+            this0.phwangAjaxObject().setupSession(this0.phwangLinkObject(), this0.phwangSessionObject().hisName(), this0.configStorageObject().goEncodedConfig(), this0.configStorageObject().stoneColor());
         });
     };
 
