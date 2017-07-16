@@ -32,18 +32,6 @@ function ConfigHtmlObject(root_object_val) {
 
             this0.debug(true, "setupHtmlInput", "boardSize=" + this0.configObject().boardSize() + " myColor=" + this0.configObject().myColor() + " komi=" + this0.configObject().komiPoint() + " handicap=" + this0.configObject().handicapPoint());
 
-            var theme_data = "GO";
-            if (this0.configStorageObject().boardSize() < 10)
-                theme_data = theme_data + 0;
-            theme_data = theme_data + this0.configStorageObject().boardSize();
-            //theme_data = theme_data + this0.configStorageObject().stoneColor();
-            if (this0.configStorageObject().handicap() < 10)
-                theme_data = theme_data + 0;
-            theme_data = theme_data + this0.configStorageObject().handicap();
-            if (this0.configStorageObject().komi() < 10)
-                theme_data = theme_data + 0;
-            theme_data = theme_data + this0.configStorageObject().komi();
-
             this0.phwangAjaxObject().setupSession(this0.phwangLinkObject(), this0.phwangSessionObject().hisName(), this0.configStorageObject().goEncodedConfig(), this0.configStorageObject().stoneColor());
         });
     };
