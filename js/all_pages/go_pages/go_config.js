@@ -12,14 +12,6 @@ function GoPlayConfigObject(root_val) {
         this.debug(true, "init__", "size=" + this.boardSize() + " color=" + this.myColor() + " handicap=" + this.handicapPoint() + " komi=" + this.komiPoint());
     };
 
-    this.sessionObject = function () {
-        return this.rootObject().sessionObject();
-    };
-
-    this.myName = function () {
-        return this.linkStorageObject().userName();
-    };
-
     this.hisName = function () {return this.theHisName;};
     this.setHisName = function (val) {this.theHisName = val;};
     this.boardSize = function () {return this.theBoardSize;};
