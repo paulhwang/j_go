@@ -255,7 +255,7 @@ function GoPlayDisplayObject(root_object_val) {
         this.whiteScoreElement().textContent = "White: " + this.boardObject().whiteCapturedStones();
     };
 
-    this.boardSize = function () {return this.configStorageObject().boardSize();};
+    this.boardSize = function () {return this.configObject().boardSize();};
     this.canvasElement = function () {return this.htmlObject().canvasElement();};
     this.canvasContext = function () {return this.htmlObject().canvasContext();};
     this.blackScoreElement = function () {return this.htmlObject().blackScoreElement();};
@@ -264,7 +264,7 @@ function GoPlayDisplayObject(root_object_val) {
     this.getArrowUnitLength = function () {return this.htmlObject().getArrowUnitLength();};
     this.objectName = function () {return "GoPlayDisplayObject";};
     this.rootObject = function () {return this.theRootObject;};
-    this.configStorageObject = function () {return this.rootObject().configStorageObject();};
+    this.configObject = function () {return this.rootObject().configObject();};
     this.htmlObject = function () {return this.rootObject().htmlObject();};
     this.inputObject = function () {return this.rootObject().inputObject();};
     this.boardObject = function () {return this.rootObject().boardObject();};

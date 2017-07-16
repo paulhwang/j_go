@@ -106,7 +106,7 @@ function GoPlayInputObject(root_object_val) {
     this.pendingRequestExist = function () {return this.thePendingRequestExist;};
     this.setPendingRequestExist = function () {this.thePendingRequestExist = true;};
     this.clearPendingRequestExist = function () {this.thePendingRequestExist = false;};
-    this.boardSize = function () {return this.configStorageObject().boardSize();};
+    this.boardSize = function () {return this.configObject().boardSize();};
     this.canvasElement = function () {return this.htmlObject().canvasElement();};
     this.getGridLength = function () {return this.htmlObject().getGridLength();};
     this.getArrowUnitLength = function () {return this.htmlObject().getArrowUnitLength();};
@@ -116,7 +116,7 @@ function GoPlayInputObject(root_object_val) {
     this.setLastMouseY = function (val) {this.theLastMouseY = val;};
     this.objectName = function () {return "GoPlayInputObject";};
     this.rootObject = function () {return this.theRootObject;};
-    this.configStorageObject = function () {return this.rootObject().configStorageObject();};
+    this.configObject = function () {return this.rootObject().configObject();};
     this.htmlObject = function () {return this.rootObject().htmlObject();};
     this.displayObject = function () {return this.rootObject().displayObject();};
     this.gameObject = function () {return this.rootObject().gameObject();};

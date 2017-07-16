@@ -16,22 +16,6 @@ function GoConfigStorageObject(root_val) {
         this.storage().config_input_data = val;
     };
 
-    this.boardSize = function () {
-        return Number(this.storage().board_size);
-    };
-
-    this.stoneColor = function () {
-        return this.storage().stone_color;
-    };
-
-    this.komi = function () {
-        return this.storage().komi;
-    };
-
-    this.handicap = function () {
-        return this.storage().handicap;
-    };
-
     this.storage = function () {return localStorage;};
     this.myColor = function () {return this.storage().go_my_color;};
     this.setMyColor = function (val) {if (val === "black") {this.storage().go_my_color = GO.BLACK_STONE();} else if (val === "white") {this.storage().go_my_color = GO.WHITE_STONE();} else {this.abend("setMyColor", val);}};

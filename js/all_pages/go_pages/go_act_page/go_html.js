@@ -58,7 +58,7 @@ function GoPlayHtmlObject(root_object_val) {
     this.objectName = function () {return "GoPlayHtmlObject";};
     this.rootObject = function () {return this.theRootObject;};
     this.phwangObject = function () {return this.rootObject().phwangObject();};
-    this.configStorageObject = function () {return this.rootObject().configStorageObject();};
+    this.configObject = function () {return this.rootObject().configObject();};
     this.ajaxObject = function () {return this.rootObject().ajaxObject();};
     this.inputObject = function () {return this.rootObject().inputObject();};
     this.renderNameListFuncExist = function () {return false;};
@@ -67,7 +67,7 @@ function GoPlayHtmlObject(root_object_val) {
     this.canvasContext = function () {return this.theCanvasContext;};
     this.blackScoreElement = function () {return this.theBlackScoreElement;};
     this.whiteScoreElement = function () {return this.theWhiteScoreElement;};
-    this.getGridLength = function () {return this.canvasElement().width / (this.configStorageObject().boardSize() + 1);};
+    this.getGridLength = function () {return this.canvasElement().width / (this.configObject().boardSize() + 1);};
     this.getArrowUnitLength = function () {return this.canvasElement().width / 20;};
     this.debug = function (debug_val, str1_val, str2_val) {if (debug_val) {this.logit(str1_val, str2_val);}};
     this.logit = function (str1_val, str2_val) {this.rootObject().logit_(this.objectName() + "." + str1_val, str2_val);};
