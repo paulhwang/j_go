@@ -14,7 +14,7 @@ function PhwangAjaxClass(phwang_object_val) {
         this.thePendingSessionDataQueueObject = new PhwangQueueClass(this.phwangObject());
         this.thePhwangAjaxEngineObject = new PhwangAjaxEngineClass(this);
         this.initSwitchTable();
-        this.thePendingAjaxRequestCommand = "";
+        this.clearPendingAjaxRequestCommand();
         this.debug(false, "init__", "");
     };
 
@@ -94,14 +94,6 @@ function PhwangAjaxClass(phwang_object_val) {
         this.debug(false, "getLinkDataResponse", "input_val=" + input_val);
         var input = JSON.parse(input_val);
         if (input) {
-/*
-            if (input.pending_session_setup != "") {
-                var data_session_id_index = input.pending_session_setup.slice(1, 9);
-                var theme_name = input.pending_session_setup.slice(9, 11);
-                var theme_config = input.pending_session_setup.slice(11);
-                this.setupSessionReply(this, input.pending_session_setup, data_session_id_index);
-            }
-*/
             if (input.data) {
                 var data = input.data;
                 while (data.length > 0) {
@@ -318,7 +310,7 @@ function PhwangAjaxClass(phwang_object_val) {
             }
 
             ajax_object.getLinkData(link_val);
-        }, 10, link_val);
+        }, 100, link_val);
     };
 
     this.pendingAjaxRequestCommand = function () {return this.thePendingAjaxRequestCommand;};

@@ -44,10 +44,8 @@ function ConfigHtmlObject(root_object_val) {
     };
 
     this.renderNameList = function () {
-        var i = 0;
-        while (i < this.phwangLinkObject().nameListLength()) {
+        for (var i = 0; i < this.phwangLinkObject().nameListLength(); i++) {
             $('.peer_name_paragraph select').append($('<option>', {value:this.phwangLinkObject().nameListElement(i), text:this.phwangLinkObject().nameListElement(i)}));
-            i += 1;
         }
     };
 
