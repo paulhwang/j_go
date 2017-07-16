@@ -85,8 +85,8 @@ function GoPlayConfigObject(root_val, config_val, encoded_config_val, his_name_v
     this.setHisName = function (val) {this.theHisName = val;};
     this.boardSize = function () {return this.configStorageObject().boardSize();};
     this.setBoardSize = function (val) {this.theBoardSize = Number(val);};
-    this.myColor = function () {return this.theMyColor;};
-    this.hisColor = function () {if (this.theMyColor === GO.BLACK_STONE()) {return GO.WHITE_STONE();} else {return GO.BLACK_STONE();}};
+    this.myColor = function () {return this.configStorageObject().myColor();};
+    this.hisColor = function () {if (this.myColor() === GO.BLACK_STONE()) {return GO.WHITE_STONE();} else {return GO.BLACK_STONE();}};
     this.setMyColor_ = function (val) {this.theMyColor = Number(val);};
     this.handicapPoint = function () {return this.configStorageObject().handicapPoint();};
     this.setHandicapPoint = function (val) {this.theHandicapPoint = Number(val);};
