@@ -12,13 +12,12 @@ function GoPlayConfigObject(root_val) {
         this.debug(true, "init__", "size=" + this.boardSize() + " color=" + this.myColor() + " handicap=" + this.handicapPoint() + " komi=" + this.komiPoint());
     };
 
-    this.hisName = function () {return this.theHisName;};
-    this.setHisName = function (val) {this.theHisName = val;};
+    this.hisName = function () {return this.configStorageObject().hisName();};
+    this.myColor = function () {return this.configStorageObject().myColor();};
+    this.setMyColor_ = function (val) {this.theMyColor = val;};
+    this.hisColor = function () {if (this.myColor() === GO.BLACK_STONE()) {return GO.WHITE_STONE();} else {return GO.BLACK_STONE();}};
     this.boardSize = function () {return this.theBoardSize;};
     this.setBoardSize = function (val) {this.theBoardSize = val;};
-    this.myColor = function () {return this.configStorageObject().myColor();};
-    this.hisColor = function () {if (this.myColor() === GO.BLACK_STONE()) {return GO.WHITE_STONE();} else {return GO.BLACK_STONE();}};
-    this.setMyColor_ = function (val) {this.theMyColor = Number(val);};
     this.handicapPoint = function () {return this.configStorageObject().handicapPoint();};
     this.komiPoint = function () {return this.configStorageObject().komiPoint();};
     this.realKomiPoint = function () {if (!this.komiPoint()) {return 0;} return this.komiPoint() + 0.5;};

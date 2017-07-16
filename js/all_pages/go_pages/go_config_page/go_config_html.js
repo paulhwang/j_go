@@ -21,6 +21,7 @@ function ConfigHtmlObject(root_object_val) {
         var this0 = this;
         $(".config_section .config_button").on("click", function() {
             this0.phwangSessionObject().setHisName($(".peer_name_paragraph select").val());
+
             this0.configStorageObject().setHisName($(".peer_name_paragraph select").val());
             this0.configStorageObject().setMyColor($(".config_section .go_config_section .stone_color").val());
             this0.configStorageObject().setBoardSize($(".config_section .go_config_section .board_size").val());
