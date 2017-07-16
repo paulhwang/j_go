@@ -19,23 +19,32 @@ function GoConfigStorageObject(root_val) {
         this.storage().config_input_data = val;
     };
 
+    this.encodeConfig = function () {
+        var buf = "GO";
+        if (this.boardSize() < 10)
+            buf = buf + 0;
+        buf = buf + this.boardSize();
+        if (this.handicapPoint() < 10)
+            buf = buf + 0;
+        buf = buf + this.handicapPoint();
+        if (this.komiPoint() < 10)
+            buf = buf + 0;
+        buf = buf + this.komiPoint();
+        //buf = buf + this.stoneColor();
+        return buf;
+    };
+
     this.storage = function () {return localStorage;};
     this.myColor = function () {return Number(this.storage().go_my_color);};
     this.setMyColor = function (val) {if (val === "black") {this.storage().go_my_color = GO.BLACK_STONE();} else if (val === "white") {this.storage().go_my_color = GO.WHITE_STONE();} else {this.abend("setMyColor", val);}};
     this.hisName = function () {return this.storage().go_his_name;};
     this.setHisName = function (val) {this.storage().go_his_name = val;};
-
-
     this.boardSize = function () {return Number(this.storage().go_board_size);};
     this.setBoardSize = function (val) {this.storage().go_board_size = val;};
     this.handicapPoint = function () {return Number(this.storage().go_handicap_point);};
     this.setHandicapPoint = function (val) {this.storage().go_handicap_point = val;};
     this.komiPoint = function () {return Number(this.storage().go_komi_point);};
     this.setKomiPoint = function (val) {this.storage().go_komi_point = val;};
-
-
-
-
     this.goEncodedConfig = function () {return this.storage().go_encoded_config;};
     this.setGoEncodedConfig = function (val) {this.storage().go_encoded_config = val;};
     this.objectName = function () {return "GoConfigStorageObject";};
