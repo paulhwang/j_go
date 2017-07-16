@@ -9,12 +9,6 @@ function GoPlayConfigObject(root_val) {
     this.init__ = function (root_val) {
         this.theRootObject = root_val;
         this.setBoardSize(this.configStorageObject().boardSize());
-/*
-        this.theEncodedConfig = encoded_config_val;
-        this.decodeConfig();
-        this.setHisName(his_name_val);
-        this.setMyColor_(my_color_val);
-*/
         this.debug(true, "init__", "size=" + this.boardSize() + " color=" + this.myColor() + " handicap=" + this.handicapPoint() + " komi=" + this.komiPoint());
     };
 
@@ -38,30 +32,6 @@ function GoPlayConfigObject(root_val) {
         return this.sessionObject().hisName();
     };
 
-    this.decodeConfig = function () {
-        if (this.encodedConfig() === undefined) {
-            this.setBoardSize(19);
-            this.setHandicapPoint(0);
-            this.setKomiPoint(0);
-            return;
-        }
-
-        var data;
-        var index = 2;
-        data = (this.encodedConfig().charAt(index++) - '0') * 10
-        data += this.encodedConfig().charAt(index++) - '0';
-        this.setBoardSize(data);
-        data = (this.encodedConfig().charAt(index++) - '0') * 10
-        data += this.encodedConfig().charAt(index++) - '0';
-        this.setHandicapPoint(data);
-        data = (this.encodedConfig().charAt(index++) - '0') * 10
-        data += this.encodedConfig().charAt(index++) - '0';
-        this.setKomiPoint(data);
-        this.logit("=============", this.boardSize());
-        this.logit("=============", this.handicapPoint());
-        this.logit("=============", this.komiPoint());
-    };
-
     this.hisName = function () {return this.theHisName;};
     this.setHisName = function (val) {this.theHisName = val;};
     this.boardSize = function () {return this.theBoardSize;};
@@ -70,9 +40,7 @@ function GoPlayConfigObject(root_val) {
     this.hisColor = function () {if (this.myColor() === GO.BLACK_STONE()) {return GO.WHITE_STONE();} else {return GO.BLACK_STONE();}};
     this.setMyColor_ = function (val) {this.theMyColor = Number(val);};
     this.handicapPoint = function () {return this.configStorageObject().handicapPoint();};
-    this.setHandicapPoint = function (val) {this.theHandicapPoint = Number(val);};
     this.komiPoint = function () {return this.configStorageObject().komiPoint();};
-    this.setKomiPoint = function (val) {this.theKomiPoint = Number(val);};
     this.realKomiPoint = function () {if (!this.komiPoint()) {return 0;} return this.komiPoint() + 0.5;};
     this.isValidCoordinates = function (x_val, y_val) {return this.isValidCoordinate(x_val) && this.isValidCoordinate(y_val);};
     this.isValidCoordinate = function (coordinate_val) {return (0 <= coordinate_val) && (coordinate_val < this.boardSize());};
