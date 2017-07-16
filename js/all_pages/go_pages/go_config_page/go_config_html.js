@@ -27,7 +27,6 @@ function ConfigHtmlObject(root_object_val) {
             this0.configStorageObject().setKomiPoint($(".config_section .go_config_section .komi").val());
             this0.configStorageObject().setHandicapPoint($(".config_section .go_config_section .handicap").val());
             var encoded_config = this0.configStorageObject().encodeConfig();
-            this0.configStorageObject().setGoEncodedConfig(this0.configObject().encodedConfig());
             this0.debug(true, "setupHtmlInput", "boardSize=" + this0.configStorageObject().boardSize() + " myColor=" + this0.configStorageObject().myColor() + " komi=" + this0.configStorageObject().komiPoint() + " handicap=" + this0.configStorageObject().handicapPoint());
             this0.phwangAjaxObject().setupSession(this0.phwangLinkObject(), this0.configStorageObject().hisName(), encoded_config, this0.configStorageObject().myColor());
         });
