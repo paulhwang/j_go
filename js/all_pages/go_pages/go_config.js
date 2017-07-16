@@ -8,6 +8,7 @@ function GoPlayConfigObject(root_val, config_val, encoded_config_val, initiater_
 
     this.init__ = function (root_val, config_val, encoded_config_val, initiater_val) {
         this.theRootObject = root_val;
+        this.debug(true, "setupConfiguration", "encoded_config_val=" + encoded_config_val);
         this.debug(true, "setupConfiguration", "config=" + config_val);
 
         this.theEncodedConfig = encoded_config_val;
@@ -46,6 +47,13 @@ function GoPlayConfigObject(root_val, config_val, encoded_config_val, initiater_
     };
 
     this.decodeConfig = function () {
+        if (this.encodedConfig() === undefined) {
+            this.setBoardSize(19);
+            this.setHandicapPoint(0);
+            this.setKomiPoint(0);
+            return;
+        }
+
         var data;
         var index = 2;
         data = (this.encodedConfig().charAt(index++) - '0') * 10

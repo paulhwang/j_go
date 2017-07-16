@@ -21,13 +21,14 @@ function ConfigHtmlObject(root_object_val) {
         var this0 = this;
         $(".config_section .config_button").on("click", function() {
             this0.phwangSessionObject().setHisName($(".peer_name_paragraph select").val());
+            this0.configStorageObject().setHisName($(".peer_name_paragraph select").val());
 
             this0.configObject().setBoardSize($(".config_section .go_config_section .board_size").val());
             this0.configObject().setMyColor($(".config_section .go_config_section .stone_color").val());
             this0.configObject().setKomiPoint($(".config_section .go_config_section .komi").val());
             this0.configObject().setHandicapPoint($(".config_section .go_config_section .handicap").val());
             this0.configObject().encodeConfig();
-            this0.configStorageObject().setEncodedGoConfig(this0.configObject().encodedConfig());
+            this0.configStorageObject().setGoEncodedConfig(this0.configObject().encodedConfig());
 
             this0.configStorageObject().setBoardSize($(".config_section .go_config_section .board_size").val());
             this0.configStorageObject().setStoneColor($(".config_section .go_config_section .stone_color").val());

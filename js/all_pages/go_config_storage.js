@@ -12,28 +12,21 @@ function GoConfigStorageObject(root_val) {
 
     this.init__ = function (root_val) {
         this.theRootObject = root_val;
-        this.debug(true, "init__", "");
-    };
-
-    this.objectName = function () {
-        return "GoConfigStorageObject";
     };
 
     this.rootObject = function () {
         return this.theRootObject;
     };
 
-    this.phwangObject = function () {
-        return this.rootObject().phwangObject();
+    this.hisName = function () {return this.storage().go_his_name;};
+    this.setHisName = function (val) {this.storage().go_his_name = val;};
+
+    this.goEncodedConfig = function () {
+        return this.storage().go_encoded_config;
     };
 
-
-    this.encodedGoConfig = function () {
-        return this.storage().encoded_go_config;
-    };
-
-    this.setEncodedGoConfig = function (val) {
-        this.storage().encoded_go_config = val;
+    this.setGoEncodedConfig = function (val) {
+        this.storage().go_encoded_config = val;
     };
 
 
@@ -85,20 +78,6 @@ function GoConfigStorageObject(root_val) {
                             komi: this.komi(),
                             handicap: this.handicap(),
                             });
-    };
-
-    this.debug = function (debug_val, str1_val, str2_val) {
-        if (debug_val) {
-            this.logit(str1_val, str2_val);
-        }
-    };
-
-    this.logit = function (str1_val, str2_val) {
-        return this.phwangObject().LOG_IT(this.objectName() + "." + str1_val, str2_val);
-    };
-
-    this.abend = function (str1_val, str2_val) {
-        return this.phwangObject().ABEND(this.objectName() + "." + str1_val, str2_val);
     };
 
     this.init__(root_val);
