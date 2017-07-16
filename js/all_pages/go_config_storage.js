@@ -19,6 +19,30 @@ function GoConfigStorageObject(root_val) {
         this.storage().config_input_data = val;
     };
 
+    this.decodeConfig = function (encoded_val) {
+        if (encoded_val === undefined) {
+            this.setBoardSize(19);
+            this.setHandicapPoint(0);
+            this.setKomiPoint(0);
+            return;
+        }
+
+        var data;
+        var index = 2;
+        data = (encoded_val.charAt(index++) - '0') * 10
+        data += encoded_val.charAt(index++) - '0';
+        this.setBoardSize(data);
+        data = (encoded_val.charAt(index++) - '0') * 10
+        data += encoded_val.charAt(index++) - '0';
+        this.setHandicapPoint(data);
+        data = (encoded_val.charAt(index++) - '0') * 10
+        data += encoded_val.charAt(index++) - '0';
+        this.setKomiPoint(data);
+        this.logit("=============", this.boardSize());
+        this.logit("=============", this.handicapPoint());
+        this.logit("=============", this.komiPoint());
+    };
+
     this.encodeConfig = function () {
         var buf = "GO";
         if (this.boardSize() < 10)
