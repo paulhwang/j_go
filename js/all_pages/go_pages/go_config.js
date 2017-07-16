@@ -10,7 +10,9 @@ function GoPlayConfigObject(root_val, config_val, encoded_config_val, initiater_
         this.theRootObject = root_val;
         this.debug(true, "setupConfiguration", "config=" + config_val);
 
-        this.theEncodedConfig = "";
+        this.theEncodedConfig = encoded_config_val;
+        this.decodeConfig();
+
         var config = JSON.parse(config_val);
         this.setBoardSize(config.board_size);
         this.setKomiPoint(config.komi);
@@ -41,6 +43,23 @@ function GoPlayConfigObject(root_val, config_val, encoded_config_val, initiater_
 
     this.opponentName = function () {
         return this.sessionObject().hisName();
+    };
+
+    this.decodeConfig = function () {
+        var data;
+        var index = 2;
+        data = (this.encodedConfig().charAt(index++) - '0') * 10
+        data += this.encodedConfig().charAt(index++) - '0';
+        this.setBoardSize(data);
+        data = (this.encodedConfig().charAt(index++) - '0') * 10
+        data += this.encodedConfig().charAt(index++) - '0';
+        this.setHandicapPoint(data);
+        data = (this.encodedConfig().charAt(index++) - '0') * 10
+        data += this.encodedConfig().charAt(index++) - '0';
+        this.setKomiPoint(data);
+        this.logit("=============", this.boardSize());
+        this.logit("=============", this.handicapPoint());
+        this.logit("=============", this.komiPoint());
     };
 
     this.encodeConfig = function () {
