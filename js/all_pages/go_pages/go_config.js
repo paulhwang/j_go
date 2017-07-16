@@ -44,7 +44,17 @@ function GoPlayConfigObject(root_val, config_val, initiater_val) {
     };
 
     this.encodeConfig = function () {
-        this.theEncodedConfig = "aaaaa";
+        this.theEncodedConfig = "GO";
+        if (this.boardSize() < 10)
+            this.theEncodedConfig = this.theEncodedConfig + 0;
+        this.theEncodedConfig = this.theEncodedConfig + this.boardSize();
+        //this.theEncodedConfig = this.theEncodedConfig + this.stoneColor();
+        if (this.handicapPoint() < 10)
+            this.theEncodedConfig = this.theEncodedConfig + 0;
+        this.theEncodedConfig = this.theEncodedConfig + this.handicapPoint();
+        if (this.komiPoint() < 10)
+            this.theEncodedConfig = this.theEncodedConfig + 0;
+        this.theEncodedConfig = this.theEncodedConfig + this.komiPoint();
     };
 
     this.encodedConfig = function () {return this.theEncodedConfig;};
