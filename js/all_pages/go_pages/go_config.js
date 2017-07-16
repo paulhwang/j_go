@@ -62,21 +62,6 @@ function GoPlayConfigObject(root_val) {
         this.logit("=============", this.komiPoint());
     };
 
-    this.encodeConfig = function () {
-        this.theEncodedConfig = "GO";
-        if (this.boardSize() < 10)
-            this.theEncodedConfig = this.theEncodedConfig + 0;
-        this.theEncodedConfig = this.theEncodedConfig + this.boardSize();
-        //this.theEncodedConfig = this.theEncodedConfig + this.stoneColor();
-        if (this.handicapPoint() < 10)
-            this.theEncodedConfig = this.theEncodedConfig + 0;
-        this.theEncodedConfig = this.theEncodedConfig + this.handicapPoint();
-        if (this.komiPoint() < 10)
-            this.theEncodedConfig = this.theEncodedConfig + 0;
-        this.theEncodedConfig = this.theEncodedConfig + this.komiPoint();
-    };
-
-    this.encodedConfig = function () {return this.theEncodedConfig;};
     this.hisName = function () {return this.theHisName;};
     this.setHisName = function (val) {this.theHisName = val;};
     this.boardSize = function () {return this.theBoardSize;};
