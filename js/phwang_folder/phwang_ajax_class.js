@@ -164,14 +164,13 @@ function PhwangAjaxClass(phwang_object_val) {
         }
     };
 
-    this.setupSession = function (link_val, his_name_val, theme_data_val, play_color_val) {
+    this.setupSession = function (link_val, his_name_val, theme_data_val) {
         var output = JSON.stringify({
                         command: this.phwangAjaxProtocolObject().SETUP_SESSION_COMMAND(),
                         packet_id: this.ajaxPacketId(),
                         link_id: link_val.linkId(),
                         his_name: his_name_val,
                         theme_data: theme_data_val,
-                        play_color: play_color_val,
                         });
         this.debug(true, "setupSession", "output=" + output);
         this.transmitAjaxRequest(output);
