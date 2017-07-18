@@ -56,7 +56,7 @@ function PhwangAjaxClass(phwang_object_val) {
             "get_link_data": this.getLinkDataResponse,
             "get_name_list": this.getNameListResponse,
             "setup_session": this.setupSessionResponse,
-            "setup_session_reply": this.setupSessionReplyResponse,
+            "setup_session_reply": this.setupSession2Response,
             "get_session_data": this.getSessionDataResponse,
             "put_session_data": this.putSessionDataResponse,
         };
@@ -116,7 +116,8 @@ function PhwangAjaxClass(phwang_object_val) {
                         var theme_config = data.slice(0, 7);
                         data = data.slice(7);
                         this.debug(true, "getLinkDataResponse", "theme_config=" + theme_config);
-                        this.setupSessionReply(this.phwangLinkObject(), data, session_id);
+                        this.rootObject().configStorageObject().decodeConfig(theme_config);
+                        this.setupSession2(this.phwangLinkObject(), data, session_id);
                     }
 
                     if (data.charAt(0) === this.phwangAjaxProtocolObject().WEB_FABRIC_PROTOCOL_RESPOND_IS_GET_LINK_DATA_PENDING_DATA()) {
@@ -192,7 +193,7 @@ function PhwangAjaxClass(phwang_object_val) {
         }
     };
 
-    this.setupSessionReply = function (link_val, data_val, session_id_val) {
+    this.setupSession2 = function (link_val, data_val, session_id_val) {
         //var data = JSON.parse(data_val);
         var output = JSON.stringify({
                         command: this.phwangAjaxProtocolObject().SETUP_SESSION_REPLY_COMMAND(),
@@ -203,12 +204,12 @@ function PhwangAjaxClass(phwang_object_val) {
                         //topic_data: data.topic_data,
                         session_id: session_id_val,
                         });
-        this.debug(true, "setupSessionReply", "output=" + output);
+        this.debug(true, "setupSession2", "output=" + output);
         this.transmitAjaxRequest(output);
     };
 
-    this.setupSessionReplyResponse = function (json_data_val) {
-        this.debug(true, "setupSessionReplyResponse", "data=" + json_data_val);
+    this.setupSession2Response = function (json_data_val) {
+        this.debug(true, "setupSession2Response", "data=" + json_data_val);
         var data = JSON.parse(json_data_val);
         if (data) {
             this.phwangSessionObject().setSessionId(data.session_id.slice(8));
@@ -218,7 +219,7 @@ function PhwangAjaxClass(phwang_object_val) {
             this.phwangSessionObject().rootObject().configStorageObject().setConfigInputData(2);///////////////////////////////////////////
             ///////////////////////////////////////////////////////////////////////
 
-            this.debug(true, "setupSessionReplyResponse", "sessionId=" + this.phwangSessionObject().sessionId());
+            this.debug(true, "setupSession2Response", "sessionId=" + this.phwangSessionObject().sessionId());
             this.phwangPortObject().receiveSetupSessionReplyResponse();
         }
     };
@@ -233,7 +234,7 @@ function PhwangAjaxClass(phwang_object_val) {
                         data: data_val,
                         });
         session_val.incrementXmtSeq();
-        this.debug(false, "putSessionData", "output=" + output);
+        this.debug(true, "putSessionData", "output=" + output);
         this.transmitAjaxRequest(output);
     };
 
