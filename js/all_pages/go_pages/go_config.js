@@ -9,7 +9,7 @@ function GoPlayConfigObject(root_val) {
         this.theRootObject = root_val;
         this.setBoardSize(this.configStorageObject().boardSize());
         this.setMyColor(this.configStorageObject().myColor());
-        this.debug(true, "init__", "boardSize=" + this.boardSize() + " myColor=" + this.myColor() + " handicapPoint=" + this.handicapPoint() + " komiPoint=" + this.komiPoint());
+        this.debug(true, "init__", " myColor=" + this.myColor() + "boardSize=" + this.boardSize() + " handicapPoint=" + this.handicapPoint() + " komiPoint=" + this.komiPoint());
     };
     this.boardSize = function () {return this.theBoardSize;};
     this.setBoardSize = function (val) {this.theBoardSize = val;};

@@ -7,16 +7,7 @@ function GoConfigStorageObject(root_val) {
     "use strict";
     this.init__ = function (root_val) {
         this.theRootObject = root_val;
-        this.debug(true, "init__", "boardSize=" + this.boardSize() + " myColor=" + this.myColor() + " handicapPoint=" + this.handicapPoint() + " komiPoint=" + this.komiPoint());
-    };
-
-
-    this.configInputData = function () {
-        return this.storage().config_input_data;
-    };
-
-    this.setConfigInputData = function (val) {
-        this.storage().config_input_data = val;
+        this.debug(true, "init__", " myColor=" + this.myColor() + "boardSize=" + this.boardSize() + " handicapPoint=" + this.handicapPoint() + " komiPoint=" + this.komiPoint());
     };
 
     this.decodeConfig = function (encoded_val) {
@@ -40,10 +31,6 @@ function GoConfigStorageObject(root_val) {
         this.setKomiPoint(data);
         data = encoded_val.charAt(index++) - '0';
         this.setMyColor_(data);
-        this.logit("=============", this.boardSize());
-        this.logit("=============", this.handicapPoint());
-        this.logit("=============", this.komiPoint());
-        this.logit("=============", this.myColor());
     };
 
     this.encodeConfig = function () {

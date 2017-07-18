@@ -182,12 +182,6 @@ function PhwangAjaxClass(phwang_object_val) {
         var data = JSON.parse(input_val);
         if (data) {
             this.phwangSessionObject().setSessionId(data.session_id);
-
-            /////////////to be rewerite
-            ///////////////////////////////////////////////////////////////////////////
-            this.phwangSessionObject().rootObject().configStorageObject().setConfigInputData(1);///////////////////////////////////////////
-            ///////////////////////////////////////////////////////////////////////
-
             this.debug(true, "setupSessionResponse", "sessionId=" + this.phwangSessionObject().sessionId());
             this.phwangPortObject().receiveSetupSessionResponse();
         }
@@ -198,10 +192,8 @@ function PhwangAjaxClass(phwang_object_val) {
         var output = JSON.stringify({
                         command: this.phwangAjaxProtocolObject().SETUP_SESSION_REPLY_COMMAND(),
                         packet_id: this.ajaxPacketId(),
-                        //my_name: link_val.myName(),
                         link_id: link_val.linkId(),
                         accept: "yes",
-                        //topic_data: data.topic_data,
                         session_id: session_id_val,
                         });
         this.debug(true, "setupSession2", "output=" + output);
@@ -213,12 +205,6 @@ function PhwangAjaxClass(phwang_object_val) {
         var data = JSON.parse(json_data_val);
         if (data) {
             this.phwangSessionObject().setSessionId(data.session_id.slice(8));
-
-            /////////////to be rewerite
-            ///////////////////////////////////////////////////////////////////////////
-            this.phwangSessionObject().rootObject().configStorageObject().setConfigInputData(2);///////////////////////////////////////////
-            ///////////////////////////////////////////////////////////////////////
-
             this.debug(true, "setupSession2Response", "sessionId=" + this.phwangSessionObject().sessionId());
             this.phwangPortObject().receiveSetupSessionReplyResponse();
         }
