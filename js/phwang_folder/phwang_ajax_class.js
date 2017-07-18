@@ -112,12 +112,13 @@ function PhwangAjaxClass(phwang_object_val) {
                         var session_id = data.slice(1, this.phwangAjaxProtocolObject().WEB_FABRIC_PROTOCOL_SESSION_ID_SIZE() + 1);
                         this.debug(true, "getLinkDataResponse", "session_id=" + session_id);
                         data = data.slice(1 + this.phwangAjaxProtocolObject().WEB_FABRIC_PROTOCOL_SESSION_ID_SIZE());
-                        var config_len = this.phwangObject().decodeNumber(data.slice(1), 3);
-                        var theme_config = data.slice(0, config_len);
+                        var theme_data = data;
+                        this.debug(true, "getLinkDataResponse", "theme_data=" + theme_data);
+                        var config_len = this.phwangObject().decodeNumber(theme_data.slice(1), 3);
+                        var theme_data = theme_data.slice(0, config_len);
+                        this.rootObject().configStorageObject().decodeConfig(theme_data);
                         data = data.slice(config_len);
-                        this.debug(true, "getLinkDataResponse", "theme_config=" + theme_config);
-                        this.rootObject().configStorageObject().decodeConfig(theme_config);
-                        this.setupSession2(this.phwangLinkObject(), data, session_id);
+                        this.setupSession2(this.phwangLinkObject(), theme_data, session_id);
                         continue;
                     }
 
