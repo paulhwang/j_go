@@ -8,7 +8,7 @@ function GoPlayConfigObject(root_val) {
     this.init__ = function(root_val) {
         this.theRootObject = root_val;
         this.cacheConfig();
-        this.debug(true, "init__", " myColor=" + this.myColor() + "boardSize=" + this.boardSize() + " handicapPoint=" + this.handicapPoint() + " komiPoint=" + this.komiPoint());
+        this.debug(true, "init__", "myColor=" + this.myColor() + " boardSize=" + this.boardSize() + " handicapPoint=" + this.handicapPoint() + " komiPoint=" + this.komiPoint());
     };
     this.cacheConfig = function() {
         this.setBoardSize(this.configStorageObject().boardSize());

@@ -7,11 +7,11 @@ function GoConfigStorageObject(root_val) {
     "use strict";
     this.init__ = function (root_val) {
         this.theRootObject = root_val;
-        this.debug(true, "init__", " myColor=" + this.myColor() + "boardSize=" + this.boardSize() + " handicapPoint=" + this.handicapPoint() + " komiPoint=" + this.komiPoint());
+        this.debug(true, "init__", "myColor=" + this.myColor() + " boardSize=" + this.boardSize() + " handicapPoint=" + this.handicapPoint() + " komiPoint=" + this.komiPoint());
     };
 
     this.decodeConfig = function (encoded_val) {
-        this.debug("decodeConfig", encoded_val);
+        this.debug(true, "decodeConfig", encoded_val);
         if ((encoded_val === undefined) || (encoded_val === "")) {
             this.setBoardSize(19);
             this.setHandicapPoint(0);

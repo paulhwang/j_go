@@ -9,7 +9,7 @@ function GoAjaxClass(root_object_val) {
     this.receiveSetupLinkResponse = function () {};
     this.receiveGetNameListResponse = function () {};
     this.receiveSetupSessionResponse = function () {};
-    this.receiveSetupSessionReplyResponse = function () {};
+    this.receiveSetupSession2Response = function () {};
     this.receiveGetSessionDataResponse = function (data_val) {};
     this.objectName = function() {return "GoAjaxClass";};
     this.rootObject = function () {return this.theRootObject;};
