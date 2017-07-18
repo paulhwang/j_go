@@ -56,7 +56,7 @@ function PhwangAjaxClass(phwang_object_val) {
             "get_link_data": this.getLinkDataResponse,
             "get_name_list": this.getNameListResponse,
             "setup_session": this.setupSessionResponse,
-            "setup_session_reply": this.setupSession2Response,
+            "setup_session2": this.setupSession2Response,
             "get_session_data": this.getSessionDataResponse,
             "put_session_data": this.putSessionDataResponse,
         };
@@ -190,7 +190,7 @@ function PhwangAjaxClass(phwang_object_val) {
     this.setupSession2 = function (link_val, data_val, session_id_val) {
         //var data = JSON.parse(data_val);
         var output = JSON.stringify({
-                        command: this.phwangAjaxProtocolObject().SETUP_SESSION_REPLY_COMMAND(),
+                        command: this.phwangAjaxProtocolObject().SETUP_SESSION2_COMMAND(),
                         packet_id: this.ajaxPacketId(),
                         link_id: link_val.linkId(),
                         accept: "yes",
