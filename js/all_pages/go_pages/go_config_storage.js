@@ -20,7 +20,10 @@ function GoConfigStorageObject(root_val) {
         }
 
         var data;
-        var index = 0;//////////////////
+        if (encoded_val.charAt(0) != 'G') {
+            this.abend("decodeConfig", "not G");
+        }
+        var index = 4;
         data = (encoded_val.charAt(index++) - '0') * 10
         data += encoded_val.charAt(index++) - '0';
         this.setBoardSize(data);
@@ -35,7 +38,9 @@ function GoConfigStorageObject(root_val) {
     };
 
     this.encodeConfig = function () {
-        var buf = "G011";
+        var len = 11;
+        var buf = "G";
+        if (len < 100) buf = buf + 0; if (len < 10) buf = buf + 0; buf = buf + len;
         if (this.boardSize() < 10) buf = buf + 0; buf = buf + this.boardSize();
         if (this.handicapPoint() < 10) buf = buf + 0; buf = buf + this.handicapPoint();
         if (this.komiPoint() < 10) buf = buf + 0; buf = buf + this.komiPoint();

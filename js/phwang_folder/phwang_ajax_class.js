@@ -104,6 +104,7 @@ function PhwangAjaxClass(phwang_object_val) {
                             this.phwangLinkObject().setServerNameListTag(name_list_tag);
                         }
                         data = data.slice(this.phwangAjaxProtocolObject().WEB_FABRIC_PROTOCOL_NAME_LIST_TAG_SIZE());
+                        continue;
                     }
 
                     if (data.charAt(0) === this.phwangAjaxProtocolObject().WEB_FABRIC_PROTOCOL_RESPOND_IS_GET_LINK_DATA_PENDING_SESSION()) {
@@ -111,14 +112,14 @@ function PhwangAjaxClass(phwang_object_val) {
                         var session_id = data.slice(1, this.phwangAjaxProtocolObject().WEB_FABRIC_PROTOCOL_SESSION_ID_SIZE() + 1);
                         this.debug(true, "getLinkDataResponse", "session_id=" + session_id);
                         data = data.slice(1 + this.phwangAjaxProtocolObject().WEB_FABRIC_PROTOCOL_SESSION_ID_SIZE());
-                        var theme_name = data.slice(0, 2);
+                        var theme_name = data.slice(0, 1);
                         this.debug(true, "getLinkDataResponse", "theme_name=" + theme_name);
-                        data = data.slice(4);
-                        var theme_config = data.slice(0, 7);
-                        data = data.slice(7);
+                        var theme_config = data.slice(0,11);
+                        data = data.slice(11);
                         this.debug(true, "getLinkDataResponse", "theme_config=" + theme_config);
                         this.rootObject().configStorageObject().decodeConfig(theme_config);
                         this.setupSession2(this.phwangLinkObject(), data, session_id);
+                        continue;
                     }
 
                     if (data.charAt(0) === this.phwangAjaxProtocolObject().WEB_FABRIC_PROTOCOL_RESPOND_IS_GET_LINK_DATA_PENDING_DATA()) {
@@ -126,7 +127,10 @@ function PhwangAjaxClass(phwang_object_val) {
                         this.debug(true, "getLinkDataResponse", "link_session_id=" + link_session_id);
                         this.pendingSessionDataQueueObject().enqueueData(link_session_id);
                         data = data.slice(this.phwangAjaxProtocolObject().WEB_FABRIC_PROTOCOL_LINK_SESSION_ID_SIZE() + 1);
+                        continue;
                     }
+
+                    this.abend("getLinkDataResponse", "not supported command: " + data);
                 }
 
                 if (data.length !== 0) {
@@ -208,6 +212,7 @@ function PhwangAjaxClass(phwang_object_val) {
             this.phwangSessionObject().setSessionId(data.session_id.slice(8));
             this.debug(true, "setupSession2Response", "sessionId=" + this.phwangSessionObject().sessionId());
             this.phwangPortObject().receiveSetupSessionReplyResponse();
+            this.rootObject().configObject().cacheConfig();
         }
     };
 
