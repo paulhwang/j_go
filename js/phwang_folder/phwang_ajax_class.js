@@ -112,10 +112,9 @@ function PhwangAjaxClass(phwang_object_val) {
                         var session_id = data.slice(1, this.phwangAjaxProtocolObject().WEB_FABRIC_PROTOCOL_SESSION_ID_SIZE() + 1);
                         this.debug(true, "getLinkDataResponse", "session_id=" + session_id);
                         data = data.slice(1 + this.phwangAjaxProtocolObject().WEB_FABRIC_PROTOCOL_SESSION_ID_SIZE());
-                        var theme_name = data.slice(0, 1);
-                        this.debug(true, "getLinkDataResponse", "theme_name=" + theme_name);
-                        var theme_config = data.slice(0,11);
-                        data = data.slice(11);
+                        var config_len = this.phwangObject().decodeNumber(data.slice(1), 3);
+                        var theme_config = data.slice(0, config_len);
+                        data = data.slice(config_len);
                         this.debug(true, "getLinkDataResponse", "theme_config=" + theme_config);
                         this.rootObject().configStorageObject().decodeConfig(theme_config);
                         this.setupSession2(this.phwangLinkObject(), data, session_id);
@@ -131,6 +130,7 @@ function PhwangAjaxClass(phwang_object_val) {
                     }
 
                     this.abend("getLinkDataResponse", "not supported command: " + data);
+                    data = data.slice(data.length);
                 }
 
                 if (data.length !== 0) {
@@ -193,7 +193,6 @@ function PhwangAjaxClass(phwang_object_val) {
     };
 
     this.setupSession2 = function (link_val, data_val, session_id_val) {
-        //var data = JSON.parse(data_val);
         var output = JSON.stringify({
                         command: this.phwangAjaxProtocolObject().SETUP_SESSION2_COMMAND(),
                         packet_id: this.ajaxPacketId(),
