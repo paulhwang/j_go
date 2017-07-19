@@ -173,22 +173,10 @@ function GoMoveObject(str_val, x_val, y_val, color_val, turn_val, root_object_va
     };
     this.encodeMove = function() {
         var buf = "";
-        if (this.xX() < 10) {
-            buf = buf + 0;
-        }
-        buf = buf + this.xX();
-        if (this.yY() < 10) {
-            buf = buf + 0;
-        }
-        buf = buf + this.yY();
+        if (this.xX() < 10) {buf = buf + 0;} buf = buf + this.xX();
+        if (this.yY() < 10) {buf = buf + 0;} buf = buf + this.yY();
         buf = buf + this.myColor();
-        if (this.turnIndex() < 100) {
-            buf = buf + 0;
-        }
-        if (this.turnIndex() < 10) {
-            buf = buf + 0;
-        }
-        buf = buf + this.turnIndex();
+        if (this.turnIndex() < 100) {buf = buf + 0;} if (this.turnIndex() < 10) {buf = buf + 0;} buf = buf + this.turnIndex();
         return buf;
     };
     this.moveObjectDecode = function(str_val) {
