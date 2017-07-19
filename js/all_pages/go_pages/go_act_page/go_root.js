@@ -6,7 +6,7 @@
 function GoPlayRootObject() {
     "use strict";
 
-    this.init__ = function () {
+    this.init__ = function() {
         this.thePhwangObject = new PhwangClass(this);
         this.phwangObject().initObject();
         this.phwangAjaxObject().startWatchDog(this.phwangLinkObject());
@@ -26,25 +26,25 @@ function GoPlayRootObject() {
         this.debug(true, "init__", "boardSize=" + this.configObject().boardSize() + " stoneColor=" + this.configStorageObject().myColor() + " komi=" + this.configObject().komiPoint() + " handicap=" + this.configObject().handicapPoint());
     };
 
-    this.objectName = function () {return "GoPlayRootObject";};
-    this.phwangObject = function () {return this.thePhwangObject;};
-    this.phwangAjaxObject = function () {return this.phwangObject().phwangAjaxObject();};
-    this.phwangLinkObject = function () {return this.phwangObject().phwangLinkObject();};
-    this.phwangSessionObject = function () {return this.phwangObject().phwangSessionObject();};
-    this.ajaxObject = function () {return this.theAjaxObject;};
-    this.htmlObject = function () {return this.theHtmlObject;};
-    this.configStorageObject = function () {return this.theConfigStorageObject;};
-    this.inputObject = function () {return this.theInputObject;};
-    this.displayObject = function () {return this.theDisplayObject;};
-    this.configObject = function () {return this.theConfigObject;};
-    this.boardObject = function () {return this.theBoardObject;};
-    this.gameObject = function () {return this.theGameObject;};
-    this.portObject = function () {return this.thePortObject;};
-    this.debug = function (debug_val, str1_val, str2_val) {if (debug_val) {this.logit(str1_val, str2_val);}};
-    this.logit = function (str1_val, str2_val) {this.logit_(this.objectName() + "." + str1_val, str2_val);};
-    this.abend = function (str1_val, str2_val) {this.abend_(this.objectName() + "." + str1_val, str2_val);};
-    this.logit_ = function (str1_val, str2_val) {this.phwangObject().LOG_IT(str1_val, str2_val);};
-    this.abend_ = function (str1_val, str2_val) {this.phwangObject().ABEND(str1_val, str2_val);};
+    this.objectName = function() {return "GoPlayRootObject";};
+    this.phwangObject = function() {return this.thePhwangObject;};
+    this.phwangAjaxObject = function() {return this.phwangObject().phwangAjaxObject();};
+    this.phwangLinkObject = function() {return this.phwangObject().phwangLinkObject();};
+    this.phwangSessionObject = function() {return this.phwangObject().phwangSessionObject();};
+    this.ajaxObject = function() {return this.theAjaxObject;};
+    this.htmlObject = function() {return this.theHtmlObject;};
+    this.configStorageObject = function() {return this.theConfigStorageObject;};
+    this.inputObject = function() {return this.theInputObject;};
+    this.displayObject = function() {return this.theDisplayObject;};
+    this.configObject = function() {return this.theConfigObject;};
+    this.boardObject = function() {return this.theBoardObject;};
+    this.gameObject = function() {return this.theGameObject;};
+    this.portObject = function() {return this.thePortObject;};
+    this.debug = function(debug_val, str1_val, str2_val) {if (debug_val) {this.logit(str1_val, str2_val);}};
+    this.logit = function(str1_val, str2_val) {this.logit_(this.objectName() + "." + str1_val, str2_val);};
+    this.abend = function(str1_val, str2_val) {this.abend_(this.objectName() + "." + str1_val, str2_val);};
+    this.logit_ = function(str1_val, str2_val) {this.phwangObject().LOG_IT(str1_val, str2_val);};
+    this.abend_ = function(str1_val, str2_val) {this.phwangObject().ABEND(str1_val, str2_val);};
     this.init__();
 }
 
@@ -59,7 +59,7 @@ function GoPlayHtmlObject(root_object_val) {
         this.debug(true, "init__", "");
     };
 
-    this.initElements = function () {
+    this.initElements = function() {
         this.theCanvasElement = window.document.getElementById("go_canvas");
         if (this.canvasElement() === null) {
             this.abend("GoUiObject", "null canvasElement");
@@ -88,7 +88,7 @@ function GoPlayHtmlObject(root_object_val) {
         }
     };
 
-    this.setupHtmlInput = function (str1_val, str2_val) {
+    this.setupHtmlInput = function(str1_val, str2_val) {
         var this0 = this;
 
         $("canvas").on("click", function(event) {
@@ -100,43 +100,43 @@ function GoPlayHtmlObject(root_object_val) {
         });
     };
 
-    this.objectName = function () {return "GoPlayHtmlObject";};
-    this.rootObject = function () {return this.theRootObject;};
-    this.phwangObject = function () {return this.rootObject().phwangObject();};
-    this.configObject = function () {return this.rootObject().configObject();};
-    this.ajaxObject = function () {return this.rootObject().ajaxObject();};
-    this.inputObject = function () {return this.rootObject().inputObject();};
-    this.renderNameListFuncExist = function () {return false;};
-    this.canvasWidth = function () {return this.theCanvasWidth;};
-    this.canvasElement = function () {return this.theCanvasElement;};
-    this.canvasContext = function () {return this.theCanvasContext;};
-    this.blackScoreElement = function () {return this.theBlackScoreElement;};
-    this.whiteScoreElement = function () {return this.theWhiteScoreElement;};
-    this.getGridLength = function () {return this.canvasElement().width / (this.configObject().boardSize() + 1);};
-    this.getArrowUnitLength = function () {return this.canvasElement().width / 20;};
-    this.debug = function (debug_val, str1_val, str2_val) {if (debug_val) {this.logit(str1_val, str2_val);}};
-    this.logit = function (str1_val, str2_val) {this.rootObject().logit_(this.objectName() + "." + str1_val, str2_val);};
-    this.abend = function (str1_val, str2_val) {this.rootObject().abend_(this.objectName() + "." + str1_val, str2_val);};
+    this.objectName = function() {return "GoPlayHtmlObject";};
+    this.rootObject = function() {return this.theRootObject;};
+    this.phwangObject = function() {return this.rootObject().phwangObject();};
+    this.configObject = function() {return this.rootObject().configObject();};
+    this.ajaxObject = function() {return this.rootObject().ajaxObject();};
+    this.inputObject = function() {return this.rootObject().inputObject();};
+    this.renderNameListFuncExist = function() {return false;};
+    this.canvasWidth = function() {return this.theCanvasWidth;};
+    this.canvasElement = function() {return this.theCanvasElement;};
+    this.canvasContext = function() {return this.theCanvasContext;};
+    this.blackScoreElement = function() {return this.theBlackScoreElement;};
+    this.whiteScoreElement = function() {return this.theWhiteScoreElement;};
+    this.getGridLength = function() {return this.canvasElement().width / (this.configObject().boardSize() + 1);};
+    this.getArrowUnitLength = function() {return this.canvasElement().width / 20;};
+    this.debug = function(debug_val, str1_val, str2_val) {if (debug_val) {this.logit(str1_val, str2_val);}};
+    this.logit = function(str1_val, str2_val) {this.rootObject().logit_(this.objectName() + "." + str1_val, str2_val);};
+    this.abend = function(str1_val, str2_val) {this.rootObject().abend_(this.objectName() + "." + str1_val, str2_val);};
     this.init__(root_object_val);
 }
 
 function GoAjaxClass(root_object_val) {
     "use strict";
     this.init__ = function (root_object_val) {this.theRootObject = root_object_val;};
-    this.receiveSetupLinkResponse = function () {};
-    this.receiveGetNameListResponse = function () {};
-    this.receiveSetupSessionResponse = function () {};
-    this.receiveSetupSession2Response = function () {};
+    this.receiveSetupLinkResponse = function() {};
+    this.receiveGetNameListResponse = function() {};
+    this.receiveSetupSessionResponse = function() {};
+    this.receiveSetupSession2Response = function() {};
     this.receiveGetSessionDataResponse = function (data_val) {};
     this.objectName = function() {return "GoAjaxClass";};
-    this.rootObject = function () {return this.theRootObject;};
-    this.phwangObject = function () {return this.rootObject().phwangObject();};
-    this.htmlObject = function () {return this.rootObject().htmlObject();};
+    this.rootObject = function() {return this.theRootObject;};
+    this.phwangObject = function() {return this.rootObject().phwangObject();};
+    this.htmlObject = function() {return this.rootObject().htmlObject();};
     this.debug = function(debug_val, str1_val, str2_val) {if (debug_val) {this.logit(str1_val, str2_val);}};
     this.logit = function(str1_val, str2_val) {return this.phwangObject().LOG_IT(this.objectName() + "." + str1_val, str2_val);};
     this.abend = function(str1_val, str2_val) {return this.phwangObject().ABEND(this.objectName() + "." + str1_val, str2_val);};
     this.init__(root_object_val);
 }
 
-var go_play_main = function () {"use strict"; new GoPlayRootObject();};
+var go_play_main = function() {"use strict"; new GoPlayRootObject();};
 $(document).ready(go_play_main);
