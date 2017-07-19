@@ -10,7 +10,6 @@ function LoginRootObject() {
         this.theAjaxObject = new LoginAjaxClass(this);
         this.theHtmlObject = new LoginHtmlObject(this);
         this.debug(true, "init__", "myName=" + this.phwangLinkObject().myName() + " linkId=" + this.phwangLinkObject().linkId());
-        this.phwangLinkObject().setHttpInfo();
     };
     this.objectName = function() {return "LoginRootObject";};
     this.phwangObject = function() {return this.thePhwangObject;};

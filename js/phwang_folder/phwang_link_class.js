@@ -64,10 +64,6 @@ function PhwangLinkClass(phwang_object_val) {
         this.phwangLinkStorageObject().resetLinkStorage();
     };
 
-    this.setHttpInfo = function() {
-        this.phwangLinkStorageObject().setHttpInfo();
-    };
-
     this.serverHttpHeader = function() {
         return this.phwangLinkStorageObject().serverHttpHeader();
     };
@@ -130,38 +126,8 @@ function PhwangLinkStorageObject(phwang_link_object_val) {
     this.setLinkId = function (val) {this.storage().link_id = val;};
     this.resetLinkId = function () {this.setLinkId("");};
 
-    this.serverIp = function () {
-        return this.storage().server_ip;
-    };
-
-    this.setServerIp = function (val) {
-        this.storage().server_ip = val;
-    };
-
-    this.serverPort = function () {
-        return this.storage().server_port;
-    };
-
-    this.setServerPort = function (val) {
-        this.storage().server_port = val;
-    };
-
-    this.serverIpPort = function () {
-        return this.serverIp() + ":" + this.serverPort();
-    };
-
-    this.serverHttpHeader = function () {
-        return "http://" + this.serverIpPort() + "/";
-    };
-
-    this.serverHttpsHeader = function () {
-        return "https://" + this.serverIpPort() + "/";
-    };
-
-    this.setHttpInfo = function () {
-        this.setServerIp(window.location.hostname);
-        this.setServerPort(window.location.port);
-    };
+    this.serverHttpHeader = function() {return "http://" + window.location.hostname + ":" + window.location.port + "/";};
+    this.serverHttpsHeader = function() {return "https://" + window.location.hostname + ":" + window.location.port + "/";};
 
     this.objectName = function () {return "PhwangLinkStorageObject";};
     this.phwangLinkObject = function () {return this.thePhwangLinkObject;};
