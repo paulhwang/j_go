@@ -15,12 +15,12 @@ function PhwangSessionClass(link_object_val) {
         this.debug(false, "init__", "sessionId=" + this.sessionId());
     };
 
-    this.topicObject = function () {
-        return this.theTopicObject;
+    this.themeObject = function() {
+        return this.theThemeObject;
     };
 
-    this.setTopicObject = function (val) {
-        this.theTopicObject = val;
+    this.setThemeObject = function(val) {
+        this.theThemeObject = val;
     };
 
     this.xmtSeq = function () {
@@ -39,12 +39,12 @@ function PhwangSessionClass(link_object_val) {
         this.theRcvSeq += 1;
     };
 
-    this.transmitData = function (data_val) {
+    this.transmitData = function(data_val) {
         this.phwangAjaxObject().putSessionData(this, data_val);
     };
 
-    this.receiveData = function (c_data_val) {
-        this.topicObject().receiveData(c_data_val);
+    this.receiveData = function(c_data_val) {
+        this.themeObject().receiveData(c_data_val);
     };
     this.objectName = function () {return "PhwangSessionClass";};
     this.phwangLinkObject = function () {return this.thePhwangLinkObject;};
