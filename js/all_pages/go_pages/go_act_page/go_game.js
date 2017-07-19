@@ -259,21 +259,16 @@ function GoPlayBoardObject(root_val) {
     this.decodeBoard = function(str_val) {
         var index = 0;
         var num;
-        var i, j;
         num  = (str_val.charAt(index++) - '0') * 100;
         num += (str_val.charAt(index++) - '0') * 10;
         num += (str_val.charAt(index++) - '0');
         this.gameObject().setTotalMoves(num);
         num = (str_val.charAt(index++) - '0');
         this.gameObject().setNextColor(num);
-        i = 0;
-        while (i < this.boardSize()) {
-            j = 0;
-            while (j < this.boardSize()) {
+        for (var i = 0; i < this.boardSize(); i++) {
+            for (var j = 0; j < this.boardSize(); j++) {
                 this.theBoardArray[i][j] = str_val.charAt(index++) - '0';
-                j += 1;
             }
-            i += 1;
         }
         num  = (str_val.charAt(index++) - '0') * 100;
         num += (str_val.charAt(index++) - '0') * 10;
