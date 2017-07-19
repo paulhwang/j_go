@@ -34,14 +34,6 @@ function PhwangLinkClass(phwang_object_val) {
         this.phwangLinkStorageObject().setMyName(val);
     };
 
-    this.passWord = function () {
-        return this.phwangLinkStorageObject().passWord();
-    };
-
-    this.setPassWord = function (val) {
-        this.phwangLinkStorageObject().setPassWord(val);
-    };
-
     this.linkId = function () {
         return this.phwangLinkStorageObject().linkId();
     };
@@ -206,8 +198,6 @@ function PhwangLinkStorageObject(phwang_link_object_val) {
     this.myName = function () {return this.storage().my_name;};
     this.setMyName = function (val) {this.storage().my_name = val;};
     this.resetMyName = function () {this.setMyName("");};
-    this.passWord = function () {return this.thePassWord;};
-    this.setPassWord = function (val) {this.thePassWord = val;};
     this.resetPassWord = function () {this.setPassWord("");};
     this.linkId = function () {return this.storage().link_id;};
     this.setLinkId = function (val) {this.storage().link_id = val;};
