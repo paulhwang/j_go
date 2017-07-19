@@ -13,7 +13,6 @@ function PhwangSessionClass(link_object_val) {
 
         this.theXmtSeq = 0;
         this.theRcvSeq = 0;
-        this.initSwitchTable();
         this.debug(false, "init__", "session=" + this.sessionName());
     };
 
@@ -24,10 +23,6 @@ function PhwangSessionClass(link_object_val) {
     this.setTopicObject = function (val) {
         this.theTopicObject = val;
     };
-
-    this.switchTable = function () {
-        return this.theSwitchTable;
-    }
 
     this.xmtSeq = function () {
         return this.theXmtSeq;
@@ -55,16 +50,6 @@ function PhwangSessionClass(link_object_val) {
 
     this.receiveData = function (c_data_val) {
         this.topicObject().receiveData(c_data_val);
-    };
-
-    this.initSwitchTable = function () {
-        this.theSwitchTable = {
-            "go": this.createGoObject,
-        };
-    };
-
-    this.createGoObject = function () {
-        return new GoContainerObject(this);
     };
 
     this.appendTopicToSession = function (topic_data_val, his_name_val, initiater_val) {
