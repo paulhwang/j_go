@@ -36,14 +36,14 @@ function PhwangClass(root_val) {
     this.ABEND = function(str1_val, str2_val) {window.console.log("***ABEND*** " + str1_val + "() " + str2_val); window.alert("***ABEND*** " + str1_val + "() " + str2_val); var x = junk;};
     this.init__(root_val);
 }
-function PhwangPortClass (phwang_object_val) {
+function PhwangPortClass(phwang_object_val) {
     "use strict";
     this.init__ = function (phwang_object_val) {this.thePhwangObject = phwang_object_val;};
     this.receiveSetupLinkResponse = function() {this.rootObject().ajaxObject().receiveSetupLinkResponse();};
     this.receiveGetNameListResponse = function() {this.rootObject().ajaxObject().receiveGetNameListResponse();};
     this.receiveSetupSessionResponse = function() {this.rootObject().ajaxObject().receiveSetupSessionResponse();};
     this.receiveSetupSession2Response = function() {this.rootObject().ajaxObject().receiveSetupSession2Response();};
-    this.receiveGetSessionDataResponse = function (data_val) {this.rootObject().ajaxObject().receiveSetupSessionResponse(data_val);};
+    this.receiveGetSessionDataResponse = function(data_val) {this.rootObject().ajaxObject().receiveSetupSessionResponse(data_val);};
     this.objectName = function() {return "PhwangPortClass";};
     this.phwangObject = function() {return this.thePhwangObject;};
     this.rootObject = function() {return this.phwangObject().rootObject();};
