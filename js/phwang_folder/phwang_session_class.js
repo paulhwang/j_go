@@ -33,14 +33,6 @@ function PhwangSessionClass(link_object_val) {
         return this.rootObject().myName();
     };
 
-    this.hisName = function () {
-        return this.phwangSessionStorageObject().hisName();
-    };
-
-    this.setHisName = function (val) {
-        this.phwangSessionStorageObject().setHisName(val);
-    };
-
     this.gameName = function () {
         return this.theGameName;
     };
@@ -140,14 +132,6 @@ function PhwangSessionStorageObject (phwang_session_object_val) {
 
     this.phwangObject = function () {
         return this.phwangSessionObject().phwangObject();
-    };
-
-    this.hisName = function () {
-        return this.storage().his_name;
-    };
-
-    this.setHisName = function (val) {
-        this.storage().his_name = val;
     };
 
     this.sessionId = function () {

@@ -43,8 +43,8 @@ function GoPlayGameObject(root_object_val) {
         return true;
     };
     this.playBothSides = function() {
-        this.debug(false, "playBothSides", "myName=" + this.phwangLinkObject().myName() + " hisName=" + this.phwangSessionObject().hisName());
-        return (this.phwangLinkObject().myName() === this.phwangSessionObject().hisName());
+        this.debug(false, "playBothSides", "myName=" + this.phwangLinkObject().myName() + " hisName=" + this.configObject().hisName());
+        return (this.phwangLinkObject().myName() === this.configObject().hisName());
     };
     this.isMyTurn = function() {
         if (this.playBothSides()) {
