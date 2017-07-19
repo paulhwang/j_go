@@ -2,10 +2,8 @@
   Copyrights reserved
   Written by Paul Hwang
 */
-
 function ConfigRootObject() {
     "use strict";
-
     this.init__ = function() {
         this.thePhwangObject = new PhwangClass(this);
         this.phwangObject().initObject();
@@ -16,7 +14,6 @@ function ConfigRootObject() {
         this.theHtmlObject = new ConfigHtmlObject(this);
         this.debug(true, "init__", "myName=" + this.phwangLinkObject().myName() + " linkId=" + this.phwangLinkObject().linkId());
     };
-
     this.objectName = function() {return "ConfigRootObject";};
     this.phwangObject = function() {return this.thePhwangObject;};
     this.phwangAjaxObject = function() {return this.phwangObject().phwangAjaxObject();};
@@ -33,10 +30,8 @@ function ConfigRootObject() {
     this.abend_ = function (str1_val, str2_val) {this.phwangObject().ABEND(str1_val, str2_val);};
     this.init__();
 }
-
 function ConfigHtmlObject(root_object_val) {
     "use strict";
-
     this.init__ = function (root_object_val) {
         this.theRootObject = root_object_val;
         this.setupHtmlInputFunction();
@@ -63,13 +58,11 @@ function ConfigHtmlObject(root_object_val) {
             this0.phwangAjaxObject().setupSession(this0.phwangLinkObject(), this0.configStorageObject().hisName(), encoded_config);
         });
     };
-
     this.renderNameList = function() {
         for (var i = 0; i < this.phwangLinkObject().nameListLength(); i++) {
             $('.peer_name_paragraph select').append($('<option>', {value:this.phwangLinkObject().nameListElement(i), text:this.phwangLinkObject().nameListElement(i)}));
         }
     };
-
     this.gotoNextPage = function() {window.open(this.phwangLinkObject().serverHttpHeader() + "go_act.html", "_self")};
     this.objectName = function() {return "ConfigHtmlObject";};
     this.rootObject = function() {return this.theRootObject;};
@@ -84,7 +77,6 @@ function ConfigHtmlObject(root_object_val) {
     this.abend = function(str1_val, str2_val) {this.rootObject().abend_(this.objectName() + "." + str1_val, str2_val);};
     this.init__(root_object_val);
 }
-
 function ConfigAjaxClass(root_object_val) {
     "use strict";
     this.init__ = function (root_object_val) {this.theRootObject = root_object_val;};
@@ -102,6 +94,5 @@ function ConfigAjaxClass(root_object_val) {
     this.abend = function(str1_val, str2_val) {return this.phwangObject().ABEND(this.objectName() + "." + str1_val, str2_val);};
     this.init__(root_object_val);
 }
-
 var config_main = function() {"use strict"; new ConfigRootObject();};
 $(document).ready(config_main);

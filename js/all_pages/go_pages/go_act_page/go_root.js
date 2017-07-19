@@ -2,10 +2,8 @@
   Copyrights reserved
   Written by Paul Hwang
 */
-
 function GoPlayRootObject() {
     "use strict";
-
     this.init__ = function() {
         this.thePhwangObject = new PhwangClass(this);
         this.phwangObject().initObject();
@@ -25,7 +23,6 @@ function GoPlayRootObject() {
         this.debug(true, "init__", "myName=" + this.phwangLinkObject().myName() + " linkId=" + this.phwangLinkObject().linkId() + " sessionId=" + this.phwangSessionObject().sessionId());
         this.debug(true, "init__", "boardSize=" + this.configObject().boardSize() + " stoneColor=" + this.configStorageObject().myColor() + " komi=" + this.configObject().komiPoint() + " handicap=" + this.configObject().handicapPoint());
     };
-
     this.objectName = function() {return "GoPlayRootObject";};
     this.phwangObject = function() {return this.thePhwangObject;};
     this.phwangAjaxObject = function() {return this.phwangObject().phwangAjaxObject();};
@@ -47,10 +44,8 @@ function GoPlayRootObject() {
     this.abend_ = function(str1_val, str2_val) {this.phwangObject().ABEND(str1_val, str2_val);};
     this.init__();
 }
-
 function GoPlayHtmlObject(root_object_val) {
     "use strict";
-
     this.init__ = function (root_object_val) {
         this.theRootObject = root_object_val;
         this.theCanvasWidth = 432;
@@ -58,7 +53,6 @@ function GoPlayHtmlObject(root_object_val) {
         this.setupHtmlInput();
         this.debug(true, "init__", "");
     };
-
     this.initElements = function() {
         this.theCanvasElement = window.document.getElementById("go_canvas");
         if (this.canvasElement() === null) {
@@ -68,38 +62,31 @@ function GoPlayHtmlObject(root_object_val) {
         this.canvasElement().setAttribute("style", "border:1px solid #000000;");
         this.canvasElement().width = this.canvasWidth();
         this.canvasElement().height = this.canvasWidth() * 1.1;
-
         this.theCanvasContext = this.canvasElement().getContext("2d");
         if (this.canvasContext() === null) {
             this.abend("GoUiObject", "null canvasContext");
             return;
         }
-
         this.theBlackScoreElement = window.document.getElementById("black_score");
         if (this.blackScoreElement() === null) {
             this.abend("GoUiObject", "null theBlackScoreElement");
             return;
         }
-
         this.theWhiteScoreElement = window.document.getElementById("white_score");
         if (this.whiteScoreElement() === null) {
             this.abend("GoUiObject", "null theWhiteScoreElement");
             return;
         }
     };
-
     this.setupHtmlInput = function(str1_val, str2_val) {
         var this0 = this;
-
         $("canvas").on("click", function(event) {
             this0.inputObject().uiClick(event.clientX, event.clientY);
         });
-
         $("canvas").on("mousemove", function(event) {
             this0.inputObject().uiMouseMove(event.clientX, event.clientY);
         });
     };
-
     this.objectName = function() {return "GoPlayHtmlObject";};
     this.rootObject = function() {return this.theRootObject;};
     this.phwangObject = function() {return this.rootObject().phwangObject();};
@@ -119,7 +106,6 @@ function GoPlayHtmlObject(root_object_val) {
     this.abend = function(str1_val, str2_val) {this.rootObject().abend_(this.objectName() + "." + str1_val, str2_val);};
     this.init__(root_object_val);
 }
-
 function GoAjaxClass(root_object_val) {
     "use strict";
     this.init__ = function (root_object_val) {this.theRootObject = root_object_val;};
@@ -137,6 +123,5 @@ function GoAjaxClass(root_object_val) {
     this.abend = function(str1_val, str2_val) {return this.phwangObject().ABEND(this.objectName() + "." + str1_val, str2_val);};
     this.init__(root_object_val);
 }
-
 var go_play_main = function() {"use strict"; new GoPlayRootObject();};
 $(document).ready(go_play_main);

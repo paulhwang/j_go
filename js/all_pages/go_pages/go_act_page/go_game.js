@@ -5,7 +5,6 @@
 
 function GoPlayGameObject(root_object_val) {
     "use strict";
-
     this.init__ = function(root_object_val) {
         this.theRootObject = root_object_val;
         this.theBlackCaptureStones = 0;
@@ -21,45 +20,36 @@ function GoPlayGameObject(root_object_val) {
         this.theGameIsOver = false;
         this.debug(false, "init__", "");
     };
-
     this.processNewMove = function(x_val, y_val) {
         this.debug(false, "processNewMove", "(" + x_val + "," + y_val + ")");
-
         if (this.gameIsOver()) {
             var move = new GoMoveObject(null, x_val, y_val, GO.THE_MARK_DEAD_STONE_DIFF, this.totalMoves(), this.containerObject());
             this.portObject().transmitMoveData(move);
             return;
         }
-
         if (!this.isValidMoveOnBoard(x_val, y_val)) {
             return;
         }
         var move = new GoMoveObject(null, x_val, y_val, this.nextColor(), this.totalMoves() + 1, this.rootObject());
         this.portObject().transmitMoveData(move);
-
     };
-
     this.isValidMoveOnBoard = function(x_val, y_val) {
         if (this.boardObject().boardArray(x_val, y_val) !== GO.EMPTY_STONE()) {
             return false;
         }
-
         if (this.validLastDeadInfo() && (x_val === this.lastDeadX()) && (y_val === this.lastDeadY())) {
             return false;
         }
         return true;
     };
-
     this.playBothSides = function() {
         this.debug(false, "playBothSides", "myName=" + this.phwangLinkObject().myName() + " hisName=" + this.phwangSessionObject().hisName());
         return (this.phwangLinkObject().myName() === this.phwangSessionObject().hisName());
     };
-
     this.isMyTurn = function() {
         if (this.playBothSides()) {
             return true;
         }
-
         this.debug(true, "isMyTurn", "nextColor=" + this.nextColor() + ", myColor=" + this.configObject().myColor());
         if (this.nextColor() === this.configObject().myColor()) {
             return true;
@@ -67,7 +57,6 @@ function GoPlayGameObject(root_object_val) {
             return false;
         }
     };
-
     this.totalMoves = function() {return this.theTotalMoves;};
     this.setTotalMoves = function(total_moves_val) {this.theTotalMoves = total_moves_val;};
     this.nextColor = function() {return this.theNextColor;};
@@ -87,7 +76,6 @@ function GoPlayGameObject(root_object_val) {
     this.setWhiteScoreString = function(val) {this.theWhiteScoreString = val;}
     this.finalScoreString = function() {return this.theFinalScoreString;}
     this.setFinalScoreString = function(val) {this.theFinalScoreString = val;}
-
     this.objectName = function() {return "GoPlayGameObject";};
     this.rootObject = function() {return this.theRootObject;};
     this.phwangObject = function() {return this.rootObject().phwangObject();};
@@ -103,7 +91,6 @@ function GoPlayGameObject(root_object_val) {
     this.abend = function(str1_val, str2_val) {this.rootObject().abend_(this.objectName() + "." + str1_val, str2_val);};
     this.init__(root_object_val);
 }
-
 function GoPlayPortObject(root_val) {
     "use strict";
     this.GO_PROTOCOL_GAME_INFO = function() {return "G";};
@@ -118,7 +105,6 @@ function GoPlayPortObject(root_val) {
     this.GO_PROTOCOL_RESIGN_COMMAND = function() {return "R";};
     this.GO_PROTOCOL_CONFIRM_COMMAND = function() {return "C";};
     this.GO_PROTOCOL_CONTINUE_COMMAND = function() {return "c";};
-
     this.init__ = function(root_val) {this.theRootObject = root_val;};
     this.transmitMoveData = function(move_val) {this.transmitGameData(this.GO_PROTOCOL_MOVE_COMMAND() + move_val.encodeMove());};
     this.transmitPassCommand = function() {this.transmitGameData(this.GO_PROTOCOL_PASS_COMMAND());};
@@ -129,18 +115,15 @@ function GoPlayPortObject(root_val) {
     this.transmitResignCommand = function() {this.transmitGameData(this.GO_PROTOCOL_RESIGN_COMMAND());};
     this.transmitConfirmCommand = function() {this.transmitGameData(this.GO_PROTOCOL_CONFIRM_COMMAND());};
     this.transmitContinueCommand = function() {this.transmitGameData(this.GO_PROTOCOL_CONTINUE_COMMAND());};
-
     this.transmitGameData = function(data_val) {
         this.debug(false, "transmitGameData", "data_val=" + data_val);
         this.inputObject().setPendingRequestExist();
         this.transmitData(this.GO_PROTOCOL_GAME_INFO() + data_val);
     };
-
     this.transmitData = function(data_val) {
         this.debug(false, "transmitData", "data_val=" + data_val);
         this.phwangSessionObject().transmitData(data_val);
     };
-
     this.receiveData = function(data_val) {
         this.debug(false, "receiveData", "data_val=" + data_val);
         if (data_val.charAt(0) === this.GO_PROTOCOL_GAME_INFO().charAt(0)) {
@@ -155,13 +138,11 @@ function GoPlayPortObject(root_val) {
         }
         this.abend("receiveData", "data_val=" + data_val);
     };
-
     this.receiveGameData = function(data_val) {
         this.inputObject().clearPendingRequestExist();
         this.boardObject().decodeBoard(data_val);
         this.displayObject().drawBoard();
     };
-
     this.objectName = function() {return "GoPlayPortObject";};
     this.rootObject = function() {return this.theRootObject;};
     this.ajxObject = function() {return this.rootObject().ajxObject();};
@@ -176,13 +157,10 @@ function GoPlayPortObject(root_val) {
     this.abend = function (str1_val, str2_val) {this.rootObject().abend_(this.objectName() + "." + str1_val, str2_val);};
     this.init__(root_val);
 }
-
 function GoMoveObject(str_val, x_val, y_val, color_val, turn_val, root_object_val) {
     "use strict";
-
     this.init__ = function(str_val, x_val, y_val, color_val, root_object_val) {
         this.theRootObject = root_object_val;
-
         if (!str_val) {
             this.theX = x_val;
             this.theY = y_val;
@@ -193,21 +171,17 @@ function GoMoveObject(str_val, x_val, y_val, color_val, turn_val, root_object_va
         }
         this.debug(true, "init__", "(" + this.xX() + "," + this.yY() + ") color=" + this.myColor() + " turn=" + this.turnIndex());
     };
-
     this.encodeMove = function() {
         var buf = "";
         if (this.xX() < 10) {
             buf = buf + 0;
         }
         buf = buf + this.xX();
-
         if (this.yY() < 10) {
             buf = buf + 0;
         }
         buf = buf + this.yY();
-
         buf = buf + this.myColor();
-
         if (this.turnIndex() < 100) {
             buf = buf + 0;
         }
@@ -215,10 +189,8 @@ function GoMoveObject(str_val, x_val, y_val, color_val, turn_val, root_object_va
             buf = buf + 0;
         }
         buf = buf + this.turnIndex();
-
         return buf;
     };
-
     this.moveObjectDecode = function(str_val) {
         var index = 0;
         this.theX = (str_val.charAt(index++) - '0') * 10;
@@ -230,7 +202,6 @@ function GoMoveObject(str_val, x_val, y_val, color_val, turn_val, root_object_va
         this.theTurnIndex += (str_val.charAt(index++) - '0') * 10;
         this.theTurnIndex += (str_val.charAt(index++) - '0');
     };
-
     this.objectName = function() {return "GoMoveObject";};
     this.rootObject = function() {return this.theRootObject;};
     this.xX = function() {return this.theX;};
@@ -242,10 +213,8 @@ function GoMoveObject(str_val, x_val, y_val, color_val, turn_val, root_object_va
     this.abend = function(str1_val, str2_val) {this.rootObject().abend_(this.objectName() + "." + str1_val, str2_val);};
     this.init__(str_val, x_val, y_val, color_val, root_object_val);
 }
-
 function GoPlayBoardObject(root_val) {
     "use strict";
-
     this.init__ = function (root_val) {
         this.theRootObject = root_val;
         this.theBoardArray = [19];
@@ -259,34 +228,27 @@ function GoPlayBoardObject(root_val) {
         this.resetBoardObjectData();
         this.debug(false, "init__", "");
     };
-
     this.addStoneToBoard = function(x_val, y_val, color_val) {
         if (!GO.isValidCoordinates(x_val, y_val, this.configObject().boardSize())) {
             this.goAbend("addStoneToBoard", "x=" + x_val + " y=" + y_val);
             return;
         }
-
         this.setBoardArray(x_val, y_val, color_val);
     };
-
     this.addStoneToMarkedBoard = function(x_val, y_val, color_val) {
         if (!GO.isValidCoordinates(x_val, y_val, this.configObject().boardSize())) {
             this.goAbend("addStoneToMarkedBoard", "x=" + x_val + " y=" + y_val);
             return;
         }
-
         this.setMarkedBoardArray(x_val, y_val, color_val);
     };
-
     this.removeStoneFromMarkedBoard = function(x_val, y_val) {
         if (!GO.isValidCoordinates(x_val, y_val, this.configObject().boardSize())) {
             this.goAbend("addStoneToMarkedBoard", "x=" + x_val + " y=" + y_val);
             return;
         }
-
         this.setMarkedBoardArray(x_val, y_val, GO.EMPTY_STONE());
     };
-
     this.isEmptySpace = function(x_val, y_val) {
         if (!GO.isValidCoordinates(x_val, y_val, this.configObject().boardSize())) {
             return false;
@@ -296,11 +258,9 @@ function GoPlayBoardObject(root_val) {
         }
         return true;
     };
-
     this.encodeBoard = function() {
         var buf = "";
         var i, j;
-
         i = 0;
         while (i < this.boardSize()) {
             j = 0;
@@ -313,21 +273,16 @@ function GoPlayBoardObject(root_val) {
         this.logit("encodeBoard", "data=" + buf);
         return buf;
     };
-
     this.decodeBoard = function(str_val) {
-        //this.logit("decodeBoard", "input=" + str_val);
         var index = 0;
         var num;
         var i, j;
-
         num  = (str_val.charAt(index++) - '0') * 100;
         num += (str_val.charAt(index++) - '0') * 10;
         num += (str_val.charAt(index++) - '0');
         this.gameObject().setTotalMoves(num);
-
         num = (str_val.charAt(index++) - '0');
         this.gameObject().setNextColor(num);
-
         i = 0;
         while (i < this.boardSize()) {
             j = 0;
@@ -337,7 +292,6 @@ function GoPlayBoardObject(root_val) {
             }
             i += 1;
         }
-
         num  = (str_val.charAt(index++) - '0') * 100;
         num += (str_val.charAt(index++) - '0') * 10;
         num += (str_val.charAt(index++) - '0');
@@ -346,7 +300,6 @@ function GoPlayBoardObject(root_val) {
         num += (str_val.charAt(index++) - '0') * 10;
         num += (str_val.charAt(index++) - '0');
         this.theWhiteCapturedStones = num;
-
         num  = (str_val.charAt(index++) - '0') * 10;
         num += (str_val.charAt(index++) - '0');
         this.gameObject().setLastDeadX(num);
@@ -359,10 +312,8 @@ function GoPlayBoardObject(root_val) {
             this.gameObject().setValidLastDeadInfo(false);
         }
     };
-
     this.compareBoards = function(board_val) {
         var i, j;
-
         i = 0;
         while (i < this.boardSize()) {
             j = 0;
@@ -375,11 +326,8 @@ function GoPlayBoardObject(root_val) {
             i += 1;
         }
     };
-
-
     this.resetMarkedBoardObjectData = function() {
         var i, j;
-
         i = 0;
         while (i < this.boardSize()) {
             j = 0;
@@ -390,11 +338,8 @@ function GoPlayBoardObject(root_val) {
             i += 1;
         }
     };
-
     this.resetBoardObjectData = function() {
         var i, j;
-
-        //this.goLog("resetBoardObjectData", "boardSize=" + this.boardSize());
         i = 0;
         while (i < this.boardSize()) {
             j = 0;
@@ -405,7 +350,6 @@ function GoPlayBoardObject(root_val) {
             i += 1;
         }
     };
-
     this.boardSize = function() {return this.configObject().boardSize();};
     this.blackCapturedStones = function() {return this.theBlackCapturedStones;};
     this.whiteCapturedStones = function() {return this.theWhiteCapturedStones;};

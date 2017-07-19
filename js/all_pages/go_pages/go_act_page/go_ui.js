@@ -5,14 +5,12 @@
 
 function GoPlayDisplayObject(root_object_val) {
     "use strict";
-
     this.init__ = function (root_object_val) {
         this.theRootObject = root_object_val;
         this.drawArrows();
         this.drawBoard();
         this.debug(false, "init__", "");
     };
-
     this.drawBoard = function() {
         var arrow_color = "black";
         var grid_len = this.getGridLength();
@@ -21,16 +19,12 @@ function GoPlayDisplayObject(root_object_val) {
         //var radius = 3.2 * micro_grid_len;
         var context = this.canvasContext();
         //var canvas_extra = this.canvasElement_().height - this.canvasElement_().width;
-
         context.fillStyle = arrow_color;
         context.lineWidth = 1;
         context.strokeStyle = '#003300';
-
         this.drawArrows();
-
         context.fillStyle = "#FF8000";
         context.fillRect(0, 0, this.canvasElement().width, this.canvasElement().width);
-
         this.drawEmptyBoard();
         this.drawStones();
         if (this.gameObject().gameIsOver()) {
@@ -40,11 +34,9 @@ function GoPlayDisplayObject(root_object_val) {
         this.drawCandidateStone();
         this.drawScore();
     };
-
     this.drawEmptyBoard = function() {
         var grid_len = this.getGridLength();
         var context = this.canvasContext();
-
         this.setBoardColor();
         context.lineWidth = 1;
         var i = 1;
@@ -57,7 +49,6 @@ function GoPlayDisplayObject(root_object_val) {
             context.stroke();
             i += 1;
         }
-
         if (this.boardSize() === 9) {
             drawBoardDot(5, 5);
         } else if (this.boardSize() === 13) {
@@ -77,7 +68,6 @@ function GoPlayDisplayObject(root_object_val) {
             drawBoardDot(16, 10);
             drawBoardDot(16, 16);
         }
-
         function drawBoardDot(x_val, y_val) {
             context.beginPath();
             context.arc(x_val * grid_len, y_val * grid_len, 3, 0, 2 * Math.PI, false);
@@ -88,24 +78,18 @@ function GoPlayDisplayObject(root_object_val) {
             context.stroke();
         }
     };
-
     this.setBoardColor = function() {
         this.canvasContext().fillStyle = "#FF8000";
         this.canvasContext().fillRect(0, 0, this.canvasElement().width, this.canvasElement().width);
     }
-
     this.drawStones = function() {
         var grid_len = this.getGridLength();
         var micro_grid_len = grid_len / 8;
         var radius = 3.2 * micro_grid_len;
         var context = this.canvasContext();
         var paint = null;
-        var i, j;
-
-        i = 0;
-        while (i < this.boardSize()) {
-            j = 0;
-            while (j < this.boardSize()) {
+        for (var i = 0; i < this.boardSize(); i++) {
+            for (var j = 0; j < this.boardSize(); j++) {
                 if (this.boardObject().boardArray(i, j) === GO.BLACK_STONE()) {
                     paint = "black";
                 } else if (this.boardObject().boardArray(i, j) === GO.WHITE_STONE()) {
@@ -115,18 +99,14 @@ function GoPlayDisplayObject(root_object_val) {
                     this.drawOneStone(i, j, paint);
                     paint = null;
                 }
-                j += 1;
             }
-            i += 1;
         }
     };
-
     this.drawOneStone = function (x_val, y_val, paint_val) {
         var grid_len = this.getGridLength();
         var micro_grid_len = grid_len / 8;
         var radius = 3.2 * micro_grid_len;
         var context = this.canvasContext();
-
         context.beginPath();
         context.arc((x_val + 1) * grid_len, (y_val + 1) * grid_len, radius, 0, 2 * Math.PI, false);
         context.fillStyle = paint_val;
@@ -135,22 +115,16 @@ function GoPlayDisplayObject(root_object_val) {
         context.strokeStyle = '#003300';
         context.stroke();
      }
-
     this.drawCandidateStone = function() {
         if (!this.gameObject().isMyTurn() && !this.gameObject().gameIsOver()) {
             return;
         }
-
         var grid_len = this.getGridLength();
         var micro_grid_len = grid_len / 8;
         var radius = 2 * micro_grid_len;
         var context = this.canvasContext();
         var paint;
-
-        //GO.goLog("GoUiObject.drawCandidateStone", "");
-
         if (this.gameObject().nextColor() === GO.BLACK_STONE()) {
-            //GO.goLog("GoUiObject.drawMarkedStones", "black" + i + j);
             paint = "black";
             if (this.gameObject().gameIsOver()) {
                 paint = "gray";
@@ -163,7 +137,6 @@ function GoPlayDisplayObject(root_object_val) {
             context.strokeStyle = '#003300';
             context.stroke();
         } else {
-            //GO.goLog("GoUiObject.drawMarkedStones", "white");
             paint = "white";
             if (this.gameObject().gameIsOver()) {
                 paint = "gray";
@@ -177,7 +150,6 @@ function GoPlayDisplayObject(root_object_val) {
             context.stroke();
         }
     };
-
     this.drawArrows = function() {
         var arrow_len = this.getArrowUnitLength();
         var context = this.canvasContext();
@@ -254,7 +226,6 @@ function GoPlayDisplayObject(root_object_val) {
         this.blackScoreElement().textContent = "Black: " + this.boardObject().blackCapturedStones();
         this.whiteScoreElement().textContent = "White: " + this.boardObject().whiteCapturedStones();
     };
-
     this.boardSize = function() {return this.configObject().boardSize();};
     this.canvasElement = function() {return this.htmlObject().canvasElement();};
     this.canvasContext = function() {return this.htmlObject().canvasContext();};
@@ -274,10 +245,8 @@ function GoPlayDisplayObject(root_object_val) {
     this.abend = function(str1_val, str2_val) {this.rootObject().abend_(this.objectName() + "." + str1_val, str2_val);};
     this.init__(root_object_val);
 }
-
 function GoPlayInputObject(root_object_val) {
     "use strict";
-
     this.init__ = function(root_object_val) {
         this.theRootObject = root_object_val;
         this.theLastMouseX = 9;
@@ -285,17 +254,14 @@ function GoPlayInputObject(root_object_val) {
         this.clearPendingRequestExist();
         this.debug(false, "init__", "");
     };
-
     this.uiMouseMove = function(event_x, event_y) {
         if (this.pendingRequestExist()) return;
-
         var grid_len = this.getGridLength();
         var x = Math.round((event_x - this.canvasElement().getBoundingClientRect().left) / grid_len) - 1;
         var y = Math.round((event_y - this.canvasElement().getBoundingClientRect().top) / grid_len) - 1;
         if ((x < 0) || (y < 0) || (x >= this.boardSize()) || (y >= this.boardSize())) {
             return;
         }
-
         if ((this.lastMouseX() !== x) || (this.lastMouseY() !== y)) {
             this.debug(false, "uiMouseMove", "(" + x + "," + y + ")");
             this.setLastMouseX(x);
@@ -303,7 +269,6 @@ function GoPlayInputObject(root_object_val) {
             this.displayObject().drawBoard();
         }
     };
-
     this.uiClick = function(event_x, event_y) {
         if (this.pendingRequestExist()) return;
         if (event_x < this.canvasElement().getBoundingClientRect().left) {return;}
@@ -321,7 +286,6 @@ function GoPlayInputObject(root_object_val) {
             if (event_y > this.canvasElement().getBoundingClientRect().top + this.canvasElement().getBoundingClientRect().width + arrow_len * 2) {
                 return;
             }
-
             if ((event_x - this.canvasElement().getBoundingClientRect().left) < arrow_len * 2.5) {
                 this.portObject().transmitDoubleBackwardCommand();
                 this.displayObject().drawBoard();
@@ -366,7 +330,6 @@ function GoPlayInputObject(root_object_val) {
             }
             return;
         }
-
         if (!this.gameObject().isMyTurn()) {this.debug(true, "uiClick", "not my turn"); return;}
         var x = Math.round((event_x - this.canvasElement().getBoundingClientRect().left) / grid_len) - 1;
         var y = Math.round((event_y - this.canvasElement().getBoundingClientRect().top) / grid_len) - 1;
@@ -374,7 +337,6 @@ function GoPlayInputObject(root_object_val) {
         this.debug(false, "uiClick", "(" + x + "," + y + ")");
         this.gameObject().processNewMove(x, y);
     };
-
     this.pendingRequestExist = function() {return this.thePendingRequestExist;};
     this.setPendingRequestExist = function() {this.thePendingRequestExist = true;};
     this.clearPendingRequestExist = function() {this.thePendingRequestExist = false;};

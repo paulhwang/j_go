@@ -2,7 +2,6 @@
   Copyrights reserved
   Written by Paul Hwang
 */
-
 function LoginRootObject() {
     "use strict";
     this.init__ = function() {
@@ -11,10 +10,8 @@ function LoginRootObject() {
         this.theAjaxObject = new LoginAjaxClass(this);
         this.theHtmlObject = new LoginHtmlObject(this);
         this.debug(true, "init__", "myName=" + this.phwangLinkObject().myName() + " linkId=" + this.phwangLinkObject().linkId());
-
         this.phwangLinkObject().setHttpInfo();
     };
-
     this.objectName = function() {return "LoginRootObject";};
     this.phwangObject = function() {return this.thePhwangObject;};
     this.phwangAjaxObject = function() {return this.phwangObject().phwangAjaxObject();};
@@ -29,16 +26,10 @@ function LoginRootObject() {
     this.abend_ = function(str1_val, str2_val) {this.phwangObject().ABEND(str1_val, str2_val);};
     this.init__();
 }
-
 function LoginHtmlObject(root_object_val) {
     "use strict";
     this.gotoNextPage = function() {window.open(this.phwangLinkObject().serverHttpHeader() + "go_config.html", "_self")};
-    this.init__ = function (root_object_val) {
-        this.theRootObject = root_object_val;
-        this.setupHtmlInput();
-        this.debug(true, "init__", "");
-    };
-
+    this.init__ = function (root_object_val) {this.theRootObject = root_object_val; this.setupHtmlInput();};
     this.setupHtmlInput = function() {
         var this0 = this;
         $(".login_section .login_button").on("click", function() {
@@ -50,7 +41,6 @@ function LoginHtmlObject(root_object_val) {
             }
         });
     };
-
     this.objectName = function() {return "LoginHtmlObject";};
     this.rootObject = function() {return this.theRootObject;};
     this.phwangObject = function() {return this.rootObject().phwangObject();};
@@ -62,7 +52,6 @@ function LoginHtmlObject(root_object_val) {
     this.abend = function(str1_val, str2_val) {return this.rootObject().abend_(this.objectName() + "." + str1_val, str2_val);};
     this.init__(root_object_val);
 }
-
 function LoginAjaxClass(root_object_val) {
     "use strict";
     this.init__ = function (root_object_val) {this.theRootObject = root_object_val;};
@@ -80,6 +69,5 @@ function LoginAjaxClass(root_object_val) {
     this.abend = function(str1_val, str2_val) {return this.rootObject().abend_(this.objectName() + "." + str1_val, str2_val);};
     this.init__(root_object_val);
 }
-
 var login_main = function() {"use strict"; new LoginRootObject();};
 $(document).ready(login_main);
