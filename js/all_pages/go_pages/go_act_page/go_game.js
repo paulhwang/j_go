@@ -303,15 +303,10 @@ function GoPlayBoardObject(root_val) {
         }
     };
     this.resetBoardObjectData = function() {
-        var i, j;
-        i = 0;
-        while (i < this.boardSize()) {
-            j = 0;
-            while (j < this.boardSize()) {
+        for (var i = 0; i < this.boardSize(); i++) {
+            for (var j = 0; j < this.boardSize(); j++) {
                 this.setBoardArray(i, j, GO.EMPTY_STONE());
-                j += 1;
             }
-            i += 1;
         }
     };
     this.boardSize = function() {return this.configObject().boardSize();};
