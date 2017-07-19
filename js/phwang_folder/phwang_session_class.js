@@ -10,10 +10,9 @@ function PhwangSessionClass(link_object_val) {
     this.init__ = function (link_object_val) {
         this.thePhwangLinkObject = link_object_val;
         this.thePhwangSessionStorageObject = new PhwangSessionStorageObject(this);
-
         this.theXmtSeq = 0;
         this.theRcvSeq = 0;
-        this.debug(false, "init__", "session=" + this.sessionName());
+        this.debug(false, "init__", "sessionId=" + this.sessionId());
     };
 
     this.topicObject = function () {
@@ -40,32 +39,12 @@ function PhwangSessionClass(link_object_val) {
         this.theRcvSeq += 1;
     };
 
-    this.sessionName = function () {
-        return  this.phwangLinkObject().linkId() + ":" + this.sessionId();
-    };
-
     this.transmitData = function (data_val) {
         this.phwangAjaxObject().putSessionData(this, data_val);
     };
 
     this.receiveData = function (c_data_val) {
         this.topicObject().receiveData(c_data_val);
-    };
-
-    this.appendTopicToSession = function (topic_data_val, his_name_val, initiater_val) {
-        this.setHisName(his_name_val);
-        this.debug(false, "appendTopicToSession", "topic_data_val=" + topic_data_val);
-        var topic_data = JSON.parse(topic_data_val);
-
-        var func = this.switchTable()[topic_data.title];
-        if (!func) {
-            this.abend("appendTopicToSession", "bad title=" + topic_data_val.title);
-            return;
-        }
-        this.setTopicObject(func.bind(this)());
-        this.topicObject().init___(topic_data.config, initiater_val);
-        this.topicObject().launchTopic();
-        this.tAjaxObject().getSessionData(this);
     };
     this.objectName = function () {return "PhwangSessionClass";};
     this.phwangLinkObject = function () {return this.thePhwangLinkObject;};
