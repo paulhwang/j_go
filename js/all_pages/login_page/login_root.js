@@ -29,15 +29,15 @@ function LoginRootObject() {
 function LoginHtmlObject(root_object_val) {
     "use strict";
     this.gotoNextPage = function() {window.open(this.phwangLinkObject().serverHttpHeader() + "go_config.html", "_self")};
-    this.init__ = function (root_object_val) {this.theRootObject = root_object_val; this.setupHtmlInput();};
+    this.init__ = function(root_object_val) {this.theRootObject = root_object_val; this.setupHtmlInput();};
     this.setupHtmlInput = function() {
         var this0 = this;
         $(".login_section .login_button").on("click", function() {
             this0.phwangLinkObject().setMyName($(".login_section .login_name").val());
-            this0.phwangLinkObject().setPassWord($(".login_section .login_password").val());
-            this0.debug(true, "setupHtmlInput", "myName=" + this0.phwangLinkObject().myName() + " passWord=" + this0.phwangLinkObject().passWord());
+            var password = $(".login_section .login_password").val();
+            this0.debug(true, "setupHtmlInput", "myName=" + this0.phwangLinkObject().myName() + " password=" + password);
             if (this0.phwangLinkObject().myName()) {
-                this0.phwangAjaxObject().setupLink(this0.phwangLinkObject());
+                this0.phwangAjaxObject().setupLink(this0.phwangLinkObject(), password);
             }
         });
     };
@@ -54,12 +54,12 @@ function LoginHtmlObject(root_object_val) {
 }
 function LoginAjaxClass(root_object_val) {
     "use strict";
-    this.init__ = function (root_object_val) {this.theRootObject = root_object_val;};
+    this.init__ = function(root_object_val) {this.theRootObject = root_object_val;};
     this.receiveSetupLinkResponse = function() {this.htmlObject().gotoNextPage();};
     this.receiveGetNameListResponse = function() {};
     this.receiveSetupSessionResponse = function() {};
     this.receiveSetupSessionReplyResponse = function() {};
-    this.receiveGetSessionDataResponse = function (data_val) {};
+    this.receiveGetSessionDataResponse = function(data_val) {};
     this.objectName = function() {return "LoginAjaxClass";};
     this.rootObject = function() {return this.theRootObject;};
     this.phwangObject = function() {return this.rootObject().phwangObject();};
