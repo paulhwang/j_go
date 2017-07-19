@@ -14,19 +14,15 @@ function PhwangClass(root_val) {
         this.debug(true, "initObject", "");
     };
     this.decodeNumber = function(input_val, size_val) {
-        var index = 0;
         var output = 0;
-        while (index < size_val) {
+        for (var index = 0; index < size_val; index++) {
             output *= 10;
             output += input_val.charAt(index) - '0';
-            index += 1;
         }
         return output;
     };
-
     this.serverHttpHeader = function() {return "http://" + window.location.hostname + ":" + window.location.port + "/";};
     this.serverHttpsHeader = function() {return "https://" + window.location.hostname + ":" + window.location.port + "/";};
-
     this.objectName = function() {return "PhwangClass";};
     this.rootObject = function() {return this.theRootObject;};
     this.phwangAjaxObject = function() {return this.thePhwangAjaxObject;};
@@ -37,11 +33,7 @@ function PhwangClass(root_val) {
     this.logit = function(str1_val, str2_val) {return this.LOG_IT(this.objectName() + "." + str1_val, str2_val);};
     this.abend = function(str1_val, str2_val) {return this.ABEND(this.objectName() + "." + str1_val, str2_val);};
     this.LOG_IT = function(str1_val, str2_val) {window.console.log(str1_val + "() " + str2_val);};
-    this.ABEND = function(str1_val, str2_val) {
-        window.console.log("***ABEND*** " + str1_val + "() " + str2_val);
-        window.alert("***ABEND*** " + str1_val + "() " + str2_val);
-        var x = junk;
-    };
+    this.ABEND = function(str1_val, str2_val) {window.console.log("***ABEND*** " + str1_val + "() " + str2_val); window.alert("***ABEND*** " + str1_val + "() " + str2_val); var x = junk;};
     this.init__(root_val);
 }
 function PhwangPortClass (phwang_object_val) {
@@ -71,22 +63,15 @@ function PhwangQueueClass(phwang_object_val) {
         this.theQueueArray = [this.maxQueueLength()];
     };
     this.enqueueData = function(data_val) {
-        if (this.queueLength() >= this.maxQueueLength()) {
-            this.abend("enqueueData", "queue full");
-            return;
-        }
+        if (this.queueLength() >= this.maxQueueLength()) {this.abend("enqueueData", "queue full"); return;}
         this.queueArray()[this.queueLength()] = data_val;
         this.incrementQueueLength();
     };
     this.dequeueData = function() {
-        if (this.queueLength() === 0) {
-            return 0;
-        }
+        if (this.queueLength() === 0) {return 0;}
         var data = this.queueArray()[0];
         this.decrementQueueLength();
-        for (var i = 0; i < this.queueLength(); i++) {
-            this.queueArray()[i] = this.queueArray()[i + 1];
-        }
+        for (var i = 0; i < this.queueLength(); i++) {this.queueArray()[i] = this.queueArray()[i + 1];}
         return data;
     };
     this.maxQueueLength = function() {return this.theMaxQueueLength};

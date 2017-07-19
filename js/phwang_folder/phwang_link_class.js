@@ -2,10 +2,8 @@
  * Copyrights phwang
  * Written by Paul Hwang
  */
-
 function PhwangLinkClass(phwang_object_val) {
     "use strict";
-
     this.init__ = function(phwang_object_val) {
         this.thePhwangObject = phwang_object_val;
         this.thePhwangLinkStorageObject = new PhwangLinkStorageObject(this);
@@ -16,7 +14,6 @@ function PhwangLinkClass(phwang_object_val) {
         this.theSessionTableArray = [null];
         this.debug(true, "init__", "linkId=" + this.linkId() + " myName=" + this.myName());
     };
-
     this.myName = function() {return this.phwangLinkStorageObject().myName();};
     this.setMyName = function(val) {this.phwangLinkStorageObject().setMyName(val);};
     this.linkId = function() {return this.phwangLinkStorageObject().linkId();};
@@ -63,7 +60,6 @@ function PhwangLinkClass(phwang_object_val) {
     this.resetLinkStorage = function() {
         this.phwangLinkStorageObject().resetLinkStorage();
     };
-
     this.mallocSessionAndInsert = function(session_id_val) {
         this.phwangSessionObject().setSessionId(session_id_val);
         var session = new PhwangSessionClass(this);
@@ -72,12 +68,10 @@ function PhwangLinkClass(phwang_object_val) {
         }
         return session;
     };
-
     this.insertSession = function(session_val) {
         this.sessionIndexArray().push(session_val.sessionId());
         this.sessionTableArray().push(session_val);
     };
-
     this.getSession = function(session_id_val) {
         var index = this.sessionIndexArray().indexOf(session_id_val);
         if (index === -1) {
@@ -87,7 +81,6 @@ function PhwangLinkClass(phwang_object_val) {
             return session;
         }
     };
-
     this.objectName = function () {return "PhwangLinkClass";};
     this.phwangLinkStorageObject = function () {return this.thePhwangLinkStorageObject;};
     this.phwangObject = function () {return this.thePhwangObject;};
@@ -101,15 +94,13 @@ function PhwangLinkClass(phwang_object_val) {
 
 function PhwangLinkStorageObject(phwang_link_object_val) {
     "use strict";
-    this.storage = function () {return localStorage;};
-    this.init__ = function (phwang_link_object_val) {this.thePhwangLinkObject = phwang_link_object_val;};
-
-    this.resetLinkStorage = function () {
+    this.storage = function() {return localStorage;};
+    this.init__ = function(phwang_link_object_val) {this.thePhwangLinkObject = phwang_link_object_val;};
+    this.resetLinkStorage = function() {
         this.resetLinkId();
         this.resetMyName();
         this.resetPassWord();
     };
-
     this.myName = function () {return this.storage().my_name;};
     this.setMyName = function (val) {this.storage().my_name = val;};
     this.resetMyName = function () {this.setMyName("");};
