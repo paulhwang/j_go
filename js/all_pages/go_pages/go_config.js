@@ -41,7 +41,7 @@ function GoConfigStorageObject(root_val) {
         this.debug(true, "init__", "myColor=" + this.myColor() + " boardSize=" + this.boardSize() + " hisName=" + this.hisName() + " handicapPoint=" + this.handicapPoint() + " komiPoint=" + this.komiPoint());
     };
 
-    this.decodeConfig = function (encoded_val) {
+    this.decodeConfig = function(encoded_val) {
         this.debug(true, "decodeConfig", encoded_val);
         if ((encoded_val === undefined) || (encoded_val === "")) {
             this.setBoardSize(19);
@@ -69,7 +69,7 @@ function GoConfigStorageObject(root_val) {
         this.setHisName(encoded_val.slice(index));
     };
 
-    this.encodeConfig = function (my_name_val) {
+    this.encodeConfig = function(my_name_val) {
         var len = 11 + my_name_val.length;
         var buf = "G";
         if (len < 100) buf = buf + 0; if (len < 10) buf = buf + 0; buf = buf + len;
