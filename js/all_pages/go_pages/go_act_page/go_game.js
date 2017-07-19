@@ -219,11 +219,9 @@ function GoPlayBoardObject(root_val) {
         this.theRootObject = root_val;
         this.theBoardArray = [19];
         this.theMarkedBoardArray = [19];
-        var i = 0;
-        while (i < 19) {
+        for (var i = 0; i < 19; i++) {
             this.theBoardArray[i] = [19];
             this.theMarkedBoardArray[i] = [19];
-            i += 1;
         }
         this.resetBoardObjectData();
         this.debug(false, "init__", "");
@@ -257,21 +255,6 @@ function GoPlayBoardObject(root_val) {
             return false;
         }
         return true;
-    };
-    this.encodeBoard = function() {
-        var buf = "";
-        var i, j;
-        i = 0;
-        while (i < this.boardSize()) {
-            j = 0;
-            while (j < this.boardSize()) {
-                buf = buf + this.theBoardArray[i][j];
-                j += 1;
-            }
-            i += 1;
-        }
-        this.logit("encodeBoard", "data=" + buf);
-        return buf;
     };
     this.decodeBoard = function(str_val) {
         var index = 0;
