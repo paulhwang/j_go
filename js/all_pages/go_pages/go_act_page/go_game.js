@@ -295,20 +295,6 @@ function GoPlayBoardObject(root_val) {
             this.gameObject().setValidLastDeadInfo(false);
         }
     };
-    this.compareBoards = function(board_val) {
-        var i, j;
-        i = 0;
-        while (i < this.boardSize()) {
-            j = 0;
-            while (j < this.boardSize()) {
-                if (this.theBoardArray[i][j] !== board_val.theBoardArray[i][j]) {
-                    this.abend("compareBoards", "(" + i + "," + j + ")");
-                }
-                j += 1;
-            }
-            i += 1;
-        }
-    };
     this.resetMarkedBoardObjectData = function() {
         var i, j;
         i = 0;
