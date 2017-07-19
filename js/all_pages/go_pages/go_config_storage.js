@@ -7,7 +7,7 @@ function GoConfigStorageObject(root_val) {
     "use strict";
     this.init__ = function (root_val) {
         this.theRootObject = root_val;
-        this.debug(true, "init__", "myColor=" + this.myColor() + " boardSize=" + this.boardSize() + " handicapPoint=" + this.handicapPoint() + " komiPoint=" + this.komiPoint());
+        this.debug(true, "init__", "myColor=" + this.myColor() + " boardSize=" + this.boardSize() + " hisName=" + this.hisName() + " handicapPoint=" + this.handicapPoint() + " komiPoint=" + this.komiPoint());
     };
 
     this.decodeConfig = function (encoded_val) {
@@ -35,16 +35,18 @@ function GoConfigStorageObject(root_val) {
         this.setKomiPoint(data);
         data = encoded_val.charAt(index++) - '0';
         this.setMyColor_(data);
+        this.setHisName(encoded_val.slice(index));
     };
 
     this.encodeConfig = function () {
-        var len = 11;
+        var len = 11 + this.hisName().length;
         var buf = "G";
         if (len < 100) buf = buf + 0; if (len < 10) buf = buf + 0; buf = buf + len;
         if (this.boardSize() < 10) buf = buf + 0; buf = buf + this.boardSize();
         if (this.handicapPoint() < 10) buf = buf + 0; buf = buf + this.handicapPoint();
         if (this.komiPoint() < 10) buf = buf + 0; buf = buf + this.komiPoint();
         buf = buf + this.hisColor();
+        buf = buf + this.hisName();
         return buf;
     };
 
