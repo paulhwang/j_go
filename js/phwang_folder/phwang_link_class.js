@@ -23,40 +23,25 @@ function PhwangLinkClass(phwang_object_val) {
         }
         this.phwangLinkStorageObject().setLinkId(val);
     };
-
-    this.sessionIndexArray = function () {
+    this.sessionIndexArray = function() {
         return this.theSessionIndexArray;
     };
-
-    this.sessionTableArray = function () {
+    this.sessionTableArray = function() {
         return this.theSessionTableArray;
     };
-
-    this.sessionTableArrayLength = function () {
+    this.sessionTableArrayLength = function() {
         return this.sessionTableArray().length;
     };
-
-    this.sessionTableArrayElement = function (val) {
+    this.sessionTableArrayElement = function(val) {
         return this.sessionTableArray()[val];
     };
-
-    this.verifyLinkIdIndex = function (id_val) {
+    this.verifyLinkIdIndex = function(id_val) {
         if (this.linkId() === id_val) {
             return true;
         } else {
             return false;
         }
     };
-    this.nameListTag = function() {return this.theNameListTag;};
-    this.setNameListTag = function(val) {this.theNameListTag = val;};
-    this.serverNameListTag = function() {return this.theServerNameListTag;};
-    this.setServerNameListTag = function(val) {this.theServerNameListTag = val;};
-    this.nameList = function() {return this.theNameList;};
-    this.setNameList = function(data_val) {this.theNameList = data_val;};
-    this.nameListLength = function() {return this.nameList().length;};
-    this.nameListElement = function(index_val) {return this.nameList()[index_val];};
-    this.setNameListElement = function(index_val, data_val) {this.nameList()[index_val] = data_val;};
-
     this.resetLinkStorage = function() {
         this.phwangLinkStorageObject().resetLinkStorage();
     };
@@ -81,17 +66,25 @@ function PhwangLinkClass(phwang_object_val) {
             return session;
         }
     };
-    this.objectName = function () {return "PhwangLinkClass";};
-    this.phwangLinkStorageObject = function () {return this.thePhwangLinkStorageObject;};
-    this.phwangObject = function () {return this.thePhwangObject;};
-    this.phwangAjaxObject = function () {return this.phwangObject().phwangAjaxObject();};
-    this.phwangSessionObject = function () {return this.phwangObject().phwangSessionObject();};
+    this.nameListTag = function() {return this.theNameListTag;};
+    this.setNameListTag = function(val) {this.theNameListTag = val;};
+    this.serverNameListTag = function() {return this.theServerNameListTag;};
+    this.setServerNameListTag = function(val) {this.theServerNameListTag = val;};
+    this.nameList = function() {return this.theNameList;};
+    this.setNameList = function(data_val) {this.theNameList = data_val;};
+    this.nameListLength = function() {return this.nameList().length;};
+    this.nameListElement = function(index_val) {return this.nameList()[index_val];};
+    this.setNameListElement = function(index_val, data_val) {this.nameList()[index_val] = data_val;};
+    this.objectName = function() {return "PhwangLinkClass";};
+    this.phwangLinkStorageObject = function() {return this.thePhwangLinkStorageObject;};
+    this.phwangObject = function() {return this.thePhwangObject;};
+    this.phwangAjaxObject = function() {return this.phwangObject().phwangAjaxObject();};
+    this.phwangSessionObject = function() {return this.phwangObject().phwangSessionObject();};
     this.debug = function(debug_val, str1_val, str2_val) {if (debug_val) {this.logit(str1_val, str2_val);}};
     this.logit = function(str1_val, str2_val) {return this.phwangObject().LOG_IT(this.objectName() + "." + str1_val, str2_val);};
     this.abend = function(str1_val, str2_val) {return this.phwangObject().ABEND(this.objectName() + "." + str1_val, str2_val);};
     this.init__(phwang_object_val);
 }
-
 function PhwangLinkStorageObject(phwang_link_object_val) {
     "use strict";
     this.storage = function() {return localStorage;};
@@ -101,16 +94,16 @@ function PhwangLinkStorageObject(phwang_link_object_val) {
         this.resetMyName();
         this.resetPassWord();
     };
-    this.myName = function () {return this.storage().my_name;};
+    this.myName = function() {return this.storage().my_name;};
     this.setMyName = function (val) {this.storage().my_name = val;};
-    this.resetMyName = function () {this.setMyName("");};
-    this.resetPassWord = function () {this.setPassWord("");};
-    this.linkId = function () {return this.storage().link_id;};
-    this.setLinkId = function (val) {this.storage().link_id = val;};
-    this.resetLinkId = function () {this.setLinkId("");};
-    this.objectName = function () {return "PhwangLinkStorageObject";};
-    this.phwangLinkObject = function () {return this.thePhwangLinkObject;};
-    this.phwangObject = function () {return this.phwangLinkObject().phwangObject();};
+    this.resetMyName = function() {this.setMyName("");};
+    this.resetPassWord = function() {this.setPassWord("");};
+    this.linkId = function() {return this.storage().link_id;};
+    this.setLinkId = function(val) {this.storage().link_id = val;};
+    this.resetLinkId = function() {this.setLinkId("");};
+    this.objectName = function() {return "PhwangLinkStorageObject";};
+    this.phwangLinkObject = function() {return this.thePhwangLinkObject;};
+    this.phwangObject = function() {return this.phwangLinkObject().phwangObject();};
     this.debug = function(debug_val, str1_val, str2_val) {if (debug_val) {this.logit(str1_val, str2_val);}};
     this.logit = function(str1_val, str2_val) {return this.phwangObject().LOG_IT(this.objectName() + "." + str1_val, str2_val);};
     this.abend = function(str1_val, str2_val) {return this.phwangObject().ABEND(this.objectName() + "." + str1_val, str2_val);};
