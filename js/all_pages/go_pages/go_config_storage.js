@@ -38,15 +38,15 @@ function GoConfigStorageObject(root_val) {
         this.setHisName(encoded_val.slice(index));
     };
 
-    this.encodeConfig = function () {
-        var len = 11 + this.hisName().length;
+    this.encodeConfig = function (my_name_val) {
+        var len = 11 + my_name_val.length;
         var buf = "G";
         if (len < 100) buf = buf + 0; if (len < 10) buf = buf + 0; buf = buf + len;
         if (this.boardSize() < 10) buf = buf + 0; buf = buf + this.boardSize();
         if (this.handicapPoint() < 10) buf = buf + 0; buf = buf + this.handicapPoint();
         if (this.komiPoint() < 10) buf = buf + 0; buf = buf + this.komiPoint();
         buf = buf + this.hisColor();
-        buf = buf + this.hisName();
+        buf = buf + my_name_val;
         return buf;
     };
 
