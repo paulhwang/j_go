@@ -27,7 +27,7 @@ function LoginRootObject() {
 }
 function LoginHtmlObject(root_object_val) {
     "use strict";
-    this.gotoNextPage = function() {window.open(this.phwangLinkObject().serverHttpHeader() + "go_config.html", "_self")};
+    this.gotoNextPage = function() {window.open(this.phwangObject().serverHttpHeader() + "go_config.html", "_self")};
     this.init__ = function(root_object_val) {this.theRootObject = root_object_val; this.setupHtmlInput();};
     this.setupHtmlInput = function() {
         var this0 = this;

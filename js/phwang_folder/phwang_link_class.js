@@ -64,14 +64,6 @@ function PhwangLinkClass(phwang_object_val) {
         this.phwangLinkStorageObject().resetLinkStorage();
     };
 
-    this.serverHttpHeader = function() {
-        return this.phwangLinkStorageObject().serverHttpHeader();
-    };
-
-    this.serverHttpsHeader = function() {
-        return this.phwangLinkStorageObject().serverHttpsHeader();
-    };
-
     this.mallocSessionAndInsert = function(session_id_val) {
         this.phwangSessionObject().setSessionId(session_id_val);
         var session = new PhwangSessionClass(this);
@@ -125,10 +117,6 @@ function PhwangLinkStorageObject(phwang_link_object_val) {
     this.linkId = function () {return this.storage().link_id;};
     this.setLinkId = function (val) {this.storage().link_id = val;};
     this.resetLinkId = function () {this.setLinkId("");};
-
-    this.serverHttpHeader = function() {return "http://" + window.location.hostname + ":" + window.location.port + "/";};
-    this.serverHttpsHeader = function() {return "https://" + window.location.hostname + ":" + window.location.port + "/";};
-
     this.objectName = function () {return "PhwangLinkStorageObject";};
     this.phwangLinkObject = function () {return this.thePhwangLinkObject;};
     this.phwangObject = function () {return this.phwangLinkObject().phwangObject();};

@@ -23,6 +23,10 @@ function PhwangClass(root_val) {
         }
         return output;
     };
+
+    this.serverHttpHeader = function() {return "http://" + window.location.hostname + ":" + window.location.port + "/";};
+    this.serverHttpsHeader = function() {return "https://" + window.location.hostname + ":" + window.location.port + "/";};
+
     this.objectName = function() {return "PhwangClass";};
     this.rootObject = function() {return this.theRootObject;};
     this.phwangAjaxObject = function() {return this.thePhwangAjaxObject;};
