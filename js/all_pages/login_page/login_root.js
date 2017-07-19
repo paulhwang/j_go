@@ -5,8 +5,7 @@
 
 function LoginRootObject() {
     "use strict";
-
-    this.init__ = function () {
+    this.init__ = function() {
         this.thePhwangObject = new PhwangClass(this);
         this.phwangObject().initObject();
         this.theAjaxObject = new LoginAjaxClass(this);
@@ -16,13 +15,13 @@ function LoginRootObject() {
         this.phwangLinkObject().setHttpInfo();
     };
 
-    this.objectName = function () {return "LoginRootObject";};
-    this.phwangObject = function () {return this.thePhwangObject;};
-    this.phwangAjaxObject = function () {return this.phwangObject().phwangAjaxObject();};
-    this.phwangLinkObject = function () {return this.phwangObject().phwangLinkObject();};
-    this.phwangSessionObject = function () {return this.phwangObject().phwangSessionObject();};
-    this.htmlObject = function () {return this.theHtmlObject;};
-    this.ajaxObject = function () {return this.theAjaxObject;};
+    this.objectName = function() {return "LoginRootObject";};
+    this.phwangObject = function() {return this.thePhwangObject;};
+    this.phwangAjaxObject = function() {return this.phwangObject().phwangAjaxObject();};
+    this.phwangLinkObject = function() {return this.phwangObject().phwangLinkObject();};
+    this.phwangSessionObject = function() {return this.phwangObject().phwangSessionObject();};
+    this.htmlObject = function() {return this.theHtmlObject;};
+    this.ajaxObject = function() {return this.theAjaxObject;};
     this.debug = function (debug_val, str1_val, str2_val) {if (debug_val) {this.logit(str1_val, str2_val);}};
     this.logit = function (str1_val, str2_val) {return this.logit_(this.objectName() + "." + str1_val, str2_val);};
     this.abend = function (str1_val, str2_val) {return this.abend_(this.objectName() + "." + str1_val, str2_val);};
@@ -33,14 +32,14 @@ function LoginRootObject() {
 
 function LoginHtmlObject(root_object_val) {
     "use strict";
-
+    this.gotoNextPage = function() {window.open(this.phwangLinkObject().serverHttpHeader() + "go_config.html", "_self")};
     this.init__ = function (root_object_val) {
         this.theRootObject = root_object_val;
         this.setupHtmlInput();
         this.debug(true, "init__", "");
     };
 
-    this.setupHtmlInput = function () {
+    this.setupHtmlInput = function() {
         var this0 = this;
         $(".login_section .login_button").on("click", function() {
             this0.phwangLinkObject().setMyName($(".login_section .login_name").val());
@@ -52,16 +51,12 @@ function LoginHtmlObject(root_object_val) {
         });
     };
 
-    this.gotoNextPage = function () {
-        window.open(this.phwangLinkObject().serverHttpHeader() + "go_config.html", "_self")
-    };
-
-    this.objectName = function () {return "LoginHtmlObject";};
-    this.rootObject = function () {return this.theRootObject;};
-    this.phwangObject = function () {return this.rootObject().phwangObject();};
-    this.phwangAjaxObject = function () {return this.phwangObject().phwangAjaxObject();};
-    this.phwangLinkObject = function () {return this.phwangObject().phwangLinkObject();};
-    this.ajaxObject = function () {return this.rootObject().ajaxObject();};
+    this.objectName = function() {return "LoginHtmlObject";};
+    this.rootObject = function() {return this.theRootObject;};
+    this.phwangObject = function() {return this.rootObject().phwangObject();};
+    this.phwangAjaxObject = function() {return this.phwangObject().phwangAjaxObject();};
+    this.phwangLinkObject = function() {return this.phwangObject().phwangLinkObject();};
+    this.ajaxObject = function() {return this.rootObject().ajaxObject();};
     this.debug = function (debug_val, str1_val, str2_val) {if (debug_val) {this.logit(str1_val, str2_val);}};
     this.logit = function (str1_val, str2_val) {return this.rootObject().logit_(this.objectName() + "." + str1_val, str2_val);};
     this.abend = function (str1_val, str2_val) {return this.rootObject().abend_(this.objectName() + "." + str1_val, str2_val);};
@@ -71,24 +66,20 @@ function LoginHtmlObject(root_object_val) {
 function LoginAjaxClass(root_object_val) {
     "use strict";
     this.init__ = function (root_object_val) {this.theRootObject = root_object_val;};
-    this.receiveSetupLinkResponse = function () {this.htmlObject().gotoNextPage();};
-    this.receiveGetNameListResponse = function () {};
-    this.receiveSetupSessionResponse = function () {};
-    this.receiveSetupSessionReplyResponse = function () {};
+    this.receiveSetupLinkResponse = function() {this.htmlObject().gotoNextPage();};
+    this.receiveGetNameListResponse = function() {};
+    this.receiveSetupSessionResponse = function() {};
+    this.receiveSetupSessionReplyResponse = function() {};
     this.receiveGetSessionDataResponse = function (data_val) {};
     this.objectName = function() {return "LoginAjaxClass";};
-    this.rootObject = function () {return this.theRootObject;};
-    this.phwangObject = function () {return this.rootObject().phwangObject();};
-    this.htmlObject = function () {return this.rootObject().htmlObject();};
+    this.rootObject = function() {return this.theRootObject;};
+    this.phwangObject = function() {return this.rootObject().phwangObject();};
+    this.htmlObject = function() {return this.rootObject().htmlObject();};
     this.debug = function(debug_val, str1_val, str2_val) {if (debug_val) {this.logit(str1_val, str2_val);}};
     this.logit = function (str1_val, str2_val) {return this.rootObject().logit_(this.objectName() + "." + str1_val, str2_val);};
     this.abend = function (str1_val, str2_val) {return this.rootObject().abend_(this.objectName() + "." + str1_val, str2_val);};
     this.init__(root_object_val);
 }
 
-var login_main = function () {
-    "use strict";
-    new LoginRootObject();
-};
-
+var login_main = function() {"use strict"; new LoginRootObject();};
 $(document).ready(login_main);

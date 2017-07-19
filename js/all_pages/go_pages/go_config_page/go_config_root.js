@@ -6,7 +6,7 @@
 function ConfigRootObject() {
     "use strict";
 
-    this.init__ = function () {
+    this.init__ = function() {
         this.thePhwangObject = new PhwangClass(this);
         this.phwangObject().initObject();
         this.phwangAjaxObject().startWatchDog(this.phwangLinkObject());
@@ -17,15 +17,15 @@ function ConfigRootObject() {
         this.debug(true, "init__", "myName=" + this.phwangLinkObject().myName() + " linkId=" + this.phwangLinkObject().linkId());
     };
 
-    this.objectName = function () {return "ConfigRootObject";};
-    this.phwangObject = function () {return this.thePhwangObject;};
-    this.phwangAjaxObject = function () {return this.phwangObject().phwangAjaxObject();};
-    this.phwangLinkObject = function () {return this.phwangObject().phwangLinkObject();};
-    this.phwangSessionObject = function () {return this.phwangObject().phwangSessionObject();};
-    this.configStorageObject = function () {return this.theConfigStorageObject;};
-    this.configObject = function () {return this.theConfigObject;};
-    this.ajaxObject = function () {return this.theAjaxObject;};
-    this.htmlObject = function () {return this.theHtmlObject;};
+    this.objectName = function() {return "ConfigRootObject";};
+    this.phwangObject = function() {return this.thePhwangObject;};
+    this.phwangAjaxObject = function() {return this.phwangObject().phwangAjaxObject();};
+    this.phwangLinkObject = function() {return this.phwangObject().phwangLinkObject();};
+    this.phwangSessionObject = function() {return this.phwangObject().phwangSessionObject();};
+    this.configStorageObject = function() {return this.theConfigStorageObject;};
+    this.configObject = function() {return this.theConfigObject;};
+    this.ajaxObject = function() {return this.theAjaxObject;};
+    this.htmlObject = function() {return this.theHtmlObject;};
     this.debug = function (debug_val, str1_val, str2_val) {if (debug_val) {this.logit(str1_val, str2_val);}};
     this.logit = function (str1_val, str2_val) {return this.logit_(this.objectName() + "." + str1_val, str2_val);};
     this.abend = function (str1_val, str2_val) {return this.abend_(this.objectName() + "." + str1_val, str2_val);};
@@ -43,11 +43,11 @@ function ConfigHtmlObject(root_object_val) {
         this.debug(true, "init__", "");
     };
 
-    this.renderNameListFuncExist = function () {
+    this.renderNameListFuncExist = function() {
         return true;
     };
 
-    this.setupHtmlInputFunction = function () {
+    this.setupHtmlInputFunction = function() {
         this.renderNameList();
         var this0 = this;
         $(".config_section .config_button").on("click", function() {
@@ -64,48 +64,44 @@ function ConfigHtmlObject(root_object_val) {
         });
     };
 
-    this.renderNameList = function () {
+    this.renderNameList = function() {
         for (var i = 0; i < this.phwangLinkObject().nameListLength(); i++) {
             $('.peer_name_paragraph select').append($('<option>', {value:this.phwangLinkObject().nameListElement(i), text:this.phwangLinkObject().nameListElement(i)}));
         }
     };
 
-    this.gotoNextPage = function () {window.open(this.phwangLinkObject().serverHttpHeader() + "go_act.html", "_self")};
-    this.objectName = function () {return "ConfigHtmlObject";};
-    this.rootObject = function () {return this.theRootObject;};
-    this.phwangObject = function () {return this.rootObject().phwangObject();};
-    this.phwangAjaxObject = function () {return this.phwangObject().phwangAjaxObject();};
-    this.phwangLinkObject = function () {return this.phwangObject().phwangLinkObject();};
-    this.phwangSessionObject = function () {return this.phwangObject().phwangSessionObject();};
-    this.configObject = function () {return this.rootObject().configObject();};
-    this.configStorageObject = function () {return this.rootObject().configStorageObject();};
-    this.debug = function (debug_val, str1_val, str2_val) {if (debug_val) {this.logit(str1_val, str2_val);}};
-    this.logit = function (str1_val, str2_val) {this.rootObject().logit_(this.objectName() + "." + str1_val, str2_val);};
-    this.abend = function (str1_val, str2_val) {this.rootObject().abend_(this.objectName() + "." + str1_val, str2_val);};
+    this.gotoNextPage = function() {window.open(this.phwangLinkObject().serverHttpHeader() + "go_act.html", "_self")};
+    this.objectName = function() {return "ConfigHtmlObject";};
+    this.rootObject = function() {return this.theRootObject;};
+    this.phwangObject = function() {return this.rootObject().phwangObject();};
+    this.phwangAjaxObject = function() {return this.phwangObject().phwangAjaxObject();};
+    this.phwangLinkObject = function() {return this.phwangObject().phwangLinkObject();};
+    this.phwangSessionObject = function() {return this.phwangObject().phwangSessionObject();};
+    this.configObject = function() {return this.rootObject().configObject();};
+    this.configStorageObject = function() {return this.rootObject().configStorageObject();};
+    this.debug = function(debug_val, str1_val, str2_val) {if (debug_val) {this.logit(str1_val, str2_val);}};
+    this.logit = function(str1_val, str2_val) {this.rootObject().logit_(this.objectName() + "." + str1_val, str2_val);};
+    this.abend = function(str1_val, str2_val) {this.rootObject().abend_(this.objectName() + "." + str1_val, str2_val);};
     this.init__(root_object_val);
 }
 
 function ConfigAjaxClass(root_object_val) {
     "use strict";
     this.init__ = function (root_object_val) {this.theRootObject = root_object_val;};
-    this.receiveSetupLinkResponse = function () {};
-    this.receiveGetNameListResponse = function () {this.htmlObject().renderNameList();};
-    this.receiveSetupSessionResponse = function () {this.htmlObject().gotoNextPage();};
-    this.receiveSetupSession2Response = function () {this.htmlObject().gotoNextPage();};
+    this.receiveSetupLinkResponse = function() {};
+    this.receiveGetNameListResponse = function() {this.htmlObject().renderNameList();};
+    this.receiveSetupSessionResponse = function() {this.htmlObject().gotoNextPage();};
+    this.receiveSetupSession2Response = function() {this.htmlObject().gotoNextPage();};
     this.receiveGetSessionDataResponse = function (data_val) {};
     this.objectName = function() {return "ConfigAjaxClass";};
-    this.rootObject = function () {return this.theRootObject;};
-    this.phwangObject = function () {return this.rootObject().phwangObject();};
-    this.htmlObject = function () {return this.rootObject().htmlObject();};
+    this.rootObject = function() {return this.theRootObject;};
+    this.phwangObject = function() {return this.rootObject().phwangObject();};
+    this.htmlObject = function() {return this.rootObject().htmlObject();};
     this.debug = function(debug_val, str1_val, str2_val) {if (debug_val) {this.logit(str1_val, str2_val);}};
     this.logit = function(str1_val, str2_val) {return this.phwangObject().LOG_IT(this.objectName() + "." + str1_val, str2_val);};
     this.abend = function(str1_val, str2_val) {return this.phwangObject().ABEND(this.objectName() + "." + str1_val, str2_val);};
     this.init__(root_object_val);
 }
 
-var config_main = function () {
-    "use strict";
-    new ConfigRootObject();
-};
-
+var config_main = function() {"use strict"; new ConfigRootObject();};
 $(document).ready(config_main);
