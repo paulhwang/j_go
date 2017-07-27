@@ -100,6 +100,16 @@ function PhwangAjaxClass(phwang_object_val) {
                         continue;
                     }
 
+                    if (data.charAt(0) === this.phwangAjaxProtocolObject().WEB_FABRIC_PROTOCOL_RESPOND_IS_GET_LINK_DATA_PENDING_SESSION3()) {
+                        this.debug(true, "getLinkDataResponse", "pending_session_data3=" + data);
+                        var session_id = data.slice(1, this.phwangAjaxProtocolObject().WEB_FABRIC_PROTOCOL_SESSION_ID_SIZE() + 1);
+                        this.debug(true, "getLinkDataResponse", "session_id=" + session_id);
+                        data = data.slice(1 + this.phwangAjaxProtocolObject().WEB_FABRIC_PROTOCOL_SESSION_ID_SIZE());
+                        this.setupSession3(this.phwangLinkObject(), session_id);
+                        continue;
+                    }
+
+
                     if (data.charAt(0) === this.phwangAjaxProtocolObject().WEB_FABRIC_PROTOCOL_RESPOND_IS_GET_LINK_DATA_PENDING_SESSION()) {
                         this.debug(true, "getLinkDataResponse", "pending_session_data=" + data);
                         var session_id = data.slice(1, this.phwangAjaxProtocolObject().WEB_FABRIC_PROTOCOL_SESSION_ID_SIZE() + 1);
@@ -201,6 +211,28 @@ function PhwangAjaxClass(phwang_object_val) {
             this.debug(true, "setupSession2Response", "sessionId=" + this.phwangSessionObject().sessionId());
             this.phwangPortObject().receiveSetupSession2Response();
             this.rootObject().configObject().cacheConfig();
+        }
+    };
+    this.setupSession3 = function(link_val, session_id_val) {
+        var output = JSON.stringify({
+                        command: this.phwangAjaxProtocolObject().SETUP_SESSION3_COMMAND(),
+                        packet_id: this.ajaxPacketId(),
+                        link_id: link_val.linkId(),
+                        accept: "yes",
+                        session_id: session_id_val,
+                        });
+        this.debug(true, "setupSession3", "output=" + output);
+        this.transmitAjaxRequest(output);
+    };
+
+    this.setupSession3Response = function(json_data_val) {
+        this.debug(true, "setupSession3Response", "data=" + json_data_val);
+        var data = JSON.parse(json_data_val);
+        if (data) {
+            this.phwangSessionObject().setSessionId(data.session_id.slice(8));
+            this.debug(true, "setupSession3Response", "sessionId=" + this.phwangSessionObject().sessionId());
+            this.phwangPortObject().receiveSetupSession3Response();
+            //this.rootObject().configObject().cacheConfig();
         }
     };
     this.putSessionData = function(session_val, data_val) {
@@ -381,9 +413,11 @@ function PhwangAjaxProtocolClass() {
     this.SETUP_SESSION_COMMAND = function() {return "setup_session";}
     this.CLEAR_SESSION_COMMAND = function() {return "clear_session";}
     this.SETUP_SESSION2_COMMAND = function() {return "setup_session2";}
+    this.SETUP_SESSION3_COMMAND = function() {return "setup_session3";}
     this.PUT_SESSION_DATA_COMMAND = function() {return "put_session_data";}
     this.GET_SESSION_DATA_COMMAND = function() {return "get_session_data";}
     this.WEB_FABRIC_PROTOCOL_RESPOND_IS_GET_LINK_DATA_PENDING_SESSION = function() {return 'S';}
+    this.WEB_FABRIC_PROTOCOL_RESPOND_IS_GET_LINK_DATA_PENDING_SESSION3 = function() {return 'T';}
     this.WEB_FABRIC_PROTOCOL_RESPOND_IS_GET_LINK_DATA_PENDING_DATA = function() {return 'D';}
     this.WEB_FABRIC_PROTOCOL_RESPOND_IS_GET_LINK_DATA_NAME_LIST = function() {return 'N';}
     this.WEB_FABRIC_PROTOCOL_NAME_LIST_TAG_SIZE = function() {return 3;}

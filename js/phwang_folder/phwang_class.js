@@ -43,6 +43,7 @@ function PhwangPortClass(phwang_object_val) {
     this.receiveGetNameListResponse = function() {this.rootObject().ajaxObject().receiveGetNameListResponse();};
     this.receiveSetupSessionResponse = function() {this.rootObject().ajaxObject().receiveSetupSessionResponse();};
     this.receiveSetupSession2Response = function() {this.rootObject().ajaxObject().receiveSetupSession2Response();};
+    this.receiveSetupSession3Response = function() {this.rootObject().ajaxObject().receiveSetupSession3Response();};
     this.receiveGetSessionDataResponse = function(data_val) {this.rootObject().ajaxObject().receiveSetupSessionResponse(data_val);};
     this.objectName = function() {return "PhwangPortClass";};
     this.phwangObject = function() {return this.thePhwangObject;};
