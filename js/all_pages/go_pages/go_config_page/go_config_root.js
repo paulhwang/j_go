@@ -75,8 +75,9 @@ function ConfigAjaxClass(root_object_val) {
     this.init__ = function (root_object_val) {this.theRootObject = root_object_val;};
     this.receiveSetupLinkResponse = function() {};
     this.receiveGetNameListResponse = function() {this.htmlObject().renderNameList();};
-    this.receiveSetupSessionResponse = function() {this.htmlObject().gotoNextPage();};
+    this.receiveSetupSessionResponse = function() {/*this.htmlObject().gotoNextPage();*/};
     this.receiveSetupSession2Response = function() {this.htmlObject().gotoNextPage();};
+    this.receiveSetupSession3Response = function() {this.htmlObject().gotoNextPage();};
     this.receiveGetSessionDataResponse = function (data_val) {};
     this.objectName = function() {return "ConfigAjaxClass";};
     this.rootObject = function() {return this.theRootObject;};

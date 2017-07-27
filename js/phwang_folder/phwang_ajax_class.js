@@ -54,6 +54,7 @@ function PhwangAjaxClass(phwang_object_val) {
             "get_name_list": this.getNameListResponse,
             "setup_session": this.setupSessionResponse,
             "setup_session2": this.setupSession2Response,
+            "setup_session3": this.setupSession3Response,
             "get_session_data": this.getSessionDataResponse,
             "put_session_data": this.putSessionDataResponse,
         };
@@ -100,15 +101,6 @@ function PhwangAjaxClass(phwang_object_val) {
                         continue;
                     }
 
-                    if (data.charAt(0) === this.phwangAjaxProtocolObject().WEB_FABRIC_PROTOCOL_RESPOND_IS_GET_LINK_DATA_PENDING_SESSION3()) {
-                        this.debug(true, "getLinkDataResponse", "pending_session_data3=" + data);
-                        var session_id = data.slice(1, this.phwangAjaxProtocolObject().WEB_FABRIC_PROTOCOL_SESSION_ID_SIZE() + 1);
-                        this.debug(true, "getLinkDataResponse", "session_id=" + session_id);
-                        data = data.slice(1 + this.phwangAjaxProtocolObject().WEB_FABRIC_PROTOCOL_SESSION_ID_SIZE());
-                        this.setupSession3(this.phwangLinkObject(), session_id);
-                        continue;
-                    }
-
 
                     if (data.charAt(0) === this.phwangAjaxProtocolObject().WEB_FABRIC_PROTOCOL_RESPOND_IS_GET_LINK_DATA_PENDING_SESSION()) {
                         this.debug(true, "getLinkDataResponse", "pending_session_data=" + data);
@@ -122,6 +114,15 @@ function PhwangAjaxClass(phwang_object_val) {
                         this.rootObject().configStorageObject().decodeConfig(theme_data);
                         data = data.slice(config_len);
                         this.setupSession2(this.phwangLinkObject(), theme_data, session_id);
+                        continue;
+                    }
+
+                    if (data.charAt(0) === this.phwangAjaxProtocolObject().WEB_FABRIC_PROTOCOL_RESPOND_IS_GET_LINK_DATA_PENDING_SESSION3()) {
+                        this.debug(true, "getLinkDataResponse", "pending_session_data3=" + data);
+                        var session_id = data.slice(1, this.phwangAjaxProtocolObject().WEB_FABRIC_PROTOCOL_SESSION_ID_SIZE() + 1);
+                        this.debug(true, "getLinkDataResponse", "session_id=" + session_id);
+                        data = data.slice(1 + this.phwangAjaxProtocolObject().WEB_FABRIC_PROTOCOL_SESSION_ID_SIZE());
+                        this.setupSession3(this.phwangLinkObject(), session_id);
                         continue;
                     }
 
