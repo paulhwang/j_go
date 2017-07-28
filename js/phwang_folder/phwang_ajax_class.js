@@ -191,13 +191,14 @@ function PhwangAjaxClass(phwang_object_val) {
             this.phwangPortObject().receiveSetupSessionResponse(data.result);
         }
     };
-    this.setupSession2 = function(link_val, data_val, session_id_val) {
+    this.setupSession2 = function(link_val, theme_data_val, session_id_val) {
         var output = JSON.stringify({
                         command: this.phwangAjaxProtocolObject().SETUP_SESSION2_COMMAND(),
                         packet_id: this.ajaxPacketId(),
                         link_id: link_val.linkId(),
                         accept: "yes",
                         session_id: session_id_val,
+                        theme_data: theme_data_val,
                         });
         this.debug(true, "setupSession2", "output=" + output);
         this.transmitAjaxRequest(output);
