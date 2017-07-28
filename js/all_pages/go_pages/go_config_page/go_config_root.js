@@ -73,12 +73,13 @@ function ConfigHtmlObject(root_object_val) {
 function ConfigAjaxClass(root_object_val) {
     "use strict";
     this.init__ = function (root_object_val) {this.theRootObject = root_object_val;};
-    this.receiveSetupLinkResponse = function() {};
-    this.receiveGetNameListResponse = function() {this.htmlObject().renderNameList();};
-    this.receiveSetupSessionResponse = function() {/*this.htmlObject().gotoNextPage();*/};
-    this.receiveSetupSession2Response = function() {this.htmlObject().gotoNextPage();};
-    this.receiveSetupSession3Response = function() {this.htmlObject().gotoNextPage();};
-    this.receiveGetSessionDataResponse = function (data_val) {};
+    this.receiveSetupLinkResponse = function(result_val) {};
+    this.receiveGetNameListResponse = function(result_val) {this.htmlObject().renderNameList();};
+    this.receiveSetupSessionResponse = function(result_val) {/*this.htmlObject().gotoNextPage();*/};
+    this.receiveSetupSession2Response = function(result_val) {this.htmlObject().gotoNextPage();};
+    this.receiveSetupSession3Response = function(result_val) {this.htmlObject().gotoNextPage();};
+    this.receivePuttSessionDataResponse = function (result_val) {};
+    this.receiveGetSessionDataResponse = function (result_val, data_val) {};
     this.objectName = function() {return "ConfigAjaxClass";};
     this.rootObject = function() {return this.theRootObject;};
     this.phwangObject = function() {return this.rootObject().phwangObject();};

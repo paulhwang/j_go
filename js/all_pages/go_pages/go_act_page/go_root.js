@@ -109,11 +109,13 @@ function GoPlayHtmlObject(root_object_val) {
 function GoAjaxClass(root_object_val) {
     "use strict";
     this.init__ = function (root_object_val) {this.theRootObject = root_object_val;};
-    this.receiveSetupLinkResponse = function() {};
-    this.receiveGetNameListResponse = function() {};
-    this.receiveSetupSessionResponse = function() {};
-    this.receiveSetupSession2Response = function() {};
-    this.receiveGetSessionDataResponse = function (data_val) {};
+    this.receiveSetupLinkResponse = function(result_val) {};
+    this.receiveGetNameListResponse = function(result_val) {};
+    this.receiveSetupSessionResponse = function(result_val) {};
+    this.receiveSetupSession2Response = function(result_val) {};
+    this.receiveSetupSession3Response = function(result_val) {};
+    this.receivePutSessionDataResponse = function (result_val) {};
+    this.receiveGetSessionDataResponse = function (result_val, data_val) {};
     this.objectName = function() {return "GoAjaxClass";};
     this.rootObject = function() {return this.theRootObject;};
     this.phwangObject = function() {return this.rootObject().phwangObject();};
