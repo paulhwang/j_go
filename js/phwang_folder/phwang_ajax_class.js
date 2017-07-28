@@ -217,7 +217,6 @@ function PhwangAjaxClass(phwang_object_val) {
                         command: this.phwangAjaxProtocolObject().SETUP_SESSION3_COMMAND(),
                         packet_id: this.ajaxPacketId(),
                         link_id: link_val.linkId(),
-                        accept: "yes",
                         session_id: session_id_val,
                         });
         this.debug(true, "setupSession3", "output=" + output);
@@ -228,7 +227,7 @@ function PhwangAjaxClass(phwang_object_val) {
         this.debug(true, "setupSession3Response", "data=" + json_data_val);
         var data = JSON.parse(json_data_val);
         if (data) {
-            this.phwangSessionObject().setSessionId(data.session_id.slice(8));
+            this.phwangSessionObject().setSessionId(data.session_id.slice(this.phwangAjaxProtocolObject().WEB_FABRIC_PROTOCOL_SESSION_ID_SIZE()));
             this.debug(true, "setupSession3Response", "sessionId=" + this.phwangSessionObject().sessionId());
             this.phwangPortObject().receiveSetupSession3Response();
         }
