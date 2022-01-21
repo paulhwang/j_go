@@ -98,18 +98,6 @@ function GoConfigStorageObject(root_val) {
         this.setHisName(encoded_val.slice(index));
     };
 
-    this.encodeConfig = function(my_name_val) {
-        var len = 11 + my_name_val.length;
-        var buf = "G";
-        if (len < 100) buf = buf + 0; if (len < 10) buf = buf + 0; buf = buf + len;
-        if (this.boardSize() < 10) buf = buf + 0; buf = buf + this.boardSize();
-        if (this.handicapPoint() < 10) buf = buf + 0; buf = buf + this.handicapPoint();
-        if (this.komiPoint() < 10) buf = buf + 0; buf = buf + this.komiPoint();
-        buf = buf + this.hisColor();
-        buf = buf + my_name_val;
-        return buf;
-    };
-
     this.storage = function() {return localStorage;};
     this.myColor = function() {return Number(this.storage().go_my_color);};
     this.setMyColor = function(val) {if (val === "black") {this.storage().go_my_color = GO.BLACK_STONE();} else if (val === "white") {this.storage().go_my_color = GO.WHITE_STONE();} else {this.abend("setMyColor", val);}};

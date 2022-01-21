@@ -47,7 +47,6 @@ function ConfigHtmlObject(root_object_val) {
             this0.configObject().setBoardSize($(".config_section .go_config_section .board_size").val());
             this0.configObject().setKomiPoint($(".config_section .go_config_section .komi").val());
             this0.configObject().setHandicapPoint($(".config_section .go_config_section .handicap").val());
-            this0.configObject().putStorageConfigData();
             var encoded_config = this0.configObject().encodeConfig(this0.phwangLinkObject().myName());
             this0.debug(true, "setupHtmlInput", "boardSize=" + this0.configObject().boardSize() + " myColor=" + this0.configObject().myColor() + " komi=" + this0.configObject().komiPoint() + " handicap=" + this0.configObject().handicapPoint() + " myName-" + this0.phwangLinkObject().myName() + " hisName=" + this0.configObject().hisName() + " config=" + encoded_config);
             this0.phwangAjaxObject().setupSession(this0.phwangLinkObject(), this0.configObject().hisName(), encoded_config);
@@ -79,10 +78,12 @@ function ConfigAjaxClass(root_object_val) {
     this.receiveSetupSessionResponse = function(result_val) {/*this.htmlObject().gotoNextPage();*/};
     this.receiveSetupSession2Response = function(result_val) {
         this.phwangObject().putStorageLinkSessionData();
+        this.configObject().putStorageConfigData();
         this.htmlObject().gotoNextPage();
     };
     this.receiveSetupSession3Response = function(result_val) {
         this.phwangObject().putStorageLinkSessionData();
+        this.configObject().putStorageConfigData();
         this.htmlObject().gotoNextPage();
     };
     this.receivePuttSessionDataResponse = function (result_val) {};
@@ -90,6 +91,7 @@ function ConfigAjaxClass(root_object_val) {
     this.objectName = function() {return "ConfigAjaxClass";};
     this.rootObject = function() {return this.theRootObject;};
     this.phwangObject = function() {return this.rootObject().phwangObject();};
+    this.configObject = function() {return this.rootObject().configObject();};
     this.htmlObject = function() {return this.rootObject().htmlObject();};
     this.debug = function(debug_val, str1_val, str2_val) {if (debug_val) {this.logit(str1_val, str2_val);}};
     this.logit = function(str1_val, str2_val) {return this.phwangObject().LOG_IT(this.objectName() + "." + str1_val, str2_val);};
