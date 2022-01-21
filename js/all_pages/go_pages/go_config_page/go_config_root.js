@@ -42,14 +42,15 @@ function ConfigHtmlObject(root_object_val) {
         this.renderNameList();
         var this0 = this;
         $(".config_section .config_button").on("click", function() {
-            this0.configStorageObject().setHisName($(".peer_name_paragraph select").val());
-            this0.configStorageObject().setMyColor($(".config_section .go_config_section .stone_color").val());
-            this0.configStorageObject().setBoardSize($(".config_section .go_config_section .board_size").val());
-            this0.configStorageObject().setKomiPoint($(".config_section .go_config_section .komi").val());
-            this0.configStorageObject().setHandicapPoint($(".config_section .go_config_section .handicap").val());
+            this0.configObject().setHisName($(".peer_name_paragraph select").val());
+            this0.configObject().setMyColor($(".config_section .go_config_section .stone_color").val());
+            this0.configObject().setBoardSize($(".config_section .go_config_section .board_size").val());
+            this0.configObject().setKomiPoint($(".config_section .go_config_section .komi").val());
+            this0.configObject().setHandicapPoint($(".config_section .go_config_section .handicap").val());
+            this0.configObject().putStorageConfigData();
             var encoded_config = this0.configStorageObject().encodeConfig(this0.phwangLinkObject().myName());
-            this0.debug(true, "setupHtmlInput", "boardSize=" + this0.configStorageObject().boardSize() + " myColor=" + this0.configStorageObject().myColor() + " komi=" + this0.configStorageObject().komiPoint() + " handicap=" + this0.configStorageObject().handicapPoint() + " myName-" + this0.phwangLinkObject().myName() + " hisName=" + this0.configStorageObject().hisName() + " config=" + encoded_config);
-            this0.phwangAjaxObject().setupSession(this0.phwangLinkObject(), this0.configStorageObject().hisName(), encoded_config);
+            this0.debug(true, "setupHtmlInput", "boardSize=" + this0.configObject().boardSize() + " myColor=" + this0.configObject().myColor() + " komi=" + this0.configObject().komiPoint() + " handicap=" + this0.configObject().handicapPoint() + " myName-" + this0.phwangLinkObject().myName() + " hisName=" + this0.configObject().hisName() + " config=" + encoded_config);
+            this0.phwangAjaxObject().setupSession(this0.phwangLinkObject(), this0.configObject().hisName(), encoded_config);
         });
     };
     this.renderNameList = function() {
