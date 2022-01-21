@@ -7,8 +7,15 @@ function PhwangClass(root_val) {
     "use strict";
     this.init__ = function(root_val) {this.theRootObject = root_val;};
     this.initObject = function() {
+        if (this.rootObject().objectName() === "LoginRootObject") {
+            var get_storage_data_on = false;
+        }
+        else{
+            var get_storage_data_on = true;
+        }
+
         this.thePhwangAjaxObject = new PhwangAjaxClass(this);
-        this.thePhwangLinkObject = new PhwangLinkClass(this);
+        this.thePhwangLinkObject = new PhwangLinkClass(this, get_storage_data_on);
         this.thePhwangSessionObject = new PhwangSessionClass(this.phwangLinkObject());
         this.thePhwangPortObject = new PhwangPortClass(this);
         this.debug(true, "initObject", "");

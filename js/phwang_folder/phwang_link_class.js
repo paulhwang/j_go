@@ -2,9 +2,9 @@
  * Copyrights phwang
  * Written by Paul Hwang
  */
-function PhwangLinkClass(phwang_object_val) {
+function PhwangLinkClass(phwang_object_val, get_storage_data_on_val) {
     "use strict";
-    this.init__ = function(phwang_object_val) {
+    this.init__ = function(phwang_object_val, get_storage_data_on_val) {
         this.thePhwangObject = phwang_object_val;
         this.thePhwangLinkStorageObject = new PhwangLinkStorageObject(this);
         this.theNameList = [];
@@ -83,7 +83,7 @@ function PhwangLinkClass(phwang_object_val) {
     this.debug = function(debug_val, str1_val, str2_val) {if (debug_val) {this.logit(str1_val, str2_val);}};
     this.logit = function(str1_val, str2_val) {return this.phwangObject().LOG_IT(this.objectName() + "." + str1_val, str2_val);};
     this.abend = function(str1_val, str2_val) {return this.phwangObject().ABEND(this.objectName() + "." + str1_val, str2_val);};
-    this.init__(phwang_object_val);
+    this.init__(phwang_object_val, get_storage_data_on_val);
 }
 function PhwangLinkStorageObject(phwang_link_object_val) {
     "use strict";
