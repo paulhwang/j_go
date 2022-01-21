@@ -12,6 +12,7 @@ function GoPlayRootObject() {
         this.theAjaxObject = new GoAjaxClass(this);
         this.theConfigStorageObject = new GoConfigStorageObject(this);
         this.theConfigObject = new GoPlayConfigObject(this);
+        this.configObject().getStorageConfigData();
         this.theBoardObject = new GoPlayBoardObject(this);
         this.thePortObject = new GoPlayPortObject(this);
         this.theGameObject = new GoPlayGameObject(this);
