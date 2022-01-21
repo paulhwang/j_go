@@ -7,15 +7,9 @@ function PhwangClass(root_val) {
     "use strict";
     this.init__ = function(root_val) {this.theRootObject = root_val;};
     this.initObject = function() {
-        if (this.rootObject().objectName() === "LoginRootObject") {
-            var get_storage_data_on = false;
-        }
-        else{
-            var get_storage_data_on = true;
-        }
-
+        this.thePhwangStorageObject = new PhwangStorageClass(this);
         this.thePhwangAjaxObject = new PhwangAjaxClass(this);
-        this.thePhwangLinkObject = new PhwangLinkClass(this, get_storage_data_on);
+        this.thePhwangLinkObject = new PhwangLinkClass(this);
         this.thePhwangSessionObject = new PhwangSessionClass(this.phwangLinkObject());
         this.thePhwangPortObject = new PhwangPortClass(this);
         this.debug(true, "initObject", "");
@@ -28,14 +22,37 @@ function PhwangClass(root_val) {
         }
         return output;
     };
-    this.putStorageData = function() {
+    this.resetAllStorageData = function () {
+        this.resetStorageLinkData();
+        this.resetStorageSessionData();
+    };
+    this.resetStorageLinkData = function () {
+        this.phwangLinkObject().resetStorageData();
+    };
+    this.resetStorageSessionData = function () {
+        this.phwangSessionObject().resetStorageData();
+    };
+    this.putStorageLinkData = function() {
+        this.resetAllStorageData();
+        this.phwangLinkObject().putStorageData();
+    };
+    this.putStorageLinkSessionData = function() {
+        this.resetAllStorageData();
         this.phwangLinkObject().putStorageData();
         this.phwangSessionObject().putStorageData();
+    };
+    this.getStorageLinkData = function() {
+        this.phwangLinkObject().getStorageData();
+    };
+    this.getStorageLinkSessionData = function() {
+        this.phwangLinkObject().getStorageData();
+        this.phwangSessionObject().getStorageData();
     };
     this.serverHttpHeader = function() {return "http://" + window.location.hostname + ":" + window.location.port + "/";};
     this.serverHttpsHeader = function() {return "https://" + window.location.hostname + ":" + window.location.port + "/";};
     this.objectName = function() {return "PhwangClass";};
     this.rootObject = function() {return this.theRootObject;};
+    this.phwangStorageObject = function() { return this.thePhwangStorageObject;};
     this.phwangAjaxObject = function() {return this.thePhwangAjaxObject;};
     this.phwangLinkObject = function() {return this.thePhwangLinkObject;};
     this.phwangSessionObject = function() {return this.thePhwangSessionObject;};
@@ -46,6 +63,27 @@ function PhwangClass(root_val) {
     this.LOG_IT = function(str1_val, str2_val) {window.console.log(str1_val + "() " + str2_val);};
     this.ABEND = function(str1_val, str2_val) {window.console.log("***ABEND*** " + str1_val + "() " + str2_val); window.alert("***ABEND*** " + str1_val + "() " + str2_val); var x = junk;};
     this.init__(root_val);
+}
+function PhwangStorageClass(phwang_object_val) {
+    "use strict";
+    this.storage = function() {return localStorage;};
+    this.init__ = function(phwang_object_val) {this.thePhwangObject = phwang_object_val;};
+    this.resetStorage = function() {
+        this.resetLinkId();
+        this.resetMyName();
+    };
+    this.myName = function() {return this.storage().my_name;};
+    this.setMyName = function (val) {this.storage().my_name = val;};
+    this.resetMyName = function() {this.setMyName("");};
+    this.linkId = function() {return this.storage().link_id;};
+    this.setLinkId = function(val) {this.storage().link_id = val;};
+    this.resetLinkId = function() {this.setLinkId("");};
+    this.objectName = function() {return "PhwangStorageObject";};
+    this.phwangObject = function() {return this.thePhwangObject;};
+    this.debug = function(debug_val, str1_val, str2_val) {if (debug_val) {this.logit(str1_val, str2_val);}};
+    this.logit = function(str1_val, str2_val) {return this.phwangObject().LOG_IT(this.objectName() + "." + str1_val, str2_val);};
+    this.abend = function(str1_val, str2_val) {return this.phwangObject().ABEND(this.objectName() + "." + str1_val, str2_val);};
+    this.init__(phwang_object_val);
 }
 function PhwangPortClass(phwang_object_val) {
     "use strict";

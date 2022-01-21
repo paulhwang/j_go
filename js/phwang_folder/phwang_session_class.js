@@ -10,17 +10,19 @@ function PhwangSessionClass(link_object_val) {
         this.thePhwangSessionStorageObject = new PhwangSessionStorageObject(this);
         this.theXmtSeq = 0;
         this.theRcvSeq = 0;
-        this.debug(false, "init__", "sessionId=" + this.sessionId());
+        this.debug(true, "init__", "");
+    };
+    this.resetStorageData = function() {
+        this.phwangSessionStorageObject().resetStorageData();
     };
     this.getStorageData = function() {
-        //this.theMyName =  this.phwangLinkStorageObject().myName();
-        //this.theLinkId =  this.phwangLinkStorageObject().linkId();
-        //this.debug(true, "getStorageData", "linkId=" + this.linkId() + " myName=" + this.myName());
+        this.theSessionId =  this.phwangSessionStorageObject().sessionId();
+        this.debug(true, "getStorageData", "SessionId=" + this.sessionId());
     };
     this.putStorageData = function() {
-        //this.debug(true, "putStorageData", "linkId=" + this.linkId() + " myName=" + this.myName());
-        //this.phwangLinkStorageObject().setMyName(this.myName());
-        //this.phwangLinkStorageObject().setLinkId(this.linkId());
+        this.phwangSessionStorageObject().setSessionId(this.sessionId());
+        this.getStorageData();
+
     };
     this.xmtSeq = function() {
         return this.theXmtSeq;
@@ -47,24 +49,23 @@ function PhwangSessionClass(link_object_val) {
     this.debug = function(debug_val, str1_val, str2_val) {if (debug_val) {this.logit(str1_val, str2_val);}};
     this.logit = function(str1_val, str2_val) {return this.phwangObject().LOG_IT(this.objectName() + "." + str1_val, str2_val);};
     this.abend = function(str1_val, str2_val) {return this.phwangObject().ABEND(this.objectName() + "." + str1_val, str2_val);};
-    this.sessionId = function() {return this.phwangSessionStorageObject().sessionId();};
-    this.setSessionId = function(val) {this.phwangSessionStorageObject().setSessionId(val);};
+    this.sessionId = function() {return this.theSessionId;};
+    this.setSessionId = function(val) {this.theSessionId = val;};
     this.init__(link_object_val);
 }
 function PhwangSessionStorageObject(phwang_session_object_val) {
     "use strict";
     this.storage = function() {return localStorage;};
-    this.init__ = function(phwang_session_object_val) {
-        this.thePhwangSessionObject = phwang_session_object_val;
-        this.resetSessionStorage();
-        this.debug(true, "init__", "");
+    this.init__ = function(phwang_session_object_val) {this.thePhwangSessionObject = phwang_session_object_val;};
+    this.resetStorageData = function() {
+        this.resetSessionId();
     };
     this.objectName = function() {return "PhwangSessionStorageObject";};
     this.phwangSessionObject = function() {return this.thePhwangSessionObject;};
     this.phwangObject = function() {return this.phwangSessionObject().phwangObject();};
     this.sessionId = function() {return this.storage().session_id;};
     this.setSessionId = function(val) {this.storage().session_id = val;};
-    this.resetSessionStorage = function() {};
+    this.resetSessionId = function() {this.setSessionId("");};
     this.debug = function(debug_val, str1_val, str2_val) {if (debug_val) {this.logit(str1_val, str2_val);}};
     this.logit = function(str1_val, str2_val) {return this.phwangObject().LOG_IT(this.objectName() + "." + str1_val, str2_val);};
     this.abend = function(str1_val, str2_val) {return this.phwangObject().ABEND(this.objectName() + "." + str1_val, str2_val);};

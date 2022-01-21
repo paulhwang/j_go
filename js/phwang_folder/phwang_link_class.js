@@ -2,20 +2,20 @@
  * Copyrights phwang
  * Written by Paul Hwang
  */
-function PhwangLinkClass(phwang_object_val, get_storage_data_on_val) {
+function PhwangLinkClass(phwang_object_val) {
     "use strict";
-    this.init__ = function(phwang_object_val, get_storage_data_on_val) {
+    this.init__ = function(phwang_object_val) {
         this.thePhwangObject = phwang_object_val;
         this.thePhwangLinkStorageObject = new PhwangLinkStorageObject(this);
-        if (get_storage_data_on_val === true) {
-            this.getStorageData();
-        }
         this.theNameList = [];
         this.theNameListTag = 0;
         this.theServerNameListTag = 0;
         this.theSessionIndexArray = [0];
         this.theSessionTableArray = [null];
-        this.debug(true, "init__", "linkId=" + this.linkId() + " myName=" + this.myName());
+        this.debug(true, "init__", "");
+    };
+    this.resetStorageData = function() {
+        this.phwangLinkStorageObject().resetStorageData();
     };
     this.getStorageData = function() {
         this.theMyName =  this.phwangLinkStorageObject().myName();
@@ -23,7 +23,6 @@ function PhwangLinkClass(phwang_object_val, get_storage_data_on_val) {
         this.debug(true, "getStorageData", "linkId=" + this.linkId() + " myName=" + this.myName());
     };
     this.putStorageData = function() {
-        this.debug(true, "putStorageData", "linkId=" + this.linkId() + " myName=" + this.myName());
         this.phwangLinkStorageObject().setMyName(this.myName());
         this.phwangLinkStorageObject().setLinkId(this.linkId());
     };
@@ -51,7 +50,7 @@ function PhwangLinkClass(phwang_object_val, get_storage_data_on_val) {
     };
     this.mallocSessionAndInsert = function(session_id_val) {
         this.phwangSessionObject().setSessionId(session_id_val);
-        var session = new PhwangSessionClass(this);
+        var session = new PhwangSessionClass(this, false);
         if (!session) {
             return null;
         }
@@ -91,7 +90,7 @@ function PhwangLinkClass(phwang_object_val, get_storage_data_on_val) {
     this.debug = function(debug_val, str1_val, str2_val) {if (debug_val) {this.logit(str1_val, str2_val);}};
     this.logit = function(str1_val, str2_val) {return this.phwangObject().LOG_IT(this.objectName() + "." + str1_val, str2_val);};
     this.abend = function(str1_val, str2_val) {return this.phwangObject().ABEND(this.objectName() + "." + str1_val, str2_val);};
-    this.init__(phwang_object_val, get_storage_data_on_val);
+    this.init__(phwang_object_val);
 }
 function PhwangLinkStorageObject(phwang_link_object_val) {
     "use strict";
@@ -101,6 +100,10 @@ function PhwangLinkStorageObject(phwang_link_object_val) {
         this.resetLinkId();
         this.resetMyName();
         this.resetPassWord();
+    };
+    this.resetStorageData = function() {
+        this.resetLinkId();
+        this.resetMyName();
     };
     this.myName = function() {return this.storage().my_name;};
     this.setMyName = function (val) {this.storage().my_name = val;};

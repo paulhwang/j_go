@@ -7,6 +7,7 @@ function ConfigRootObject() {
     this.init__ = function() {
         this.thePhwangObject = new PhwangClass(this);
         this.phwangObject().initObject();
+        this.phwangObject().getStorageLinkData();
         this.phwangAjaxObject().startWatchDog(this.phwangLinkObject());
         this.theConfigStorageObject = new GoConfigStorageObject(this);
         this.theConfigObject = new GoPlayConfigObject(this);
@@ -76,8 +77,14 @@ function ConfigAjaxClass(root_object_val) {
     this.receiveSetupLinkResponse = function(result_val) {};
     this.receiveGetNameListResponse = function(result_val) {this.htmlObject().renderNameList();};
     this.receiveSetupSessionResponse = function(result_val) {/*this.htmlObject().gotoNextPage();*/};
-    this.receiveSetupSession2Response = function(result_val) {this.htmlObject().gotoNextPage();};
-    this.receiveSetupSession3Response = function(result_val) {this.htmlObject().gotoNextPage();};
+    this.receiveSetupSession2Response = function(result_val) {
+        this.phwangObject().putStorageLinkSessionData();
+        this.htmlObject().gotoNextPage();
+    };
+    this.receiveSetupSession3Response = function(result_val) {
+        this.phwangObject().putStorageLinkSessionData();
+        this.htmlObject().gotoNextPage();
+    };
     this.receivePuttSessionDataResponse = function (result_val) {};
     this.receiveGetSessionDataResponse = function (result_val, data_val) {};
     this.objectName = function() {return "ConfigAjaxClass";};
