@@ -18,8 +18,8 @@ function PhwangLinkClass(phwang_object_val) {
         this.phwangLinkStorageObject().resetStorageData();
     };
     this.getStorageData = function() {
-        this.theMyName =  this.phwangLinkStorageObject().myName();
-        this.theLinkId =  this.phwangLinkStorageObject().linkId();
+        this.setMyName(this.phwangLinkStorageObject().myName());
+        this.setLinkId(this.phwangLinkStorageObject().linkId());
         this.debug(true, "getStorageData", "linkId=" + this.linkId() + " myName=" + this.myName());
     };
     this.putStorageData = function() {

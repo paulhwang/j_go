@@ -16,7 +16,7 @@ function PhwangSessionClass(link_object_val) {
         this.phwangSessionStorageObject().resetStorageData();
     };
     this.getStorageData = function() {
-        this.theSessionId =  this.phwangSessionStorageObject().sessionId();
+        this.setSessionId(this.phwangSessionStorageObject().sessionId());
         this.debug(true, "getStorageData", "SessionId=" + this.sessionId());
     };
     this.putStorageData = function() {

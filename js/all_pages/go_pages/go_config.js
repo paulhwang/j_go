@@ -17,7 +17,15 @@ function GoPlayConfigObject(root_val) {
         this.setHisName(this.configStorageObject().hisName());
         this.setPlayBothSides();
         this.debug(true, "getStorageConfigData", "myColor=" + this.myColor() + " boardSize=" + this.boardSize() + " hisName=" + this.hisName() + " handicapPoint=" + this.handicapPoint() + " komiPoint=" + this.komiPoint());
-     }
+    };
+    this.putStorageConfigData = function() {
+        this.configStorageObject().setBoardSize(this.boardSize());
+        this.configStorageObject().setMyColor(this.myColor());
+        this.configStorageObject().setHandicapPoint(this.handicapPoint());
+        this.configStorageObject().setKomiPoint(this.komiPoint());
+        this.configStorageObject().setHisName(this.hisName());
+        this.setPlayBothSides();
+    };
     this.playBothSides = function() {return this.thePlayBothSides;};
     this.setPlayBothSides = function() {this.thePlayBothSides = (this.phwangLinkObject().myName() === this.hisName());};
     this.boardSize = function() {return this.theBoardSize;};
