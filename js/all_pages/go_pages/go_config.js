@@ -26,6 +26,17 @@ function GoPlayConfigObject(root_val) {
         this.configStorageObject().setHisName(this.hisName());
         this.setPlayBothSides();
     };
+    this.encodeConfig = function(my_name_val) {
+        var len = 11 + my_name_val.length;
+        var buf = "G";
+        if (len < 100) buf = buf + 0; if (len < 10) buf = buf + 0; buf = buf + len;
+        if (this.boardSize() < 10) buf = buf + 0; buf = buf + this.boardSize();
+        if (this.handicapPoint() < 10) buf = buf + 0; buf = buf + this.handicapPoint();
+        if (this.komiPoint() < 10) buf = buf + 0; buf = buf + this.komiPoint();
+        buf = buf + this.hisColor();
+        buf = buf + my_name_val;
+        return buf;
+    };
     this.playBothSides = function() {return this.thePlayBothSides;};
     this.setPlayBothSides = function() {this.thePlayBothSides = (this.phwangLinkObject().myName() === this.hisName());};
     this.boardSize = function() {return this.theBoardSize;};

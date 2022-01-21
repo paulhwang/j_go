@@ -48,7 +48,7 @@ function ConfigHtmlObject(root_object_val) {
             this0.configObject().setKomiPoint($(".config_section .go_config_section .komi").val());
             this0.configObject().setHandicapPoint($(".config_section .go_config_section .handicap").val());
             this0.configObject().putStorageConfigData();
-            var encoded_config = this0.configStorageObject().encodeConfig(this0.phwangLinkObject().myName());
+            var encoded_config = this0.configObject().encodeConfig(this0.phwangLinkObject().myName());
             this0.debug(true, "setupHtmlInput", "boardSize=" + this0.configObject().boardSize() + " myColor=" + this0.configObject().myColor() + " komi=" + this0.configObject().komiPoint() + " handicap=" + this0.configObject().handicapPoint() + " myName-" + this0.phwangLinkObject().myName() + " hisName=" + this0.configObject().hisName() + " config=" + encoded_config);
             this0.phwangAjaxObject().setupSession(this0.phwangLinkObject(), this0.configObject().hisName(), encoded_config);
         });
@@ -66,7 +66,6 @@ function ConfigHtmlObject(root_object_val) {
     this.phwangLinkObject = function() {return this.phwangObject().phwangLinkObject();};
     this.phwangSessionObject = function() {return this.phwangObject().phwangSessionObject();};
     this.configObject = function() {return this.rootObject().configObject();};
-    this.configStorageObject = function() {return this.rootObject().configStorageObject();};
     this.debug = function(debug_val, str1_val, str2_val) {if (debug_val) {this.logit(str1_val, str2_val);}};
     this.logit = function(str1_val, str2_val) {this.rootObject().logit_(this.objectName() + "." + str1_val, str2_val);};
     this.abend = function(str1_val, str2_val) {this.rootObject().abend_(this.objectName() + "." + str1_val, str2_val);};
