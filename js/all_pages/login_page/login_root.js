@@ -54,7 +54,10 @@ function LoginHtmlObject(root_object_val) {
 function LoginAjaxClass(root_object_val) {
     "use strict";
     this.init__ = function(root_object_val) {this.theRootObject = root_object_val;};
-    this.receiveSetupLinkResponse = function(result_val) {this.htmlObject().gotoNextPage();};
+    this.receiveSetupLinkResponse = function(result_val) {
+        this.phwangObject().putStorageData();
+        this.htmlObject().gotoNextPage();
+    };
     this.receiveGetNameListResponse = function(result_val) {};
     this.receiveSetupSessionResponse = function(result_val) {};
     this.receiveSetupSession2Response = function(result_val) {};

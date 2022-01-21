@@ -12,6 +12,16 @@ function PhwangSessionClass(link_object_val) {
         this.theRcvSeq = 0;
         this.debug(false, "init__", "sessionId=" + this.sessionId());
     };
+    this.getStorageData = function() {
+        //this.theMyName =  this.phwangLinkStorageObject().myName();
+        //this.theLinkId =  this.phwangLinkStorageObject().linkId();
+        //this.debug(true, "getStorageData", "linkId=" + this.linkId() + " myName=" + this.myName());
+    };
+    this.putStorageData = function() {
+        //this.debug(true, "putStorageData", "linkId=" + this.linkId() + " myName=" + this.myName());
+        //this.phwangLinkStorageObject().setMyName(this.myName());
+        //this.phwangLinkStorageObject().setLinkId(this.linkId());
+    };
     this.xmtSeq = function() {
         return this.theXmtSeq;
     };

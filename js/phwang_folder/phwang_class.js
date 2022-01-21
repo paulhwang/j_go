@@ -28,6 +28,10 @@ function PhwangClass(root_val) {
         }
         return output;
     };
+    this.putStorageData = function() {
+        this.phwangLinkObject().putStorageData();
+        this.phwangSessionObject().putStorageData();
+    };
     this.serverHttpHeader = function() {return "http://" + window.location.hostname + ":" + window.location.port + "/";};
     this.serverHttpsHeader = function() {return "https://" + window.location.hostname + ":" + window.location.port + "/";};
     this.objectName = function() {return "PhwangClass";};

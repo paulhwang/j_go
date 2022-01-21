@@ -7,6 +7,9 @@ function PhwangLinkClass(phwang_object_val, get_storage_data_on_val) {
     this.init__ = function(phwang_object_val, get_storage_data_on_val) {
         this.thePhwangObject = phwang_object_val;
         this.thePhwangLinkStorageObject = new PhwangLinkStorageObject(this);
+        if (get_storage_data_on_val === true) {
+            this.getStorageData();
+        }
         this.theNameList = [];
         this.theNameListTag = 0;
         this.theServerNameListTag = 0;
@@ -14,14 +17,15 @@ function PhwangLinkClass(phwang_object_val, get_storage_data_on_val) {
         this.theSessionTableArray = [null];
         this.debug(true, "init__", "linkId=" + this.linkId() + " myName=" + this.myName());
     };
-    this.myName = function() {return this.phwangLinkStorageObject().myName();};
-    this.setMyName = function(val) {this.phwangLinkStorageObject().setMyName(val);};
-    this.linkId = function() {return this.phwangLinkStorageObject().linkId();};
-    this.setLinkId = function(val) {
-        if (this.linkId()) {
-            //this.abend("setLinkIdIndex", "already exist");
-        }
-        this.phwangLinkStorageObject().setLinkId(val);
+    this.getStorageData = function() {
+        this.theMyName =  this.phwangLinkStorageObject().myName();
+        this.theLinkId =  this.phwangLinkStorageObject().linkId();
+        this.debug(true, "getStorageData", "linkId=" + this.linkId() + " myName=" + this.myName());
+    };
+    this.putStorageData = function() {
+        this.debug(true, "putStorageData", "linkId=" + this.linkId() + " myName=" + this.myName());
+        this.phwangLinkStorageObject().setMyName(this.myName());
+        this.phwangLinkStorageObject().setLinkId(this.linkId());
     };
     this.sessionIndexArray = function() {
         return this.theSessionIndexArray;
@@ -66,6 +70,10 @@ function PhwangLinkClass(phwang_object_val, get_storage_data_on_val) {
             return session;
         }
     };
+    this.myName = function() {return this.theMyName;};
+    this.setMyName = function(val) {this.theMyName = val;};
+    this.linkId = function() {return this.theLinkId;};
+    this.setLinkId = function(val) { this.theLinkId = val;};
     this.nameListTag = function() {return this.theNameListTag;};
     this.setNameListTag = function(val) {this.theNameListTag = val;};
     this.serverNameListTag = function() {return this.theServerNameListTag;};
