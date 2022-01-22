@@ -77,6 +77,7 @@ function ConfigAjaxClass(root_object_val) {
     this.receiveGetNameListResponse = function(result_val) {this.htmlObject().renderNameList();};
     this.receiveSetupSessionResponse = function(result_val) {/*this.htmlObject().gotoNextPage();*/};
     this.receiveSetupSession2Response = function(result_val) {
+        this.phwangObject().sleepMilliseconds(10000);//for the opponents in the same browser
         this.phwangObject().putStorageLinkSessionData();
         this.configObject().putStorageConfigData();
         this.htmlObject().gotoNextPage();

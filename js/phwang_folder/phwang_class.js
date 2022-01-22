@@ -48,6 +48,14 @@ function PhwangClass(root_val) {
         this.phwangLinkObject().getStorageData();
         this.phwangSessionObject().getStorageData();
     };
+    this.sleepMilliseconds = function (milliseconds_val) {
+        var start = new Date().getTime();
+        for (var i = 0; i < 1e7; i++) {
+            if ((new Date().getTime() - start) > milliseconds_val){
+                break;
+            }
+        }
+    };
     this.serverHttpHeader = function() {return "http://" + window.location.hostname + ":" + window.location.port + "/";};
     this.serverHttpsHeader = function() {return "https://" + window.location.hostname + ":" + window.location.port + "/";};
     this.objectName = function() {return "PhwangClass";};

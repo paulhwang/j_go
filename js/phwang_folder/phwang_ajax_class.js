@@ -212,7 +212,6 @@ function PhwangAjaxClass(phwang_object_val) {
             this.phwangSessionObject().setSessionId(data.session_id.slice(8));
             this.debug(true, "setupSession2Response", "sessionId=" + this.phwangSessionObject().sessionId());
             this.phwangPortObject().receiveSetupSession2Response();
-            this.rootObject().configObject().cacheConfig();
         }
     };
     this.setupSession3 = function(link_val, session_id_val) {
