@@ -19,12 +19,15 @@ function GoPlayConfigObject(root_val) {
         this.debug(true, "getStorageConfigData", "myColor=" + this.myColor() + " boardSize=" + this.boardSize() + " hisName=" + this.hisName() + " handicapPoint=" + this.handicapPoint() + " komiPoint=" + this.komiPoint());
     };
     this.putStorageConfigData = function() {
+        this.debug(true, "putStorageConfigData", "myColor=" + this.myColor() + " boardSize=" + this.boardSize() + " hisName=" + this.hisName() + " handicapPoint=" + this.handicapPoint() + " komiPoint=" + this.komiPoint());
         this.configStorageObject().setBoardSize(this.boardSize());
         this.configStorageObject().setMyColor(this.myColor());
+        this.debug(true, "putStorageConfigData1", "myColor=" + this.myColor() + " boardSize=" + this.boardSize() + " hisName=" + this.hisName() + " handicapPoint=" + this.handicapPoint() + " komiPoint=" + this.komiPoint());
         this.configStorageObject().setHandicapPoint(this.handicapPoint());
         this.configStorageObject().setKomiPoint(this.komiPoint());
         this.configStorageObject().setHisName(this.hisName());
         this.setPlayBothSides();
+        this.debug(true, "putStorageConfigData2", "myColor=" + this.myColor() + " boardSize=" + this.boardSize() + " hisName=" + this.hisName() + " handicapPoint=" + this.handicapPoint() + " komiPoint=" + this.komiPoint());
     };
     this.encodeConfig = function(my_name_val) {
         var len = 11 + my_name_val.length;
@@ -37,12 +40,39 @@ function GoPlayConfigObject(root_val) {
         buf = buf + my_name_val;
         return buf;
     };
+    this.decodeConfig = function(encoded_val) {
+        this.debug(true, "decodeConfig", encoded_val);
+        if ((encoded_val === undefined) || (encoded_val === "")) {
+            this.setBoardSize(19);
+            this.setHandicapPoint(0);
+            this.setKomiPoint(0);
+            return;
+        }
+        var data;
+        if (encoded_val.charAt(0) != 'G') {
+            this.abend("decodeConfig", "not G");
+        }
+        var index = 4;
+        data = (encoded_val.charAt(index++) - '0') * 10
+        data += encoded_val.charAt(index++) - '0';
+        this.setBoardSize(data);
+        data = (encoded_val.charAt(index++) - '0') * 10
+        data += encoded_val.charAt(index++) - '0';
+        this.setHandicapPoint(data);
+        data = (encoded_val.charAt(index++) - '0') * 10
+        data += encoded_val.charAt(index++) - '0';
+        this.setKomiPoint(data);
+        data = encoded_val.charAt(index++) - '0';
+        this.setMyColor_(data);
+        this.setHisName(encoded_val.slice(index));
+    };
     this.playBothSides = function() {return this.thePlayBothSides;};
     this.setPlayBothSides = function() {this.thePlayBothSides = (this.phwangLinkObject().myName() === this.hisName());};
     this.boardSize = function() {return this.theBoardSize;};
     this.setBoardSize = function(val) {this.theBoardSize = val;};
     this.myColor = function() {return this.theMyColor;};
     this.setMyColor = function(val) {this.theMyColor = val;};
+    this.setMyColor_ = function(val) {this.theMyColor = val;};
     this.hisColor = function() {if (this.myColor() === GO.BLACK_STONE()) {return GO.WHITE_STONE();} else {return GO.BLACK_STONE();}};
     this.hisName = function() {return this.theHisName;};
     this.setHisName = function(val) {return this.theHisName = val;};
