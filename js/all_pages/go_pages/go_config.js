@@ -99,35 +99,6 @@ function GoConfigStorageObject(root_val) {
         this.theRootObject = root_val;
         this.debug(true, "init__", "myColor=" + this.myColor() + " boardSize=" + this.boardSize() + " hisName=" + this.hisName() + " handicapPoint=" + this.handicapPoint() + " komiPoint=" + this.komiPoint());
     };
-
-    this.decodeConfig = function(encoded_val) {
-        this.debug(true, "decodeConfig", encoded_val);
-        if ((encoded_val === undefined) || (encoded_val === "")) {
-            this.setBoardSize(19);
-            this.setHandicapPoint(0);
-            this.setKomiPoint(0);
-            return;
-        }
-
-        var data;
-        if (encoded_val.charAt(0) != 'G') {
-            this.abend("decodeConfig", "not G");
-        }
-        var index = 4;
-        data = (encoded_val.charAt(index++) - '0') * 10
-        data += encoded_val.charAt(index++) - '0';
-        this.setBoardSize(data);
-        data = (encoded_val.charAt(index++) - '0') * 10
-        data += encoded_val.charAt(index++) - '0';
-        this.setHandicapPoint(data);
-        data = (encoded_val.charAt(index++) - '0') * 10
-        data += encoded_val.charAt(index++) - '0';
-        this.setKomiPoint(data);
-        data = encoded_val.charAt(index++) - '0';
-        this.setMyColor_(data);
-        this.setHisName(encoded_val.slice(index));
-    };
-
     this.storage = function() {return localStorage;};
     this.myColor = function() {return Number(this.storage().go_my_color);};
     this.setMyColor = function(val) {if (val === "black") {this.storage().go_my_color = GO.BLACK_STONE();} else if (val === "white") {this.storage().go_my_color = GO.WHITE_STONE();} else {this.abend("setMyColor", val);}};
