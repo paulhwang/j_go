@@ -11,7 +11,7 @@ function GoPlayConfigObject(root_val) {
     };
     this.getStorageConfigData = function() {
         this.setBoardSize(this.configStorageObject().boardSize());
-        this.setMyColor_(this.configStorageObject().myColor());
+        this.setMyColor(this.configStorageObject().myColor());
         this.setHandicapPoint(this.configStorageObject().handicapPoint());
         this.setKomiPoint(this.configStorageObject().komiPoint());
         this.setHisName(this.configStorageObject().hisName());
@@ -63,7 +63,7 @@ function GoPlayConfigObject(root_val) {
         data += encoded_val.charAt(index++) - '0';
         this.setKomiPoint(data);
         data = encoded_val.charAt(index++) - '0';
-        this.setMyColor_(data);
+        this.setMyColor(data);
         this.setHisName(encoded_val.slice(index));
     };
     this.playBothSides = function() {return this.thePlayBothSides;};
@@ -72,7 +72,7 @@ function GoPlayConfigObject(root_val) {
     this.setBoardSize = function(val) {this.theBoardSize = val;};
     this.myColor = function() {return this.theMyColor;};
     this.setMyColorConverted = function(val) {if (val === "black") {this.theMyColor = GO.BLACK_STONE();} else if (val === "white") {this.theMyColor = GO.WHITE_STONE();} else {this.abend("setMyColor", val);}};
-    this.setMyColor_ = function(val) {this.theMyColor = val;};
+    this.setMyColor = function(val) {this.theMyColor = val;};
     this.hisColor = function() {if (this.myColor() === GO.BLACK_STONE()) {return GO.WHITE_STONE();} else {return GO.BLACK_STONE();}};
     this.hisName = function() {return this.theHisName;};
     this.setHisName = function(val) {return this.theHisName = val;};
@@ -101,7 +101,6 @@ function GoConfigStorageObject(root_val) {
     };
     this.storage = function() {return localStorage;};
     this.myColor = function() {return Number(this.storage().go_my_color);};
-    this.setMyColor = function(val) {if (val === "black") {this.storage().go_my_color = GO.BLACK_STONE();} else if (val === "white") {this.storage().go_my_color = GO.WHITE_STONE();} else {this.abend("setMyColor", val);}};
     this.setMyColor_ = function(val) {this.storage().go_my_color = val;};
     this.hisColor = function() {if (this.myColor() === GO.BLACK_STONE()) {return GO.WHITE_STONE();} else {return GO.BLACK_STONE();}};
     this.hisName = function() {return this.storage().go_his_name;};
