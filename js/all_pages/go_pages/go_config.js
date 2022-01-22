@@ -21,13 +21,11 @@ function GoPlayConfigObject(root_val) {
     this.putStorageConfigData = function() {
         this.debug(true, "putStorageConfigData", "myColor=" + this.myColor() + " boardSize=" + this.boardSize() + " hisName=" + this.hisName() + " handicapPoint=" + this.handicapPoint() + " komiPoint=" + this.komiPoint());
         this.configStorageObject().setBoardSize(this.boardSize());
-        this.configStorageObject().setMyColor_(this.myColor());
-        this.debug(true, "putStorageConfigData1", "myColor=" + this.myColor() + " boardSize=" + this.boardSize() + " hisName=" + this.hisName() + " handicapPoint=" + this.handicapPoint() + " komiPoint=" + this.komiPoint());
+        this.configStorageObject().setMyColor(this.myColor());
         this.configStorageObject().setHandicapPoint(this.handicapPoint());
         this.configStorageObject().setKomiPoint(this.komiPoint());
         this.configStorageObject().setHisName(this.hisName());
         this.setPlayBothSides();
-        this.debug(true, "putStorageConfigData2", "myColor=" + this.myColor() + " boardSize=" + this.boardSize() + " hisName=" + this.hisName() + " handicapPoint=" + this.handicapPoint() + " komiPoint=" + this.komiPoint());
     };
     this.encodeConfig = function(my_name_val) {
         var len = 11 + my_name_val.length;
@@ -101,7 +99,7 @@ function GoConfigStorageObject(root_val) {
     };
     this.storage = function() {return localStorage;};
     this.myColor = function() {return Number(this.storage().go_my_color);};
-    this.setMyColor_ = function(val) {this.storage().go_my_color = val;};
+    this.setMyColor = function(val) {this.storage().go_my_color = val;};
     this.hisColor = function() {if (this.myColor() === GO.BLACK_STONE()) {return GO.WHITE_STONE();} else {return GO.BLACK_STONE();}};
     this.hisName = function() {return this.storage().go_his_name;};
     this.setHisName = function(val) {this.storage().go_his_name = val;};
