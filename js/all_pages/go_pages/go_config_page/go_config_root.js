@@ -43,7 +43,7 @@ function ConfigHtmlObject(root_object_val) {
         var this0 = this;
         $(".config_section .config_button").on("click", function() {
             this0.configObject().setHisName($(".peer_name_paragraph select").val());
-            this0.configObject().setMyColor($(".config_section .go_config_section .stone_color").val());
+            this0.configObject().setMyColorConverted($(".config_section .go_config_section .stone_color").val());
             this0.configObject().setBoardSize($(".config_section .go_config_section .board_size").val());
             this0.configObject().setKomiPoint($(".config_section .go_config_section .komi").val());
             this0.configObject().setHandicapPoint($(".config_section .go_config_section .handicap").val());

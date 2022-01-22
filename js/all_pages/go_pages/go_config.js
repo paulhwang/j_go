@@ -71,7 +71,7 @@ function GoPlayConfigObject(root_val) {
     this.boardSize = function() {return this.theBoardSize;};
     this.setBoardSize = function(val) {this.theBoardSize = val;};
     this.myColor = function() {return this.theMyColor;};
-    this.setMyColor = function(val) {if (val === "black") {this.theMyColor = GO.BLACK_STONE();} else if (val === "white") {this.theMyColor = GO.WHITE_STONE();} else {this.abend("setMyColor", val);}};
+    this.setMyColorConverted = function(val) {if (val === "black") {this.theMyColor = GO.BLACK_STONE();} else if (val === "white") {this.theMyColor = GO.WHITE_STONE();} else {this.abend("setMyColor", val);}};
     this.setMyColor_ = function(val) {this.theMyColor = val;};
     this.hisColor = function() {if (this.myColor() === GO.BLACK_STONE()) {return GO.WHITE_STONE();} else {return GO.BLACK_STONE();}};
     this.hisName = function() {return this.theHisName;};
