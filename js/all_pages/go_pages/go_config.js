@@ -11,7 +11,7 @@ function GoPlayConfigObject(root_val) {
     };
     this.getStorageConfigData = function() {
         this.setBoardSize(this.configStorageObject().boardSize());
-        this.setMyColor(this.configStorageObject().myColor());
+        this.setMyColor_(this.configStorageObject().myColor());
         this.setHandicapPoint(this.configStorageObject().handicapPoint());
         this.setKomiPoint(this.configStorageObject().komiPoint());
         this.setHisName(this.configStorageObject().hisName());
@@ -21,7 +21,7 @@ function GoPlayConfigObject(root_val) {
     this.putStorageConfigData = function() {
         this.debug(true, "putStorageConfigData", "myColor=" + this.myColor() + " boardSize=" + this.boardSize() + " hisName=" + this.hisName() + " handicapPoint=" + this.handicapPoint() + " komiPoint=" + this.komiPoint());
         this.configStorageObject().setBoardSize(this.boardSize());
-        this.configStorageObject().setMyColor(this.myColor());
+        this.configStorageObject().setMyColor_(this.myColor());
         this.debug(true, "putStorageConfigData1", "myColor=" + this.myColor() + " boardSize=" + this.boardSize() + " hisName=" + this.hisName() + " handicapPoint=" + this.handicapPoint() + " komiPoint=" + this.komiPoint());
         this.configStorageObject().setHandicapPoint(this.handicapPoint());
         this.configStorageObject().setKomiPoint(this.komiPoint());
@@ -71,7 +71,7 @@ function GoPlayConfigObject(root_val) {
     this.boardSize = function() {return this.theBoardSize;};
     this.setBoardSize = function(val) {this.theBoardSize = val;};
     this.myColor = function() {return this.theMyColor;};
-    this.setMyColor = function(val) {this.theMyColor = val;};
+    this.setMyColor = function(val) {if (val === "black") {this.theMyColor = GO.BLACK_STONE();} else if (val === "white") {this.theMyColor = GO.WHITE_STONE();} else {this.abend("setMyColor", val);}};
     this.setMyColor_ = function(val) {this.theMyColor = val;};
     this.hisColor = function() {if (this.myColor() === GO.BLACK_STONE()) {return GO.WHITE_STONE();} else {return GO.BLACK_STONE();}};
     this.hisName = function() {return this.theHisName;};
