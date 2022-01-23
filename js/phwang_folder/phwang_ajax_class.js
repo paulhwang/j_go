@@ -80,6 +80,7 @@ function PhwangAjaxClass(phwang_object_val) {
         var output = JSON.stringify({
                         command: this.phwangAjaxProtocolObject().GET_LINK_DATA_COMMAND(),
                         packet_id: this.ajaxPacketId(),
+                        time_stamp: link_val.timeStamp(),
                         link_id: link_val.linkId(),
                         });
         this.debug(false, "getLinkData", "output=" + output);
@@ -150,6 +151,7 @@ function PhwangAjaxClass(phwang_object_val) {
         var output = JSON.stringify({
                         command: this.phwangAjaxProtocolObject().GET_NAME_LIST_COMMAND(),
                         packet_id: this.ajaxPacketId(),
+                        time_stamp: link_val.timeStamp(),
                         link_id: link_val.linkId(),
                         name_list_tag: link_val.nameListTag(),
                         });
@@ -178,6 +180,7 @@ function PhwangAjaxClass(phwang_object_val) {
         var output = JSON.stringify({
                         command: this.phwangAjaxProtocolObject().SETUP_SESSION_COMMAND(),
                         packet_id: this.ajaxPacketId(),
+                        time_stamp: link_val.timeStamp(),
                         link_id: link_val.linkId(),
                         his_name: his_name_val,
                         theme_data: theme_data_val,
@@ -197,6 +200,7 @@ function PhwangAjaxClass(phwang_object_val) {
         var output = JSON.stringify({
                         command: this.phwangAjaxProtocolObject().SETUP_SESSION2_COMMAND(),
                         packet_id: this.ajaxPacketId(),
+                        time_stamp: link_val.timeStamp(),
                         link_id: link_val.linkId(),
                         accept: "yes",
                         session_id: session_id_val,
@@ -219,6 +223,7 @@ function PhwangAjaxClass(phwang_object_val) {
         var output = JSON.stringify({
                         command: this.phwangAjaxProtocolObject().SETUP_SESSION3_COMMAND(),
                         packet_id: this.ajaxPacketId(),
+                        time_stamp: link_val.timeStamp(),
                         link_id: link_val.linkId(),
                         session_id: session_id_val,
                         });
@@ -239,6 +244,7 @@ function PhwangAjaxClass(phwang_object_val) {
         var output = JSON.stringify({
                         command: this.phwangAjaxProtocolObject().PUT_SESSION_DATA_COMMAND(),
                         packet_id: this.ajaxPacketId(),
+                        time_stamp: session_val.phwangLinkObject().timeStamp(),
                         link_id: session_val.phwangLinkObject().linkId(),
                         session_id: session_val.sessionId(),
                         xmt_seq: session_val.xmtSeq(),
@@ -252,11 +258,12 @@ function PhwangAjaxClass(phwang_object_val) {
         this.debug(false, "putSessionDataResponse", "data=" + json_data_val);
         var data = JSON.parse(json_data_val);
     };
-    this.getSessionData = function(link_session_id_val) {
+    this.getSessionData = function(link_val, link_session_id_val) {
         var output = JSON.stringify({
                         command: this.phwangAjaxProtocolObject().GET_SESSION_DATA_COMMAND(),
                         packet_id: this.ajaxPacketId(),
-                        link_id: link_session_id_val.slice(0, this.phwangAjaxProtocolObject().WEB_FABRIC_PROTOCOL_LINK_ID_SIZE()),
+                        time_stamp: link_val.timeStamp(),
+                        link_id: link_val.linkId(),
                         session_id: link_session_id_val.slice(this.phwangAjaxProtocolObject().WEB_FABRIC_PROTOCOL_LINK_ID_SIZE()),
                         });
         this.debug(false, "getSessionData", "output=" + output);
@@ -303,7 +310,7 @@ function PhwangAjaxClass(phwang_object_val) {
             }
             var link_session_id = ajax_object.pendingSessionDataQueueObject().dequeueData();
             if (link_session_id) {
-                ajax_object.getSessionData(link_session_id);
+                ajax_object.getSessionData(link_val, link_session_id);
                 return;
             }
             if (link_val.serverNameListTag() > link_val.nameListTag()) {
