@@ -19,11 +19,13 @@ function PhwangLinkClass(phwang_object_val) {
     };
     this.getStorageData = function() {
         this.setMyName(this.phwangLinkStorageObject().myName());
+        this.setTimeStamp(this.phwangLinkStorageObject().timeStamp());
         this.setLinkId(this.phwangLinkStorageObject().linkId());
-        this.debug(true, "getStorageData", "linkId=" + this.linkId() + " myName=" + this.myName());
+        this.debug(true, "getStorageData", "timeStamp=" + this.timeStamp() + " linkId=" + this.linkId() + " myName=" + this.myName());
     };
     this.putStorageData = function() {
         this.phwangLinkStorageObject().setMyName(this.myName());
+        this.phwangLinkStorageObject().setTimeStamp(this.timeStamp());
         this.phwangLinkStorageObject().setLinkId(this.linkId());
     };
     this.sessionIndexArray = function() {
@@ -71,6 +73,8 @@ function PhwangLinkClass(phwang_object_val) {
     };
     this.myName = function() {return this.theMyName;};
     this.setMyName = function(val) {this.theMyName = val;};
+    this.timeStamp = function() {return this.theTimeStamp;};
+    this.setTimeStamp = function(val) { this.theTimeStamp = val;};
     this.linkId = function() {return this.theLinkId;};
     this.setLinkId = function(val) { this.theLinkId = val;};
     this.nameListTag = function() {return this.theNameListTag;};
@@ -97,18 +101,21 @@ function PhwangLinkStorageObject(phwang_link_object_val) {
     this.storage = function() {return localStorage;};
     this.init__ = function(phwang_link_object_val) {this.thePhwangLinkObject = phwang_link_object_val;};
     this.resetLinkStorage = function() {
-        this.resetLinkId();
         this.resetMyName();
-        this.resetPassWord();
+        this.resetTimeStamp();
+        this.resetLinkId();
     };
     this.resetStorageData = function() {
-        this.resetLinkId();
         this.resetMyName();
+        this.resetTimeStamp();
+        this.resetLinkId();
     };
     this.myName = function() {return this.storage().my_name;};
     this.setMyName = function (val) {this.storage().my_name = val;};
     this.resetMyName = function() {this.setMyName("");};
-    this.resetPassWord = function() {this.setPassWord("");};
+    this.timeStamp = function() {return this.storage().time_stamp;};
+    this.setTimeStamp = function(val) {this.storage().time_stamp = val;};
+    this.resetTimeStamp = function() {this.setTimeStamp("");};
     this.linkId = function() {return this.storage().link_id;};
     this.setLinkId = function(val) {this.storage().link_id = val;};
     this.resetLinkId = function() {this.setLinkId("");};
