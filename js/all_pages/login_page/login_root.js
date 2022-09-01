@@ -55,8 +55,26 @@ function LoginAjaxClass(root_object_val) {
     "use strict";
     this.init__ = function(root_object_val) {this.theRootObject = root_object_val;};
     this.receiveSetupLinkResponse = function(result_val) {
-        this.phwangObject().putStorageLinkData();
-        this.htmlObject().gotoNextPage();
+        this.debug(true, "receiveSetupLinkResponse", "result_val=" + result_val);
+        var data = JSON.parse(result_val);
+        if (data.result === "succeed") {
+            this.debug(false, "receiveSetupLinkResponse", "succeed");
+            //this.phwangLinkObject().setTimeStamp(data.time_stamp);
+            //this.phwangLinkObject().setLinkId(data.link_id);
+            this.phwangObject().putStorageLinkData();
+            this.htmlObject().gotoNextPage();
+
+        }
+        else if (data.result === "password not match") {
+            this.debug(true, "receiveSetupLinkResponse", "password not match");
+
+        }
+        else if (data.result === "name not found") {
+            this.debug(true, "receiveSetupLinkResponse", "name not found");
+        }
+        else {
+            this.abend("receiveSetupLinkResponse", "bad result" + data.result);
+        }
     };
     this.receiveGetNameListResponse = function(result_val) {};
     this.receiveSetupSessionResponse = function(result_val) {};
