@@ -28,8 +28,7 @@ function SignUpRootObject() {
 
 function SignUpHtmlObject(root_object_val) {
     "use strict";
-    this.gotoGoConfigPage = function() {window.open(this.phwangObject().serverHttpHeader() + "go_config.html", "_self")};
-    this.gotoSignUpPage = function() {window.open(this.phwangObject().serverHttpHeader() + "sign_up.html", "_self")};
+    this.gotoSignInPage = function() {window.open(this.phwangObject().serverHttpHeader() + "go_login.html", "_self")};
 
     this.init__ = function(root_object_val) {
         this.theRootObject = root_object_val; this.setupHtmlInput();
@@ -65,35 +64,30 @@ function SignUpAjaxClass(root_object_val) {
         this.theRootObject = root_object_val;
     };
 
-    this.receiveSetupLinkResponse = function(result_val) {
-        this.debug(true, "receiveSetupLinkResponse", "result_val=" + result_val);
+    this.receiveSignUpResponse = function(result_val) {
+        this.debug(true, "receiveSignUpResponse", "result_val=" + result_val);
         var data = JSON.parse(result_val);
         if (data.result === "succeed") {
-            this.debug(false, "receiveSetupLinkResponse", "succeed");
-            this.phwangLinkObject().setTimeStamp(data.time_stamp);
-            this.phwangLinkObject().setLinkId(data.link_id);
-            this.phwangObject().putStorageLinkData();
-            this.htmlObject().gotoGoConfigPage();
+            this.debug(true, "receiveSignUpResponse", "succeed");
+            this.htmlObject().gotoSignInPage();
         }
-        else if (data.result === "password not match") {
-            this.debug(true, "receiveSetupLinkResponse", "password not match");
-
-        }
-        else if (data.result === "name not found") {
-            this.debug(true, "receiveSetupLinkResponse", "name not found");
-            this.htmlObject().gotoSignUpPage();
+        else if (data.result === "name exist") {
+            this.debug(true, "receiveSignUpResponse", "nane_exist");
         }
         else {
-            this.abend("receiveSetupLinkResponse", "bad result" + data.result);
+            this.abend("receiveSignUpResponse", "bad result" + data.result);
         }
     };
 
-    this.receiveGetNameListResponse = function(result_val) {};
+    /*
+    this.receiveSetupLinkResponse = function(result_val) {};
     this.receiveSetupSessionResponse = function(result_val) {};
     this.receiveSetupSession2Response = function(result_val) {};
     this.receiveSetupSession3Response = function(result_val) {};
     this.receivePutSessionDataResponse = function(result_val) {};
     this.receiveGetSessionDataResponse = function(result_val, data_val) {};
+    */
+
     this.objectName = function() {return "SignUpAjaxClass";};
     this.rootObject = function() {return this.theRootObject;};
     this.phwangObject = function() {return this.rootObject().phwangObject();};

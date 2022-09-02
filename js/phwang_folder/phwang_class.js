@@ -66,6 +66,7 @@ function PhwangStorageClass(phwang_object_val) {
 function PhwangPortClass(phwang_object_val) {
     "use strict";
     this.init__ = function (phwang_object_val) {this.thePhwangObject = phwang_object_val;};
+    this.receiveSignUpResponse = function(result_val) {this.rootObject().ajaxObject().receiveSignUpResponse(result_val);};
     this.receiveSetupLinkResponse = function(result_val) {this.rootObject().ajaxObject().receiveSetupLinkResponse(result_val);};
     this.receiveGetNameListResponse = function(result_val) {this.rootObject().ajaxObject().receiveGetNameListResponse(result_val);};
     this.receiveSetupSessionResponse = function(result_val) {this.rootObject().ajaxObject().receiveSetupSessionResponse(result_val);};

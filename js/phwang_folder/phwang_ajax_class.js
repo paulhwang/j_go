@@ -34,7 +34,9 @@ function PhwangAjaxClass(phwang_object_val) {
             return;
         }
 
-        if ((response.command !== this.phwangAjaxProtocolObject().SETUP_LINK_COMMAND()) && (!this.phwangLinkObject().verifyLinkIdIndex(data.link_id))) {
+        if ((response.command !== this.phwangAjaxProtocolObject().SETUP_LINK_COMMAND()) &&
+            (response.command !== this.phwangAjaxProtocolObject().SIGN_UP_COMMAND()) &&
+            (!this.phwangLinkObject().verifyLinkIdIndex(data.link_id))) {
             this.abend("parseAndSwitchAjaxResponse", "link_id=" + data.link_id);
             return;
         }
