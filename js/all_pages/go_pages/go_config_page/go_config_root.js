@@ -9,7 +9,7 @@ function ConfigRootObject() {
         this.thePhwangLinkObject = new PhwangLinkClass(this);
         this.thePhwangSessionObject = new PhwangSessionClass(this.phwangLinkObject());
         this.phwangObject().initObject();
-        this.phwangLinkObject().getStorageLinkData();
+        this.phwangLinkObject().getStorageData();
         this.phwangAjaxObject().startWatchDog(this.phwangLinkObject());
         this.theConfigStorageObject = new GoConfigStorageObject(this);
         this.theConfigObject = new GoPlayConfigObject(this);

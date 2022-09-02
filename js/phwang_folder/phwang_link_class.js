@@ -15,27 +15,22 @@ function PhwangLinkClass(root_object_val) {
         this.debug(true, "init__", "");
     };
 
-    this.resetAllStorageData = function () {
-        this.resetStorageLinkData();
-        this.resetStorageSessionData();
-    };
-    this.resetStorageLinkData = function () {
+    this.resetAllStorageData1 = function () {
         this.resetStorageData();
-    };
-    this.resetStorageSessionData = function () {
         this.phwangSessionObject().resetStorageData();
     };
     this.putStorageLinkData = function() {
-        this.resetAllStorageData();
+        this.resetStorageData();
+        this.phwangSessionObject().resetStorageData();
+        //this.resetAllStorageData();
         this.putStorageData();
     };
     this.putStorageLinkSessionData = function() {
-        this.resetAllStorageData();
+        this.resetStorageData();
+        this.phwangSessionObject().resetStorageData();
+        //this.resetAllStorageData();
         this.putStorageData();
         this.phwangSessionObject().putStorageData();
-    };
-    this.getStorageLinkData = function() {
-        this.getStorageData();
     };
     this.getStorageLinkSessionData = function() {
         this.getStorageData();
