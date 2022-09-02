@@ -16,6 +16,7 @@ function PhwangAjaxClass(phwang_object_val) {
         this.clearPendingAjaxRequestCommand();
         this.debug(false, "init__", "");
     };
+
     this.parseAndSwitchAjaxResponse = function(json_response_val) {
         var response = JSON.parse(json_response_val);
 
@@ -47,8 +48,10 @@ function PhwangAjaxClass(phwang_object_val) {
         this.clearPendingAjaxRequestCommand();
         func.bind(this)(response.data);
     };
+
     this.initSwitchTable = function() {
         this.theSwitchTable = {
+            "sign_up": this.signUpResponse,
             "setup_link": this.setupLinkResponse,
             "get_link_data": this.getLinkDataResponse,
             "get_name_list": this.getNameListResponse,
@@ -59,6 +62,23 @@ function PhwangAjaxClass(phwang_object_val) {
             "put_session_data": this.putSessionDataResponse,
         };
     };
+
+    this.signUpRequest = function(account_name_val, password_val, email_val) {
+        var output = JSON.stringify({
+                        command: this.phwangAjaxProtocolObject().SETUP_LINK_COMMAND(),
+                        packet_id: this.ajaxPacketId(),
+                        my_name: account_name_val,
+                        password: password_val,
+                        });
+        this.debug(true, "signUpRequest", "output=" + output);
+        this.transmitAjaxRequest(output);
+    };
+
+    this.signUpResponse = function(input_val) {
+        this.debug(true, "setupLinkResponse", "input_val=" + input_val);
+        this.phwangPortObject().receiveSetupLinkResponse(input_val);
+    };
+
     this.setupLink = function(link_val, password_val) {
         var output = JSON.stringify({
                         command: this.phwangAjaxProtocolObject().SETUP_LINK_COMMAND(),
@@ -69,10 +89,12 @@ function PhwangAjaxClass(phwang_object_val) {
         this.debug(true, "setupLink", "output=" + output);
         this.transmitAjaxRequest(output);
     };
+
     this.setupLinkResponse = function(input_val) {
         this.debug(true, "setupLinkResponse", "input_val=" + input_val);
         this.phwangPortObject().receiveSetupLinkResponse(input_val);
     };
+
     this.getLinkData = function(link_val) {
         var output = JSON.stringify({
                         command: this.phwangAjaxProtocolObject().GET_LINK_DATA_COMMAND(),
@@ -83,6 +105,7 @@ function PhwangAjaxClass(phwang_object_val) {
         this.debug(false, "getLinkData", "output=" + output);
         this.transmitAjaxRequest(output);
     };
+
     this.getLinkDataResponse = function(input_val) {
         this.debug(false, "getLinkDataResponse", "input_val=" + input_val);
         var input = JSON.parse(input_val);
@@ -144,6 +167,7 @@ function PhwangAjaxClass(phwang_object_val) {
             }
         }
     };
+
     this.getNameList = function(link_val) {
         var output = JSON.stringify({
                         command: this.phwangAjaxProtocolObject().GET_NAME_LIST_COMMAND(),
@@ -155,6 +179,7 @@ function PhwangAjaxClass(phwang_object_val) {
         this.debug(true, "getNameList", "output=" + output);
         this.transmitAjaxRequest(output);
     };
+
     this.getNameListResponse = function(input_val) {
         this.debug(true, "getNameListResponse", "input_val=" + input_val);
         var data = JSON.parse(input_val);
@@ -173,6 +198,7 @@ function PhwangAjaxClass(phwang_object_val) {
             }
         }
     };
+
     this.setupSession = function(link_val, his_name_val, theme_data_val) {
         var output = JSON.stringify({
                         command: this.phwangAjaxProtocolObject().SETUP_SESSION_COMMAND(),
@@ -185,6 +211,7 @@ function PhwangAjaxClass(phwang_object_val) {
         this.debug(true, "setupSession", "output=" + output);
         this.transmitAjaxRequest(output);
     };
+
     this.setupSessionResponse = function(input_val) {
         this.debug(true, "setupSessionResponse", "input_val=" + input_val);
         var data = JSON.parse(input_val);
@@ -193,6 +220,7 @@ function PhwangAjaxClass(phwang_object_val) {
             this.phwangPortObject().receiveSetupSessionResponse(data.result);
         }
     };
+
     this.setupSession2 = function(link_val, theme_data_val, session_id_val) {
         var output = JSON.stringify({
                         command: this.phwangAjaxProtocolObject().SETUP_SESSION2_COMMAND(),
@@ -216,6 +244,7 @@ function PhwangAjaxClass(phwang_object_val) {
             this.phwangPortObject().receiveSetupSession2Response();
         }
     };
+
     this.setupSession3 = function(link_val, session_id_val) {
         var output = JSON.stringify({
                         command: this.phwangAjaxProtocolObject().SETUP_SESSION3_COMMAND(),
@@ -237,6 +266,7 @@ function PhwangAjaxClass(phwang_object_val) {
             this.phwangPortObject().receiveSetupSession3Response();
         }
     };
+
     this.putSessionData = function(session_val, data_val) {
         var output = JSON.stringify({
                         command: this.phwangAjaxProtocolObject().PUT_SESSION_DATA_COMMAND(),
@@ -251,10 +281,12 @@ function PhwangAjaxClass(phwang_object_val) {
         this.debug(true, "putSessionData", "output=" + output);
         this.transmitAjaxRequest(output);
     };
+
     this.putSessionDataResponse = function(json_data_val) {
         this.debug(false, "putSessionDataResponse", "data=" + json_data_val);
         var data = JSON.parse(json_data_val);
     };
+
     this.getSessionData = function(link_val, link_session_id_val) {
         var output = JSON.stringify({
                         command: this.phwangAjaxProtocolObject().GET_SESSION_DATA_COMMAND(),
@@ -266,6 +298,7 @@ function PhwangAjaxClass(phwang_object_val) {
         this.debug(false, "getSessionData", "output=" + output);
         this.transmitAjaxRequest(output);
     };
+
     this.getSessionDataResponse = function(json_data_val) {
         this.debug(false, "getSessionDataResponse", "data=" + json_data_val);
         var data = JSON.parse(json_data_val);
@@ -276,6 +309,7 @@ function PhwangAjaxClass(phwang_object_val) {
             }
         }
     };
+
     this.transmitAjaxRequest = function(output_val) {
         if (this.pendingAjaxRequestCommandExist()) {
             this.transmitQueueObject().enqueueData(output_val);
@@ -283,6 +317,7 @@ function PhwangAjaxClass(phwang_object_val) {
         }
         this.xmtAjaxRequest(output_val);
     };
+
     this.xmtAjaxRequest = function (output_val) {
         var output = JSON.parse(output_val);
         if (output.command !== this.phwangAjaxProtocolObject().GET_LINK_DATA_COMMAND()) {
@@ -291,6 +326,7 @@ function PhwangAjaxClass(phwang_object_val) {
         this.setPendingAjaxRequestCommand(output.command);
         this.phwangAjaxEngineObject().sendAjaxRequest(output_val);
     };
+
     this.startWatchDog = function(link_val) {
         setInterval(function (link_val) {
             var ajax_object = link_val.phwangAjaxObject();
@@ -317,6 +353,7 @@ function PhwangAjaxClass(phwang_object_val) {
             ajax_object.getLinkData(link_val);
         }, 100, link_val);
     };
+
     this.pendingAjaxRequestCommand = function() {return this.thePendingAjaxRequestCommand;};
     this.pendingAjaxRequestCommandExist = function() {return (this.pendingAjaxRequestCommand() !== "");};
     this.clearPendingAjaxRequestCommand = function() {this.thePendingAjaxRequestCommand = "";};
@@ -340,6 +377,7 @@ function PhwangAjaxClass(phwang_object_val) {
     this.incrementAjaxPacketId = function() {this.phwangAjaxStorageObject().incrementAjaxPacketId();};
     this.init__(phwang_object_val);
 }
+
 function PhwangAjaxEngineClass(phwang_ajax_object_val) {
     "use strict";
     this.ajaxRoute = function() {return "/django_go/go_ajax/";};
@@ -351,6 +389,7 @@ function PhwangAjaxEngineClass(phwang_ajax_object_val) {
         this.startAjaxResponseProcess();
         this.debug(false, "init__", "");
     };
+
     this.startAjaxResponseProcess = function() {
         var this0 = this;
         this.httpGetRequest().onreadystatechange = function() {
@@ -360,6 +399,7 @@ function PhwangAjaxEngineClass(phwang_ajax_object_val) {
             }
         };
     };
+
     this.sendAjaxRequest = function(output_val) {
         this.httpGetRequest().open("GET", this.ajaxRoute(), true);
         this.httpGetRequest().setRequestHeader("X-Requested-With", "XMLHttpRequest");
@@ -369,6 +409,7 @@ function PhwangAjaxEngineClass(phwang_ajax_object_val) {
         this.incrementAjaxPacketId();
         this.httpGetRequest().send(null);
     };
+
     this.objectName = function() {return "PhwangAjaxEngineClass";};
     this.phwangAjaxObject = function() {return this.thePhwangAjaxObject;};
     this.httpGetRequest = function() {return this.theHttpGetRequest;};
@@ -381,6 +422,7 @@ function PhwangAjaxEngineClass(phwang_ajax_object_val) {
     this.incrementAjaxPacketId = function() {this.phwangAjaxObject().incrementAjaxPacketId();};
     this.init__(phwang_ajax_object_val);
 }
+
 function PhwangAjaxStorageObject(phwang_ajax_object_val) {
     "use strict";
     this.storage = function() {return localStorage;};
@@ -388,9 +430,11 @@ function PhwangAjaxStorageObject(phwang_ajax_object_val) {
         this.thePhwangAjaxObject = phwang_ajax_object_val;
         this.resetAjaxStorage();
     };
+
     this.resetAjaxStorage = function() {
         this.resetAjaxPacketId();
     };
+
     this.resetAjaxPacketId = function() {if (this.ajaxPacketId() === undefined) {this.storage().ajax_packet_id = 0;}};
     this.ajaxPacketId = function() {return this.storage().ajax_packet_id;};
     this.incrementAjaxPacketId = function() {
@@ -400,6 +444,7 @@ function PhwangAjaxStorageObject(phwang_ajax_object_val) {
         }
         this.storage().ajax_packet_id = i;
     };
+
     this.objectName = function() {return "PhwangAjaxStorageObject";};
     this.phwangAjaxObject = function() {return this.thePhwangAjaxObject;};
     this.phwangObject = function() {return this.phwangAjaxObject().phwangObject();};
@@ -408,6 +453,7 @@ function PhwangAjaxStorageObject(phwang_ajax_object_val) {
     this.abend = function(str1_val, str2_val) {return this.phwangObject().ABEND(this.objectName() + "." + str1_val, str2_val);};
     this.init__(phwang_ajax_object_val);
 }
+
 function PhwangAjaxProtocolClass() {
     "use strict";
     this.SETUP_LINK_COMMAND = function() {return "setup_link";}

@@ -7,7 +7,6 @@ function SignUpRootObject() {
     "use strict";
     this.init__ = function() {
         this.thePhwangObject = new PhwangClass(this);
-        this.thePhwangLinkObject = new PhwangLinkClass(this);
         this.phwangObject().initObject();
         this.theAjaxObject = new SignUpAjaxClass(this);
         this.theHtmlObject = new SignUpHtmlObject(this);
@@ -17,8 +16,6 @@ function SignUpRootObject() {
     this.objectName = function() {return "SignUpRootObject";};
     this.phwangObject = function() {return this.thePhwangObject;};
     this.phwangAjaxObject = function() {return this.phwangObject().phwangAjaxObject();};
-    this.phwangLinkObject = function() {return this.thePhwangLinkObject;};
-    this.phwangSessionObject = function() {return this.phwangLinkObject().phwangSessionObject();};
     this.htmlObject = function() {return this.theHtmlObject;};
     this.ajaxObject = function() {return this.theAjaxObject;};
     this.debug = function(debug_val, str1_val, str2_val) {if (debug_val) {this.logit(str1_val, str2_val);}};
@@ -40,12 +37,13 @@ function SignUpHtmlObject(root_object_val) {
 
     this.setupHtmlInput = function() {
         var this0 = this;
-        $(".login_section .login_button").on("click", function() {
-            this0.phwangLinkObject().setMyName($(".login_section .login_name").val());
-            var password = $(".login_section .login_password").val();
-            this0.debug(true, "setupHtmlInput", "myName=" + this0.phwangLinkObject().myName() + " password=" + password);
-            if (this0.phwangLinkObject().myName()) {
-                this0.phwangAjaxObject().setupLink(this0.phwangLinkObject(), password);
+        $(".sign_up_section .sign_up_button").on("click", function() {
+            var account_name = $(".sign_up_section .sign_up_account_name").val();
+            var password = $(".sign_up_section .sign_up_password").val();
+            var email = $(".sign_up_section .sign_up_email").val();
+            this0.debug(true, "setupHtmlInput", "account_name=" + account_name + " password=" + password + " email=" + email);
+            if (account_name) {
+                this0.phwangAjaxObject().signUpRequest(account_name, password, email);
             }
         });
     };
@@ -54,7 +52,6 @@ function SignUpHtmlObject(root_object_val) {
     this.rootObject = function() {return this.theRootObject;};
     this.phwangObject = function() {return this.rootObject().phwangObject();};
     this.phwangAjaxObject = function() {return this.phwangObject().phwangAjaxObject();};
-    this.phwangLinkObject = function() {return this.rootObject().phwangLinkObject();};
     this.ajaxObject = function() {return this.rootObject().ajaxObject();};
     this.debug = function(debug_val, str1_val, str2_val) {if (debug_val) {this.logit(str1_val, str2_val);}};
     this.logit = function(str1_val, str2_val) {return this.rootObject().logit_(this.objectName() + "." + str1_val, str2_val);};
