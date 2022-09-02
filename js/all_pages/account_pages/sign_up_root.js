@@ -7,8 +7,8 @@ function SignUpRootObject() {
     this.init__ = function() {
         this.thePhwangObject = new PhwangClass(this);
         this.phwangObject().initObject();
-        this.theAjaxObject = new LoginAjaxClass(this);
-        this.theHtmlObject = new LoginHtmlObject(this);
+        this.theAjaxObject = new SignUpAjaxClass(this);
+        this.theHtmlObject = new SignUpHtmlObject(this);
         this.debug(true, "init__", this.objectName());
     };
     this.objectName = function() {return "SignUpRootObject";};
@@ -25,7 +25,7 @@ function SignUpRootObject() {
     this.abend_ = function(str1_val, str2_val) {this.phwangObject().ABEND(str1_val, str2_val);};
     this.init__();
 }
-function LoginHtmlObject(root_object_val) {
+function SignUpHtmlObject(root_object_val) {
     "use strict";
     this.gotoGoConfigPage = function() {window.open(this.phwangObject().serverHttpHeader() + "go_config.html", "_self")};
     this.gotoSignUpPage = function() {window.open(this.phwangObject().serverHttpHeader() + "sign_up.html", "_self")};
@@ -41,7 +41,7 @@ function LoginHtmlObject(root_object_val) {
             }
         });
     };
-    this.objectName = function() {return "LoginHtmlObject";};
+    this.objectName = function() {return "SignUpHtmlObject";};
     this.rootObject = function() {return this.theRootObject;};
     this.phwangObject = function() {return this.rootObject().phwangObject();};
     this.phwangAjaxObject = function() {return this.phwangObject().phwangAjaxObject();};
@@ -52,7 +52,7 @@ function LoginHtmlObject(root_object_val) {
     this.abend = function(str1_val, str2_val) {return this.rootObject().abend_(this.objectName() + "." + str1_val, str2_val);};
     this.init__(root_object_val);
 }
-function LoginAjaxClass(root_object_val) {
+function SignUpAjaxClass(root_object_val) {
     "use strict";
     this.init__ = function(root_object_val) {this.theRootObject = root_object_val;};
     this.receiveSetupLinkResponse = function(result_val) {
@@ -83,7 +83,7 @@ function LoginAjaxClass(root_object_val) {
     this.receiveSetupSession3Response = function(result_val) {};
     this.receivePutSessionDataResponse = function(result_val) {};
     this.receiveGetSessionDataResponse = function(result_val, data_val) {};
-    this.objectName = function() {return "LoginAjaxClass";};
+    this.objectName = function() {return "SignUpAjaxClass";};
     this.rootObject = function() {return this.theRootObject;};
     this.phwangObject = function() {return this.rootObject().phwangObject();};
     this.phwangLinkObject = function() {return this.phwangObject().phwangLinkObject();};
