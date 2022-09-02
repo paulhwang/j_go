@@ -64,8 +64,8 @@ function ConfigHtmlObject(root_object_val) {
     this.rootObject = function() {return this.theRootObject;};
     this.phwangObject = function() {return this.rootObject().phwangObject();};
     this.phwangAjaxObject = function() {return this.phwangObject().phwangAjaxObject();};
-    this.phwangLinkObject = function() {return this.phwangObject().phwangLinkObject();};
-    this.phwangSessionObject = function() {return this.phwangObject().phwangSessionObject();};
+    this.phwangLinkObject = function() {return this.rootObject().phwangLinkObject();};
+    this.phwangSessionObject = function() {return this.rootObject().phwangSessionObject();};
     this.configObject = function() {return this.rootObject().configObject();};
     this.debug = function(debug_val, str1_val, str2_val) {if (debug_val) {this.logit(str1_val, str2_val);}};
     this.logit = function(str1_val, str2_val) {this.rootObject().logit_(this.objectName() + "." + str1_val, str2_val);};
