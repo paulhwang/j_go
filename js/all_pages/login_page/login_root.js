@@ -27,7 +27,8 @@ function LoginRootObject() {
 }
 function LoginHtmlObject(root_object_val) {
     "use strict";
-    this.gotoNextPage = function() {window.open(this.phwangObject().serverHttpHeader() + "go_config.html", "_self")};
+    this.gotoGoConfigPage = function() {window.open(this.phwangObject().serverHttpHeader() + "go_config.html", "_self")};
+    this.gotoSignUpPage = function() {window.open(this.phwangObject().serverHttpHeader() + "sign_up.html", "_self")};
     this.init__ = function(root_object_val) {this.theRootObject = root_object_val; this.setupHtmlInput();};
     this.setupHtmlInput = function() {
         var this0 = this;
@@ -59,11 +60,10 @@ function LoginAjaxClass(root_object_val) {
         var data = JSON.parse(result_val);
         if (data.result === "succeed") {
             this.debug(false, "receiveSetupLinkResponse", "succeed");
-            //this.phwangLinkObject().setTimeStamp(data.time_stamp);
-            //this.phwangLinkObject().setLinkId(data.link_id);
+            this.phwangLinkObject().setTimeStamp(data.time_stamp);
+            this.phwangLinkObject().setLinkId(data.link_id);
             this.phwangObject().putStorageLinkData();
-            this.htmlObject().gotoNextPage();
-
+            this.htmlObject().gotoGoConfigPage();
         }
         else if (data.result === "password not match") {
             this.debug(true, "receiveSetupLinkResponse", "password not match");
@@ -71,6 +71,7 @@ function LoginAjaxClass(root_object_val) {
         }
         else if (data.result === "name not found") {
             this.debug(true, "receiveSetupLinkResponse", "name not found");
+            this.htmlObject().gotoSignUpPage();
         }
         else {
             this.abend("receiveSetupLinkResponse", "bad result" + data.result);
@@ -85,6 +86,7 @@ function LoginAjaxClass(root_object_val) {
     this.objectName = function() {return "LoginAjaxClass";};
     this.rootObject = function() {return this.theRootObject;};
     this.phwangObject = function() {return this.rootObject().phwangObject();};
+    this.phwangLinkObject = function() {return this.phwangObject().phwangLinkObject();};
     this.htmlObject = function() {return this.rootObject().htmlObject();};
     this.debug = function(debug_val, str1_val, str2_val) {if (debug_val) {this.logit(str1_val, str2_val);}};
     this.logit = function(str1_val, str2_val) {return this.rootObject().logit_(this.objectName() + "." + str1_val, str2_val);};

@@ -71,9 +71,6 @@ function PhwangAjaxClass(phwang_object_val) {
     };
     this.setupLinkResponse = function(input_val) {
         this.debug(true, "setupLinkResponse", "input_val=" + input_val);
-        var data = JSON.parse(input_val);
-        this.phwangLinkObject().setTimeStamp(data.time_stamp);
-        this.phwangLinkObject().setLinkId(data.link_id);
         this.phwangPortObject().receiveSetupLinkResponse(input_val);
     };
     this.getLinkData = function(link_val) {
