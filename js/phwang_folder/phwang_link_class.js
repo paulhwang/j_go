@@ -14,60 +14,74 @@ function PhwangLinkClass(root_object_val) {
         this.theSessionIndexArray = [0];
         this.theSessionTableArray = [null];
     };
-    this.insertSessionObject = function (val) {this.thePhwangSessionObject = val;};
 
-    this.resetAllStorageData1 = function () {
-        this.resetStorageData();
-        this.phwangSessionObject().resetStorageData();
+    this.insertSessionObject = function (val) {
+        this.thePhwangSessionObject = val;
     };
+
+    this.resetAllStorageData = function () {
+        this.resetStorageData();
+
+        if (this.phwangSessionObject !== null) {
+            this.phwangSessionObject().resetStorageData();
+        }
+    };
+
     this.putStorageLinkData = function() {
-        this.resetStorageData();
-        this.phwangSessionObject().resetStorageData();
-        //this.resetAllStorageData();
+        this.resetAllStorageData();
         this.putStorageData();
     };
+
     this.putStorageLinkSessionData = function() {
-        this.resetStorageData();
-        this.phwangSessionObject().resetStorageData();
-        //this.resetAllStorageData();
+        this.resetAllStorageData();
         this.putStorageData();
-        this.phwangSessionObject().putStorageData();
+
+        if (this.phwangSessionObject !== null) {
+            this.phwangSessionObject().putStorageData();
+        }
     };
+
     this.getStorageLinkSessionData = function() {
         this.getStorageData();
-        this.phwangSessionObject().getStorageData();
+
+        if (this.phwangSessionObject !== null) {
+            this.phwangSessionObject().getStorageData();
+        }
     };
-
-
-
-
 
     this.resetStorageData = function() {
         this.phwangLinkStorageObject().resetStorageData();
     };
+
     this.getStorageData = function() {
         this.setMyName(this.phwangLinkStorageObject().myName());
         this.setTimeStamp(this.phwangLinkStorageObject().timeStamp());
         this.setLinkId(this.phwangLinkStorageObject().linkId());
         this.debug(true, "getStorageData", "timeStamp=" + this.timeStamp() + " linkId=" + this.linkId() + " myName=" + this.myName());
     };
+
     this.putStorageData = function() {
         this.phwangLinkStorageObject().setMyName(this.myName());
         this.phwangLinkStorageObject().setTimeStamp(this.timeStamp());
         this.phwangLinkStorageObject().setLinkId(this.linkId());
     };
+
     this.sessionIndexArray = function() {
         return this.theSessionIndexArray;
     };
+
     this.sessionTableArray = function() {
         return this.theSessionTableArray;
     };
+
     this.sessionTableArrayLength = function() {
         return this.sessionTableArray().length;
     };
+
     this.sessionTableArrayElement = function(val) {
         return this.sessionTableArray()[val];
     };
+
     this.verifyLinkIdIndex = function(id_val) {
         if (this.linkId() === id_val) {
             return true;
@@ -75,9 +89,11 @@ function PhwangLinkClass(root_object_val) {
             return false;
         }
     };
+
     this.resetLinkStorage = function() {
         this.phwangLinkStorageObject().resetLinkStorage();
     };
+
     this.mallocSessionAndInsert = function(session_id_val) {
         this.phwangSessionObject().setSessionId(session_id_val);
         var session = new PhwangSessionClass(this, false);
@@ -86,10 +102,12 @@ function PhwangLinkClass(root_object_val) {
         }
         return session;
     };
+
     this.insertSession = function(session_val) {
         this.sessionIndexArray().push(session_val.sessionId());
         this.sessionTableArray().push(session_val);
     };
+
     this.getSession = function(session_id_val) {
         var index = this.sessionIndexArray().indexOf(session_id_val);
         if (index === -1) {
@@ -99,6 +117,7 @@ function PhwangLinkClass(root_object_val) {
             return session;
         }
     };
+
     this.myName = function() {return this.theMyName;};
     this.setMyName = function(val) {this.theMyName = val;};
     this.timeStamp = function() {return this.theTimeStamp;};
