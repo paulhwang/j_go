@@ -6,7 +6,7 @@ function LoginRootObject() {
     "use strict";
     this.init__ = function() {
         this.thePhwangObject = new PhwangClass(this);
-        this.thePhwangLinkObject = new PhwangLinkClass(this.phwangObject());
+        this.thePhwangLinkObject = new PhwangLinkClass(this);
         this.thePhwangSessionObject = new PhwangSessionClass(this.phwangLinkObject());
         this.phwangObject().initObject();
         this.theAjaxObject = new LoginAjaxClass(this);
@@ -64,7 +64,7 @@ function LoginAjaxClass(root_object_val) {
             this.debug(false, "receiveSetupLinkResponse", "succeed");
             this.phwangLinkObject().setTimeStamp(data.time_stamp);
             this.phwangLinkObject().setLinkId(data.link_id);
-            this.phwangObject().putStorageLinkData();
+            this.phwangLinkObject().putStorageLinkData();
             this.htmlObject().gotoGoConfigPage();
         }
         else if (data.result === "password not match") {

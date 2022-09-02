@@ -6,7 +6,7 @@ function SignUpRootObject() {
     "use strict";
     this.init__ = function() {
         this.thePhwangObject = new PhwangClass(this);
-        this.thePhwangLinkObject = new PhwangLinkClass(this.phwangObject());
+        this.thePhwangLinkObject = new PhwangLinkClass(this);
         this.thePhwangSessionObject = new PhwangSessionClass(this.phwangLinkObject());
         this.phwangObject().initObject();
         this.theAjaxObject = new SignUpAjaxClass(this);

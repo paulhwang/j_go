@@ -20,32 +20,6 @@ function PhwangClass(root_val) {
         }
         return output;
     };
-    this.resetAllStorageData = function () {
-        this.resetStorageLinkData();
-        this.resetStorageSessionData();
-    };
-    this.resetStorageLinkData = function () {
-        this.phwangLinkObject().resetStorageData();
-    };
-    this.resetStorageSessionData = function () {
-        this.phwangSessionObject().resetStorageData();
-    };
-    this.putStorageLinkData = function() {
-        this.resetAllStorageData();
-        this.phwangLinkObject().putStorageData();
-    };
-    this.putStorageLinkSessionData = function() {
-        this.resetAllStorageData();
-        this.phwangLinkObject().putStorageData();
-        this.phwangSessionObject().putStorageData();
-    };
-    this.getStorageLinkData = function() {
-        this.phwangLinkObject().getStorageData();
-    };
-    this.getStorageLinkSessionData = function() {
-        this.phwangLinkObject().getStorageData();
-        this.phwangSessionObject().getStorageData();
-    };
     this.sleepMilliseconds = function (milliseconds_val) {
         var start = new Date().getTime();
         for (var i = 0; i < 1e7; i++) {
@@ -59,8 +33,6 @@ function PhwangClass(root_val) {
     this.objectName = function() {return "PhwangClass";};
     this.rootObject = function() {return this.theRootObject;};
     this.phwangStorageObject = function() { return this.thePhwangStorageObject;};
-    this.phwangLinkObject = function() {return this.rootObject().phwangLinkObject();};
-    this.phwangSessionObject = function() {return this.rootObject().phwangSessionObject();};
     this.phwangAjaxObject = function() {return this.thePhwangAjaxObject;};
     this.phwangPortObject = function() {return this.thePhwangPortObject;};
     this.debug = function(debug_val, str1_val, str2_val) {if (debug_val) {this.logit(str1_val, str2_val);}};

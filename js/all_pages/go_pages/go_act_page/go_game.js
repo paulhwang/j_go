@@ -76,7 +76,7 @@ function GoPlayGameObject(root_object_val) {
     this.objectName = function() {return "GoPlayGameObject";};
     this.rootObject = function() {return this.theRootObject;};
     this.phwangObject = function() {return this.rootObject().phwangObject();};
-    this.phwangLinkObject = function() {return this.phwangObject().phwangLinkObject();};
+    this.phwangLinkObject = function() {return this.rootObject().phwangLinkObject();};
     this.phwangSessionObject = function() {return this.phwangObject().phwangSessionObject();};
     this.storageObject = function() {return this.rootObject().storageObject();};
     this.configObject = function() {return this.rootObject().configObject();};

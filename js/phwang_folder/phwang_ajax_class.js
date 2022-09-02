@@ -330,7 +330,7 @@ function PhwangAjaxClass(phwang_object_val) {
     this.pendingSessionDataQueueObject = function() {return this.thePendingSessionDataQueueObject;}
     this.phwangObject = function() {return this.thePhwangObject;};
     this.rootObject = function() {return this.phwangObject().rootObject();};
-    this.phwangLinkObject = function() {return this.phwangObject().phwangLinkObject();};
+    this.phwangLinkObject = function() {return this.rootObject().phwangLinkObject();};
     this.phwangSessionObject = function() {return this.rootObject().phwangSessionObject();};
     this.phwangPortObject = function() {return this.phwangObject().phwangPortObject();};
     this.debug = function(debug_val, str1_val, str2_val) {if (debug_val) {this.logit(str1_val, str2_val);}};

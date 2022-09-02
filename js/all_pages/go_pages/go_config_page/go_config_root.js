@@ -6,10 +6,10 @@ function ConfigRootObject() {
     "use strict";
     this.init__ = function() {
         this.thePhwangObject = new PhwangClass(this);
-        this.thePhwangLinkObject = new PhwangLinkClass(this.phwangObject());
+        this.thePhwangLinkObject = new PhwangLinkClass(this);
         this.thePhwangSessionObject = new PhwangSessionClass(this.phwangLinkObject());
         this.phwangObject().initObject();
-        this.phwangObject().getStorageLinkData();
+        this.phwangLinkObject().getStorageLinkData();
         this.phwangAjaxObject().startWatchDog(this.phwangLinkObject());
         this.theConfigStorageObject = new GoConfigStorageObject(this);
         this.theConfigObject = new GoPlayConfigObject(this);
@@ -85,7 +85,7 @@ function ConfigAjaxClass(root_object_val) {
         this.htmlObject().gotoNextPage();
     };
     this.receiveSetupSession3Response = function(result_val) {
-        this.phwangObject().putStorageLinkSessionData();
+        this.phwangLinkObject().putStorageLinkSessionData();
         this.configObject().putStorageConfigData();
         this.htmlObject().gotoNextPage();
     };
@@ -94,6 +94,7 @@ function ConfigAjaxClass(root_object_val) {
     this.objectName = function() {return "ConfigAjaxClass";};
     this.rootObject = function() {return this.theRootObject;};
     this.phwangObject = function() {return this.rootObject().phwangObject();};
+    this.phwangLinkObject = function() {return this.rootObject().phwangLinkObject();};
     this.configObject = function() {return this.rootObject().configObject();};
     this.htmlObject = function() {return this.rootObject().htmlObject();};
     this.debug = function(debug_val, str1_val, str2_val) {if (debug_val) {this.logit(str1_val, str2_val);}};

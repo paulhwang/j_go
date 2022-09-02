@@ -6,10 +6,10 @@ function GoPlayRootObject() {
     "use strict";
     this.init__ = function() {
         this.thePhwangObject = new PhwangClass(this);
-        this.thePhwangLinkObject = new PhwangLinkClass(this.phwangObject());
+        this.thePhwangLinkObject = new PhwangLinkClass(this);
         this.thePhwangSessionObject = new PhwangSessionClass(this.phwangLinkObject());
         this.phwangObject().initObject();
-        this.phwangObject().getStorageLinkSessionData();
+        this.phwangLinkObject().getStorageLinkSessionData();
         this.phwangAjaxObject().startWatchDog(this.phwangLinkObject());
         this.theAjaxObject = new GoAjaxClass(this);
         this.theConfigStorageObject = new GoConfigStorageObject(this);
