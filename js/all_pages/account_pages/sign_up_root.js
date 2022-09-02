@@ -72,7 +72,7 @@ function SignUpAjaxClass(root_object_val) {
             this.htmlObject().gotoSignInPage();
         }
         else if (data.result === "name exist") {
-            this.debug(true, "receiveSignUpResponse", "nane_exist");
+            this.debug(true, "receiveSignUpResponse", "exist exist");
         }
         else {
             this.abend("receiveSignUpResponse", "bad result" + data.result);

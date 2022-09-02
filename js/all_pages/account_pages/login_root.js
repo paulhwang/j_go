@@ -81,8 +81,8 @@ function LoginAjaxClass(root_object_val) {
             this.debug(true, "receiveSetupLinkResponse", "password not match");
 
         }
-        else if (data.result === "name not found") {
-            this.debug(true, "receiveSetupLinkResponse", "name not found");
+        else if (data.result === "name not exist") {
+            this.debug(true, "receiveSetupLinkResponse", "name not exist");
             this.htmlObject().gotoSignUpPage();
         }
         else {
