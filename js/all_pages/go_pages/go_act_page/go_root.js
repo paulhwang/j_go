@@ -6,6 +6,8 @@ function GoPlayRootObject() {
     "use strict";
     this.init__ = function() {
         this.thePhwangObject = new PhwangClass(this);
+        this.thePhwangLinkObject = new PhwangLinkClass(this.phwangObject());
+        this.thePhwangSessionObject = new PhwangSessionClass(this.phwangLinkObject());
         this.phwangObject().initObject();
         this.phwangObject().getStorageLinkSessionData();
         this.phwangAjaxObject().startWatchDog(this.phwangLinkObject());
@@ -19,7 +21,7 @@ function GoPlayRootObject() {
         this.theHtmlObject = new GoPlayHtmlObject(this);
         this.theInputObject = new GoPlayInputObject(this);
         this.theDisplayObject = new GoPlayDisplayObject(this);
-        this.thePhwangSessionObject = this.phwangLinkObject().mallocSessionAndInsert(this.phwangSessionObject().sessionId());
+        //this.thePhwangSessionObject = this.phwangLinkObject().mallocSessionAndInsert(this.phwangSessionObject().sessionId());
         this.phwangLinkObject().insertSession(this.phwangSessionObject());
         this.phwangSessionObject().setThemeObject(this.portObject());
         this.debug(true, "init__", "myName=" + this.phwangLinkObject().myName() + " linkId=" + this.phwangLinkObject().linkId() + " sessionId=" + this.phwangSessionObject().sessionId());
@@ -28,8 +30,8 @@ function GoPlayRootObject() {
     this.objectName = function() {return "GoPlayRootObject";};
     this.phwangObject = function() {return this.thePhwangObject;};
     this.phwangAjaxObject = function() {return this.phwangObject().phwangAjaxObject();};
-    this.phwangLinkObject = function() {return this.phwangObject().phwangLinkObject();};
-    this.phwangSessionObject = function() {return this.phwangObject().phwangSessionObject();};
+    this.phwangLinkObject = function() {return this.thePhwangLinkObject;};
+    this.phwangSessionObject = function() {return this.thePhwangSessionObject;};
     this.ajaxObject = function() {return this.theAjaxObject;};
     this.htmlObject = function() {return this.theHtmlObject;};
     this.configStorageObject = function() {return this.theConfigStorageObject;};
