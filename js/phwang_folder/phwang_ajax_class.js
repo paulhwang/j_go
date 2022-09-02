@@ -65,28 +65,29 @@ function PhwangAjaxClass(phwang_object_val) {
 
     this.signUpRequest = function(account_name_val, password_val, email_val) {
         var output = JSON.stringify({
-                        command: this.phwangAjaxProtocolObject().SETUP_LINK_COMMAND(),
+                        command: this.phwangAjaxProtocolObject().SIGN_UP_COMMAND(),
                         packet_id: this.ajaxPacketId(),
                         my_name: account_name_val,
                         password: password_val,
+                        email: email_val,
                         });
         this.debug(true, "signUpRequest", "output=" + output);
         this.transmitAjaxRequest(output);
     };
 
     this.signUpResponse = function(input_val) {
-        this.debug(true, "setupLinkResponse", "input_val=" + input_val);
-        this.phwangPortObject().receiveSetupLinkResponse(input_val);
+        this.debug(true, "signUpResponse", "input_val=" + input_val);
+        this.phwangPortObject().receiveSignUpResponse(input_val);
     };
 
-    this.setupLink = function(link_val, password_val) {
+    this.setupLinkRequest = function(link_val, password_val) {
         var output = JSON.stringify({
                         command: this.phwangAjaxProtocolObject().SETUP_LINK_COMMAND(),
                         packet_id: this.ajaxPacketId(),
                         my_name: link_val.myName(),
                         password: password_val,
                         });
-        this.debug(true, "setupLink", "output=" + output);
+        this.debug(true, "setupLinkRequest", "output=" + output);
         this.transmitAjaxRequest(output);
     };
 
@@ -456,6 +457,7 @@ function PhwangAjaxStorageObject(phwang_ajax_object_val) {
 
 function PhwangAjaxProtocolClass() {
     "use strict";
+    this.SIGN_UP_COMMAND = function() {return "sign_up";}
     this.SETUP_LINK_COMMAND = function() {return "setup_link";}
     this.CLEAR_LINK_COMMAND = function() {return "clear_link";}
     this.GET_LINK_DATA_COMMAND = function() {return "get_link_data";}
