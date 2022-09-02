@@ -7,7 +7,7 @@ function LoginRootObject() {
     this.init__ = function() {
         this.thePhwangObject = new PhwangClass(this);
         this.thePhwangLinkObject = new PhwangLinkClass(this);
-        this.thePhwangSessionObject = new PhwangSessionClass(this.phwangLinkObject());
+        new PhwangSessionClass(this.phwangLinkObject());
         this.phwangObject().initObject();
         this.theAjaxObject = new LoginAjaxClass(this);
         this.theHtmlObject = new LoginHtmlObject(this);
@@ -17,7 +17,7 @@ function LoginRootObject() {
     this.phwangObject = function() {return this.thePhwangObject;};
     this.phwangAjaxObject = function() {return this.phwangObject().phwangAjaxObject();};
     this.phwangLinkObject = function() {return this.thePhwangLinkObject;};
-    this.phwangSessionObject = function() {return this.thePhwangSessionObject;};
+    this.phwangSessionObject = function() {return this.phwangLinkObject().phwangSessionObject();};
     this.htmlObject = function() {return this.theHtmlObject;};
     this.ajaxObject = function() {return this.theAjaxObject;};
     this.debug = function(debug_val, str1_val, str2_val) {if (debug_val) {this.logit(str1_val, str2_val);}};

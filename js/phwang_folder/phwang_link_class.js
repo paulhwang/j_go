@@ -6,14 +6,15 @@ function PhwangLinkClass(root_object_val) {
     "use strict";
     this.init__ = function(root_object_val) {
         this.theRootObject = root_object_val;
+        this.debug(true, "init__", "");
         this.thePhwangLinkStorageObject = new PhwangLinkStorageObject(this);
         this.theNameList = [];
         this.theNameListTag = 0;
         this.theServerNameListTag = 0;
         this.theSessionIndexArray = [0];
         this.theSessionTableArray = [null];
-        this.debug(true, "init__", "");
     };
+    this.insertSessionObject = function (val) {this.thePhwangSessionObject = val;};
 
     this.resetAllStorageData1 = function () {
         this.resetStorageData();
@@ -118,7 +119,7 @@ function PhwangLinkClass(root_object_val) {
     this.rootObject = function() {return this.theRootObject;};
     this.phwangObject = function() {return this.rootObject().phwangObject();};
     this.phwangAjaxObject = function() {return this.rootObject().phwangObject().phwangAjaxObject();};
-    this.phwangSessionObject = function() {return this.rootObject().phwangSessionObject();};
+    this.phwangSessionObject = function() {return this.thePhwangSessionObject;};
     this.debug = function(debug_val, str1_val, str2_val) {if (debug_val) {this.logit(str1_val, str2_val);}};
     this.logit = function(str1_val, str2_val) {return this.phwangObject().LOG_IT(this.objectName() + "." + str1_val, str2_val);};
     this.abend = function(str1_val, str2_val) {return this.phwangObject().ABEND(this.objectName() + "." + str1_val, str2_val);};

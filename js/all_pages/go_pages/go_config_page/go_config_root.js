@@ -7,7 +7,7 @@ function ConfigRootObject() {
     this.init__ = function() {
         this.thePhwangObject = new PhwangClass(this);
         this.thePhwangLinkObject = new PhwangLinkClass(this);
-        this.thePhwangSessionObject = new PhwangSessionClass(this.phwangLinkObject());
+        new PhwangSessionClass(this.phwangLinkObject());
         this.phwangObject().initObject();
         this.phwangLinkObject().getStorageData();
         this.phwangAjaxObject().startWatchDog(this.phwangLinkObject());
@@ -21,7 +21,7 @@ function ConfigRootObject() {
     this.phwangObject = function() {return this.thePhwangObject;};
     this.phwangAjaxObject = function() {return this.phwangObject().phwangAjaxObject();};
     this.phwangLinkObject = function() {return this.thePhwangLinkObject;};
-    this.phwangSessionObject = function() {return this.thePhwangSessionObject;};
+    this.phwangSessionObject = function() {return this.phwangLinkObject().phwangSessionObject();};
     this.configStorageObject = function() {return this.theConfigStorageObject;};
     this.configObject = function() {return this.theConfigObject;};
     this.ajaxObject = function() {return this.theAjaxObject;};

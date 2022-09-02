@@ -7,10 +7,11 @@ function PhwangSessionClass(link_object_val) {
     "use strict";
     this.init__ = function (link_object_val) {
         this.thePhwangLinkObject = link_object_val;
+        this.debug(true, "init__", "");
+        this.phwangLinkObject().insertSessionObject(this);
         this.thePhwangSessionStorageObject = new PhwangSessionStorageObject(this);
         this.theXmtSeq = 0;
         this.theRcvSeq = 0;
-        this.debug(true, "init__", "");
     };
     this.resetStorageData = function() {
         this.phwangSessionStorageObject().resetStorageData();

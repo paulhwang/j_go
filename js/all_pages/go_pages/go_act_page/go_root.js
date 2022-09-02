@@ -7,7 +7,7 @@ function GoPlayRootObject() {
     this.init__ = function() {
         this.thePhwangObject = new PhwangClass(this);
         this.thePhwangLinkObject = new PhwangLinkClass(this);
-        this.thePhwangSessionObject = new PhwangSessionClass(this.phwangLinkObject());
+        new PhwangSessionClass(this.phwangLinkObject());
         this.phwangObject().initObject();
         this.phwangLinkObject().getStorageLinkSessionData();
         this.phwangAjaxObject().startWatchDog(this.phwangLinkObject());
@@ -31,7 +31,7 @@ function GoPlayRootObject() {
     this.phwangObject = function() {return this.thePhwangObject;};
     this.phwangAjaxObject = function() {return this.phwangObject().phwangAjaxObject();};
     this.phwangLinkObject = function() {return this.thePhwangLinkObject;};
-    this.phwangSessionObject = function() {return this.thePhwangSessionObject;};
+    this.phwangSessionObject = function() {return this.phwangLinkObject().phwangSessionObject();};
     this.ajaxObject = function() {return this.theAjaxObject;};
     this.htmlObject = function() {return this.theHtmlObject;};
     this.configStorageObject = function() {return this.theConfigStorageObject;};
