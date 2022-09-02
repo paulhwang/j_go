@@ -7,12 +7,12 @@ function SignUpRootObject() {
     this.init__ = function() {
         this.thePhwangObject = new PhwangClass(this);
         this.thePhwangLinkObject = new PhwangLinkClass(this);
-        new PhwangSessionClass(this.phwangLinkObject());
         this.phwangObject().initObject();
         this.theAjaxObject = new SignUpAjaxClass(this);
         this.theHtmlObject = new SignUpHtmlObject(this);
         this.debug(true, "init__", this.objectName());
     };
+
     this.objectName = function() {return "SignUpRootObject";};
     this.phwangObject = function() {return this.thePhwangObject;};
     this.phwangAjaxObject = function() {return this.phwangObject().phwangAjaxObject();};
@@ -27,6 +27,7 @@ function SignUpRootObject() {
     this.abend_ = function(str1_val, str2_val) {this.phwangObject().ABEND(str1_val, str2_val);};
     this.init__();
 }
+
 function SignUpHtmlObject(root_object_val) {
     "use strict";
     this.gotoGoConfigPage = function() {window.open(this.phwangObject().serverHttpHeader() + "go_config.html", "_self")};
@@ -43,6 +44,7 @@ function SignUpHtmlObject(root_object_val) {
             }
         });
     };
+
     this.objectName = function() {return "SignUpHtmlObject";};
     this.rootObject = function() {return this.theRootObject;};
     this.phwangObject = function() {return this.rootObject().phwangObject();};
@@ -54,9 +56,13 @@ function SignUpHtmlObject(root_object_val) {
     this.abend = function(str1_val, str2_val) {return this.rootObject().abend_(this.objectName() + "." + str1_val, str2_val);};
     this.init__(root_object_val);
 }
+
 function SignUpAjaxClass(root_object_val) {
     "use strict";
-    this.init__ = function(root_object_val) {this.theRootObject = root_object_val;};
+    this.init__ = function(root_object_val) {
+        this.theRootObject = root_object_val;
+    };
+
     this.receiveSetupLinkResponse = function(result_val) {
         this.debug(true, "receiveSetupLinkResponse", "result_val=" + result_val);
         var data = JSON.parse(result_val);
@@ -79,6 +85,7 @@ function SignUpAjaxClass(root_object_val) {
             this.abend("receiveSetupLinkResponse", "bad result" + data.result);
         }
     };
+
     this.receiveGetNameListResponse = function(result_val) {};
     this.receiveSetupSessionResponse = function(result_val) {};
     this.receiveSetupSession2Response = function(result_val) {};
@@ -95,5 +102,6 @@ function SignUpAjaxClass(root_object_val) {
     this.abend = function(str1_val, str2_val) {return this.rootObject().abend_(this.objectName() + "." + str1_val, str2_val);};
     this.init__(root_object_val);
 }
+
 var sign_up_main = function() {"use strict"; new SignUpRootObject();};
 $(document).ready(sign_up_main);

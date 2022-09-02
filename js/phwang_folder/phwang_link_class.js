@@ -13,6 +13,7 @@ function PhwangLinkClass(root_object_val) {
         this.theServerNameListTag = 0;
         this.theSessionIndexArray = [0];
         this.theSessionTableArray = [null];
+        this.thePhwangSessionObject = null;
     };
 
     this.insertSessionObject = function (val) {
@@ -22,7 +23,9 @@ function PhwangLinkClass(root_object_val) {
     this.resetAllStorageData = function () {
         this.resetStorageData();
 
-        if (this.phwangSessionObject !== null) {
+        this.debug(true, "resetAllStorageData", this.phwangSessionObject());
+
+        if (this.phwangSessionObject() !== null) {
             this.phwangSessionObject().resetStorageData();
         }
     };
@@ -36,7 +39,7 @@ function PhwangLinkClass(root_object_val) {
         this.resetAllStorageData();
         this.putStorageData();
 
-        if (this.phwangSessionObject !== null) {
+        if (this.phwangSessionObject() !== null) {
             this.phwangSessionObject().putStorageData();
         }
     };
@@ -44,7 +47,7 @@ function PhwangLinkClass(root_object_val) {
     this.getStorageLinkSessionData = function() {
         this.getStorageData();
 
-        if (this.phwangSessionObject !== null) {
+        if (this.phwangSessionObject() !== null) {
             this.phwangSessionObject().getStorageData();
         }
     };
@@ -144,6 +147,7 @@ function PhwangLinkClass(root_object_val) {
     this.abend = function(str1_val, str2_val) {return this.phwangObject().ABEND(this.objectName() + "." + str1_val, str2_val);};
     this.init__(root_object_val);
 }
+
 function PhwangLinkStorageObject(phwang_link_object_val) {
     "use strict";
     this.storage = function() {return localStorage;};
@@ -153,11 +157,13 @@ function PhwangLinkStorageObject(phwang_link_object_val) {
         this.resetTimeStamp();
         this.resetLinkId();
     };
+
     this.resetStorageData = function() {
         this.resetMyName();
         this.resetTimeStamp();
         this.resetLinkId();
     };
+
     this.myName = function() {return this.storage().my_name;};
     this.setMyName = function (val) {this.storage().my_name = val;};
     this.resetMyName = function() {this.setMyName("");};
