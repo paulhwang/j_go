@@ -2,6 +2,7 @@
   Copyrights reserved
   Written by Paul Hwang
 */
+
 function ConfigRootObject() {
     "use strict";
     this.init__ = function() {
@@ -33,6 +34,7 @@ function ConfigRootObject() {
     this.abend_ = function(str1_val, str2_val) {this.phwangObject().ABEND(str1_val, str2_val);};
     this.init__();
 }
+
 function ConfigHtmlObject(root_object_val) {
     "use strict";
     this.init__ = function(root_object_val) {
@@ -72,6 +74,7 @@ function ConfigHtmlObject(root_object_val) {
     this.abend = function(str1_val, str2_val) {this.rootObject().abend_(this.objectName() + "." + str1_val, str2_val);};
     this.init__(root_object_val);
 }
+
 function ConfigAjaxClass(root_object_val) {
     "use strict";
     this.init__ = function (root_object_val) {this.theRootObject = root_object_val;};
@@ -102,5 +105,6 @@ function ConfigAjaxClass(root_object_val) {
     this.abend = function(str1_val, str2_val) {return this.phwangObject().ABEND(this.objectName() + "." + str1_val, str2_val);};
     this.init__(root_object_val);
 }
+
 var config_main = function() {"use strict"; new ConfigRootObject();};
 $(document).ready(config_main);

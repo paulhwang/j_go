@@ -2,6 +2,7 @@
   Copyrights reserved
   Written by Paul Hwang
 */
+
 function LoginRootObject() {
     "use strict";
     this.init__ = function() {
@@ -31,7 +32,7 @@ function LoginHtmlObject(root_object_val) {
     "use strict";
     this.gotoGoConfigPage = function() {window.open(this.phwangObject().serverHttpHeader() + "go_config.html", "_self")};
     this.gotoSignUpPage = function() {window.open(this.phwangObject().serverHttpHeader() + "sign_up.html", "_self")};
-    
+
     this.init__ = function(root_object_val) {
         this.theRootObject = root_object_val; this.setupHtmlInput();
     };

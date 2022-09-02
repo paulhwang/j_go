@@ -3,6 +3,7 @@
  * Written by Paul Hwang
  * File name: SessionObject.js
  */
+
 function PhwangSessionClass(link_object_val) {
     "use strict";
     this.init__ = function (link_object_val) {
@@ -13,30 +14,38 @@ function PhwangSessionClass(link_object_val) {
         this.theXmtSeq = 0;
         this.theRcvSeq = 0;
     };
+
     this.resetStorageData = function() {
         this.phwangSessionStorageObject().resetStorageData();
     };
+
     this.getStorageData = function() {
         this.setSessionId(this.phwangSessionStorageObject().sessionId());
         this.debug(true, "getStorageData", "SessionId=" + this.sessionId());
     };
+
     this.putStorageData = function() {
         this.phwangSessionStorageObject().setSessionId(this.sessionId());
         this.getStorageData();
 
     };
+
     this.xmtSeq = function() {
         return this.theXmtSeq;
     };
+
     this.incrementXmtSeq = function() {
         this.theXmtSeq += 1;
     };
+
     this.rcvSeq = function() {
         return this.theRcvSeq;
     };
+
     this.incrementRcvSeq = function() {
         this.theRcvSeq += 1;
     };
+
     this.transmitData = function(data_val) {this.phwangAjaxObject().putSessionData(this, data_val);};
     this.receiveData = function(c_data_val) {this.themeObject().receiveData(c_data_val);};
     this.themeObject = function() {return this.theThemeObject;};
@@ -54,13 +63,19 @@ function PhwangSessionClass(link_object_val) {
     this.setSessionId = function(val) {this.theSessionId = val;};
     this.init__(link_object_val);
 }
+
 function PhwangSessionStorageObject(phwang_session_object_val) {
     "use strict";
     this.storage = function() {return localStorage;};
-    this.init__ = function(phwang_session_object_val) {this.thePhwangSessionObject = phwang_session_object_val;};
+    
+    this.init__ = function(phwang_session_object_val) {
+        this.thePhwangSessionObject = phwang_session_object_val;
+    };
+
     this.resetStorageData = function() {
         this.resetSessionId();
     };
+
     this.objectName = function() {return "PhwangSessionStorageObject";};
     this.phwangSessionObject = function() {return this.thePhwangSessionObject;};
     this.phwangObject = function() {return this.phwangSessionObject().phwangObject();};
