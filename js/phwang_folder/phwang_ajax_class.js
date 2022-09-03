@@ -264,7 +264,7 @@ function PhwangAjaxClass(phwang_object_val) {
         this.debug(true, "setupSession3Response", "data=" + json_data_val);
         var data = JSON.parse(json_data_val);
         if (data) {
-            this.phwangSessionObject().setSessionId(data.session_id.slice(this.phwangAjaxProtocolObject().WEB_FABRIC_PROTOCOL_SESSION_ID_SIZE()));
+            this.phwangSessionObject().setSessionId(data.session_id);
             this.debug(true, "setupSession3Response", "sessionId=" + this.phwangSessionObject().sessionId());
             this.phwangPortObject().receiveSetupSession3Response();
         }
