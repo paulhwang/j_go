@@ -67,6 +67,12 @@ function PhwangAjaxClass(phwang_object_val) {
         };
     };
 
+    this.triggerGetMmwData = function() {
+        this.debug(true, "triggerGetMmwData", "tbd");
+        //var ajax_object = link_val.phwangAjaxObject();
+        //ajax_object.getMmwData(link_val);
+    };
+
     this.mmwReadDataRequest = function(filename_val) {
         var output = JSON.stringify({
                         command: this.phwangAjaxProtocolObject().MMW_READ_DATA_COMMAND(),
