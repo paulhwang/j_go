@@ -65,6 +65,16 @@ function PhwangAjaxClass(phwang_object_val) {
         };
     };
 
+    this.readMmwDataRequest = function(filename_val) {
+        var output = JSON.stringify({
+                        command: this.phwangAjaxProtocolObject().READ_MMW_DATA_COMMAND(),
+                        packet_id: this.ajaxPacketId(),
+                        filename: filename_val,
+                        });
+        this.debug(true, "readMmwDataRequest", "output=" + output);
+        this.transmitAjaxRequest(output);
+    };
+
     this.signUpRequest = function(account_name_val, password_val, email_val) {
         var output = JSON.stringify({
                         command: this.phwangAjaxProtocolObject().SIGN_UP_COMMAND(),
@@ -459,6 +469,7 @@ function PhwangAjaxStorageObject(phwang_ajax_object_val) {
 
 function PhwangAjaxProtocolClass() {
     "use strict";
+    this.READ_MMW_DATA_COMMAND = function() {return "read_mmw_data";}
     this.SIGN_UP_COMMAND = function() {return "sign_up";}
     this.SETUP_LINK_COMMAND = function() {return "setup_link";}
     this.CLEAR_LINK_COMMAND = function() {return "clear_link";}
