@@ -73,11 +73,12 @@ function PhwangAjaxClass(phwang_object_val) {
         //ajax_object.getMmwData(link_val);
     };
 
-    this.mmwReadDataRequest = function(filename_val) {
+    this.mmwReadDataRequest = function(act_val, filename_val) {
         var output = JSON.stringify({
                         command: this.phwangAjaxProtocolObject().MMW_READ_DATA_COMMAND(),
                         packet_id: this.ajaxPacketId(),
-                        filename: filename_val,
+                        act: act_val,
+                        data: filename_val,
                         });
         this.debug(true, "mmwReadDataRequest", "output=" + output);
         this.transmitAjaxRequest(output);

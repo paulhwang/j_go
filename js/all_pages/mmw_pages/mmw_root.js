@@ -33,7 +33,7 @@ function mmwHtmlObject(root_object_val) {
             var filename = $(".mmw_section .mmw_file_name").val();
             this0.debug(true, "setupHtmlInput", " filename=" + filename);
             if (filename) {
-                this0.phwangAjaxObject().mmwReadDataRequest(filename);
+                this0.phwangAjaxObject().mmwReadDataRequest("init", filename);
             }
         });
     };
