@@ -33,7 +33,7 @@ function mmwHtmlObject(root_object_val) {
             var filename = $(".mmw_section .mmw_file_name").val();
             this0.debug(true, "setupHtmlInput", " filename=" + filename);
             if (filename) {
-                this0.phwangAjaxObject().readMmwDataRequest(filename);
+                this0.phwangAjaxObject().mmwReadDataRequest(filename);
             }
         });
     };
@@ -50,15 +50,15 @@ function mmwHtmlObject(root_object_val) {
 function mmwAjaxClass(root_object_val) {
     "use strict";
     this.init__ = function(root_object_val) {this.theRootObject = root_object_val;};
-    this.readMmwDataResponse = function(result_val) {
-        this.debug(true, "readMmwDataResponse", "result_val=" + result_val);
+    this.receiveMmwReadDataResponse = function(result_val) {
+        this.debug(true, "mmwReadDataResponse", "result_val=" + result_val);
         var data = JSON.parse(result_val);
         if (data.result === "succeed") {
-            this.debug(true, "readMmwDataResponse", "succeed");
+            this.debug(true, "mmwReadDataResponse", "succeed");
             this.htmlObject().gotoMmwActPage();
         }
         else {
-            this.abend("readMmwDataResponse", "bad result" + data.result);
+            this.abend("mmwReadDataResponse", "bad result" + data.result);
         }
     };
     this.receiveGetNameListResponse = function(result_val) {};

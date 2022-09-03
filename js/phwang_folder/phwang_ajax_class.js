@@ -36,6 +36,7 @@ function PhwangAjaxClass(phwang_object_val) {
 
         if ((response.command !== this.phwangAjaxProtocolObject().SETUP_LINK_COMMAND()) &&
             (response.command !== this.phwangAjaxProtocolObject().SIGN_UP_COMMAND()) &&
+            (response.command !== this.phwangAjaxProtocolObject().MMW_READ_DATA_COMMAND()) &&
             (!this.phwangLinkObject().verifyLinkIdIndex(data.link_id))) {
             this.abend("parseAndSwitchAjaxResponse", "link_id=" + data.link_id);
             return;
@@ -62,17 +63,23 @@ function PhwangAjaxClass(phwang_object_val) {
             "setup_session3": this.setupSession3Response,
             "get_session_data": this.getSessionDataResponse,
             "put_session_data": this.putSessionDataResponse,
+            "mmw_read_data": this.mmwReadDataResponse,
         };
     };
 
-    this.readMmwDataRequest = function(filename_val) {
+    this.mmwReadDataRequest = function(filename_val) {
         var output = JSON.stringify({
-                        command: this.phwangAjaxProtocolObject().READ_MMW_DATA_COMMAND(),
+                        command: this.phwangAjaxProtocolObject().MMW_READ_DATA_COMMAND(),
                         packet_id: this.ajaxPacketId(),
                         filename: filename_val,
                         });
-        this.debug(true, "readMmwDataRequest", "output=" + output);
+        this.debug(true, "mmwReadDataRequest", "output=" + output);
         this.transmitAjaxRequest(output);
+    };
+
+    this.mmwReadDataResponse = function(input_val) {
+        this.debug(true, "mmwReadDataResponse", "input_val=" + input_val);
+        this.phwangPortObject().receiveMmwReadDataResponse(input_val);
     };
 
     this.signUpRequest = function(account_name_val, password_val, email_val) {
@@ -469,7 +476,7 @@ function PhwangAjaxStorageObject(phwang_ajax_object_val) {
 
 function PhwangAjaxProtocolClass() {
     "use strict";
-    this.READ_MMW_DATA_COMMAND = function() {return "read_mmw_data";}
+    this.MMW_READ_DATA_COMMAND = function() {return "mmw_read_data";}
     this.SIGN_UP_COMMAND = function() {return "sign_up";}
     this.SETUP_LINK_COMMAND = function() {return "setup_link";}
     this.CLEAR_LINK_COMMAND = function() {return "clear_link";}

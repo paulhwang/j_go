@@ -6,12 +6,14 @@
 function PhwangClass(root_val) {
     "use strict";
     this.init__ = function(root_val) {this.theRootObject = root_val;};
+
     this.initObject = function() {
         this.thePhwangStorageObject = new PhwangStorageClass(this);
         this.thePhwangAjaxObject = new PhwangAjaxClass(this);
         this.thePhwangPortObject = new PhwangPortClass(this);
         this.debug(true, "initObject", "");
     };
+
     this.decodeNumber = function(input_val, size_val) {
         var output = 0;
         for (var index = 0; index < size_val; index++) {
@@ -20,6 +22,7 @@ function PhwangClass(root_val) {
         }
         return output;
     };
+
     this.sleepMilliseconds = function (milliseconds_val) {
         var start = new Date().getTime();
         for (var i = 0; i < 1e7; i++) {
@@ -28,6 +31,7 @@ function PhwangClass(root_val) {
             }
         }
     };
+
     this.serverHttpHeader = function() {return "http://" + window.location.hostname + ":" + window.location.port + "/";};
     this.serverHttpsHeader = function() {return "https://" + window.location.hostname + ":" + window.location.port + "/";};
     this.objectName = function() {return "PhwangClass";};
@@ -50,6 +54,7 @@ function PhwangStorageClass(phwang_object_val) {
         this.resetLinkId();
         this.resetMyName();
     };
+
     this.myName = function() {return this.storage().my_name;};
     this.setMyName = function (val) {this.storage().my_name = val;};
     this.resetMyName = function() {this.setMyName("");};
@@ -63,6 +68,7 @@ function PhwangStorageClass(phwang_object_val) {
     this.abend = function(str1_val, str2_val) {return this.phwangObject().ABEND(this.objectName() + "." + str1_val, str2_val);};
     this.init__(phwang_object_val);
 }
+
 function PhwangPortClass(phwang_object_val) {
     "use strict";
     this.init__ = function (phwang_object_val) {this.thePhwangObject = phwang_object_val;};
@@ -74,6 +80,7 @@ function PhwangPortClass(phwang_object_val) {
     this.receiveSetupSession3Response = function(result_val) {this.rootObject().ajaxObject().receiveSetupSession3Response(result_val);};
     this.receivePutSessionDataResponse = function(result_val) {this.rootObject().ajaxObject().receivePutSessionDataResponse(result_val, data_val);};
     this.receiveGetSessionDataResponse = function(result_val, data_val) {this.rootObject().ajaxObject().receiveSetupSessionResponse(result_val, data_val);};
+    this.receiveMmwReadDataResponse = function(result_val) {this.rootObject().ajaxObject().receiveMmwReadDataResponse(result_val);};
     this.objectName = function() {return "PhwangPortClass";};
     this.phwangObject = function() {return this.thePhwangObject;};
     this.rootObject = function() {return this.phwangObject().rootObject();};
@@ -84,6 +91,7 @@ function PhwangPortClass(phwang_object_val) {
     this.abend = function(str1_val, str2_val) {return this.phwangObject().ABEND(this.objectName() + "." + str1_val, str2_val);};
     this.init__(phwang_object_val);
 }
+
 function PhwangQueueClass(phwang_object_val) {
     "use strict";
     this.init__ = function(phwang_object_val) {
@@ -92,11 +100,13 @@ function PhwangQueueClass(phwang_object_val) {
         this.theQueueLength = 0;
         this.theQueueArray = [this.maxQueueLength()];
     };
+
     this.enqueueData = function(data_val) {
         if (this.queueLength() >= this.maxQueueLength()) {this.abend("enqueueData", "queue full"); return;}
         this.queueArray()[this.queueLength()] = data_val;
         this.incrementQueueLength();
     };
+
     this.dequeueData = function() {
         if (this.queueLength() === 0) {return 0;}
         var data = this.queueArray()[0];
@@ -104,6 +114,7 @@ function PhwangQueueClass(phwang_object_val) {
         for (var i = 0; i < this.queueLength(); i++) {this.queueArray()[i] = this.queueArray()[i + 1];}
         return data;
     };
+
     this.maxQueueLength = function() {return this.theMaxQueueLength};
     this.queueLength = function() {return this.theQueueLength};
     this.incrementQueueLength = function() {this.theQueueLength += 1};
