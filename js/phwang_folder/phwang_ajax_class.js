@@ -84,9 +84,85 @@ function PhwangAjaxClass(phwang_object_val) {
         this.transmitAjaxRequest(output);
     };
 
-    this.mmwReadDataResponse = function(input_val) {
-        this.debug(true, "mmwReadDataResponse", "input_val=" + input_val);
-        this.phwangPortObject().receiveMmwReadDataResponse(input_val);
+    this.mmwReadDataResponse = function(json_response_val) {
+        this.debug(true, "mmwReadDataResponse", "json_response_val=" + json_response_val);
+        var response = JSON.parse(json_response_val);
+        this.debug(true, "mmwReadDataResponse", "response.data=" + response.data);
+        if (response.data === "I_data") {
+            this.phwangPortObject().receiveMmwReadDataResponse(json_response_val);
+        }
+        else {
+            this.getMmwDataResponse(json_response_val);
+        }
+    };
+
+    this.triggerGetMmwData = function(link_val) {
+        var ajax_object = link_val.phwangAjaxObject();
+        ajax_object.getMmwData(link_val);
+    };
+
+    this.getMmwData = function(link_val) {
+        var output = JSON.stringify({
+                        command: this.phwangAjaxProtocolObject().GET_MMW_DATA_COMMAND(),
+                        packet_id: this.ajaxPacketId(),
+                        time_stamp: link_val.timeStamp(),
+                        link_id: link_val.linkId(),
+                        name_list_tag: link_val.nameListTag(),
+                        });
+        this.debug(true, "getMmwData", "output=" + output);
+        this.transmitAjaxRequest(output);
+    };
+    this.getMmwDataResponse = function(input_val) {
+        this.debug(true, "getMmwDataResponse", "input_val=" + input_val);
+        var data = JSON.parse(input_val);
+        if (data) {
+            this.rootObject().displayObject().pushTarget(1000, 2000, 3000);
+            this.rootObject().displayObject().drawBoard();
+
+            if (data.mmw_data) {
+                var target_data_x = data.mmw_data;
+                var len = target_data_x.slice(0, 1);
+                var x_str = target_data_x.slice(2, len)
+                this.debug(true, "getMmwDataResponse", "len=" + len);
+                this.debug(true, "getMmwDataResponse", "x_str=" + x_str);
+                var x_number = this.phwangObject().decodeSignedNumber(x_str, Number(len) - 2);
+                this.debug(true, "getMmwDataResponse", "x_number=" + x_number);
+
+                var target_data_y = target_data_x.slice(Number(len) + 1);
+                len = target_data_y.slice(0, 1);
+                var y_str = target_data_y.slice(2, len)
+                this.debug(true, "getMmwDataResponse", "len=" + len);
+                this.debug(true, "getMmwDataResponse", "y_str=" + y_str);
+                var y_number = this.phwangObject().decodeSignedNumber(y_str, Number(len) - 2);
+                this.debug(true, "getMmwDataResponse", "y_number=" + y_number);
+
+                var target_data_z = target_data_y.slice(Number(len) + 1);
+                len = target_data_z.slice(0, 1);
+                var z_str = target_data_z.slice(2, len)
+                this.debug(true, "getMmwDataResponse", "len=" + len);
+                this.debug(true, "getMmwDataResponse", "z_str=" + z_str);
+                var z_number = this.phwangObject().decodeSignedNumber(z_str, Number(len) - 2);
+                this.debug(true, "getMmwDataResponse", "z_number=" + z_number);
+
+                this.rootObject().displayObject().pushTarget(x_number, y_number, z_number);
+                this.rootObject().displayObject().drawBoard();
+
+                this.triggerGetMmwData(this.phwangLinkObject());
+
+                //var name_list_tag  = this.phwangObject().decodeNumber(data.mmw_data, 3);
+                //this.phwangLinkObject().setNameListTag(name_list_tag);
+
+/*
+                var name_list = data.c_name_list.slice(3);
+                this.debug(true, "getMmwDataResponse", "name_list_tag=" + name_list_tag);
+                this.debug(true, "getMmwDataResponse", "name_list=" + name_list);
+                var array = JSON.parse("[" + name_list + "]");
+                this.debug(true, "getMmwDataResponse", "array=" + array);
+                this.phwangLinkObject().setNameList(array);
+                this.phwangPortObject().receiveGetNameListResponse();
+                */
+            }
+        }
     };
 
     this.signUpRequest = function(account_name_val, password_val, email_val) {
