@@ -148,19 +148,6 @@ function PhwangAjaxClass(phwang_object_val) {
                 this.rootObject().displayObject().drawBoard();
 
                 this.triggerGetMmwData(this.phwangLinkObject());
-
-                //var name_list_tag  = this.phwangObject().decodeNumber(data.mmw_data, 3);
-                //this.phwangLinkObject().setNameListTag(name_list_tag);
-
-/*
-                var name_list = data.c_name_list.slice(3);
-                this.debug(true, "getMmwDataResponse", "name_list_tag=" + name_list_tag);
-                this.debug(true, "getMmwDataResponse", "name_list=" + name_list);
-                var array = JSON.parse("[" + name_list + "]");
-                this.debug(true, "getMmwDataResponse", "array=" + array);
-                this.phwangLinkObject().setNameList(array);
-                this.phwangPortObject().receiveGetNameListResponse();
-                */
             }
         }
     };
