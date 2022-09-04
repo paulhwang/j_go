@@ -11,6 +11,7 @@ function MmwRootObject() {
         this.theHtmlObject = new mmwHtmlObject(this);
         this.debug(true, "init__", this.objectName());
     };
+
     this.objectName = function() {return "MmwRootObject";};
     this.phwangObject = function() {return this.thePhwangObject;};
     this.phwangAjaxObject = function() {return this.phwangObject().phwangAjaxObject();};
@@ -23,6 +24,7 @@ function MmwRootObject() {
     this.abend_ = function(str1_val, str2_val) {this.phwangObject().ABEND(str1_val, str2_val);};
     this.init__();
 }
+
 function mmwHtmlObject(root_object_val) {
     "use strict";
     this.gotoMmwActPage = function() {window.open(this.phwangObject().serverHttpHeader() + "mmw_act.html", "_self")};
@@ -37,6 +39,7 @@ function mmwHtmlObject(root_object_val) {
             }
         });
     };
+
     this.objectName = function() {return "mmwHtmlObject";};
     this.rootObject = function() {return this.theRootObject;};
     this.phwangObject = function() {return this.rootObject().phwangObject();};
@@ -47,20 +50,23 @@ function mmwHtmlObject(root_object_val) {
     this.abend = function(str1_val, str2_val) {return this.rootObject().abend_(this.objectName() + "." + str1_val, str2_val);};
     this.init__(root_object_val);
 }
+
 function mmwAjaxClass(root_object_val) {
     "use strict";
     this.init__ = function(root_object_val) {this.theRootObject = root_object_val;};
-    this.receiveMmwReadDataResponse = function(result_val) {
-        this.debug(true, "mmwReadDataResponse", "result_val=" + result_val);
-        var data = JSON.parse(result_val);
-        if (data.result === "succeed") {
-            this.debug(true, "mmwReadDataResponse", "succeed");
+    this.receiveMmwReadDataResponse = function(json_response_val) {
+        this.debug(true, "receiveMmwReadDataResponse", "json_response_val=" + json_response_val);
+        var response = JSON.parse(json_response_val);
+        if (response.result === "succeed") {
+            this.debug(true, "receiveMmwReadDataResponse", "succeed, data=" + response.data);
+
             this.htmlObject().gotoMmwActPage();
         }
         else {
-            this.abend("mmwReadDataResponse", "bad result" + data.result);
+            this.abend("receiveMmwReadDataResponse", "bad result" + response.result);
         }
     };
+
     this.receiveGetNameListResponse = function(result_val) {};
     this.receiveSetupSessionResponse = function(result_val) {};
     this.receiveSetupSession2Response = function(result_val) {};
@@ -76,5 +82,6 @@ function mmwAjaxClass(root_object_val) {
     this.abend = function(str1_val, str2_val) {return this.rootObject().abend_(this.objectName() + "." + str1_val, str2_val);};
     this.init__(root_object_val);
 }
+
 var mmw_main = function() {"use strict"; new MmwRootObject();};
 $(document).ready(mmw_main);

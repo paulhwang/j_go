@@ -51,17 +51,20 @@ function mmwHtmlObject(root_object_val) {
 function mmwAjaxClass(root_object_val) {
     "use strict";
     this.init__ = function(root_object_val) {this.theRootObject = root_object_val;};
-    this.receiveMmwReadDataResponse = function(result_val) {
-        this.debug(true, "mmwReadDataResponse", "result_val=" + result_val);
-        var data = JSON.parse(result_val);
-        if (data.result === "succeed") {
-            this.debug(true, "mmwReadDataResponse", "succeed");
+
+    this.receiveMmwReadDataResponse = function(json_response_val) {
+        this.debug(true, "receiveMmwReadDataResponse", "json_response_val=" + json_response_val);
+        var response = JSON.parse(json_response_val);
+        if (response.result === "succeed") {
+            this.debug(true, "receiveMmwReadDataResponse", "succeed, data=" + response.data);
+
             //this.phwangAjaxObject().mmwReadDataRequest("read", "");
         }
         else {
-            this.abend("mmwReadDataResponse", "bad result" + data.result);
+            this.abend("receiveMmwReadDataResponse", "bad result" + response.result);
         }
     };
+
     this.receiveGetNameListResponse = function(result_val) {};
     this.receiveSetupSessionResponse = function(result_val) {};
     this.receiveSetupSession2Response = function(result_val) {};
