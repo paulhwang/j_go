@@ -7,6 +7,7 @@ function LoginRootObject() {
     "use strict";
     this.init__ = function() {
         this.thePhwangObject = new PhwangClass(this);
+        this.theFE_DEF = new FE_DEFINE_OBJECT();
         this.thePhwangLinkObject = new PhwangLinkClass(this);
         this.phwangObject().initObject();
         this.theAjaxObject = new LoginAjaxClass(this);
@@ -16,6 +17,7 @@ function LoginRootObject() {
 
     this.objectName = function() {return "LoginRootObject";};
     this.phwangObject = function() {return this.thePhwangObject;};
+    this.FE_DEF = function() {return this.theFE_DEF;};
     this.phwangAjaxObject = function() {return this.phwangObject().phwangAjaxObject();};
     this.phwangLinkObject = function() {return this.thePhwangLinkObject;};
     this.htmlObject = function() {return this.theHtmlObject;};
@@ -70,23 +72,23 @@ function LoginAjaxClass(root_object_val) {
     this.receiveSetupLinkResponse = function(result_val) {
         this.debug(true, "receiveSetupLinkResponse", "result_val=" + result_val);
         var data = JSON.parse(result_val);
-        if (data.result === "succeed") {
+        if (data.result === this.FE_DEF().FE_RESULT_SUCCEED()) {
             this.debug(false, "receiveSetupLinkResponse", "succeed");
             this.phwangLinkObject().setTimeStamp(data.time_stamp);
             this.phwangLinkObject().setLinkId(data.link_id);
             this.phwangLinkObject().putStorageLinkData();
             this.htmlObject().gotoGoConfigPage();
         }
-        else if (data.result === "password not match") {
-            this.debug(true, "receiveSetupLinkResponse", "password not match");
+        else if (data.result === this.FE_DEF().FE_RESULT_PASSWORD_NOT_MATCH()) {
+            this.debug(true, "receiveSetupLinkResponse", "password_not_match");
 
         }
-        else if (data.result === "name not exist") {
-            this.debug(true, "receiveSetupLinkResponse", "name not exist");
+        else if (data.result === this.FE_DEF().FE_RESULT_ACCOUNT_NAME_NOT_EXIST()) {
+            this.debug(true, "receiveSetupLinkResponse", "account_not_exist");
             this.htmlObject().gotoSignUpPage();
         }
         else {
-            this.abend("receiveSetupLinkResponse", "bad result" + data.result);
+            this.abend("receiveSetupLinkResponse", "invalid_result=" + data.result);
         }
     };
 
@@ -99,6 +101,7 @@ function LoginAjaxClass(root_object_val) {
     this.objectName = function() {return "LoginAjaxClass";};
     this.rootObject = function() {return this.theRootObject;};
     this.phwangObject = function() {return this.rootObject().phwangObject();};
+    this.FE_DEF = function() {return this.rootObject().FE_DEF();};
     this.phwangLinkObject = function() {return this.rootObject().phwangLinkObject();};
     this.htmlObject = function() {return this.rootObject().htmlObject();};
     this.debug = function(debug_val, str1_val, str2_val) {if (debug_val) {this.logit(str1_val, str2_val);}};
