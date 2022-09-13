@@ -16,8 +16,8 @@ function LoginRootObject() {
     };
 
     this.objectName = function() {return "LoginRootObject";};
-    this.phwangObject = function() {return this.thePhwangObject;};
     this.FE_DEF = function() {return this.theFE_DEF;};
+    this.phwangObject = function() {return this.thePhwangObject;};
     this.phwangAjaxObject = function() {return this.phwangObject().phwangAjaxObject();};
     this.phwangLinkObject = function() {return this.thePhwangLinkObject;};
     this.htmlObject = function() {return this.theHtmlObject;};
@@ -100,8 +100,8 @@ function LoginAjaxClass(root_object_val) {
     this.receiveGetSessionDataResponse = function(result_val, data_val) {};
     this.objectName = function() {return "LoginAjaxClass";};
     this.rootObject = function() {return this.theRootObject;};
-    this.phwangObject = function() {return this.rootObject().phwangObject();};
     this.FE_DEF = function() {return this.rootObject().FE_DEF();};
+    this.phwangObject = function() {return this.rootObject().phwangObject();};
     this.phwangLinkObject = function() {return this.rootObject().phwangLinkObject();};
     this.htmlObject = function() {return this.rootObject().htmlObject();};
     this.debug = function(debug_val, str1_val, str2_val) {if (debug_val) {this.logit(str1_val, str2_val);}};

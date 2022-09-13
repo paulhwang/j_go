@@ -7,6 +7,7 @@ function SignUpRootObject() {
     "use strict";
     this.init__ = function() {
         this.thePhwangObject = new PhwangClass(this);
+        this.theFE_DEF = new FE_DEFINE_OBJECT();
         this.phwangObject().initObject();
         this.theAjaxObject = new SignUpAjaxClass(this);
         this.theHtmlObject = new SignUpHtmlObject(this);
@@ -14,6 +15,7 @@ function SignUpRootObject() {
     };
 
     this.objectName = function() {return "SignUpRootObject";};
+    this.FE_DEF = function() {return this.theFE_DEF;};
     this.phwangObject = function() {return this.thePhwangObject;};
     this.phwangAjaxObject = function() {return this.phwangObject().phwangAjaxObject();};
     this.htmlObject = function() {return this.theHtmlObject;};
@@ -67,15 +69,15 @@ function SignUpAjaxClass(root_object_val) {
     this.receiveSignUpResponse = function(result_val) {
         this.debug(true, "receiveSignUpResponse", "result_val=" + result_val);
         var data = JSON.parse(result_val);
-        if (data.result === "succeed") {
+        if (data.result === this.FE_DEF().FE_RESULT_SUCCEED()) {
             this.debug(true, "receiveSignUpResponse", "succeed");
             this.htmlObject().gotoSignInPage();
         }
         else if (data.result === "name exist") {
-            this.debug(true, "receiveSignUpResponse", "exist exist");
+            this.debug(true, "receiveSignUpResponse", "account_name_already_exist");
         }
         else {
-            this.abend("receiveSignUpResponse", "bad result" + data.result);
+            this.abend("receiveSignUpResponse", "invalid_result" + data.result);
         }
     };
 
@@ -90,6 +92,7 @@ function SignUpAjaxClass(root_object_val) {
 
     this.objectName = function() {return "SignUpAjaxClass";};
     this.rootObject = function() {return this.theRootObject;};
+    this.FE_DEF = function() {return this.rootObject().FE_DEF();};
     this.phwangObject = function() {return this.rootObject().phwangObject();};
     this.phwangLinkObject = function() {return this.rootObject().phwangLinkObject();};
     this.htmlObject = function() {return this.rootObject().htmlObject();};
