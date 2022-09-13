@@ -73,11 +73,11 @@ function SignUpAjaxClass(root_object_val) {
             this.debug(true, "receiveSignUpResponse", "succeed");
             this.htmlObject().gotoSignInPage();
         }
-        else if (data.result === "name exist") {
+        else if (data.result === this.FE_DEF().FE_RESULT_ACCOUNT_NAME_ALREADY_EXIST()) {
             this.debug(true, "receiveSignUpResponse", "account_name_already_exist");
         }
         else {
-            this.abend("receiveSignUpResponse", "invalid_result" + data.result);
+            this.abend("receiveSignUpResponse", "invalid_result=" + data.result);
         }
     };
 
