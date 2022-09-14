@@ -57,7 +57,7 @@ function mmwAjaxClass(root_object_val) {
     this.receiveMmwReadDataResponse = function(json_response_val) {
         this.debug(true, "receiveMmwReadDataResponse", "json_response_val=" + json_response_val);
         var response = JSON.parse(json_response_val);
-        if (response.result === "succeed") {
+        if (response.result === "00") {
             this.debug(true, "receiveMmwReadDataResponse", "succeed, data=" + response.data);
 
             this.htmlObject().gotoMmwActPage();
