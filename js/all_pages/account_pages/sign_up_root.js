@@ -11,10 +11,8 @@ function SignUpRootObject() {
 
     this.init__ = function() {
         this.theFE_DEF = new FE_DEFINE_OBJECT();
+        this.theHttpRequestObject = new HttpRequestObject(this.examineResponse, this);
         this.thePhwangAjaxStorageObject = new PhwangAjaxStorageObject(this);
-
-        this.theHttpGetRequest = new XMLHttpRequest();
-        this.startAjaxWaiting();
 
         this.bindHtmlInput();
     };
@@ -35,29 +33,9 @@ function SignUpRootObject() {
                         });
                 console.log("signUpRequest=" + output);
 
-                this0.sendAjaxRequest(output);
+                this0.httpRequestObject().sendAjaxRequest(output);
             }
         });
-    };
-
-    this.sendAjaxRequest = function(output_val) {
-        this.httpGetRequest().open("GET", this.ajaxRoute(), true);
-        this.httpGetRequest().setRequestHeader("X-Requested-With", "XMLHttpRequest");
-        this.httpGetRequest().setRequestHeader("Content-Type", this.jsonContext());
-        this.httpGetRequest().setRequestHeader("phwangajaxrequest", output_val);
-        this.httpGetRequest().setRequestHeader("phwangajaxpacketid", this.ajaxPacketId());
-        this.incrementAjaxPacketId();
-        this.httpGetRequest().send(null);
-    };
-
-    this.startAjaxWaiting = function() {
-        var this0 = this;
-        this.httpGetRequest().onreadystatechange = function() {
-            if ((this0.httpGetRequest().readyState === 4) &&
-                (this0.httpGetRequest().status === 200)) {
-                this0.examineResponse(this0.httpGetRequest().responseText);
-            }
-        };
     };
 
     this.examineResponse = function(json_response_val) {
@@ -69,7 +47,7 @@ function SignUpRootObject() {
         var data = JSON.parse(response.data);
         if (data.result === this.FE_DEF().FE_RESULT_SUCCEED()) {
             console.log("succeed");
-            this.gotoSignInPage();
+            //this.gotoSignInPage();
         }
         else if (data.result === this.FE_DEF().FE_RESULT_ACCOUNT_NAME_ALREADY_EXIST()) {
             console.log("account_name_already_exist");
@@ -85,13 +63,54 @@ function SignUpRootObject() {
     };
 
     this.FE_DEF = function() {return this.theFE_DEF;};
-    this.httpGetRequest = function() {return this.theHttpGetRequest;};
+    this.httpRequestObject = function() {return this.theHttpRequestObject;};
     this.ajaxPacketId = function() {return this.phwangAjaxObject().ajaxPacketId();};
     this.phwangAjaxStorageObject = function() {return this.thePhwangAjaxStorageObject;};
     this.ajaxPacketId = function() {return this.phwangAjaxStorageObject().ajaxPacketId();};
     this.incrementAjaxPacketId = function() {this.phwangAjaxStorageObject().incrementAjaxPacketId();};
     this.init__();
 }
+
+function HttpRequestObject(callback_func_val, callback_object_val) {
+    this.init__ = function() {
+        this.theCallBackFunc = callback_func_val;
+        this.theCallBackObject = callback_object_val;
+        this.ajaxRoute = function() {return "/django_go/go_ajax/";};
+        this.jsonContext = function() {return "application/json; charset=utf-8";}
+        this.plainTextContext = function() {return "text/plain; charset=utf-8";}
+        this.thePhwangAjaxStorageObject = new PhwangAjaxStorageObject(this);
+        this.theHttpGetRequest = new XMLHttpRequest();
+        this.startAjaxWaiting();
+    };
+
+    this.startAjaxWaiting = function() {
+        var this0 = this;
+        this.httpGetRequest().onreadystatechange = function() {
+            if ((this0.httpGetRequest().readyState === 4) &&
+                (this0.httpGetRequest().status === 200)) {
+                this0.callBackFunc().bind(this0.callBackObject())(this0.httpGetRequest().responseText);
+            }
+        };
+    };
+
+    this.sendAjaxRequest = function(output_val) {
+        this.httpGetRequest().open("GET", this.ajaxRoute(), true);
+        this.httpGetRequest().setRequestHeader("X-Requested-With", "XMLHttpRequest");
+        this.httpGetRequest().setRequestHeader("Content-Type", this.jsonContext());
+        this.httpGetRequest().setRequestHeader("phwangajaxrequest", output_val);
+        this.httpGetRequest().setRequestHeader("phwangajaxpacketid", this.ajaxPacketId());
+        this.incrementAjaxPacketId();
+        this.httpGetRequest().send(null);
+    };
+
+    this.httpGetRequest = function() {return this.theHttpGetRequest;};
+    this.callBackFunc = function() {return this.theCallBackFunc;};
+    this.callBackObject = function() {return this.theCallBackObject;};
+    this.phwangAjaxStorageObject = function() {return this.thePhwangAjaxStorageObject;};
+    this.ajaxPacketId = function() {return this.phwangAjaxStorageObject().ajaxPacketId();};
+    this.incrementAjaxPacketId = function() {this.phwangAjaxStorageObject().incrementAjaxPacketId();};
+    this.init__();
+};
 
 function PhwangAjaxStorageObject(phwang_ajax_object_val) {
     "use strict";
