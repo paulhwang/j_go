@@ -93,24 +93,26 @@ function HttpRequestObject(callback_func_val, callback_object_val) {
     this.resetAjaxPacketId = function() {
         if (this.ajaxPacketId() === undefined) {
             console.log("resetAjaxPacketId: undefined id");
-            this.storage().ajax_packet_id = 0;
+            sessionStorage.ajax_packet_id = 0;
         }
     };
+
     this.ajaxPacketId = function() {
-        return this.storage().ajax_packet_id;
+        return sessionStorage.ajax_packet_id;
     };
+
     this.incrementAjaxPacketId = function() {
-        var i = Number(this.storage().ajax_packet_id) + 1;
-        if (i !== 1 + Number(this.storage().ajax_packet_id)) {
+        var i = Number(sessionStorage.ajax_packet_id) + 1;
+        if (i !== 1 + Number(sessionStorage.ajax_packet_id)) {
             this.abend("incrementAjaxPacketId", "fix it");
         }
-        this.storage().ajax_packet_id = i;
+        sessionStorage.ajax_packet_id = i;
     };
 
     this.httpGetRequest = function() {return this.theHttpGetRequest;};
     this.callBackFunc = function() {return this.theCallBackFunc;};
     this.callBackObject = function() {return this.theCallBackObject;};
-    this.storage = function() {return sessionStorage;};
+    //this.storage = function() {return sessionStorage;};
     this.init__();
 };
 
