@@ -5,15 +5,9 @@
 
 function SignUpRootObject() {
     "use strict";
-    this.ajaxRoute = function() {return "/django_go/go_ajax/";};
-    this.jsonContext = function() {return "application/json; charset=utf-8";}
-    this.plainTextContext = function() {return "text/plain; charset=utf-8";}
-
     this.init__ = function() {
         this.theFE_DEF = new FE_DEFINE_OBJECT();
         this.theHttpRequestObject = new HttpRequestObject(this.examineResponse, this);
-        this.thePhwangAjaxStorageObject = new PhwangAjaxStorageObject(this);
-
         this.bindHtmlInput();
     };
 
@@ -24,6 +18,7 @@ function SignUpRootObject() {
             var password = $(".sign_up_section .sign_up_password").val();
             var email = $(".sign_up_section .sign_up_email").val();
             if (account_name) {
+                console.log("ajaxPacketId=" + this0.ajaxPacketId());
                 var output = JSON.stringify({
                         command: "sign_up",
                         packet_id: this0.ajaxPacketId(),
@@ -47,7 +42,7 @@ function SignUpRootObject() {
         var data = JSON.parse(response.data);
         if (data.result === this.FE_DEF().FE_RESULT_SUCCEED()) {
             console.log("succeed");
-            //this.gotoSignInPage();
+            //window.open("go_login.html", "_self")
         }
         else if (data.result === this.FE_DEF().FE_RESULT_ACCOUNT_NAME_ALREADY_EXIST()) {
             console.log("account_name_already_exist");
@@ -57,17 +52,9 @@ function SignUpRootObject() {
         }
     };
 
-    this.gotoSignInPage = function() {
-        //window.open(this.phwangObject().serverHttpHeader() + "sign_in.html", "_self")
-        window.open("go_login.html", "_self")
-    };
-
     this.FE_DEF = function() {return this.theFE_DEF;};
     this.httpRequestObject = function() {return this.theHttpRequestObject;};
-    this.ajaxPacketId = function() {return this.phwangAjaxObject().ajaxPacketId();};
-    this.phwangAjaxStorageObject = function() {return this.thePhwangAjaxStorageObject;};
-    this.ajaxPacketId = function() {return this.phwangAjaxStorageObject().ajaxPacketId();};
-    this.incrementAjaxPacketId = function() {this.phwangAjaxStorageObject().incrementAjaxPacketId();};
+    this.ajaxPacketId = function() {return this.httpRequestObject().ajaxPacketId();};
     this.init__();
 }
 
@@ -78,7 +65,7 @@ function HttpRequestObject(callback_func_val, callback_object_val) {
         this.ajaxRoute = function() {return "/django_go/go_ajax/";};
         this.jsonContext = function() {return "application/json; charset=utf-8";}
         this.plainTextContext = function() {return "text/plain; charset=utf-8";}
-        this.thePhwangAjaxStorageObject = new PhwangAjaxStorageObject(this);
+        this.resetAjaxPacketId();
         this.theHttpGetRequest = new XMLHttpRequest();
         this.startAjaxWaiting();
     };
@@ -103,31 +90,15 @@ function HttpRequestObject(callback_func_val, callback_object_val) {
         this.httpGetRequest().send(null);
     };
 
-    this.httpGetRequest = function() {return this.theHttpGetRequest;};
-    this.callBackFunc = function() {return this.theCallBackFunc;};
-    this.callBackObject = function() {return this.theCallBackObject;};
-    this.phwangAjaxStorageObject = function() {return this.thePhwangAjaxStorageObject;};
-    this.ajaxPacketId = function() {return this.phwangAjaxStorageObject().ajaxPacketId();};
-    this.incrementAjaxPacketId = function() {this.phwangAjaxStorageObject().incrementAjaxPacketId();};
-    this.init__();
-};
-
-function PhwangAjaxStorageObject(phwang_ajax_object_val) {
-    "use strict";
-    this.storage = function() {return sessionStorage;};
-    this.init__ = function (phwang_ajax_object_val) {
-        this.thePhwangAjaxObject = phwang_ajax_object_val;
-        this.resetAjaxStorage();
+    this.resetAjaxPacketId = function() {
+        if (this.ajaxPacketId() === undefined) {
+            console.log("resetAjaxPacketId: undefined id");
+            this.storage().ajax_packet_id = 0;
+        }
     };
-
-    this.resetAjaxStorage = function() {
-        this.resetAjaxPacketId();
+    this.ajaxPacketId = function() {
+        return this.storage().ajax_packet_id;
     };
-
-    this.resetAjaxPacketId = function() {if (this.ajaxPacketId() === undefined) {
-        this.storage().ajax_packet_id = 0;}
-    };
-    this.ajaxPacketId = function() {return this.storage().ajax_packet_id;};
     this.incrementAjaxPacketId = function() {
         var i = Number(this.storage().ajax_packet_id) + 1;
         if (i !== 1 + Number(this.storage().ajax_packet_id)) {
@@ -136,14 +107,12 @@ function PhwangAjaxStorageObject(phwang_ajax_object_val) {
         this.storage().ajax_packet_id = i;
     };
 
-    this.objectName = function() {return "PhwangAjaxStorageObject";};
-    this.phwangAjaxObject = function() {return this.thePhwangAjaxObject;};
-    this.phwangObject = function() {return this.phwangAjaxObject().phwangObject();};
-    this.debug = function(debug_val, str1_val, str2_val) {if (debug_val) {this.logit(str1_val, str2_val);}};
-    this.logit = function(str1_val, str2_val) {return this.phwangObject().LOG_IT(this.objectName() + "." + str1_val, str2_val);};
-    this.abend = function(str1_val, str2_val) {return this.phwangObject().ABEND(this.objectName() + "." + str1_val, str2_val);};
-    this.init__(phwang_ajax_object_val);
-}
+    this.httpGetRequest = function() {return this.theHttpGetRequest;};
+    this.callBackFunc = function() {return this.theCallBackFunc;};
+    this.callBackObject = function() {return this.theCallBackObject;};
+    this.storage = function() {return sessionStorage;};
+    this.init__();
+};
 
 var sign_up_main = function() {"use strict"; new SignUpRootObject();};
 $(document).ready(sign_up_main);
