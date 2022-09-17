@@ -92,7 +92,6 @@ function HttpRequestObject(callback_func_val, callback_object_val) {
 
     this.resetAjaxPacketId = function() {
         if (this.ajaxPacketId() === undefined) {
-            console.log("resetAjaxPacketId: undefined id");
             sessionStorage.ajax_packet_id = 0;
         }
     };
@@ -112,7 +111,6 @@ function HttpRequestObject(callback_func_val, callback_object_val) {
     this.httpGetRequest = function() {return this.theHttpGetRequest;};
     this.callBackFunc = function() {return this.theCallBackFunc;};
     this.callBackObject = function() {return this.theCallBackObject;};
-    //this.storage = function() {return sessionStorage;};
     this.init__();
 };
 
