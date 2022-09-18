@@ -4,6 +4,10 @@ function PaulObject() {
         window.open("go_config.html", "_self");
     });
 
+    document.querySelector(".go_login_button").addEventListener("click", function() {
+        window.open("go_login.html", "_self");
+    });
+
     document.querySelector(".image_button").addEventListener("click", function() {
         window.open("image.html", "_self");
     });
