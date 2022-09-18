@@ -19,9 +19,9 @@ function SignOffObject() {
             if (account_name) {
                 var output = JSON.stringify({
                         command: "sign_off",
-                        packet_id: sessionStorage.ajax_packet_id,
-                        my_name: account_name,
-                        password: password,
+                        time_stamp: sessionStorage.time_stamp,
+                        link_id: sessionStorage.link_id,
+                        my_name: sessionStorage.my_name,
                         });
                 console.log("signOffRequest=" + output);
 
@@ -38,6 +38,8 @@ function SignOffObject() {
 
         var data = JSON.parse(response.data);
         if (data.result === this.FE_DEF().FE_RESULT_SUCCEED()) {
+            sessionStorage.setItem("link_id", null);
+            sessionStorage.setItem("my_name", null);
             console.log("succeed");
             //window.open("go_login.html", "_self")
         }
