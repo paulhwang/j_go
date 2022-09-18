@@ -41,7 +41,7 @@ function SignInObject() {
             console.log("succeed");
             console.log("link_id=", data.link_id);
             sessionStorage.setItem("session_id", data.link_id);
-            sessionStorage.setItem("account_name", data.link_id);
+            sessionStorage.setItem("my_name", data.my_name);
             //window.history.go(-1);
             //window.open("go_config.html", "_self")
         }
