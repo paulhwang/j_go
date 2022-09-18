@@ -44,7 +44,6 @@ function SignInObject() {
             sessionStorage.setItem("my_name", data.my_name);
             sessionStorage.setItem("time_stamp", data.time_stamp);
             window.history.go(-1);
-            //window.open("go_config.html", "_self")
         }
         else if (data.result === this.FE_DEF().FE_RESULT_PASSWORD_NOT_MATCH()) {
             console.log("password_not_match");

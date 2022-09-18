@@ -40,8 +40,9 @@ function SignOffObject() {
         if (data.result === this.FE_DEF().FE_RESULT_SUCCEED()) {
             sessionStorage.setItem("link_id", null);
             sessionStorage.setItem("my_name", null);
+            sessionStorage.setItem("time_stamp", null);
             console.log("succeed");
-            //window.open("go_login.html", "_self")
+            window.history.go(-1);
         }
         else if (data.result === this.FE_DEF().FE_RESULT_ACCOUNT_NAME_ALREADY_EXIST()) {
             console.log("account_name_already_exist");
