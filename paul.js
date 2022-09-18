@@ -21,7 +21,7 @@ function PaulObject() {
     });
 
     document.querySelector(".sign_off_button").addEventListener("click", function() {
-        window.open("sign_in.html", "_self");
+        window.open("sign_off.html", "_self");
     });
 };
 

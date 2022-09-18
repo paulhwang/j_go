@@ -3,7 +3,7 @@
   Written by Paul Hwang
 */
 
-function SignInObject() {
+function SignOffObject() {
     "use strict";
     this.init__ = function() {
         this.theFE_DEF = new FE_DEFINE_OBJECT();
@@ -13,18 +13,18 @@ function SignInObject() {
 
     this.bindHtmlInput = function() {
         var this0 = this;
-        $(".sign_in_section .sign_in_button").on("click", function() {
-            var account_name = $(".sign_in_section .sign_in_account_name").val();
-            var password = $(".sign_in_section .sign_in_password").val();
-            var email = $(".sign_in_section .sign_in_email").val();
+        $(".sign_up_section .sign_up_button").on("click", function() {
+            var account_name = $(".sign_up_section .sign_up_account_name").val();
+            var password = $(".sign_up_section .sign_up_password").val();
             if (account_name) {
                 var output = JSON.stringify({
                         command: "sign_up",
+                        packet_id: sessionStorage.ajax_packet_id,
                         my_name: account_name,
                         password: password,
-                        email: email,
+                        email: password,
                         });
-                console.log("signInRequest=" + output);
+                console.log("signOffRequest=" + output);
 
                 this0.httpServiceObject().sendAjaxRequest(output);
             }
@@ -55,5 +55,5 @@ function SignInObject() {
     this.init__();
 }
 
-var sign_in_main = function() {"use strict"; new SignInObject();};
-$(document).ready(sign_in_main);
+var sign_off_main = function() {"use strict"; new SignOffObject();};
+$(document).ready(sign_off_main);
