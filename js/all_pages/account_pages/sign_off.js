@@ -47,6 +47,9 @@ function SignOffObject() {
         else if (data.result === this.FE_DEF().FE_RESULT_ACCOUNT_NAME_ALREADY_EXIST()) {
             console.log("account_name_already_exist");
         }
+        else if (data.result === this.FE_DEF().FE_RESULT_TIME_STAMP_NOT_MATCH()) {
+            console.log("time_stamp_not_match");
+        }
         else {
             console.log("invalid_result=" + data.result);
         }

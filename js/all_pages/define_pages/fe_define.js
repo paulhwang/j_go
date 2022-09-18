@@ -16,6 +16,7 @@ function FE_DEFINE_OBJECT() {
         this.theFE_RESULT_DB_EMPTY_TABLE             = "22";
         this.theFE_RESULT_DB_ERROR                   = "23";
 
+        this.theFE_RESULT_TIME_STAMP_NOT_MATCH       = "50";
         this.theFE_RESULT_LINK_NOT_EXIST             = "51";
         this.theFE_RESULT_SESSION_NOT_EXIST          = "52";
         this.theFE_RESULT_NULL_LINK                  = "53";
@@ -38,6 +39,7 @@ function FE_DEFINE_OBJECT() {
     this.FE_RESULT_DB_EMPTY_TABLE             = function() {return this.theFE_RESULT_DB_EMPTY_TABLE;};
     this.FE_RESULT_DB_ERROR                   = function() {return this.theFE_RESULT_DB_ERROR;};
 
+    this.FE_RESULT_TIME_STAMP_NOT_MATCH             = function() {return this.theFE_RESULT_TIME_STAMP_NOT_MATCH;};
     this.FE_RESULT_LINK_NOT_EXIST             = function() {return this.theFE_RESULT_LINK_NOT_EXIST;};
     this.FE_RESULT_SESSION_NOT_EXIST          = function() {return this.theFE_RESULT_SESSION_NOT_EXIST;};
 
