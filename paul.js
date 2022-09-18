@@ -21,13 +21,12 @@ function PaulObject() {
     });
 
     document.querySelector(".sign_off_button").addEventListener("click", function() {
-        window.open("sign_off", "_self");
+        window.open("sign_in.html", "_self");
     });
 };
 
 document.addEventListener("DOMContentLoaded", function(){
     if (sessionStorage.ajax_packet_id === undefined) {
-        console.log("undefined");
         sessionStorage.ajax_packet_id = 100;
     }
     new PaulObject();
