@@ -40,7 +40,7 @@ function SignInObject() {
         if (data.result === this.FE_DEF().FE_RESULT_SUCCEED()) {
             console.log("succeed");
             console.log("link_id=", data.link_id);
-            sessionStorage.setItem("session_id", data.link_id);
+            sessionStorage.setItem("link_id", data.link_id);
             sessionStorage.setItem("my_name", data.my_name);
             //window.history.go(-1);
             //window.open("go_config.html", "_self")
