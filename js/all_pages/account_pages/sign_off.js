@@ -18,11 +18,10 @@ function SignOffObject() {
             var password = $(".sign_off_section .sign_off_password").val();
             if (account_name) {
                 var output = JSON.stringify({
-                        command: "sign_up",
+                        command: "sign_off",
                         packet_id: sessionStorage.ajax_packet_id,
                         my_name: account_name,
                         password: password,
-                        email: password,
                         });
                 console.log("signOffRequest=" + output);
 

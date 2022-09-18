@@ -22,7 +22,6 @@ function SignInObject() {
                         packet_id: sessionStorage.ajax_packet_id,
                         my_name: account_name,
                         password: password,
-                        email: password,
                         });
                 console.log("signInRequest=" + output);
 
