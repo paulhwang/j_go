@@ -25,10 +25,11 @@ function PaulObject() {
     });
 };
 
-var count = 0;
 document.addEventListener("DOMContentLoaded", function(){
-    console.log("count=" + count);
-    count++;
+    if (sessionStorage.ajax_packet_id === undefined) {
+        console.log("undefined");
+        sessionStorage.ajax_packet_id = 100;
+    }
     new PaulObject();
 });
 

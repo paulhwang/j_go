@@ -18,10 +18,8 @@ function SignUpRootObject() {
             var password = $(".sign_up_section .sign_up_password").val();
             var email = $(".sign_up_section .sign_up_email").val();
             if (account_name) {
-                console.log("ajaxPacketId=" + this0.ajaxPacketId());
                 var output = JSON.stringify({
                         command: "sign_up",
-                        packet_id: this0.ajaxPacketId(),
                         my_name: account_name,
                         password: password,
                         email: email,
@@ -54,7 +52,6 @@ function SignUpRootObject() {
 
     this.FE_DEF = function() {return this.theFE_DEF;};
     this.httpServiceObject = function() {return this.thePhwangHttpServiceObject;};
-    this.ajaxPacketId = function() {return this.httpServiceObject().ajaxPacketId();};
     this.init__();
 }
 
