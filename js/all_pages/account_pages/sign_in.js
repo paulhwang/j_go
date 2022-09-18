@@ -16,13 +16,13 @@ function SignInObject() {
         $(".sign_in_section .sign_in_button").on("click", function() {
             var account_name = $(".sign_in_section .sign_in_account_name").val();
             var password = $(".sign_in_section .sign_in_password").val();
-            var email = $(".sign_in_section .sign_in_email").val();
             if (account_name) {
                 var output = JSON.stringify({
                         command: "sign_up",
+                        packet_id: sessionStorage.ajax_packet_id,
                         my_name: account_name,
                         password: password,
-                        email: email,
+                        email: password,
                         });
                 console.log("signInRequest=" + output);
 
