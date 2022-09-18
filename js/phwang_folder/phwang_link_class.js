@@ -150,7 +150,7 @@ function PhwangLinkClass(root_object_val) {
 
 function PhwangLinkStorageObject(phwang_link_object_val) {
     "use strict";
-    this.storage = function() {return localStorage;};
+    this.storage = function() {return sessionStorage;};
     this.init__ = function(phwang_link_object_val) {this.thePhwangLinkObject = phwang_link_object_val;};
     this.resetLinkStorage = function() {
         this.resetMyName();

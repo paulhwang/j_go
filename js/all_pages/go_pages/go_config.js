@@ -97,7 +97,7 @@ function GoConfigStorageObject(root_val) {
         this.theRootObject = root_val;
         this.debug(true, "init__", "myColor=" + this.myColor() + " boardSize=" + this.boardSize() + " hisName=" + this.hisName() + " handicapPoint=" + this.handicapPoint() + " komiPoint=" + this.komiPoint());
     };
-    this.storage = function() {return localStorage;};
+    this.storage = function() {return sessionStorage;};
     this.myColor = function() {return Number(this.storage().go_my_color);};
     this.setMyColor = function(val) {this.storage().go_my_color = val;};
     this.hisColor = function() {if (this.myColor() === GO.BLACK_STONE()) {return GO.WHITE_STONE();} else {return GO.BLACK_STONE();}};
