@@ -40,8 +40,10 @@ function SignInObject() {
         if (data.result === this.FE_DEF().FE_RESULT_SUCCEED()) {
             console.log("succeed");
             console.log("link_id=", data.link_id);
+            sessionStorage.setItem("session_id", data.link_id);
+            sessionStorage.setItem("account_name", data.link_id);
             //window.history.go(-1);
-            window.open("go_config.html", "_self")
+            //window.open("go_config.html", "_self")
         }
         else if (data.result === this.FE_DEF().FE_RESULT_PASSWORD_NOT_MATCH()) {
             console.log("password_not_match");
