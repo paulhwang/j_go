@@ -13,9 +13,9 @@ function SignOffObject() {
 
     this.bindHtmlInput = function() {
         var this0 = this;
-        $(".sign_up_section .sign_up_button").on("click", function() {
-            var account_name = $(".sign_up_section .sign_up_account_name").val();
-            var password = $(".sign_up_section .sign_up_password").val();
+        $(".sign_off_section .sign_off_button").on("click", function() {
+            var account_name = $(".sign_off_section .sign_off_account_name").val();
+            var password = $(".sign_off_section .sign_off_password").val();
             if (account_name) {
                 var output = JSON.stringify({
                         command: "sign_up",
