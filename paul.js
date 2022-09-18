@@ -17,11 +17,11 @@ function PaulObject() {
     });
 
     document.querySelector(".sign_in_button").addEventListener("click", function() {
-        window.open("go_login.html", "_self");
+        window.open("sign_in.html", "_self");
     });
 
     document.querySelector(".sign_off_button").addEventListener("click", function() {
-        window.open("sign_in.html", "_self");
+        window.open("sign_off.html", "_self");
     });
 };
 
