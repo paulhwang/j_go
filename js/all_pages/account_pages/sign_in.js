@@ -43,7 +43,7 @@ function SignInObject() {
             sessionStorage.setItem("link_id", data.link_id);
             sessionStorage.setItem("my_name", data.my_name);
             sessionStorage.setItem("time_stamp", data.time_stamp);
-            //window.history.go(-1);
+            window.history.go(-1);
             //window.open("go_config.html", "_self")
         }
         else if (data.result === this.FE_DEF().FE_RESULT_PASSWORD_NOT_MATCH()) {
@@ -56,30 +56,6 @@ function SignInObject() {
             console.log("invalid_result=" + data.result);
         }
     };
-    /*
-    this.receiveSetupLinkResponse = function(result_val) {
-        this.debug(true, "receiveSetupLinkResponse", "result_val=" + result_val);
-        var data = JSON.parse(result_val);
-        if (data.result === this.FE_DEF().FE_RESULT_SUCCEED()) {
-            this.debug(false, "receiveSetupLinkResponse", "succeed");
-            this.phwangLinkObject().setTimeStamp(data.time_stamp);
-            this.phwangLinkObject().setLinkId(data.link_id);
-            this.phwangLinkObject().putStorageLinkData();
-            this.htmlObject().gotoGoConfigPage();
-        }
-        else if (data.result === this.FE_DEF().FE_RESULT_PASSWORD_NOT_MATCH()) {
-            this.debug(true, "receiveSetupLinkResponse", "password_not_match");
-
-        }
-        else if (data.result === this.FE_DEF().FE_RESULT_ACCOUNT_NAME_NOT_EXIST()) {
-            this.debug(true, "receiveSetupLinkResponse", "account_not_exist");
-            this.htmlObject().gotoSignUpPage();
-        }
-        else {
-            this.abend("receiveSetupLinkResponse", "invalid_result=" + data.result);
-        }
-    };
-*/
 
     this.FE_DEF = function() {return this.theFE_DEF;};
     this.httpServiceObject = function() {return this.thePhwangHttpServiceObject;};
