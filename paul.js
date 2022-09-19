@@ -1,5 +1,17 @@
 
 function PaulObject() {
+    document.querySelector(".sign_up_button").addEventListener("click", function() {
+        window.open("sign_up.html", "_self");
+    });
+
+    document.querySelector(".sign_in_button").addEventListener("click", function() {
+        window.open("sign_in.html", "_self");
+    });
+
+    document.querySelector(".sign_off_button").addEventListener("click", function() {
+        window.open("sign_off.html", "_self");
+    });
+
     document.querySelector(".go_button").addEventListener("click", function() {
         window.open("go_config.html", "_self");
     });
@@ -16,16 +28,8 @@ function PaulObject() {
         window.open("mmw.html", "_self");
     });
 
-    document.querySelector(".sign_up_button").addEventListener("click", function() {
-        window.open("sign_up.html", "_self");
-    });
-
-    document.querySelector(".sign_in_button").addEventListener("click", function() {
-        window.open("sign_in.html", "_self");
-    });
-
-    document.querySelector(".sign_off_button").addEventListener("click", function() {
-        window.open("sign_off.html", "_self");
+    document.querySelector(".map_button").addEventListener("click", function() {
+        window.open("map.html", "_self");
     });
 };
 
