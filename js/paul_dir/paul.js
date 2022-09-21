@@ -36,6 +36,7 @@ function PaulObject() {
 document.addEventListener("DOMContentLoaded", function(){
     if (sessionStorage.ajax_packet_id === undefined) {
         sessionStorage.ajax_packet_id = 100;
+        console.log("new window");
     }
     new PaulObject();
 });
