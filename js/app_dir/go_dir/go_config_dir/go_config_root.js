@@ -61,7 +61,7 @@ function ConfigHtmlObject(root_object_val) {
             $('.peer_name_paragraph select').append($('<option>', {value:this.phwangLinkObject().nameListElement(i), text:this.phwangLinkObject().nameListElement(i)}));
         }
     };
-    this.gotoNextPage = function() {window.open(this.phwangObject().serverHttpHeader() + "old_go_act.html", "_self")};
+    this.gotoNextPage = function() {window.open(this.phwangObject().serverHttpHeader() + "go_act.html", "_self")};
     this.objectName = function() {return "ConfigHtmlObject";};
     this.rootObject = function() {return this.theRootObject;};
     this.phwangObject = function() {return this.rootObject().phwangObject();};

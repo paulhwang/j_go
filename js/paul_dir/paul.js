@@ -16,6 +16,10 @@ function PaulObject() {
         window.open("go_config.html", "_self");
     });
 
+    document.querySelector(".old_go_button").addEventListener("click", function() {
+        window.open("old_go_config.html", "_self");
+    });
+
     document.querySelector(".go_login_button").addEventListener("click", function() {
         window.open("go_login.html", "_self");
     });
