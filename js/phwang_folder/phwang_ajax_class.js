@@ -58,7 +58,7 @@ function PhwangAjaxClass(phwang_object_val) {
             "setup_link": this.setupLinkResponse,
             "get_link_data": this.getLinkDataResponse,
             "get_name_list": this.getNameListResponse,
-            "setup_session": this.setupSessionResponse,
+            "setup_session1": this.setupSession1Response,
             "setup_session2": this.setupSession2Response,
             "setup_session3": this.setupSession3Response,
             "get_session_data": this.getSessionDataResponse,
@@ -289,25 +289,25 @@ function PhwangAjaxClass(phwang_object_val) {
         }
     };
 
-    this.setupSession = function(link_val, his_name_val, theme_data_val) {
+    this.setupSession1 = function(link_val, his_name_val, theme_data_val) {
         var output = JSON.stringify({
-                        command: this.phwangAjaxProtocolObject().SETUP_SESSION_COMMAND(),
+                        command: this.phwangAjaxProtocolObject().SETUP_SESSION1_COMMAND(),
                         packet_id: this.ajaxPacketId(),
                         time_stamp: link_val.timeStamp(),
                         link_id: link_val.linkId(),
                         his_name: his_name_val,
                         theme_data: theme_data_val,
                         });
-        this.debug(true, "setupSession", "output=" + output);
+        this.debug(true, "setupSession1", "output=" + output);
         this.transmitAjaxRequest(output);
     };
 
-    this.setupSessionResponse = function(input_val) {
+    this.setupSession1Response = function(input_val) {
         this.debug(true, "setupSessionResponse", "input_val=" + input_val);
         var data = JSON.parse(input_val);
         if (data) {
             this.phwangSessionObject().setSessionId(data.session_id.slice(this.phwangAjaxProtocolObject().WEB_FABRIC_PROTOCOL_SESSION_ID_SIZE()));
-            this.phwangPortObject().receiveSetupSessionResponse(data.result);
+            this.phwangPortObject().receiveSetupSession1Response(data.result);
         }
     };
 
@@ -552,10 +552,10 @@ function PhwangAjaxProtocolClass() {
     this.CLEAR_LINK_COMMAND = function() {return "clear_link";}
     this.GET_LINK_DATA_COMMAND = function() {return "get_link_data";}
     this.GET_NAME_LIST_COMMAND = function() {return "get_name_list";}
-    this.SETUP_SESSION_COMMAND = function() {return "setup_session";}
-    this.CLEAR_SESSION_COMMAND = function() {return "clear_session";}
+    this.SETUP_SESSION1_COMMAND = function() {return "setup_session1";}
     this.SETUP_SESSION2_COMMAND = function() {return "setup_session2";}
     this.SETUP_SESSION3_COMMAND = function() {return "setup_session3";}
+    this.CLEAR_SESSION_COMMAND = function() {return "clear_session";}
     this.PUT_SESSION_DATA_COMMAND = function() {return "put_session_data";}
     this.GET_SESSION_DATA_COMMAND = function() {return "get_session_data";}
     this.WEB_FABRIC_PROTOCOL_RESPOND_IS_GET_LINK_DATA_PENDING_SESSION = function() {return 'S';}
