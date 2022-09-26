@@ -6,8 +6,8 @@
 function SignInObject() {
     "use strict";
     this.init__ = function() {
-        this.theFE_DEF = new FE_DEFINE_OBJECT();
-        this.thePhwangHttpServiceObject = new PhwangHttpServiceObject(this.examineResponse, this);
+        this.FE_DEF_ = new FE_DEFINE_OBJECT();
+        this.httpServiceObject_ = new HttpServiceObject(this.examineResponse, this);
         this.bindHtmlInput();
     };
 
@@ -56,8 +56,8 @@ function SignInObject() {
         }
     };
 
-    this.FE_DEF = function() {return this.theFE_DEF;};
-    this.httpServiceObject = function() {return this.thePhwangHttpServiceObject;};
+    this.FE_DEF = function() {return this.FE_DEF_;};
+    this.httpServiceObject = function() {return this.httpServiceObject_;};
     this.init__();
 }
 

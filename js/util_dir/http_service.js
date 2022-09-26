@@ -3,7 +3,7 @@
   Written by Paul Hwang
 */
 
-function PhwangHttpServiceObject(callback_func_val, callback_object_val) {
+function HttpServiceObject(callback_func_val, callback_object_val) {
     this.init__ = function() {
         this.theCallBackFunc = callback_func_val;
         this.theCallBackObject = callback_object_val;
@@ -35,10 +35,10 @@ function PhwangHttpServiceObject(callback_func_val, callback_object_val) {
     };
 
     this.incrementAjaxPacketId = function() {
-        console.log("PhwangHttpServiceObject.incrementAjaxPacketId() ajax_packet_id=" + sessionStorage.ajax_packet_id);
+        console.log("HttpServiceObject.incrementAjaxPacketId() ajax_packet_id=" + sessionStorage.ajax_packet_id);
         var i = Number(sessionStorage.ajax_packet_id) + 1;
         if (i !== 1 + Number(sessionStorage.ajax_packet_id)) {
-            this.abend("PhwangHttpServiceObject.incrementAjaxPacketId()", "fix it");
+            this.abend("HttpServiceObject.incrementAjaxPacketId()", "fix it");
         }
         sessionStorage.ajax_packet_id = i;
     };
