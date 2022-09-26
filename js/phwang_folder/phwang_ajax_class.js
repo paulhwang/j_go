@@ -303,7 +303,7 @@ function PhwangAjaxClass(phwang_object_val) {
     };
 
     this.setupSession1Response = function(input_val) {
-        this.debug(true, "setupSessionResponse", "input_val=" + input_val);
+        this.debug(true, "setupSession1Response", "input_val=" + input_val);
         var data = JSON.parse(input_val);
         if (data) {
             this.phwangSessionObject().setSessionId(data.session_id.slice(this.phwangAjaxProtocolObject().WEB_FABRIC_PROTOCOL_SESSION_ID_SIZE()));

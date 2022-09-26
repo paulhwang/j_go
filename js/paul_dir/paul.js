@@ -1,3 +1,7 @@
+/*
+  Copyrights reserved
+  Written by Paul Hwang
+*/
 
 function PaulObject() {
     document.querySelector(".sign_up_button").addEventListener("click", function() {
@@ -13,7 +17,7 @@ function PaulObject() {
     });
 
     document.querySelector(".go_button").addEventListener("click", function() {
-        window.open("go_config.html", "_self");
+        window.open("go_base.html", "_self");
     });
 
     document.querySelector(".old_go_button").addEventListener("click", function() {

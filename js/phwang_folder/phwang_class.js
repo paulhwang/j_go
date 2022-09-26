@@ -75,7 +75,7 @@ function PhwangPortClass(phwang_object_val) {
     this.receiveSignUpResponse = function(result_val) {this.rootObject().ajaxObject().receiveSignUpResponse(result_val);};
     this.receiveSetupLinkResponse = function(result_val) {this.rootObject().ajaxObject().receiveSetupLinkResponse(result_val);};
     this.receiveGetNameListResponse = function(result_val) {this.rootObject().ajaxObject().receiveGetNameListResponse(result_val);};
-    this.receiveSetupSessionResponse = function(result_val) {this.rootObject().ajaxObject().receiveSetupSessionResponse(result_val);};
+    this.receiveSetupSession1Response = function(result_val) {this.rootObject().ajaxObject().receiveSetupSession1Response(result_val);};
     this.receiveSetupSession2Response = function(result_val) {this.rootObject().ajaxObject().receiveSetupSession2Response(result_val);};
     this.receiveSetupSession3Response = function(result_val) {this.rootObject().ajaxObject().receiveSetupSession3Response(result_val);};
     this.receivePutSessionDataResponse = function(result_val) {this.rootObject().ajaxObject().receivePutSessionDataResponse(result_val, data_val);};
