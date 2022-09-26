@@ -58,6 +58,7 @@ function GoBaseRootObject() {
         if (data.result === this.FE_DEF().FE_RESULT_SUCCEED()) {
             console.log("GoBaseRootObject.examineResponse() succeed! session_id=", data.session_id);
             sessionStorage.setItem("session_id", data.session_id);
+            sessionStorage.setItem("go_config_data", data.theme_data);
             //window.open("go_act.html", "_self");
         }
         else if (data.result === this.FE_DEF().FE_RESULT_ACCOUNT_NAME_NOT_EXIST()) {
@@ -87,12 +88,15 @@ function GoBaseRootObject() {
             exit;
         }
 
+        var theme_data = GoConfigEncoder.encode(my_name, 19, 0, 0, 2);
+
         var output = JSON.stringify({
                 command: "setup_session",
                 time_stamp: time_stamp,
                 link_id: sessionStorage.link_id,
                 app_type: 'G',
                 theme_data: "G0151900002paul",
+                aaa: theme_data,
                 his_name: my_name,
                 });
         console.log("GoBaseRootObject.sendSetupSessionRequest() output=" + output);
