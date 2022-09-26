@@ -57,8 +57,8 @@ function GoBaseRootObject() {
         var data = JSON.parse(response.data);
         if (data.result === this.FE_DEF().FE_RESULT_SUCCEED()) {
             console.log("GoBaseRootObject.examineResponse() succeed! session_id=", data.session_id);
-            sessionStorage.setItem("sessuib_id", data.session_id);
-            window.open("go_act.html", "_self");
+            sessionStorage.setItem("session_id", data.session_id);
+            //window.open("go_act.html", "_self");
         }
         else if (data.result === this.FE_DEF().FE_RESULT_ACCOUNT_NAME_NOT_EXIST()) {
             console.log("account_not_exist");
