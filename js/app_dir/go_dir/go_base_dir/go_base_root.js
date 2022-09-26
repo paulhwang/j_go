@@ -49,7 +49,6 @@ function GoBaseRootObject() {
     };
 
     this.examineResponse = function(json_response_val) {
-        /*
         console.log("json_response_val=" + json_response_val);
 
         var response = JSON.parse(json_response_val);
@@ -62,7 +61,7 @@ function GoBaseRootObject() {
             sessionStorage.setItem("link_id", data.link_id);
             sessionStorage.setItem("my_name", data.my_name);
             sessionStorage.setItem("time_stamp", data.time_stamp);
-            window.history.go(-1);
+            //window.history.go(-1);
         }
         else if (data.result === this.FE_DEF().FE_RESULT_PASSWORD_NOT_MATCH()) {
             console.log("password_not_match");
@@ -73,7 +72,6 @@ function GoBaseRootObject() {
         else {
             console.log("invalid_result=" + data.result);
         }
-        */
     };
 
     this.sendSetupSessionRequest = function() {
@@ -89,10 +87,15 @@ function GoBaseRootObject() {
             exit;
         }
 
+        var time_stamp = sessionStorage.getItem("time_stamp");
+        if (time_stamp === null) {
+            abend("sendSetupSessionRequest() null time_stamp");
+            exit;
+        }
+
         var output = JSON.stringify({
                 command: "setup_session",
-                //packet_id: sessionStorage.ajax_packet_id,
-                time_stamp: sessionStorage.time_stamp,
+                time_stamp: time_stamp,
                 link_id: sessionStorage.link_id,
                 app_type: 'G',
                 theme_data: "G0151900002paul",
