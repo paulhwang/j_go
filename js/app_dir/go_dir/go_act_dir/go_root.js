@@ -6,6 +6,7 @@
 function GoPlayRootObject() {
     "use strict";
     this.init__ = function() {
+        this.decodeGoConfig();
         this.thePhwangObject = new PhwangClass(this);
         this.thePhwangLinkObject = new PhwangLinkClass(this);
         new PhwangSessionClass(this.phwangLinkObject());
@@ -29,6 +30,42 @@ function GoPlayRootObject() {
         this.debug(true, "init__", "boardSize=" + this.configObject().boardSize() + " stoneColor=" + this.configStorageObject().myColor() + " komi=" + this.configObject().komiPoint() + " handicap=" + this.configObject().handicapPoint());
     };
     
+    this.decodeGoConfig = function() {
+        var go_config_data = sessionStorage.getItem("go_config_data");
+        console.log("GoPlayRootObject.decodeGoConfig() go_config_data=" + go_config_data);
+
+        if ((go_config_data === undefined) || (go_config_data === "")) {
+            this.theBoardSize = 19;
+            this.theHandicapPoint = 0;
+            this.theKomiPoint = 0;
+            return;
+        }
+
+        if (go_config_data.charAt(0) != 'G') {
+            abend("GoConfigEncoder.constructor() not G");
+        }
+
+        var index = 4;
+        this.theBoardSize = (go_config_data.charAt(index++) - '0') * 10
+        this.theBoardSize += go_config_data.charAt(index++) - '0';
+        console.log("board_size=" + this.theBoardSize);
+
+        this.theHandicapPoint = (go_config_data.charAt(index++) - '0') * 10
+        this.theHandicapPoint += go_config_data.charAt(index++) - '0';
+        console.log("handicap=" + this.theHandicapPoint);
+
+        this.theKomiPoint = (go_config_data.charAt(index++) - '0') * 10
+        this.theKomiPoint += go_config_data.charAt(index++) - '0';
+        console.log("komi=" + this.theKomiPoint);
+
+        this.theMyColor = go_config_data.charAt(index++) - '0';
+        console.log("color=" + this.theMyColor);
+
+        this.theHisName = go_config_data.slice(index);
+        console.log("his_name=" + this.theHisName);
+
+    };
+
     this.objectName = function() {return "GoPlayRootObject";};
     this.phwangObject = function() {return this.thePhwangObject;};
     this.phwangAjaxObject = function() {return this.phwangObject().phwangAjaxObject();};

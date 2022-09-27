@@ -59,7 +59,7 @@ function GoBaseRootObject() {
             console.log("GoBaseRootObject.examineResponse() succeed! session_id=", data.session_id);
             sessionStorage.setItem("session_id", data.session_id);
             sessionStorage.setItem("go_config_data", data.theme_data);
-            //window.open("go_act.html", "_self");
+            window.open("go_act.html", "_self");
         }
         else if (data.result === this.FE_DEF().FE_RESULT_ACCOUNT_NAME_NOT_EXIST()) {
             console.log("account_not_exist");
@@ -88,7 +88,7 @@ function GoBaseRootObject() {
             exit;
         }
 
-        var theme_data = GoConfigEncoder.encode(my_name, 19, 0, 0, 2);
+        var theme_data = this.encodeGoConfig(my_name, 19, 0, 0, 2);
 
         var output = JSON.stringify({
                 command: "setup_session",
@@ -103,6 +103,19 @@ function GoBaseRootObject() {
 
         this.httpServiceObject().sendAjaxRequest(output);
 
+    };
+
+    this.encodeGoConfig = function(my_name_val, board_size_val, handicap_val, komi_val, his_color_val) {
+        console.log("my_name_val = " + my_name_val);
+        var len = 11 + my_name_val.length;
+        var buf = "G";
+        if (len < 100) buf = buf + 0; if (len < 10) buf = buf + 0; buf = buf + len;
+        if (board_size_val < 10) buf = buf + 0; buf = buf + board_size_val;
+        if (handicap_val < 10) buf = buf + 0; buf = buf + handicap_val;
+        if (komi_val) buf = buf + 0; buf = buf + komi_val;
+        buf = buf + his_color_val;
+        buf = buf + my_name_val;
+        return buf;
     };
 
     this.FE_DEF = function() {return this.FE_DEF_;};
