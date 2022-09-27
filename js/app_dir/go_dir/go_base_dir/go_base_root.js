@@ -35,27 +35,44 @@ function GoBaseRootObject() {
         if (response.command === "setup_session") {
             var data = JSON.parse(response.data);
             if (data.result === this.FE_DEF().FE_RESULT_SUCCEED()) {
-                console.log("GoBaseRootObject.examineResponse() succeed! session_id=", data.session_id);
-                this.setSessionInfoIntoStorage(data.session_id, data.theme_data, data.peer_name);
-                window.open("go_act.html", "_self");
+                console.log("GoBaseRootObject.examineResponse(setup_session) succeed! session_id=", data.session_id);
+                //this.setSessionInfoIntoStorage(data.session_id, data.theme_data, data.peer_name);
+                this.sendGetSessionSetupStatusRequest(data.session_id);
+                //window.open("go_act.html", "_self");
             }
             else if (data.result === this.FE_DEF().FE_RESULT_ACCOUNT_NAME_NOT_EXIST()) {
-                console.log("GoBaseRootObject.examineResponse() account_not_exist");
+                console.log("GoBaseRootObject.examineResponse(setup_session) account_not_exist");
             }
             else {
-                console.log("GoBaseRootObject.examineResponse() invalid_result=" + data.result);
+                console.log("GoBaseRootObject.examineResponse(setup_session) invalid_result=" + data.result);
             }
         }
         else if (response.command === "setup_session1") {
             var data = JSON.parse(response.data);
             if (data.result === this.FE_DEF().FE_RESULT_SUCCEED()) {
-                console.log("GoBaseRootObject.examineResponse() succeed! session_id=", data.session_id);
+                console.log("GoBaseRootObject.examineResponse(setup_session1) succeed! session_id=", data.session_id);
             }
             else if (data.result === this.FE_DEF().FE_RESULT_ACCOUNT_NAME_NOT_EXIST()) {
-                console.log("GoBaseRootObject.examineResponse() account_not_exist");
+                console.log("GoBaseRootObject.examineResponse(setup_session1) account_not_exist");
             }
             else {
-                console.log("GoBaseRootObject.examineResponse() invalid_result=" + data.result);
+                console.log("GoBaseRootObject.examineResponse(setup_session1) invalid_result=" + data.result);
+            }
+        }
+        else if (response.command === "get_session_setup_status") {
+            var data = JSON.parse(response.data);
+            if (data.result === this.FE_DEF().FE_RESULT_SUCCEED()) {
+                console.log("GoBaseRootObject.examineResponse(get_session_setup_status) succeed! session_id=", data.session_id);
+                if (data.session_status === 'R') {
+                    this.setSessionInfoIntoStorage(data.session_id, data.theme_data, data.initiator_name, data.peer_name, data.session_type);
+                    window.open("go_act.html", "_self");
+                }
+            }
+            else if (data.result === this.FE_DEF().FE_RESULT_ACCOUNT_NAME_NOT_EXIST()) {
+                console.log("GoBaseRootObject.examineResponse(get_session_setup_status) account_not_exist");
+            }
+            else {
+                console.log("GoBaseRootObject.examineResponse(get_session_setup_status) invalid_result=" + data.result);
             }
         }
         else {
@@ -69,6 +86,7 @@ function GoBaseRootObject() {
                 command: "setup_session",
                 time_stamp: this.timeStamp_,
                 link_id: this.linkId_,
+                initiator_name: "TBD",
                 peer_name: this.myName_,
                 theme_data: theme_data,
                 });
@@ -82,6 +100,7 @@ function GoBaseRootObject() {
                 command: "setup_session1",
                 time_stamp: this.timeStamp_,
                 link_id: this.linkId_,
+                initiator_name: "tbd",
                 peer_name: this.myName_,
                 theme_data: theme_data,
                 });
@@ -89,8 +108,20 @@ function GoBaseRootObject() {
         this.httpServiceObject().sendAjaxRequest(output); 
     };
 
+    this.sendGetSessionSetupStatusRequest = function(session_id_val) {
+        var theme_data = this.encodeGoConfig(this.myName_, 19, 0, 0, 1);
+        var output = JSON.stringify({
+                command: "get_session_setup_status",
+                time_stamp: this.timeStamp_,
+                link_id: this.linkId_,
+                session_id: session_id_val,
+                });
+        console.log("GoBaseRootObject.sendGetSessionSetupStatusRequest() output=" + output);
+        this.httpServiceObject().sendAjaxRequest(output); 
+    };
+
     this.encodeGoConfig = function(initiator_name_val, board_size_val, handicap_val, komi_val, initiator_color_val) {
-        console.log("GoBaseRootObject.encodeGoConfig() initiator_name=" + initiator_name_val);
+        //console.log("GoBaseRootObject.encodeGoConfig() initiator_name=" + initiator_name_val);
         var len = 11 + initiator_name_val.length;
         var buf = "G";
         if (len < 100) buf = buf + 0; if (len < 10) buf = buf + 0; buf = buf + len;
@@ -121,10 +152,12 @@ function GoBaseRootObject() {
         return 0;
     };
 
-    this.setSessionInfoIntoStorage = function(session_id_val, theme_data_val, peer_name_val) {
+    this.setSessionInfoIntoStorage = function(session_id_val, theme_data_val, initiator_name_val, peer_name_val, session_type_val) {
         sessionStorage.setItem("session_id", session_id_val);
         sessionStorage.setItem("go_config_data", theme_data_val);
+        sessionStorage.setItem("initiator_name", initiator_name_val);
         sessionStorage.setItem("peer_name", peer_name_val);
+        sessionStorage.setItem("session_type", session_type_val);
     };
 
     this.FE_DEF = function() {return this.FE_DEF_;};
