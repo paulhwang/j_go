@@ -18,7 +18,7 @@ function GoBaseRootObject() {
         });
 
         document.querySelector(".play_with_button").addEventListener("click", function() {
-            this0.sendSetupGroupSessionRequest(this.myName_);
+            this0.sendSetupGroupSessionRequest(this0.myName_);
         });
 
         document.querySelector(".exit_button").addEventListener("click", function() {
@@ -51,6 +51,7 @@ function GoBaseRootObject() {
             var data = JSON.parse(response.data);
             if (data.result === this.FE_DEF().FE_RESULT_SUCCEED()) {
                 console.log("GoBaseRootObject.examineResponse(setup_session1) succeed! session_id=", data.session_id);
+                this.sendGetSessionSetupStatusRequest(data.session_id);
             }
             else if (data.result === this.FE_DEF().FE_RESULT_ACCOUNT_NAME_NOT_EXIST()) {
                 console.log("GoBaseRootObject.examineResponse(setup_session1) account_not_exist");
