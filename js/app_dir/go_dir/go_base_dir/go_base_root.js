@@ -90,7 +90,7 @@ function GoBaseRootObject() {
     };
 
     this.encodeGoConfig = function(initiator_name_val, board_size_val, handicap_val, komi_val, initiator_color_val) {
-        console.log("initiator_name_val = " + initiator_name_val);
+        console.log("GoBaseRootObject.encodeGoConfig() initiator_name=" + initiator_name_val);
         var len = 11 + initiator_name_val.length;
         var buf = "G";
         if (len < 100) buf = buf + 0; if (len < 10) buf = buf + 0; buf = buf + len;
