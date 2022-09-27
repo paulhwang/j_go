@@ -7,63 +7,43 @@ function GoPlayConfigObject(root_val) {
     "use strict";
     this.init__ = function(root_val) {
         this.theRootObject = root_val;
-        this.debug(true, "init__", "myColor=" + this.myColor() + " boardSize=" + this.boardSize() + " hisName=" + this.hisName() + " handicapPoint=" + this.handicapPoint() + " komiPoint=" + this.komiPoint());
     };
-    this.getStorageConfigData = function() {
-        this.setBoardSize(this.configStorageObject().boardSize());
-        this.setMyColor(this.configStorageObject().myColor());
-        this.setHandicapPoint(this.configStorageObject().handicapPoint());
-        this.setKomiPoint(this.configStorageObject().komiPoint());
-        this.setHisName(this.configStorageObject().hisName());
-        this.setPlayBothSides();
-        this.debug(true, "getStorageConfigData", "myColor=" + this.myColor() + " boardSize=" + this.boardSize() + " hisName=" + this.hisName() + " handicapPoint=" + this.handicapPoint() + " komiPoint=" + this.komiPoint());
-    };
-    this.putStorageConfigData = function() {
-        this.debug(true, "putStorageConfigData", "myColor=" + this.myColor() + " boardSize=" + this.boardSize() + " hisName=" + this.hisName() + " handicapPoint=" + this.handicapPoint() + " komiPoint=" + this.komiPoint());
-        this.configStorageObject().setBoardSize(this.boardSize());
-        this.configStorageObject().setMyColor(this.myColor());
-        this.configStorageObject().setHandicapPoint(this.handicapPoint());
-        this.configStorageObject().setKomiPoint(this.komiPoint());
-        this.configStorageObject().setHisName(this.hisName());
-        this.setPlayBothSides();
-    };
-    this.encodeConfig = function(my_name_val) {
-        var len = 11 + my_name_val.length;
-        var buf = "G";
-        if (len < 100) buf = buf + 0; if (len < 10) buf = buf + 0; buf = buf + len;
-        if (this.boardSize() < 10) buf = buf + 0; buf = buf + this.boardSize();
-        if (this.handicapPoint() < 10) buf = buf + 0; buf = buf + this.handicapPoint();
-        if (this.komiPoint() < 10) buf = buf + 0; buf = buf + this.komiPoint();
-        buf = buf + this.hisColor();
-        buf = buf + my_name_val;
-        return buf;
-    };
-    this.decodeConfig = function(encoded_val) {
-        this.debug(true, "decodeConfig", encoded_val);
-        if ((encoded_val === undefined) || (encoded_val === "")) {
-            this.setBoardSize(19);
-            this.setHandicapPoint(0);
-            this.setKomiPoint(0);
+    
+    this.decodeGoConfig = function() {
+        var go_config_data = sessionStorage.getItem("go_config_data");
+        console.log("GoPlayConfigObject.decodeGoConfig() go_config_data=" + go_config_data);
+
+        if ((go_config_data === undefined) || (go_config_data === "")) {
+            this.theBoardSize = 19;
+            this.theHandicapPoint = 0;
+            this.theKomiPoint = 0;
             return;
         }
-        var data;
-        if (encoded_val.charAt(0) != 'G') {
-            this.abend("decodeConfig", "not G");
+
+        if (go_config_data.charAt(0) != 'G') {
+            abend("GoPlayConfigObject.constructor() not G");
         }
+
         var index = 4;
-        data = (encoded_val.charAt(index++) - '0') * 10
-        data += encoded_val.charAt(index++) - '0';
-        this.setBoardSize(data);
-        data = (encoded_val.charAt(index++) - '0') * 10
-        data += encoded_val.charAt(index++) - '0';
-        this.setHandicapPoint(data);
-        data = (encoded_val.charAt(index++) - '0') * 10
-        data += encoded_val.charAt(index++) - '0';
-        this.setKomiPoint(data);
-        data = encoded_val.charAt(index++) - '0';
-        this.setMyColor(data);
-        this.setHisName(encoded_val.slice(index));
+        this.theBoardSize = (go_config_data.charAt(index++) - '0') * 10
+        this.theBoardSize += go_config_data.charAt(index++) - '0';
+        console.log("board_size=" + this.theBoardSize);
+
+        this.theHandicapPoint = (go_config_data.charAt(index++) - '0') * 10
+        this.theHandicapPoint += go_config_data.charAt(index++) - '0';
+        console.log("handicap=" + this.theHandicapPoint);
+
+        this.theKomiPoint = (go_config_data.charAt(index++) - '0') * 10
+        this.theKomiPoint += go_config_data.charAt(index++) - '0';
+        console.log("komi=" + this.theKomiPoint);
+
+        this.theMyColor = go_config_data.charAt(index++) - '0';
+        console.log("color=" + this.theMyColor);
+
+        this.theHisName = go_config_data.slice(index);
+        console.log("his_name=" + this.theHisName);
     };
+
     this.playBothSides = function() {return this.thePlayBothSides;};
     this.setPlayBothSides = function() {this.thePlayBothSides = (this.phwangLinkObject().myName() === this.hisName());};
     this.boardSize = function() {return this.theBoardSize;};
