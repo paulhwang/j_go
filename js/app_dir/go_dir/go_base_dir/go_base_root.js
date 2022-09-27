@@ -18,7 +18,7 @@ function GoBaseRootObject() {
         });
 
         document.querySelector(".play_with_button").addEventListener("click", function() {
-            this0.sendSetupGroupSessionRequest();
+            this0.sendSetupGroupSessionRequest(this.myName_);
         });
 
         document.querySelector(".exit_button").addEventListener("click", function() {
@@ -86,7 +86,7 @@ function GoBaseRootObject() {
                 command: "setup_session",
                 time_stamp: this.timeStamp_,
                 link_id: this.linkId_,
-                initiator_name: "TBD",
+                initiator_name: this.myName_,
                 peer_name: this.myName_,
                 theme_data: theme_data,
                 });
@@ -94,14 +94,14 @@ function GoBaseRootObject() {
         this.httpServiceObject().sendAjaxRequest(output); 
     };
 
-    this.sendSetupGroupSessionRequest = function() {
+    this.sendSetupGroupSessionRequest = function(peer_name_val) {
         var theme_data = this.encodeGoConfig(this.myName_, 19, 0, 0, 1);
         var output = JSON.stringify({
                 command: "setup_session1",
                 time_stamp: this.timeStamp_,
                 link_id: this.linkId_,
-                initiator_name: "tbd",
-                peer_name: this.myName_,
+                initiator_name: this.myName_,
+                peer_name: peer_name_val,
                 theme_data: theme_data,
                 });
         console.log("GoBaseRootObject.sendSetupGroupSessionRequest() output=" + output);
