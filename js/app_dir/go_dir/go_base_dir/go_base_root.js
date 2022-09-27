@@ -5,47 +5,25 @@
 
 function GoBaseRootObject() {
     this.init__ = function() {
+        this.getLinkInfoFromStorage();
         this.setupQuerySelectors();
         this.FE_DEF_ = new FE_DEFINE_OBJECT();
         this.httpServiceObject_ = new HttpServiceObject(this.examineResponse, this);
-        this.bindHtmlInput();
     };
 
     this.setupQuerySelectors = function() {
         var this0 = this;
         document.querySelector(".solo_button").addEventListener("click", function() {
-            this0.sendSetupSessionRequest();
-            //window.open("go_config.html", "_self");
+            this0.sendSetupSoloSessionRequest();
         });
 
         document.querySelector(".play_with_button").addEventListener("click", function() {
-            window.open("go_config.html", "_self");
+            this0.sendSetupGroupSessionRequest();
         });
 
         document.querySelector(".exit_button").addEventListener("click", function() {
             window.history.go(-1);
         });
-    };
-
-    this.bindHtmlInput = function() {
-        /*
-        var this0 = this;
-        $(".sign_in_section .sign_in_button").on("click", function() {
-            var account_name = $(".sign_in_section .sign_in_account_name").val();
-            var password = $(".sign_in_section .sign_in_password").val();
-            if (account_name) {
-                var output = JSON.stringify({
-                        command: "setup_link",
-                        packet_id: sessionStorage.ajax_packet_id,
-                        my_name: account_name,
-                        password: password,
-                        });
-                console.log("signInRequest=" + output);
-
-                this0.httpServiceObject().sendAjaxRequest(output);
-            }
-        });
-        */
     };
 
     this.examineResponse = function(json_response_val) {
@@ -54,54 +32,61 @@ function GoBaseRootObject() {
         var response = JSON.parse(json_response_val);
         console.log("GoBaseRootObject.examineResponse() response.data=" + response.data);
 
-        var data = JSON.parse(response.data);
-        if (data.result === this.FE_DEF().FE_RESULT_SUCCEED()) {
-            console.log("GoBaseRootObject.examineResponse() succeed! session_id=", data.session_id);
-            sessionStorage.setItem("session_id", data.session_id);
-            sessionStorage.setItem("go_config_data", data.theme_data);
-            sessionStorage.setItem("peer_name", data.peer_name);
-            window.open("go_act.html", "_self");
+        if (response.command === "setup_session") {
+            var data = JSON.parse(response.data);
+            if (data.result === this.FE_DEF().FE_RESULT_SUCCEED()) {
+                console.log("GoBaseRootObject.examineResponse() succeed! session_id=", data.session_id);
+                this.setSessionInfoIntoStorage(data.session_id, data.theme_data, data.peer_name);
+                window.open("go_act.html", "_self");
+            }
+            else if (data.result === this.FE_DEF().FE_RESULT_ACCOUNT_NAME_NOT_EXIST()) {
+                console.log("GoBaseRootObject.examineResponse() account_not_exist");
+            }
+            else {
+                console.log("GoBaseRootObject.examineResponse() invalid_result=" + data.result);
+            }
         }
-        else if (data.result === this.FE_DEF().FE_RESULT_ACCOUNT_NAME_NOT_EXIST()) {
-            console.log("account_not_exist");
+        else if (response.command === "setup_session1") {
+            var data = JSON.parse(response.data);
+            if (data.result === this.FE_DEF().FE_RESULT_SUCCEED()) {
+                console.log("GoBaseRootObject.examineResponse() succeed! session_id=", data.session_id);
+            }
+            else if (data.result === this.FE_DEF().FE_RESULT_ACCOUNT_NAME_NOT_EXIST()) {
+                console.log("GoBaseRootObject.examineResponse() account_not_exist");
+            }
+            else {
+                console.log("GoBaseRootObject.examineResponse() invalid_result=" + data.result);
+            }
         }
         else {
-            console.log("invalid_result=" + data.result);
+            abend();
         }
     };
 
-    this.sendSetupSessionRequest = function() {
-        var link_id = sessionStorage.getItem("link_id");
-        if (link_id === null) {
-            abend("sendSetupSessionRequest() null link_id");
-            exit;
-        }
-
-        var my_name = sessionStorage.getItem("my_name");
-        if (my_name === null) {
-            abend("sendSetupSessionRequest() null my_name");
-            exit;
-        }
-
-        var time_stamp = sessionStorage.getItem("time_stamp");
-        if (time_stamp === null) {
-            abend("sendSetupSessionRequest() null time_stamp");
-            exit;
-        }
-
-        var theme_data = this.encodeGoConfig(my_name, 19, 0, 0, 1);
-
+    this.sendSetupSoloSessionRequest = function() {
+        var theme_data = this.encodeGoConfig(this.myName_, 19, 0, 0, 1);
         var output = JSON.stringify({
                 command: "setup_session",
-                time_stamp: time_stamp,
-                link_id: sessionStorage.link_id,
+                time_stamp: this.timeStamp_,
+                link_id: this.linkId_,
+                peer_name: this.myName_,
                 theme_data: theme_data,
-                peer_name: my_name,
                 });
-        console.log("GoBaseRootObject.sendSetupSessionRequest() output=" + output);
-
+        console.log("GoBaseRootObject.sendSetupSoloSessionRequest() output=" + output);
         this.httpServiceObject().sendAjaxRequest(output); 
+    };
 
+    this.sendSetupGroupSessionRequest = function() {
+        var theme_data = this.encodeGoConfig(this.myName_, 19, 0, 0, 1);
+        var output = JSON.stringify({
+                command: "setup_session1",
+                time_stamp: this.timeStamp_,
+                link_id: this.linkId_,
+                peer_name: this.myName_,
+                theme_data: theme_data,
+                });
+        console.log("GoBaseRootObject.sendSetupGroupSessionRequest() output=" + output);
+        this.httpServiceObject().sendAjaxRequest(output); 
     };
 
     this.encodeGoConfig = function(initiator_name_val, board_size_val, handicap_val, komi_val, initiator_color_val) {
@@ -115,6 +100,31 @@ function GoBaseRootObject() {
         buf = buf + initiator_color_val;
         buf = buf + initiator_name_val;
         return buf;
+    };
+
+    this.getLinkInfoFromStorage = function() {
+        this.linkId_ = sessionStorage.getItem("link_id");
+        if (this.linkId_ === null) {
+            abend("GoBaseRootObject.init__() null link_id");
+            return -1;
+        }
+        this.myName_ = sessionStorage.getItem("my_name");
+        if (this.myName_ === null) {
+            abend("GoBaseRootObject.init__() null my_name");
+            return -1;
+        }
+        this.timeStamp_ = sessionStorage.getItem("time_stamp");
+        if (this.timeStamp_ === null) {
+            abend("GoBaseRootObject.init__() null time_stamp");
+            return -1;
+        }
+        return 0;
+    };
+
+    this.setSessionInfoIntoStorage = function(session_id_val, theme_data_val, peer_name_val) {
+        sessionStorage.setItem("session_id", session_id_val);
+        sessionStorage.setItem("go_config_data", theme_data_val);
+        sessionStorage.setItem("peer_name", peer_name_val);
     };
 
     this.FE_DEF = function() {return this.FE_DEF_;};
