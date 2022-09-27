@@ -25,8 +25,9 @@ function GoPlayGameObject(root_object_val) {
         else {
             this.thePlayBothSides = false;
         }
-        this.debug(false, "init__", "");
+        console.log("GoPlayGameObject.init__() thePlayBothSides=" + this.thePlayBothSides);
     };
+
     this.processNewMove = function(x_val, y_val) {
         this.debug(false, "processNewMove", "(" + x_val + "," + y_val + ")");
         if (this.gameIsOver()) {
@@ -61,8 +62,10 @@ function GoPlayGameObject(root_object_val) {
         */
     };
     this.isMyTurn = function() {
-        this.debug(true, "isMyTurn", "nextColor=" + this.nextColor() + ", myColor=" + this.configObject().myColor());
-        return (this.playBothSides()) || (this.nextColor() === this.configObject().myColor());
+        //console.log("GoPlayGameObject.isMyTurn() nextColor=" + this.nextColor() + ", myColor=" + this.configObject().myColor());
+        var result = (this.playBothSides()) || (this.nextColor() === this.configObject().myColor());
+        //console.log("GoPlayGameObject.isMyTurn() result=" + result);
+        return result;
     };
     this.totalMoves = function() {return this.theTotalMoves;};
     this.setTotalMoves = function(total_moves_val) {this.theTotalMoves = total_moves_val;};
