@@ -37,11 +37,24 @@ function GoPlayConfigObject(root_val) {
         this.theKomiPoint += go_config_data.charAt(index++) - '0';
         console.log("komi=" + this.theKomiPoint);
 
-        this.theMyColor = go_config_data.charAt(index++) - '0';
-        console.log("color=" + this.theMyColor);
+        this.theInitiatorColor = go_config_data.charAt(index++) - '0';
+        console.log("initiator_color=" + this.theInitiatorColor);
 
-        this.theHisName = go_config_data.slice(index);
-        console.log("his_name=" + this.theHisName);
+        this.theInitiatorName = go_config_data.slice(index);
+        console.log("initiator_name=" + this.theInitiatorName);
+
+        if (sessionStorage.my_name === this.theInitiatorName) {
+            this.theMyColor = this.theInitiatorColor;
+        }
+        else {
+            if (this.theInitiatorColor === GO.BLACK_STONE) {
+                this.theMyColor = GO.WHITE_STONE;
+            }
+            else {
+                this.theMyColor = GO.BLACK_STONE;
+            }
+        }
+        console.log("theMyColor=" + this.theMyColor);
     };
 
     this.playBothSides = function() {return this.thePlayBothSides;};

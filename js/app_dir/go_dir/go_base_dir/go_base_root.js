@@ -89,7 +89,7 @@ function GoBaseRootObject() {
             exit;
         }
 
-        var theme_data = this.encodeGoConfig(my_name, 19, 0, 0, 2);
+        var theme_data = this.encodeGoConfig(my_name, 19, 0, 0, 1);
 
         var output = JSON.stringify({
                 command: "setup_session",
@@ -104,16 +104,16 @@ function GoBaseRootObject() {
 
     };
 
-    this.encodeGoConfig = function(my_name_val, board_size_val, handicap_val, komi_val, my_color_val) {
-        console.log("my_name_val = " + my_name_val);
-        var len = 11 + my_name_val.length;
+    this.encodeGoConfig = function(initiator_name_val, board_size_val, handicap_val, komi_val, initiator_color_val) {
+        console.log("initiator_name_val = " + initiator_name_val);
+        var len = 11 + initiator_name_val.length;
         var buf = "G";
         if (len < 100) buf = buf + 0; if (len < 10) buf = buf + 0; buf = buf + len;
         if (board_size_val < 10) buf = buf + 0; buf = buf + board_size_val;
-        if (handicap_val < 10) buf = buf + 0; buf = buf + handicap_val;
-        if (komi_val) buf = buf + 0; buf = buf + komi_val;
-        buf = buf + my_color_val;
-        buf = buf + my_name_val;
+        if (handicap_val < 10)   buf = buf + 0; buf = buf + handicap_val;
+        if (komi_val < 10)       buf = buf + 0; buf = buf + komi_val;
+        buf = buf + initiator_color_val;
+        buf = buf + initiator_name_val;
         return buf;
     };
 
