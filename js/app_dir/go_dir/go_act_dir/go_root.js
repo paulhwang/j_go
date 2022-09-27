@@ -6,7 +6,7 @@
 function GoPlayRootObject() {
     "use strict";
     this.init__ = function() {
-        console.log("sessionStorage.his_name=" + sessionStorage.his_name);
+        console.log("sessionStorage.peer_name=" + sessionStorage.peer_name);
         this.thePhwangObject = new PhwangClass(this);
         this.thePhwangLinkObject = new PhwangLinkClass(this);
         new PhwangSessionClass(this.phwangLinkObject());
