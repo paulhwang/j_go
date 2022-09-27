@@ -18,6 +18,13 @@ function GoPlayGameObject(root_object_val) {
         this.theTotalMoves = 0;
         this.theNextColor = GO.BLACK_STONE();
         this.theGameIsOver = false;
+
+        if (sessionStorage.my_name === sessionStorage.peer_name) {
+            this.thePlayBothSides = true;
+        }
+        else {
+            this.thePlayBothSides = false;
+        }
         this.debug(false, "init__", "");
     };
     this.processNewMove = function(x_val, y_val) {
@@ -43,12 +50,15 @@ function GoPlayGameObject(root_object_val) {
         return true;
     };
     this.playBothSides = function() {
+        return this.thePlayBothSides;
+        /*
         this.debug(false, "playBothSides", "myName=" + this.phwangLinkObject().myName() + " hisName=" + this.configObject().hisName());
         var result = (this.phwangLinkObject().myName() === this.configObject().hisName());
         if (this.configObject().playBothSides() !== result) {
             this.abend("playBothSides", "not match");
         }
         return result;
+        */
     };
     this.isMyTurn = function() {
         this.debug(true, "isMyTurn", "nextColor=" + this.nextColor() + ", myColor=" + this.configObject().myColor());
