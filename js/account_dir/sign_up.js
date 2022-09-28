@@ -7,7 +7,7 @@ function SignUpObject() {
     "use strict";
     this.init__ = function() {
         this.theFE_DEF = new FE_DEFINE_OBJECT();
-        this.thePhwangHttpServiceObject = new PhwangHttpServiceObject(this.examineResponse, this);
+        this.theHttpServiceObject = new HttpServiceObject(this.examineResponse, this);
         this.bindHtmlInput();
     };
 
@@ -51,7 +51,7 @@ function SignUpObject() {
     };
 
     this.FE_DEF = function() {return this.theFE_DEF;};
-    this.httpServiceObject = function() {return this.thePhwangHttpServiceObject;};
+    this.httpServiceObject = function() {return this.theHttpServiceObject;};
     this.init__();
 }
 
