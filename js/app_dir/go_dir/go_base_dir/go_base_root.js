@@ -36,9 +36,7 @@ function GoBaseRootObject() {
             var data = JSON.parse(response.data);
             if (data.result === this.FE_DEF().FE_RESULT_SUCCEED()) {
                 console.log("GoBaseRootObject.examineResponse(setup_session) succeed! session_id=", data.session_id);
-                //this.setSessionInfoIntoStorage(data.session_id, data.theme_data, data.peer_name);
                 this.sendGetSessionSetupStatusRequest(data.session_id);
-                //window.open("go_act.html", "_self");
             }
             else if (data.result === this.FE_DEF().FE_RESULT_ACCOUNT_NAME_NOT_EXIST()) {
                 console.log("GoBaseRootObject.examineResponse(setup_session) account_not_exist");
@@ -85,7 +83,7 @@ function GoBaseRootObject() {
     };
 
     this.sendSetupSoloSessionRequest = function() {
-        var theme_data = this.encodeGoConfig(this.myName_, 19, 0, 0, 1);
+        var theme_data = this.encodeGoConfig(19, 0, 0, 1);
         var output = JSON.stringify({
                 command: "setup_session",
                 time_stamp: this.timeStamp_,
@@ -99,7 +97,7 @@ function GoBaseRootObject() {
     };
 
     this.sendSetupGroupSessionRequest = function(peer_name_val) {
-        var theme_data = this.encodeGoConfig(this.myName_, 19, 0, 0, 1);
+        var theme_data = this.encodeGoConfig(19, 0, 0, 1);
         var output = JSON.stringify({
                 command: "setup_session1",
                 time_stamp: this.timeStamp_,
@@ -124,16 +122,14 @@ function GoBaseRootObject() {
         this.httpServiceObject().sendAjaxRequest(output); 
     };
 
-    this.encodeGoConfig = function(initiator_name_val, board_size_val, handicap_val, komi_val, initiator_color_val) {
-        //console.log("GoBaseRootObject.encodeGoConfig() initiator_name=" + initiator_name_val);
-        var len = 11 + initiator_name_val.length;
+    this.encodeGoConfig = function(board_size_val, handicap_val, komi_val, initiator_color_val) {
+        var len = 11;
         var buf = "G";
         if (len < 100) buf = buf + 0; if (len < 10) buf = buf + 0; buf = buf + len;
         if (board_size_val < 10) buf = buf + 0; buf = buf + board_size_val;
         if (handicap_val < 10)   buf = buf + 0; buf = buf + handicap_val;
         if (komi_val < 10)       buf = buf + 0; buf = buf + komi_val;
         buf = buf + initiator_color_val;
-        buf = buf + initiator_name_val;
         return buf;
     };
 
