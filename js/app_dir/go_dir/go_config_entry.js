@@ -24,7 +24,7 @@ function GoPlayConfigObject(root_val) {
             abend("GoPlayConfigObject.constructor() not G");
         }
 
-        var index = 4;
+        var index = 3;
         this.theBoardSize = (go_config_data.charAt(index++) - '0') * 10
         this.theBoardSize += go_config_data.charAt(index++) - '0';
         console.log("board_size=" + this.theBoardSize);
