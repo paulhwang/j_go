@@ -6,7 +6,6 @@
 function GoBaseFabricObject(root_object_val) {
     this.init__ = function(root_object_val) {
         this.theRootObject = root_object_val;
-        this.getLinkInfoFromStorage();
         this.FE_DEF_ = new FE_DEFINE_OBJECT();
         this.httpServiceObject_ = new HttpServiceObject(this.examineResponse, this);
     };
@@ -71,10 +70,10 @@ function GoBaseFabricObject(root_object_val) {
         var theme_data = this.encodeGoConfig(19, 0, 0, 1);
         var output = JSON.stringify({
                 command: "setup_session",
-                time_stamp: this.timeStamp_,
-                link_id: this.linkId_,
-                initiator_name: this.myName_,
-                peer_name: this.myName_,
+                time_stamp: this.timeStamp(),
+                link_id: this.linkId(),
+                initiator_name: this.myName(),
+                peer_name: this.myName(),
                 theme_data: theme_data,
                 });
         console.log("GoBaseFabricObject.sendSetupSoloSessionRequest() output=" + output);
@@ -85,9 +84,9 @@ function GoBaseFabricObject(root_object_val) {
         var theme_data = this.encodeGoConfig(19, 0, 0, 1);
         var output = JSON.stringify({
                 command: "setup_session1",
-                time_stamp: this.timeStamp_,
-                link_id: this.linkId_,
-                initiator_name: this.myName_,
+                time_stamp: this.timeStamp(),
+                link_id: this.linkId(),
+                initiator_name: this.myName(),
                 peer_name: peer_name_val,
                 theme_data: theme_data,
                 });
@@ -99,8 +98,8 @@ function GoBaseFabricObject(root_object_val) {
         var theme_data = this.encodeGoConfig(this.myName_, 19, 0, 0, 1);
         var output = JSON.stringify({
                 command: "get_session_setup_status",
-                time_stamp: this.timeStamp_,
-                link_id: this.linkId_,
+                time_stamp: this.timeStamp(),
+                link_id: this.linkId(),
                 session_id: session_id_val,
                 });
         console.log("GoBaseFabricObject.sendGetSessionSetupStatusRequest() output=" + output);
@@ -116,25 +115,6 @@ function GoBaseFabricObject(root_object_val) {
         return buf;
     };
 
-    this.getLinkInfoFromStorage = function() {
-        this.linkId_ = sessionStorage.getItem("link_id");
-        if (this.linkId_ === null) {
-            abend("GoBaseFabricObject.init__() null link_id");
-            return -1;
-        }
-        this.myName_ = sessionStorage.getItem("my_name");
-        if (this.myName_ === null) {
-            abend("GoBaseFabricObject.init__() null my_name");
-            return -1;
-        }
-        this.timeStamp_ = sessionStorage.getItem("time_stamp");
-        if (this.timeStamp_ === null) {
-            abend("GoBaseFabricObject.init__() null time_stamp");
-            return -1;
-        }
-        return 0;
-    };
-
     this.setSessionInfoIntoStorage = function(session_id_val, group_mode_val, theme_data_val, initiator_name_val, peer_name_val) {
         sessionStorage.setItem("session_id", session_id_val);
         sessionStorage.setItem("group_mode", group_mode_val);
@@ -144,6 +124,10 @@ function GoBaseFabricObject(root_object_val) {
     };
 
     this.FE_DEF = function() {return this.FE_DEF_;};
+    this.rootObject = function() {return this.theRootObject;};
+    this.linkId = function() {return this.rootObject().linkId();};
+    this.myName = function() {return this.rootObject().myName();};
+    this.timeStamp = function() {return this.rootObject().timeStamp();};
     this.httpServiceObject = function() {return this.httpServiceObject_;};
     this.init__(root_object_val);
 };

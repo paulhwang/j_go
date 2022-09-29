@@ -16,7 +16,7 @@ function GoBaseHtmlObject(root_object_val) {
         });
 
         document.querySelector(".play_with_button").addEventListener("click", function() {
-            this0.fabricObject().sendSetupGroupSessionRequest(this0.myName_);
+            this0.fabricObject().sendSetupGroupSessionRequest(this0.myName());
         });
 
         document.querySelector(".exit_button").addEventListener("click", function() {
@@ -25,6 +25,9 @@ function GoBaseHtmlObject(root_object_val) {
     };
 
     this.rootObject = function() {return this.theRootObject;};
+    this.linkId = function() {return this.rootObject().linkId();};
+    this.myName = function() {return this.rootObject().myName();};
+    this.timeStamp = function() {return this.rootObject().timeStamp();};
     this.fabricObject = function() {return this.rootObject().fabricObject();};
     this.init__(root_object_val);
 };
