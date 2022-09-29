@@ -7,6 +7,7 @@ function SignInObject() {
     "use strict";
     this.init__ = function() {
         this.FE_DEF_ = new FE_DEFINE_OBJECT();
+        this.linkObject_ = new FabricLinkObject();
         this.httpServiceObject_ = new HttpServiceObject(this.examineResponse, this);
         this.bindHtmlInput();
     };
@@ -40,9 +41,7 @@ function SignInObject() {
         if (data.result === this.FE_DEF().FE_RESULT_SUCCEED()) {
             console.log("succeed");
             console.log("link_id=", data.link_id);
-            sessionStorage.setItem("link_id", data.link_id);
-            sessionStorage.setItem("my_name", data.my_name);
-            sessionStorage.setItem("time_stamp", data.time_stamp);
+            this.linkObject().setLinkInfoIntoStorage(data.link_id, data.my_name, data.time_stamp);
             window.history.go(-1);
         }
         else if (data.result === this.FE_DEF().FE_RESULT_PASSWORD_NOT_MATCH()) {
@@ -56,8 +55,9 @@ function SignInObject() {
         }
     };
 
-    this.FE_DEF = function() {return this.FE_DEF_;};
-    this.httpServiceObject = function() {return this.httpServiceObject_;};
+    this.FE_DEF = () => this.FE_DEF_;
+    this.linkObject = () => this.linkObject_;
+    this.httpServiceObject = () => this.httpServiceObject_;
     this.init__();
 }
 

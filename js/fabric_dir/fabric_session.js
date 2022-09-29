@@ -5,7 +5,6 @@
 
 function FabricSessionObject() {
     this.init__ = function() {
-        this.getSessionInfoFromStorage();
     }
 
     this.getSessionInfoFromStorage = function() {
@@ -21,9 +20,9 @@ function FabricSessionObject() {
             abend();
             return -1;
         }
-        this.themeData = sessionStorage.getItem("go_config_data");
+        this.themeData = sessionStorage.getItem("theme_data");
         if (this.themeData === null) {
-            console.log("FabricSessionObject.getSessionInfoFromStorage() null go_config_data");
+            console.log("FabricSessionObject.getSessionInfoFromStorage() null theme_data");
             abend();
             return -1;
         }
@@ -45,7 +44,7 @@ function FabricSessionObject() {
     this.setSessionInfoIntoStorage = function(session_id_val, group_mode_val, theme_data_val, initiator_name_val, peer_name_val) {
         sessionStorage.setItem("session_id", session_id_val);
         sessionStorage.setItem("group_mode", group_mode_val);
-        sessionStorage.setItem("go_config_data", theme_data_val);
+        sessionStorage.setItem("theme_data", theme_data_val);
         sessionStorage.setItem("initiator_name", initiator_name_val);
         sessionStorage.setItem("peer_name", peer_name_val);
     };

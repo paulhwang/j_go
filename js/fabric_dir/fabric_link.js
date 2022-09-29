@@ -30,6 +30,12 @@ function FabricLinkObject() {
         return 0;
     };
 
+    this.setLinkInfoIntoStorage = function(link_id_val, my_name_val, time_stamp_val) {
+        sessionStorage.setItem("link_id", link_id_val);
+        sessionStorage.setItem("my_name", my_name_val);
+        sessionStorage.setItem("time_stamp", time_stamp_val);
+    };
+
     this.linkId = () => this.linkId_;
     this.myName = () => this.myName_;
     this.timeStamp = () => this.timeStamp_;
