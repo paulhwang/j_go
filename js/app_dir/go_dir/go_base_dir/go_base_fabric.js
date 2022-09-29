@@ -3,9 +3,9 @@
   Written by Paul Hwang
 */
 
-function GoBaseFabricObject() {
-    this.init__ = function(go_base_root_object_val) {
-        this.theGoBaseRootObject = go_base_root_object_val;
+function GoBaseFabricObject(root_object_val) {
+    this.init__ = function(root_object_val) {
+        this.theRootObject = root_object_val;
         this.getLinkInfoFromStorage();
         this.FE_DEF_ = new FE_DEFINE_OBJECT();
         this.httpServiceObject_ = new HttpServiceObject(this.examineResponse, this);
@@ -145,5 +145,5 @@ function GoBaseFabricObject() {
 
     this.FE_DEF = function() {return this.FE_DEF_;};
     this.httpServiceObject = function() {return this.httpServiceObject_;};
-    this.init__();
+    this.init__(root_object_val);
 };
