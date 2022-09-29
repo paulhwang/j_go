@@ -64,7 +64,7 @@ function GoBaseRootObject() {
                 console.log("GoBaseRootObject.examineResponse(get_session_setup_status) succeed! session_id=", data.session_id);
                 if (data.room_status === 'R') {
                     this.setSessionInfoIntoStorage(data.session_id, data.group_mode, data.theme_data, data.initiator_name, data.peer_name);
-                    window.open("go_act.html", "_self");
+                    window.open("go_play.html", "_self");
                 }
                 else {
                     this.sendGetSessionSetupStatusRequest(data.session_id);
