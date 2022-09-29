@@ -61,18 +61,8 @@ function GoConfigObject(root_val) {
     this.handicapPoint = () => this.handicapPoint_;
     this.komiPoint = () => this.komiPoint_;
     this.initiatorColor = () => this.initiatorColor_;
-    this.myColor = function() {return this.myColor_;};
-    this.rootObject = function() {return this.rootObject_;};
-
-    this.playBothSides = function() {return this.thePlayBothSides;};
-    this.setPlayBothSides = function() {this.thePlayBothSides = (this.phwangLinkObject().myName() === this.hisName());};
-    this.setMyColorConverted = function(val) {if (val === "black") {this.theMyColor = GO.BLACK_STONE();} else if (val === "white") {this.theMyColor = GO.WHITE_STONE();} else {this.abend("setMyColor", val);}};
-    this.hisColor = function() {if (this.myColor() === GO.BLACK_STONE()) {return GO.WHITE_STONE();} else {return GO.BLACK_STONE();}};
-    this.hisName = function() {return this.theHisName;};
-    this.setHisName = function(val) {return this.theHisName = val;};
-    this.realKomiPoint = function() {if (!this.komiPoint()) {return 0;} return this.komiPoint() + 0.5;};
-    this.isValidCoordinates = function(x_val, y_val) {return this.isValidCoordinate(x_val) && this.isValidCoordinate(y_val);};
-    this.isValidCoordinate = function(coordinate_val) {return (0 <= coordinate_val) && (coordinate_val < this.boardSize());};
+    this.myColor = () => this.myColor_;
+    this.rootObject = () => this.rootObject_;
     this.init__(root_val);
 }
 
