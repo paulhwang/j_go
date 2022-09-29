@@ -28,11 +28,6 @@ function GoPlayRootObject() {
         this.displayObject_ = new GoPlayDisplayObject(this);
     };
 
-    this.logit_ = function(str1_val, str2_val) {
-        console.log(str1_val + str2_val);
-        //this.phwangObject().LOG_IT(str1_val, str2_val);
-    };
-
     this.configObject = () => this.configObject_;
     this.boardObject = () => this.boardObject_;
     this.portObject = () => this.portObject_;

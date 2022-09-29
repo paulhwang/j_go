@@ -6,11 +6,10 @@
 function GoPlayHtmlObject(root_object_val) {
     "use strict";
     this.init__ = function (root_object_val) {
-        this.theRootObject = root_object_val;
+        this.rootObject_ = root_object_val;
         this.theCanvasWidth = 432;
         this.initElements();
         this.setupHtmlInput();
-        this.debug(true, "init__", "");
     };
 
     this.initElements = function() {
@@ -49,8 +48,7 @@ function GoPlayHtmlObject(root_object_val) {
         });
     };
 
-    this.objectName = function() {return "GoPlayHtmlObject";};
-    this.rootObject = function() {return this.theRootObject;};
+   this.rootObject = () => this.rootObject_;
     this.phwangObject = function() {return this.rootObject().phwangObject();};
     this.configObject = function() {return this.rootObject().configObject();};
     this.ajaxObject = function() {return this.rootObject().ajaxObject();};
@@ -63,8 +61,5 @@ function GoPlayHtmlObject(root_object_val) {
     this.whiteScoreElement = function() {return this.theWhiteScoreElement;};
     this.getGridLength = function() {return this.canvasElement().width / (this.configObject().boardSize() + 1);};
     this.getArrowUnitLength = function() {return this.canvasElement().width / 20;};
-    this.debug = function(debug_val, str1_val, str2_val) {if (debug_val) {this.logit(str1_val, str2_val);}};
-    this.logit = function(str1_val, str2_val) {this.rootObject().logit_(this.objectName() + "." + str1_val, str2_val);};
-    this.abend = function(str1_val, str2_val) {this.rootObject().abend_(this.objectName() + "." + str1_val, str2_val);};
     this.init__(root_object_val);
 }
