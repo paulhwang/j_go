@@ -15,9 +15,6 @@ function GoBaseRootObject() {
     this.sessionObject = () => this.sessionObject_;
     this.fabricObject = () => this.fabricObject_;
     this.htmlObject = () => this.htmlObject_;
-    this.linkId = () => this.linkObject().linkId();
-    this.myName = () => this.linkObject().myName();
-    this.timeStamp = () => this.linkObject().timeStamp();
     this.init__();
 };
 

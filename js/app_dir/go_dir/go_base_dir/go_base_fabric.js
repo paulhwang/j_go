@@ -70,10 +70,10 @@ function GoBaseFabricObject(root_object_val) {
         var theme_data = this.encodeGoConfig(19, 0, 0, 1);
         var output = JSON.stringify({
                 command: "setup_session",
-                time_stamp: this.timeStamp(),
-                link_id: this.linkId(),
-                initiator_name: this.myName(),
-                peer_name: this.myName(),
+                time_stamp: this.linkObject().timeStamp(),
+                link_id: this.linkObject().linkId(),
+                initiator_name: this.linkObject().myName(),
+                peer_name: this.linkObject().myName(),
                 theme_data: theme_data,
                 });
         console.log("GoBaseFabricObject.sendSetupSoloSessionRequest() output=" + output);
@@ -84,9 +84,9 @@ function GoBaseFabricObject(root_object_val) {
         var theme_data = this.encodeGoConfig(19, 0, 0, 1);
         var output = JSON.stringify({
                 command: "setup_session1",
-                time_stamp: this.timeStamp(),
-                link_id: this.linkId(),
-                initiator_name: this.myName(),
+                time_stamp: this.linkObject().timeStamp(),
+                link_id: this.linkObject().linkId(),
+                initiator_name: this.linkObject().myName(),
                 peer_name: peer_name_val,
                 theme_data: theme_data,
                 });
@@ -98,8 +98,8 @@ function GoBaseFabricObject(root_object_val) {
         var theme_data = this.encodeGoConfig(this.myName_, 19, 0, 0, 1);
         var output = JSON.stringify({
                 command: "get_session_setup_status",
-                time_stamp: this.timeStamp(),
-                link_id: this.linkId(),
+                time_stamp: this.linkObject().timeStamp(),
+                link_id: this.linkObject().linkId(),
                 session_id: session_id_val,
                 });
         console.log("GoBaseFabricObject.sendGetSessionSetupStatusRequest() output=" + output);
@@ -117,10 +117,8 @@ function GoBaseFabricObject(root_object_val) {
 
     this.FE_DEF = () => this.FE_DEF_;
     this.rootObject = () => this.rootObject_;
+    this.linkObject = () => this.rootObject().linkObject();
     this.sessionObject = () => this.rootObject().sessionObject();
-    this.linkId = () => this.rootObject().linkId();
-    this.myName = () => this.rootObject().myName();
-    this.timeStamp = () => this.rootObject().timeStamp();
     this.httpServiceObject = () => this.httpServiceObject_;
     this.init__(root_object_val);
 };
