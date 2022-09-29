@@ -131,11 +131,12 @@ function GoPlayPortObject(root_val) {
         this.transmitData(this.GO_PROTOCOL_GAME_INFO() + data_val);
     };
     this.transmitData = function(data_val) {
-        this.debug(false, "transmitData", "data_val=" + data_val);
-        this.phwangSessionObject().transmitData(data_val);
+        this.debug(true, "transmitData", "data_val=" + data_val);
+        this.rootObject().fabricObject().sendPutSessionDataRequest(data_val);
+        //this.phwangSessionObject().transmitData(data_val);
     };
     this.receiveData = function(data_val) {
-        this.debug(false, "receiveData", "data_val=" + data_val);
+        this.debug(true, "receiveData", "data_val=" + data_val);
         if (data_val.charAt(0) === this.GO_PROTOCOL_GAME_INFO().charAt(0)) {
             this.receiveGameData(data_val.slice(1));
             return;
