@@ -120,7 +120,7 @@ function GoPlayDisplayObject(root_object_val) {
         }
         var grid_len = this.getGridLength();
         var micro_grid_len = grid_len / 8;
-        var radius = 2 * micro_grid_len;
+        var radius = 1.5 * micro_grid_len;
         var context = this.canvasContext();
         var paint;
         if (this.gameObject().nextColor() === GO.BLACK_STONE()) {
