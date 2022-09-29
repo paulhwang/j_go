@@ -47,7 +47,7 @@ function GoBaseFabricObject(root_object_val) {
             if (data.result === this.FE_DEF().FE_RESULT_SUCCEED()) {
                 console.log("GoBaseFabricObject.examineResponse(get_session_setup_status) succeed! session_id=", data.session_id);
                 if (data.room_status === 'R') {
-                    this.setSessionInfoIntoStorage(data.session_id, data.group_mode, data.theme_data, data.initiator_name, data.peer_name);
+                    this.sessionObject().setSessionInfoIntoStorage(data.session_id, data.group_mode, data.theme_data, data.initiator_name, data.peer_name);
                     window.open("go_play.html", "_self");
                 }
                 else {
@@ -115,16 +115,9 @@ function GoBaseFabricObject(root_object_val) {
         return buf;
     };
 
-    this.setSessionInfoIntoStorage = function(session_id_val, group_mode_val, theme_data_val, initiator_name_val, peer_name_val) {
-        sessionStorage.setItem("session_id", session_id_val);
-        sessionStorage.setItem("group_mode", group_mode_val);
-        sessionStorage.setItem("go_config_data", theme_data_val);
-        sessionStorage.setItem("initiator_name", initiator_name_val);
-        sessionStorage.setItem("peer_name", peer_name_val);
-    };
-
     this.FE_DEF = () => this.FE_DEF_;
     this.rootObject = () => this.rootObject_;
+    this.sessionObject = () => this.rootObject().sessionObject();
     this.linkId = () => this.rootObject().linkId();
     this.myName = () => this.rootObject().myName();
     this.timeStamp = () => this.rootObject().timeStamp();
