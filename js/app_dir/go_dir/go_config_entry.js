@@ -6,12 +6,11 @@
 function GoConfigObject(root_val) {
     "use strict";
     this.init__ = function(root_val) {
-        this.theRootObject = root_val;
+        this.rootObject_ = root_val;
     };
     
     this.decode = function() {
         var go_config_data = sessionStorage.getItem("theme_data");
-        console.log("GoConfigObject.decode() go_config_data=" + go_config_data);
 
         if ((go_config_data === undefined) || (go_config_data === "")) {
             this.theBoardSize = 19;
@@ -26,32 +25,28 @@ function GoConfigObject(root_val) {
         }
 
         var index = 3;
-        this.theBoardSize = (go_config_data.charAt(index++) - '0') * 10
-        this.theBoardSize += go_config_data.charAt(index++) - '0';
+        this.boardSize_ = (go_config_data.charAt(index++) - '0') * 10
+        this.boardSize_ += go_config_data.charAt(index++) - '0';
 
-        this.theHandicapPoint = (go_config_data.charAt(index++) - '0') * 10
-        this.theHandicapPoint += go_config_data.charAt(index++) - '0';
+        this.handicapPoint_ = (go_config_data.charAt(index++) - '0') * 10
+        this.handicapPoint_ += go_config_data.charAt(index++) - '0';
 
-        this.theKomiPoint = (go_config_data.charAt(index++) - '0') * 10
-        this.theKomiPoint += go_config_data.charAt(index++) - '0';
+        this.komiPoint_ = (go_config_data.charAt(index++) - '0') * 10
+        this.komiPoint_ += go_config_data.charAt(index++) - '0';
 
-        this.theInitiatorColor = go_config_data.charAt(index++) - '0';
+        this.initiatorColor_ = go_config_data.charAt(index++) - '0';
 
-        this.theInitiatorName = go_config_data.slice(index);
-        console.log("initiator_name=" + this.theInitiatorName);
-
-        if (sessionStorage.my_name === this.theInitiatorName) {
-            this.theMyColor = this.theInitiatorColor;
+        if (this.rootObject().linkObject().myName() === this.rootObject().sessionObject().initiatorName()) {
+            this.myColor_ = this.initiatorColor_;
         }
         else {
-            if (this.theInitiatorColor === GO.BLACK_STONE) {
-                this.theMyColor = GO.WHITE_STONE;
+            if (this.initiatorColor_ === GO.BLACK_STONE) {
+                this.myColor_ = GO.WHITE_STONE;
             }
             else {
-                this.theMyColor = GO.BLACK_STONE;
+                this.myColor_ = GO.BLACK_STONE;
             }
         }
-        console.log("theMyColor=" + this.theMyColor);
     };
 
     this.printConfigInfo = function() {
@@ -59,34 +54,25 @@ function GoConfigObject(root_val) {
         console.log("GoConfigObject.decode() handicap=" + this.handicapPoint());
         console.log("GoConfigObject.decode() komi=" + this.komiPoint());
         console.log("GoConfigObject.decode() initiator_color=" + this.initiatorColor());
+        console.log("GoConfigObject.decode() myColor=" + this.myColor());
     }
 
-    this.boardSize = () => this.theBoardSize;
-    this.handicapPoint = () => this.theHandicapPoint;
-    this.komiPoint = () => this.theKomiPoint;
-    this.initiatorColor = () => this.theInitiatorColor;
+    this.boardSize = () => this.boardSize_;
+    this.handicapPoint = () => this.handicapPoint_;
+    this.komiPoint = () => this.komiPoint_;
+    this.initiatorColor = () => this.initiatorColor_;
+    this.myColor = function() {return this.myColor_;};
+    this.rootObject = function() {return this.rootObject_;};
 
     this.playBothSides = function() {return this.thePlayBothSides;};
     this.setPlayBothSides = function() {this.thePlayBothSides = (this.phwangLinkObject().myName() === this.hisName());};
-    this.setBoardSize = function(val) {this.theBoardSize = val;};
-    this.myColor = function() {return this.theMyColor;};
     this.setMyColorConverted = function(val) {if (val === "black") {this.theMyColor = GO.BLACK_STONE();} else if (val === "white") {this.theMyColor = GO.WHITE_STONE();} else {this.abend("setMyColor", val);}};
-    this.setMyColor = function(val) {this.theMyColor = val;};
     this.hisColor = function() {if (this.myColor() === GO.BLACK_STONE()) {return GO.WHITE_STONE();} else {return GO.BLACK_STONE();}};
     this.hisName = function() {return this.theHisName;};
     this.setHisName = function(val) {return this.theHisName = val;};
-    this.setHandicapPoint = function(val) {this.theHandicapPoint = val;};
-    this.setKomiPoint = function(val) {this.theKomiPoint = val;};
     this.realKomiPoint = function() {if (!this.komiPoint()) {return 0;} return this.komiPoint() + 0.5;};
     this.isValidCoordinates = function(x_val, y_val) {return this.isValidCoordinate(x_val) && this.isValidCoordinate(y_val);};
     this.isValidCoordinate = function(coordinate_val) {return (0 <= coordinate_val) && (coordinate_val < this.boardSize());};
-    this.objectName = function() {return "GoPlayConfigObject";};
-    this.rootObject = function() {return this.theRootObject;};
-    this.configStorageObject = function() {return this.rootObject().configStorageObject();};
-    this.phwangLinkObject = function() {return this.rootObject().phwangLinkObject();};
-    this.debug = function(debug_val, str1_val, str2_val) {if (debug_val) {this.logit(str1_val, str2_val);}};
-    this.logit = function(str1_val, str2_val) {this.rootObject().logit_(this.objectName() + "." + str1_val, str2_val);};
-    this.abend = function(str1_val, str2_val) {this.rootObject().abend_(this.objectName() + "." + str1_val, str2_val);};
     this.init__(root_val);
 }
 
