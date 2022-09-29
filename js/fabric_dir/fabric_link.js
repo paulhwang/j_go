@@ -14,20 +14,29 @@ function FabricLinkObject() {
             abend();
             return -1;
         }
+
         this.myName_ = sessionStorage.getItem("my_name");
         if (this.myName_ === null) {
             console.log("FabricLinkObject.getLinkInfoFromStorage() null my_name");
             abend();
             return -1;
         }
+
         this.timeStamp_ = sessionStorage.getItem("time_stamp");
         if (this.timeStamp_ === null) {
             console.log("FabricLinkObject.getLinkInfoFromStorage() null time_stamp");
             abend();
             return -1;
         }
+
         return 0;
     };
+
+    this.printLinkInfo = function() {
+        console.log("FabricLinkObject.getLinkInfoFromStorage() link_id=" + this.linkId());
+        console.log("FabricLinkObject.getLinkInfoFromStorage() my_name=" + this.myName());
+        console.log("FabricLinkObject.getLinkInfoFromStorage() time_stamp=" + this.timeStamp());
+    }
 
     this.setLinkInfoIntoStorage = function(link_id_val, my_name_val, time_stamp_val) {
         sessionStorage.setItem("link_id", link_id_val);

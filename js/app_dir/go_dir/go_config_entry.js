@@ -9,9 +9,9 @@ function GoConfigObject(root_val) {
         this.theRootObject = root_val;
     };
     
-    this.decodeGoConfig = function() {
+    this.decode = function() {
         var go_config_data = sessionStorage.getItem("theme_data");
-        console.log("GoPlayConfigObject.decodeGoConfig() go_config_data=" + go_config_data);
+        console.log("GoConfigObject.decode() go_config_data=" + go_config_data);
 
         if ((go_config_data === undefined) || (go_config_data === "")) {
             this.theBoardSize = 19;
@@ -21,24 +21,21 @@ function GoConfigObject(root_val) {
         }
 
         if (go_config_data.charAt(0) != 'G') {
-            abend("GoPlayConfigObject.constructor() not G");
+            console.log("GoConfigObject.decode() not G");
+            abend();
         }
 
         var index = 3;
         this.theBoardSize = (go_config_data.charAt(index++) - '0') * 10
         this.theBoardSize += go_config_data.charAt(index++) - '0';
-        console.log("board_size=" + this.theBoardSize);
 
         this.theHandicapPoint = (go_config_data.charAt(index++) - '0') * 10
         this.theHandicapPoint += go_config_data.charAt(index++) - '0';
-        console.log("handicap=" + this.theHandicapPoint);
 
         this.theKomiPoint = (go_config_data.charAt(index++) - '0') * 10
         this.theKomiPoint += go_config_data.charAt(index++) - '0';
-        console.log("komi=" + this.theKomiPoint);
 
         this.theInitiatorColor = go_config_data.charAt(index++) - '0';
-        console.log("initiator_color=" + this.theInitiatorColor);
 
         this.theInitiatorName = go_config_data.slice(index);
         console.log("initiator_name=" + this.theInitiatorName);
@@ -57,9 +54,20 @@ function GoConfigObject(root_val) {
         console.log("theMyColor=" + this.theMyColor);
     };
 
+    this.printConfigInfo = function() {
+        console.log("GoConfigObject.decode() board_size=" + this.boardSize());
+        console.log("GoConfigObject.decode() handicap=" + this.handicapPoint());
+        console.log("GoConfigObject.decode() komi=" + this.komiPoint());
+        console.log("GoConfigObject.decode() initiator_color=" + this.initiatorColor());
+    }
+
+    this.boardSize = () => this.theBoardSize;
+    this.handicapPoint = () => this.theHandicapPoint;
+    this.komiPoint = () => this.theKomiPoint;
+    this.initiatorColor = () => this.theInitiatorColor;
+
     this.playBothSides = function() {return this.thePlayBothSides;};
     this.setPlayBothSides = function() {this.thePlayBothSides = (this.phwangLinkObject().myName() === this.hisName());};
-    this.boardSize = function() {return this.theBoardSize;};
     this.setBoardSize = function(val) {this.theBoardSize = val;};
     this.myColor = function() {return this.theMyColor;};
     this.setMyColorConverted = function(val) {if (val === "black") {this.theMyColor = GO.BLACK_STONE();} else if (val === "white") {this.theMyColor = GO.WHITE_STONE();} else {this.abend("setMyColor", val);}};
@@ -67,9 +75,7 @@ function GoConfigObject(root_val) {
     this.hisColor = function() {if (this.myColor() === GO.BLACK_STONE()) {return GO.WHITE_STONE();} else {return GO.BLACK_STONE();}};
     this.hisName = function() {return this.theHisName;};
     this.setHisName = function(val) {return this.theHisName = val;};
-    this.handicapPoint = function() {return this.theHandicapPoint;};
     this.setHandicapPoint = function(val) {this.theHandicapPoint = val;};
-    this.komiPoint = function() {return this.theKomiPoint;};
     this.setKomiPoint = function(val) {this.theKomiPoint = val;};
     this.realKomiPoint = function() {if (!this.komiPoint()) {return 0;} return this.komiPoint() + 0.5;};
     this.isValidCoordinates = function(x_val, y_val) {return this.isValidCoordinate(x_val) && this.isValidCoordinate(y_val);};

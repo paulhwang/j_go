@@ -8,12 +8,15 @@ function GoPlayRootObject() {
     this.init__ = function() {
         this.linkObject_ = new FabricLinkObject();
         this.linkObject().getLinkInfoFromStorage();
+        this.linkObject().printLinkInfo();
 
         this.sessionObject_ = new FabricSessionObject();
         this.sessionObject().getSessionInfoFromStorage();
+        this.sessionObject().printSessionInfo();
 
         this.configObject_ = new GoConfigObject(this);
-        this.configObject().decodeGoConfig();
+        this.configObject().decode();
+        this.configObject().printConfigInfo();
 
         this.htmlObject_ = new GoPlayHtmlObject(this);
         this.fabricObject_ = new GoPlayFabricObject(this);
