@@ -5,7 +5,7 @@
 
 function GoBaseHtmlObject(root_object_val) {
     this.init__ = function(root_object_val) {
-        this.theRootObject = root_object_val;
+        this.rootObject_ = root_object_val;
         this.setupQuerySelectors();
     }
 
@@ -24,10 +24,10 @@ function GoBaseHtmlObject(root_object_val) {
         });
     };
 
-    this.rootObject = function() {return this.theRootObject;};
-    this.linkId = function() {return this.rootObject().linkId();};
-    this.myName = function() {return this.rootObject().myName();};
-    this.timeStamp = function() {return this.rootObject().timeStamp();};
-    this.fabricObject = function() {return this.rootObject().fabricObject();};
+    this.rootObject = () => this.rootObject_;
+    this.linkId = () => this.rootObject().linkId();
+    this.myName = () => this.rootObject().myName();
+    this.timeStamp = () => this.rootObject().timeStamp();
+    this.fabricObject = () => this.rootObject().fabricObject();
     this.init__(root_object_val);
 };
