@@ -7,8 +7,8 @@ function GoPlayInputObject(root_object_val) {
     "use strict";
     this.init__ = function(root_object_val) {
         this.rootObject_ = root_object_val;
-        this.theLastMouseX = 9;
-        this.theLastMouseY = 9;
+        this.lastMouseX_ = 9;
+        this.lastMouseY_ = 9;
         this.clearPendingRequestExist();
     };
     this.uiMouseMove = function(event_x, event_y) {
@@ -20,7 +20,7 @@ function GoPlayInputObject(root_object_val) {
             return;
         }
         if ((this.lastMouseX() !== x) || (this.lastMouseY() !== y)) {
-            console.log("GoPlayInputObject.uiMouseMove() (" + x + "," + y + ")");
+            //console.log("GoPlayInputObject.uiMouseMove() (" + x + "," + y + ")");
             this.setLastMouseX(x);
             this.setLastMouseY(y);
             this.displayObject().drawBoard();
@@ -98,13 +98,13 @@ function GoPlayInputObject(root_object_val) {
     this.setPendingRequestExist = function() {this.thePendingRequestExist = true;};
     this.clearPendingRequestExist = function() {this.thePendingRequestExist = false;};
     this.boardSize = () => this.configObject().boardSize();
-    this.canvasElement = function() {return this.htmlObject().canvasElement();};
-    this.getGridLength = function() {return this.htmlObject().getGridLength();};
-    this.getArrowUnitLength = function() {return this.htmlObject().getArrowUnitLength();};
-    this.lastMouseX = function() {return this.theLastMouseX;};
-    this.setLastMouseX = function (val) {this.theLastMouseX = val;};
-    this.lastMouseY = function() {return this.theLastMouseY;};
-    this.setLastMouseY = function (val) {this.theLastMouseY = val;};
+    this.canvasElement = () => this.htmlObject().canvasElement();
+    this.getGridLength = () => this.htmlObject().getGridLength();
+    this.getArrowUnitLength = () => this.htmlObject().getArrowUnitLength();
+    this.lastMouseX = () => this.lastMouseX_;
+    this.setLastMouseX = (val) => {this.lastMouseX_ = val;};
+    this.lastMouseY = () => this.lastMouseY_;
+    this.setLastMouseY = (val) => {this.lastMouseY_ = val;};
     this.rootObject = () => this.rootObject_;
     this.configObject = () => this.rootObject().configObject();
     this.htmlObject = () => this.rootObject().htmlObject();
