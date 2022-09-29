@@ -30,8 +30,8 @@ function FabricLinkObject() {
         return 0;
     };
 
-    this.linkId = function() {return this.linkId_;};
-    this.myName = function() {return this.myName_;};
-    this.timeStamp = function() {return this.timeStamp_;};
+    this.linkId = () => this.linkId_;
+    this.myName = () => this.myName_;
+    this.timeStamp = () => this.timeStamp_;
     this.init__();
 };

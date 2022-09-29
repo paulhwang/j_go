@@ -5,7 +5,7 @@
 
 function GoBaseFabricObject(root_object_val) {
     this.init__ = function(root_object_val) {
-        this.theRootObject = root_object_val;
+        this.rootObject_ = root_object_val;
         this.FE_DEF_ = new FE_DEFINE_OBJECT();
         this.httpServiceObject_ = new HttpServiceObject(this.examineResponse, this);
     };
@@ -123,11 +123,11 @@ function GoBaseFabricObject(root_object_val) {
         sessionStorage.setItem("peer_name", peer_name_val);
     };
 
-    this.FE_DEF = function() {return this.FE_DEF_;};
-    this.rootObject = function() {return this.theRootObject;};
-    this.linkId = function() {return this.rootObject().linkId();};
-    this.myName = function() {return this.rootObject().myName();};
-    this.timeStamp = function() {return this.rootObject().timeStamp();};
-    this.httpServiceObject = function() {return this.httpServiceObject_;};
+    this.FE_DEF = () => this.FE_DEF_;
+    this.rootObject = () => this.rootObject_;
+    this.linkId = () => this.rootObject().linkId();
+    this.myName = () => this.rootObject().myName();
+    this.timeStamp = () => this.rootObject().timeStamp();
+    this.httpServiceObject = () => this.httpServiceObject_;
     this.init__(root_object_val);
 };
