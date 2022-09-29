@@ -10,12 +10,12 @@ function GoBaseRootObject() {
         this.fabricObject_ = new GoBaseFabricObject(this);
     };
 
-    this.linkObject = function() {return this.linkObject_;};
-    this.fabricObject = function() {return this.fabricObject_;};
-    this.htmlObject = function() {return this.htmlObject_;};
-    this.linkId = function() {return this.linkObject().linkId();};
-    this.myName = function() {return this.linkObject().myName();};
-    this.timeStamp = function() {return this.linkObject().timeStamp();};
+    this.linkObject = () => this.linkObject_;
+    this.fabricObject = () => this.fabricObject_;
+    this.htmlObject = () => this.htmlObject_;
+    this.linkId = () => this.linkObject().linkId();
+    this.myName = () => this.linkObject().myName();
+    this.timeStamp = () => this.linkObject().timeStamp();
     this.init__();
 };
 
