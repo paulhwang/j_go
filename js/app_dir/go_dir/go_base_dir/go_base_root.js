@@ -6,6 +6,7 @@
 function GoBaseRootObject() {
     this.init__ = function() {
         this.linkObject_ = new FabricLinkObject();
+        this.linkObject().getLinkInfoFromStorage();
         this.sessionObject_ = new FabricSessionObject();
         this.htmlObject_ = new GoBaseHtmlObject(this);
         this.fabricObject_ = new GoBaseFabricObject(this);

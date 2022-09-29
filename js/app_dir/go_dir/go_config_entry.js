@@ -10,7 +10,7 @@ function GoPlayConfigObject(root_val) {
     };
     
     this.decodeGoConfig = function() {
-        var go_config_data = sessionStorage.getItem("go_config_data");
+        var go_config_data = sessionStorage.getItem("theme_data");
         console.log("GoPlayConfigObject.decodeGoConfig() go_config_data=" + go_config_data);
 
         if ((go_config_data === undefined) || (go_config_data === "")) {

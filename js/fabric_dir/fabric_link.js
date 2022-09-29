@@ -5,7 +5,6 @@
 
 function FabricLinkObject() {
     this.init__ = function() {
-        this.getLinkInfoFromStorage();
     }
 
     this.getLinkInfoFromStorage = function() {
