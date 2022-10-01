@@ -19,7 +19,7 @@ function AccountLoginObject() {
             var password = $(".login_section .login_password").val();
             if (account_name) {
                 var output = JSON.stringify({
-                        command: "setup_link",
+                        command: "login",
                         packet_id: sessionStorage.ajax_packet_id,
                         my_name: account_name,
                         password: password,

@@ -17,7 +17,7 @@ function AccountLogoutObject() {
             var account_name = $(".logout_section .logout_account_name").val();
             if (account_name) {
                 var output = JSON.stringify({
-                        command: "sign_off",
+                        command: "logout",
                         time_stamp: sessionStorage.time_stamp,
                         link_id: sessionStorage.link_id,
                         my_name: sessionStorage.my_name,

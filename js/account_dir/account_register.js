@@ -19,7 +19,7 @@ function AccountRegisterObject() {
             var email = $(".register_section .register_email").val();
             if (account_name) {
                 var output = JSON.stringify({
-                        command: "sign_up",
+                        command: "register",
                         my_name: account_name,
                         password: password,
                         email: email,
