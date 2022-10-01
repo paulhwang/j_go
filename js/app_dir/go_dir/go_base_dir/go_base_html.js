@@ -11,12 +11,16 @@ function GoBaseHtmlObject(root_object_val) {
 
     this.setupQuerySelectors = function() {
         var this0 = this;
-        document.querySelector(".solo_button").addEventListener("click", function() {
-            this0.fabricObject().sendSetupSoloSessionRequest();
+        document.querySelector(".sole_button").addEventListener("click", function() {
+            this0.fabricObject().sendSetupSoleSessionRequest();
         });
 
-        document.querySelector(".play_with_button").addEventListener("click", function() {
-            this0.fabricObject().sendSetupGroupSessionRequest(this0.linkObject().myName());
+        document.querySelector(".dual_button").addEventListener("click", function() {
+            this0.fabricObject().sendSetupDualSessionRequest(this0.linkObject().myName());
+        });
+
+        document.querySelector(".multiple_button").addEventListener("click", function() {
+            this0.fabricObject().sendSetupMultipleSessionRequest(this0.linkObject().myName());
         });
 
         document.querySelector(".exit_button").addEventListener("click", function() {

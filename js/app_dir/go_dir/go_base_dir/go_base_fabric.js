@@ -66,7 +66,7 @@ function GoBaseFabricObject(root_object_val) {
         }
     };
 
-    this.sendSetupSoloSessionRequest = function() {
+    this.sendSetupSoleSessionRequest = function() {
         var theme_data = this.encodeGoConfig(19, 0, 0, 1);
         var output = JSON.stringify({
                 command: "setup_session",
@@ -80,7 +80,21 @@ function GoBaseFabricObject(root_object_val) {
         this.httpServiceObject().sendAjaxRequest(output); 
     };
 
-    this.sendSetupGroupSessionRequest = function(peer_name_val) {
+    this.sendSetupDualSessionRequest = function(peer_name_val) {
+        var theme_data = this.encodeGoConfig(19, 0, 0, 1);
+        var output = JSON.stringify({
+                command: "setup_session1",
+                time_stamp: this.linkObject().timeStamp(),
+                link_id: this.linkObject().linkId(),
+                initiator_name: this.linkObject().myName(),
+                peer_name: peer_name_val,
+                theme_data: theme_data,
+                });
+        console.log("GoBaseFabricObject.sendSetupGroupSessionRequest() output=" + output);
+        this.httpServiceObject().sendAjaxRequest(output); 
+    };
+
+    this.sendSetupMultipleSessionRequest = function(peer_name_val) {
         var theme_data = this.encodeGoConfig(19, 0, 0, 1);
         var output = JSON.stringify({
                 command: "setup_session1",
