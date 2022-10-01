@@ -66,7 +66,7 @@ function GoBaseFabricObject(root_object_val) {
         }
     };
 
-    this.sendSetupSoleSessionRequest = function() {
+    this.sendSetupSoloRequest = function() {
         var theme_data = this.encodeGoConfig(19, 0, 0, 1);
         var output = JSON.stringify({
                 command: "setup_session",
@@ -76,11 +76,11 @@ function GoBaseFabricObject(root_object_val) {
                 peer_name: this.linkObject().myName(),
                 theme_data: theme_data,
                 });
-        console.log("GoBaseFabricObject.sendSetupSoloSessionRequest() output=" + output);
+        console.log("GoBaseFabricObject.sendSetupSoloRequest() output=" + output);
         this.httpServiceObject().sendAjaxRequest(output); 
     };
 
-    this.sendSetupDualSessionRequest = function(peer_name_val) {
+    this.sendSetupDuetRequest = function(peer_name_val) {
         var theme_data = this.encodeGoConfig(19, 0, 0, 1);
         var output = JSON.stringify({
                 command: "setup_session1",
@@ -90,11 +90,11 @@ function GoBaseFabricObject(root_object_val) {
                 peer_name: peer_name_val,
                 theme_data: theme_data,
                 });
-        console.log("GoBaseFabricObject.sendSetupGroupSessionRequest() output=" + output);
+        console.log("GoBaseFabricObject.sendSetupDuetRequest() output=" + output);
         this.httpServiceObject().sendAjaxRequest(output); 
     };
 
-    this.sendSetupMultipleSessionRequest = function(peer_name_val) {
+    this.sendSetupTrioRequest = function(peer_name_val) {
         var theme_data = this.encodeGoConfig(19, 0, 0, 1);
         var output = JSON.stringify({
                 command: "setup_session1",
@@ -104,7 +104,7 @@ function GoBaseFabricObject(root_object_val) {
                 peer_name: peer_name_val,
                 theme_data: theme_data,
                 });
-        console.log("GoBaseFabricObject.sendSetupGroupSessionRequest() output=" + output);
+        console.log("GoBaseFabricObject.sendSetupTrioRequest() output=" + output);
         this.httpServiceObject().sendAjaxRequest(output); 
     };
 
