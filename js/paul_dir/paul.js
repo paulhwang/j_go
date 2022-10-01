@@ -5,15 +5,15 @@
 
 function PaulObject() {
     document.querySelector(".register_button").addEventListener("click", function() {
-        window.open("sign_up.html", "_self");
+        window.open("register.html", "_self");
     });
 
     document.querySelector(".login_button").addEventListener("click", function() {
-        window.open("sign_in.html", "_self");
+        window.open("login.html", "_self");
     });
 
     document.querySelector(".logout_button").addEventListener("click", function() {
-        window.open("sign_off.html", "_self");
+        window.open("logout.html", "_self");
     });
 
     document.querySelector(".go_button").addEventListener("click", function() {
