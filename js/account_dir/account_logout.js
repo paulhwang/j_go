@@ -3,7 +3,7 @@
   Written by Paul Hwang
 */
 
-function SignOffObject() {
+function AccountLogoutObject() {
     "use strict";
     this.init__ = function() {
         this.theFE_DEF = new FE_DEFINE_OBJECT();
@@ -13,9 +13,8 @@ function SignOffObject() {
 
     this.bindHtmlInput = function() {
         var this0 = this;
-        $(".sign_off_section .sign_off_button").on("click", function() {
-            var account_name = $(".sign_off_section .sign_off_account_name").val();
-            var password = $(".sign_off_section .sign_off_password").val();
+        $(".logout_section .logout_button").on("click", function() {
+            var account_name = $(".logout_section .logout_account_name").val();
             if (account_name) {
                 var output = JSON.stringify({
                         command: "sign_off",
@@ -23,7 +22,7 @@ function SignOffObject() {
                         link_id: sessionStorage.link_id,
                         my_name: sessionStorage.my_name,
                         });
-                console.log("signOffRequest=" + output);
+                console.log("AccountLogoutObject.bindHtmlInput() Logout Request=" + output);
 
                 this0.httpServiceObject().sendAjaxRequest(output);
             }
@@ -60,5 +59,5 @@ function SignOffObject() {
     this.init__();
 }
 
-var sign_off_main = function() {"use strict"; new SignOffObject();};
+var sign_off_main = function() {"use strict"; new AccountLogoutObject();};
 $(document).ready(sign_off_main);
