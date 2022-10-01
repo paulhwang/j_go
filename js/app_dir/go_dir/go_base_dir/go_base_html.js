@@ -11,15 +11,15 @@ function GoBaseHtmlObject(root_object_val) {
 
     this.setupQuerySelectors = function() {
         var this0 = this;
-        document.querySelector(".sole_button").addEventListener("click", function() {
+        document.querySelector(".solo_button").addEventListener("click", function() {
             this0.fabricObject().sendSetupSoleSessionRequest();
         });
 
-        document.querySelector(".dual_button").addEventListener("click", function() {
+        document.querySelector(".duet_button").addEventListener("click", function() {
             this0.fabricObject().sendSetupDualSessionRequest(this0.linkObject().myName());
         });
 
-        document.querySelector(".multiple_button").addEventListener("click", function() {
+        document.querySelector(".trio_button").addEventListener("click", function() {
             this0.fabricObject().sendSetupMultipleSessionRequest(this0.linkObject().myName());
         });
 
