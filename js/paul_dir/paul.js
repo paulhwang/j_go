@@ -4,15 +4,15 @@
 */
 
 function PaulObject() {
-    document.querySelector(".sign_up_button").addEventListener("click", function() {
+    document.querySelector(".register_button").addEventListener("click", function() {
         window.open("sign_up.html", "_self");
     });
 
-    document.querySelector(".sign_in_button").addEventListener("click", function() {
+    document.querySelector(".login_button").addEventListener("click", function() {
         window.open("sign_in.html", "_self");
     });
 
-    document.querySelector(".sign_off_button").addEventListener("click", function() {
+    document.querySelector(".logout_button").addEventListener("click", function() {
         window.open("sign_off.html", "_self");
     });
 
