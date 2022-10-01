@@ -42,17 +42,17 @@ function GoBaseFabricObject(root_object_val) {
                 console.log("GoBaseFabricObject.examineResponse(setup_duet1) invalid_result=" + data.result);
             }
         }
-        else if (response.command === "setup_trio") {
+        else if (response.command === "setup_ensemble") {
             var data = JSON.parse(response.data);
             if (data.result === this.FE_DEF().FE_RESULT_SUCCEED()) {
-                console.log("GoBaseFabricObject.examineResponse(setup_trio) succeed! session_id=", data.session_id);
+                console.log("GoBaseFabricObject.examineResponse(setup_ensemble) succeed! session_id=", data.session_id);
                 this.sendGetSessionSetupStatusRequest(data.session_id);
             }
             else if (data.result === this.FE_DEF().FE_RESULT_ACCOUNT_NAME_NOT_EXIST()) {
-                console.log("GoBaseFabricObject.examineResponse(setup_trio) account_not_exist");
+                console.log("GoBaseFabricObject.examineResponse(setup_ensemble) account_not_exist");
             }
             else {
-                console.log("GoBaseFabricObject.examineResponse(setup_trio) invalid_result=" + data.result);
+                console.log("GoBaseFabricObject.examineResponse(setup_ensemble) invalid_result=" + data.result);
             }
         }
         else if (response.command === "get_session_setup_status") {
@@ -107,10 +107,10 @@ function GoBaseFabricObject(root_object_val) {
         this.httpServiceObject().sendAjaxRequest(output); 
     };
 
-    this.sendSetupTrioRequest = function(peer_name_val) {
+    this.sendSetupEnsembleRequest = function(peer_name_val) {
         var theme_data = this.encodeGoConfig(19, 0, 0, 1);
         var output = JSON.stringify({
-                command: "setup_trio",
+                command: "setup_ensemble",
                 time_stamp: this.linkObject().timeStamp(),
                 link_id: this.linkObject().linkId(),
                 initiator_name: this.linkObject().myName(),

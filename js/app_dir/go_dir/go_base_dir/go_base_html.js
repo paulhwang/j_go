@@ -19,8 +19,8 @@ function GoBaseHtmlObject(root_object_val) {
             this0.fabricObject().sendSetupDuetRequest(this0.linkObject().myName());
         });
 
-        document.querySelector(".trio_button").addEventListener("click", function() {
-            this0.fabricObject().sendSetupTrioRequest(this0.linkObject().myName());
+        document.querySelector(".ensemble_button").addEventListener("click", function() {
+            this0.fabricObject().sendSetupEnsembleRequest(this0.linkObject().myName());
         });
 
         document.querySelector(".exit_button").addEventListener("click", function() {
