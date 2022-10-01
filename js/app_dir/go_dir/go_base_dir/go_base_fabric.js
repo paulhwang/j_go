@@ -85,7 +85,7 @@ function GoBaseFabricObject(root_object_val) {
                 command: "setup_solo",
                 time_stamp: this.linkObject().timeStamp(),
                 link_id: this.linkObject().linkId(),
-                initiator_name: this.linkObject().myName(),
+                first_fiddle: this.linkObject().myName(),
                 peer_name: this.linkObject().myName(),
                 theme_data: theme_data,
                 });
@@ -99,7 +99,7 @@ function GoBaseFabricObject(root_object_val) {
                 command: "setup_duet1",
                 time_stamp: this.linkObject().timeStamp(),
                 link_id: this.linkObject().linkId(),
-                initiator_name: this.linkObject().myName(),
+                first_fiddle: this.linkObject().myName(),
                 peer_name: peer_name_val,
                 theme_data: theme_data,
                 });
@@ -113,7 +113,7 @@ function GoBaseFabricObject(root_object_val) {
                 command: "setup_ensemble",
                 time_stamp: this.linkObject().timeStamp(),
                 link_id: this.linkObject().linkId(),
-                initiator_name: this.linkObject().myName(),
+                first_fiddle: this.linkObject().myName(),
                 peer_name: peer_name_val,
                 theme_data: theme_data,
                 });
