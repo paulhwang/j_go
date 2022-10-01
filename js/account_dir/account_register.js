@@ -3,7 +3,7 @@
   Written by Paul Hwang
 */
 
-function RegisterObject() {
+function AccountRegisterObject() {
     "use strict";
     this.init__ = function() {
         this.theFE_DEF = new FE_DEFINE_OBJECT();
@@ -24,7 +24,7 @@ function RegisterObject() {
                         password: password,
                         email: email,
                         });
-                console.log("RegisterObject.bindHtmlInput() registerRequest=" + output);
+                console.log("AccountRegisterObject.bindHtmlInput() registerRequest=" + output);
 
                 this0.httpServiceObject().sendAjaxRequest(output);
             }
@@ -55,5 +55,5 @@ function RegisterObject() {
     this.init__();
 }
 
-var sign_up_main = function() {"use strict"; new RegisterObject();};
+var sign_up_main = function() {"use strict"; new AccountRegisterObject();};
 $(document).ready(sign_up_main);
