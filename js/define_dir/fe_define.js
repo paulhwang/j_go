@@ -43,6 +43,9 @@ function FE_DEFINE_OBJECT() {
     this.FE_RESULT_LINK_NOT_EXIST             = function() {return this.theFE_RESULT_LINK_NOT_EXIST;};
     this.FE_RESULT_SESSION_NOT_EXIST          = function() {return this.theFE_RESULT_SESSION_NOT_EXIST;};
 
+    this.FE_ROOM_STATUS_PREPARING = () => 'P';
+    this.FE_ROOM_STATUS_READY     = () => 'R';
+
     this.init_();
 }
 

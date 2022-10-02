@@ -20,7 +20,7 @@ function GoBaseFabricObject(root_object_val) {
             var data = JSON.parse(response.data);
             if (data.result === this.FE_DEF().FE_RESULT_SUCCEED()) {
                 console.log("GoBaseFabricObject.examineResponse(setup_solo) succeed! session_id=", data.session_id);
-                if (data.room_status === 'R') {
+                if (data.room_status === this.FE_DEF().FE_ROOM_STATUS_READY()) {
                     this.sessionObject().setSessionInfoIntoStorage(data.session_id, data.group_mode, data.theme_data, data.first_fiddle, "not_available");
                     window.open("go_play.html", "_self");
                 }
@@ -52,7 +52,7 @@ function GoBaseFabricObject(root_object_val) {
             var data = JSON.parse(response.data);
             if (data.result === this.FE_DEF().FE_RESULT_SUCCEED()) {
                 console.log("GoBaseFabricObject.examineResponse(setup_ensemble) succeed! session_id=", data.session_id);
-                if (data.room_status === 'R') {
+                if (data.room_status === this.FE_DEF().FE_ROOM_STATUS_READY()) {
                     this.sessionObject().setSessionInfoIntoStorage(data.session_id, data.group_mode, data.theme_data, data.first_fiddle, "not_available");
                     window.open("go_play.html", "_self");
                 }
