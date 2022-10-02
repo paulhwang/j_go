@@ -20,7 +20,13 @@ function GoBaseFabricObject(root_object_val) {
             var data = JSON.parse(response.data);
             if (data.result === this.FE_DEF().FE_RESULT_SUCCEED()) {
                 console.log("GoBaseFabricObject.examineResponse(setup_solo) succeed! session_id=", data.session_id);
-                this.sendGetSessionSetupStatusRequest(data.session_id);
+                if (data.room_status === 'R') {
+                    this.sessionObject().setSessionInfoIntoStorage(data.session_id, data.group_mode, data.theme_data, data.first_fiddle, "not_available");
+                    window.open("go_play.html", "_self");
+                }
+                else {
+                    this.sendGetSessionSetupStatusRequest(data.session_id);
+                }
             }
             else if (data.result === this.FE_DEF().FE_RESULT_ACCOUNT_NAME_NOT_EXIST()) {
                 console.log("GoBaseFabricObject.examineResponse(setup_solo) account_not_exist");

@@ -87,13 +87,23 @@ function GoPlayInputObject(root_object_val) {
             }
             return;
         }
-        if (!this.gameObject().isMyTurn()) {this.debug(true, "uiClick", "not my turn"); return;}
+
+        if (!this.gameObject().isMyTurn()) {
+            console.log("GoPlayInputObject.uiClick() not my turn");
+            return;
+        }
+
         var x = Math.round((event_x - this.canvasElement().getBoundingClientRect().left) / grid_len) - 1;
         var y = Math.round((event_y - this.canvasElement().getBoundingClientRect().top) / grid_len) - 1;
-        if ((x < 0) || (y < 0) || (x >= this.boardSize()) || (y >= this.boardSize())) {return;}
+
+        if ((x < 0) || (y < 0) || (x >= this.boardSize()) || (y >= this.boardSize())) {
+            return;
+        }
+
         console.log("GoPlayInputObject.uiClick() (" + x + "," + y + ")");
         this.gameObject().processNewMove(x, y);
     };
+
     this.pendingRequestExist = function() {return this.thePendingRequestExist;};
     this.setPendingRequestExist = function() {this.thePendingRequestExist = true;};
     this.clearPendingRequestExist = function() {this.thePendingRequestExist = false;};

@@ -23,8 +23,9 @@ function GoPlayGameObject(root_object_val) {
     }
 
     this.setPlayBothsides = () => {
-        if ((this.sessionObject().groupMode() === 'I') ||
-            (this.linkObject().myName() === this.sessionObject().peerName())) {
+        if ( (this.sessionObject().groupMode() === 'S') ||
+            ((this.sessionObject().groupMode() === 'D') && (this.linkObject().myName() === this.sessionObject().peerName())) ||
+             (this.sessionObject().groupMode() === 'E')) {
             this.playBothSides_ = true;
         }
         else {
