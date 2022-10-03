@@ -24,7 +24,7 @@ function GoPlayUiMouseObject(root_object_val) {
             //console.log("GoPlayInputObject.uiMouseMove() (" + x + "," + y + ")");
             this.setLastMouseX(x);
             this.setLastMouseY(y);
-            this.displayObject().drawBoard();
+            this.uiDisplayObject().drawBoard();
         }
     };
 
@@ -120,7 +120,7 @@ function GoPlayUiMouseObject(root_object_val) {
     this.rootObject = () => this.rootObject_;
     this.configObject = () => this.rootObject().configObject();
     this.htmlObject = () => this.rootObject().htmlObject();
-    this.displayObject = () => this.rootObject().displayObject();
+    this.uiDisplayObject = () => this.rootObject().uiDisplayObject();
     this.gameObject = () => this.rootObject().gameObject();
     this.portObject = () => this.rootObject().portObject();
     this.init__(root_object_val);

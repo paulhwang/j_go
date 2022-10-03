@@ -47,7 +47,7 @@ function GoPlayPortObject(root_val) {
     this.receiveGameData = function(data_val) {
         this.uiMouseObject().clearPendingRequestExist();
         this.boardObject().decodeBoard(data_val);
-        this.displayObject().drawBoard();
+        this.uiDisplayObject().drawBoard();
     };
 
     this.rootObject = () => this.rootObject_;
@@ -55,6 +55,6 @@ function GoPlayPortObject(root_val) {
     this.gameObject = () => this.rootObject().gameObject();
     this.uiMouseObject = () => this.rootObject().uiMouseObject();
     this.boardObject = () => this.rootObject().boardObject();
-    this.displayObject = () => this.rootObject().displayObject();
+    this.uiDisplayObject = () => this.rootObject().uiDisplayObject();
     this.init__(root_val);
 }
