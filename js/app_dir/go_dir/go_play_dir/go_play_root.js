@@ -21,7 +21,7 @@ function GoPlayRootObject() {
         this.htmlObject_ = new GoPlayHtmlObject(this);
         this.fabricObject_ = new GoPlayFabricObject(this);
         this.htmlObject_ = new GoPlayHtmlObject(this);
-        this.inputObject_ = new GoPlayInputObject(this);
+        this.uiMouseObject_ = new GoPlayUiMouseObject(this);
         this.boardObject_ = new GoPlayBoardObject(this);
         this.portObject_ = new GoPlayPortObject(this);
         this.gameObject_ = new GoPlayGameObject(this);
@@ -32,7 +32,7 @@ function GoPlayRootObject() {
     this.boardObject = () => this.boardObject_;
     this.portObject = () => this.portObject_;
     this.gameObject = () => this.gameObject_
-    this.inputObject = () => this.inputObject_;
+    this.uiMouseObject = () => this.uiMouseObject_;
     this.displayObject = () => this.displayObject_;
     this.htmlObject = () => this.htmlObject_;
     this.linkObject = () => this.linkObject_;

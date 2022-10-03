@@ -19,7 +19,7 @@ function GoMoveObject(str_val, x_val, y_val, color_val, turn_val, root_object_va
     };
 
     this.encodeMove = function() {
-        var buf = "";
+        let buf = "";
         if (this.xX() < 10) {
           buf = buf + 0;
         } 
@@ -44,7 +44,7 @@ function GoMoveObject(str_val, x_val, y_val, color_val, turn_val, root_object_va
     };
 
     this.moveObjectDecode = function(str_val) {
-        var index = 0;
+        let index = 0;
         this.x_ = (str_val.charAt(index++) - '0') * 10;
         this.x_ += (str_val.charAt(index++) - '0');
         this.y_ = (str_val.charAt(index++) - '0') * 10;

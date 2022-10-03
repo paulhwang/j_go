@@ -9,12 +9,13 @@ function GoPlayBoardObject(root_val) {
         this.rootObject_ = root_val;
         this.boardArray_ = [19];
         this.markedBoardArray_ = [19];
-        for (var i = 0; i < 19; i++) {
+        for (let i = 0; i < 19; i++) {
             this.boardArray_[i] = [19];
             this.markedBoardArray_[i] = [19];
         }
         this.resetBoardObjectData();
     };
+
     /*
     this.addStoneToBoard = function(x_val, y_val, color_val) {
         if (!GO.isValidCoordinates(x_val, y_val, this.configObject().boardSize())) {
@@ -47,9 +48,10 @@ function GoPlayBoardObject(root_val) {
         return true;
     };
     */
+
     this.decodeBoard = function(str_val) {
-        var index = 0;
-        var num;
+        let index = 0;
+        let num;
         num  = (str_val.charAt(index++) - '0') * 100;
         num += (str_val.charAt(index++) - '0') * 10;
         num += (str_val.charAt(index++) - '0');
@@ -85,15 +87,17 @@ function GoPlayBoardObject(root_val) {
             this.gameObject().setValidLastDeadInfo(false);
         }
     };
+
     this.resetMarkedBoardObjectData = function() {
-        for (var i = 0; i < this.boardSize(); i++) {
+        for (let i = 0; i < this.boardSize(); i++) {
             for (var j = 0; j < this.boardSize(); j++) {
                 this.setMarkedBoardArray(i, j, GO.EMPTY_STONE());
             }
         }
     };
+
     this.resetBoardObjectData = function() {
-        for (var i = 0; i < this.boardSize(); i++) {
+        for (let i = 0; i < this.boardSize(); i++) {
             for (var j = 0; j < this.boardSize(); j++) {
                 this.setBoardArray(i, j, GO_DEF.EMPTY_STONE());
             }

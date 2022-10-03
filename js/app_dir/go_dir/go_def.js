@@ -15,6 +15,16 @@ function Go_DEF_OJBECT() {
     this.GO_PROTOCOL_TIME_INFO = () => "T";
     this.GO_PROTOCOL_CHAT_INFO = () => "C";
 
+    this.GO_PROTOCOL_MOVE_COMMAND            = () => "M";
+    this.GO_PROTOCOL_PASS_COMMAND            = () => "P";
+    this.GO_PROTOCOL_BACKWARD_COMMAND        = () => "b";
+    this.GO_PROTOCOL_DOUBLE_BACKWARD_COMMAND = () => "B";
+    this.GO_PROTOCOL_FORWARD_COMMAND         = () => "f";
+    this.GO_PROTOCOL_DOUBLE_FORWARD_COMMAND  = () => "F";
+    this.GO_PROTOCOL_RESIGN_COMMAND          = () => "R";
+    this.GO_PROTOCOL_CONFIRM_COMMAND         = () => "C";
+    this.GO_PROTOCOL_CONTINUE_COMMAND        = () => "c";
+
     this.BOTH_COLOR_STONE = function() {return 2;};
     this.MARK_DEAD_STONE_DIFF = function() {return 4;};
     this.MARK_EMPTY_STONE_DIFF = function() {return 6;};

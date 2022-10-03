@@ -41,10 +41,10 @@ function GoPlayHtmlObject(root_object_val) {
     this.setupHtmlInput = function(str1_val, str2_val) {
         var this0 = this;
         $("canvas").on("click", function(event) {
-            this0.inputObject().uiClick(event.clientX, event.clientY);
+            this0.uiMouseObject().uiClick(event.clientX, event.clientY);
         });
         $("canvas").on("mousemove", function(event) {
-            this0.inputObject().uiMouseMove(event.clientX, event.clientY);
+            this0.uiMouseObject().uiMouseMove(event.clientX, event.clientY);
         });
     };
 
@@ -52,7 +52,7 @@ function GoPlayHtmlObject(root_object_val) {
     this.phwangObject = function() {return this.rootObject().phwangObject();};
     this.configObject = function() {return this.rootObject().configObject();};
     this.ajaxObject = function() {return this.rootObject().ajaxObject();};
-    this.inputObject = function() {return this.rootObject().inputObject();};
+    this.uiMouseObject = function() {return this.rootObject().uiMouseObject();};
     this.renderNameListFuncExist = function() {return false;};
     this.canvasWidth = function() {return this.theCanvasWidth;};
     this.canvasElement = function() {return this.theCanvasElement;};

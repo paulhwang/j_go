@@ -3,7 +3,7 @@
   Written by Paul Hwang
 */
 
-function GoPlayInputObject(root_object_val) {
+function GoPlayUiMouseObject(root_object_val) {
     "use strict";
     this.init__ = function(root_object_val) {
         this.rootObject_ = root_object_val;
@@ -11,11 +11,12 @@ function GoPlayInputObject(root_object_val) {
         this.lastMouseY_ = 9;
         this.clearPendingRequestExist();
     };
+
     this.uiMouseMove = function(event_x, event_y) {
         if (this.pendingRequestExist()) return;
-        var grid_len = this.getGridLength();
-        var x = Math.round((event_x - this.canvasElement().getBoundingClientRect().left) / grid_len) - 1;
-        var y = Math.round((event_y - this.canvasElement().getBoundingClientRect().top) / grid_len) - 1;
+        const grid_len = this.getGridLength();
+        const x = Math.round((event_x - this.canvasElement().getBoundingClientRect().left) / grid_len) - 1;
+        const y = Math.round((event_y - this.canvasElement().getBoundingClientRect().top) / grid_len) - 1;
         if ((x < 0) || (y < 0) || (x >= this.boardSize()) || (y >= this.boardSize())) {
             return;
         }
@@ -26,14 +27,15 @@ function GoPlayInputObject(root_object_val) {
             this.displayObject().drawBoard();
         }
     };
+
     this.uiClick = function(event_x, event_y) {
         if (this.pendingRequestExist()) return;
         if (event_x < this.canvasElement().getBoundingClientRect().left) {return;}
         if (event_y < this.canvasElement().getBoundingClientRect().top) {return;}
         if (event_x > this.canvasElement().getBoundingClientRect().left + this.canvasElement().getBoundingClientRect().width) {return;}
         if (event_y > this.canvasElement().getBoundingClientRect().top + this.canvasElement().getBoundingClientRect().height) {return;}
-        var arrow_len = this.getArrowUnitLength();
-        var grid_len = this.getGridLength();
+        const arrow_len = this.getArrowUnitLength();
+        const grid_len = this.getGridLength();
         console.log("GoPlayInputObject.uiClick() raw_data=(" + event_x + ", " + event_y + ")");
 
         if (event_y > this.canvasElement().getBoundingClientRect().top + this.canvasElement().getBoundingClientRect().width) {
@@ -93,8 +95,8 @@ function GoPlayInputObject(root_object_val) {
             return;
         }
 
-        var x = Math.round((event_x - this.canvasElement().getBoundingClientRect().left) / grid_len) - 1;
-        var y = Math.round((event_y - this.canvasElement().getBoundingClientRect().top) / grid_len) - 1;
+        const x = Math.round((event_x - this.canvasElement().getBoundingClientRect().left) / grid_len) - 1;
+        const y = Math.round((event_y - this.canvasElement().getBoundingClientRect().top) / grid_len) - 1;
 
         if ((x < 0) || (y < 0) || (x >= this.boardSize()) || (y >= this.boardSize())) {
             return;
