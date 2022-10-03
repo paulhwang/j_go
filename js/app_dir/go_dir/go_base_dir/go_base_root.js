@@ -4,6 +4,7 @@
 */
 
 function GoBaseRootObject() {
+    "use strict";
     this.init__ = function() {
         this.linkObject_ = new FabricLinkObject();
         this.linkObject().getLinkInfoFromStorage();

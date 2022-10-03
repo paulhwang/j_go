@@ -3,8 +3,9 @@
  * Written by Paul Hwang
  */
 
-var GO_DEF = new GoDefineObject;
-function GoDefineObject() {
+var GO_DEF = new Go_DEF_OJBECT;
+
+function Go_DEF_OJBECT() {
     "use strict";
     this.EMPTY_STONE = () => 0;
     this.BLACK_STONE = () => 1;

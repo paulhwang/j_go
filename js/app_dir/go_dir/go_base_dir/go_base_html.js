@@ -4,6 +4,7 @@
 */
 
 function GoBaseHtmlObject(root_object_val) {
+    "use strict";
     this.init__ = function(root_object_val) {
         this.rootObject_ = root_object_val;
         this.setupQuerySelectors();
