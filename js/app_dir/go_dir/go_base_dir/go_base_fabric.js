@@ -13,11 +13,11 @@ function GoBaseFabricObject(root_object_val) {
     this.examineResponse = function(json_response_val) {
         console.log("GoBaseFabricObject.examineResponse() json_response_val=" + json_response_val);
 
-        var response = JSON.parse(json_response_val);
+        let response = JSON.parse(json_response_val);
         console.log("GoBaseFabricObject.examineResponse() response.data=" + response.data);
 
         if (response.command === "setup_solo") {
-            var data = JSON.parse(response.data);
+            let data = JSON.parse(response.data);
             if (data.result === this.FE_DEF().FE_RESULT_SUCCEED()) {
                 console.log("GoBaseFabricObject.examineResponse(setup_solo) succeed! session_id=", data.session_id);
                 if (data.room_status === this.FE_DEF().FE_ROOM_STATUS_READY()) {
@@ -36,7 +36,7 @@ function GoBaseFabricObject(root_object_val) {
             }
         }
         else if (response.command === "setup_duet1") {
-            var data = JSON.parse(response.data);
+            let data = JSON.parse(response.data);
             if (data.result === this.FE_DEF().FE_RESULT_SUCCEED()) {
                 console.log("GoBaseFabricObject.examineResponse(setup_duet1) succeed! session_id=", data.session_id);
                 this.sendGetSessionSetupStatusRequest(data.session_id);
@@ -49,7 +49,7 @@ function GoBaseFabricObject(root_object_val) {
             }
         }
         else if (response.command === "setup_ensemble") {
-            var data = JSON.parse(response.data);
+            let data = JSON.parse(response.data);
             if (data.result === this.FE_DEF().FE_RESULT_SUCCEED()) {
                 console.log("GoBaseFabricObject.examineResponse(setup_ensemble) succeed! session_id=", data.session_id);
                 if (data.room_status === this.FE_DEF().FE_ROOM_STATUS_READY()) {
@@ -68,7 +68,7 @@ function GoBaseFabricObject(root_object_val) {
             }
         }
         else if (response.command === "get_session_setup_status") {
-            var data = JSON.parse(response.data);
+            let data = JSON.parse(response.data);
             if (data.result === this.FE_DEF().FE_RESULT_SUCCEED()) {
                 console.log("GoBaseFabricObject.examineResponse(get_session_setup_status) succeed! session_id=", data.session_id);
                 if (data.room_status === 'R') {
@@ -92,8 +92,8 @@ function GoBaseFabricObject(root_object_val) {
     };
 
     this.sendSetupSoloRequest = function(group_mode_val, second_fiddle_val) {
-        var theme_data = this.encodeGoConfig(19, 0, 0, 1);
-        var output = JSON.stringify({
+        const theme_data = this.encodeGoConfig(19, 0, 0, 1);
+        const output = JSON.stringify({
                 command: "setup_solo",
                 time_stamp: this.linkObject().timeStamp(),
                 link_id: this.linkObject().linkId(),
@@ -107,8 +107,8 @@ function GoBaseFabricObject(root_object_val) {
     };
 
     this.sendSetupDuetRequest = function(group_mode_val, second_fiddle_val) {
-        var theme_data = this.encodeGoConfig(19, 0, 0, 1);
-        var output = JSON.stringify({
+        let theme_data = this.encodeGoConfig(19, 0, 0, 1);
+        let output = JSON.stringify({
                 command: "setup_duet1",
                 time_stamp: this.linkObject().timeStamp(),
                 link_id: this.linkObject().linkId(),
@@ -122,8 +122,8 @@ function GoBaseFabricObject(root_object_val) {
     };
 
     this.sendSetupEnsembleRequest = function(group_mode_val, second_fiddle_val) {
-        var theme_data = this.encodeGoConfig(19, 0, 0, 1);
-        var output = JSON.stringify({
+        let theme_data = this.encodeGoConfig(19, 0, 0, 1);
+        let output = JSON.stringify({
                 command: "setup_ensemble",
                 time_stamp: this.linkObject().timeStamp(),
                 link_id: this.linkObject().linkId(),
@@ -137,8 +137,8 @@ function GoBaseFabricObject(root_object_val) {
     };
 
     this.sendGetSessionSetupStatusRequest = function(session_id_val) {
-        var theme_data = this.encodeGoConfig(this.myName_, 19, 0, 0, 1);
-        var output = JSON.stringify({
+        let theme_data = this.encodeGoConfig(this.myName_, 19, 0, 0, 1);
+        let output = JSON.stringify({
                 command: "get_session_setup_status",
                 time_stamp: this.linkObject().timeStamp(),
                 link_id: this.linkObject().linkId(),
@@ -149,7 +149,7 @@ function GoBaseFabricObject(root_object_val) {
     };
 
     this.encodeGoConfig = function(board_size_val, handicap_val, komi_val, initiator_color_val) {
-        var buf = "G17";
+        let buf = "G17";
         if (board_size_val < 10) buf = buf + 0; buf = buf + board_size_val;
         if (handicap_val < 10)   buf = buf + 0; buf = buf + handicap_val;
         if (komi_val < 10)       buf = buf + 0; buf = buf + komi_val;

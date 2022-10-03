@@ -11,17 +11,17 @@ function GoBaseHtmlObject(root_object_val) {
     }
 
     this.setupQuerySelectors = function() {
-        var this0 = this;
+        let this0 = this;
         document.querySelector(".solo_button").addEventListener("click", function() {
             this0.fabricObject().sendSetupSoloRequest(this0.FE_DEF().FE_GROUP_MODE_SOLO(), "N/A");
         });
 
         document.querySelector(".duet_button").addEventListener("click", function() {
-            this0.fabricObject().sendSetupDuetRequest(this0.FE_DEF().FE_GROUP_MODE_DUET(), this0.linkObject().myName());
+            this0.fabricObject().sendSetupSoloRequest(this0.FE_DEF().FE_GROUP_MODE_DUET(), this0.linkObject().myName());
         });
 
         document.querySelector(".ensemble_button").addEventListener("click", function() {
-            this0.fabricObject().sendSetupEnsembleRequest(this0.FE_DEF().FE_GROUP_MODE_ENSEMBLE(), "N/A");
+            this0.fabricObject().sendSetupSoloRequest(this0.FE_DEF().FE_GROUP_MODE_ENSEMBLE(), "N/A");
         });
 
         document.querySelector(".exit_button").addEventListener("click", function() {

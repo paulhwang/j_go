@@ -24,7 +24,7 @@ function GoPlayGameObject(root_object_val) {
 
     this.setPlayBothsides = () => {
         if ( (this.sessionObject().groupMode() === 'S') ||
-            ((this.sessionObject().groupMode() === 'D') && (this.linkObject().myName() === this.sessionObject().peerName())) ||
+            ((this.sessionObject().groupMode() === 'D') && (this.sessionObject().firstFiddle() === this.sessionObject().secondFiddle())) ||
              (this.sessionObject().groupMode() === 'E')) {
             this.playBothSides_ = true;
         }
@@ -37,14 +37,14 @@ function GoPlayGameObject(root_object_val) {
     this.processNewMove = function(x_val, y_val) {
         console.log("GoPlayGameObject.processNewMove() (" + x_val + "," + y_val + ")");
         if (this.gameIsOver()) {
-            var move = new GoMoveObject(null, x_val, y_val, GO.THE_MARK_DEAD_STONE_DIFF, this.totalMoves(), this.containerObject());
+            let move = new GoMoveObject(null, x_val, y_val, GO.THE_MARK_DEAD_STONE_DIFF, this.totalMoves(), this.containerObject());
             this.portObject().transmitMoveData(move);
             return;
         }
         if (!this.isValidMoveOnBoard(x_val, y_val)) {
             return;
         }
-        var move = new GoMoveObject(null, x_val, y_val, this.nextColor(), this.totalMoves() + 1, this.rootObject());
+        let move = new GoMoveObject(null, x_val, y_val, this.nextColor(), this.totalMoves() + 1, this.rootObject());
         this.portObject().transmitMoveData(move);
     };
 
@@ -59,7 +59,7 @@ function GoPlayGameObject(root_object_val) {
     };
 
     this.isMyTurn = function() {
-        var result = (this.playBothSides()) || (this.nextColor() === this.configObject().myColor());
+        let result = (this.playBothSides()) || (this.nextColor() === this.configObject().myColor());
         return result;
     };
 
