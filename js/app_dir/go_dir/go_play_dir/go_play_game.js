@@ -16,7 +16,7 @@ function GoPlayGameObject(root_object_val) {
         this.theWhiteScoreString = null;
         this.theFinalScoreString = null;
         this.theTotalMoves = 0;
-        this.theNextColor = GO.BLACK_STONE();
+        this.theNextColor = GO_DEF.BLACK_STONE();
         this.theGameIsOver = false;
 
         this.setPlayBothsides();
@@ -49,7 +49,7 @@ function GoPlayGameObject(root_object_val) {
     };
 
     this.isValidMoveOnBoard = function(x_val, y_val) {
-        if (this.boardObject().boardArray(x_val, y_val) !== GO.EMPTY_STONE()) {
+        if (this.boardObject().boardArray(x_val, y_val) !== GO_DEF.EMPTY_STONE()) {
             return false;
         }
         if (this.validLastDeadInfo() && (x_val === this.lastDeadX()) && (y_val === this.lastDeadY())) {

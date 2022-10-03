@@ -89,9 +89,9 @@ function GoPlayDisplayObject(root_object_val) {
         var paint = null;
         for (var i = 0; i < this.boardSize(); i++) {
             for (var j = 0; j < this.boardSize(); j++) {
-                if (this.boardObject().boardArray(i, j) === GO.BLACK_STONE()) {
+                if (this.boardObject().boardArray(i, j) === GO_DEF.BLACK_STONE()) {
                     paint = "black";
-                } else if (this.boardObject().boardArray(i, j) === GO.WHITE_STONE()) {
+                } else if (this.boardObject().boardArray(i, j) === GO_DEF.WHITE_STONE()) {
                     paint = "white";
                 }
                 if (paint) {
@@ -123,7 +123,7 @@ function GoPlayDisplayObject(root_object_val) {
         var radius = 1.5 * micro_grid_len;
         var context = this.canvasContext();
         var paint;
-        if (this.gameObject().nextColor() === GO.BLACK_STONE()) {
+        if (this.gameObject().nextColor() === GO_DEF.BLACK_STONE()) {
             paint = "black";
             if (this.gameObject().gameIsOver()) {
                 paint = "gray";

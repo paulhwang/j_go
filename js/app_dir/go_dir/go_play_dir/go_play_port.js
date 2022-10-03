@@ -5,9 +5,6 @@
 
 function GoPlayPortObject(root_val) {
     "use strict";
-    this.GO_PROTOCOL_GAME_INFO = function() {return "G";};
-    this.GO_PROTOCOL_TIME_INFO = function() {return "T";};
-    this.GO_PROTOCOL_CHAT_INFO = function() {return "C";};
     this.GO_PROTOCOL_MOVE_COMMAND = function() {return "M";};
     this.GO_PROTOCOL_PASS_COMMAND = function() {return "P";};
     this.GO_PROTOCOL_BACKWARD_COMMAND = function() {return "b";};
@@ -35,7 +32,7 @@ function GoPlayPortObject(root_val) {
     this.transmitGameData = function(data_val) {
         console.log("GoPlayPortObject.transmitGameData() data_val=" + data_val);
         this.inputObject().setPendingRequestExist();
-        this.transmitData(this.GO_PROTOCOL_GAME_INFO() + data_val);
+        this.transmitData(GO_DEF.GO_PROTOCOL_GAME_INFO() + data_val);
     };
 
     this.transmitData = function(data_val) {
@@ -45,14 +42,14 @@ function GoPlayPortObject(root_val) {
 
     this.receiveData = function(data_val) {
         console.log("GoPlayPortObject.receiveData() data_val=" + data_val);
-        if (data_val.charAt(0) === this.GO_PROTOCOL_GAME_INFO().charAt(0)) {
+        if (data_val.charAt(0) === GO_DEF.GO_PROTOCOL_GAME_INFO().charAt(0)) {
             this.receiveGameData(data_val.slice(1));
             return;
         }
-        if (data_val.charAt(0) === this.GO_PROTOCOL_TIME_INFO().charAt(0)) {
+        if (data_val.charAt(0) === GO_DEF.GO_PROTOCOL_TIME_INFO().charAt(0)) {
             return;
         }
-        if (data_val.charAt(0) === this.GO_PROTOCOL_CHAT_INFO().charAt(0)) {
+        if (data_val.charAt(0) === GO_DEF.GO_PROTOCOL_CHAT_INFO().charAt(0)) {
             return;
         }
     };

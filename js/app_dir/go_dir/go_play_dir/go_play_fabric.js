@@ -4,7 +4,8 @@
 */
 
 function GoPlayFabricObject(root_object_val) {
-    this.init__ = function(root_object_val) {
+    "use strict";
+     this.init__ = function(root_object_val) {
         this.rootObject_ = root_object_val;
         this.httpServiceObject_ = new HttpServiceObject(this.examineResponse, this);
     };

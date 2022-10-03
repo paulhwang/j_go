@@ -95,7 +95,7 @@ function GoPlayBoardObject(root_val) {
     this.resetBoardObjectData = function() {
         for (var i = 0; i < this.boardSize(); i++) {
             for (var j = 0; j < this.boardSize(); j++) {
-                this.setBoardArray(i, j, GO.EMPTY_STONE());
+                this.setBoardArray(i, j, GO_DEF.EMPTY_STONE());
             }
         }
     };
