@@ -26,15 +26,15 @@ function FabricSessionObject() {
             abend();
             return -1;
         }
-        this.initiatorName_ = sessionStorage.getItem("initiator_name");
-        if (this.initiatorName_ === null) {
-            console.log("FabricSessionObject.getSessionInfoFromStorage() null initiator_name");
+        this.firstFiddle_ = sessionStorage.getItem("first_fiddle");
+        if (this.firstFiddle_ === null) {
+            console.log("FabricSessionObject.getSessionInfoFromStorage() null first_fiddle");
             abend();
             return -1;
         }
-        this.peerName_ = sessionStorage.getItem("peer_name");
-        if (this.peerName_ === null) {
-            console.log("FabricSessionObject.getSessionInfoFromStorage() null peer_name");
+        this.secondFiddle_ = sessionStorage.getItem("second_fiddle");
+        if (this.secondFiddle_ === null) {
+            console.log("FabricSessionObject.getSessionInfoFromStorage() null second_fiddle");
             abend();
             return -1;
         }
@@ -42,25 +42,25 @@ function FabricSessionObject() {
     };
 
     this.printSessionInfo = function() {
-        console.log("FabricSessionObject.getSessionInfoFromStorage() session_id=" + this.sessionId());
-        console.log("FabricSessionObject.getSessionInfoFromStorage() group_mode=" + this.groupMode());
-        console.log("FabricSessionObject.getSessionInfoFromStorage() themeData=" + this.themeData());
-        console.log("FabricSessionObject.getSessionInfoFromStorage() initiator_name=" + this.initiatorName());
-        console.log("FabricSessionObject.getSessionInfoFromStorage() peer_name=" + this.peerName());
+        console.log("FabricSessionObject.getSessionInfoFromStorage() session_id="    + this.sessionId());
+        console.log("FabricSessionObject.getSessionInfoFromStorage() group_mode="    + this.groupMode());
+        console.log("FabricSessionObject.getSessionInfoFromStorage() theme_data="    + this.themeData());
+        console.log("FabricSessionObject.getSessionInfoFromStorage() first_fiddle="  + this.firstFiddle());
+        console.log("FabricSessionObject.getSessionInfoFromStorage() second_fiddle=" + this.secondFiddle());
     }
 
-    this.setSessionInfoIntoStorage = function(session_id_val, group_mode_val, theme_data_val, initiator_name_val, peer_name_val) {
-        sessionStorage.setItem("session_id", session_id_val);
-        sessionStorage.setItem("group_mode", group_mode_val);
-        sessionStorage.setItem("theme_data", theme_data_val);
-        sessionStorage.setItem("initiator_name", initiator_name_val);
-        sessionStorage.setItem("peer_name", peer_name_val);
+    this.setSessionInfoIntoStorage = function(session_id_val, group_mode_val, theme_data_val, first_fiddle_val, second_fiddle_val) {
+        sessionStorage.setItem("session_id",    session_id_val);
+        sessionStorage.setItem("group_mode",    group_mode_val);
+        sessionStorage.setItem("theme_data",    theme_data_val);
+        sessionStorage.setItem("first_fiddle",  first_fiddle_val);
+        sessionStorage.setItem("second_fiddle", second_fiddle_val);
     };
 
-    this.sessionId = () => this.sessionId_;
-    this.groupMode = () => this.groupMode_;
-    this.themeData = () => this.themeData_;
-    this.initiatorName = () => this.initiatorName_;
-    this.peerName = () => this.peerName_;
+    this.sessionId    = () => this.sessionId_;
+    this.groupMode    = () => this.groupMode_;
+    this.themeData    = () => this.themeData_;
+    this.firstFiddle  = () => this.firstFiddle_;
+    this.secondFiddle = () => this.secondFiddle_;
     this.init__();
 };

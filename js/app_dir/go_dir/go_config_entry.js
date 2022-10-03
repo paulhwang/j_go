@@ -34,13 +34,13 @@ function GoConfigObject(root_val) {
         this.komiPoint_ = (go_config_data.charAt(index++) - '0') * 10
         this.komiPoint_ += go_config_data.charAt(index++) - '0';
 
-        this.initiatorColor_ = go_config_data.charAt(index++) - '0';
+        this.firstFiddleColor_ = go_config_data.charAt(index++) - '0';
 
-        if (this.rootObject().linkObject().myName() === this.rootObject().sessionObject().initiatorName()) {
-            this.myColor_ = this.initiatorColor_;
+        if (this.rootObject().linkObject().myName() === this.rootObject().sessionObject().firstFiddle()) {
+            this.myColor_ = this.firstFiddleColor_;
         }
         else {
-            if (this.initiatorColor_ === GO.BLACK_STONE) {
+            if (this.firstFiddleColor_ === GO.BLACK_STONE) {
                 this.myColor_ = GO.WHITE_STONE;
             }
             else {
@@ -53,14 +53,14 @@ function GoConfigObject(root_val) {
         console.log("GoConfigObject.decode() board_size=" + this.boardSize());
         console.log("GoConfigObject.decode() handicap=" + this.handicapPoint());
         console.log("GoConfigObject.decode() komi=" + this.komiPoint());
-        console.log("GoConfigObject.decode() initiator_color=" + this.initiatorColor());
+        console.log("GoConfigObject.decode() first_fiddle_color=" + this.firstFiddleColor());
         console.log("GoConfigObject.decode() myColor=" + this.myColor());
     }
 
     this.boardSize = () => this.boardSize_;
     this.handicapPoint = () => this.handicapPoint_;
     this.komiPoint = () => this.komiPoint_;
-    this.initiatorColor = () => this.initiatorColor_;
+    this.firstFiddleColor = () => this.firstFiddleColor_;
     this.myColor = () => this.myColor_;
     this.rootObject = () => this.rootObject_;
     this.init__(root_val);
