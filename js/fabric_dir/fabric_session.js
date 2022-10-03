@@ -4,6 +4,7 @@
 */
 
 function FabricSessionObject() {
+    "use strict";
     this.init__ = function() {
     }
 

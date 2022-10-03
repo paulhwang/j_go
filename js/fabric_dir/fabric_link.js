@@ -4,6 +4,7 @@
 */
 
 function FabricLinkObject() {
+    "use strict";
     this.init__ = function() {
     }
 

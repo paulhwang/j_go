@@ -4,6 +4,7 @@
 */
 
 function HttpServiceObject(callback_func_val, callback_object_val) {
+    "use strict";
     this.init__ = function() {
         this.theCallBackFunc = callback_func_val;
         this.theCallBackObject = callback_object_val;

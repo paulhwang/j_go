@@ -3,9 +3,10 @@
   Written by Paul Hwang
 */
 
-var FE_DEF = new FE_DEFINE_OBJECT;
+var FE_DEF = new FE_DEF_OBJECT;
 
-function FE_DEFINE_OBJECT() {
+function FE_DEF_OBJECT() {
+    "use strict";
     this.FE_RESULT_SUCCEED                    = () => "00";
     this.FE_RESULT_ACCOUNT_NAME_NOT_EXIST     = () => "01";
     this.FE_RESULT_ACCOUNT_NAME_ALREADY_EXIST = () => "02";
