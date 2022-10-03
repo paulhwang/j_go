@@ -27,7 +27,13 @@ function FE_DEFINE_OBJECT() {
 
     this.theFE_RESULT_MALLOC_ROOM_FAIL        = () => "71";
 
+    this.FE_GROUP_MODE_SOLO     = () => 'S';
+    this.FE_GROUP_MODE_DUET     = () => 'D';
+    this.FE_GROUP_MODE_ENSEMBLE = () => 'E';
+
     this.FE_ROOM_STATUS_PREPARING = () => 'P';
     this.FE_ROOM_STATUS_READY     = () => 'R';
+
+    this.FE_APP_IS_GO_GAME     = () => 'G';
 };
 

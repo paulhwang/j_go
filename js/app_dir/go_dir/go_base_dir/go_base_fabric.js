@@ -91,42 +91,45 @@ function GoBaseFabricObject(root_object_val) {
         }
     };
 
-    this.sendSetupSoloRequest = function() {
+    this.sendSetupSoloRequest = function(group_mode_val, second_fiddle_val) {
         var theme_data = this.encodeGoConfig(19, 0, 0, 1);
         var output = JSON.stringify({
                 command: "setup_solo",
                 time_stamp: this.linkObject().timeStamp(),
                 link_id: this.linkObject().linkId(),
+                group_mode: group_mode_val,
                 first_fiddle: this.linkObject().myName(),
-                peer_name: this.linkObject().myName(),
+                second_fiddle: second_fiddle_val,
                 theme_data: theme_data,
                 });
         console.log("GoBaseFabricObject.sendSetupSoloRequest() output=" + output);
         this.httpServiceObject().sendAjaxRequest(output); 
     };
 
-    this.sendSetupDuetRequest = function(peer_name_val) {
+    this.sendSetupDuetRequest = function(group_mode_val, second_fiddle_val) {
         var theme_data = this.encodeGoConfig(19, 0, 0, 1);
         var output = JSON.stringify({
                 command: "setup_duet1",
                 time_stamp: this.linkObject().timeStamp(),
                 link_id: this.linkObject().linkId(),
+                group_mode: group_mode_val,
                 first_fiddle: this.linkObject().myName(),
-                peer_name: peer_name_val,
+                second_fiddle: second_fiddle_val,
                 theme_data: theme_data,
                 });
         console.log("GoBaseFabricObject.sendSetupDuetRequest() output=" + output);
         this.httpServiceObject().sendAjaxRequest(output); 
     };
 
-    this.sendSetupEnsembleRequest = function(peer_name_val) {
+    this.sendSetupEnsembleRequest = function(group_mode_val, second_fiddle_val) {
         var theme_data = this.encodeGoConfig(19, 0, 0, 1);
         var output = JSON.stringify({
                 command: "setup_ensemble",
                 time_stamp: this.linkObject().timeStamp(),
                 link_id: this.linkObject().linkId(),
+                group_mode: group_mode_val,
                 first_fiddle: this.linkObject().myName(),
-                peer_name: peer_name_val,
+                second_fiddle: second_fiddle_val,
                 theme_data: theme_data,
                 });
         console.log("GoBaseFabricObject.sendSetupTrioRequest() output=" + output);
