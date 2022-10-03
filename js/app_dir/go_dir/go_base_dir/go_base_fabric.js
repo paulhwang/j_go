@@ -6,7 +6,6 @@
 function GoBaseFabricObject(root_object_val) {
     this.init__ = function(root_object_val) {
         this.rootObject_ = root_object_val;
-        this.FE_DEF_ = new FE_DEFINE_OBJECT();
         this.httpServiceObject_ = new HttpServiceObject(this.examineResponse, this);
     };
 
@@ -18,9 +17,9 @@ function GoBaseFabricObject(root_object_val) {
 
         if (response.command === "setup_solo") {
             let data = JSON.parse(response.data);
-            if (data.result === this.FE_DEF().FE_RESULT_SUCCEED()) {
+            if (data.result === FE_DEF.FE_RESULT_SUCCEED()) {
                 console.log("GoBaseFabricObject.examineResponse(setup_solo) succeed! session_id=", data.session_id);
-                if (data.room_status === this.FE_DEF().FE_ROOM_STATUS_READY()) {
+                if (data.room_status === FE_DEF.FE_ROOM_STATUS_READY()) {
                     this.sessionObject().setSessionInfoIntoStorage(data.session_id, data.group_mode, data.theme_data, data.first_fiddle, data.second_fiddle);
                     window.open("go_play.html", "_self");
                 }
@@ -28,7 +27,7 @@ function GoBaseFabricObject(root_object_val) {
                     //this.sendGetSessionSetupStatusRequest(data.session_id);
                 }
             }
-            else if (data.result === this.FE_DEF().FE_RESULT_ACCOUNT_NAME_NOT_EXIST()) {
+            else if (data.result === FE_DEF.FE_RESULT_ACCOUNT_NAME_NOT_EXIST()) {
                 console.log("GoBaseFabricObject.examineResponse(setup_solo) account_not_exist");
             }
             else {
@@ -157,7 +156,6 @@ function GoBaseFabricObject(root_object_val) {
         return buf;
     };
 
-    this.FE_DEF = () => this.FE_DEF_;
     this.rootObject = () => this.rootObject_;
     this.linkObject = () => this.rootObject().linkObject();
     this.sessionObject = () => this.rootObject().sessionObject();

@@ -10,7 +10,7 @@ function GoConfigObject(root_val) {
     };
     
     this.decode = function() {
-        var go_config_data = sessionStorage.getItem("theme_data");
+        const go_config_data = sessionStorage.getItem("theme_data");
 
         if ((go_config_data === undefined) || (go_config_data === "")) {
             this.theBoardSize = 19;
@@ -68,9 +68,9 @@ function GoConfigObject(root_val) {
 
 var GO = new GoDefineObject;
 function GoDefineObject() {
-    this.EMPTY_STONE = function() {return 0;};
-    this.BLACK_STONE = function() {return 1;};
-    this.WHITE_STONE = function() {return 2;};
+    this.EMPTY_STONE = () => 0;
+    this.BLACK_STONE = () => 1;
+    this.WHITE_STONE = () => 2;
     this.BOTH_COLOR_STONE = function() {return 2;};
     this.MARK_DEAD_STONE_DIFF = function() {return 4;};
     this.MARK_EMPTY_STONE_DIFF = function() {return 6;};

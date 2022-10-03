@@ -3,6 +3,8 @@
   Written by Paul Hwang
 */
 
+var FE_DEF = new FE_DEFINE_OBJECT;
+
 function FE_DEFINE_OBJECT() {
     this.FE_RESULT_SUCCEED                    = () => "00";
     this.FE_RESULT_ACCOUNT_NAME_NOT_EXIST     = () => "01";
