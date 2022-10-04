@@ -3,9 +3,9 @@
   Written by Paul Hwang
 */
 
-function GoPlayFabricObject(root_object_val) {
+function GoPlayFabricObject() {
     "use strict";
-     this.init__ = function(root_object_val) {
+     this.init__ = function() {
         this.linkObject_ = new FabricLinkObject();
         this.linkObject().getLinkInfoFromStorage();
         this.linkObject().printLinkInfo();
@@ -14,7 +14,6 @@ function GoPlayFabricObject(root_object_val) {
         this.sessionObject().getSessionInfoFromStorage();
         this.sessionObject().printSessionInfo();
 
-        this.rootObject_ = root_object_val;
         this.httpServiceObject_ = new HttpServiceObject(this.examineResponse, this);
     }
 
@@ -79,11 +78,10 @@ function GoPlayFabricObject(root_object_val) {
         this.httpServiceObject().sendAjaxRequest(output); 
     };
 
-    this.rootObject = () => this.rootObject_;
     this.linkObject = () => this.linkObject_;
     this.sessionObject = () => this.sessionObject_;
     this.putCallbackFunc = () => this.putCallbackFunc_;
     this.putCallbackObject = () => this.putCallbackObject_;
     this.httpServiceObject = () => this.httpServiceObject_;
-    this.init__(root_object_val);
+    this.init__();
 };

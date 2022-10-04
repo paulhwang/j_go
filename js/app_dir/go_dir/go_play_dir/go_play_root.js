@@ -6,7 +6,7 @@
 function GoPlayRootObject() {
     "use strict";
     this.init__ = function() {
-        this.fabricObject_ = new GoPlayFabricObject(this);
+        this.fabricObject_ = new GoPlayFabricObject();
         this.configObject_ = new GoConfigObject(this);
         this.configObject().decode();
         this.configObject().printConfigInfo();
