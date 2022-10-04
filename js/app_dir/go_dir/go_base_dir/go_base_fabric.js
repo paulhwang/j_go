@@ -3,7 +3,7 @@
   Written by Paul Hwang
 */
 
-function GoBaseFabricObject(root_object_val) {
+function FabricSessionSetupObject(root_object_val) {
     "use strict";
      this.init__ = function(root_object_val) {
         this.rootObject_ = root_object_val;
