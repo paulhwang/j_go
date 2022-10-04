@@ -6,7 +6,6 @@
 function AccountLogoutObject() {
     "use strict";
     this.init__ = function() {
-        this.theFE_DEF = new FE_DEFINE_OBJECT();
         this.theHttpServiceObject = new HttpServiceObject(this.examineResponse, this);
         this.bindHtmlInput();
     };
@@ -36,17 +35,17 @@ function AccountLogoutObject() {
         console.log("response.data=" + response.data);
 
         var data = JSON.parse(response.data);
-        if (data.result === this.FE_DEF().FE_RESULT_SUCCEED()) {
+        if (data.result === FE_DEF.FE_RESULT_SUCCEED()) {
             sessionStorage.setItem("link_id", null);
             sessionStorage.setItem("my_name", null);
             sessionStorage.setItem("time_stamp", null);
             console.log("succeed");
             window.history.go(-1);
         }
-        else if (data.result === this.FE_DEF().FE_RESULT_ACCOUNT_NAME_ALREADY_EXIST()) {
+        else if (data.result === FE_DEF.FE_RESULT_ACCOUNT_NAME_ALREADY_EXIST()) {
             console.log("account_name_already_exist");
         }
-        else if (data.result === this.FE_DEF().FE_RESULT_TIME_STAMP_NOT_MATCH()) {
+        else if (data.result === FE_DEF.FE_RESULT_TIME_STAMP_NOT_MATCH()) {
             console.log("time_stamp_not_match");
         }
         else {
@@ -54,8 +53,7 @@ function AccountLogoutObject() {
         }
     };
 
-    this.FE_DEF = function() {return this.theFE_DEF;};
-    this.httpServiceObject = function() {return this.theHttpServiceObject;};
+    this.httpServiceObject = () => this.theHttpServiceObject;
     this.init__();
 }
 

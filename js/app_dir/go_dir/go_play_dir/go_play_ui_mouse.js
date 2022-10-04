@@ -21,7 +21,7 @@ function GoPlayUiMouseObject(root_object_val) {
             return;
         }
         if ((this.lastMouseX() !== x) || (this.lastMouseY() !== y)) {
-            //console.log("GoPlayInputObject.uiMouseMove() (" + x + "," + y + ")");
+            //console.log("GoPlayUiMouseObject.uiMouseMove() (" + x + "," + y + ")");
             this.setLastMouseX(x);
             this.setLastMouseY(y);
             this.uiDisplayObject().drawBoard();
@@ -36,7 +36,7 @@ function GoPlayUiMouseObject(root_object_val) {
         if (event_y > this.canvasElement().getBoundingClientRect().top + this.canvasElement().getBoundingClientRect().height) {return;}
         const arrow_len = this.getArrowUnitLength();
         const grid_len = this.getGridLength();
-        console.log("GoPlayInputObject.uiClick() raw_data=(" + event_x + ", " + event_y + ")");
+        console.log("GoPlayUiMouseObject.uiClick() raw_data=(" + event_x + ", " + event_y + ")");
 
         if (event_y > this.canvasElement().getBoundingClientRect().top + this.canvasElement().getBoundingClientRect().width) {
             if (event_y < this.canvasElement().getBoundingClientRect().top + this.canvasElement().getBoundingClientRect().width + arrow_len) {
@@ -91,7 +91,7 @@ function GoPlayUiMouseObject(root_object_val) {
         }
 
         if (!this.gameObject().isMyTurn()) {
-            console.log("GoPlayInputObject.uiClick() not my turn");
+            console.log("GoPlayUiMouseObject.uiClick() not my turn");
             return;
         }
 
@@ -102,7 +102,7 @@ function GoPlayUiMouseObject(root_object_val) {
             return;
         }
 
-        console.log("GoPlayInputObject.uiClick() (" + x + "," + y + ")");
+        console.log("GoPlayUiMouseObject.uiClick() (" + x + "," + y + ")");
         this.gameObject().processNewMove(x, y);
     };
 
