@@ -27,7 +27,7 @@ function GoPlayPortObject(root_val) {
 
     this.transmitData = function(data_val) {
         console.log("GoPlayPortObject.transmitData() data_val=" + data_val);
-        this.rootObject().fabricObject().sendPutSessionDataRequest(data_val);
+        this.rootObject().fabricObject().sendPutSessionDataRequest(this.receiveData, data_val);
     };
 
     this.receiveData = function(data_val) {
