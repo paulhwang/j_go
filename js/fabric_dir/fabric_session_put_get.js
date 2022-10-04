@@ -53,8 +53,7 @@ function FabricSessionPutGetObject() {
         }
     };
 
-    this.sendPutSessionDataRequest = function(func_val, object_val, data_val) {
-        this.setCallbackFunc(func_val, object_val);
+    this.sendPutSessionDataRequest = function(data_val) {
         const output = JSON.stringify({
                 command: "put_session_data",
                 time_stamp: this.linkObject().timeStamp(),
