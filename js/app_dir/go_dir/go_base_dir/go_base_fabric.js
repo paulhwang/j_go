@@ -21,7 +21,7 @@ function GoBaseFabricObject(root_object_val) {
             if (data.result === FE_DEF.FE_RESULT_SUCCEED()) {
                 console.log("GoBaseFabricObject.examineResponse(setup_solo) succeed! session_id=", data.session_id);
                 if (data.room_status === FE_DEF.FE_ROOM_STATUS_READY()) {
-                    this.sessionObject().setSessionInfoIntoStorage(data.session_id, data.group_mode, data.theme_data, data.first_fiddle, data.second_fiddle);
+                    this.sessionObject().setSessionInfoIntoStorage(data.session_id, data.group_mode, data.theme_type, data.theme_data, data.first_fiddle, data.second_fiddle);
                     window.open("go_play.html", "_self");
                 }
                 else {

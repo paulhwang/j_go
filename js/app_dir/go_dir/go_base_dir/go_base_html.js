@@ -33,7 +33,7 @@ function GoBaseHtmlObject(root_object_val) {
     };
 
     this.encodeGoConfig = function(board_size_val, handicap_val, komi_val, initiator_color_val) {
-        let buf = "G17";
+        let buf = "17";
         if (board_size_val < 10) buf = buf + 0; buf = buf + board_size_val;
         if (handicap_val < 10)   buf = buf + 0; buf = buf + handicap_val;
         if (komi_val < 10)       buf = buf + 0; buf = buf + komi_val;

@@ -19,12 +19,7 @@ function GoConfigObject(root_val) {
             return;
         }
 
-        if (go_config_data.charAt(0) != 'G') {
-            console.log("GoConfigObject.decode() not G");
-            abend();
-        }
-
-        var index = 3;
+        var index = 2;
         this.boardSize_ = (go_config_data.charAt(index++) - '0') * 10
         this.boardSize_ += go_config_data.charAt(index++) - '0';
 
