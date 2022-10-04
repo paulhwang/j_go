@@ -19,7 +19,7 @@ function GoConfigObject(root_val) {
             return;
         }
 
-        var index = 2;
+        let index = 0;
         this.boardSize_ = (go_config_data.charAt(index++) - '0') * 10
         this.boardSize_ += go_config_data.charAt(index++) - '0';
 

@@ -48,7 +48,7 @@ function GoPlayHtmlObject(root_object_val) {
         });
     };
 
-   this.rootObject = () => this.rootObject_;
+    this.rootObject = () => this.rootObject_;
     this.phwangObject = function() {return this.rootObject().phwangObject();};
     this.configObject = function() {return this.rootObject().configObject();};
     this.ajaxObject = function() {return this.rootObject().ajaxObject();};
