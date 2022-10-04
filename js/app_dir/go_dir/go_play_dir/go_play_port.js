@@ -27,7 +27,7 @@ function GoPlayPortObject(root_val) {
 
     this.transmitData = function(data_val) {
         console.log("GoPlayPortObject.transmitData() data_val=" + data_val);
-        this.rootObject().fabricSessionDataObject().sendPutSessionDataRequest(this.receiveData, this, data_val);
+        this.fabricSessionPutGetObject().sendPutSessionDataRequest(this.receiveData, this, data_val);
     };
 
     this.receiveData = function(data_val) {
@@ -51,6 +51,7 @@ function GoPlayPortObject(root_val) {
     };
 
     this.rootObject = () => this.rootObject_;
+    this.fabricSessionPutGetObject = () => this.rootObject().fabricSessionPutGetObject();
     this.configObject = () => this.rootObject().configObject();
     this.gameObject = () => this.rootObject().gameObject();
     this.uiMouseObject = () => this.rootObject().uiMouseObject();

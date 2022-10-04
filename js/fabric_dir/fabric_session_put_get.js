@@ -3,7 +3,7 @@
   Written by Paul Hwang
 */
 
-function FabricSessionDataObject() {
+function FabricSessionPutGetObject() {
     "use strict";
      this.init__ = function() {
         this.linkObject_ = new FabricLinkObject();
@@ -23,30 +23,29 @@ function FabricSessionDataObject() {
     };
 
     this.examineResponse = function(json_response_val) {
-        console.log("GoPlayFabricObject.examineResponse() json_response_val=" + json_response_val);
+        console.log("FabricSessionPutGetObject.examineResponse() json_response_val=" + json_response_val);
 
         const response = JSON.parse(json_response_val);
-        //console.log("GoPlayFabricObject.examineResponse() response.data=" + response.data);
+        //console.log("FabricSessionPutGetObject.examineResponse() response.data=" + response.data);
 
         if (response.command === "put_session_data") {
             const data = JSON.parse(response.data);
             if (data.result === FE_DEF.FE_RESULT_SUCCEED()) {
-                console.log("GoPlayFabricObject.examineResponse(put_session_data) succeed! session_id=", data.session_id);
+                console.log("FabricSessionPutGetObject.examineResponse(put_session_data) succeed! session_id=", data.session_id);
                 this.putCallbackFunc().bind(this.putCallbackObject())(data.result_data);
-                //this.putCallbackFunc().bind(this.rootObject().portObject())(data.result_data);
             }
             else {
-                console.log("GoPlayFabricObject.examineResponse(put_session_data) invalid_result=" + data.result);
+                console.log("FabricSessionPutGetObject.examineResponse(put_session_data) invalid_result=" + data.result);
             }
         }
         else if (response.command === "get_session_data") {
             const data = JSON.parse(response.data);
             if (data.result === FE_DEF.FE_RESULT_SUCCEED()) {
-                console.log("GoPlayFabricObject.examineResponse(get_session_data) succeed! session_id=", data.session_id);
+                console.log("FabricSessionPutGetObject.examineResponse(get_session_data) succeed! session_id=", data.session_id);
                 this.rootObject().portObject().receiveData(data.c_data);
             }
             else {
-                console.log("GoPlayFabricObject.examineResponse(get_session_data) invalid_result=" + data.result);
+                console.log("FabricSessionPutGetObject.examineResponse(get_session_data) invalid_result=" + data.result);
             }
         }
         else {
@@ -63,7 +62,7 @@ function FabricSessionDataObject() {
                 session_id: this.sessionObject().sessionId(),
                 data: data_val,
                 });
-        console.log("GoBaseFabricObject.sendPutSessionDataRequest() output=" + output);
+        console.log("FabricSessionPutGetObject.sendPutSessionDataRequest() output=" + output);
         this.httpServiceObject().sendAjaxRequest(output); 
     };
 
@@ -74,7 +73,7 @@ function FabricSessionDataObject() {
                 link_id: this.linkObject().linkId(),
                 session_id: this.sessionObject().sessionId(),
                 });
-        console.log("GoBaseFabricObject.sendGetSessionDataRequest() output=" + output);
+        console.log("FabricSessionPutGetObject.sendGetSessionDataRequest() output=" + output);
         this.httpServiceObject().sendAjaxRequest(output); 
     };
 

@@ -6,7 +6,7 @@
 function GoPlayRootObject() {
     "use strict";
     this.init__ = function() {
-        this.fabricSessionDataObject_ = new FabricSessionDataObject();
+        this.fabricSessionPutGetObject_ = new FabricSessionPutGetObject();
         this.configObject_ = new GoConfigObject(this);
         this.configObject().decode();
         this.configObject().printConfigInfo();
@@ -25,9 +25,9 @@ function GoPlayRootObject() {
     this.uiMouseObject = () => this.uiMouseObject_;
     this.uiDisplayObject = () => this.uiDisplayObject_;
     this.htmlObject = () => this.htmlObject_;
-    this.linkObject = () => this.fabricSessionDataObject().linkObject();
-    this.sessionObject = () => this.fabricSessionDataObject().sessionObject();
-    this.fabricSessionDataObject = () => this.fabricSessionDataObject_;
+    this.linkObject = () => this.fabricSessionPutGetObject().linkObject();
+    this.sessionObject = () => this.fabricSessionPutGetObject().sessionObject();
+    this.fabricSessionPutGetObject = () => this.fabricSessionPutGetObject_;
     this.htmlObject = () => this.htmlObject_;
     this.init__();
 }
