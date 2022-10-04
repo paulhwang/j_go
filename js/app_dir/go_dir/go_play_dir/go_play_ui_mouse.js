@@ -47,34 +47,34 @@ function GoPlayUiMouseObject(root_object_val) {
             }
             if ((event_x - this.canvasElement().getBoundingClientRect().left) < arrow_len * 2.5) {
                 this.portObject().transmitDoubleBackwardCommand();
-                this.displayObject().drawBoard();
+                this.uiDisplayObject().drawBoard();
                 return;
             }
             if ((event_x - this.canvasElement().getBoundingClientRect().left) < arrow_len * 4.5) {
                 this.portObject().transmitBackwardCommand();
-                this.displayObject().drawBoard();
+                this.uiDisplayObject().drawBoard();
                 return;
             }
             if ((event_x - this.canvasElement().getBoundingClientRect().left) < arrow_len * 6.5) {
                 this.portObject().transmitForwardCommand();
-                this.displayObject().drawBoard();
+                this.uiDisplayObject().drawBoard();
                 return;
             }
             if ((event_x - this.canvasElement().getBoundingClientRect().left) < arrow_len * 8.5) {
                 this.portObject().transmitDoubleForwardCommand();
-                this.displayObject().drawBoard();
+                this.uiDisplayObject().drawBoard();
                 return;
             }
             if ((event_x - this.canvasElement().getBoundingClientRect().left) < arrow_len * 10.5) {
                 if (this.gameObject().isMyTurn()) {
                     this.portObject().transmitPassCommand();
-                    this.displayObject().drawBoard();
+                    this.uiDisplayObject().drawBoard();
                 }
                 return;
             }
             if ((event_x - this.canvasElement().getBoundingClientRect().left) < arrow_len * 12.5) {
                 this.portObject().transmitConfirmCommand();
-                this.displayObject().drawBoard();
+                this.uiDisplayObject().drawBoard();
                 return;
             }
             if ((event_x - this.canvasElement().getBoundingClientRect().left) < arrow_len * 14.5) {
@@ -84,7 +84,7 @@ function GoPlayUiMouseObject(root_object_val) {
             }
             if ((event_x - this.canvasElement().getBoundingClientRect().left) < arrow_len * 18.5) {
                 this.portObject().transmitContinueCommand();
-                this.displayObject().drawBoard();
+                this.uiDisplayObject().drawBoard();
                 return;
             }
             return;
