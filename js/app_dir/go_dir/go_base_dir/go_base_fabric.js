@@ -35,64 +35,12 @@ function GoBaseFabricObject(root_object_val) {
                 console.log("GoBaseFabricObject.examineResponse(setup_solo) invalid_result=" + data.result);
             }
         }
-        else if (response.command === "setup_duet1") {
-            let data = JSON.parse(response.data);
-            if (data.result === this.FE_DEF().FE_RESULT_SUCCEED()) {
-                console.log("GoBaseFabricObject.examineResponse(setup_duet1) succeed! session_id=", data.session_id);
-                this.sendGetSessionSetupStatusRequest(data.session_id);
-            }
-            else if (data.result === this.FE_DEF().FE_RESULT_ACCOUNT_NAME_NOT_EXIST()) {
-                console.log("GoBaseFabricObject.examineResponse(setup_duet1) account_not_exist");
-            }
-            else {
-                console.log("GoBaseFabricObject.examineResponse(setup_duet1) invalid_result=" + data.result);
-            }
-        }
-        else if (response.command === "setup_ensemble") {
-            let data = JSON.parse(response.data);
-            if (data.result === this.FE_DEF().FE_RESULT_SUCCEED()) {
-                console.log("GoBaseFabricObject.examineResponse(setup_ensemble) succeed! session_id=", data.session_id);
-                if (data.room_status === this.FE_DEF().FE_ROOM_STATUS_READY()) {
-                    this.sessionObject().setSessionInfoIntoStorage(data.session_id, data.group_mode, data.theme_data, data.first_fiddle, data.second_fiddle);
-                    window.open("go_play.html", "_self");
-                }
-                else {
-                    //this.sendGetSessionSetupStatusRequest(data.session_id);
-                }
-            }
-            else if (data.result === this.FE_DEF().FE_RESULT_ACCOUNT_NAME_NOT_EXIST()) {
-                console.log("GoBaseFabricObject.examineResponse(setup_ensemble) account_not_exist");
-            }
-            else {
-                console.log("GoBaseFabricObject.examineResponse(setup_ensemble) invalid_result=" + data.result);
-            }
-        }
-        else if (response.command === "get_session_setup_status") {
-            let data = JSON.parse(response.data);
-            if (data.result === this.FE_DEF().FE_RESULT_SUCCEED()) {
-                console.log("GoBaseFabricObject.examineResponse(get_session_setup_status) succeed! session_id=", data.session_id);
-                if (data.room_status === 'R') {
-                    this.sessionObject().setSessionInfoIntoStorage(data.session_id, data.group_mode, data.theme_data, data.initiator_name, data.peer_name);
-                    window.open("go_play.html", "_self");
-                }
-                else {
-                    this.sendGetSessionSetupStatusRequest(data.session_id);
-                }
-            }
-            else if (data.result === this.FE_DEF().FE_RESULT_ACCOUNT_NAME_NOT_EXIST()) {
-                console.log("GoBaseFabricObject.examineResponse(get_session_setup_status) account_not_exist");
-            }
-            else {
-                console.log("GoBaseFabricObject.examineResponse(get_session_setup_status) invalid_result=" + data.result);
-            }
-        }
         else {
             abend();
         }
     };
 
-    this.sendSetupSoloRequest = function(group_mode_val, second_fiddle_val) {
-        const theme_data = this.encodeGoConfig(19, 0, 0, 1);
+    this.sendSetupSoloRequest = function(theme_type_val, theme_data_val, group_mode_val, second_fiddle_val) {
         const output = JSON.stringify({
                 command: "setup_solo",
                 time_stamp: this.linkObject().timeStamp(),
@@ -100,61 +48,11 @@ function GoBaseFabricObject(root_object_val) {
                 group_mode: group_mode_val,
                 first_fiddle: this.linkObject().myName(),
                 second_fiddle: second_fiddle_val,
-                theme_data: theme_data,
+                theme_type: theme_type_val,
+                theme_data: theme_data_val,
                 });
         console.log("GoBaseFabricObject.sendSetupSoloRequest() output=" + output);
         this.httpServiceObject().sendAjaxRequest(output); 
-    };
-
-    this.sendSetupDuetRequest = function(group_mode_val, second_fiddle_val) {
-        let theme_data = this.encodeGoConfig(19, 0, 0, 1);
-        let output = JSON.stringify({
-                command: "setup_duet1",
-                time_stamp: this.linkObject().timeStamp(),
-                link_id: this.linkObject().linkId(),
-                group_mode: group_mode_val,
-                first_fiddle: this.linkObject().myName(),
-                second_fiddle: second_fiddle_val,
-                theme_data: theme_data,
-                });
-        console.log("GoBaseFabricObject.sendSetupDuetRequest() output=" + output);
-        this.httpServiceObject().sendAjaxRequest(output); 
-    };
-
-    this.sendSetupEnsembleRequest = function(group_mode_val, second_fiddle_val) {
-        let theme_data = this.encodeGoConfig(19, 0, 0, 1);
-        let output = JSON.stringify({
-                command: "setup_ensemble",
-                time_stamp: this.linkObject().timeStamp(),
-                link_id: this.linkObject().linkId(),
-                group_mode: group_mode_val,
-                first_fiddle: this.linkObject().myName(),
-                second_fiddle: second_fiddle_val,
-                theme_data: theme_data,
-                });
-        console.log("GoBaseFabricObject.sendSetupTrioRequest() output=" + output);
-        this.httpServiceObject().sendAjaxRequest(output); 
-    };
-
-    this.sendGetSessionSetupStatusRequest = function(session_id_val) {
-        let theme_data = this.encodeGoConfig(this.myName_, 19, 0, 0, 1);
-        let output = JSON.stringify({
-                command: "get_session_setup_status",
-                time_stamp: this.linkObject().timeStamp(),
-                link_id: this.linkObject().linkId(),
-                session_id: session_id_val,
-                });
-        console.log("GoBaseFabricObject.sendGetSessionSetupStatusRequest() output=" + output);
-        this.httpServiceObject().sendAjaxRequest(output); 
-    };
-
-    this.encodeGoConfig = function(board_size_val, handicap_val, komi_val, initiator_color_val) {
-        let buf = "G17";
-        if (board_size_val < 10) buf = buf + 0; buf = buf + board_size_val;
-        if (handicap_val < 10)   buf = buf + 0; buf = buf + handicap_val;
-        if (komi_val < 10)       buf = buf + 0; buf = buf + komi_val;
-        buf = buf + initiator_color_val;
-        return buf;
     };
 
     this.rootObject = () => this.rootObject_;

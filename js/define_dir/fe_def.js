@@ -37,6 +37,6 @@ function FE_DEF_OBJECT() {
     this.FE_ROOM_STATUS_PREPARING = () => 'P';
     this.FE_ROOM_STATUS_READY     = () => 'R';
 
-    this.FE_APP_IS_GO_GAME     = () => 'G';
+    this.FE_THEME_IS_GO_GAME = () => 'G';
 };
 

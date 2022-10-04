@@ -11,22 +11,34 @@ function GoBaseHtmlObject(root_object_val) {
     }
 
     this.setupQuerySelectors = function() {
-        let this0 = this;
+        const theme_type = FE_DEF.FE_THEME_IS_GO_GAME();
+        const theme_data = this.encodeGoConfig(19, 0, 0, 1);
+
+        const this0 = this;
         document.querySelector(".solo_button").addEventListener("click", function() {
-            this0.fabricObject().sendSetupSoloRequest(FE_DEF.FE_GROUP_MODE_SOLO(), "N/A");
+            this0.fabricObject().sendSetupSoloRequest(theme_type, theme_data, FE_DEF.FE_GROUP_MODE_SOLO(), "N/A");
         });
 
         document.querySelector(".duet_button").addEventListener("click", function() {
-            this0.fabricObject().sendSetupSoloRequest(FE_DEF.FE_GROUP_MODE_DUET(), this0.linkObject().myName());
+            this0.fabricObject().sendSetupSoloRequest(theme_type, theme_data, FE_DEF.FE_GROUP_MODE_DUET(), this0.linkObject().myName());
         });
 
         document.querySelector(".ensemble_button").addEventListener("click", function() {
-            this0.fabricObject().sendSetupSoloRequest(FE_DEF.FE_GROUP_MODE_ENSEMBLE(), "N/A");
+            this0.fabricObject().sendSetupSoloRequest(theme_type, theme_data, FE_DEF.FE_GROUP_MODE_ENSEMBLE(), "N/A");
         });
 
         document.querySelector(".exit_button").addEventListener("click", function() {
             window.history.go(-1);
         });
+    };
+
+    this.encodeGoConfig = function(board_size_val, handicap_val, komi_val, initiator_color_val) {
+        let buf = "G17";
+        if (board_size_val < 10) buf = buf + 0; buf = buf + board_size_val;
+        if (handicap_val < 10)   buf = buf + 0; buf = buf + handicap_val;
+        if (komi_val < 10)       buf = buf + 0; buf = buf + komi_val;
+        buf = buf + initiator_color_val;
+        return buf;
     };
 
     this.rootObject = () => this.rootObject_;
