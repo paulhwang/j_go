@@ -49,17 +49,17 @@ function GoPlayHtmlObject(root_object_val) {
     };
 
     this.rootObject = () => this.rootObject_;
-    this.phwangObject = function() {return this.rootObject().phwangObject();};
-    this.configObject = function() {return this.rootObject().configObject();};
-    this.ajaxObject = function() {return this.rootObject().ajaxObject();};
-    this.uiMouseObject = function() {return this.rootObject().uiMouseObject();};
-    this.renderNameListFuncExist = function() {return false;};
-    this.canvasWidth = function() {return this.theCanvasWidth;};
-    this.canvasElement = function() {return this.theCanvasElement;};
-    this.canvasContext = function() {return this.theCanvasContext;};
-    this.blackScoreElement = function() {return this.theBlackScoreElement;};
-    this.whiteScoreElement = function() {return this.theWhiteScoreElement;};
-    this.getGridLength = function() {return this.canvasElement().width / (this.configObject().boardSize() + 1);};
-    this.getArrowUnitLength = function() {return this.canvasElement().width / 20;};
+    //this.phwangObject = function() {return this.rootObject().phwangObject();};
+    this.configObject = () => this.rootObject().configObject();
+    //this.ajaxObject = function() {return this.rootObject().ajaxObject();};
+    this.uiMouseObject = () => this.rootObject().uiMouseObject();
+    //this.renderNameListFuncExist = function() {return false;};
+    this.canvasWidth = () => this.theCanvasWidth;
+    this.canvasElement = () => this.theCanvasElement;
+    this.canvasContext = () => this.theCanvasContext;
+    this.blackScoreElement = () => this.theBlackScoreElement;
+    this.whiteScoreElement = () => this.theWhiteScoreElement;
+    this.getGridLength = () => this.canvasElement().width / (this.configObject().boardSize() + 1);
+    this.getArrowUnitLength = () => this.canvasElement().width / 20;
     this.init__(root_object_val);
 }
