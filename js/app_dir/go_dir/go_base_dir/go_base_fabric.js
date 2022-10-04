@@ -7,6 +7,12 @@ function FabricSessionSetupObject(root_object_val) {
     "use strict";
      this.init__ = function(root_object_val) {
         this.rootObject_ = root_object_val;
+
+        this.linkObject_ = new FabricLinkObject();
+        this.linkObject().getLinkInfoFromStorage();
+
+        this.sessionObject_ = new FabricSessionObject();
+
         this.httpServiceObject_ = new HttpServiceObject(this.examineResponse, this);
     };
 
@@ -56,8 +62,8 @@ function FabricSessionSetupObject(root_object_val) {
     };
 
     this.rootObject = () => this.rootObject_;
-    this.linkObject = () => this.rootObject().linkObject();
-    this.sessionObject = () => this.rootObject().sessionObject();
+    this.linkObject = () => this.linkObject_;
+    this.sessionObject = () => this.sessionObject_;
     this.httpServiceObject = () => this.httpServiceObject_;
     this.init__(root_object_val);
 };
