@@ -18,8 +18,9 @@ function GoPlayFabricObject(root_object_val) {
         this.httpServiceObject_ = new HttpServiceObject(this.examineResponse, this);
     }
 
-    this.setCallbackFunc = function(func_val) {
+    this.setCallbackFunc = function(func_val, object_val) {
         this.putCallbackFunc_ = func_val;
+        this.putCallbackObject_ = object_val;
     };
 
     this.examineResponse = function(json_response_val) {
@@ -32,9 +33,8 @@ function GoPlayFabricObject(root_object_val) {
             const data = JSON.parse(response.data);
             if (data.result === FE_DEF.FE_RESULT_SUCCEED()) {
                 console.log("GoPlayFabricObject.examineResponse(put_session_data) succeed! session_id=", data.session_id);
-                this.putCallbackFunc().bind(this.rootObject().portObject())(data.result_data);
-                //this.rootObject().portObject().receiveData(data.result_data);
-                //this.sendGetSessionDataRequest();
+                this.putCallbackFunc().bind(this.putCallbackObject())(data.result_data);
+                //this.putCallbackFunc().bind(this.rootObject().portObject())(data.result_data);
             }
             else {
                 console.log("GoPlayFabricObject.examineResponse(put_session_data) invalid_result=" + data.result);
@@ -55,8 +55,8 @@ function GoPlayFabricObject(root_object_val) {
         }
     };
 
-    this.sendPutSessionDataRequest = function(func_val, data_val) {
-        this.setCallbackFunc(func_val);
+    this.sendPutSessionDataRequest = function(func_val, object_val, data_val) {
+        this.setCallbackFunc(func_val, object_val);
         const output = JSON.stringify({
                 command: "put_session_data",
                 time_stamp: this.linkObject().timeStamp(),
@@ -83,6 +83,7 @@ function GoPlayFabricObject(root_object_val) {
     this.linkObject = () => this.linkObject_;
     this.sessionObject = () => this.sessionObject_;
     this.putCallbackFunc = () => this.putCallbackFunc_;
+    this.putCallbackObject = () => this.putCallbackObject_;
     this.httpServiceObject = () => this.httpServiceObject_;
     this.init__(root_object_val);
 };
