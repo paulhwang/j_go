@@ -20,7 +20,8 @@ function GoPlayFabricObject(root_object_val) {
             const data = JSON.parse(response.data);
             if (data.result === FE_DEF.FE_RESULT_SUCCEED()) {
                 console.log("GoPlayFabricObject.examineResponse(put_session_data) succeed! session_id=", data.session_id);
-                this.sendGetSessionDataRequest();
+                this.rootObject().portObject().receiveData(data.result_data);
+                //this.sendGetSessionDataRequest();
             }
             else {
                 console.log("GoPlayFabricObject.examineResponse(put_session_data) invalid_result=" + data.result);
