@@ -8,6 +8,10 @@ function GoPlayFabricObject(root_object_val) {
      this.init__ = function(root_object_val) {
         this.rootObject_ = root_object_val;
         this.httpServiceObject_ = new HttpServiceObject(this.examineResponse, this);
+    }
+
+    this.setCallbackFunc = function(func_val) {
+        this.putCallbackFunc_ = func_val;
     };
 
     this.examineResponse = function(json_response_val) {
@@ -20,7 +24,8 @@ function GoPlayFabricObject(root_object_val) {
             const data = JSON.parse(response.data);
             if (data.result === FE_DEF.FE_RESULT_SUCCEED()) {
                 console.log("GoPlayFabricObject.examineResponse(put_session_data) succeed! session_id=", data.session_id);
-                this.rootObject().portObject().receiveData(data.result_data);
+                this.putCallbackFunc().bind(this.rootObject().portObject())(data.result_data);
+                //this.rootObject().portObject().receiveData(data.result_data);
                 //this.sendGetSessionDataRequest();
             }
             else {
@@ -43,6 +48,7 @@ function GoPlayFabricObject(root_object_val) {
     };
 
     this.sendPutSessionDataRequest = function(data_val) {
+        this.setCallbackFunc(this.rootObject().portObject().receiveData);
         const output = JSON.stringify({
                 command: "put_session_data",
                 time_stamp: this.linkObject().timeStamp(),
@@ -68,6 +74,7 @@ function GoPlayFabricObject(root_object_val) {
     this.rootObject = () => this.rootObject_;
     this.linkObject = () => this.rootObject().linkObject();
     this.sessionObject = () => this.rootObject().sessionObject();
+    this.putCallbackFunc = () => this.putCallbackFunc_;
     this.httpServiceObject = () => this.httpServiceObject_;
     this.init__(root_object_val);
 };
