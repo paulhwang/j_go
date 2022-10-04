@@ -3,7 +3,7 @@
   Written by Paul Hwang
 */
 
-function GoPlayFabricObject() {
+function FabricSessionDataObject() {
     "use strict";
      this.init__ = function() {
         this.linkObject_ = new FabricLinkObject();
