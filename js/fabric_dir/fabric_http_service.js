@@ -8,28 +8,28 @@ function HttpServiceObject(callback_func_val, callback_object_val) {
     this.init__ = function() {
         this.callBackFunc_ = callback_func_val;
         this.callBackObject_ = callback_object_val;
-        this.httpGetRequest_ = new XMLHttpRequest();
+        this.xmlHttpRequest_ = new XMLHttpRequest();
         this.startAjaxWaiting();
     };
 
     this.startAjaxWaiting = function() {
         const this0 = this;
-        this.httpGetRequest().onreadystatechange = function() {
-            if ((this0.httpGetRequest().readyState === 4) &&
-                (this0.httpGetRequest().status === 200)) {
-                this0.callBackFunc().bind(this0.callBackObject())(this0.httpGetRequest().responseText);
+        this.xmlHttpRequest().onreadystatechange = function() {
+            if ((this0.xmlHttpRequest().readyState === 4) &&
+                (this0.xmlHttpRequest().status === 200)) {
+                this0.callBackFunc().bind(this0.callBackObject())(this0.xmlHttpRequest().responseText);
             }
         };
     };
 
     this.sendAjaxRequest = function(output_val) {
-        this.httpGetRequest().open("GET", this.ajaxRoute(), true);
-        this.httpGetRequest().setRequestHeader("X-Requested-With", "XMLHttpRequest");
-        this.httpGetRequest().setRequestHeader("Content-Type", this.jsonContext());
-        this.httpGetRequest().setRequestHeader("phwangajaxrequest", output_val);
-        this.httpGetRequest().setRequestHeader("phwangajaxpacketid", sessionStorage.ajax_packet_id);
+        this.xmlHttpRequest().open("GET", this.ajaxRoute(), true);
+        this.xmlHttpRequest().setRequestHeader("X-Requested-With", "XMLHttpRequest");
+        this.xmlHttpRequest().setRequestHeader("Content-Type", this.jsonContext());
+        this.xmlHttpRequest().setRequestHeader("phwangajaxrequest", output_val);
+        this.xmlHttpRequest().setRequestHeader("phwangajaxpacketid", sessionStorage.ajax_packet_id);
         this.incrementAjaxPacketId();
-        this.httpGetRequest().send(null);
+        this.xmlHttpRequest().send(null);
     };
 
     this.incrementAjaxPacketId = function() {
@@ -41,7 +41,7 @@ function HttpServiceObject(callback_func_val, callback_object_val) {
         sessionStorage.ajax_packet_id = next_ajax_packet_id;
     };
 
-    this.httpGetRequest = () => this.httpGetRequest_;
+    this.xmlHttpRequest = () => this.xmlHttpRequest_;
     this.callBackFunc = () => this.callBackFunc_;
     this.callBackObject = () => this.callBackObject_;
     this.ajaxRoute = () => "/django_go/go_ajax/";
