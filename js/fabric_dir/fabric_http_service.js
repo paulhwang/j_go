@@ -3,7 +3,7 @@
   Written by Paul Hwang
 */
 
-function HttpServiceObject(callback_func_val, callback_object_val) {
+function FabricHttpServiceObject(callback_func_val, callback_object_val) {
     "use strict";
     this.init__ = function() {
         this.callBackFunc_ = callback_func_val;

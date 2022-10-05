@@ -13,7 +13,7 @@ function FabricSessionSetupObject(root_object_val) {
 
         this.sessionObject_ = new FabricSessionObject();
 
-        this.httpServiceObject_ = new HttpServiceObject(this.examineResponse, this);
+        this.httpServiceObject_ = new FabricHttpServiceObject(this.examineResponse, this);
     };
 
     this.setCallbackFunc = function(func_val, object_val) {

@@ -14,7 +14,7 @@ function FabricSessionPutGetObject() {
         this.sessionObject().getSessionInfoFromStorage();
         this.sessionObject().printSessionInfo();
 
-        this.httpServiceObject_ = new HttpServiceObject(this.examineResponse, this);
+        this.httpServiceObject_ = new FabricHttpServiceObject(this.examineResponse, this);
     }
 
     this.setCallbackFunc = function(func_val, object_val) {

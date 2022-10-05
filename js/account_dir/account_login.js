@@ -7,7 +7,7 @@ function AccountLoginObject() {
     "use strict";
     this.init__ = function() {
         this.linkObject_ = new FabricLinkObject();
-        this.httpServiceObject_ = new HttpServiceObject(this.examineResponse, this);
+        this.httpServiceObject_ = new FabricHttpServiceObject(this.examineResponse, this);
         this.bindHtmlInput();
     };
 
