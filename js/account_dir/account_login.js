@@ -12,12 +12,12 @@ function AccountLoginObject() {
     };
 
     this.bindHtmlInput = function() {
-        var this0 = this;
+        const this0 = this;
         $(".login_section .login_button").on("click", function() {
-            var account_name = $(".login_section .login_account_name").val();
-            var password = $(".login_section .login_password").val();
+            let account_name = $(".login_section .login_account_name").val();
+            let password = $(".login_section .login_password").val();
             if (account_name) {
-                var output = JSON.stringify({
+                const output = JSON.stringify({
                         command: "login",
                         packet_id: sessionStorage.ajax_packet_id,
                         my_name: account_name,
@@ -33,10 +33,10 @@ function AccountLoginObject() {
     this.examineResponse = function(json_response_val) {
         console.log("json_response_val=" + json_response_val);
 
-        var response = JSON.parse(json_response_val);
+        const response = JSON.parse(json_response_val);
         console.log("response.data=" + response.data);
 
-        var data = JSON.parse(response.data);
+        const data = JSON.parse(response.data);
         if (data.result === FE_DEF.FE_RESULT_SUCCEED()) {
             console.log("succeed");
             console.log("link_id=", data.link_id);
@@ -59,5 +59,4 @@ function AccountLoginObject() {
     this.init__();
 }
 
-var sign_in_main = function() {"use strict"; new AccountLoginObject();};
-$(document).ready(sign_in_main);
+$(document).ready(() => {new AccountLoginObject();});
