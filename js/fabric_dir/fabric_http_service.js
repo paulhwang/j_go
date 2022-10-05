@@ -8,9 +8,6 @@ function HttpServiceObject(callback_func_val, callback_object_val) {
     this.init__ = function() {
         this.theCallBackFunc = callback_func_val;
         this.theCallBackObject = callback_object_val;
-        this.ajaxRoute = function() {return "/django_go/go_ajax/";};
-        this.jsonContext = function() {return "application/json; charset=utf-8";}
-        this.plainTextContext = function() {return "text/plain; charset=utf-8";}
         this.theHttpGetRequest = new XMLHttpRequest();
         this.startAjaxWaiting();
     };
@@ -47,5 +44,8 @@ function HttpServiceObject(callback_func_val, callback_object_val) {
     this.httpGetRequest = function() {return this.theHttpGetRequest;};
     this.callBackFunc = function() {return this.theCallBackFunc;};
     this.callBackObject = function() {return this.theCallBackObject;};
+    this.ajaxRoute = () => "/django_go/go_ajax/";
+    this.jsonContext = () => "application/json; charset=utf-8";
+    this.plainTextContext = () => "text/plain; charset=utf-8";
     this.init__();
 };
