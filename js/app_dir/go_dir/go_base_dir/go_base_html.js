@@ -16,15 +16,15 @@ function GoBaseHtmlObject(root_object_val) {
 
         const this0 = this;
         document.querySelector(".solo_button").addEventListener("click", function() {
-            this0.fabricSessionSetupObject().sendSetupSoloRequest(theme_type, theme_data, FE_DEF.FE_GROUP_MODE_SOLO(), "N/A");
+            this0.portObject().transmitData(theme_type, theme_data, FE_DEF.FE_GROUP_MODE_SOLO(), "N/A");
         });
 
         document.querySelector(".duet_button").addEventListener("click", function() {
-            this0.fabricSessionSetupObject().sendSetupSoloRequest(theme_type, theme_data, FE_DEF.FE_GROUP_MODE_DUET(), this0.linkObject().myName());
+            this0.portObject().transmitData(theme_type, theme_data, FE_DEF.FE_GROUP_MODE_DUET(), this0.linkObject().myName());
         });
 
         document.querySelector(".ensemble_button").addEventListener("click", function() {
-            this0.fabricSessionSetupObject().sendSetupSoloRequest(theme_type, theme_data, FE_DEF.FE_GROUP_MODE_ENSEMBLE(), "N/A");
+            this0.portObject().transmitData(theme_type, theme_data, FE_DEF.FE_GROUP_MODE_ENSEMBLE(), "N/A");
         });
 
         document.querySelector(".exit_button").addEventListener("click", function() {
@@ -44,5 +44,6 @@ function GoBaseHtmlObject(root_object_val) {
     this.rootObject = () => this.rootObject_;
     this.linkObject = () => this.rootObject().linkObject();
     this.fabricSessionSetupObject = () => this.rootObject().fabricSessionSetupObject();
+    this.portObject = () => this.rootObject().portObject();
     this.init__(root_object_val);
 };

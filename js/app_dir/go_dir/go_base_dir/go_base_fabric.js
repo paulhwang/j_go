@@ -16,6 +16,11 @@ function FabricSessionSetupObject(root_object_val) {
         this.httpServiceObject_ = new HttpServiceObject(this.examineResponse, this);
     };
 
+    this.setCallbackFunc = function(func_val, object_val) {
+        this.putCallbackFunc_ = func_val;
+        this.putCallbackObject_ = object_val;
+    };
+
     this.examineResponse = function(json_response_val) {
         console.log("GoBaseFabricObject.examineResponse() json_response_val=" + json_response_val);
 
