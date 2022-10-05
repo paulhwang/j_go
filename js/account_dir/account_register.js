@@ -11,13 +11,13 @@ function AccountRegisterObject() {
     };
 
     this.bindHtmlInput = function() {
-        var this0 = this;
+        const this0 = this;
         $(".register_section .register_button").on("click", function() {
-            var account_name = $(".register_section .register_account_name").val();
-            var password = $(".register_section .register_password").val();
-            var email = $(".register_section .register_email").val();
+            let account_name = $(".register_section .register_account_name").val();
+            let password = $(".register_section .register_password").val();
+            let email = $(".register_section .register_email").val();
             if (account_name) {
-                var output = JSON.stringify({
+                const output = JSON.stringify({
                         command: "register",
                         my_name: account_name,
                         password: password,
@@ -33,10 +33,10 @@ function AccountRegisterObject() {
     this.examineResponse = function(json_response_val) {
         console.log("json_response_val=" + json_response_val);
 
-        var response = JSON.parse(json_response_val);
+        const response = JSON.parse(json_response_val);
         console.log("response.data=" + response.data);
 
-        var data = JSON.parse(response.data);
+        const data = JSON.parse(response.data);
         if (data.result === FE_DEF.FE_RESULT_SUCCEED()) {
             console.log("succeed");
             //window.open("go_login.html", "_self")
@@ -53,5 +53,4 @@ function AccountRegisterObject() {
     this.init__();
 }
 
-var sign_up_main = function() {"use strict"; new AccountRegisterObject();};
-$(document).ready(sign_up_main);
+$(document).ready(() => {new AccountRegisterObject();});
