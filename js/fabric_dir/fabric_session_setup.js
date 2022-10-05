@@ -14,6 +14,7 @@ function FabricSessionSetupObject(root_object_val) {
         this.sessionObject_ = new FabricSessionObject();
 
         this.httpServiceObject_ = new FabricHttpServiceObject(this.examineResponse, this);
+        this.sendGetLinkDataRequest();
     };
 
     this.setCallbackFunc = function(func_val, object_val) {
@@ -23,12 +24,22 @@ function FabricSessionSetupObject(root_object_val) {
 
     this.examineResponse = function(json_response_val) {
         console.log("FabricSessionSetupObject.examineResponse() json_response_val=" + json_response_val);
+        const response = JSON.parse(json_response_val);
 
-        let response = JSON.parse(json_response_val);
         console.log("FabricSessionSetupObject.examineResponse() response.data=" + response.data);
+        const data = JSON.parse(response.data);
 
-        if (response.command === "setup_session") {
-            let data = JSON.parse(response.data);
+        if (response.command === "get_link_data") {
+            if (data.result === FE_DEF.FE_RESULT_SUCCEED()) {
+
+                this.sendGetLinkDataRequest();
+            }
+            else {
+                //tbd
+            }
+        }
+
+        else if (response.command === "setup_session") {
             if (data.result === FE_DEF.FE_RESULT_SUCCEED()) {
                 console.log("FabricSessionSetupObject.examineResponse(setup_session) succeed! session_id=", data.session_id);
                 if (data.room_status === FE_DEF.FE_ROOM_STATUS_READY()) {
@@ -45,9 +56,20 @@ function FabricSessionSetupObject(root_object_val) {
                 console.log("FabricSessionSetupObject.examineResponse(setup_session) invalid_result=" + data.result);
             }
         }
+
         else {
             abend();
         }
+    };
+
+    this.sendGetLinkDataRequest = function() {
+        const output = JSON.stringify({
+                command: "get_link_data",
+                time_stamp: this.linkObject().timeStamp(),
+                link_id: this.linkObject().linkId(),
+                });
+        console.log("FabricSessionSetupObject.sendGetLinkDataRequest() output=" + output);
+        this.httpServiceObject().sendAjaxRequest(output); 
     };
 
     this.sendSetupSessionRequest = function(theme_type_val, theme_data_val, group_mode_val, second_fiddle_val) {

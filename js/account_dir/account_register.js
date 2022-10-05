@@ -39,7 +39,7 @@ function AccountRegisterObject() {
         const data = JSON.parse(response.data);
         if (data.result === FE_DEF.FE_RESULT_SUCCEED()) {
             console.log("succeed");
-            //window.open("go_login.html", "_self")
+            window.history.go(-1);
         }
         else if (data.result === FE_DEF.FE_RESULT_ACCOUNT_NAME_ALREADY_EXIST()) {
             console.log("account_name_already_exist");
