@@ -13,7 +13,7 @@ function HttpServiceObject(callback_func_val, callback_object_val) {
     };
 
     this.startAjaxWaiting = function() {
-        var this0 = this;
+        const this0 = this;
         this.httpGetRequest().onreadystatechange = function() {
             if ((this0.httpGetRequest().readyState === 4) &&
                 (this0.httpGetRequest().status === 200)) {
@@ -34,16 +34,16 @@ function HttpServiceObject(callback_func_val, callback_object_val) {
 
     this.incrementAjaxPacketId = function() {
         console.log("HttpServiceObject.incrementAjaxPacketId() ajax_packet_id=" + sessionStorage.ajax_packet_id);
-        var i = Number(sessionStorage.ajax_packet_id) + 1;
-        if (i !== 1 + Number(sessionStorage.ajax_packet_id)) {
+        const next_ajax_packet_id = Number(sessionStorage.ajax_packet_id) + 1;
+        if (next_ajax_packet_id !== 1 + Number(sessionStorage.ajax_packet_id)) {
             this.abend("HttpServiceObject.incrementAjaxPacketId()", "fix it");
         }
-        sessionStorage.ajax_packet_id = i;
+        sessionStorage.ajax_packet_id = next_ajax_packet_id;
     };
 
-    this.httpGetRequest = function() {return this.theHttpGetRequest;};
-    this.callBackFunc = function() {return this.theCallBackFunc;};
-    this.callBackObject = function() {return this.theCallBackObject;};
+    this.httpGetRequest = () => this.theHttpGetRequest;
+    this.callBackFunc = () => this.theCallBackFunc;
+    this.callBackObject = () => this.theCallBackObject;
     this.ajaxRoute = () => "/django_go/go_ajax/";
     this.jsonContext = () => "application/json; charset=utf-8";
     this.plainTextContext = () => "text/plain; charset=utf-8";
