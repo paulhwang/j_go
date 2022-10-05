@@ -6,8 +6,8 @@
 function GoBaseRootObject() {
     "use strict";
     this.init__ = function() {
-
         this.fabricSessionSetupObject_ = new FabricSessionSetupObject(this);
+
         this.htmlObject_ = new GoBaseHtmlObject(this);
         this.portObject_ = new GoBasePortObject(this);
     };

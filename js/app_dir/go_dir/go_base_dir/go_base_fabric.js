@@ -17,8 +17,8 @@ function FabricSessionSetupObject(root_object_val) {
     };
 
     this.setCallbackFunc = function(func_val, object_val) {
-        this.putCallbackFunc_ = func_val;
-        this.putCallbackObject_ = object_val;
+        this.setupSessionCallbackFunc_ = func_val;
+        this.setupSessionCallbackObject_ = object_val;
     };
 
     this.examineResponse = function(json_response_val) {
@@ -33,7 +33,8 @@ function FabricSessionSetupObject(root_object_val) {
                 console.log("GoBaseFabricObject.examineResponse(setup_solo) succeed! session_id=", data.session_id);
                 if (data.room_status === FE_DEF.FE_ROOM_STATUS_READY()) {
                     this.sessionObject().setSessionInfoIntoStorage(data.session_id, data.group_mode, data.theme_type, data.theme_data, data.first_fiddle, data.second_fiddle);
-                    window.open("go_play.html", "_self");
+                    this.setupSessionCallbackFunc().bind(this.setupSessionCallbackObject())();
+                    //window.open("go_play.html", "_self");
                 }
                 else {
                     //this.sendGetSessionSetupStatusRequest(data.session_id);
@@ -69,6 +70,8 @@ function FabricSessionSetupObject(root_object_val) {
     this.rootObject = () => this.rootObject_;
     this.linkObject = () => this.linkObject_;
     this.sessionObject = () => this.sessionObject_;
+    this.setupSessionCallbackFunc = () => this.setupSessionCallbackFunc_;
+    this.setupSessionCallbackObject = () => this.setupSessionCallbackObject_;
     this.httpServiceObject = () => this.httpServiceObject_;
     this.init__(root_object_val);
 };

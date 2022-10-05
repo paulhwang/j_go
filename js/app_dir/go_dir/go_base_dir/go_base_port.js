@@ -15,8 +15,9 @@ function GoBasePortObject(root_val) {
         this.fabricSessionSetupObject().sendSetupSoloRequest(theme_type_val, theme_data_val, group_mode_val, second_fiddle_val);
     };
 
-    this.receiveData = function(data_val) {
-        console.log("GoPlayPortObject.receiveData() data_val=" + data_val);
+    this.receiveData = function() {
+        console.log("GoPlayPortObject.receiveData()");
+        window.open("go_play.html", "_self");
     };
 
     this.rootObject = () => this.rootObject_;
