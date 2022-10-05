@@ -11,11 +11,11 @@ function AccountLogoutObject() {
     };
 
     this.bindHtmlInput = function() {
-        var this0 = this;
+        const this0 = this;
         $(".logout_section .logout_button").on("click", function() {
-            var account_name = $(".logout_section .logout_account_name").val();
+            let account_name = $(".logout_section .logout_account_name").val();
             if (account_name) {
-                var output = JSON.stringify({
+                const output = JSON.stringify({
                         command: "logout",
                         time_stamp: sessionStorage.time_stamp,
                         link_id: sessionStorage.link_id,
@@ -31,10 +31,10 @@ function AccountLogoutObject() {
     this.examineResponse = function(json_response_val) {
         console.log("json_response_val=" + json_response_val);
 
-        var response = JSON.parse(json_response_val);
+        const response = JSON.parse(json_response_val);
         console.log("response.data=" + response.data);
 
-        var data = JSON.parse(response.data);
+        const data = JSON.parse(response.data);
         if (data.result === FE_DEF.FE_RESULT_SUCCEED()) {
             sessionStorage.setItem("link_id", null);
             sessionStorage.setItem("my_name", null);
@@ -57,5 +57,4 @@ function AccountLogoutObject() {
     this.init__();
 }
 
-var sign_off_main = function() {"use strict"; new AccountLogoutObject();};
-$(document).ready(sign_off_main);
+$(document).ready(() => {new AccountLogoutObject();});
