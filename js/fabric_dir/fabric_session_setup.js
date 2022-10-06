@@ -30,7 +30,7 @@ function FabricSessionSetupObject(root_object_val) {
         const data = JSON.parse(response.data);
 
         if (response.command === "get_link_data") {
-            if (data.result === FE_DEF.FE_RESULT_SUCCEED()) {
+            if (data.result === FE_DEF.RESULT_SUCCEED()) {
 
                 this.sendGetLinkDataRequest();
             }
@@ -40,16 +40,16 @@ function FabricSessionSetupObject(root_object_val) {
         }
 
         else if (response.command === "setup_session") {
-            if (data.result === FE_DEF.FE_RESULT_SUCCEED()) {
+            if (data.result === FE_DEF.RESULT_SUCCEED()) {
                 console.log("FabricSessionSetupObject.examineResponse(setup_session) succeed! session_id=", data.session_id);
-                if (data.room_status === FE_DEF.FE_ROOM_STATUS_READY()) {
+                if (data.room_status === FE_DEF.ROOM_STATUS_READY()) {
                     this.sessionObject().setSessionInfoIntoStorage(data.session_id, data.group_mode, data.theme_type, data.theme_data, data.first_fiddle, data.second_fiddle);
                     this.setupSessionCallbackFunc().bind(this.setupSessionCallbackObject())();
                 }
                 else {
                 }
             }
-            else if (data.result === FE_DEF.FE_RESULT_ACCOUNT_NAME_NOT_EXIST()) {
+            else if (data.result === FE_DEF.RESULT_ACCOUNT_NAME_NOT_EXIST()) {
                 console.log("FabricSessionSetupObject.examineResponse(setup_session) account_not_exist");
             }
             else {

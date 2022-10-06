@@ -37,16 +37,16 @@ function AccountLoginObject() {
         console.log("response.data=" + response.data);
 
         const data = JSON.parse(response.data);
-        if (data.result === FE_DEF.FE_RESULT_SUCCEED()) {
+        if (data.result === FE_DEF.RESULT_SUCCEED()) {
             console.log("succeed");
             console.log("link_id=", data.link_id);
             this.linkObject().setLinkInfoIntoStorage(data.link_id, data.my_name, data.time_stamp);
             window.history.go(-1);
         }
-        else if (data.result === FE_DEF.FE_RESULT_PASSWORD_NOT_MATCH()) {
+        else if (data.result === FE_DEF.RESULT_PASSWORD_NOT_MATCH()) {
             console.log("password_not_match");
         }
-        else if (data.result === FE_DEF.FE_RESULT_ACCOUNT_NAME_NOT_EXIST()) {
+        else if (data.result === FE_DEF.RESULT_ACCOUNT_NAME_NOT_EXIST()) {
             console.log("account_not_exist");
         }
         else {

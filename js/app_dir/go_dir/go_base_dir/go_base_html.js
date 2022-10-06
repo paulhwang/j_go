@@ -11,20 +11,20 @@ function GoBaseHtmlObject(root_object_val) {
     }
 
     this.setupQuerySelectors = function() {
-        const theme_type = FE_DEF.FE_THEME_IS_GO_GAME();
+        const theme_type = FE_DEF.THEME_IS_GO_GAME();
         const theme_data = this.encodeGoConfig(19, 0, 0, 1);
 
         const this0 = this;
         document.querySelector(".solo_button").addEventListener("click", function() {
-            this0.portObject().transmitData(theme_type, theme_data, FE_DEF.FE_GROUP_MODE_SOLO(), "N/A");
+            this0.portObject().transmitData(theme_type, theme_data, FE_DEF.GROUP_MODE_SOLO(), "N/A");
         });
 
         document.querySelector(".duet_button").addEventListener("click", function() {
-            this0.portObject().transmitData(theme_type, theme_data, FE_DEF.FE_GROUP_MODE_DUET(), this0.linkObject().myName());
+            this0.portObject().transmitData(theme_type, theme_data, FE_DEF.GROUP_MODE_DUET(), this0.linkObject().myName());
         });
 
         document.querySelector(".ensemble_button").addEventListener("click", function() {
-            this0.portObject().transmitData(theme_type, theme_data, FE_DEF.FE_GROUP_MODE_ENSEMBLE(), "N/A");
+            this0.portObject().transmitData(theme_type, theme_data, FE_DEF.GROUP_MODE_ENSEMBLE(), "N/A");
         });
 
         document.querySelector(".exit_button").addEventListener("click", function() {

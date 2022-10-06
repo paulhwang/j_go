@@ -30,11 +30,11 @@ function FabricSessionPutGetObject() {
 
         if (response.command === "put_session_data") {
             const data = JSON.parse(response.data);
-            if (data.result === FE_DEF.FE_RESULT_SUCCEED()) {
+            if (data.result === FE_DEF.RESULT_SUCCEED()) {
                 console.log("FabricSessionPutGetObject.examineResponse(put_session_data) succeed! session_id=", data.session_id);
                 this.putCallbackFunc().bind(this.putCallbackObject())(data.result_data);
             }
-            if (data.result === FE_DEF.FE_RESULT_MALLOC_IN_PROGRESS()) {
+            if (data.result === FE_DEF.RESULT_ALMOST_SUCCEED()) {
                 console.log("FabricSessionPutGetObject.examineResponse(put_session_data) in_progress! session_id=", data.session_id);
                 this.sendGetSessionDataRequest();
             }
@@ -44,11 +44,11 @@ function FabricSessionPutGetObject() {
         }
         else if (response.command === "get_session_data") {
             const data = JSON.parse(response.data);
-            if (data.result === FE_DEF.FE_RESULT_SUCCEED()) {
+            if (data.result === FE_DEF.RESULT_SUCCEED()) {
                 console.log("FabricSessionPutGetObject.examineResponse(get_session_data) succeed! session_id=", data.session_id);
                 this.putCallbackFunc().bind(this.putCallbackObject())(data.result_data);
             }
-            if (data.result === FE_DEF.FE_RESULT_MALLOC_IN_PROGRESS()) {
+            if (data.result === FE_DEF.RESULT_ALMOST_SUCCEED()) {
                 console.log("FabricSessionPutGetObject.examineResponse(get_session_data) in_progress! session_id=", data.session_id);
                 this.sendGetSessionDataRequest();
             }
