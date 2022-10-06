@@ -32,7 +32,7 @@ function FabricSessionSetupObject(root_object_val) {
         if (response.command === "get_link_data") {
             if (data.result === FE_DEF.RESULT_SUCCEED()) {
 
-                this.sendGetLinkDataRequest();
+                //this.sendGetLinkDataRequest();
             }
             else {
                 //tbd
