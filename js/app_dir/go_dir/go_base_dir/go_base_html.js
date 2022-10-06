@@ -16,7 +16,8 @@ function GoBaseHtmlObject(root_object_val) {
 
         const this0 = this;
         document.querySelector(".solo_button").addEventListener("click", function() {
-            this0.portObject().transmitData(theme_type, theme_data, FE_DEF.GROUP_MODE_SOLO(), "N/A");
+            window.open("go_solo.html", "_self");
+            //this0.portObject().transmitData(theme_type, theme_data, FE_DEF.GROUP_MODE_SOLO(), "N/A");
         });
 
         document.querySelector(".duet_button").addEventListener("click", function() {
@@ -25,7 +26,8 @@ function GoBaseHtmlObject(root_object_val) {
         });
 
         document.querySelector(".ensemble_button").addEventListener("click", function() {
-            this0.portObject().transmitData(theme_type, theme_data, FE_DEF.GROUP_MODE_ENSEMBLE(), "N/A");
+            window.open("go_ensemble.html", "_self");
+            //this0.portObject().transmitData(theme_type, theme_data, FE_DEF.GROUP_MODE_ENSEMBLE(), "N/A");
         });
 
         document.querySelector(".exit_button").addEventListener("click", function() {

@@ -3,7 +3,7 @@
   Written by Paul Hwang
 */
 
-function GoDuetPortObject(root_val) {
+function GoEnsemblePortObject(root_val) {
     "use strict";
     this.init__ = function(root_val) {
         this.rootObject_ = root_val;
@@ -11,12 +11,12 @@ function GoDuetPortObject(root_val) {
     };
 
     this.transmitData = function(theme_type_val, theme_data_val, group_mode_val, second_fiddle_val) {
-        console.log("GoDuetPortObject.transmitData() theme_type_val=" + theme_type_val + " theme_data_val=" + theme_data_val);
+        console.log("GoEnsemblePortObject.transmitData() theme_type_val=" + theme_type_val + " theme_data_val=" + theme_data_val);
         this.fabricSessionSetupObject().sendSetupSessionRequest(theme_type_val, theme_data_val, group_mode_val, second_fiddle_val);
     };
 
     this.receiveData = function() {
-        console.log("GoDuetPortObject.receiveData()");
+        console.log("GoEnsemblePortObject.receiveData()");
         window.open("go_play.html", "_self");
     };
 
