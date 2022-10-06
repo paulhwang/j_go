@@ -20,7 +20,8 @@ function GoBaseHtmlObject(root_object_val) {
         });
 
         document.querySelector(".duet_button").addEventListener("click", function() {
-            this0.portObject().transmitData(theme_type, theme_data, FE_DEF.GROUP_MODE_DUET(), this0.linkObject().myName());
+            window.open("go_duet.html", "_self");
+            //this0.portObject().transmitData(theme_type, theme_data, FE_DEF.GROUP_MODE_DUET(), this0.linkObject().myName());
         });
 
         document.querySelector(".ensemble_button").addEventListener("click", function() {
