@@ -62,7 +62,61 @@ function FabricSessionSetupObject(root_object_val) {
     };
 
     this.processGetLinkDataResponse = function(data_val) {
+        var data = data_val;
+        while (data_val.length > 0) {
+            if (data_val.charAt(0) === this.phwangAjaxProtocolObject().WEB_FABRIC_PROTOCOL_RESPOND_IS_GET_LINK_DATA_NAME_LIST()) {
+                data_val = data_val.slice(1);
+                var name_list_tag  = this.phwangObject().decodeNumber(data_val, this.phwangAjaxProtocolObject().WEB_FABRIC_PROTOCOL_NAME_LIST_TAG_SIZE());
+                if (name_list_tag > this.phwangLinkObject().nameListTag()) {
+                    this.phwangLinkObject().setServerNameListTag(name_list_tag);
+                }
+                data_val = data_val.slice(this.phwangAjaxProtocolObject().WEB_FABRIC_PROTOCOL_NAME_LIST_TAG_SIZE());
+                continue;
+            }
 
+            /*
+            if (data.charAt(0) === this.phwangAjaxProtocolObject().WEB_FABRIC_PROTOCOL_RESPOND_IS_GET_LINK_DATA_PENDING_SESSION()) {
+                this.debug(true, "getLinkDataResponse", "pending_session_data=" + data);
+                var session_id = data.slice(1, this.phwangAjaxProtocolObject().WEB_FABRIC_PROTOCOL_SESSION_ID_SIZE() + 1);
+                this.debug(true, "getLinkDataResponse", "session_id=" + session_id);
+                data = data.slice(1 + this.phwangAjaxProtocolObject().WEB_FABRIC_PROTOCOL_SESSION_ID_SIZE());
+                var theme_data = data;
+                this.debug(true, "getLinkDataResponse", "theme_data=" + theme_data);
+                var config_len = this.phwangObject().decodeNumber(theme_data.slice(1), 3);
+                var theme_data = theme_data.slice(0, config_len);
+                this.rootObject().configObject().decodeConfig(theme_data);
+                this.rootObject().configObject().putStorageConfigData();
+                data = data.slice(config_len);
+                this.setupSession2(this.phwangLinkObject(), theme_data, session_id);
+                continue;
+            }
+
+            if (data.charAt(0) === this.phwangAjaxProtocolObject().WEB_FABRIC_PROTOCOL_RESPOND_IS_GET_LINK_DATA_PENDING_SESSION3()) {
+                this.debug(true, "getLinkDataResponse", "pending_session_data3=" + data);
+                var session_id = data.slice(1, this.phwangAjaxProtocolObject().WEB_FABRIC_PROTOCOL_SESSION_ID_SIZE() + 1);
+                this.debug(true, "getLinkDataResponse", "session_id=" + session_id);
+                data = data.slice(1 + this.phwangAjaxProtocolObject().WEB_FABRIC_PROTOCOL_SESSION_ID_SIZE());
+                this.setupSession3(this.phwangLinkObject(), session_id);
+                continue;
+            }
+
+            if (data.charAt(0) === this.phwangAjaxProtocolObject().WEB_FABRIC_PROTOCOL_RESPOND_IS_GET_LINK_DATA_PENDING_DATA()) {
+                var link_session_id = data.slice(1, this.phwangAjaxProtocolObject().WEB_FABRIC_PROTOCOL_LINK_SESSION_ID_SIZE() + 1);
+                this.debug(true, "getLinkDataResponse", "link_session_id=" + link_session_id);
+                this.pendingSessionDataQueueObject().enqueueData(link_session_id);
+                data = data.slice(this.phwangAjaxProtocolObject().WEB_FABRIC_PROTOCOL_LINK_SESSION_ID_SIZE() + 1);
+                continue;
+            }
+            */
+
+            console.log("FabricSessionSetupObject.processGetLinkDataResponse() not_supported+command=" + data_val);
+            abend();
+            data_val = data_val.slice(data_val.length);
+        }
+
+        if (data_val.length !== 0) {
+            console.log("FabricSessionSetupObject.processGetLinkDataResponse() length=" + data_val.length);
+        }
     };
 
     this.sendGetNameListRequest = function(name_list_tag_val) {
@@ -77,7 +131,20 @@ function FabricSessionSetupObject(root_object_val) {
     };
 
     this.processGetNameListResponse = function(data_val) {
+        if (data_val) {
+            if (data_val.c_name_list) {
+                var name_list_tag  = this.phwangObject().decodeNumber(data_val.c_name_list, 3);
+                this.phwangLinkObject().setNameListTag(name_list_tag);
 
+                var name_list = data_val.c_name_list.slice(3);
+                console.log("FabricSessionSetupObject.processGetNameListResponse() name_list_tag=" + name_list_tag);
+                console.log("FabricSessionSetupObject.processGetNameListResponse() name_list=" + name_list);
+                var array = JSON.parse("[" + name_list + "]");
+                console.log("FabricSessionSetupObject.processGetNameListResponse() array=" + array);
+                this.phwangLinkObject().setNameList(array);
+                this.phwangPortObject().receiveGetNameListResponse();
+            }
+        }
     };
 
     this.sendSetupSessionRequest = function(theme_type_val, theme_data_val, group_mode_val, second_fiddle_val) {
