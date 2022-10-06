@@ -49,8 +49,31 @@ function FabricSessionSetupObject(root_object_val) {
                 else {
                 }
             }
+            else if (data.result === FE_DEF.RESULT_ALMOST_SUCCEED()) {
+                console.log("FabricSessionSetupObject.examineResponse(setup_session) almost_succeed");
+                this.sendSetupSession3Request(data.session_id);
+            }
             else if (data.result === FE_DEF.RESULT_ACCOUNT_NAME_NOT_EXIST()) {
                 console.log("FabricSessionSetupObject.examineResponse(setup_session) account_not_exist");
+            }
+            else {
+                console.log("FabricSessionSetupObject.examineResponse(setup_session) invalid_result=" + data.result);
+            }
+        }
+
+        else if (response.command === "setup_session3") {
+            if (data.result === FE_DEF.RESULT_SUCCEED()) {
+                console.log("FabricSessionSetupObject.examineResponse(setup_session3) succeed! session_id=", data.session_id);
+                if (data.room_status === FE_DEF.ROOM_STATUS_READY()) {
+                    this.sessionObject().setSessionInfoIntoStorage(data.session_id, data.group_mode, data.theme_type, data.theme_data, data.first_fiddle, data.second_fiddle);
+                    this.setupSessionCallbackFunc().bind(this.setupSessionCallbackObject())();
+                }
+                else {
+                }
+            }
+            else if (data.result === FE_DEF.RESULT_ALMOST_SUCCEED()) {
+                console.log("FabricSessionSetupObject.examineResponse(setup_session3) almost_succeed");
+                this.sendSetupSession3Request(data.session_id);
             }
             else {
                 console.log("FabricSessionSetupObject.examineResponse(setup_session) invalid_result=" + data.result);
@@ -82,6 +105,17 @@ function FabricSessionSetupObject(root_object_val) {
                 second_fiddle: second_fiddle_val,
                 theme_type: theme_type_val,
                 theme_data: theme_data_val,
+                });
+        console.log("FabricSessionSetupObject.sendSetupSessionRequest() output=" + output);
+        this.httpServiceObject().sendAjaxRequest(output); 
+    };
+
+    this.sendSetupSession3Request = function(session_id_val) {
+        const output = JSON.stringify({
+                command: "setup_session3",
+                time_stamp: this.linkObject().timeStamp(),
+                link_id: this.linkObject().linkId(),
+                session_id: session_id_val,
                 });
         console.log("FabricSessionSetupObject.sendSetupSessionRequest() output=" + output);
         this.httpServiceObject().sendAjaxRequest(output); 
