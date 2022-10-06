@@ -27,8 +27,9 @@ function FE_DEF_OBJECT() {
     this.FE_RESULT_MALLOC_GROUP_FAIL          = () => "58";
     this.FE_RESULT_HIS_LINK_NOT_EXIST         = () => "59";
     this.FE_RESULT_NULL_HIS_SESSION           = () => "60";
+    this.FE_RESULT_MALLOC_IN_PROGRESS         = () => "63";
 
-    this.theFE_RESULT_MALLOC_ROOM_FAIL        = () => "71";
+    this.FE_RESULT_MALLOC_ROOM_FAIL           = () => "71";
 
     this.FE_GROUP_MODE_SOLO     = () => 'S';
     this.FE_GROUP_MODE_DUET     = () => 'D';
