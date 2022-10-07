@@ -63,10 +63,19 @@ function FabricSessionSetupObject(root_object_val) {
 
     this.processGetLinkDataResponse = function(data_val) {
         console.log("FabricSessionSetupObject.processGetLinkDataResponse() data_val.result=" + data_val.result);
-        console.log("FabricSessionSetupObject.processGetLinkDataResponse() data_val.all_data=" + data_val.all_data);
-        console.log("FabricSessionSetupObject.processGetLinkDataResponse() data_val.name_tag=" + data_val.name_tag);
-        var data = data_val;
+        console.log("FabricSessionSetupObject.processGetLinkDataResponse() data_val.name_list_tag=" + data_val.name_list_tag);
+
+        const name_list_tag = this.decodeNumber(data_val.name_list_tag, data_val.name_list_tag.length)
+        console.log("FabricSessionSetupObject.processGetLinkDataResponse() name_list_tag=" + name_list_tag);
+        this.linkObject().setServerNameListTag(name_list_tag);
+        if (this.linkObject().nameListUpdateNeeded()) {
+            this.sendGetNameListRequest(this.linkObject().nameListTag());
+        }
+
+        console.log("FabricSessionSetupObject.processGetLinkDataResponse() data_val.data=" + data_val.data);
+        let data = data_val.data;
         while (data_val.length > 0) {
+            /*
             if (data_val.charAt(0) === this.phwangAjaxProtocolObject().WEB_FABRIC_PROTOCOL_RESPOND_IS_GET_LINK_DATA_NAME_LIST()) {
                 data_val = data_val.slice(1);
                 var name_list_tag  = this.phwangObject().decodeNumber(data_val, this.phwangAjaxProtocolObject().WEB_FABRIC_PROTOCOL_NAME_LIST_TAG_SIZE());
@@ -76,6 +85,7 @@ function FabricSessionSetupObject(root_object_val) {
                 data_val = data_val.slice(this.phwangAjaxProtocolObject().WEB_FABRIC_PROTOCOL_NAME_LIST_TAG_SIZE());
                 continue;
             }
+            */
 
             /*
             if (data.charAt(0) === this.phwangAjaxProtocolObject().WEB_FABRIC_PROTOCOL_RESPOND_IS_GET_LINK_DATA_PENDING_SESSION()) {
@@ -125,7 +135,7 @@ function FabricSessionSetupObject(root_object_val) {
     this.sendGetNameListRequest = function(name_list_tag_val) {
         var output = JSON.stringify({
                 command: "get_name_list",
-                time_stamp: link_val.timeStamp(),
+                time_stamp: this.linkObject().timeStamp(),
                 link_id: this.linkObject().linkId(),
                 name_list_tag: name_list_tag_val,
                 });
@@ -219,6 +229,24 @@ function FabricSessionSetupObject(root_object_val) {
 
     this.clearPendingAjaxRequestCommand = function() {
 
+    };
+
+    this.decodeNumber = function(input_val, size_val) {
+        var output = 0;
+        for (var index = 0; index < size_val; index++) {
+            output *= 10;
+            output += input_val.charAt(index) - '0';
+        }
+        return output;
+    };
+
+    this.sleepMilliseconds = function (milliseconds_val) {
+        var start = new Date().getTime();
+        for (var i = 0; i < 1e7; i++) {
+            if ((new Date().getTime() - start) > milliseconds_val){
+                break;
+            }
+        }
     };
 
     this.rootObject = () => this.rootObject_;

@@ -6,6 +6,9 @@
 function FabricLinkObject() {
     "use strict";
     this.init__ = function() {
+        this.nameList_ = [];
+        this.nameListTag_ = 0;
+        this.serverNameListTag_ = 0;
     }
 
     this.getLinkInfoFromStorage = function() {
@@ -45,8 +48,29 @@ function FabricLinkObject() {
         sessionStorage.setItem("time_stamp", time_stamp_val);
     };
 
+    this.nameListUpdateNeeded = function () {
+        if (this.serverNameListTag() > this.nameListTag()) {
+            console.log("true");
+            return true;
+        }
+        else {
+            console.log("false");
+            return false;
+        }
+    };
+
     this.linkId = () => this.linkId_;
     this.myName = () => this.myName_;
     this.timeStamp = () => this.timeStamp_;
+
+    this.nameListTag = () => this.nameListTag_;
+    this.setNameListTag = (val) => {this.nameListTag_ = val;};
+    this.serverNameListTag = () => this.serverNameListTag_;
+    this.setServerNameListTag = (val) => {this.serverNameListTag_ = val;};
+    this.nameList = () => this.nameList_;
+    this.setNameList = (data_val) => {this.nameList_ = data_val;};
+    this.nameListLength = () => this.nameList().length;
+    this.nameListElement = (index_val) => {return this.nameList()[index_val];};
+    this.setNameListElement = (index_val, data_val) => {this.nameList()[index_val] = data_val;};
     this.init__();
 };
