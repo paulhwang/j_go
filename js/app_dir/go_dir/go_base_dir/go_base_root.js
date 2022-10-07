@@ -8,7 +8,6 @@ function GoBaseRootObject() {
     this.init__ = function() {
         this.fabricResponseObject_ = new FabricResponseObject(this);
         this.fabricRequestObject_ = new FabricRequestObject(this);
-        this.fabricSessionSetupObject_ = new FabricSessionSetupObject(this);
 
         this.htmlObject_ = new GoBaseHtmlObject(this);
         this.portObject_ = new GoBasePortObject(this);
@@ -16,7 +15,6 @@ function GoBaseRootObject() {
 
     this.fabricResponseObject = () => this.fabricResponseObject_;
     this.fabricRequestObject = () => this.fabricRequestObject_;
-    this.fabricSessionSetupObject = () => this.fabricSessionSetupObject_;
     this.linkObject = () => this.fabricSessionSetupObject().linkObject();
     this.sessionObject = () => this.fabricSessionSetupObject().sessionObject();
     this.htmlObject = () => this.htmlObject_;

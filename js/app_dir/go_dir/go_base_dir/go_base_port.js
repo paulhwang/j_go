@@ -7,12 +7,12 @@ function GoBasePortObject(root_val) {
     "use strict";
     this.init__ = function(root_val) {
         this.rootObject_ = root_val;
-        this.fabricSessionSetupObject().setCallbackFunc(this.receiveData, this);
+        this.fabricResponseObject().setCallbackFunc(this.receiveData, this);
     };
 
     this.transmitData = function(theme_type_val, theme_data_val, group_mode_val, second_fiddle_val) {
         console.log("GoPlayPortObject.transmitData() theme_type_val=" + theme_type_val + " theme_data_val=" + theme_data_val);
-        this.fabricSessionSetupObject().sendSetupSessionRequest(theme_type_val, theme_data_val, group_mode_val, second_fiddle_val);
+        this.fabricRequestObject().sendSetupSessionRequest(theme_type_val, theme_data_val, group_mode_val, second_fiddle_val);
     };
 
     this.receiveData = function() {
@@ -21,6 +21,7 @@ function GoBasePortObject(root_val) {
     };
 
     this.rootObject = () => this.rootObject_;
-    this.fabricSessionSetupObject = () => this.rootObject().fabricSessionSetupObject();
+    this.fabricRequestObject = () => this.rootObject().fabricRequestObject();
+    this.fabricResponseObject = () => this.rootObject().fabricResponseObject();
     this.init__(root_val);
 }
