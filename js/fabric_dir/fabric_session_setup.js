@@ -62,6 +62,9 @@ function FabricSessionSetupObject(root_object_val) {
     };
 
     this.processGetLinkDataResponse = function(data_val) {
+        console.log("FabricSessionSetupObject.processGetLinkDataResponse() data_val.result=" + data_val.result);
+        console.log("FabricSessionSetupObject.processGetLinkDataResponse() data_val.all_data=" + data_val.all_data);
+        console.log("FabricSessionSetupObject.processGetLinkDataResponse() data_val.name_tag=" + data_val.name_tag);
         var data = data_val;
         while (data_val.length > 0) {
             if (data_val.charAt(0) === this.phwangAjaxProtocolObject().WEB_FABRIC_PROTOCOL_RESPOND_IS_GET_LINK_DATA_NAME_LIST()) {
