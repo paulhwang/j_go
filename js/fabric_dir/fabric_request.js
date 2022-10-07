@@ -17,28 +17,28 @@ function FabricRequestObject(root_object_val) {
         this.sessionObject().printSessionInfo();
     };
 
-    this.sendGetLinkDataRequest = function() {
+    this.getLinkDataRequest = function() {
         const output = JSON.stringify({
                 command: "get_link_data",
                 time_stamp: this.linkObject().timeStamp(),
                 link_id: this.linkObject().linkId(),
                 });
-        console.log("FabricSessionSetupObject.sendGetLinkDataRequest() output=" + output);
+        console.log("FabricRequestObject.getLinkDataRequest() output=" + output);
         this.httpServiceObject().sendAjaxRequest(output); 
     };
 
-    this.sendGetNameListRequest = function(name_list_tag_val) {
+    this.getNameListRequest = function(name_list_tag_val) {
         var output = JSON.stringify({
                 command: "get_name_list",
                 time_stamp: this.linkObject().timeStamp(),
                 link_id: this.linkObject().linkId(),
                 name_list_tag: name_list_tag_val,
                 });
-        console.log("FabricSessionSetupObject.sendGetNameListRequest() output=" + output);
+        console.log("FabricRequestObject.getNameListRequest() output=" + output);
         this.httpServiceObject().sendAjaxRequest(output); 
     };
 
-    this.sendSetupSessionRequest = function(theme_type_val, theme_data_val, group_mode_val, second_fiddle_val) {
+    this.setupSessionRequest = function(theme_type_val, theme_data_val, group_mode_val, second_fiddle_val) {
         const output = JSON.stringify({
                 command: "setup_session",
                 time_stamp: this.linkObject().timeStamp(),
@@ -49,22 +49,22 @@ function FabricRequestObject(root_object_val) {
                 theme_type: theme_type_val,
                 theme_data: theme_data_val,
                 });
-        console.log("FabricRequestObject.sendSetupSessionRequest() output=" + output);
+        console.log("FabricRequestObject.setupSessionRequest() output=" + output);
         this.httpServiceObject().sendAjaxRequest(output); 
     };
 
-    this.sendSetupSession3Request = function(session_id_val) {
+    this.setupSession3Request = function(session_id_val) {
         const output = JSON.stringify({
                 command: "setup_session3",
                 time_stamp: this.linkObject().timeStamp(),
                 link_id: this.linkObject().linkId(),
                 session_id: session_id_val,
                 });
-        console.log("FabricSessionSetupObject.sendSetupSessionRequest() output=" + output);
+        console.log("FabricRequestObject.setupSession3Request() output=" + output);
         this.httpServiceObject().sendAjaxRequest(output); 
     };
 
-    this.sendPutSessionDataRequest = function(data_val) {
+    this.putSessionDataRequest = function(data_val) {
         const output = JSON.stringify({
                 command: "put_session_data",
                 time_stamp: this.linkObject().timeStamp(),
@@ -72,18 +72,18 @@ function FabricRequestObject(root_object_val) {
                 session_id: this.sessionObject().sessionId(),
                 data: data_val,
                 });
-        console.log("FabricSessionPutGetObject.sendPutSessionDataRequest() output=" + output);
+        console.log("FabricRequestObject.putSessionDataRequest() output=" + output);
         this.httpServiceObject().sendAjaxRequest(output); 
     };
 
-    this.sendGetSessionDataRequest = function() {
+    this.getSessionDataRequest = function() {
         const output = JSON.stringify({
                 command: "get_session_data",
                 time_stamp: this.linkObject().timeStamp(),
                 link_id: this.linkObject().linkId(),
                 session_id: this.sessionObject().sessionId(),
                 });
-        console.log("FabricSessionPutGetObject.sendGetSessionDataRequest() output=" + output);
+        console.log("FabricRequestObject.getSessionDataRequest() output=" + output);
         this.httpServiceObject().sendAjaxRequest(output); 
     };
 

@@ -150,7 +150,7 @@ function FabricResponseObject(root_object_val) {
         }
         else if (data_val.result === FE_DEF.RESULT_ALMOST_SUCCEED()) {
             console.log("FabricResponseObject.setupSessionResponse() almost_succeed");
-            this.fabricRequestObject().sendSetupSession3Request(data_val.session_id);
+            this.fabricRequestObject().setupSession3Request(data_val.session_id);
         }
         else if (data_val.result === FE_DEF.RESULT_ACCOUNT_NAME_NOT_EXIST()) {
             console.log("FabricResponseObject.setupSessionResponse() account_not_exist");
@@ -186,7 +186,7 @@ function FabricResponseObject(root_object_val) {
         }
         if (data_val.result === FE_DEF.RESULT_ALMOST_SUCCEED()) {
             console.log("FabricResponseObject.putSessionDataResponse() in_progress! session_id=", data_val.session_id);
-            this.fabricRequestObject().sendGetSessionDataRequest();
+            this.fabricRequestObject().getSessionDataRequest();
         }
         else {
             console.log("FabricResponseObject.putSessionDataResponse() invalid_result=" + data_val.result);
@@ -200,7 +200,7 @@ function FabricResponseObject(root_object_val) {
         }
         if (data_val.result === FE_DEF.RESULT_ALMOST_SUCCEED()) {
             console.log("FabricResponseObject.getSessionDataResponse() in_progress! session_id=", data_val.session_id);
-            this.sendGetSessionDataRequest();
+            this.getSessionDataRequest();
         }
         else {
             console.log("FabricResponseObject.getSessionDataResponse() invalid_result=" + data_val.result);

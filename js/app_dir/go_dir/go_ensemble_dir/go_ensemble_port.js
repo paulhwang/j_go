@@ -12,7 +12,7 @@ function GoEnsemblePortObject(root_val) {
 
     this.transmitData = function(theme_type_val, theme_data_val, group_mode_val, second_fiddle_val) {
         console.log("GoEnsemblePortObject.transmitData() theme_type_val=" + theme_type_val + " theme_data_val=" + theme_data_val);
-        this.fabricRequestObject().sendSetupSessionRequest(theme_type_val, theme_data_val, group_mode_val, second_fiddle_val);
+        this.fabricRequestObject().setupSessionRequest(theme_type_val, theme_data_val, group_mode_val, second_fiddle_val);
     };
 
     this.receiveData = function() {
