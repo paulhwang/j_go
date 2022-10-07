@@ -56,19 +56,28 @@ function FabricLinkObject() {
     };
 
 
-    this.encodePadInteger = function(num_val, size_val) {
-        if ((num_val === undefined) || (num_val === null)) {
+    this.encodePadInteger = function(int_val, size_val) {
+        if ((int_val === undefined) || (int_val === null)) {
             console.log("FabricLinkObject.encodePadInteger() null num_val");
             abend();
         }
 
-        let str = "" + num_val;
+        let str = "" + int_val;
         while (str.length < size_val) {
             str = "0" + str;
         }
 
         //console.log("FabricLinkObject.encodePadInteger() str=" + str);
         return str;
+    };
+
+    this.decodePadInteger = function(int_str_val, size_val) {
+        let output = 0;
+        for (let index = 0; index < size_val; index++) {
+            output *= 10;
+            output += int_str_val.charAt(index) - '0';
+        }
+        return output;
     };
 
     this.linkId = () => this.linkId_;

@@ -214,15 +214,6 @@ function FabricResponseObject(root_object_val) {
 
     };
 
-    this.decodeNumber = function(input_val, size_val) {
-        var output = 0;
-        for (var index = 0; index < size_val; index++) {
-            output *= 10;
-            output += input_val.charAt(index) - '0';
-        }
-        return output;
-    };
-
     this.sleepMilliseconds = function (milliseconds_val) {
         var start = new Date().getTime();
         for (var i = 0; i < 1e7; i++) {
