@@ -7,18 +7,14 @@ function GoDuetPortObject(root_val) {
     "use strict";
     this.init__ = function(root_val) {
         this.rootObject_ = root_val;
-        this.fabricResponseObject().setCallbackFunc(this.receiveData, this);
+        this.fabricResponseObject().setCallbackFunc(this.receiveFabricResponse, this);
 
         this.fabricRequestObject().getLinkDataRequest();
     };
 
-    this.transmitData = function(theme_type_val, theme_data_val, group_mode_val, second_fiddle_val) {
-        console.log("GoDuetPortObject.transmitData() theme_type_val=" + theme_type_val + " theme_data_val=" + theme_data_val);
-        //this.fabricRequestObject().setupSessionRequest(theme_type_val, theme_data_val, group_mode_val, second_fiddle_val);
-    };
 
-    this.receiveData = function(command_val) {
-        console.log("GoDuetPortObject.receiveData() command_val=" + command_val);
+    this.receiveFabricResponse = function(command_val) {
+        console.log("GoDuetPortObject.receiveFabricResponse() command_val=" + command_val);
 
         if (command_val === "get_link_data") {
             if (this.linkObject().nameListUpdateNeeded()) {
@@ -32,7 +28,7 @@ function GoDuetPortObject(root_val) {
             window.open("go_play.html", "_self");
         }
         else {
-            console.log("GoDuetPortObject.receiveData() bad command_val=" + command_val);
+            console.log("GoDuetPortObject.receiveFabricResponse() bad command_val=" + command_val);
             abend();
         }
     };

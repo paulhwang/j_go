@@ -22,14 +22,11 @@ function GoDuetHtmlObject(root_object_val) {
             const theme_data = this0.encodeGoConfig(board_size, handicap, komi, initiator_color);
             console.log("GoDuetHtmlObject.setupHtmlInputFun() board_size=" + board_size + " initiator_color=" + initiator_color + " komi=" + komi + " handicap=" + handicap + " myName=" + this0.linkObject().myName() + " second_fiddle=" + second_fiddle + " theme_data=" + theme_data);
             this0.fabricRequestObject().setupSessionRequest(FE_DEF.THEME_IS_GO_GAME(), theme_data, FE_DEF.GROUP_MODE_DUET(), second_fiddle);
-            //this0.portObject().transmitData(FE_DEF.THEME_IS_GO_GAME(), theme_data, FE_DEF.GROUP_MODE_DUET(), this0.linkObject().myName());
         });
     };
 
     this.renderNameList = function() {
-        console.log("+++++++++this.linkObject().nameListLength()=" + this.linkObject().nameListLength());
         for (let i = 0; i < this.linkObject().nameListLength(); i++) {
-            console.log("+++++++++++++this.linkObject().nameListElement(i)=" + this.linkObject().nameListElement(i));
             $('.peer_name_paragraph select').append($('<option>', {value:this.linkObject().nameListElement(i), text:this.linkObject().nameListElement(i)}));
         }
     };

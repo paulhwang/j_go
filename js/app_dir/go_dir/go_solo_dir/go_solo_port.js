@@ -7,7 +7,7 @@ function GoSoloPortObject(root_val) {
     "use strict";
     this.init__ = function(root_val) {
         this.rootObject_ = root_val;
-        this.fabricResponseObject().setCallbackFunc(this.receiveData, this);
+        this.fabricResponseObject().setCallbackFunc(this.receiveFabricResponse, this);
     };
 
     this.transmitData = function(theme_type_val, theme_data_val, group_mode_val, second_fiddle_val) {
@@ -15,8 +15,8 @@ function GoSoloPortObject(root_val) {
         this.fabricRequestObject().setupSessionRequest(theme_type_val, theme_data_val, group_mode_val, second_fiddle_val);
     };
 
-    this.receiveData = function() {
-        console.log("GoSoloPortObject.receiveData()");
+    this.receiveFabricResponse = function(command_val) {
+        console.log("GoSoloPortObject.receiveFabricResponse() command_val=" + command_val);
         window.open("go_play.html", "_self");
     };
 
