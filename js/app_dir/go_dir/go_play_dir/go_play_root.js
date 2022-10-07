@@ -8,7 +8,6 @@ function GoPlayRootObject() {
     this.init__ = function() {
         this.fabricResponseObject_ = new FabricResponseObject(this);
         this.fabricRequestObject_ = new FabricRequestObject(this);
-        this.fabricSessionPutGetObject_ = new FabricSessionPutGetObject();
 
         this.configObject_ = new GoConfigObject(this);
         this.configObject().decode();
@@ -24,9 +23,8 @@ function GoPlayRootObject() {
 
     this.fabricResponseObject = () => this.fabricResponseObject_;
     this.fabricRequestObject = () => this.fabricRequestObject_;
-    this.fabricSessionPutGetObject = () => this.fabricSessionPutGetObject_;
-    this.linkObject                = () => this.fabricSessionPutGetObject().linkObject();
-    this.sessionObject             = () => this.fabricSessionPutGetObject().sessionObject();
+    this.linkObject                = () => this.fabricRequestObject().linkObject();
+    this.sessionObject             = () => this.fabricRequestObject().sessionObject();
 
     this.configObject    = () => this.configObject_;
     this.boardObject     = () => this.boardObject_;
