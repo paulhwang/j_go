@@ -66,8 +66,6 @@ function FabricLinkObject() {
         while (str.length < size_val) {
             str = "0" + str;
         }
-
-        //console.log("FabricLinkObject.encodePadInteger() str=" + str);
         return str;
     };
 

@@ -14,13 +14,18 @@ function GoDuetPortObject(root_val) {
 
     this.transmitData = function(theme_type_val, theme_data_val, group_mode_val, second_fiddle_val) {
         console.log("GoDuetPortObject.transmitData() theme_type_val=" + theme_type_val + " theme_data_val=" + theme_data_val);
-        this.fabricRequestObject().setupSessionRequest(theme_type_val, theme_data_val, group_mode_val, second_fiddle_val);
+        //this.fabricRequestObject().setupSessionRequest(theme_type_val, theme_data_val, group_mode_val, second_fiddle_val);
     };
 
     this.receiveData = function(command_val) {
         console.log("GoDuetPortObject.receiveData() command_val=" + command_val);
 
-        if (command_val === "get_name_list") {
+        if (command_val === "get_link_data") {
+            if (this.linkObject().nameListUpdateNeeded()) {
+                this.fabricRequestObject().getNameListRequest(this.linkObject().nameListTag());
+            }
+        }
+        else if (command_val === "get_name_list") {
             this.htmlObject().renderNameList();
         }
         else if (command_val === "setup_session3") {
@@ -33,6 +38,7 @@ function GoDuetPortObject(root_val) {
     };
 
     this.rootObject = () => this.rootObject_;
+    this.linkObject = () => this.rootObject().linkObject();
     this.fabricRequestObject = () => this.rootObject().fabricRequestObject();
     this.fabricResponseObject = () => this.rootObject().fabricResponseObject();
     this.htmlObject = () => this.rootObject().htmlObject();
