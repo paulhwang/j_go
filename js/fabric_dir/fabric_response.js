@@ -54,10 +54,7 @@ function FabricResponseObject(root_object_val) {
         console.log("FabricResponseObject.getLinkDataResponse() data_val.result=" + data_val.result);
         console.log("FabricResponseObject.getLinkDataResponse() data_val.name_list_tag=" + data_val.name_list_tag);
 
-        //const name_list_tag = this.decodeNumber(data_val.name_list_tag, data_val.name_list_tag.length)
-        //console.log("FabricResponseObject.getLinkDataResponse() data_val.name_list_tag=" + data_val.name_list_tag);
         this.linkObject().setServerNameListTag(data_val.name_list_tag);
-
 
         ////////////////////////////////////////////////// move out*********************
         if (this.linkObject().nameListUpdateNeeded()) {
@@ -128,11 +125,10 @@ function FabricResponseObject(root_object_val) {
     this.getNameListResponse = function(data_val) {
         if (data_val) {
             if (data_val.name_list) {
-                //const name_list_tag  = this.decodeNumber(data_val.name_list, 3);
-                const name_list_tag  = data_val.name_list.slice(0, 3);
+                const name_list_tag  = data_val.name_list.slice(0, FE_DEF.NAME_LIST_TAG_SIZE());
                 console.log("FabricResponseObject.getNameListResponse() name_list_tag=" + name_list_tag);
 
-                const name_list_data = data_val.name_list.slice(3);
+                const name_list_data = data_val.name_list.slice(FE_DEF.NAME_LIST_TAG_SIZE());
                 console.log("FabricResponseObject.getNameListResponse() name_list_data=" + name_list_data);
 
                 const name_list_array = JSON.parse("[" + name_list_data + "]");

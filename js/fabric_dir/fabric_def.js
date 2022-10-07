@@ -38,6 +38,8 @@ function FE_DEF_OBJECT() {
     this.ROOM_STATUS_PREPARING = () => 'P';
     this.ROOM_STATUS_READY     = () => 'R';
 
+    this.NAME_LIST_TAG_SIZE = () => 3;
+
     this.THEME_IS_GO_GAME = () => 'G';
 };
 
