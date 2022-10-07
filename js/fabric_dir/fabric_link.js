@@ -59,6 +59,22 @@ function FabricLinkObject() {
         }
     };
 
+
+    this.encodePadInteger = function(num_val, size_val) {
+        if ((num_val === undefined) || (num_val === null)) {
+            console.log("FabricLinkObject.encodePadInteger() null num_val");
+            abend();
+        }
+
+        let str = "" + num_val;
+        while (str.length < size_val) {
+            str = "0" + str;
+        }
+
+        //console.log("FabricLinkObject.encodePadInteger() str=" + str);
+        return str;
+    };
+
     this.linkId = () => this.linkId_;
     this.myName = () => this.myName_;
     this.timeStamp = () => this.timeStamp_;
