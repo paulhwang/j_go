@@ -10,11 +10,6 @@ function GoEnsemblePortObject(root_val) {
         this.fabricResponseObject().setCallbackFunc(this.receiveFabricResponse, this);
     };
 
-    this.transmitData = function(theme_type_val, theme_data_val, group_mode_val, second_fiddle_val) {
-        console.log("GoEnsemblePortObject.transmitData() theme_type_val=" + theme_type_val + " theme_data_val=" + theme_data_val);
-        this.fabricRequestObject().setupSessionRequest(theme_type_val, theme_data_val, group_mode_val, second_fiddle_val);
-    };
-
     this.receiveFabricResponse = function(command_val) {
         console.log("GoEnsemblePortObject.receiveFabricResponse() command_val=" + command_val);
         window.open("go_play.html", "_self");
