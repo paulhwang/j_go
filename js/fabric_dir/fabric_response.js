@@ -39,7 +39,7 @@ function FabricResponseObject(root_object_val) {
         console.log("FabricResponseObject.parseFabricResponse() response.data=" + response.data);
         const data = JSON.parse(response.data);
 
-        var func = this.responseSwitchTable()[response.command];
+        let func = this.responseSwitchTable()[response.command];
         if (!func) {
             console.log("FabricResponseObject.parseFabricResponse() bad_command=" + response.command);
             abend();
@@ -54,9 +54,9 @@ function FabricResponseObject(root_object_val) {
         console.log("FabricResponseObject.getLinkDataResponse() data_val.result=" + data_val.result);
         console.log("FabricResponseObject.getLinkDataResponse() data_val.name_list_tag=" + data_val.name_list_tag);
 
-        const name_list_tag = this.decodeNumber(data_val.name_list_tag, data_val.name_list_tag.length)
-        console.log("FabricResponseObject.getLinkDataResponse() name_list_tag=" + name_list_tag);
-        this.linkObject().setServerNameListTag(name_list_tag);
+        //const name_list_tag = this.decodeNumber(data_val.name_list_tag, data_val.name_list_tag.length)
+        //console.log("FabricResponseObject.getLinkDataResponse() data_val.name_list_tag=" + data_val.name_list_tag);
+        this.linkObject().setServerNameListTag(data_val.name_list_tag);
 
 
         ////////////////////////////////////////////////// move out*********************
@@ -127,16 +127,19 @@ function FabricResponseObject(root_object_val) {
 
     this.getNameListResponse = function(data_val) {
         if (data_val) {
-            if (data_val.c_name_list) {
-                const name_list_tag  = this.decodeNumber(data_val.c_name_list, 3);
-                this.linkObject().setNameListTag(name_list_tag);
-
-                const name_list = data_val.c_name_list.slice(3);
+            if (data_val.name_list) {
+                //const name_list_tag  = this.decodeNumber(data_val.name_list, 3);
+                const name_list_tag  = data_val.name_list.slice(0, 3);
                 console.log("FabricResponseObject.getNameListResponse() name_list_tag=" + name_list_tag);
-                console.log("FabricResponseObject.getNameListResponse() name_list=" + name_list);
-                const array = JSON.parse("[" + name_list + "]");
-                console.log("FabricResponseObject.getNameListResponse() array=" + array);
-                this.linkObject().setNameList(array);
+
+                const name_list_data = data_val.name_list.slice(3);
+                console.log("FabricResponseObject.getNameListResponse() name_list_data=" + name_list_data);
+
+                const name_list_array = JSON.parse("[" + name_list_data + "]");
+                console.log("FabricResponseObject.getNameListResponse() name_list_array=" + name_list_array);
+
+                this.linkObject().setNameListTag(name_list_tag);
+                this.linkObject().setNameList(name_list_array);
                 //this.phwangPortObject().receiveGetNameListResponse();
             }
         }

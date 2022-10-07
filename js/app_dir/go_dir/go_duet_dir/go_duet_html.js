@@ -12,7 +12,7 @@ function GoDuetHtmlObject(root_object_val) {
 
     this.setupHtmlInputFunc = function() {
         this.renderNameList();
-        var this0 = this;
+        const this0 = this;
         $(".config_section .config_button").on("click", function() {
             let second_fiddle = $(".peer_name_paragraph select").val();
             let initiator_color = $(".config_section .go_config_section .stone_color").val();
@@ -26,9 +26,9 @@ function GoDuetHtmlObject(root_object_val) {
     };
 
     this.renderNameList = function() {
-        //for (var i = 0; i < this.phwangLinkObject().nameListLength(); i++) {
-            //$('.peer_name_paragraph select').append($('<option>', {value:this.phwangLinkObject().nameListElement(i), text:this.phwangLinkObject().nameListElement(i)}));
-        //}
+        for (let i = 0; i < this.linkObject().nameListLength(); i++) {
+            $('.peer_name_paragraph select').append($('<option>', {value:this.linkObject().nameListElement(i), text:this.linkObject().nameListElement(i)}));
+        }
     };
 
     this.encodeGoConfig = function(board_size_val, handicap_val, komi_val, initiator_color_val) {
