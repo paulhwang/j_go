@@ -7,7 +7,7 @@ function GoSoloPortObject(root_val) {
     "use strict";
     this.init__ = function(root_val) {
         this.rootObject_ = root_val;
-        this.fabricSessionSetupObject().setCallbackFunc(this.receiveData, this);
+        this.fabricResponseObject().setCallbackFunc(this.receiveData, this);
     };
 
     this.transmitData = function(theme_type_val, theme_data_val, group_mode_val, second_fiddle_val) {
@@ -22,6 +22,6 @@ function GoSoloPortObject(root_val) {
 
     this.rootObject = () => this.rootObject_;
     this.fabricRequestObject = () => this.rootObject().fabricRequestObject();
-    this.fabricSessionSetupObject = () => this.rootObject().fabricSessionSetupObject();
+    this.fabricResponseObject = () => this.rootObject().fabricResponseObject();
     this.init__(root_val);
 }

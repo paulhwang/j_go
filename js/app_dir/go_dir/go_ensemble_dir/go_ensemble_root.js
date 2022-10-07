@@ -8,7 +8,6 @@ function GoEnsembleRootObject() {
     this.init__ = function() {
         this.fabricResponseObject_ = new FabricResponseObject(this);
         this.fabricRequestObject_ = new FabricRequestObject(this);
-        this.fabricSessionSetupObject_ = new FabricSessionSetupObject(this);
 
         this.htmlObject_ = new GoEnsembleHtmlObject(this);
         this.portObject_ = new GoEnsemblePortObject(this);
@@ -16,9 +15,8 @@ function GoEnsembleRootObject() {
 
     this.fabricResponseObject = () => this.fabricResponseObject_;
     this.fabricRequestObject = () => this.fabricRequestObject_;
-    this.fabricSessionSetupObject = () => this.fabricSessionSetupObject_;
-    this.linkObject = () => this.fabricSessionSetupObject().linkObject();
-    this.sessionObject = () => this.fabricSessionSetupObject().sessionObject();
+    this.linkObject = () => this.fabricRequestObject().linkObject();
+    this.sessionObject = () => this.fabricRequestObject().sessionObject();
     this.htmlObject = () => this.htmlObject_;
     this.portObject = () => this.portObject_;
     this.init__();
