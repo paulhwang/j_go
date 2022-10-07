@@ -8,6 +8,8 @@ function GoDuetPortObject(root_val) {
     this.init__ = function(root_val) {
         this.rootObject_ = root_val;
         this.fabricResponseObject().setCallbackFunc(this.receiveData, this);
+
+        this.fabricRequestObject().getLinkDataRequest();
     };
 
     this.transmitData = function(theme_type_val, theme_data_val, group_mode_val, second_fiddle_val) {

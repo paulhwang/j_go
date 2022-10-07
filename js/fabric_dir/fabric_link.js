@@ -7,8 +7,8 @@ function FabricLinkObject() {
     "use strict";
     this.init__ = function() {
         this.nameList_ = [];
-        this.nameListTag_ = 0;
-        this.serverNameListTag_ = 0;
+        this.nameListTag_ = this.encodePadInteger(0, 3);
+        this.serverNameListTag_ = this.encodePadInteger(0, 3);
     }
 
     this.getLinkInfoFromStorage = function() {
@@ -49,14 +49,10 @@ function FabricLinkObject() {
     };
 
     this.nameListUpdateNeeded = function () {
-        if (this.serverNameListTag() > this.nameListTag()) {
-            console.log("true");
-            return true;
-        }
-        else {
-            console.log("false");
+        if (this.serverNameListTag() === this.nameListTag())
             return false;
-        }
+        else
+            return true;
     };
 
 

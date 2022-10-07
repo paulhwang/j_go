@@ -57,9 +57,13 @@ function FabricResponseObject(root_object_val) {
         const name_list_tag = this.decodeNumber(data_val.name_list_tag, data_val.name_list_tag.length)
         console.log("FabricResponseObject.getLinkDataResponse() name_list_tag=" + name_list_tag);
         this.linkObject().setServerNameListTag(name_list_tag);
+
+
+        ////////////////////////////////////////////////// move out*********************
         if (this.linkObject().nameListUpdateNeeded()) {
-            this.sendGetNameListRequest(this.linkObject().nameListTag());
+            this.fabricRequestObject().getNameListRequest(this.linkObject().nameListTag());
         }
+        //**************************************************
 
         console.log("FabricResponseObject.getLinkDataResponse() data_val.data=" + data_val.data);
         let data = data_val.data;
