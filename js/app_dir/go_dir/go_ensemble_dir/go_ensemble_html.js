@@ -20,7 +20,7 @@ function GoEnsembleHtmlObject(root_object_val) {
             let handicap = $(".config_section .go_config_section .handicap").val();
             let theme_data = this0.encodeGoConfig(board_size, handicap, komi, initiator_color);
             console.log("GoEnsembleHtmlObject.setupHtmlInputFun() board_size=" + board_size + " initiator_color=" + initiator_color + " komi=" + komi + " handicap=" + handicap + " myName=" + this0.linkObject().myName() + " second_fiddle=" + second_fiddle + " theme_data=" + theme_data);
-            this0.portObject().transmitData(FE_DEF.THEME_IS_GO_GAME(), theme_data, FE_DEF.GROUP_MODE_ENSEMBLE(), "N/A");
+            this0.fabricRequestObject().setupSessionRequest(FE_DEF.THEME_IS_GO_GAME(), theme_data, FE_DEF.GROUP_MODE_ENSEMBLE(), "N/A");
         });
     };
 
@@ -41,7 +41,7 @@ function GoEnsembleHtmlObject(root_object_val) {
 
     this.rootObject = () => this.rootObject_;
     this.linkObject = () => this.rootObject().linkObject();
-    this.fabricSessionSetupObject = () => this.rootObject().fabricSessionSetupObject();
+    this.fabricRequestObject = () => this.rootObject().fabricRequestObject();
     this.portObject = () => this.rootObject().portObject();
     this.init__(root_object_val);
 };
