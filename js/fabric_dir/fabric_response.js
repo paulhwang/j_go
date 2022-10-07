@@ -136,7 +136,7 @@ function FabricResponseObject(root_object_val) {
 
                 this.linkObject().setNameListTag(name_list_tag);
                 this.linkObject().setNameList(name_list_array);
-                //this.phwangPortObject().receiveGetNameListResponse();
+                this.callbackFunc().bind(this.callbackObject())("get_name_list");
             }
         }
     };
@@ -168,7 +168,7 @@ function FabricResponseObject(root_object_val) {
             console.log("FabricResponseObject.setupSession3Response() succeed! session_id=", data_val.session_id);
             if (data_val.room_status === FE_DEF.ROOM_STATUS_READY()) {
                 this.sessionObject().setSessionInfoIntoStorage(data_val.session_id, data_val.group_mode, data_val.theme_type, data_val.theme_data, data_val.first_fiddle, data_val.second_fiddle);
-                this.callbackFunc().bind(this.callbackObject())();
+                this.callbackFunc().bind(this.callbackObject())("setup_session3");
             }
             else {
             }

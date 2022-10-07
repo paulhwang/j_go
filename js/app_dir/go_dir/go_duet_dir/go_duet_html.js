@@ -26,7 +26,9 @@ function GoDuetHtmlObject(root_object_val) {
     };
 
     this.renderNameList = function() {
+        console.log("+++++++++this.linkObject().nameListLength()=" + this.linkObject().nameListLength());
         for (let i = 0; i < this.linkObject().nameListLength(); i++) {
+            console.log("+++++++++++++this.linkObject().nameListElement(i)=" + this.linkObject().nameListElement(i));
             $('.peer_name_paragraph select').append($('<option>', {value:this.linkObject().nameListElement(i), text:this.linkObject().nameListElement(i)}));
         }
     };

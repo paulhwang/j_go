@@ -17,13 +17,20 @@ function GoDuetPortObject(root_val) {
         this.fabricRequestObject().setupSessionRequest(theme_type_val, theme_data_val, group_mode_val, second_fiddle_val);
     };
 
-    this.receiveData = function() {
-        console.log("GoDuetPortObject.receiveData()");
-        window.open("go_play.html", "_self");
+    this.receiveData = function(command_val) {
+        console.log("GoDuetPortObject.receiveData() command_val=" + command_val);
+
+        if (command_val === "get_name_list") {
+            this.htmlObject().renderNameList();
+        }
+        else if (command_val === "setup_session3") {
+            window.open("go_play.html", "_self");
+        }
     };
 
     this.rootObject = () => this.rootObject_;
     this.fabricRequestObject = () => this.rootObject().fabricRequestObject();
     this.fabricResponseObject = () => this.rootObject().fabricResponseObject();
+    this.htmlObject = () => this.rootObject().htmlObject();
     this.init__(root_val);
 }
