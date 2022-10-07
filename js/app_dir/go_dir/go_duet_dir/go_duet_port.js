@@ -26,6 +26,10 @@ function GoDuetPortObject(root_val) {
         else if (command_val === "setup_session3") {
             window.open("go_play.html", "_self");
         }
+        else {
+            console.log("GoDuetPortObject.receiveData() bad command_val=" + command_val);
+            abend();
+        }
     };
 
     this.rootObject = () => this.rootObject_;
