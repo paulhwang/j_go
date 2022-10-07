@@ -146,16 +146,16 @@ function FabricSessionSetupObject(root_object_val) {
     this.processGetNameListResponse = function(data_val) {
         if (data_val) {
             if (data_val.c_name_list) {
-                var name_list_tag  = this.phwangObject().decodeNumber(data_val.c_name_list, 3);
-                this.phwangLinkObject().setNameListTag(name_list_tag);
+                const name_list_tag  = this.decodeNumber(data_val.c_name_list, 3);
+                this.linkObject().setNameListTag(name_list_tag);
 
-                var name_list = data_val.c_name_list.slice(3);
+                const name_list = data_val.c_name_list.slice(3);
                 console.log("FabricSessionSetupObject.processGetNameListResponse() name_list_tag=" + name_list_tag);
                 console.log("FabricSessionSetupObject.processGetNameListResponse() name_list=" + name_list);
-                var array = JSON.parse("[" + name_list + "]");
+                const array = JSON.parse("[" + name_list + "]");
                 console.log("FabricSessionSetupObject.processGetNameListResponse() array=" + array);
-                this.phwangLinkObject().setNameList(array);
-                this.phwangPortObject().receiveGetNameListResponse();
+                this.linkObject().setNameList(array);
+                //this.phwangPortObject().receiveGetNameListResponse();
             }
         }
     };
