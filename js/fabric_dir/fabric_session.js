@@ -11,44 +11,44 @@ function FabricSessionObject() {
     this.getSessionInfoFromStorage = function() {
         this.sessionId_ = sessionStorage.getItem("session_id");
         if (this.sessionId_ === null) {
-            console.log("FabricSessionObject.getSessionInfoFromStorage() null session_id");
-            abend();
-            return -1;
+            //console.log("FabricSessionObject.getSessionInfoFromStorage() null session_id");
+            //abend();
+            //return -1;
         }
 
         this.groupMode_ = sessionStorage.getItem("group_mode");
         if (this.groupMode_ === undefined) {
-            console.log("FabricSessionObject.getSessionInfoFromStorage() undefined group_mode");
-            abend();
-            return -1;
+            //console.log("FabricSessionObject.getSessionInfoFromStorage() undefined group_mode");
+            //abend();
+            //return -1;
         }
 
         this.themeType_ = sessionStorage.getItem("theme_type");
         if (this.themeType_ === null) {
-            console.log("FabricSessionObject.getSessionInfoFromStorage() null theme_type");
-            abend();
-            return -1;
+            //console.log("FabricSessionObject.getSessionInfoFromStorage() null theme_type");
+            //abend();
+            //return -1;
         }
 
         this.themeData_ = sessionStorage.getItem("theme_data");
         if (this.themeData_ === null) {
-            console.log("FabricSessionObject.getSessionInfoFromStorage() null theme_data");
-            abend();
-            return -1;
+            //console.log("FabricSessionObject.getSessionInfoFromStorage() null theme_data");
+            //abend();
+            //return -1;
         }
 
         this.firstFiddle_ = sessionStorage.getItem("first_fiddle");
         if (this.firstFiddle_ === null) {
-            console.log("FabricSessionObject.getSessionInfoFromStorage() null first_fiddle");
-            abend();
-            return -1;
+            //console.log("FabricSessionObject.getSessionInfoFromStorage() null first_fiddle");
+            //abend();
+            //return -1;
         }
 
         this.secondFiddle_ = sessionStorage.getItem("second_fiddle");
         if (this.secondFiddle_ === null) {
-            console.log("FabricSessionObject.getSessionInfoFromStorage() null second_fiddle");
-            abend();
-            return -1;
+            //console.log("FabricSessionObject.getSessionInfoFromStorage() null second_fiddle");
+            //abend();
+            //return -1;
         }
 
         return 0;

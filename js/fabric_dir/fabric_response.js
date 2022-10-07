@@ -27,6 +27,8 @@ function FabricResponseObject(root_object_val) {
             "setup_session": this.processSetupSessionResponse,
             "setup_session2": this.processSetupSession2Response,
             "setup_session3": this.processSetupSession3Response,
+            "put_session_data": this.processPutSessionDataResponse,
+            "get_session_data": this.processGetSessionDataResponse,
         };
     };
 
@@ -174,6 +176,34 @@ function FabricResponseObject(root_object_val) {
         }
         else {
             console.log("FabricRequestObject.examineResponse(setup_session) invalid_result=" + data_val.result);
+        }
+    };
+
+    this.processPutSessionDataResponse = function(data_val) {
+        if (data_val.result === FE_DEF.RESULT_SUCCEED()) {
+            console.log("FabricSessionPutGetObject.examineResponse(put_session_data) succeed! session_id=", data_val.session_id);
+            this.putCallbackFunc().bind(this.putCallbackObject())(data_val.result_data);
+        }
+        if (data_val.result === FE_DEF.RESULT_ALMOST_SUCCEED()) {
+            console.log("FabricSessionPutGetObject.examineResponse(put_session_data) in_progress! session_id=", data_val.session_id);
+            this.fabricRequestObject().sendGetSessionDataRequest();
+        }
+        else {
+            console.log("FabricSessionPutGetObject.examineResponse(put_session_data) invalid_result=" + data_val.result);
+        }
+    };
+
+    this.processGetSessionDataResponse = function(data_val) {
+        if (data_val.result === FE_DEF.RESULT_SUCCEED()) {
+            console.log("FabricSessionPutGetObject.examineResponse(get_session_data) succeed! session_id=", data_val.session_id);
+            this.setupSessionCallbackFunc().bind(this.setupSessionCallbackObject())(data_val.result_data);
+        }
+        if (data_val.result === FE_DEF.RESULT_ALMOST_SUCCEED()) {
+            console.log("FabricSessionPutGetObject.examineResponse(get_session_data) in_progress! session_id=", data_val.session_id);
+            this.sendGetSessionDataRequest();
+        }
+        else {
+            console.log("FabricSessionPutGetObject.examineResponse(get_session_data) invalid_result=" + data_val.result);
         }
     };
 
