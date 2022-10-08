@@ -28,6 +28,7 @@ function FE_DEF_OBJECT() {
     this.RESULT_HIS_LINK_NOT_EXIST         = () => "59";
     this.RESULT_NULL_HIS_SESSION           = () => "60";
     this.RESULT_ALMOST_SUCCEED             = () => "63";
+    this.RESULT_WAITING_FOR_ANSWER         = () => "64";
 
     this.RESULT_MALLOC_ROOM_FAIL           = () => "71";
 

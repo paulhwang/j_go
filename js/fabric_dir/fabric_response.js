@@ -152,6 +152,10 @@ function FabricResponseObject(root_object_val) {
             console.log("FabricResponseObject.setupSessionResponse() almost_succeed");
             this.fabricRequestObject().setupSession3Request(data_val.session_id);
         }
+        else if (data_val.result === FE_DEF.RESULT_WAITING_FOR_ANSWER()) {
+            console.log("FabricResponseObject.setupSessionResponse() waiting_for_answer");
+            //this.fabricRequestObject().setupSession3Request(data_val.session_id);
+        }
         else if (data_val.result === FE_DEF.RESULT_ACCOUNT_NAME_NOT_EXIST()) {
             console.log("FabricResponseObject.setupSessionResponse() account_not_exist");
         }
