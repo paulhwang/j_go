@@ -15,8 +15,8 @@ function GoBaseRootObject() {
 
     this.fabricResponseObject = () => this.fabricResponseObject_;
     this.fabricRequestObject = () => this.fabricRequestObject_;
-    this.linkObject = () => this.fabricSessionSetupObject().linkObject();
-    this.sessionObject = () => this.fabricSessionSetupObject().sessionObject();
+    this.linkObject = () => this.fabricRequestObject().linkObject();
+    this.sessionObject = () => this.fabricRequestObject().sessionObject();
     this.htmlObject = () => this.htmlObject_;
     this.portObject = () => this.portObject_;
     this.init__();

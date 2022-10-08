@@ -13,7 +13,7 @@ function GoDuetPortObject(root_val) {
     };
 
 
-    this.receiveFabricResponse = function(command_val) {
+    this.receiveFabricResponse = function(command_val, data_val) {
         console.log("GoDuetPortObject.receiveFabricResponse() command_val=" + command_val);
 
         if (command_val === "get_link_data") {

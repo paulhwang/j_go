@@ -57,7 +57,15 @@ function FabricResponseObject(root_object_val) {
         console.log("FabricResponseObject.getLinkDataResponse() data_val.name_list_tag=" + data_val.name_list_tag);
         this.linkObject().setServerNameListTag(data_val.name_list_tag);
 
+        console.log("FabricResponseObject.getLinkDataResponse() data_val.pending_session2=" + data_val.pending_session2);
+        if (data_val.pending_session2 != "N/A") {
+            console.log("=====================FabricResponseObject.getLinkDataResponse(pending_session2)");
+        }
 
+        console.log("FabricResponseObject.getLinkDataResponse() data_val.pending_session3=" + data_val.pending_session3);
+        if (data_val.pending_session3 != "N/A") {
+
+        }
 
 
         console.log("FabricResponseObject.getLinkDataResponse() data_val.data=" + data_val.data);
@@ -118,7 +126,7 @@ function FabricResponseObject(root_object_val) {
         if (data_val.length !== 0) {
             console.log("FabricResponseObject.getLinkDataResponse() length=" + data_val.length);
         }
-        this.callbackFunc().bind(this.callbackObject())("get_link_data");
+        this.callbackFunc().bind(this.callbackObject())("get_link_data", data_val);
     };
 
     this.getNameListResponse = function(data_val) {
