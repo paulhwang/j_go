@@ -18,11 +18,7 @@ function GoSoloPortObject(root_val) {
         if (command_val === "get_link_data") {
             if (data_val.pending_session3 != "N/A") {
                 console.log("GoSoloPortObject.getLinkDataResponse() pending_session3=" + data_val.pending_session3);
-                const pending_session3 = data_val.pending_session3;
-                const session_id = pending_session3.slice(0, 8);
-                //const theme_type = pending_session3.charAt(8)
-                //const theme_data = pending_session3.slice(9);
-                this.fabricRequestObj().setupSession3Request(session_id);
+                this.fabricRequestObj().setupSession3Request(data_val.pending_session3);
             }
         }
 
