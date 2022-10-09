@@ -14,7 +14,9 @@ function GoDuetPortObject(root_val) {
 
 
     this.receiveFabricResponse = function(command_val, data_val) {
-        console.log("GoDuetPortObject.receiveFabricResponse() command_val=" + command_val);
+        if (command_val !== "get_link_data") {
+            console.log("GoDuetPortObject.receiveFabricResponse() command_val=" + command_val);
+        }
 
         if (command_val === "get_link_data") {
             this.getLinkDataResponse(data_val);
@@ -39,7 +41,6 @@ function GoDuetPortObject(root_val) {
             const theme_type = pending_session3.charAt(8)
             const theme_data = pending_session3.slice(9);
 
-            this.fabricRequestObject().setupSession2Request(session_id);
             //window.open("go_play.html", "_self");
         }
 
@@ -47,11 +48,12 @@ function GoDuetPortObject(root_val) {
             this.fabricRequestObject().getNameListRequest(this.linkObject().nameListTag());
         }
 
-        //this.linkObject().sleepMilliseconds(5000);
-        //this.fabricRequestObject().getLinkDataRequest();
+        this.linkObject().sleepMilliseconds(5000);
+        this.fabricRequestObject().getLinkDataRequest();
     };
 
     this.getNameListResponse = function (data_val) {
+        console.log("GoDuetPortObject.getNameListResponse()");
         this.htmlObject().renderNameList();
     };
 
