@@ -7,6 +7,8 @@ function HttpXmtClass(fab_request_obj_val) {
     "use strict";
     this.init__ = function(fab_request_obj_val) {
         this.fabRequestObj_ = fab_request_obj_val;
+        this.theTransmitQueueObject = new QueueClass();
+        this.thePendingSessionDataQueueObject = new QueueClass();
     };
 
     this.transmitAjaxRequest = function(output_val) {
