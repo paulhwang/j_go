@@ -23,7 +23,7 @@ function FabricRequestObject(root_object_val) {
                 time_stamp: this.linkObject().timeStamp(),
                 link_id: this.linkObject().linkId(),
                 });
-        console.log("FabricRequestObject.getLinkDataRequest() output=" + output);
+        //console.log("FabricRequestObject.getLinkDataRequest() output=" + output);
         this.httpServiceObject().sendAjaxRequest(output); 
     };
 

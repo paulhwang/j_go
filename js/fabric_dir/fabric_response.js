@@ -33,42 +33,44 @@ function FabricResponseObject(root_object_val) {
     };
 
     this.parseFabricResponse = function(json_response_val) {
-        console.log("FabricResponseObject.parseFabricResponse() json_response_val=" + json_response_val);
+        //console.log("FabricResponseObject.parseFabricResponse() json_response_val=" + json_response_val);
         const response = JSON.parse(json_response_val);
 
-        console.log("FabricResponseObject.parseFabricResponse() response.data=" + response.data);
-        const data = JSON.parse(response.data);
+        const command = response.command;
+        if (command !== "get_link_data") {
+            console.log("FabricResponseObject.parseFabricResponse() response.data=" + response.data);
+        }
 
-        let func = this.responseSwitchTable()[response.command];
+        const func = this.responseSwitchTable()[command];
         if (!func) {
-            console.log("FabricResponseObject.parseFabricResponse() bad_command=" + response.command);
+            console.log("FabricResponseObject.parseFabricResponse() bad_command=" + command);
             abend();
             return;
         }
 
         this.clearPendingAjaxRequestCommand();
+
+        const data = JSON.parse(response.data);
         func.bind(this)(data);
     };
 
     this.getLinkDataResponse = function(data_val) {
-        console.log("FabricResponseObject.getLinkDataResponse() data_val.result=" + data_val.result);
+        //console.log("FabricResponseObject.getLinkDataResponse() data_val.result=" + data_val.result);
 
         /* name_list_tag */
-        console.log("FabricResponseObject.getLinkDataResponse() data_val.name_list_tag=" + data_val.name_list_tag);
+        //console.log("FabricResponseObject.getLinkDataResponse() data_val.name_list_tag=" + data_val.name_list_tag);
         this.linkObject().setServerNameListTag(data_val.name_list_tag);
 
-        console.log("FabricResponseObject.getLinkDataResponse() data_val.pending_session2=" + data_val.pending_session2);
         if (data_val.pending_session2 != "N/A") {
-            console.log("=====================FabricResponseObject.getLinkDataResponse(pending_session2)");
+            console.log("FabricResponseObject.getLinkDataResponse() data_val.pending_session2=" + data_val.pending_session2);
         }
 
-        console.log("FabricResponseObject.getLinkDataResponse() data_val.pending_session3=" + data_val.pending_session3);
         if (data_val.pending_session3 != "N/A") {
-
+            console.log("FabricResponseObject.getLinkDataResponse() data_val.pending_session3=" + data_val.pending_session3);
         }
 
 
-        console.log("FabricResponseObject.getLinkDataResponse() data_val.data=" + data_val.data);
+        //console.log("FabricResponseObject.getLinkDataResponse() data_val.data=" + data_val.data);
         let data = data_val.data;
         while (data_val.length > 0) {
             /*
@@ -118,13 +120,13 @@ function FabricResponseObject(root_object_val) {
             }
             */
 
-            console.log("FabricResponseObject.getLinkDataResponse() not_supported+command=" + data_val);
+            console.log("FabricResponseObject.getLinkDataResponse() not_supported_command=" + data_val);
             abend();
             data_val = data_val.slice(data_val.length);
         }
 
         if (data_val.length !== 0) {
-            console.log("FabricResponseObject.getLinkDataResponse() length=" + data_val.length);
+            //console.log("FabricResponseObject.getLinkDataResponse() length=" + data_val.length);
         }
         this.callbackFunc().bind(this.callbackObject())("get_link_data", data_val);
     };

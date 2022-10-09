@@ -33,7 +33,7 @@ function FabricHttpServiceObject(callback_func_val, callback_object_val) {
     };
 
     this.incrementAjaxPacketId = function() {
-        console.log("HttpServiceObject.incrementAjaxPacketId() ajax_packet_id=" + sessionStorage.ajax_packet_id);
+        //console.log("HttpServiceObject.incrementAjaxPacketId() ajax_packet_id=" + sessionStorage.ajax_packet_id);
         const next_ajax_packet_id = Number(sessionStorage.ajax_packet_id) + 1;
         if (next_ajax_packet_id !== 1 + Number(sessionStorage.ajax_packet_id)) {
             this.abend("HttpServiceObject.incrementAjaxPacketId()", "fix it");
