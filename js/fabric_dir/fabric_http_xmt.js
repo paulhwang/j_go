@@ -53,12 +53,10 @@ function HttpXmtClass(fabric_request_obj_val) {
                 //this0.getSessionData(link_val, link_session_id);
                 //return;
             }
-            /*
-            if (link_val.serverNameListTag() > link_val.nameListTag()) {
-                this0.getNameList(link_val);
+            if (this0.linkObj().serverNameListTag() !== this0.linkObj().nameListTag()) {
+                this0.fabricRequestObj().getNameListRequest();
                 return;
             }
-            */
             this0.fabricRequestObj().getLinkDataRequest();
         }, 100, link_val);
     };
@@ -79,6 +77,7 @@ function HttpXmtClass(fabric_request_obj_val) {
     };
 
     this.fabricRequestObj = () => this.fabricRequestObj_;
+    this.linkObj = () => this.fabricRequestObj().linkObject();
     this.httpServiceObject = () => this.fabricRequestObj().httpServiceObject();
     this.transmitQueueObj = () => this.transmitQueueObj_;
     this.pendingSessionDataQueueObj = () => this.pendingSessionDataQueueObj_;

@@ -16,7 +16,7 @@ function GoBasePortObject(root_val) {
         }
 
         //else if (command_val === "get_link_data") {} else {console.log("bad command"); abend();}
-        if (command_val === "get_link_data") {} else {console.log("bad command"); abend();}
+        if (command_val === "get_link_data") {} else if (command_val === "get_name_list") {} else {console.log("bad command"); abend();}
 
     };
 
