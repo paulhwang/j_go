@@ -9,6 +9,7 @@ function HttpXmtClass(fab_request_obj_val) {
         this.fabRequestObj_ = fab_request_obj_val;
         this.theTransmitQueueObject = new QueueClass();
         this.thePendingSessionDataQueueObject = new QueueClass();
+        this.clearPendingAjaxRequestCommand();
     };
 
     this.transmitAjaxRequest = function(output_val) {
@@ -60,6 +61,21 @@ function HttpXmtClass(fab_request_obj_val) {
             ajax_object.getLinkData(link_val);
             */
         }, 100, link_val);
+    };
+
+    this.pendingAjaxRequestCommand = () => this.thePendingAjaxRequestCommand;
+    this.pendingAjaxRequestCommandExist = () => (this.pendingAjaxRequestCommand() !== "");
+
+    this.clearPendingAjaxRequestCommand = function() {
+        this.thePendingAjaxRequestCommand = "";
+    };
+
+    this.setPendingAjaxRequestCommand = function (command_val) {
+        if (this.pendingAjaxRequestCommand()) {
+            console.log("HttpXmtClass.setPendingAjaxRequestCommand() old=" + this.pendingAjaxRequestCommand() + " new=" + command_val);
+            abend();
+        }
+        this.thePendingAjaxRequestCommand = command_val;
     };
 
     this.fabRequestObj = () => this.fabRequestObj_;
