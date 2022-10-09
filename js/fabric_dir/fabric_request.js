@@ -53,6 +53,18 @@ function FabricRequestObject(root_object_val) {
         this.httpServiceObject().sendAjaxRequest(output); 
     };
 
+    this.setupSession2Request = function(session_id_val) {
+        const output = JSON.stringify({
+                command: "setup_session2",
+                time_stamp: this.linkObject().timeStamp(),
+                link_id: this.linkObject().linkId(),
+                session_id: session_id_val,
+                answer: 'Y',
+                });
+        console.log("FabricRequestObject.setupSession2Request() output=" + output);
+        this.httpServiceObject().sendAjaxRequest(output); 
+    };
+
     this.setupSession3Request = function(session_id_val) {
         const output = JSON.stringify({
                 command: "setup_session3",

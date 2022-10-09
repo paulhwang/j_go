@@ -172,6 +172,25 @@ function FabricResponseObject(root_object_val) {
         }
     };
 
+    this.setupSession2Response = function(data_val) {
+        if (data_val.result === FE_DEF.RESULT_SUCCEED()) {
+            console.log("FabricResponseObject.setupSession2Response() succeed! session_id=", data_val.session_id);
+            if (data_val.room_status === FE_DEF.ROOM_STATUS_READY()) {
+                this.sessionObject().setSessionInfoIntoStorage(data_val.session_id, data_val.group_mode, data_val.theme_type, data_val.theme_data, data_val.first_fiddle, data_val.second_fiddle);
+                this.callbackFunc().bind(this.callbackObject())("setup_session2");
+            }
+            else {
+            }
+        }
+        else if (data_val.result === FE_DEF.RESULT_ALMOST_SUCCEED()) {
+            console.log("FabricResponseObject.setupSession2Response() almost_succeed");
+            this.sendSetupSession3Request(data_val.session_id);
+        }
+        else {
+            console.log("FabricResponseObject.setupSession2Response() invalid_result=" + data_val.result);
+        }
+    };
+
     this.setupSession3Response = function(data_val) {
         if (data_val.result === FE_DEF.RESULT_SUCCEED()) {
             console.log("FabricResponseObject.setupSession3Response() succeed! session_id=", data_val.session_id);
