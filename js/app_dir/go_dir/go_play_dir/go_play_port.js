@@ -31,18 +31,28 @@ function GoPlayPortObject(root_val) {
         this.fabricRequestObject().putSessionDataRequest(data_val);
     };
 
-    this.receiveFabricResponse = function(data_val) {
-        console.log("GoPlayPortObject.receiveFabricResponse() data_val=" + data_val);
-        if (data_val.charAt(0) === GO_DEF.GO_PROTOCOL_GAME_INFO().charAt(0)) {
-            this.receiveGameData(data_val.slice(1));
-            return;
+    this.receiveFabricResponse = function(command_val, data_val) {
+        if (command_val !== "get_link_data") {
+            console.log("GoPlayPortObject.receiveFabricResponse() command=" + command_val + " data=" + data_val);
         }
-        if (data_val.charAt(0) === GO_DEF.GO_PROTOCOL_TIME_INFO().charAt(0)) {
-            return;
+
+        if (command_val === "put_session_data") {
         }
-        if (data_val.charAt(0) === GO_DEF.GO_PROTOCOL_CHAT_INFO().charAt(0)) {
-            return;
+
+        else if (command_val === "get_session_data") {
+            if (data_val.charAt(0) === GO_DEF.GO_PROTOCOL_GAME_INFO().charAt(0)) {
+                this.receiveGameData(data_val.slice(1));
+                return;
+            }
+            if (data_val.charAt(0) === GO_DEF.GO_PROTOCOL_TIME_INFO().charAt(0)) {
+                return;
+            }
+            if (data_val.charAt(0) === GO_DEF.GO_PROTOCOL_CHAT_INFO().charAt(0)) {
+                return;
+            }
         }
+
+        else if (command_val === "get_link_data") {} else {abend();}
     };
 
     this.receiveGameData = function(data_val) {

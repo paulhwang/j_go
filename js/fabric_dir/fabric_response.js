@@ -127,7 +127,8 @@ function FabricResponseObject(root_object_val) {
         if (data_val.length !== 0) {
             //console.log("FabricResponseObject.getLinkDataResponse() length=" + data_val.length);
         }
-        //this.callbackFunc().bind(this.callbackObject())("get_link_data", data_val);
+
+        this.callbackFunc().bind(this.callbackObject())("get_link_data", data_val);
     };
 
     this.getNameListResponse = function(data_val) {
@@ -214,10 +215,11 @@ function FabricResponseObject(root_object_val) {
     this.putSessionDataResponse = function(data_val) {
         if (data_val.result === FE_DEF.RESULT_SUCCEED()) {
             console.log("FabricResponseObject.putSessionDataResponse() succeed! session_id=", data_val.session_id);
-            this.putCallbackFunc().bind(this.putCallbackObject())(data_val.result_data);
+            this.putCallbackFunc().bind(this.putCallbackObject())("put_session_data", data_val.result_data);
         }
         if (data_val.result === FE_DEF.RESULT_ALMOST_SUCCEED()) {
             console.log("FabricResponseObject.putSessionDataResponse() in_progress! session_id=", data_val.session_id);
+            //this.putCallbackFunc().bind(this.putCallbackObject())("put_session_data", data_val.result_data);
             this.fabricRequestObject().getSessionDataRequest();
         }
         else {
@@ -228,7 +230,7 @@ function FabricResponseObject(root_object_val) {
     this.getSessionDataResponse = function(data_val) {
         if (data_val.result === FE_DEF.RESULT_SUCCEED()) {
             console.log("FabricResponseObject.getSessionDataResponse() succeed! session_id=", data_val.session_id);
-            this.callbackFunc().bind(this.callbackObject())(data_val.result_data);
+            this.callbackFunc().bind(this.callbackObject())("get_session_data", data_val.result_data);
         }
         if (data_val.result === FE_DEF.RESULT_ALMOST_SUCCEED()) {
             console.log("FabricResponseObject.getSessionDataResponse() in_progress! session_id=", data_val.session_id);
