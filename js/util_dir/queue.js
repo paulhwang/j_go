@@ -1,3 +1,7 @@
+/*
+  Copyrights reserved
+  Written by Paul Hwang
+*/
 
 function QueueClass() {
     "use strict";
