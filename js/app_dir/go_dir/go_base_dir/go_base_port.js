@@ -25,7 +25,8 @@ function GoBasePortObject(root_val) {
             console.log("GoBasePortObject.getLinkDataResponse() data_val.pending_session2=" + data_val.pending_session2);
             const pending_session2 = data_val.pending_session2;
             const session_id = pending_session2.slice(0, 8);
-            const theme_data = pending_session2.slice(8);
+            const theme_type = pending_session2.charAt(8)
+            const theme_data = pending_session2.slice(9);
 
             this.fabricRequestObject().setupSession2Request(session_id);
         }
@@ -33,7 +34,8 @@ function GoBasePortObject(root_val) {
             console.log("GoBasePortObject.getLinkDataResponse() data_val.pending_session3=" + data_val.pending_session3);
             const pending_session3 = data_val.pending_session3;
             const session_id = pending_session3.slice(0, 8);
-            const theme_data = pending_session3.slice(8);
+            const theme_type = pending_session3.charAt(8)
+            const theme_data = pending_session3.slice(9);
 
             this.fabricRequestObject().setupSession2Request(session_id);
             //window.open("go_play.html", "_self");

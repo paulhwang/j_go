@@ -36,14 +36,13 @@ function FabricResponseObject(root_object_val) {
         //console.log("FabricResponseObject.parseFabricResponse() json_response_val=" + json_response_val);
         const response = JSON.parse(json_response_val);
 
-        const command = response.command;
-        if (command !== "get_link_data") {
-            console.log("FabricResponseObject.parseFabricResponse() response.data=" + response.data);
+        if (response.command !== "get_link_data") {
+            console.log("FabricResponseObject.parseFabricResponse() command=" + response.command + " data=" + response.data);
         }
 
-        const func = this.responseSwitchTable()[command];
+        const func = this.responseSwitchTable()[response.command];
         if (!func) {
-            console.log("FabricResponseObject.parseFabricResponse() bad_command=" + command);
+            console.log("FabricResponseObject.parseFabricResponse() bad_command=" + response.command);
             abend();
             return;
         }

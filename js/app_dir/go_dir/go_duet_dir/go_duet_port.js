@@ -32,14 +32,23 @@ function GoDuetPortObject(root_val) {
     };
 
     this.getLinkDataResponse = function (data_val) {
-
         if (data_val.pending_session3 != "N/A") {
             console.log("GoDuetPortObject.getLinkDataResponse() data_val.pending_session3=" + data_val.pending_session3);
+            const pending_session3 = data_val.pending_session3;
+            const session_id = pending_session3.slice(0, 8);
+            const theme_type = pending_session3.charAt(8)
+            const theme_data = pending_session3.slice(9);
+
+            this.fabricRequestObject().setupSession2Request(session_id);
+            //window.open("go_play.html", "_self");
         }
 
         if (this.linkObject().nameListUpdateNeeded()) {
             this.fabricRequestObject().getNameListRequest(this.linkObject().nameListTag());
         }
+
+        //this.linkObject().sleepMilliseconds(5000);
+        //this.fabricRequestObject().getLinkDataRequest();
     };
 
     this.getNameListResponse = function (data_val) {
