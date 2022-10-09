@@ -14,7 +14,7 @@ function HttpXmtClass(fabric_request_obj_val) {
 
     this.transmitAjaxRequest = function(output_val) {
         if (this.pendingAjaxRequestCommandExist()) {
-            this.transmitQueueObject().enqueueData(output_val);
+            this.transmitQueueObj().enqueueData(output_val);
             return;
         }
         this.xmtAjaxRequest(output_val); 
@@ -57,7 +57,7 @@ function HttpXmtClass(fabric_request_obj_val) {
                 return;
             }
             */
-            //this0.fabricRequestObj().getLinkDataRequest();
+            this0.fabricRequestObj().getLinkDataRequest();
         }, 100, link_val);
     };
 

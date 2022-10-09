@@ -127,7 +127,7 @@ function FabricResponseObject(root_object_val) {
         if (data_val.length !== 0) {
             //console.log("FabricResponseObject.getLinkDataResponse() length=" + data_val.length);
         }
-        this.callbackFunc().bind(this.callbackObject())("get_link_data", data_val);
+        //this.callbackFunc().bind(this.callbackObject())("get_link_data", data_val);
     };
 
     this.getNameListResponse = function(data_val) {
