@@ -59,6 +59,7 @@ function GoPlayGameObject(root_object_val) {
     };
 
     this.isMyTurn = function() {
+        console.log("GoPlayGameObject.isMyTurn() next_color=" + this.nextColor() + " my_color=" + this.configObject().myColor());
         let result = (this.playBothSides()) || (this.nextColor() === this.configObject().myColor());
         return result;
     };

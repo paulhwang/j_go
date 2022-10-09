@@ -51,37 +51,40 @@ function GoPlayBoardObject(root_val) {
 
     this.decodeBoard = function(str_val) {
         let index = 0;
-        let num;
-        num  = (str_val.charAt(index++) - '0') * 100;
-        num += (str_val.charAt(index++) - '0') * 10;
-        num += (str_val.charAt(index++) - '0');
-        this.gameObject().setTotalMoves(num);
-        num = (str_val.charAt(index++) - '0');
-        this.gameObject().setNextColor(num);
-        for (var i = 0; i < this.boardSize(); i++) {
-            for (var j = 0; j < this.boardSize(); j++) {
+
+        let total_count  = (str_val.charAt(index++) - '0') * 100;
+            total_count += (str_val.charAt(index++) - '0') * 10;
+            total_count += (str_val.charAt(index++) - '0');
+        this.gameObject().setTotalMoves(total_count);
+
+        const next_color = (str_val.charAt(index++) - '0');
+        this.gameObject().setNextColor(next_color);
+
+        for (let i = 0; i < this.boardSize(); i++) {
+            for (let j = 0; j < this.boardSize(); j++) {
                 this.boardArray_[i][j] = str_val.charAt(index++) - '0';
             }
         }
-        num  = (str_val.charAt(index++) - '0') * 100;
-        num += (str_val.charAt(index++) - '0') * 10;
-        num += (str_val.charAt(index++) - '0');
-        this.blackCapturedStones_ = num;
 
-        num  = (str_val.charAt(index++) - '0') * 100;
-        num += (str_val.charAt(index++) - '0') * 10;
-        num += (str_val.charAt(index++) - '0');
-        this.whiteCapturedStones_ = num;
+        let black_captured_stone  = (str_val.charAt(index++) - '0') * 100;
+            black_captured_stone += (str_val.charAt(index++) - '0') * 10;
+            black_captured_stone += (str_val.charAt(index++) - '0');
+        this.blackCapturedStones_ = black_captured_stone;
 
-        num  = (str_val.charAt(index++) - '0') * 10;
-        num += (str_val.charAt(index++) - '0');
-        this.gameObject().setLastDeadX(num);
+        let white_captured_stone  = (str_val.charAt(index++) - '0') * 100;
+            white_captured_stone += (str_val.charAt(index++) - '0') * 10;
+            white_captured_stone += (str_val.charAt(index++) - '0');
+        this.whiteCapturedStones_ = white_captured_stone;
 
-        num  = (str_val.charAt(index++) - '0') * 10;
-        num += (str_val.charAt(index++) - '0');
-        this.gameObject().setLastDeadY(num);
+        let last_stone_x  = (str_val.charAt(index++) - '0') * 10;
+            last_stone_x += (str_val.charAt(index++) - '0');
+        this.gameObject().setLastDeadX(last_stone_x);
 
-        if (num != 19) {
+        let last_stone_y  = (str_val.charAt(index++) - '0') * 10;
+            last_stone_y += (str_val.charAt(index++) - '0');
+        this.gameObject().setLastDeadY(last_stone_y);
+
+        if (last_stone_y != 19) {
             this.gameObject().setValidLastDeadInfo(true);
         } else {
             this.gameObject().setValidLastDeadInfo(false);
