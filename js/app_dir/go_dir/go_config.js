@@ -6,7 +6,7 @@
 function GoConfigObject(root_val) {
     "use strict";
     this.init__ = function(root_val) {
-        this.rootObject_ = root_val;
+        this.rootObj_ = root_val;
     };
     
     this.decode = function() {
@@ -31,15 +31,15 @@ function GoConfigObject(root_val) {
 
         this.firstFiddleColor_ = go_config_data.charAt(index++) - '0';
 
-        if (this.rootObject().linkObject().myName() === this.rootObject().sessionObject().firstFiddle()) {
+        if (this.linkObj().myName() === this.sessionObj().firstFiddle()) {
             this.myColor_ = this.firstFiddleColor_;
         }
         else {
-            if (this.firstFiddleColor_ === GO.BLACK_STONE) {
-                this.myColor_ = GO.WHITE_STONE;
+            if (this.firstFiddleColor_ === GO_DEF.BLACK_STONE()) {
+                this.myColor_ = GO_DEF.WHITE_STONE();
             }
             else {
-                this.myColor_ = GO.BLACK_STONE;
+                this.myColor_ = GO_DEF.BLACK_STONE();
             }
         }
     };
@@ -57,6 +57,8 @@ function GoConfigObject(root_val) {
     this.komiPoint = () => this.komiPoint_;
     this.firstFiddleColor = () => this.firstFiddleColor_;
     this.myColor = () => this.myColor_;
-    this.rootObject = () => this.rootObject_;
+    this.rootObj = () => this.rootObj_;
+    this.linkObj = () => this.rootObj().linkObject();
+    this.sessionObj = () => this.rootObj().sessionObject();
     this.init__(root_val);
 }
