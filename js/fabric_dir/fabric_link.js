@@ -48,14 +48,6 @@ function FabricLinkObject() {
         sessionStorage.setItem("time_stamp", time_stamp_val);
     };
 
-    this.nameListUpdateNeeded = function () {
-        if (this.serverNameListTag() === this.nameListTag())
-            return false;
-        else
-            return true;
-    };
-
-
     this.encodePadInteger = function(int_val, size_val) {
         if ((int_val === undefined) || (int_val === null)) {
             console.log("FabricLinkObject.encodePadInteger() null num_val");

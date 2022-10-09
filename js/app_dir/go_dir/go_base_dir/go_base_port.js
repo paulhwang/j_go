@@ -6,8 +6,8 @@
 function GoBasePortObject(root_val) {
     "use strict";
     this.init__ = function(root_val) {
-        this.rootObject_ = root_val;
-        this.fabricResponseObject().setCallbackFunc(this.receiveFabricResponse, this);
+        this.rootObj_ = root_val;
+        this.fabricResponseObj().setCallbackFunc(this.receiveFabricResponse, this);
     };
 
     this.receiveFabricResponse = function(command_val, data_val) {
@@ -46,9 +46,9 @@ function GoBasePortObject(root_val) {
         }
     };
 
-    this.rootObject = () => this.rootObject_;
-    this.linkObject = () => this.rootObject().linkObject();
-    this.fabricRequestObject = () => this.rootObject().fabricRequestObject();
-    this.fabricResponseObject = () => this.rootObject().fabricResponseObject();
+    this.rootObj = () => this.rootObj_;
+    this.linkObj = () => this.rootObject().linkObject();
+    this.fabricRequestObj = () => this.rootObj().fabricRequestObject();
+    this.fabricResponseObj = () => this.rootObj().fabricResponseObject();
     this.init__(root_val);
 }

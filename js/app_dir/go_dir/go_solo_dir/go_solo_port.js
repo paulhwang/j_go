@@ -6,8 +6,8 @@
 function GoSoloPortObject(root_val) {
     "use strict";
     this.init__ = function(root_val) {
-        this.rootObject_ = root_val;
-        this.fabricResponseObject().setCallbackFunc(this.receiveFabricResponse, this);
+        this.rootObj_ = root_val;
+        this.fabricResponseObj().setCallbackFunc(this.receiveFabricResponse, this);
     };
 
     this.receiveFabricResponse = function(command_val, data_val) {
@@ -22,8 +22,8 @@ function GoSoloPortObject(root_val) {
         else if (command_val === "get_link_data") {} else if (command_val === "get_name_list") {} else {console.log("bad command"); abend();}
     };
 
-    this.rootObject = () => this.rootObject_;
-    this.fabricRequestObject = () => this.rootObject().fabricRequestObject();
-    this.fabricResponseObject = () => this.rootObject().fabricResponseObject();
+    this.rootObj = () => this.rootObj_;
+    this.fabricRequestObj = () => this.rootObj().fabricRequestObject();
+    this.fabricResponseObj = () => this.rootObj().fabricResponseObject();
     this.init__(root_val);
 }
