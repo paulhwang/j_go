@@ -60,13 +60,18 @@ function FabricResponseObject(root_object_val) {
         //console.log("FabricResponseObject.getLinkDataResponse() data_val.name_list_tag=" + data_val.name_list_tag);
         this.linkObject().setServerNameListTag(data_val.name_list_tag);
 
+        if (data_val.pending_data != "N/A") {
+            console.log("FabricResponseObject.getLinkDataResponse() pending_data=" + data_val.pending_data);
+            this.callbackFunc().bind(this.callbackObject())("get_link_data", data_val);
+        }
+
         if (data_val.pending_session2 != "N/A") {
-            console.log("FabricResponseObject.getLinkDataResponse() data_val.pending_session2=" + data_val.pending_session2);
+            console.log("FabricResponseObject.getLinkDataResponse() pending_session2=" + data_val.pending_session2);
             this.callbackFunc().bind(this.callbackObject())("get_link_data", data_val);
         }
 
         if (data_val.pending_session3 != "N/A") {
-            console.log("FabricResponseObject.getLinkDataResponse() data_val.pending_session3=" + data_val.pending_session3);
+            console.log("FabricResponseObject.getLinkDataResponse() pending_session3=" + data_val.pending_session3);
             this.callbackFunc().bind(this.callbackObject())("get_link_data", data_val);
         }
 
