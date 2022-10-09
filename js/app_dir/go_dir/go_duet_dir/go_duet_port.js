@@ -21,6 +21,14 @@ function GoDuetPortObject(root_val) {
                 console.log("GoDuetPortObject.getLinkDataResponse() pending_session3=" + data_val.pending_session3);
                 this.fabricRequestObj().setupSession3Request(data_val.pending_session3);
             }
+            /*
+            if (data_val.pending_session2 != "N/A") {
+                console.log("GoDuetPortObject.getLinkDataResponse() pending_session2=" + data_val.pending_session2);
+                const pending_session2 = data_val.pending_session2;
+                const session_id = pending_session2.slice(0, 8);
+                this.fabricRequestObj().setupSession2Request(session_id);
+            }
+            */
         }
 
         else if (command_val === "get_name_list") {
