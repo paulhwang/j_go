@@ -3,10 +3,10 @@
   Written by Paul Hwang
 */
 
-function HttpXmtClass(fab_request_obj_val) {
+function HttpXmtClass(fabric_request_obj_val) {
     "use strict";
-    this.init__ = function(fab_request_obj_val) {
-        this.fabRequestObj_ = fab_request_obj_val;
+    this.init__ = function(fabric_request_obj_val) {
+        this.fabricRequestObj_ = fabric_request_obj_val;
         this.transmitQueueObj_ = new QueueClass();
         this.pendingSessionDataQueueObj_ = new QueueClass();
         this.clearPendingAjaxRequestCommand();
@@ -17,7 +17,7 @@ function HttpXmtClass(fab_request_obj_val) {
             this.transmitQueueObject().enqueueData(output_val);
             return;
         }
-        this.httpServiceObject().sendAjaxRequest(output_val); 
+        this.xmtAjaxRequest(output_val); 
     };
 
     this.xmtAjaxRequest = function (output_val) {
@@ -27,7 +27,7 @@ function HttpXmtClass(fab_request_obj_val) {
         }
 
         this.setPendingAjaxRequestCommand(output.command);
-        this.phwangAjaxEngineObject().sendAjaxRequest(output_val);
+        this.httpServiceObject().sendAjaxRequest(output_val); 
     };
 
     this.startWatchDog = function(link_val) {
@@ -35,7 +35,7 @@ function HttpXmtClass(fab_request_obj_val) {
         setInterval(function (link_val) {
             if (this0.pendingAjaxRequestCommandExist()) {
                 if (this0.pendingAjaxRequestCommand() !== "get_link_data") {
-                    console.log("HttpXmtClass.startWatchDog() request is not transmitted because of pending_command=" + ajax_object.pendingAjaxRequestCommand());
+                    console.log("HttpXmtClass.startWatchDog() request is not transmitted because of pending_command=" + this0.pendingAjaxRequestCommand());
                 }
                 return;
             }
@@ -56,8 +56,8 @@ function HttpXmtClass(fab_request_obj_val) {
                 this0.getNameList(link_val);
                 return;
             }
-            this0.getLinkData(link_val);
             */
+            //this0.fabricRequestObj().getLinkDataRequest();
         }, 100, link_val);
     };
 
@@ -76,9 +76,9 @@ function HttpXmtClass(fab_request_obj_val) {
         this.thePendingAjaxRequestCommand = command_val;
     };
 
-    this.fabRequestObj = () => this.fabRequestObj_;
-    this.httpServiceObject = () => this.fabRequestObj().httpServiceObject();
+    this.fabricRequestObj = () => this.fabricRequestObj_;
+    this.httpServiceObject = () => this.fabricRequestObj().httpServiceObject();
     this.transmitQueueObj = () => this.transmitQueueObj_;
     this.pendingSessionDataQueueObj = () => this.pendingSessionDataQueueObj_;
-    this.init__(fab_request_obj_val);
+    this.init__(fabric_request_obj_val);
 }
