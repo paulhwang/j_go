@@ -10,9 +10,16 @@ function GoEnsemblePortObject(root_val) {
         this.fabricResponseObject().setCallbackFunc(this.receiveFabricResponse, this);
     };
 
-    this.receiveFabricResponse = function(command_val) {
-        console.log("GoEnsemblePortObject.receiveFabricResponse() command_val=" + command_val);
-        window.open("go_play.html", "_self");
+    this.receiveFabricResponse = function(command_val, data_val) {
+        if (command_val !== "get_link_data") {
+            console.log("GoEnsemblePortObject.receiveFabricResponse() command=" + command_val + " data=" + data_val);
+        }
+
+        if (command_val === "setup_session3") {
+            window.open("go_play.html", "_self");
+        }
+
+        else if (command_val === "get_link_data") {} else {console.log("bad command"); abend();}
     };
 
     this.rootObject = () => this.rootObject_;

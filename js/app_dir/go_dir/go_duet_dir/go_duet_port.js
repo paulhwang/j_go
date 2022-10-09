@@ -15,22 +15,22 @@ function GoDuetPortObject(root_val) {
 
     this.receiveFabricResponse = function(command_val, data_val) {
         if (command_val !== "get_link_data") {
-            console.log("GoDuetPortObject.receiveFabricResponse() command_val=" + command_val);
+            console.log("GoPlayPortObject.receiveFabricResponse() command=" + command_val + " data=" + data_val);
         }
 
         if (command_val === "get_link_data") {
             this.getLinkDataResponse(data_val);
         }
+
         else if (command_val === "get_name_list") {
             this.getNameListResponse(data_val);
         }
+
         else if (command_val === "setup_session3") {
             this.setupSession3Response(data_val);
         }
-        else {
-            console.log("GoDuetPortObject.receiveFabricResponse() bad command_val=" + command_val);
-            abend();
-        }
+
+        else if (command_val === "get_link_data") {} else {console.log("bad command"); abend();}
     };
 
     this.getLinkDataResponse = function (data_val) {

@@ -19,7 +19,7 @@ function GoSoloPortObject(root_val) {
             window.open("go_play.html", "_self");
         }
 
-        else if (command_val === "get_link_data") {} else {abend();}
+        else if (command_val === "get_link_data") {} else {console.log("bad command"); abend();}
     };
 
     this.rootObject = () => this.rootObject_;

@@ -8,16 +8,16 @@ function GoBasePortObject(root_val) {
     this.init__ = function(root_val) {
         this.rootObject_ = root_val;
         this.fabricResponseObject().setCallbackFunc(this.receiveFabricResponse, this);
-
-        this.fabricRequestObject().getLinkDataRequest();
     };
 
     this.receiveFabricResponse = function(command_val, data_val) {
-        if (command_val === "get_link_data") {
-            this.getLinkDataResponse(data_val);
+        if (command_val !== "get_link_data") {
+            console.log("GoBasePortObject.receiveFabricResponse() command=" + command_val + " data=" + data_val);
         }
 
-        //window.open("go_play.html", "_self");
+        //else if (command_val === "get_link_data") {} else {console.log("bad command"); abend();}
+        if (command_val === "get_link_data") {} else {console.log("bad command"); abend();}
+
     };
 
     this.getLinkDataResponse = function (data_val) {

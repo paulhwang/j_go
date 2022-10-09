@@ -52,7 +52,7 @@ function GoPlayPortObject(root_val) {
             }
         }
 
-        else if (command_val === "get_link_data") {} else {abend();}
+        else if (command_val === "get_link_data") {} else {console.log("bad command"); abend();}
     };
 
     this.receiveGameData = function(data_val) {
