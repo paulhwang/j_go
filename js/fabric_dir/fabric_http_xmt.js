@@ -14,6 +14,8 @@ function HttpXmtClass(fabric_request_obj_val) {
 
     this.transmitAjaxRequest = function(output_val) {
         if (this.pendingAjaxRequestCommandExist()) {
+            console.log("HttpXmtClass.transmitAjaxRequest() enqueue " + output_val);  
+            console.log("HttpXmtClass.transmitAjaxRequest() pending_command " + this.pendingAjaxRequestCommand());
             this.transmitQueueObj().enqueueData(output_val);
             return;
         }

@@ -8,8 +8,6 @@ function GoDuetPortObject(root_val) {
     this.init__ = function(root_val) {
         this.rootObject_ = root_val;
         this.fabricResponseObject().setCallbackFunc(this.receiveFabricResponse, this);
-
-        this.fabricRequestObject().getLinkDataRequest();
     };
 
 
@@ -47,9 +45,6 @@ function GoDuetPortObject(root_val) {
         if (this.linkObject().nameListUpdateNeeded()) {
             this.fabricRequestObject().getNameListRequest(this.linkObject().nameListTag());
         }
-
-        this.linkObject().sleepMilliseconds(5000);
-        this.fabricRequestObject().getLinkDataRequest();
     };
 
     this.getNameListResponse = function (data_val) {
