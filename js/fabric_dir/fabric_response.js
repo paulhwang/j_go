@@ -142,7 +142,7 @@ function FabricResponseObject(root_object_val) {
 
             this.linkObject().setNameListTag(name_list_tag);
             this.linkObject().setNameList(name_list_array);
-            this.callbackFunc().bind(this.callbackObject())("get_name_list");
+            this.callbackFunc().bind(this.callbackObject())("get_name_list", data_val);
         }
     };
 
