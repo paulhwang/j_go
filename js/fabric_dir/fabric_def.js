@@ -7,6 +7,11 @@ var FE_DEF = new FE_DEF_OBJECT;
 
 function FE_DEF_OBJECT() {
     "use strict";
+    this.LINK_ID_SIZE    = () => 8;
+    this.SESSION_ID_SIZE = () => 8;
+
+    this.RESULT_SIZE     = () => 2;
+
     this.RESULT_SUCCEED                    = () => "00";
     this.RESULT_ACCOUNT_NAME_NOT_EXIST     = () => "01";
     this.RESULT_ACCOUNT_NAME_ALREADY_EXIST = () => "02";

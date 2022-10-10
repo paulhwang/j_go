@@ -68,7 +68,10 @@ function FabricResponseObject(root_obj_val) {
 
         if (data_val.pending_session2 != "N/A") {
             console.log("FabricResponseObject.getLinkDataResponse() pending_session2=" + data_val.pending_session2);
-            this.callbackFunc().bind(this.callbackObj())("get_link_data", data_val);
+            //this.callbackFunc().bind(this.callbackObj())("get_link_data", data_val);
+            const pending_session2 = data_val.pending_session2;
+            const session_id = pending_session2.slice(0, FE_DEF.SESSION_ID_SIZE());
+            this.fabricRequestObj().setupSession2Request(session_id);
         }
 
         if (data_val.pending_session3 != "N/A") {
