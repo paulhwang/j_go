@@ -40,6 +40,11 @@ function FE_DEF_OBJECT() {
     this.ROOM_STATUS_READY     = () => 'R';
 
     this.NAME_LIST_TAG_SIZE = () => 3;
+    this.GET_LINK_DATA_LENGTH_SIZE = () => 2;
+    this.GET_LINK_DATA_TYPE_NAME_LIST        = () => 'N';
+    this.GET_LINK_DATA_TYPE_PENDING_SESSION2 = () => 'Y';
+    this.GET_LINK_DATA_TYPE_PENDING_SESSION3 = () => 'Z';
+    this.GET_LINK_DATA_TYPE_PENDING_DATA     = () => 'D';
 
     this.THEME_IS_GO_GAME = () => 'G';
 };

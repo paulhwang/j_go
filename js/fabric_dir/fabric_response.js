@@ -78,8 +78,61 @@ function FabricResponseObject(root_object_val) {
 
 
         //console.log("FabricResponseObject.getLinkDataResponse() data_val.data=" + data_val.data);
-        let data = data_val.data;
-        while (data_val.length > 0) {
+        let remaining_data = data_val.data
+        while (remaining_data.length > 0) {
+            index = 0;
+            let type = remaining_data.charAt(index);
+            //console.log("FabricResponseObject.getLinkDataResponse() type=" + type);
+            index++;
+
+            if (type === this.FABRIC_DEF().GET_LINK_DATA_TYPE_NAME_LIST()) {
+                name_list_tag = remaining_data.slice(index, index + this.FABRIC_DEF().NAME_LIST_TAG_SIZE());
+                index += this.FABRIC_DEF().NAME_LIST_TAG_SIZE();
+
+                //console.log("FabricResponseObject.getLinkDataResponse() name_list_tag=" + name_list_tag);
+            }
+
+            else if (type === this.FABRIC_DEF().GET_LINK_DATA_TYPE_PENDING_DATA()) {
+                pending_data = remaining_data.slice(index, index + this.FABRIC_DEF().SESSION_ID_SIZE());
+                index += this.FABRIC_DEF().SESSION_ID_SIZE();
+
+                console.log("FabricResponseObject.getLinkDataResponse() pending_data=" + pending_data);
+            }
+
+            else if (type === this.FABRIC_DEF().GET_LINK_DATA_TYPE_PENDING_SESSION2()) {
+                let len_str = remaining_data.slice(index, index + this.FABRIC_DEF().GET_LINK_DATA_LENGTH_SIZE());
+                index += this.FABRIC_DEF().GET_LINK_DATA_LENGTH_SIZE();
+
+                let len = this.encodeObject().decodeNumber(len_str, this.FABRIC_DEF().GET_LINK_DATA_LENGTH_SIZE());
+                pending_session2 = remaining_data.slice(index, index + len);
+                index += len;
+
+                console.log("FabricResponseObject.getLinkDataResponse() pending_session2=" + pending_session2);
+            }
+
+            else if (type === this.FABRIC_DEF().GET_LINK_DATA_TYPE_PENDING_SESSION3()) {
+                let len_str = remaining_data.slice(index, index + this.FABRIC_DEF().GET_LINK_DATA_LENGTH_SIZE());
+                index += this.FABRIC_DEF().GET_LINK_DATA_LENGTH_SIZE();
+
+                let len = this.encodeObject().decodeNumber(len_str, this.FABRIC_DEF().GET_LINK_DATA_LENGTH_SIZE());
+                pending_session3 = remaining_data.slice(index, index + len);
+                index += len;
+
+                console.log("FabricResponseObject.getLinkDataResponse() pending_session3=" + pending_session3);
+            }
+
+            remaining_data = remaining_data.slice(index);
+        }
+
+        if (remaining_data.length !== 0) {
+            console.log("FabricResponseObject.getLinkDataResponse() remaining_data.length=" + remaining_data.length);
+            abend();
+        }
+
+
+
+        //let data = data_val.data;
+        //while (data_val.length > 0) {
             /*
             if (data_val.charAt(0) === this.phwangAjaxProtocolObject().WEB_FABRIC_PROTOCOL_RESPOND_IS_GET_LINK_DATA_NAME_LIST()) {
                 data_val = data_val.slice(1);
@@ -127,14 +180,14 @@ function FabricResponseObject(root_object_val) {
             }
             */
 
-            console.log("FabricResponseObject.getLinkDataResponse() not_supported_command=" + data_val);
-            abend();
-            data_val = data_val.slice(data_val.length);
-        }
+            //console.log("FabricResponseObject.getLinkDataResponse() not_supported_command=" + data_val);
+            //abend();
+            //data_val = data_val.slice(data_val.length);
+        //}
 
-        if (data_val.length !== 0) {
+        //if (data_val.length !== 0) {
             //console.log("FabricResponseObject.getLinkDataResponse() length=" + data_val.length);
-        }
+        //}
 
         //this.callbackFunc().bind(this.callbackObject())("get_link_data", data_val);
     };
