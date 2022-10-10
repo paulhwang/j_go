@@ -62,6 +62,7 @@ function FabricResponseObject(root_object_val) {
 
         if (data_val.pending_data != "N/A") {
             console.log("FabricResponseObject.getLinkDataResponse() pending_data=" + data_val.pending_data);
+            this.fabricRequestObject().getSessionDataRequest();
             this.callbackFunc().bind(this.callbackObject())("get_link_data", data_val);
         }
 
@@ -222,12 +223,12 @@ function FabricResponseObject(root_object_val) {
     this.putSessionDataResponse = function(data_val) {
         if (data_val.result === FE_DEF.RESULT_SUCCEED()) {
             console.log("FabricResponseObject.putSessionDataResponse() succeed! session_id=", data_val.session_id);
-            this.putCallbackFunc().bind(this.putCallbackObject())("put_session_data", data_val.result_data);
+            this.callbackFunc().bind(this.callbackObject())("put_session_data", data_val.result_data);
         }
         if (data_val.result === FE_DEF.RESULT_ALMOST_SUCCEED()) {
             console.log("FabricResponseObject.putSessionDataResponse() in_progress! session_id=", data_val.session_id);
-            //this.putCallbackFunc().bind(this.putCallbackObject())("put_session_data", data_val.result_data);
-            this.fabricRequestObject().getSessionDataRequest();
+            this.callbackFunc().bind(this.callbackObject())("put_session_data", data_val.result_data);
+            //this.fabricRequestObject().getSessionDataRequest();
         }
         else {
             console.log("FabricResponseObject.putSessionDataResponse() invalid_result=" + data_val.result);
