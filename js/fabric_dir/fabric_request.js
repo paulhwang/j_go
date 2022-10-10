@@ -106,7 +106,7 @@ function FabricRequestObject(root_object_val) {
     this.linkObject = () => this.linkObject_;
     this.sessionObject = () => this.sessionObject_;
     this.fabricResponseObject = () => this.rootObject().fabricResponseObject();
-    this.httpServiceObject = () => this.fabricResponseObject().httpServiceObject();
+    this.httpServiceObject = () => this.fabricResponseObject().httpServiceObj();
     this.httpXmtObj = () => this.httpXmtObj_;
     this.init__(root_object_val);
 };

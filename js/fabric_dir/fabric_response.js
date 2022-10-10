@@ -3,21 +3,21 @@
   Written by Paul Hwang
 */
 
-function FabricResponseObject(root_object_val) {
+function FabricResponseObject(root_obj_val) {
     "use strict";
-     this.init__ = function(root_object_val) {
-        this.rootObject_ = root_object_val;
+     this.init__ = function(root_obj_val) {
+        this.rootObj_ = root_obj_val;
 
         this.initSwitchTable();
 
-        this.httpServiceObject_ = new FabricHttpServiceObject(this.parseFabricResponse, this);
+        this.httpServiceObj_ = new FabricHttpServiceObject(this.parseFabricResponse, this);
 
         ///////////this.sendGetLinkDataRequest();
     };
 
-    this.setCallbackFunc = function(func_val, object_val) {
+    this.setCallbackFunc = function(func_val, obj_val) {
         this.callbackFunc_ = func_val;
-        this.callbackObject_ = object_val;
+        this.callbackObj_ = obj_val;
     };
 
     this.initSwitchTable = function() {
@@ -58,22 +58,23 @@ function FabricResponseObject(root_object_val) {
 
         /* name_list_tag */
         //console.log("FabricResponseObject.getLinkDataResponse() data_val.name_list_tag=" + data_val.name_list_tag);
-        this.linkObject().setServerNameListTag(data_val.name_list_tag);
+        this.linkObj().setServerNameListTag(data_val.name_list_tag);
 
         if (data_val.pending_data != "N/A") {
             console.log("FabricResponseObject.getLinkDataResponse() pending_data=" + data_val.pending_data);
-            this.fabricRequestObject().getSessionDataRequest();
-            this.callbackFunc().bind(this.callbackObject())("get_link_data", data_val);
+            this.fabricRequestObj().getSessionDataRequest();
+            this.callbackFunc().bind(this.callbackObj())("get_link_data", data_val);
         }
 
         if (data_val.pending_session2 != "N/A") {
             console.log("FabricResponseObject.getLinkDataResponse() pending_session2=" + data_val.pending_session2);
-            this.callbackFunc().bind(this.callbackObject())("get_link_data", data_val);
+            this.callbackFunc().bind(this.callbackObj())("get_link_data", data_val);
         }
 
         if (data_val.pending_session3 != "N/A") {
             console.log("FabricResponseObject.getLinkDataResponse() pending_session3=" + data_val.pending_session3);
-            this.callbackFunc().bind(this.callbackObject())("get_link_data", data_val);
+            this.fabricRequestObj().setupSession3Request(data_val.pending_session3);
+            //this.callbackFunc().bind(this.callbackObj())("get_link_data", data_val);
         }
 
 
@@ -203,9 +204,9 @@ function FabricResponseObject(root_object_val) {
             const name_list_array = JSON.parse("[" + name_list_data + "]");
             console.log("FabricResponseObject.getNameListResponse() name_list_array=" + name_list_array);
 
-            this.linkObject().setNameListTag(name_list_tag);
-            this.linkObject().setNameList(name_list_array);
-            this.callbackFunc().bind(this.callbackObject())("get_name_list", data_val);
+            this.linkObj().setNameListTag(name_list_tag);
+            this.linkObj().setNameList(name_list_array);
+            this.callbackFunc().bind(this.callbackObj())("get_name_list", data_val);
         }
     };
 
@@ -213,7 +214,7 @@ function FabricResponseObject(root_object_val) {
         if (data_val.result === FE_DEF.RESULT_SUCCEED()) {
             console.log("FabricResponseObject.setupSessionResponse() succeed! session_id=", data_val.session_id);
             if (data_val.room_status === FE_DEF.ROOM_STATUS_READY()) {
-                this.sessionObject().setSessionInfoIntoStorage(data_val.session_id, data.group_mode, data_val.theme_type, data_val.theme_data, data_val.first_fiddle, data_val.second_fiddle);
+                this.sessionObj().setSessionInfoIntoStorage(data_val.session_id, data.group_mode, data_val.theme_type, data_val.theme_data, data_val.first_fiddle, data_val.second_fiddle);
                 this.setupSessionCallbackFunc().bind(this.setupSessionCallbackObject())();
             }
             else {
@@ -239,7 +240,7 @@ function FabricResponseObject(root_object_val) {
         if (data_val.result === FE_DEF.RESULT_SUCCEED()) {
             console.log("FabricResponseObject.setupSession2Response() succeed! session_id=", data_val.session_id);
             if (data_val.room_status === FE_DEF.ROOM_STATUS_READY()) {
-                this.sessionObject().setSessionInfoIntoStorage(data_val.session_id, data_val.group_mode, data_val.theme_type, data_val.theme_data, data_val.first_fiddle, data_val.second_fiddle);
+                this.sessionObj().setSessionInfoIntoStorage(data_val.session_id, data_val.group_mode, data_val.theme_type, data_val.theme_data, data_val.first_fiddle, data_val.second_fiddle);
                 this.callbackFunc().bind(this.callbackObject())("setup_session2");
             }
             else {
@@ -258,8 +259,8 @@ function FabricResponseObject(root_object_val) {
         if (data_val.result === FE_DEF.RESULT_SUCCEED()) {
             console.log("FabricResponseObject.setupSession3Response() succeed! session_id=", data_val.session_id);
             if (data_val.room_status === FE_DEF.ROOM_STATUS_READY()) {
-                this.sessionObject().setSessionInfoIntoStorage(data_val.session_id, data_val.group_mode, data_val.theme_type, data_val.theme_data, data_val.first_fiddle, data_val.second_fiddle);
-                this.callbackFunc().bind(this.callbackObject())("setup_session3");
+                this.sessionObj().setSessionInfoIntoStorage(data_val.session_id, data_val.group_mode, data_val.theme_type, data_val.theme_data, data_val.first_fiddle, data_val.second_fiddle);
+                this.callbackFunc().bind(this.callbackObj())("setup_session3");
             }
             else {
             }
@@ -280,7 +281,7 @@ function FabricResponseObject(root_object_val) {
         }
         if (data_val.result === FE_DEF.RESULT_ALMOST_SUCCEED()) {
             console.log("FabricResponseObject.putSessionDataResponse() in_progress! session_id=", data_val.session_id);
-            this.callbackFunc().bind(this.callbackObject())("put_session_data", data_val.result_data);
+            this.callbackFunc().bind(this.callbackObj())("put_session_data", data_val.result_data);
             //this.fabricRequestObject().getSessionDataRequest();
         }
         else {
@@ -291,7 +292,7 @@ function FabricResponseObject(root_object_val) {
     this.getSessionDataResponse = function(data_val) {
         if (data_val.result === FE_DEF.RESULT_SUCCEED()) {
             console.log("FabricResponseObject.getSessionDataResponse() succeed! session_id=", data_val.session_id);
-            this.callbackFunc().bind(this.callbackObject())("get_session_data", data_val.result_data);
+            this.callbackFunc().bind(this.callbackObj())("get_session_data", data_val.result_data);
         }
         if (data_val.result === FE_DEF.RESULT_ALMOST_SUCCEED()) {
             console.log("FabricResponseObject.getSessionDataResponse() in_progress! session_id=", data_val.session_id);
@@ -315,14 +316,14 @@ function FabricResponseObject(root_object_val) {
         }
     };
 
-    this.rootObject = () => this.rootObject_;
+    this.rootObj = () => this.rootObj_;
     this.responseSwitchTable = () => this.responseSwitchTable_;
-    this.fabricRequestObject = () => this.rootObject().fabricRequestObject();
-    this.httpXmtObj = () => this.fabricRequestObject().httpXmtObj();
-    this.linkObject = () => this.fabricRequestObject().linkObject();
-    this.httpServiceObject = () => this.httpServiceObject_;
-    this.sessionObject = () => this.fabricRequestObject().sessionObject();
+    this.fabricRequestObj = () => this.rootObj().fabricRequestObject();
+    this.httpXmtObj = () => this.fabricRequestObj().httpXmtObj();
+    this.linkObj = () => this.fabricRequestObj().linkObject();
+    this.httpServiceObj = () => this.httpServiceObj_;
+    this.sessionObj = () => this.fabricRequestObj().sessionObject();
     this.callbackFunc = () => this.callbackFunc_;
-    this.callbackObject = () => this.callbackObject_;
-    this.init__(root_object_val);
+    this.callbackObj = () => this.callbackObj_;
+    this.init__(root_obj_val);
 };
