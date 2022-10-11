@@ -6,7 +6,7 @@
 function AccountLogoutObject() {
     "use strict";
     this.init__ = function() {
-        this.theHttpServiceObject = new FabricHttpServiceObject(this.examineResponse, this);
+        this.theHttpServiceObject = new FabricHttpReqObject(this.examineResponse, this);
         this.setupHtmlInputFunc();
     };
 

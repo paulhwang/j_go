@@ -3,7 +3,7 @@
   Written by Paul Hwang
 */
 
-function FabricHttpServiceObject(callback_func_val, callback_object_val) {
+function FabricHttpReqObject(callback_func_val, callback_object_val) {
     "use strict";
     this.init__ = function() {
         this.callBackFunc_ = callback_func_val;
@@ -33,10 +33,10 @@ function FabricHttpServiceObject(callback_func_val, callback_object_val) {
     };
 
     this.incrementAjaxPacketId = function() {
-        //console.log("HttpServiceObject.incrementAjaxPacketId() ajax_packet_id=" + sessionStorage.ajax_packet_id);
+        //console.log("FabricHttpReqObject.incrementAjaxPacketId() ajax_packet_id=" + sessionStorage.ajax_packet_id);
         const next_ajax_packet_id = Number(sessionStorage.ajax_packet_id) + 1;
         if (next_ajax_packet_id !== 1 + Number(sessionStorage.ajax_packet_id)) {
-            this.abend("HttpServiceObject.incrementAjaxPacketId()", "fix it");
+            this.abend("FabricHttpReqObject.incrementAjaxPacketId()", "fix it");
         }
         sessionStorage.ajax_packet_id = next_ajax_packet_id;
     };

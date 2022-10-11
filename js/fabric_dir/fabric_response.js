@@ -10,7 +10,7 @@ function FabricResponseObject(root_obj_val) {
 
         this.initSwitchTable();
 
-        this.httpServiceObj_ = new FabricHttpServiceObject(this.parseFabricResponse, this);
+        this.httpServiceObj_ = new FabricHttpReqObject(this.parseFabricResponse, this);
 
         ///////////this.sendGetLinkDataRequest();
     };
