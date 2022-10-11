@@ -58,7 +58,7 @@ function FabricResponseObject(root_obj_val) {
 
         /* name_list_tag */
         //console.log("FabricResponseObject.getLinkDataResponse() data_val.name_list_tag=" + data_val.name_list_tag);
-        this.linkObj().setServerNameListTag(data_val.name_list_tag);
+        //this.linkObj().setServerNameListTag(data_val.name_list_tag);
 
         if (data_val.pending_data != "N/A") {
             console.log("FabricResponseObject.getLinkDataResponse() pending_data=" + data_val.pending_data);
@@ -83,37 +83,38 @@ function FabricResponseObject(root_obj_val) {
 
         //console.log("FabricResponseObject.getLinkDataResponse() data_val.data=" + data_val.data);
         let remaining_data = data_val.data
+
         while (remaining_data.length > 0) {
-            index = 0;
+            let index = 0;
             let type = remaining_data.charAt(index);
             //console.log("FabricResponseObject.getLinkDataResponse() type=" + type);
             index++;
 
-            if (type === this.FABRIC_DEF().GET_LINK_DATA_TYPE_NAME_LIST()) {
-                name_list_tag = remaining_data.slice(index, index + this.FABRIC_DEF().NAME_LIST_TAG_SIZE());
-                index += this.FABRIC_DEF().NAME_LIST_TAG_SIZE();
+            if (type === FE_DEF.GET_LINK_DATA_TYPE_NAME_LIST()) {
+                const name_list_tag = remaining_data.slice(index, index + FE_DEF.NAME_LIST_TAG_SIZE());
+                index += FE_DEF.NAME_LIST_TAG_SIZE();
 
-                this.linkObj().setServerNameListTag(data_val.name_list_tag);
+                this.linkObj().setServerNameListTag(name_list_tag);
 
 
                 //console.log("FabricResponseObject.getLinkDataResponse() name_list_tag=" + name_list_tag);
             }
 
-            else if (type === this.FABRIC_DEF().GET_LINK_DATA_TYPE_PENDING_DATA()) {
-                pending_data = remaining_data.slice(index, index + this.FABRIC_DEF().SESSION_ID_SIZE());
-                index += this.FABRIC_DEF().SESSION_ID_SIZE();
+            else if (type === FE_DEF.GET_LINK_DATA_TYPE_PENDING_DATA()) {
+                let pending_data = remaining_data.slice(index, index + FE_DEF.SESSION_ID_SIZE());
+                index += FE_DEF.SESSION_ID_SIZE();
 
                 this.fabricRequestObj().getSessionDataRequest();
 
                 console.log("FabricResponseObject.getLinkDataResponse() pending_data=" + pending_data);
             }
 
-            else if (type === this.FABRIC_DEF().GET_LINK_DATA_TYPE_PENDING_SESSION2()) {
-                let len_str = remaining_data.slice(index, index + this.FABRIC_DEF().GET_LINK_DATA_LENGTH_SIZE());
-                index += this.FABRIC_DEF().GET_LINK_DATA_LENGTH_SIZE();
+            else if (type === FE_DEF.GET_LINK_DATA_TYPE_PENDING_SESSION2()) {
+                let len_str = remaining_data.slice(index, index + FE_DEF.GET_LINK_DATA_LENGTH_SIZE());
+                index += FE_DEF.GET_LINK_DATA_LENGTH_SIZE();
 
-                let len = this.encodeObject().decodeNumber(len_str, this.FABRIC_DEF().GET_LINK_DATA_LENGTH_SIZE());
-                pending_session2 = remaining_data.slice(index, index + len);
+                let len = this.decodeNumber(len_str, FE_DEF.GET_LINK_DATA_LENGTH_SIZE());
+                let pending_session2 = remaining_data.slice(index, index + len);
                 index += len;
 
                 const session_id = pending_session2.slice(0, FE_DEF.SESSION_ID_SIZE());
@@ -123,12 +124,12 @@ function FabricResponseObject(root_obj_val) {
                 console.log("FabricResponseObject.getLinkDataResponse() pending_session2=" + pending_session2);
             }
 
-            else if (type === this.FABRIC_DEF().GET_LINK_DATA_TYPE_PENDING_SESSION3()) {
-                let len_str = remaining_data.slice(index, index + this.FABRIC_DEF().GET_LINK_DATA_LENGTH_SIZE());
-                index += this.FABRIC_DEF().GET_LINK_DATA_LENGTH_SIZE();
+            else if (type === FE_DEF.GET_LINK_DATA_TYPE_PENDING_SESSION3()) {
+                let len_str = remaining_data.slice(index, index + FE_DEF.GET_LINK_DATA_LENGTH_SIZE());
+                index += FE_DEF.GET_LINK_DATA_LENGTH_SIZE();
 
-                let len = this.encodeObject().decodeNumber(len_str, this.FABRIC_DEF().GET_LINK_DATA_LENGTH_SIZE());
-                pending_session3 = remaining_data.slice(index, index + len);
+                let len = this.decodeNumber(len_str, FE_DEF.GET_LINK_DATA_LENGTH_SIZE());
+                let pending_session3 = remaining_data.slice(index, index + len);
                 index += len;
 
 
@@ -206,6 +207,15 @@ function FabricResponseObject(root_obj_val) {
         //}
 
         //this.callbackFunc().bind(this.callbackObject())("get_link_data", data_val);
+    };
+
+    this.decodeNumber = function(input_val, size_val) {
+        let output = 0;
+        for (let index = 0; index < size_val; index++) {
+            output *= 10;
+            output += input_val.charAt(index) - '0';
+        }
+        return output;
     };
 
     this.getNameListResponse = function(data_val) {
