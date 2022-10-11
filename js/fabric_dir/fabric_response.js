@@ -54,47 +54,18 @@ function FabricResponseObject(root_obj_val) {
     };
 
     this.getLinkDataResponse = function(data_val) {
-        //console.log("FabricResponseObject.getLinkDataResponse() data_val.result=" + data_val.result);
-
-        /* name_list_tag */
-        //console.log("FabricResponseObject.getLinkDataResponse() data_val.name_list_tag=" + data_val.name_list_tag);
-        //this.linkObj().setServerNameListTag(data_val.name_list_tag);
-
-/*
-        if (data_val.pending_data != "N/A") {
-            console.log("FabricResponseObject.getLinkDataResponse() pending_data=" + data_val.pending_data);
-            this.fabricRequestObj().getSessionDataRequest();
-            this.callbackFunc().bind(this.callbackObj())("get_link_data", data_val);
-        }
-
-        if (data_val.pending_session2 != "N/A") {
-            console.log("FabricResponseObject.getLinkDataResponse() pending_session2=" + data_val.pending_session2);
-            //this.callbackFunc().bind(this.callbackObj())("get_link_data", data_val);
-            const pending_session2 = data_val.pending_session2;
-            const session_id = pending_session2.slice(0, FE_DEF.SESSION_ID_SIZE());
-            this.fabricRequestObj().setupSession2Request(session_id);
-        }
-
-        if (data_val.pending_session3 != "N/A") {
-            console.log("FabricResponseObject.getLinkDataResponse() pending_session3=" + data_val.pending_session3);
-            this.fabricRequestObj().setupSession3Request(data_val.pending_session3);
-            //this.callbackFunc().bind(this.callbackObj())("get_link_data", data_val);
-        }
-*/
-
         //console.log("FabricResponseObject.getLinkDataResponse() data_val.data=" + data_val.data);
 
         let data = data_val.data;
-
         let index = 0;
+
         const result = data.slice(index, index + FE_DEF.RESULT_SIZE());
         index += FE_DEF.RESULT_SIZE();
 
         const link_id = data.slice(index, index + FE_DEF.LINK_ID_SIZE());
         index += FE_DEF.LINK_ID_SIZE();
 
-
-        let remaining_data = data_val.data
+        let remaining_data = data.slice(index);
 
         while (remaining_data.length > 0) {
             let index = 0;
@@ -107,7 +78,6 @@ function FabricResponseObject(root_obj_val) {
                 index += FE_DEF.NAME_LIST_TAG_SIZE();
 
                 this.linkObj().setServerNameListTag(name_list_tag);
-
 
                 //console.log("FabricResponseObject.getLinkDataResponse() name_list_tag=" + name_list_tag);
             }
@@ -132,7 +102,6 @@ function FabricResponseObject(root_obj_val) {
                 const session_id = pending_session2.slice(0, FE_DEF.SESSION_ID_SIZE());
                 this.fabricRequestObj().setupSession2Request(session_id);
 
-
                 console.log("FabricResponseObject.getLinkDataResponse() pending_session2=" + pending_session2);
             }
 
@@ -143,7 +112,6 @@ function FabricResponseObject(root_obj_val) {
                 let len = this.decodeNumber(len_str, FE_DEF.GET_LINK_DATA_LENGTH_SIZE());
                 let pending_session3 = remaining_data.slice(index, index + len);
                 index += len;
-
 
                 this.fabricRequestObj().setupSession3Request(pending_session3);
 
@@ -157,69 +125,7 @@ function FabricResponseObject(root_obj_val) {
             console.log("FabricResponseObject.getLinkDataResponse() remaining_data.length=" + remaining_data.length);
             abend();
         }
-
-
-
-        //let data = data_val.data;
-        //while (data_val.length > 0) {
-            /*
-            if (data_val.charAt(0) === this.phwangAjaxProtocolObject().WEB_FABRIC_PROTOCOL_RESPOND_IS_GET_LINK_DATA_NAME_LIST()) {
-                data_val = data_val.slice(1);
-                var name_list_tag  = this.phwangObject().decodeNumber(data_val, this.phwangAjaxProtocolObject().WEB_FABRIC_PROTOCOL_NAME_LIST_TAG_SIZE());
-                if (name_list_tag > this.phwangLinkObject().nameListTag()) {
-                    this.phwangLinkObject().setServerNameListTag(name_list_tag);
-                }
-                data_val = data_val.slice(this.phwangAjaxProtocolObject().WEB_FABRIC_PROTOCOL_NAME_LIST_TAG_SIZE());
-                continue;
-            }
-            */
-
-            /*
-            if (data.charAt(0) === this.phwangAjaxProtocolObject().WEB_FABRIC_PROTOCOL_RESPOND_IS_GET_LINK_DATA_PENDING_SESSION()) {
-                this.debug(true, "getLinkDataResponse", "pending_session_data=" + data);
-                var session_id = data.slice(1, this.phwangAjaxProtocolObject().WEB_FABRIC_PROTOCOL_SESSION_ID_SIZE() + 1);
-                this.debug(true, "getLinkDataResponse", "session_id=" + session_id);
-                data = data.slice(1 + this.phwangAjaxProtocolObject().WEB_FABRIC_PROTOCOL_SESSION_ID_SIZE());
-                var theme_data = data;
-                this.debug(true, "getLinkDataResponse", "theme_data=" + theme_data);
-                var config_len = this.phwangObject().decodeNumber(theme_data.slice(1), 3);
-                var theme_data = theme_data.slice(0, config_len);
-                this.rootObject().configObject().decodeConfig(theme_data);
-                this.rootObject().configObject().putStorageConfigData();
-                data = data.slice(config_len);
-                this.setupSession2(this.phwangLinkObject(), theme_data, session_id);
-                continue;
-            }
-
-            if (data.charAt(0) === this.phwangAjaxProtocolObject().WEB_FABRIC_PROTOCOL_RESPOND_IS_GET_LINK_DATA_PENDING_SESSION3()) {
-                this.debug(true, "getLinkDataResponse", "pending_session_data3=" + data);
-                var session_id = data.slice(1, this.phwangAjaxProtocolObject().WEB_FABRIC_PROTOCOL_SESSION_ID_SIZE() + 1);
-                this.debug(true, "getLinkDataResponse", "session_id=" + session_id);
-                data = data.slice(1 + this.phwangAjaxProtocolObject().WEB_FABRIC_PROTOCOL_SESSION_ID_SIZE());
-                this.setupSession3(this.phwangLinkObject(), session_id);
-                continue;
-            }
-
-            if (data.charAt(0) === this.phwangAjaxProtocolObject().WEB_FABRIC_PROTOCOL_RESPOND_IS_GET_LINK_DATA_PENDING_DATA()) {
-                var link_session_id = data.slice(1, this.phwangAjaxProtocolObject().WEB_FABRIC_PROTOCOL_LINK_SESSION_ID_SIZE() + 1);
-                this.debug(true, "getLinkDataResponse", "link_session_id=" + link_session_id);
-                this.pendingSessionDataQueueObject().enqueueData(link_session_id);
-                data = data.slice(this.phwangAjaxProtocolObject().WEB_FABRIC_PROTOCOL_LINK_SESSION_ID_SIZE() + 1);
-                continue;
-            }
-            */
-
-            //console.log("FabricResponseObject.getLinkDataResponse() not_supported_command=" + data_val);
-            //abend();
-            //data_val = data_val.slice(data_val.length);
-        //}
-
-        //if (data_val.length !== 0) {
-            //console.log("FabricResponseObject.getLinkDataResponse() length=" + data_val.length);
-        //}
-
-        //this.callbackFunc().bind(this.callbackObject())("get_link_data", data_val);
-    };
+   };
 
     this.decodeNumber = function(input_val, size_val) {
         let output = 0;
