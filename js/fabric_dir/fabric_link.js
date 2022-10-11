@@ -48,6 +48,19 @@ function FabricLinkObject() {
         sessionStorage.setItem("time_stamp", time_stamp_val);
     };
 
+    this.alreadyLogin = () => {
+        console.log("this.linkId()=" + this.linkId());
+        if (this.linkId() === null) {
+            console.log("is null");
+            return false;
+        }
+        else {
+            console.log("not null");
+            return true;
+        }
+
+    }
+
     this.linkId = () => this.linkId_;
     this.myName = () => this.myName_;
     this.timeStamp = () => this.timeStamp_;

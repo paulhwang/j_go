@@ -11,8 +11,6 @@ function FabricResponseObject(root_obj_val) {
         this.initSwitchTable();
 
         this.httpReqObj_ = new FabricHttpReqObject(this.parseFabricResponse, this);
-
-        ///////////this.sendGetLinkDataRequest();
     };
 
     this.setCallbackFunc = function(func_val, obj_val) {
