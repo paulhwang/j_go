@@ -77,7 +77,7 @@ function HttpXmtClass(fabric_request_obj_val) {
     };
 
     this.fabricRequestObj = () => this.fabricRequestObj_;
-    this.linkObj = () => this.fabricRequestObj().linkObject();
+    this.linkObj = () => this.fabricRequestObj().linkObj();
     this.httpReqObj = () => this.fabricRequestObj().httpReqObj();
     this.transmitQueueObj = () => this.transmitQueueObj_;
     this.pendingSessionDataQueueObj = () => this.pendingSessionDataQueueObj_;

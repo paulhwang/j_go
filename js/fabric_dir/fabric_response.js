@@ -448,9 +448,9 @@ function FabricResponseObject(root_obj_val) {
     this.responseSwitchTable = () => this.responseSwitchTable_;
     this.fabricRequestObj = () => this.rootObj().fabricRequestObject();
     this.httpXmtObj = () => this.fabricRequestObj().httpXmtObj();
-    this.linkObj = () => this.fabricRequestObj().linkObject();
+    this.linkObj = () => this.fabricRequestObj().linkObj();
     this.httpReqObj = () => this.httpReqObj_;
-    this.sessionObj = () => this.fabricRequestObj().sessionObject();
+    this.sessionObj = () => this.fabricRequestObj().sessionObj();
     this.callbackFunc = () => this.callbackFunc_;
     this.callbackObj = () => this.callbackObj_;
     this.init__(root_obj_val);

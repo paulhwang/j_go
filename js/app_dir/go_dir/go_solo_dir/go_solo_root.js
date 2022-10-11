@@ -45,8 +45,8 @@ function GoSoloRootObject() {
 
     this.fabricResponseObject = () => this.fabricResponseObj_;
     this.fabricRequestObject = () => this.fabricRequestObj_;
-    this.linkObj = () => this.fabricRequestObject().linkObject();
-    this.sessionObj = () => this.fabricRequestObject().sessionObject();
+    this.linkObj = () => this.fabricRequestObject().linkObj();
+    this.sessionObj = () => this.fabricRequestObject().sessionObj();
     this.configObj = () => this.configObj_;
     this.init__();
 };

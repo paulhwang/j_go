@@ -49,8 +49,8 @@ function GoEnsembleRootObject() {
 
     this.fabricResponseObject = () => this.fabricResponseObject_;
     this.fabricRequestObject = () => this.fabricRequestObject_;
-    this.linkObject = () => this.fabricRequestObject().linkObject();
-    this.sessionObject = () => this.fabricRequestObject().sessionObject();
+    this.linkObject = () => this.fabricRequestObject().linkObj();
+    this.sessionObject = () => this.fabricRequestObject().sessionObj();
     this.htmlObject = () => this.htmlObject_;
     this.portObject = () => this.portObject_;
     this.configObject = () => this.configObject_;

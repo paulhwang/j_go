@@ -23,8 +23,8 @@ function GoPlayRootObject() {
 
     this.fabricResponseObject = () => this.fabricResponseObject_;
     this.fabricRequestObject = () => this.fabricRequestObject_;
-    this.linkObject = () => this.fabricRequestObject().linkObject();
-    this.sessionObject = () => this.fabricRequestObject().sessionObject();
+    this.linkObject = () => this.fabricRequestObject().linkObj();
+    this.sessionObject = () => this.fabricRequestObject().sessionObj();
     this.configObject = () => this.configObject_;
     this.boardObject = () => this.boardObject_;
     this.portObject = () => this.portObject_;
