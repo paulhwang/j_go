@@ -332,15 +332,6 @@ function FabricResponseObject(root_obj_val) {
         this.httpXmtObj().clearPendingAjaxRequestCommand();
     };
 
-    this.sleepMilliseconds = function (milliseconds_val) {
-        var start = new Date().getTime();
-        for (var i = 0; i < 1e7; i++) {
-            if ((new Date().getTime() - start) > milliseconds_val){
-                break;
-            }
-        }
-    };
-
     this.rootObj = () => this.rootObj_;
     this.responseSwitchTable = () => this.responseSwitchTable_;
     this.fabricRequestObj = () => this.rootObj().fabricRequestObject();
