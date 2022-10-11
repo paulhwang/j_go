@@ -8,10 +8,10 @@ function AccountLoginObject() {
     this.init__ = function() {
         this.linkObject_ = new FabricLinkObject();
         this.httpServiceObject_ = new FabricHttpServiceObject(this.examineResponse, this);
-        this.bindHtmlInput();
+        this.setupHtmlInputFunc();
     };
 
-    this.bindHtmlInput = function() {
+    this.setupHtmlInputFunc = function() {
         const this0 = this;
         $(".login_section .login_button").on("click", function() {
             let account_name = $(".login_section .login_account_name").val();
@@ -23,7 +23,7 @@ function AccountLoginObject() {
                         my_name: account_name,
                         password: password,
                         });
-                console.log("AccountLoginObject.bindHtmlInput() LoginRequest=" + output);
+                console.log("AccountLoginObject.setupHtmlInputFunc() LoginRequest=" + output);
 
                 this0.httpServiceObject().sendAjaxRequest(output);
             }

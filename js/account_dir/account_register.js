@@ -7,10 +7,10 @@ function AccountRegisterObject() {
     "use strict";
     this.init__ = function() {
         this.theHttpServiceObject = new FabricHttpServiceObject(this.examineResponse, this);
-        this.bindHtmlInput();
+        this.setupHtmlInputFunc();
     };
 
-    this.bindHtmlInput = function() {
+    this.setupHtmlInputFunc = function() {
         const this0 = this;
         $(".register_section .register_button").on("click", function() {
             let account_name = $(".register_section .register_account_name").val();
@@ -23,7 +23,7 @@ function AccountRegisterObject() {
                         password: password,
                         email: email,
                         });
-                console.log("AccountRegisterObject.bindHtmlInput() registerRequest=" + output);
+                console.log("AccountRegisterObject.setupHtmlInputFunc() registerRequest=" + output);
 
                 this0.httpServiceObject().sendAjaxRequest(output);
             }

@@ -7,10 +7,10 @@ function AccountLogoutObject() {
     "use strict";
     this.init__ = function() {
         this.theHttpServiceObject = new FabricHttpServiceObject(this.examineResponse, this);
-        this.bindHtmlInput();
+        this.setupHtmlInputFunc();
     };
 
-    this.bindHtmlInput = function() {
+    this.setupHtmlInputFunc = function() {
         const this0 = this;
         $(".logout_section .logout_button").on("click", function() {
             let account_name = $(".logout_section .logout_account_name").val();
@@ -21,7 +21,7 @@ function AccountLogoutObject() {
                         link_id: sessionStorage.link_id,
                         my_name: sessionStorage.my_name,
                         });
-                console.log("AccountLogoutObject.bindHtmlInput() Logout Request=" + output);
+                console.log("AccountLogoutObject.setupHtmlInputFunc() Logout Request=" + output);
 
                 this0.httpServiceObject().sendAjaxRequest(output);
             }
