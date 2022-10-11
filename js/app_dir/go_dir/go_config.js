@@ -67,6 +67,13 @@ function GoConfigObject(root_val) {
         return buf;
     };
 
+    this.encodeGoSoloConfig = function(board_size_val) {
+        let buf = "";
+        if (board_size_val < 10) buf = buf + 0; buf = buf + board_size_val;
+        buf = buf + "00001";
+        return buf;
+    };
+
     this.boardSize = () => this.boardSize_;
     this.handicapPoint = () => this.handicapPoint_;
     this.komiPoint = () => this.komiPoint_;
