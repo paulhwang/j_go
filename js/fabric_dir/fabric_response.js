@@ -137,20 +137,29 @@ function FabricResponseObject(root_obj_val) {
     };
 
     this.getNameListResponse = function(data_val) {
-        if (data_val.name_list) {
-            const name_list_tag  = data_val.name_list.slice(0, FE_DEF.NAME_LIST_TAG_SIZE());
-            console.log("FabricResponseObject.getNameListResponse() name_list_tag=" + name_list_tag);
+        let data = data_val.data;
+        let index = 0;
 
-            const name_list_data = data_val.name_list.slice(FE_DEF.NAME_LIST_TAG_SIZE());
-            console.log("FabricResponseObject.getNameListResponse() name_list_data=" + name_list_data);
+        const result = data.slice(index, index + FE_DEF.RESULT_SIZE());
+        index += FE_DEF.RESULT_SIZE();
 
-            const name_list_array = JSON.parse("[" + name_list_data + "]");
-            console.log("FabricResponseObject.getNameListResponse() name_list_array=" + name_list_array);
+        const link_id = data.slice(index, index + FE_DEF.LINK_ID_SIZE());
+        index += FE_DEF.LINK_ID_SIZE();
 
-            this.linkObj().setNameListTag(name_list_tag);
-            this.linkObj().setNameList(name_list_array);
-            this.callbackFunc().bind(this.callbackObj())("get_name_list", data_val);
-        }
+        data = data.slice(index);
+
+        const name_list_tag = data.slice(0, FE_DEF.NAME_LIST_TAG_SIZE());
+        console.log("FabricResponseObject.getNameListResponse() name_list_tag=" + name_list_tag);
+
+        const name_list_data = data.slice(FE_DEF.NAME_LIST_TAG_SIZE());
+        console.log("FabricResponseObject.getNameListResponse() name_list_data=" + name_list_data);
+
+        const name_list_array = JSON.parse("[" + name_list_data + "]");
+        console.log("FabricResponseObject.getNameListResponse() name_list_array=" + name_list_array);
+
+        this.linkObj().setNameListTag(name_list_tag);
+        this.linkObj().setNameList(name_list_array);
+        this.callbackFunc().bind(this.callbackObj())("get_name_list", data_val);
     };
 
     this.setupSessionResponse = function(data_val) {
