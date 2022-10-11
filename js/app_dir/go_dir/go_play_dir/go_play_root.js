@@ -13,26 +13,25 @@ function GoPlayRootObject() {
         this.configObject().decode();
         this.configObject().printConfigInfo();
 
-        this.htmlObject_      = new GoPlayHtmlObject(this);
-        this.uiMouseObject_   = new GoPlayUiMouseObject(this);
-        this.boardObject_     = new GoPlayBoardObject(this);
-        this.portObject_      = new GoPlayPortObject(this);
-        this.gameObject_      = new GoPlayGameObject(this);
+        this.htmlObject_ = new GoPlayHtmlObject(this);
+        this.uiMouseObject_ = new GoPlayUiMouseObject(this);
+        this.boardObject_ = new GoPlayBoardObject(this);
+        this.portObject_ = new GoPlayPortObject(this);
+        this.gameObject_ = new GoPlayGameObject(this);
         this.uiDisplayObject_ = new GoPlayUiDisplayObject(this);
     };
 
     this.fabricResponseObject = () => this.fabricResponseObject_;
     this.fabricRequestObject = () => this.fabricRequestObject_;
-    this.linkObject                = () => this.fabricRequestObject().linkObject();
-    this.sessionObject             = () => this.fabricRequestObject().sessionObject();
-
-    this.configObject    = () => this.configObject_;
-    this.boardObject     = () => this.boardObject_;
-    this.portObject      = () => this.portObject_;
-    this.gameObject      = () => this.gameObject_
-    this.uiMouseObject   = () => this.uiMouseObject_;
+    this.linkObject = () => this.fabricRequestObject().linkObject();
+    this.sessionObject = () => this.fabricRequestObject().sessionObject();
+    this.configObject = () => this.configObject_;
+    this.boardObject = () => this.boardObject_;
+    this.portObject = () => this.portObject_;
+    this.gameObject = () => this.gameObject_
+    this.uiMouseObject = () => this.uiMouseObject_;
     this.uiDisplayObject = () => this.uiDisplayObject_;
-    this.htmlObject      = () => this.htmlObject_;
+    this.htmlObject = () => this.htmlObject_;
 
     this.init__();
 }

@@ -52,6 +52,21 @@ function GoConfigObject(root_val) {
         console.log("GoConfigObject.decode() myColor=" + this.myColor());
     }
 
+    this.encodeGoConfig = function(board_size_val, handicap_val, komi_val, initiator_color_val) {
+        let initiator_color;
+        if (initiator_color_val == "black")
+            initiator_color = 1;
+        else
+            initiator_color = 2;
+
+        let buf = "";
+        if (board_size_val < 10) buf = buf + 0; buf = buf + board_size_val;
+        if (handicap_val < 10)   buf = buf + 0; buf = buf + handicap_val;
+        if (komi_val < 10)       buf = buf + 0; buf = buf + komi_val;
+        buf = buf + initiator_color;
+        return buf;
+    };
+
     this.boardSize = () => this.boardSize_;
     this.handicapPoint = () => this.handicapPoint_;
     this.komiPoint = () => this.komiPoint_;

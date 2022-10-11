@@ -62,7 +62,6 @@ function ENCODE_OBJECT() {
         }
     };
 
-
     this.decodeStringGetLength = function(input_val) {
         let length = 0;
         let length_str;

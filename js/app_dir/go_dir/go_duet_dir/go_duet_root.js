@@ -8,6 +8,7 @@ function GoDuetRootObject() {
     this.init__ = function() {
         this.fabricResponseObject_ = new FabricResponseObject(this);
         this.fabricRequestObject_ = new FabricRequestObject(this);
+        this.configObject_ = new GoConfigObject(this);
 
         this.htmlObject_ = new GoDuetHtmlObject(this);
         this.portObject_ = new GoDuetPortObject(this);
@@ -19,6 +20,7 @@ function GoDuetRootObject() {
     this.sessionObject = () => this.fabricRequestObject().sessionObject();
     this.htmlObject = () => this.htmlObject_;
     this.portObject = () => this.portObject_;
+    this.configObject = () => this.configObject_;
     this.init__();
 };
 
