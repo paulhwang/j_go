@@ -47,12 +47,18 @@ function AccountLoginObject() {
         index += FE_DEF.LINK_ID_SIZE();
 
         const encoded_my_name = data.slice(index);
+        const encoded_my_name_length = ENCODE.decodeStringGetLength(encoded_my_name);
         const my_name = ENCODE.decodeString(encoded_my_name);
+        index += encoded_my_name_length;
+        //console.log("my_name=" + my_name);
+
+        const time_stamp = data.slice(index);
+        console.log("time_stamp=" + time_stamp);
 
         if (result === FE_DEF.RESULT_SUCCEED()) {
             console.log("succeed");
             console.log("link_id=", link_id);
-            this.linkObject().setLinkInfoIntoStorage(link_id, my_name, response_data.time_stamp);
+            this.linkObject().setLinkInfoIntoStorage(link_id, my_name, time_stamp);
             window.history.go(-1);
         }
         else if (result === FE_DEF.RESULT_PASSWORD_NOT_MATCH()) {
