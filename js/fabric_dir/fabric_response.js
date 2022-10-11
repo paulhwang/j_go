@@ -60,6 +60,7 @@ function FabricResponseObject(root_obj_val) {
         //console.log("FabricResponseObject.getLinkDataResponse() data_val.name_list_tag=" + data_val.name_list_tag);
         //this.linkObj().setServerNameListTag(data_val.name_list_tag);
 
+/*
         if (data_val.pending_data != "N/A") {
             console.log("FabricResponseObject.getLinkDataResponse() pending_data=" + data_val.pending_data);
             this.fabricRequestObj().getSessionDataRequest();
@@ -79,9 +80,20 @@ function FabricResponseObject(root_obj_val) {
             this.fabricRequestObj().setupSession3Request(data_val.pending_session3);
             //this.callbackFunc().bind(this.callbackObj())("get_link_data", data_val);
         }
-
+*/
 
         //console.log("FabricResponseObject.getLinkDataResponse() data_val.data=" + data_val.data);
+
+        let data = data_val.data;
+
+        let index = 0;
+        const result = data.slice(index, index + FE_DEF.RESULT_SIZE());
+        index += FE_DEF.RESULT_SIZE();
+
+        const link_id = data.slice(index, index + FE_DEF.LINK_ID_SIZE());
+        index += FE_DEF.LINK_ID_SIZE();
+
+
         let remaining_data = data_val.data
 
         while (remaining_data.length > 0) {
