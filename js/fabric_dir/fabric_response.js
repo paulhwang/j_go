@@ -163,28 +163,34 @@ function FabricResponseObject(root_obj_val) {
     };
 
     this.setupSessionResponse = function(data_val) {
-        if (data_val.result === FE_DEF.RESULT_SUCCEED()) {
+        let data = data_val.data;
+        let index = 0;
+
+        const result = data.slice(index, index + FE_DEF.RESULT_SIZE());
+        index += FE_DEF.RESULT_SIZE();
+
+        const link_id = data.slice(index, index + FE_DEF.LINK_ID_SIZE());
+        index += FE_DEF.LINK_ID_SIZE();
+
+        const session_id = data.slice(index, index + FE_DEF.SESSION_ID_SIZE());
+        index += FE_DEF.SESSION_ID_SIZE();
+
+        if (result === FE_DEF.RESULT_SUCCEED()) {
             console.log("FabricResponseObject.setupSessionResponse() succeed! session_id=", data_val.session_id);
-            if (data_val.room_status === FE_DEF.ROOM_STATUS_READY()) {
-                this.sessionObj().setSessionInfoIntoStorage(data_val.session_id, data.group_mode, data_val.theme_type, data_val.theme_data, data_val.first_fiddle, data_val.second_fiddle);
-                this.setupSessionCallbackFunc().bind(this.setupSessionCallbackObject())();
-            }
-            else {
-            }
         }
-        else if (data_val.result === FE_DEF.RESULT_ALMOST_SUCCEED()) {
+        else if (result === FE_DEF.RESULT_ALMOST_SUCCEED()) {
             console.log("FabricResponseObject.setupSessionResponse() almost_succeed");
-            this.fabricRequestObject().setupSession3Request(data_val.session_id);
+            this.fabricRequestObject().setupSession3Request(session_id);
         }
-        else if (data_val.result === FE_DEF.RESULT_WAITING_FOR_ANSWER()) {
+        else if (result === FE_DEF.RESULT_WAITING_FOR_ANSWER()) {
             console.log("FabricResponseObject.setupSessionResponse() waiting_for_answer");
-            //this.fabricRequestObject().setupSession3Request(data_val.session_id);
+            //this.fabricRequestObject().setupSession3Request(session_id);
         }
-        else if (data_val.result === FE_DEF.RESULT_ACCOUNT_NAME_NOT_EXIST()) {
+        else if (result === FE_DEF.RESULT_ACCOUNT_NAME_NOT_EXIST()) {
             console.log("FabricResponseObject.setupSessionResponse() account_not_exist");
         }
         else {
-            console.log("FabricResponseObject.setupSessionResponse() invalid_result=" + data_val.result);
+            console.log("FabricResponseObject.setupSessionResponse() invalid_result=" + result);
         }
     };
 
