@@ -125,7 +125,7 @@ function FabricResponseObject(root_obj_val) {
             console.log("FabricResponseObject.getLinkDataResponse() remaining_data.length=" + remaining_data.length);
             abend();
         }
-   };
+    };
 
     this.getNameListResponse = function(data_val) {
         let data = data_val.data;
