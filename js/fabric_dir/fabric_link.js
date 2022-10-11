@@ -7,8 +7,8 @@ function FabricLinkObject() {
     "use strict";
     this.init__ = function() {
         this.nameList_ = [];
-        this.nameListTag_ = this.encodePadInteger(0, 3);
-        this.serverNameListTag_ = this.encodePadInteger(0, 3);
+        this.nameListTag_ = ENCODE.encodePadInteger(0, 3);
+        this.serverNameListTag_ = ENCODE.encodePadInteger(0, 3);
     }
 
     this.getLinkInfoFromStorage = function() {
@@ -46,28 +46,6 @@ function FabricLinkObject() {
         sessionStorage.setItem("link_id", link_id_val);
         sessionStorage.setItem("my_name", my_name_val);
         sessionStorage.setItem("time_stamp", time_stamp_val);
-    };
-
-    this.encodePadInteger = function(int_val, size_val) {
-        if ((int_val === undefined) || (int_val === null)) {
-            console.log("FabricLinkObject.encodePadInteger() null num_val");
-            abend();
-        }
-
-        let str = "" + int_val;
-        while (str.length < size_val) {
-            str = "0" + str;
-        }
-        return str;
-    };
-
-    this.decodePadInteger = function(int_str_val, size_val) {
-        let output = 0;
-        for (let index = 0; index < size_val; index++) {
-            output *= 10;
-            output += int_str_val.charAt(index) - '0';
-        }
-        return output;
     };
 
     this.sleepMilliseconds = function (milliseconds_val) {

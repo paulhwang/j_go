@@ -95,7 +95,7 @@ function FabricResponseObject(root_obj_val) {
                 let len_str = remaining_data.slice(index, index + FE_DEF.GET_LINK_DATA_LENGTH_SIZE());
                 index += FE_DEF.GET_LINK_DATA_LENGTH_SIZE();
 
-                let len = this.decodeNumber(len_str, FE_DEF.GET_LINK_DATA_LENGTH_SIZE());
+                let len = ENCODE.decodeNumber(len_str, FE_DEF.GET_LINK_DATA_LENGTH_SIZE());
                 let pending_session2 = remaining_data.slice(index, index + len);
                 index += len;
 
@@ -109,7 +109,7 @@ function FabricResponseObject(root_obj_val) {
                 let len_str = remaining_data.slice(index, index + FE_DEF.GET_LINK_DATA_LENGTH_SIZE());
                 index += FE_DEF.GET_LINK_DATA_LENGTH_SIZE();
 
-                let len = this.decodeNumber(len_str, FE_DEF.GET_LINK_DATA_LENGTH_SIZE());
+                let len = ENCODE.decodeNumber(len_str, FE_DEF.GET_LINK_DATA_LENGTH_SIZE());
                 let pending_session3 = remaining_data.slice(index, index + len);
                 index += len;
 
@@ -126,15 +126,6 @@ function FabricResponseObject(root_obj_val) {
             abend();
         }
    };
-
-    this.decodeNumber = function(input_val, size_val) {
-        let output = 0;
-        for (let index = 0; index < size_val; index++) {
-            output *= 10;
-            output += input_val.charAt(index) - '0';
-        }
-        return output;
-    };
 
     this.getNameListResponse = function(data_val) {
         let data = data_val.data;
@@ -242,18 +233,18 @@ function FabricResponseObject(root_obj_val) {
 
         const encoded_theme_data = data.slice(index);
         console.log("theme=" + encoded_theme_data);
-        const theme_data = this.decodeString(encoded_theme_data);
-        const theme_data_len = this.decodeStringGetLength(encoded_theme_data);
+        const theme_data = ENCODE.decodeString(encoded_theme_data);
+        const theme_data_len = ENCODE.decodeStringGetLength(encoded_theme_data);
         index += theme_data_len;
 
         const encoded_first_fiddle = data.slice(index);
-        const first_fiddle = this.decodeString(encoded_first_fiddle);
-        const first_fiddle_len = this.decodeStringGetLength(encoded_first_fiddle);
+        const first_fiddle = ENCODE.decodeString(encoded_first_fiddle);
+        const first_fiddle_len = ENCODE.decodeStringGetLength(encoded_first_fiddle);
         index += first_fiddle_len;
 
         const encoded_second_fiddle = data.slice(index);
-        const second_fiddle = this.decodeString(encoded_second_fiddle);
-        const second_fiddle_len = this.decodeStringGetLength(encoded_second_fiddle);
+        const second_fiddle = ENCODE.decodeString(encoded_second_fiddle);
+        const second_fiddle_len = ENCODE.decodeStringGetLength(encoded_second_fiddle);
         index += second_fiddle_len;
 
         if (result === FE_DEF.RESULT_SUCCEED()) {
@@ -271,87 +262,6 @@ function FabricResponseObject(root_obj_val) {
         }
         else {
             console.log("FabricResponseObject.setupSession3Response() invalid_result=" + result);
-        }
-    };
-
-    this.decodeString = function(input_val)
-    {
-        let length = 0;
-        let buf = "";
-        let length_str;
-
-        switch (input_val.charAt(0)) {
-            case '1':
-                length_str = input_val.slice(1, 1 + 1);
-                length = this.decodeNumber(length_str, 1);
-                buf = input_val.slice(1 + 1, 1 + 1 + length);
-                return buf;
-
-            case '2':
-                length_str = input_val.slice(1, 1 + 2);
-                length = this.decodeNumber(length_str, 2);
-                buf = input_val.slice(1 + 2, 1 + 2 + length);
-                return buf;
-
-            case '3':
-                length_str = input_val.slice(1, 1 + 3);
-                length = this.decodeNumber(length_str, 3);
-                buf = input_val.slice(1 + 3, 1 + 3 + length);
-                return buf;
-
-            case '4':
-                length_str = input_val.slice(1, 1 + 4);
-                length = this.decodeNumber(length_str, 4);
-                buf = input_val.slice(1 + 4, 1 + 4 + length);
-                return buf;
-
-            case '5':
-                length_str = input_val.slice(1, 1 + 5);
-                length = this.decodeNumber(length_str, 5);
-                buf = input_val.slice(1 + 5, 1 + 5 + length);
-                return buf;
-
-            default:
-                console.log("EncodeClass.decodeString() TBD");
-                abend();
-                return buf;
-        }
-    };
-
-    this.decodeStringGetLength = function(input_val) {
-        let length = 0;
-        let length_str;
-
-        switch (input_val.charAt(0)) {
-            case '1':
-                length_str = input_val.slice(1, 1 + 1);
-                length = this.decodeNumber(length_str, 1);
-                return length + 1 + 1;
-
-            case '2':
-                length_str = input_val.slice(1, 1 + 2);
-                length = this.decodeNumber(length_str, 2);
-                return length + 1 + 2;
-
-            case '3':
-                length_str = input_val.slice(1, 1 + 3);
-                length = this.decodeNumber(length_str, 3);
-                return length + 1 + 3;
-
-            case '4':
-                length_str = input_val.slice(1, 1 + 4);
-                length = this.decodeNumber(length_str, 4);
-                return length + 1 + 4;
-
-            case '5':
-                length_str = input_val.slice(1, 1 + 5);
-                length = this.decodeNumber(length_str, 5);
-                return length + 1 + 5;
-
-            default:
-                console.log("EncodeClass.decodeStringGetLength() TBD");
-                abend();
-                return length;
         }
     };
 
