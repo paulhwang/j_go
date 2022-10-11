@@ -10,7 +10,7 @@ function FabricResponseObject(root_obj_val) {
 
         this.initSwitchTable();
 
-        this.httpServiceObj_ = new FabricHttpReqObject(this.parseFabricResponse, this);
+        this.httpReqObj_ = new FabricHttpReqObject(this.parseFabricResponse, this);
 
         ///////////this.sendGetLinkDataRequest();
     };
@@ -449,7 +449,7 @@ function FabricResponseObject(root_obj_val) {
     this.fabricRequestObj = () => this.rootObj().fabricRequestObject();
     this.httpXmtObj = () => this.fabricRequestObj().httpXmtObj();
     this.linkObj = () => this.fabricRequestObj().linkObject();
-    this.httpServiceObj = () => this.httpServiceObj_;
+    this.httpReqObj = () => this.httpReqObj_;
     this.sessionObj = () => this.fabricRequestObj().sessionObject();
     this.callbackFunc = () => this.callbackFunc_;
     this.callbackObj = () => this.callbackObj_;

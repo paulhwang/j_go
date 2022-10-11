@@ -29,7 +29,7 @@ function HttpXmtClass(fabric_request_obj_val) {
         }
 
         this.setPendingAjaxRequestCommand(output.command);
-        this.httpServiceObject().sendAjaxRequest(output_val); 
+        this.httpReqObj().sendAjaxRequest(output_val); 
     };
 
     this.startWatchDog = function(link_val) {
@@ -78,7 +78,7 @@ function HttpXmtClass(fabric_request_obj_val) {
 
     this.fabricRequestObj = () => this.fabricRequestObj_;
     this.linkObj = () => this.fabricRequestObj().linkObject();
-    this.httpServiceObject = () => this.fabricRequestObj().httpServiceObject();
+    this.httpReqObj = () => this.fabricRequestObj().httpReqObj();
     this.transmitQueueObj = () => this.transmitQueueObj_;
     this.pendingSessionDataQueueObj = () => this.pendingSessionDataQueueObj_;
     this.init__(fabric_request_obj_val);
