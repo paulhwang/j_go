@@ -356,17 +356,37 @@ function FabricResponseObject(root_obj_val) {
     };
 
     this.putSessionDataResponse = function(data_val) {
-        if (data_val.result === FE_DEF.RESULT_SUCCEED()) {
-            console.log("FabricResponseObject.putSessionDataResponse() succeed! session_id=", data_val.session_id);
-            this.callbackFunc().bind(this.callbackObject())("put_session_data", data_val.result_data);
+        let data = data_val.data;
+        let index = 0;
+
+        const result = data.slice(index, index + 2);
+        index += 2;
+
+        const link_id = data.slice(index, index + FE_DEF.LINK_ID_SIZE());
+        index += FE_DEF.LINK_ID_SIZE();
+
+        const session_id = data.slice(index, index + FE_DEF.SESSION_ID_SIZE());
+        index += FE_DEF.SESSION_ID_SIZE();
+
+        const more_ajx_id = data.charAt(index);
+        index++;
+
+        const theme_type = data.charAt(index);
+        index++;
+
+        const result_data = data.slice(index);
+
+        if (result === FE_DEF.RESULT_SUCCEED()) {
+            console.log("FabricResponseObject.putSessionDataResponse() succeed! session_id=", session_id);
+            this.callbackFunc().bind(this.callbackObject())("put_session_data", result_data);
         }
-        if (data_val.result === FE_DEF.RESULT_ALMOST_SUCCEED()) {
-            console.log("FabricResponseObject.putSessionDataResponse() in_progress! session_id=", data_val.session_id);
-            this.callbackFunc().bind(this.callbackObj())("put_session_data", data_val.result_data);
+        if (result === FE_DEF.RESULT_ALMOST_SUCCEED()) {
+            console.log("FabricResponseObject.putSessionDataResponse() in_progress! session_id=", session_id);
+            this.callbackFunc().bind(this.callbackObj())("put_session_data", result_data);
             //this.fabricRequestObject().getSessionDataRequest();
         }
         else {
-            console.log("FabricResponseObject.putSessionDataResponse() invalid_result=" + data_val.result);
+            console.log("FabricResponseObject.putSessionDataResponse() invalid_result=" + result);
         }
     };
 
