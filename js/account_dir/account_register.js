@@ -36,16 +36,25 @@ function AccountRegisterObject() {
         const response = JSON.parse(json_response_val);
         console.log("response.data=" + response.data);
 
-        const data = JSON.parse(response.data);
-        if (data.result === FE_DEF.RESULT_SUCCEED()) {
+        const response_data = JSON.parse(response.data);
+
+        let data = response_data.data;
+
+        let index = 0;
+        const result = data.slice(index, index + FE_DEF.RESULT_SIZE());
+        index += FE_DEF.RESULT_SIZE();
+        const my_name = data.slice(index);
+
+
+        if (result === FE_DEF.RESULT_SUCCEED()) {
             console.log("succeed");
             window.history.go(-1);
         }
-        else if (data.result === FE_DEF.RESULT_ACCOUNT_NAME_ALREADY_EXIST()) {
+        else if (result === FE_DEF.RESULT_ACCOUNT_NAME_ALREADY_EXIST()) {
             console.log("account_name_already_exist");
         }
         else {
-            console.log("invalid_result=" + data.result);
+            console.log("invalid_result=" + result);
         }
     };
 
