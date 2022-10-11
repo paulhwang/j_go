@@ -371,16 +371,30 @@ function FabricResponseObject(root_obj_val) {
     };
 
     this.getSessionDataResponse = function(data_val) {
-        if (data_val.result === FE_DEF.RESULT_SUCCEED()) {
-            console.log("FabricResponseObject.getSessionDataResponse() succeed! session_id=", data_val.session_id);
-            this.callbackFunc().bind(this.callbackObj())("get_session_data", data_val.result_data);
+        let data = data_val.data;
+        let index = 0;
+
+        const result = data.slice(index, index + 2);
+        index += 2;
+
+        const link_id = data.slice(index, index + FE_DEF.LINK_ID_SIZE());
+        index += FE_DEF.LINK_ID_SIZE();
+
+        const session_id = data.slice(index, index + FE_DEF.SESSION_ID_SIZE());
+        index += FE_DEF.SESSION_ID_SIZE();
+
+        const result_data = data.slice(index);
+
+        if (result === FE_DEF.RESULT_SUCCEED()) {
+            console.log("FabricResponseObject.getSessionDataResponse() succeed! session_id=", session_id);
+            this.callbackFunc().bind(this.callbackObj())("get_session_data", result_data);
         }
-        if (data_val.result === FE_DEF.RESULT_ALMOST_SUCCEED()) {
-            console.log("FabricResponseObject.getSessionDataResponse() in_progress! session_id=", data_val.session_id);
+        if (result === FE_DEF.RESULT_ALMOST_SUCCEED()) {
+            console.log("FabricResponseObject.getSessionDataResponse() in_progress! session_id=", session_id);
             this.getSessionDataRequest();
         }
         else {
-            console.log("FabricResponseObject.getSessionDataResponse() invalid_result=" + data_val.result);
+            console.log("FabricResponseObject.getSessionDataResponse() invalid_result=" + result);
         }
     };
 
