@@ -224,21 +224,134 @@ function FabricResponseObject(root_obj_val) {
     };
 
     this.setupSession3Response = function(data_val) {
-        if (data_val.result === FE_DEF.RESULT_SUCCEED()) {
-            console.log("FabricResponseObject.setupSession3Response() succeed! session_id=", data_val.session_id);
-            if (data_val.room_status === FE_DEF.ROOM_STATUS_READY()) {
-                this.sessionObj().setSessionInfoIntoStorage(data_val.session_id, data_val.group_mode, data_val.theme_type, data_val.theme_data, data_val.first_fiddle, data_val.second_fiddle);
+        let data = data_val.data;
+        var index = 0;
+
+        var result = data.slice(index, index + 2);
+        index += 2;
+
+        var link_id = data.slice(index, index + FE_DEF.LINK_ID_SIZE());
+        index += FE_DEF.LINK_ID_SIZE();
+
+        var session_id = data.slice(index, index + 8);
+        index += FE_DEF.SESSION_ID_SIZE();
+
+        const room_status = data[index++];
+        const group_mode = data[index++];
+        const theme_type = data[index++];
+
+        const encoded_theme_data = data.slice(index);
+        console.log("theme=" + encoded_theme_data);
+        const theme_data = this.decodeString(encoded_theme_data);
+        const theme_data_len = this.decodeStringGetLength(encoded_theme_data);
+        index += theme_data_len;
+
+        const encoded_first_fiddle = data.slice(index);
+        const first_fiddle = this.decodeString(encoded_first_fiddle);
+        const first_fiddle_len = this.decodeStringGetLength(encoded_first_fiddle);
+        index += first_fiddle_len;
+
+        const encoded_second_fiddle = data.slice(index);
+        const second_fiddle = this.decodeString(encoded_second_fiddle);
+        const second_fiddle_len = this.decodeStringGetLength(encoded_second_fiddle);
+        index += second_fiddle_len;
+
+        if (result === FE_DEF.RESULT_SUCCEED()) {
+            console.log("FabricResponseObject.setupSession3Response() succeed! session_id=", session_id);
+            if (room_status === FE_DEF.ROOM_STATUS_READY()) {
+                this.sessionObj().setSessionInfoIntoStorage(session_id, group_mode, theme_type, theme_data, first_fiddle, second_fiddle);
                 this.callbackFunc().bind(this.callbackObj())("setup_session3");
             }
             else {
             }
         }
-        else if (data_val.result === FE_DEF.RESULT_ALMOST_SUCCEED()) {
+        else if (result === FE_DEF.RESULT_ALMOST_SUCCEED()) {
             console.log("FabricResponseObject.setupSession3Response() almost_succeed");
-            this.sendSetupSession3Request(data_val.session_id);
+            this.sendSetupSession3Request(session_id);
         }
         else {
-            console.log("FabricResponseObject.setupSession3Response() invalid_result=" + data_val.result);
+            console.log("FabricResponseObject.setupSession3Response() invalid_result=" + result);
+        }
+    };
+
+    this.decodeString = function(input_val)
+    {
+        let length = 0;
+        let buf = "";
+        let length_str;
+
+        switch (input_val.charAt(0)) {
+            case '1':
+                length_str = input_val.slice(1, 1 + 1);
+                length = this.decodeNumber(length_str, 1);
+                buf = input_val.slice(1 + 1, 1 + 1 + length);
+                return buf;
+
+            case '2':
+                length_str = input_val.slice(1, 1 + 2);
+                length = this.decodeNumber(length_str, 2);
+                buf = input_val.slice(1 + 2, 1 + 2 + length);
+                return buf;
+
+            case '3':
+                length_str = input_val.slice(1, 1 + 3);
+                length = this.decodeNumber(length_str, 3);
+                buf = input_val.slice(1 + 3, 1 + 3 + length);
+                return buf;
+
+            case '4':
+                length_str = input_val.slice(1, 1 + 4);
+                length = this.decodeNumber(length_str, 4);
+                buf = input_val.slice(1 + 4, 1 + 4 + length);
+                return buf;
+
+            case '5':
+                length_str = input_val.slice(1, 1 + 5);
+                length = this.decodeNumber(length_str, 5);
+                buf = input_val.slice(1 + 5, 1 + 5 + length);
+                return buf;
+
+            default:
+                console.log("EncodeClass.decodeString() TBD");
+                abend();
+                return buf;
+        }
+    };
+
+    this.decodeStringGetLength = function(input_val) {
+        let length = 0;
+        let length_str;
+
+        switch (input_val.charAt(0)) {
+            case '1':
+                length_str = input_val.slice(1, 1 + 1);
+                length = this.decodeNumber(length_str, 1);
+                return length + 1 + 1;
+
+            case '2':
+                length_str = input_val.slice(1, 1 + 2);
+                length = this.decodeNumber(length_str, 2);
+                return length + 1 + 2;
+
+            case '3':
+                length_str = input_val.slice(1, 1 + 3);
+                length = this.decodeNumber(length_str, 3);
+                return length + 1 + 3;
+
+            case '4':
+                length_str = input_val.slice(1, 1 + 4);
+                length = this.decodeNumber(length_str, 4);
+                return length + 1 + 4;
+
+            case '5':
+                length_str = input_val.slice(1, 1 + 5);
+                length = this.decodeNumber(length_str, 5);
+                return length + 1 + 5;
+
+            default:
+                console.log("EncodeClass.decodeStringGetLength() TBD");
+                abend();
+                return length;
         }
     };
 
