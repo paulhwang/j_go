@@ -195,21 +195,31 @@ function FabricResponseObject(root_obj_val) {
     };
 
     this.setupSession2Response = function(data_val) {
-        if (data_val.result === FE_DEF.RESULT_SUCCEED()) {
-            console.log("FabricResponseObject.setupSession2Response() succeed! session_id=", data_val.session_id);
-            if (data_val.room_status === FE_DEF.ROOM_STATUS_READY()) {
-                this.sessionObj().setSessionInfoIntoStorage(data_val.session_id, data_val.group_mode, data_val.theme_type, data_val.theme_data, data_val.first_fiddle, data_val.second_fiddle);
-                this.callbackFunc().bind(this.callbackObject())("setup_session2");
-            }
-            else {
-            }
+        let index = 0;
+        const result = data_val.slice(index, index + FE_DEF.RESULT_SIZE());
+        index += FE_DEF.RESULT_SIZE();
+
+        const link_id = data_val.slice(index, index + FE_DEF.LINK_ID_SIZE());
+        index += FE_DEF.LINK_ID_SIZE();
+
+        const session_id = data_val.slice(index, index + FE_DEF.SESSION_ID_SIZE());
+        index += FE_DEF.SESSION_ID_SIZE();
+
+        const theme_type = data_val.charAt(index);
+        index++;
+
+        const theme_info = data_val.slice(index);
+
+
+        if (result === FE_DEF.RESULT_SUCCEED()) {
+            console.log("FabricResponseObject.setupSession2Response() succeed! session_id=", session_id);
         }
-        else if (data_val.result === FE_DEF.RESULT_ALMOST_SUCCEED()) {
+        else if (result === FE_DEF.RESULT_ALMOST_SUCCEED()) {
             console.log("FabricResponseObject.setupSession2Response() almost_succeed");
-            this.sendSetupSession3Request(data_val.session_id);
+            this.sendSetupSession3Request(session_id);
         }
         else {
-            console.log("FabricResponseObject.setupSession2Response() invalid_result=" + data_val.result);
+            console.log("FabricResponseObject.setupSession2Response() invalid_result=" + result);
         }
     };
 
