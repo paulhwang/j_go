@@ -44,7 +44,7 @@ function HttpXmtClass(fabric_request_obj_val) {
             console.log("!!!HttpXmtClass.xmtAjaxRequest() data=" + data);
         }
 
-        this.setPendingAjaxRequestCommand(output.command);
+        this.setPendingAjaxRequestCommand(command);
         this.httpReqObj().sendAjaxRequest(output_val); 
     };
 
