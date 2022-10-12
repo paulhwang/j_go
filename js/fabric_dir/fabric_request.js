@@ -81,38 +81,38 @@ function FabricRequestObject(root_obj_val) {
     };
 
     this.setupSessionRequest = function(theme_type_val, theme_data_val, group_mode_val, second_fiddle_val) {
+        const data = "1S" + this.linkObj().linkId()
+                        + group_mode_val + theme_type_val
+                        + ENCODE.encodeString(theme_data_val)
+                        + ENCODE.encodeString(this.linkObj().myName())
+                        + ENCODE.encodeString(second_fiddle_val);
         const output = JSON.stringify({
                 command: "setup_session",
                 time_stamp: this.linkObj().timeStamp(),
-                link_id: this.linkObj().linkId(),
-                group_mode: group_mode_val,
-                first_fiddle: this.linkObj().myName(),
-                second_fiddle: second_fiddle_val,
-                theme_type: theme_type_val,
-                theme_data: theme_data_val,
+                data: data,
                 });
         console.log("FabricRequestObject.setupSessionRequest() output=" + output);
         this.httpXmtObj().transmitAjaxRequest(output); 
     };
 
     this.setupSession2Request = function(session_id_val) {
+        const answer = 'Y';
+        const data = "2Y" + this.linkObj().linkId() + session_id_val + answer;
         const output = JSON.stringify({
                 command: "setup_session2",
                 time_stamp: this.linkObj().timeStamp(),
-                link_id: this.linkObj().linkId(),
-                session_id: session_id_val,
-                answer: 'Y',
+                data: data,
                 });
         console.log("FabricRequestObject.setupSession2Request() output=" + output);
         this.httpXmtObj().transmitAjaxRequest(output); 
     };
 
     this.setupSession3Request = function(session_id_val) {
+        const data = "2Z" + this.linkObj().linkId() + session_id_val;
         const output = JSON.stringify({
                 command: "setup_session3",
                 time_stamp: this.linkObj().timeStamp(),
-                link_id: this.linkObj().linkId(),
-                session_id: session_id_val,
+                data: data,
                 });
         console.log("FabricRequestObject.setupSession3Request() output=" + output);
         this.httpXmtObj().transmitAjaxRequest(output); 

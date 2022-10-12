@@ -19,6 +19,69 @@ function ENCODE_OBJECT() {
         return output;
     };
 
+    this.encodeString = function(input_val) {
+        if ((input_val === undefined) || (input_val === null)) {
+            console.log("EncodeClass.encodeString() null_input_val");
+            abend();
+        }
+        let header;
+        const length = input_val.length;
+
+        if (length < 10) {
+            header = "1";
+        }
+        else if (length < 100) {
+            header = "2";
+        }
+        else if (length < 1000) {
+            header = "3";
+        }
+        else if (length < 10000) {
+            header = "4";
+        }
+        else if (length < 100000) {
+            header = "5";
+        }
+        return header + length + input_val;
+    };
+
+    this.encodedStringlength = function(input_val) {
+        let length = 0;
+
+        switch (input_val.charAt(0)) {
+            case '1':
+                var length_str = input_val.slice(1, 1 + 1);
+                length = this.decodeNumber(length_str, 1);
+                return 1 + 1 + length;
+
+            case '2':
+                var length_str = input_val.slice(1, 1 + 2);
+                length = this.decodeNumber(length_str, 2);
+                return 1 + 2 + length;
+
+            case '3':
+                var length_str = input_val.slice(1, 1 + 3);
+                length = this.decodeNumber(length_str, 3);
+                return 1 + 3 + length;
+
+            case '4':
+                var length_str = input_val.slice(1, 1 + 4);
+                length = this.decodeNumber(length_str, 4);
+                return 1 + 4 + length;
+
+            case '5':
+                var length_str = input_val.slice(1, 1 + 5);
+                length = this.decodeNumber(length_str, 5);
+                return 1 + 5 + length;
+
+            default:
+                console.log("EncodeClass.encodedStringlength() TBD");
+                abend();
+                return buf;
+        }
+        return buf;
+    };
+
     this.decodeString = function(input_val) {
         let length = 0;
         let buf = "";
