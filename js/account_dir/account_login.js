@@ -26,6 +26,8 @@ function AccountLoginObject() {
                 console.log("AccountLoginObject.setupHtmlInputFunc() LoginRequest=" + output);
 
                 this0.httpServiceObject().sendAjaxRequest(output);
+
+                //loginRequest(account_name, password);
             }
         });
     };

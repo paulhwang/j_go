@@ -22,6 +22,39 @@ function FabricRequestObject(root_obj_val) {
         }
     };
 
+    this.registerRequest = function(my_name_val, password_val, email_val) {
+        const output = JSON.stringify({
+                command: "register",
+                my_name: my_name_val,
+                password: password_val,
+                email: email_val,
+                });
+        console.log("FabricRequestObject.registerRequest() output=" + output);
+        this.httpXmtObj().transmitAjaxRequest(output); 
+    };
+
+    this.loginRequest = function(my_name_val, password_val) {
+        const output = JSON.stringify({
+                command: "login",
+                packet_id: sessionStorage.ajax_packet_id,
+                my_name: my_name_val,
+                password: password_val,
+                });
+        console.log("FabricRequestObject.loginRequest() output=" + output);
+        this.httpXmtObj().transmitAjaxRequest(output); 
+    };
+
+    this.logoutRequest = function() {
+        const output = JSON.stringify({
+                command: "logout",
+                //time_stamp: sessionStorage.time_stamp,
+                link_id: this.linkObj().linkId(),
+                //my_name: sessionStorage.my_name,
+                });
+        console.log("FabricRequestObject.logoutRequest() output=" + output);
+        this.httpXmtObj().transmitAjaxRequest(output); 
+     };
+
     this.getLinkDataRequest = function() {
         const output = JSON.stringify({
                 command: "get_link_data",
@@ -33,7 +66,7 @@ function FabricRequestObject(root_obj_val) {
     };
 
     this.getNameListRequest = function(name_list_tag_val) {
-        var output = JSON.stringify({
+        const output = JSON.stringify({
                 command: "get_name_list",
                 time_stamp: this.linkObj().timeStamp(),
                 link_id: this.linkObj().linkId(),
@@ -102,6 +135,9 @@ function FabricRequestObject(root_obj_val) {
                 });
         console.log("FabricRequestObject.getSessionDataRequest() output=" + output);
         this.httpXmtObj().transmitAjaxRequest(output); 
+    };
+
+    this.datagramRequest = function() {
     };
 
     this.rootObj = () => this.rootObj_;
