@@ -52,9 +52,8 @@ function FabricRequestObject(root_obj_val) {
     this.logoutRequest = function() {
         const output = JSON.stringify({
                 command: "logout",
-                //time_stamp: sessionStorage.time_stamp,
+                time_stamp: sessionStorage.time_stamp,
                 link_id: this.linkObj().linkId(),
-                //my_name: sessionStorage.my_name,
                 });
         console.log("FabricRequestObject.logoutRequest() output=" + output);
         this.httpXmtObj().transmitAjaxRequest(output); 

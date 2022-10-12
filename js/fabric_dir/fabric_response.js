@@ -55,19 +55,13 @@ function FabricResponseObject(root_obj_val) {
         func.bind(this)(data);
     };
 
-    this.registerResponse = function(json_response_val) {
-        console.log("json_response_val=" + json_response_val);
-
-        const response = JSON.parse(json_response_val);
-        console.log("response.data=" + response.data);
-
-        const response_data = JSON.parse(response.data);
-
-        let data = response_data.data;
-
+    this.registerResponse = function(data_val) {
+        let data = data_val.data;
         let index = 0;
+
         const result = data.slice(index, index + FE_DEF.RESULT_SIZE());
         index += FE_DEF.RESULT_SIZE();
+
         const my_name = data.slice(index);
 
         if (result === FE_DEF.RESULT_SUCCEED()) {
@@ -118,18 +112,13 @@ function FabricResponseObject(root_obj_val) {
         }
     };
 
-    this.logoutResponse = function(json_response_val) {
-        console.log("json_response_val=" + json_response_val);
-
-        const response = JSON.parse(json_response_val);
-        console.log("response.data=" + response.data);
-
-        const response_data = JSON.parse(response.data);
-        let data = response_data.data;
-
+    this.logoutResponse = function(data_val) {
+        let data = data_val.data;
         let index = 0;
+
         const result = data.slice(index, index + FE_DEF.RESULT_SIZE());
         index += FE_DEF.RESULT_SIZE();
+
         const link_id = data.slice(index, index + FE_DEF.LINK_ID_SIZE());
         index += FE_DEF.LINK_ID_SIZE();
 
@@ -141,7 +130,7 @@ function FabricResponseObject(root_obj_val) {
             sessionStorage.setItem("my_name", null);
             sessionStorage.setItem("time_stamp", null);
             console.log("succeed");
-            window.history.go(-1);
+            //window.history.go(-1);
         }
         else if (result === FE_DEF.RESULT_ACCOUNT_NAME_ALREADY_EXIST()) {
             console.log("account_name_already_exist");
@@ -391,11 +380,6 @@ function FabricResponseObject(root_obj_val) {
             console.log("FabricResponseObject.putSessionDataResponse() succeed! session_id=", session_id);
             this.callbackFunc().bind(this.callbackObject())("put_session_data", result_data);
         }
-        if (result === FE_DEF.RESULT_ALMOST_SUCCEED()) {
-            console.log("FabricResponseObject.putSessionDataResponse() in_progress! session_id=", session_id);
-            this.callbackFunc().bind(this.callbackObj())("put_session_data", result_data);
-            //this.fabricRequestObject().getSessionDataRequest();
-        }
         else {
             console.log("FabricResponseObject.putSessionDataResponse() invalid_result=" + result);
         }
@@ -419,10 +403,6 @@ function FabricResponseObject(root_obj_val) {
         if (result === FE_DEF.RESULT_SUCCEED()) {
             console.log("FabricResponseObject.getSessionDataResponse() succeed! session_id=", session_id);
             this.callbackFunc().bind(this.callbackObj())("get_session_data", result_data);
-        }
-        if (result === FE_DEF.RESULT_ALMOST_SUCCEED()) {
-            console.log("FabricResponseObject.getSessionDataResponse() in_progress! session_id=", session_id);
-            this.getSessionDataRequest();
         }
         else {
             console.log("FabricResponseObject.getSessionDataResponse() invalid_result=" + result);
