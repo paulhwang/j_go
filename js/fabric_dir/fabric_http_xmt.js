@@ -38,16 +38,8 @@ function HttpXmtClass(fabric_request_obj_val) {
             console.log("222HttpXmtClass.xmtAjaxRequest() data=" + data);
         }
 
-        const output = JSON.stringify({
-                data: data,
-                });
-
-        if (command !== 'D') {
-            console.log("333HttpXmtClass.xmtAjaxRequest() output=" + output);
-        }
-
         this.setPendingAjaxRequestCommand(command);
-        this.httpReqObj().sendAjaxRequest(output); 
+        this.httpReqObj().sendAjaxRequest(data); 
     };
 
     this.startWatchDog = function(link_val) {
