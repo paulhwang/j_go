@@ -49,10 +49,10 @@ function FabricRequestObject(root_obj_val) {
     };
 
     this.logoutRequest = function() {
-        const data = "1O" + this.linkObj().linkId();
+        const data = this.linkObj().timeStamp() + "1O" + this.linkObj().linkId();
         const output = JSON.stringify({
                 command: "logout",
-                time_stamp: sessionStorage.time_stamp,
+                //time_stamp: sessionStorage.time_stamp,
                 data: data,
                 });
         console.log("FabricRequestObject.logoutRequest() output=" + output);
@@ -60,10 +60,10 @@ function FabricRequestObject(root_obj_val) {
      };
 
     this.getLinkDataRequest = function() {
-        const data = "1D" + this.linkObj().linkId();
+        const data = this.linkObj().timeStamp() + "1D" + this.linkObj().linkId();
         const output = JSON.stringify({
                 command: "get_link_data",
-                time_stamp: this.linkObj().timeStamp(),
+                //time_stamp: this.linkObj().timeStamp(),
                 data: data,
                 });
         //console.log("FabricRequestObject.getLinkDataRequest() output=" + output);
@@ -71,10 +71,10 @@ function FabricRequestObject(root_obj_val) {
     };
 
     this.getNameListRequest = function(name_list_tag_val) {
-        const data = "1N" + this.linkObj().linkId() + name_list_tag_val;
+        const data = this.linkObj().timeStamp() + "1N" + this.linkObj().linkId() + name_list_tag_val;
         const output = JSON.stringify({
                 command: "get_name_list",
-                time_stamp: this.linkObj().timeStamp(),
+                //time_stamp: this.linkObj().timeStamp(),
                 data: data,
                 });
         console.log("FabricRequestObject.getNameListRequest() output=" + output);
@@ -82,14 +82,14 @@ function FabricRequestObject(root_obj_val) {
     };
 
     this.setupSessionRequest = function(theme_type_val, theme_data_val, group_mode_val, second_fiddle_val) {
-        const data = "1S" + this.linkObj().linkId()
+        const data = this.linkObj().timeStamp() + "1S" + this.linkObj().linkId()
                         + group_mode_val + theme_type_val
                         + ENCODE.encodeString(theme_data_val)
                         + ENCODE.encodeString(this.linkObj().myName())
                         + ENCODE.encodeString(second_fiddle_val);
         const output = JSON.stringify({
                 command: "setup_session",
-                time_stamp: this.linkObj().timeStamp(),
+                //time_stamp: this.linkObj().timeStamp(),
                 data: data,
                 });
         console.log("FabricRequestObject.setupSessionRequest() output=" + output);
@@ -98,10 +98,10 @@ function FabricRequestObject(root_obj_val) {
 
     this.setupSession2Request = function(session_id_val) {
         const answer = 'Y';
-        const data = "2Y" + this.linkObj().linkId() + session_id_val + answer;
+        const data = this.linkObj().timeStamp() + "2Y" + this.linkObj().linkId() + session_id_val + answer;
         const output = JSON.stringify({
                 command: "setup_session2",
-                time_stamp: this.linkObj().timeStamp(),
+                //time_stamp: this.linkObj().timeStamp(),
                 data: data,
                 });
         console.log("FabricRequestObject.setupSession2Request() output=" + output);
@@ -109,10 +109,10 @@ function FabricRequestObject(root_obj_val) {
     };
 
     this.setupSession3Request = function(session_id_val) {
-        const data = "2Z" + this.linkObj().linkId() + session_id_val;
+        const data = this.linkObj().timeStamp() + "2Z" + this.linkObj().linkId() + session_id_val;
         const output = JSON.stringify({
                 command: "setup_session3",
-                time_stamp: this.linkObj().timeStamp(),
+                //time_stamp: this.linkObj().timeStamp(),
                 data: data,
                 });
         console.log("FabricRequestObject.setupSession3Request() output=" + output);
@@ -120,10 +120,10 @@ function FabricRequestObject(root_obj_val) {
     };
 
     this.putSessionDataRequest = function(data_val) {
-        const data = "2P" + this.linkObj().linkId() + this.sessionObj().sessionId() + data_val;
+        const data = this.linkObj().timeStamp() + "2P" + this.linkObj().linkId() + this.sessionObj().sessionId() + data_val;
         const output = JSON.stringify({
                 command: "put_session_data",
-                time_stamp: this.linkObj().timeStamp(),
+                //time_stamp: this.linkObj().timeStamp(),
                 data: data,
                 });
         console.log("FabricRequestObject.putSessionDataRequest() output=" + output);
@@ -131,10 +131,10 @@ function FabricRequestObject(root_obj_val) {
     };
 
     this.getSessionDataRequest = function() {
-        const data = "2G" + this.linkObj().linkId() + this.sessionObj().sessionId();
+        const data = this.linkObj().timeStamp() + "2G" + this.linkObj().linkId() + this.sessionObj().sessionId();
         const output = JSON.stringify({
                 command: "get_session_data",
-                time_stamp: this.linkObj().timeStamp(),
+                //time_stamp: this.linkObj().timeStamp(),
                 data: data,
                 });
         console.log("FabricRequestObject.getSessionDataRequest() output=" + output);
