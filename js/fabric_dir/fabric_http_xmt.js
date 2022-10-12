@@ -23,29 +23,31 @@ function HttpXmtClass(fabric_request_obj_val) {
     };
 
     this.xmtAjaxRequest = function (output_val) {
-        var output = JSON.parse(output_val);
-
-        let data = output.data;
-
-        if (data.charAt(0) === '{') {
-            data = data.slice(14);
-        }
+        let data = output_val;
         const command = data.charAt(1);
 
         if (command !== 'D') {
-            console.log("===HttpXmtClass.xmtAjaxRequest() data=" + data);
+            console.log("111HttpXmtClass.xmtAjaxRequest() data=" + data);
         }
 
-        if ((command !== 'R') && (command !== "i")) {
+        if ((command !== 'R') && (command !== "I")) {
             data = this.linkObj().timeStamp() + data;
         }
 
         if (command !== 'D') {
-            console.log("!!!HttpXmtClass.xmtAjaxRequest() data=" + data);
+            console.log("222HttpXmtClass.xmtAjaxRequest() data=" + data);
+        }
+
+        const output = JSON.stringify({
+                data: data,
+                });
+
+        if (command !== 'D') {
+            console.log("333HttpXmtClass.xmtAjaxRequest() output=" + output);
         }
 
         this.setPendingAjaxRequestCommand(command);
-        this.httpReqObj().sendAjaxRequest(output_val); 
+        this.httpReqObj().sendAjaxRequest(output); 
     };
 
     this.startWatchDog = function(link_val) {
