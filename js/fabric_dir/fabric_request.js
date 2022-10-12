@@ -119,23 +119,22 @@ function FabricRequestObject(root_obj_val) {
     };
 
     this.putSessionDataRequest = function(data_val) {
+        const data = "2P" + this.linkObj().linkId() + this.sessionObj().sessionId() + data_val;
         const output = JSON.stringify({
                 command: "put_session_data",
                 time_stamp: this.linkObj().timeStamp(),
-                link_id: this.linkObj().linkId(),
-                session_id: this.sessionObj().sessionId(),
-                data: data_val,
+                data: data,
                 });
         console.log("FabricRequestObject.putSessionDataRequest() output=" + output);
         this.httpXmtObj().transmitAjaxRequest(output); 
     };
 
     this.getSessionDataRequest = function() {
+        const data = "2G" + this.linkObj().linkId() + this.sessionObj().sessionId();
         const output = JSON.stringify({
                 command: "get_session_data",
                 time_stamp: this.linkObj().timeStamp(),
-                link_id: this.linkObj().linkId(),
-                session_id: this.sessionObj().sessionId(),
+                data: data,
                 });
         console.log("FabricRequestObject.getSessionDataRequest() output=" + output);
         this.httpXmtObj().transmitAjaxRequest(output); 

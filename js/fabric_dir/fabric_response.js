@@ -7,9 +7,7 @@ function FabricResponseObject(root_obj_val) {
     "use strict";
      this.init__ = function(root_obj_val) {
         this.rootObj_ = root_obj_val;
-
         this.initSwitchTable();
-
         this.httpReqObj_ = new FabricHttpReqObject(this.parseFabricResponse, this);
     };
 
