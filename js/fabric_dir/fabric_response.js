@@ -34,7 +34,25 @@ function FabricResponseObject(root_obj_val) {
         };
     };
 
-    this.datagramResponse = function(json_response_val) {
+    this.parseFabricResponse = function(json_response_val) {
+        //console.log("FabricResponseObject.parseFabricResponse() json_response_val=" + json_response_val);
+        const response = JSON.parse(json_response_val);
+
+        if (response.command !== "get_link_data") {
+            console.log("FabricResponseObject.parseFabricResponse() command=" + response.command + " data=" + response.data);
+        }
+
+        const func = this.responseSwitchTable()[response.command];
+        if (!func) {
+            console.log("FabricResponseObject.parseFabricResponse() bad_command=" + response.command);
+            abend();
+            return;
+        }
+
+        this.clearPendingAjaxRequestCommand();
+
+        const data = JSON.parse(response.data);
+        func.bind(this)(data);
     };
 
     this.registerResponse = function(json_response_val) {
@@ -64,16 +82,10 @@ function FabricResponseObject(root_obj_val) {
         }
     };
 
-    this.loginResponse = function(json_response_val) {
-        console.log("json_response_val=" + json_response_val);
-
-        const response = JSON.parse(json_response_val);
-        console.log("response.data=" + response.data);
-
-        const response_data = JSON.parse(response.data);
-        let data = response_data.data;
-
+    this.loginResponse = function(data_val) {
+        let data = data_val.data;
         let index = 0;
+
         const result = data.slice(index, index + FE_DEF.RESULT_SIZE());
         index += FE_DEF.RESULT_SIZE();
 
@@ -92,7 +104,7 @@ function FabricResponseObject(root_obj_val) {
         if (result === FE_DEF.RESULT_SUCCEED()) {
             console.log("succeed");
             console.log("link_id=", link_id);
-            this.linkObject().setLinkInfoIntoStorage(link_id, my_name, time_stamp);
+            this.linkObj().setLinkInfoIntoStorage(link_id, my_name, time_stamp);
             window.history.go(-1);
         }
         else if (result === FE_DEF.RESULT_PASSWORD_NOT_MATCH()) {
@@ -140,27 +152,6 @@ function FabricResponseObject(root_obj_val) {
         else {
             console.log("invalid_result=" + result);
         }
-    };
-
-    this.parseFabricResponse = function(json_response_val) {
-        //console.log("FabricResponseObject.parseFabricResponse() json_response_val=" + json_response_val);
-        const response = JSON.parse(json_response_val);
-
-        if (response.command !== "get_link_data") {
-            console.log("FabricResponseObject.parseFabricResponse() command=" + response.command + " data=" + response.data);
-        }
-
-        const func = this.responseSwitchTable()[response.command];
-        if (!func) {
-            console.log("FabricResponseObject.parseFabricResponse() bad_command=" + response.command);
-            abend();
-            return;
-        }
-
-        this.clearPendingAjaxRequestCommand();
-
-        const data = JSON.parse(response.data);
-        func.bind(this)(data);
     };
 
     this.getLinkDataResponse = function(data_val) {
@@ -436,6 +427,9 @@ function FabricResponseObject(root_obj_val) {
         else {
             console.log("FabricResponseObject.getSessionDataResponse() invalid_result=" + result);
         }
+    };
+
+    this.datagramResponse = function(json_response_val) {
     };
 
     this.clearPendingAjaxRequestCommand = function() {

@@ -8,19 +8,24 @@ function FabricRequestObject(root_obj_val) {
      this.init__ = function(root_obj_val) {
         this.rootObj_ = root_obj_val;
 
-        this.linkObj_ = new FabricLinkObject();
-        this.linkObj().getLinkInfoFromStorage();
-        this.linkObj().printLinkInfo();
-
-        this.sessionObj_ = new FabricSessionObject();
-        this.sessionObj().getSessionInfoFromStorage();
-        this.sessionObj().printSessionInfo();
-
         this.httpXmtObj_ = new HttpXmtClass(this);
-        if (this.linkObj().alreadyLogin()) {
-            this.httpXmtObj().startWatchDog();
-        }
-    };
+
+        this.linkObj_ = new FabricLinkObject();
+
+        const link_id_ = sessionStorage.getItem("link_id");
+        if (link_id_ !== null) {
+            this.linkObj().getLinkInfoFromStorage();
+            this.linkObj().printLinkInfo();
+
+            this.sessionObj_ = new FabricSessionObject();
+            this.sessionObj().getSessionInfoFromStorage();
+            this.sessionObj().printSessionInfo();
+
+            if (this.linkObj().alreadyLogin()) {
+                this.httpXmtObj().startWatchDog();
+            }
+         }
+   };
 
     this.registerRequest = function(my_name_val, password_val, email_val) {
         const output = JSON.stringify({
