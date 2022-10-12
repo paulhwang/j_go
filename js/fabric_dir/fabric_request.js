@@ -17,7 +17,9 @@ function FabricRequestObject(root_obj_val) {
         this.sessionObj().printSessionInfo();
 
         this.httpXmtObj_ = new HttpXmtClass(this);
-        this.httpXmtObj().startWatchDog();
+        if (this.linkObj().alreadyLogin()) {
+            this.httpXmtObj().startWatchDog();
+        }
     };
 
     this.getLinkDataRequest = function() {

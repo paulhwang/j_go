@@ -50,7 +50,7 @@ function FabricLinkObject() {
 
     this.alreadyLogin = () => {
         console.log("this.linkId()=" + this.linkId());
-        if (this.linkId() === null) {
+        if ((this.linkId() === null) || (this.linkId() === "null") || (this.linkId() === undefined)) {
             console.log("is null");
             return false;
         }
