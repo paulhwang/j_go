@@ -30,7 +30,6 @@ function FabricRequestObject(root_obj_val) {
     this.registerRequest = function(my_name_val, password_val, email_val) {
         const data =  "0R" + ENCODE.encodeString(my_name_val) + ENCODE.encodeString(password_val) + ENCODE.encodeString(email_val);
         const output = JSON.stringify({
-                command: "register",
                 data: data,
                 });
         console.log("FabricRequestObject.registerRequest() output=" + output);
@@ -40,7 +39,6 @@ function FabricRequestObject(root_obj_val) {
     this.loginRequest = function(my_name_val, password_val) {
         const data = "0I" + ENCODE.encodeString(my_name_val) + ENCODE.encodeString(password_val);
         const output = JSON.stringify({
-                command: "login",
                 packet_id: sessionStorage.ajax_packet_id,
                 data: data,
                 });
@@ -51,8 +49,6 @@ function FabricRequestObject(root_obj_val) {
     this.logoutRequest = function() {
         const data = this.linkObj().timeStamp() + "1O" + this.linkObj().linkId();
         const output = JSON.stringify({
-                command: "logout",
-                //time_stamp: sessionStorage.time_stamp,
                 data: data,
                 });
         console.log("FabricRequestObject.logoutRequest() output=" + output);
@@ -62,8 +58,6 @@ function FabricRequestObject(root_obj_val) {
     this.getLinkDataRequest = function() {
         const data = this.linkObj().timeStamp() + "1D" + this.linkObj().linkId();
         const output = JSON.stringify({
-                command: "get_link_data",
-                //time_stamp: this.linkObj().timeStamp(),
                 data: data,
                 });
         //console.log("FabricRequestObject.getLinkDataRequest() output=" + output);
@@ -73,8 +67,6 @@ function FabricRequestObject(root_obj_val) {
     this.getNameListRequest = function(name_list_tag_val) {
         const data = this.linkObj().timeStamp() + "1N" + this.linkObj().linkId() + name_list_tag_val;
         const output = JSON.stringify({
-                command: "get_name_list",
-                //time_stamp: this.linkObj().timeStamp(),
                 data: data,
                 });
         console.log("FabricRequestObject.getNameListRequest() output=" + output);
@@ -88,8 +80,6 @@ function FabricRequestObject(root_obj_val) {
                         + ENCODE.encodeString(this.linkObj().myName())
                         + ENCODE.encodeString(second_fiddle_val);
         const output = JSON.stringify({
-                command: "setup_session",
-                //time_stamp: this.linkObj().timeStamp(),
                 data: data,
                 });
         console.log("FabricRequestObject.setupSessionRequest() output=" + output);
@@ -100,8 +90,6 @@ function FabricRequestObject(root_obj_val) {
         const answer = 'Y';
         const data = this.linkObj().timeStamp() + "2Y" + this.linkObj().linkId() + session_id_val + answer;
         const output = JSON.stringify({
-                command: "setup_session2",
-                //time_stamp: this.linkObj().timeStamp(),
                 data: data,
                 });
         console.log("FabricRequestObject.setupSession2Request() output=" + output);
@@ -111,8 +99,6 @@ function FabricRequestObject(root_obj_val) {
     this.setupSession3Request = function(session_id_val) {
         const data = this.linkObj().timeStamp() + "2Z" + this.linkObj().linkId() + session_id_val;
         const output = JSON.stringify({
-                command: "setup_session3",
-                //time_stamp: this.linkObj().timeStamp(),
                 data: data,
                 });
         console.log("FabricRequestObject.setupSession3Request() output=" + output);
@@ -122,8 +108,6 @@ function FabricRequestObject(root_obj_val) {
     this.putSessionDataRequest = function(data_val) {
         const data = this.linkObj().timeStamp() + "2P" + this.linkObj().linkId() + this.sessionObj().sessionId() + data_val;
         const output = JSON.stringify({
-                command: "put_session_data",
-                //time_stamp: this.linkObj().timeStamp(),
                 data: data,
                 });
         console.log("FabricRequestObject.putSessionDataRequest() output=" + output);
@@ -133,8 +117,6 @@ function FabricRequestObject(root_obj_val) {
     this.getSessionDataRequest = function() {
         const data = this.linkObj().timeStamp() + "2G" + this.linkObj().linkId() + this.sessionObj().sessionId();
         const output = JSON.stringify({
-                command: "get_session_data",
-                //time_stamp: this.linkObj().timeStamp(),
                 data: data,
                 });
         console.log("FabricRequestObject.getSessionDataRequest() output=" + output);
