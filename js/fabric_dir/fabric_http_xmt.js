@@ -24,8 +24,24 @@ function HttpXmtClass(fabric_request_obj_val) {
 
     this.xmtAjaxRequest = function (output_val) {
         var output = JSON.parse(output_val);
-        if (output.command !== "get_link_data") {
-            console.log("HttpXmtClass.xmtAjaxRequest() output=" + output_val);
+
+        let data = output.data;
+
+        if (data.charAt(0) === '{') {
+            data = data.slice(14);
+        }
+        const command = data.charAt(1);
+
+        if (command !== 'D') {
+            console.log("===HttpXmtClass.xmtAjaxRequest() data=" + data);
+        }
+
+        if ((command !== 'R') && (command !== "i")) {
+            data = this.linkObj().timeStamp() + data;
+        }
+
+        if (command !== 'D') {
+            console.log("!!!HttpXmtClass.xmtAjaxRequest() data=" + data);
         }
 
         this.setPendingAjaxRequestCommand(output.command);
