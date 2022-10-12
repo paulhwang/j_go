@@ -28,53 +28,54 @@ function FabricRequestObject(root_obj_val) {
    };
 
     this.registerRequest = function(my_name_val, password_val, email_val) {
+        const data =  "0R" + ENCODE.encodeString(my_name_val) + ENCODE.encodeString(password_val) + ENCODE.encodeString(email_val);
         const output = JSON.stringify({
                 command: "register",
-                my_name: my_name_val,
-                password: password_val,
-                email: email_val,
+                data: data,
                 });
         console.log("FabricRequestObject.registerRequest() output=" + output);
         this.httpXmtObj().transmitAjaxRequest(output); 
     };
 
     this.loginRequest = function(my_name_val, password_val) {
+        const data = "0I" + ENCODE.encodeString(my_name_val) + ENCODE.encodeString(password_val);
         const output = JSON.stringify({
                 command: "login",
                 packet_id: sessionStorage.ajax_packet_id,
-                my_name: my_name_val,
-                password: password_val,
+                data: data,
                 });
         console.log("FabricRequestObject.loginRequest() output=" + output);
         this.httpXmtObj().transmitAjaxRequest(output); 
     };
 
     this.logoutRequest = function() {
+        const data = "1O" + this.linkObj().linkId();
         const output = JSON.stringify({
                 command: "logout",
                 time_stamp: sessionStorage.time_stamp,
-                link_id: this.linkObj().linkId(),
+                data: data,
                 });
         console.log("FabricRequestObject.logoutRequest() output=" + output);
         this.httpXmtObj().transmitAjaxRequest(output); 
      };
 
     this.getLinkDataRequest = function() {
+        const data = "1D" + this.linkObj().linkId();
         const output = JSON.stringify({
                 command: "get_link_data",
                 time_stamp: this.linkObj().timeStamp(),
-                link_id: this.linkObj().linkId(),
+                data: data,
                 });
         //console.log("FabricRequestObject.getLinkDataRequest() output=" + output);
         this.httpXmtObj().transmitAjaxRequest(output); 
     };
 
     this.getNameListRequest = function(name_list_tag_val) {
+        const data = "1N" + this.linkObj().linkId() + name_list_tag_val;
         const output = JSON.stringify({
                 command: "get_name_list",
                 time_stamp: this.linkObj().timeStamp(),
-                link_id: this.linkObj().linkId(),
-                name_list_tag: name_list_tag_val,
+                data: data,
                 });
         console.log("FabricRequestObject.getNameListRequest() output=" + output);
         this.httpXmtObj().transmitAjaxRequest(output); 
