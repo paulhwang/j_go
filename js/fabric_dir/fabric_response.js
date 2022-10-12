@@ -20,43 +20,42 @@ function FabricResponseObject(root_obj_val) {
 
     this.initSwitchTable = function() {
         this.responseSwitchTable_ = {
-            "register": this.registerResponse,
-            "login": this.loginResponse,
-            "logout": this.logoutResponse,
-            "get_link_data": this.getLinkDataResponse,
-            "get_name_list": this.getNameListResponse,
-            "setup_session": this.setupSessionResponse,
-            "setup_session2": this.setupSession2Response,
-            "setup_session3": this.setupSession3Response,
-            "put_session_data": this.putSessionDataResponse,
-            "get_session_data": this.getSessionDataResponse,
-            "mmw_read_data": this.datagramResponse,
+            'r': this.registerResponse,
+            'i': this.loginResponse,
+            'o': this.logoutResponse,
+            'd': this.getLinkDataResponse,
+            'n': this.getNameListResponse,
+            's': this.setupSessionResponse,
+            'y': this.setupSession2Response,
+            'z': this.setupSession3Response,
+            'p': this.putSessionDataResponse,
+            'g': this.getSessionDataResponse,
+            'm': this.datagramResponse,
         };
     };
 
-    this.parseFabricResponse = function(json_response_val) {
-        //console.log("FabricResponseObject.parseFabricResponse() json_response_val=" + json_response_val);
-        const response = JSON.parse(json_response_val);
+    this.parseFabricResponse = function(data_val) {
+        const command = data_val.charAt(0);
+        const data = data_val.slice(1);
 
-        if (response.command !== "get_link_data") {
-            console.log("FabricResponseObject.parseFabricResponse() command=" + response.command + " data=" + response.data);
+        if (command !== 'd') {
+            console.log("FabricResponseObject.parseFabricResponse() command=" + command + " data=" + data_val);
         }
 
-        const func = this.responseSwitchTable()[response.command];
+        const func = this.responseSwitchTable()[command];
         if (!func) {
-            console.log("FabricResponseObject.parseFabricResponse() bad_command=" + response.command);
+            console.log("FabricResponseObject.parseFabricResponse() bad_command=" + command);
             abend();
             return;
         }
 
         this.clearPendingAjaxRequestCommand();
 
-        const data = JSON.parse(response.data);
         func.bind(this)(data);
     };
 
     this.registerResponse = function(data_val) {
-        let data = data_val.data;
+        const data = data_val;
         let index = 0;
 
         const result = data.slice(index, index + FE_DEF.RESULT_SIZE());
@@ -77,7 +76,7 @@ function FabricResponseObject(root_obj_val) {
     };
 
     this.loginResponse = function(data_val) {
-        let data = data_val.data;
+        const data = data_val;
         let index = 0;
 
         const result = data.slice(index, index + FE_DEF.RESULT_SIZE());
@@ -113,7 +112,7 @@ function FabricResponseObject(root_obj_val) {
     };
 
     this.logoutResponse = function(data_val) {
-        let data = data_val.data;
+        const data = data_val;
         let index = 0;
 
         const result = data.slice(index, index + FE_DEF.RESULT_SIZE());
@@ -144,9 +143,7 @@ function FabricResponseObject(root_obj_val) {
     };
 
     this.getLinkDataResponse = function(data_val) {
-        //console.log("FabricResponseObject.getLinkDataResponse() data_val.data=" + data_val.data);
-
-        let data = data_val.data;
+        const data = data_val;
         let index = 0;
 
         const result = data.slice(index, index + FE_DEF.RESULT_SIZE());
@@ -218,7 +215,7 @@ function FabricResponseObject(root_obj_val) {
     };
 
     this.getNameListResponse = function(data_val) {
-        let data = data_val.data;
+        const data = data_val;
         let index = 0;
 
         const result = data.slice(index, index + FE_DEF.RESULT_SIZE());
@@ -227,12 +224,11 @@ function FabricResponseObject(root_obj_val) {
         const link_id = data.slice(index, index + FE_DEF.LINK_ID_SIZE());
         index += FE_DEF.LINK_ID_SIZE();
 
-        data = data.slice(index);
-
-        const name_list_tag = data.slice(0, FE_DEF.NAME_LIST_TAG_SIZE());
+        const name_list_tag = data.slice(index, index + FE_DEF.NAME_LIST_TAG_SIZE());
+        index += FE_DEF.NAME_LIST_TAG_SIZE();
         console.log("FabricResponseObject.getNameListResponse() name_list_tag=" + name_list_tag);
 
-        const name_list_data = data.slice(FE_DEF.NAME_LIST_TAG_SIZE());
+        const name_list_data = data.slice(index);
         console.log("FabricResponseObject.getNameListResponse() name_list_data=" + name_list_data);
 
         const name_list_array = JSON.parse("[" + name_list_data + "]");
@@ -244,7 +240,7 @@ function FabricResponseObject(root_obj_val) {
     };
 
     this.setupSessionResponse = function(data_val) {
-        let data = data_val.data;
+        const data = data_val;
         let index = 0;
 
         const result = data.slice(index, index + FE_DEF.RESULT_SIZE());
@@ -276,20 +272,22 @@ function FabricResponseObject(root_obj_val) {
     };
 
     this.setupSession2Response = function(data_val) {
+        const data = data_val;
         let index = 0;
-        const result = data_val.slice(index, index + FE_DEF.RESULT_SIZE());
+
+        const result = data.slice(index, index + FE_DEF.RESULT_SIZE());
         index += FE_DEF.RESULT_SIZE();
 
-        const link_id = data_val.slice(index, index + FE_DEF.LINK_ID_SIZE());
+        const link_id = data.slice(index, index + FE_DEF.LINK_ID_SIZE());
         index += FE_DEF.LINK_ID_SIZE();
 
-        const session_id = data_val.slice(index, index + FE_DEF.SESSION_ID_SIZE());
+        const session_id = data.slice(index, index + FE_DEF.SESSION_ID_SIZE());
         index += FE_DEF.SESSION_ID_SIZE();
 
-        const theme_type = data_val.charAt(index);
+        const theme_type = data.charAt(index);
         index++;
 
-        const theme_info = data_val.slice(index);
+        const theme_info = data.slice(index);
 
 
         if (result === FE_DEF.RESULT_SUCCEED()) {
@@ -305,16 +303,16 @@ function FabricResponseObject(root_obj_val) {
     };
 
     this.setupSession3Response = function(data_val) {
-        let data = data_val.data;
-        var index = 0;
+        const data = data_val;
+        let index = 0;
 
-        var result = data.slice(index, index + 2);
+        const result = data.slice(index, index + 2);
         index += 2;
 
-        var link_id = data.slice(index, index + FE_DEF.LINK_ID_SIZE());
+        const link_id = data.slice(index, index + FE_DEF.LINK_ID_SIZE());
         index += FE_DEF.LINK_ID_SIZE();
 
-        var session_id = data.slice(index, index + 8);
+        const session_id = data.slice(index, index + 8);
         index += FE_DEF.SESSION_ID_SIZE();
 
         const room_status = data[index++];
@@ -356,7 +354,7 @@ function FabricResponseObject(root_obj_val) {
     };
 
     this.putSessionDataResponse = function(data_val) {
-        let data = data_val.data;
+        const data = data_val;
         let index = 0;
 
         const result = data.slice(index, index + 2);
@@ -386,7 +384,7 @@ function FabricResponseObject(root_obj_val) {
     };
 
     this.getSessionDataResponse = function(data_val) {
-        let data = data_val.data;
+        const data = data_val;
         let index = 0;
 
         const result = data.slice(index, index + 2);
