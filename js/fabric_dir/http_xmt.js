@@ -3,7 +3,7 @@
   Written by Paul Hwang
 */
 
-function UPortClass(u_fabric_obj_val) {
+function HttpXmtClass(u_fabric_obj_val) {
     "use strict";
     this.init__ = function(u_fabric_obj_val) {
         this.uFabricObj_ = u_fabric_obj_val;
