@@ -7,8 +7,9 @@ var FE_DEF = new FE_DEF_OBJECT;
 
 function FE_DEF_OBJECT() {
     "use strict";
-    this.LINK_ID_SIZE    = () => 8;
-    this.SESSION_ID_SIZE = () => 8;
+    this.FABRIC_TIME_STAMP_SIZE = () => 10;
+    this.LINK_ID_SIZE           = () => 8;
+    this.SESSION_ID_SIZE        = () => 8;
 
     this.RESULT_SIZE     = () => 2;
 
