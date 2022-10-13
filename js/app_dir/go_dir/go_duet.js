@@ -7,7 +7,7 @@ function GoDuetRootObject() {
     "use strict";
     this.init__ = function() {
         this.fabricResponseObject_ = new DFabricObject(this);
-        this.fabricRequestObject_ = new FabricRequestObject(this);
+        this.fabricRequestObject_ = new UFabricObject(this);
         this.configObject_ = new GoConfigObject(this);
 
         this.setupHtmlInputFunc();

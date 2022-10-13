@@ -7,7 +7,7 @@ function GoBaseRootObject() {
     "use strict";
     this.init__ = function() {
         this.fabricResponseObject_ = new DFabricObject(this);
-        this.fabricRequestObject_ = new FabricRequestObject(this);
+        this.fabricRequestObject_ = new UFabricObject(this);
 
         this.htmlObject_ = new GoBaseHtmlObject(this);
         this.portObject_ = new GoBasePortObject(this);

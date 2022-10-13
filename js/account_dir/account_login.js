@@ -7,7 +7,7 @@ function AccountLoginObject() {
     "use strict";
     this.init__ = function() {
         this.fabricResponseObj_ = new DFabricObject(this);
-        this.fabricRequestObj_ = new FabricRequestObject(this);
+        this.fabricRequestObj_ = new UFabricObject(this);
 
         this.setupHtmlInputFunc();
         this.fabricResponseObject().setCallbackFunc(this.receiveFabricResponse, this);

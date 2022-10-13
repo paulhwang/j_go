@@ -3,7 +3,7 @@
   Written by Paul Hwang
 */
 
-function FabricRequestObject(root_obj_val) {
+function UFabricObject(root_obj_val) {
     "use strict";
      this.init__ = function(root_obj_val) {
         this.rootObj_ = root_obj_val;
