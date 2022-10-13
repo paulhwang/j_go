@@ -6,7 +6,7 @@
 function GoSoloRootObject() {
     "use strict";
     this.init__ = function() {
-        this.fabricResponseObj_ = new FabricResponseObject(this);
+        this.fabricResponseObj_ = new DFabricObject(this);
         this.fabricRequestObj_ = new FabricRequestObject(this);
         this.configObj_ = new GoConfigObject(this);
 
