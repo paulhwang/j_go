@@ -80,7 +80,7 @@ function GoConfigObject(root_val) {
     this.firstFiddleColor = () => this.firstFiddleColor_;
     this.myColor = () => this.myColor_;
     this.rootObj = () => this.rootObj_;
-    this.linkObj = () => this.rootObj().linkObject();
-    this.sessionObj = () => this.rootObj().sessionObject();
+    this.linkObj = () => this.rootObj().linkObj();
+    this.sessionObj = () => this.rootObj().sessionObj();
     this.init__(root_val);
 }

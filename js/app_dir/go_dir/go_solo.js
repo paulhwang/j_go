@@ -3,15 +3,14 @@
   Written by Paul Hwang
 */
 
-function GoSoloRootObject() {
+function GoSoloObject() {
     "use strict";
     this.init__ = function() {
-        this.fabricResponseObj_ = new DFabricObject(this);
-        this.fabricRequestObj_ = new UFabricObject(this);
+        this.fabricBaseObj_ = new FabricBaseObject(this);
         this.configObj_ = new GoConfigObject(this);
 
         this.setupHtmlInputFunc();
-        this.fabricResponseObject().setCallbackFunc(this.receiveFabricResponse, this);
+        this.dFabricObj().setCallbackFunc(this.receiveFabricResponse, this);
     };
 
     this.setupHtmlInputFunc = function() {
@@ -19,20 +18,20 @@ function GoSoloRootObject() {
         $(".config_section .config_button").on("click", function() {
             let board_size = $(".config_section .go_config_section .board_size").val();
             let theme_data = this0.configObj().encodeGoSoloConfig(board_size);
-            console.log("GoSoloHtmlObject.setupHtmlInputFun() board_size=" + board_size + " theme_data=" + theme_data);
-            this0.fabricRequestObject().setupSessionRequest(FE_DEF.THEME_IS_GO_GAME(), theme_data, FE_DEF.GROUP_MODE_SOLO(), "N/A");
+            console.log("GoSoloObject.setupHtmlInputFunc() board_size=" + board_size + " theme_data=" + theme_data);
+            this0.uFabricObj().setupSessionRequest(FE_DEF.THEME_IS_GO_GAME(), theme_data, FE_DEF.GROUP_MODE_SOLO(), "N/A");
         });
     };
 
     this.receiveFabricResponse = function(command_val, data_val) {
         if (command_val !== "get_link_data") {
-            console.log("GoPlayPortObject.receiveFabricResponse() command=" + command_val + " data=" + data_val);
+            console.log("GoSoloObject.receiveFabricResponse() command=" + command_val + " data=" + data_val);
         }
 
         if (command_val === "get_link_data") {
             if (data_val.pending_session3 != "N/A") {
-                console.log("GoSoloPortObject.getLinkDataResponse() pending_session3=" + data_val.pending_session3);
-                this.fabricRequestObject().setupSession3Request(data_val.pending_session3);
+                console.log("GoSoloObject.receiveFabricResponse() pending_session3=" + data_val.pending_session3);
+                this.uFabricObj().setupSession3Request(data_val.pending_session3);
             }
         }
 
@@ -43,12 +42,13 @@ function GoSoloRootObject() {
         else if (command_val === "get_link_data") {} else if (command_val === "get_name_list") {} else {console.log("bad command"); abend();}
     };
 
-    this.fabricResponseObject = () => this.fabricResponseObj_;
-    this.fabricRequestObject = () => this.fabricRequestObj_;
-    this.linkObj = () => this.fabricRequestObject().linkObj();
-    this.sessionObj = () => this.fabricRequestObject().sessionObj();
+    this.fabricBaseObj = () => this.fabricBaseObj_;
+    this.dFabricObj = () => this.fabricBaseObj().dFabricObj();
+    this.uFabricObj = () => this.fabricBaseObj().uFabricObj();
+    this.linkObj = () => this.uFabricObj().linkObj();
+    this.sessionObj = () => this.uFabricObj().sessionObj();
     this.configObj = () => this.configObj_;
     this.init__();
 };
 
-$(document).ready(() => {new GoSoloRootObject();});
+$(document).ready(() => {new GoSoloObject();});

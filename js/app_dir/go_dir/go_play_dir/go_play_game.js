@@ -91,7 +91,7 @@ function GoPlayGameObject(root_object_val) {
     this.configObject = () => this.rootObject().configObject();
     this.boardObject = () => this.rootObject().boardObject();
     this.portObject = () => this.rootObject().portObject();
-    this.linkObject = () => this.rootObject().linkObject();
-    this.sessionObject = () => this.rootObject().sessionObject();
+    this.linkObject = () => this.rootObject().linkObj();
+    this.sessionObject = () => this.rootObject().sessionObj();
     this.init__(root_object_val);
 };

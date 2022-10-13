@@ -6,8 +6,7 @@
 function GoPlayRootObject() {
     "use strict";
     this.init__ = function() {
-        this.fabricResponseObject_ = new DFabricObject(this);
-        this.fabricRequestObject_ = new UFabricObject(this);
+        this.fabricBaseObj_ = new FabricBaseObject(this);
 
         this.configObject_ = new GoConfigObject(this);
         this.configObject().decode();
@@ -21,10 +20,11 @@ function GoPlayRootObject() {
         this.uiDisplayObject_ = new GoPlayUiDisplayObject(this);
     };
 
-    this.fabricResponseObject = () => this.fabricResponseObject_;
-    this.fabricRequestObject = () => this.fabricRequestObject_;
-    this.linkObject = () => this.fabricRequestObject().linkObj();
-    this.sessionObject = () => this.fabricRequestObject().sessionObj();
+    this.fabricBaseObj = () => this.fabricBaseObj_;
+    this.dFabricObj = () => this.fabricBaseObj().dFabricObj();
+    this.uFabricObj = () => this.fabricBaseObj().uFabricObj();
+    this.linkObj = () => this.uFabricObj().linkObj();
+    this.sessionObj = () => this.uFabricObj().sessionObj();
     this.configObject = () => this.configObject_;
     this.boardObject = () => this.boardObject_;
     this.portObject = () => this.portObject_;

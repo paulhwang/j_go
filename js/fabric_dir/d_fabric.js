@@ -172,7 +172,7 @@ function DFabricObject(root_obj_val) {
                 let pending_data = remaining_data.slice(index, index + FE_DEF.SESSION_ID_SIZE());
                 index += FE_DEF.SESSION_ID_SIZE();
 
-                this.fabricRequestObj().getSessionDataRequest();
+                this.uFabricObj().getSessionDataRequest();
 
                 console.log("DFabricObject.getLinkDataResponse() pending_data=" + pending_data);
             }
@@ -186,7 +186,7 @@ function DFabricObject(root_obj_val) {
                 index += len;
 
                 const session_id = pending_session2.slice(0, FE_DEF.SESSION_ID_SIZE());
-                this.fabricRequestObj().setupSession2Request(session_id);
+                this.uFabricObj().setupSession2Request(session_id);
 
                 console.log("DFabricObject.getLinkDataResponse() pending_session2=" + pending_session2);
             }
@@ -199,7 +199,7 @@ function DFabricObject(root_obj_val) {
                 let pending_session3 = remaining_data.slice(index, index + len);
                 index += len;
 
-                this.fabricRequestObj().setupSession3Request(pending_session3);
+                this.uFabricObj().setupSession3Request(pending_session3);
 
                 console.log("DFabricObject.getLinkDataResponse() pending_session3=" + pending_session3);
             }
@@ -415,11 +415,11 @@ function DFabricObject(root_obj_val) {
 
     this.rootObj = () => this.rootObj_;
     this.responseSwitchTable = () => this.responseSwitchTable_;
-    this.fabricRequestObj = () => this.rootObj().fabricRequestObject();
-    this.httpXmtObj = () => this.fabricRequestObj().httpXmtObj();
-    this.linkObj = () => this.fabricRequestObj().linkObj();
+    this.uFabricObj = () => this.rootObj().uFabricObj();
+    this.httpXmtObj = () => this.uFabricObj().httpXmtObj();
+    this.linkObj = () => this.uFabricObj().linkObj();
     this.httpReqObj = () => this.httpReqObj_;
-    this.sessionObj = () => this.fabricRequestObj().sessionObj();
+    this.sessionObj = () => this.uFabricObj().sessionObj();
     this.callbackFunc = () => this.callbackFunc_;
     this.callbackObj = () => this.callbackObj_;
     this.init__(root_obj_val);

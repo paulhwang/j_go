@@ -7,7 +7,7 @@ function GoPlayPortObject(root_val) {
     "use strict";
     this.init__ = function(root_val) {
         this.rootObject_ = root_val;
-        this.fabricResponseObject().setCallbackFunc(this.receiveFabricResponse, this);
+        this.dFabricObj().setCallbackFunc(this.receiveFabricResponse, this);
     };
 
     this.transmitMoveData              = function(move_val) {this.transmitGameData(GO_DEF.GO_PROTOCOL_MOVE_COMMAND() + move_val.encodeMove());};
@@ -28,7 +28,7 @@ function GoPlayPortObject(root_val) {
 
     this.transmitData = function(data_val) {
         console.log("GoPlayPortObject.transmitData() data_val=" + data_val);
-        this.fabricRequestObject().putSessionDataRequest(data_val);
+        this.uFabricObj().putSessionDataRequest(data_val);
     };
 
     this.receiveFabricResponse = function(command_val, data_val) {
@@ -62,9 +62,9 @@ function GoPlayPortObject(root_val) {
     };
 
     this.rootObject = () => this.rootObject_;
-    this.fabricSessionPutGetObject = () => this.rootObject().fabricSessionPutGetObject();
-    this.fabricRequestObject = () => this.rootObject().fabricRequestObject();
-    this.fabricResponseObject = () => this.rootObject().fabricResponseObject();
+    //this.fabricSessionPutGetObject = () => this.rootObject().fabricSessionPutGetObject();
+    this.uFabricObj = () => this.rootObject().uFabricObj();
+    this.dFabricObj = () => this.rootObject().dFabricObj();
     this.configObject = () => this.rootObject().configObject();
     this.gameObject = () => this.rootObject().gameObject();
     this.uiMouseObject = () => this.rootObject().uiMouseObject();

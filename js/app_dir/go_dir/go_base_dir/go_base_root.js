@@ -6,17 +6,17 @@
 function GoBaseRootObject() {
     "use strict";
     this.init__ = function() {
-        this.fabricResponseObject_ = new DFabricObject(this);
-        this.fabricRequestObject_ = new UFabricObject(this);
+        this.fabricBaseObj_ = new FabricBaseObject(this);
 
         this.htmlObject_ = new GoBaseHtmlObject(this);
         this.portObject_ = new GoBasePortObject(this);
     };
 
-    this.fabricResponseObject = () => this.fabricResponseObject_;
-    this.fabricRequestObject = () => this.fabricRequestObject_;
-    this.linkObject = () => this.fabricRequestObject().linkObj();
-    this.sessionObject = () => this.fabricRequestObject().sessionObj();
+    this.fabricBaseObj = () => this.fabricBaseObj_;
+    this.dFabricObj = () => this.fabricBaseObj().dFabricObj();
+    this.uFabricObj = () => this.fabricBaseObj().uFabricObj();
+    this.linkObj = () => this.uFabricObj().linkObj();
+    this.sessionObj = () => this.uFabricObj().sessionObj();
     this.htmlObject = () => this.htmlObject_;
     this.portObject = () => this.portObject_;
     this.init__();

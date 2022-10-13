@@ -88,8 +88,8 @@ function UFabricObject(root_obj_val) {
     this.rootObj = () => this.rootObj_;
     this.linkObj = () => this.linkObj_;
     this.sessionObj = () => this.sessionObj_;
-    this.fabricResponseObject = () => this.rootObj().fabricResponseObject();
-    this.httpReqObj = () => this.fabricResponseObject().httpReqObj();
+    this.dFabricObj = () => this.rootObj().dFabricObj();
+    this.httpReqObj = () => this.dFabricObj().httpReqObj();
     this.httpXmtObj = () => this.httpXmtObj_;
     this.init__(root_obj_val);
 };

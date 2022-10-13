@@ -11,10 +11,10 @@ function FabricBaseObject(root_obj_val) {
         this.uFabricObj_ = new UFabricObject(this);
     };
 
-    this.DFabricObj = () => this.dFabricObj_;
-    this.UFabricObj = () => this.uFabricObj_;
-    this.linkObj = () => this.UFabricObj().linkObj();
-    this.sessionObj = () => this.UFabricObj().sessionObj();
+    this.dFabricObj = () => this.dFabricObj_;
+    this.uFabricObj = () => this.uFabricObj_;
+    this.linkObj = () => this.uFabricObj().linkObj();
+    this.sessionObj = () => this.uFabricObj().sessionObj();
     this.configObj = () => this.configObj_;
     this.init__(root_obj_val);
 };
