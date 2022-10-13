@@ -83,9 +83,9 @@ function DFabricObject(root_obj_val) {
         const link_id = data.slice(index, index + FE_DEF.LINK_ID_SIZE());
         index += FE_DEF.LINK_ID_SIZE();
 
-        const time_stamp = data.slice(index, index + FE_DEF.FABRIC_TIME_STAMP_SIZE());
+        const fabric_time_stamp = data.slice(index, index + FE_DEF.FABRIC_TIME_STAMP_SIZE());
         index += FE_DEF.FABRIC_TIME_STAMP_SIZE();
-        //console.log("time_stamp=" + time_stamp);
+        //console.log("fabric_time_stamp=" + fabric_time_stamp);
 
         const encoded_my_name = data.slice(index);
         const encoded_my_name_length = ENCODE.decodeStringGetLength(encoded_my_name);
@@ -93,10 +93,14 @@ function DFabricObject(root_obj_val) {
         index += encoded_my_name_length;
         //console.log("my_name=" + my_name);
 
+        const node_time_stamp = data.slice(index, index + FE_DEF.FABRIC_TIME_STAMP_SIZE());
+        index += FE_DEF.FABRIC_TIME_STAMP_SIZE();
+        //console.log("node_time_stamp=" + node_time_stamp);
+
         if (result === FE_DEF.RESULT_SUCCEED()) {
             console.log("succeed");
             console.log("link_id=", link_id);
-            this.linkObj().setLinkInfoIntoStorage(link_id, my_name, time_stamp);
+            this.linkObj().setLinkInfoIntoStorage(link_id, my_name, fabric_time_stamp, node_time_stamp);
             window.history.go(-1);
         }
         else if (result === FE_DEF.RESULT_PASSWORD_NOT_MATCH()) {

@@ -31,7 +31,7 @@ function UPortClass(u_fabric_obj_val) {
         }
 
         if ((command !== 'R') && (command !== "I")) {
-            data = this.linkObj().timeStamp() + data;
+            data = this.linkObj().nodeTimeStamp() + this.linkObj().fabricTimeStamp() + data;
         }
 
         if (command !== 'D') {
