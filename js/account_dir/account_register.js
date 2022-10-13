@@ -6,11 +6,10 @@
 function AccountRegisterObject() {
     "use strict";
     this.init__ = function() {
-        this.fabricResponseObj_ = new DFabricObject(this);
-        this.fabricRequestObj_ = new UFabricObject(this);
+        this.fabricBaseObj_ = new FabricBaseObject(this);
 
         this.setupHtmlInputFunc();
-        this.fabricResponseObject().setCallbackFunc(this.receiveFabricResponse, this);
+        this.dFabricObj().setCallbackFunc(this.receiveFabricResponse, this);
     };
 
     this.setupHtmlInputFunc = function() {
@@ -21,7 +20,7 @@ function AccountRegisterObject() {
             let email = $(".register_section .register_email").val();
             if (my_name !== null) {
                 console.log("AccountRegisterObject.setupHtmlInputFunc() my_name=" + my_name + " email=" + email);
-                this0.fabricRequestObject().registerRequest(my_name, password, email);
+                this0.uFabricObj().registerRequest(my_name, password, email);
             }
         });
     };
@@ -29,10 +28,11 @@ function AccountRegisterObject() {
     this.receiveFabricResponse = function(command_val, data_val) {
     };
 
-    this.fabricResponseObject = () => this.fabricResponseObj_;
-    this.fabricRequestObject = () => this.fabricRequestObj_;
-    this.linkObj = () => this.fabricRequestObject().linkObj();
-    this.sessionObj = () => this.fabricRequestObject().sessionObj();
+    this.fabricBaseObj = () => this.fabricBaseObj_;
+    this.dFabricObj = () => this.fabricBaseObj().dFabricObj();
+    this.uFabricObj = () => this.fabricBaseObj().uFabricObj();
+    this.linkObj = () => this.uFabricObj().linkObj();
+    this.sessionObj = () => this.uFabricObj().sessionObj();
     this.init__();
 }
 

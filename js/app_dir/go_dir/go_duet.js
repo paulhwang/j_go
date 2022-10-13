@@ -6,12 +6,11 @@
 function GoDuetRootObject() {
     "use strict";
     this.init__ = function() {
-        this.fabricResponseObject_ = new DFabricObject(this);
-        this.fabricRequestObject_ = new UFabricObject(this);
+        this.fabricBaseObj_ = new FabricBaseObject(this);
         this.configObject_ = new GoConfigObject(this);
 
         this.setupHtmlInputFunc();
-        this.fabricResponseObject().setCallbackFunc(this.receiveFabricResponse, this);
+        this.dFabricObj().setCallbackFunc(this.receiveFabricResponse, this);
     };
 
     this.setupHtmlInputFunc = function() {
@@ -24,14 +23,14 @@ function GoDuetRootObject() {
             let komi = $(".config_section .go_config_section .komi").val();
             let handicap = $(".config_section .go_config_section .handicap").val();
             const theme_data = this0.configObject().encodeGoConfig(board_size, handicap, komi, initiator_color);
-            console.log("GoDuetHtmlObject.setupHtmlInputFun() board_size=" + board_size + " initiator_color=" + initiator_color + " komi=" + komi + " handicap=" + handicap + " myName=" + this0.linkObject().myName() + " second_fiddle=" + second_fiddle + " theme_data=" + theme_data);
-            this0.fabricRequestObject().setupSessionRequest(FE_DEF.THEME_IS_GO_GAME(), theme_data, FE_DEF.GROUP_MODE_DUET(), second_fiddle);
+            console.log("GoDuetHtmlObject.setupHtmlInputFun() board_size=" + board_size + " initiator_color=" + initiator_color + " komi=" + komi + " handicap=" + handicap + " myName=" + this0.linkObj().myName() + " second_fiddle=" + second_fiddle + " theme_data=" + theme_data);
+            this0.uFabricObj().setupSessionRequest(FE_DEF.THEME_IS_GO_GAME(), theme_data, FE_DEF.GROUP_MODE_DUET(), second_fiddle);
         });
     };
 
     this.renderNameList = function() {
-        for (let i = 0; i < this.linkObject().nameListLength(); i++) {
-            $('.peer_name_paragraph select').append($('<option>', {value:this.linkObject().nameListElement(i), text:this.linkObject().nameListElement(i)}));
+        for (let i = 0; i < this.linkObj().nameListLength(); i++) {
+            $('.peer_name_paragraph select').append($('<option>', {value:this.linkObj().nameListElement(i), text:this.linkObj().nameListElement(i)}));
         }
     };
 
@@ -66,10 +65,11 @@ function GoDuetRootObject() {
         else if (command_val === "get_link_data") {} else if (command_val === "get_name_list") {} else {console.log("bad command"); abend();}
     };
 
-    this.fabricResponseObject = () => this.fabricResponseObject_;
-    this.fabricRequestObject = () => this.fabricRequestObject_;
-    this.linkObject = () => this.fabricRequestObject().linkObj();
-    this.sessionObject = () => this.fabricRequestObject().sessionObj();
+    this.fabricBaseObj = () => this.fabricBaseObj_;
+    this.dFabricObj = () => this.fabricBaseObj().dFabricObj();
+    this.uFabricObj = () => this.fabricBaseObj().uFabricObj();
+    this.linkObj = () => this.uFabricObj().linkObj();
+    this.sessionObj = () => this.uFabricObj().sessionObj();
     this.htmlObject = () => this.htmlObject_;
     this.portObject = () => this.portObject_;
     this.configObject = () => this.configObject_;

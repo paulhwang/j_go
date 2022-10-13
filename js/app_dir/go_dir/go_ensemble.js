@@ -6,12 +6,11 @@
 function GoEnsembleRootObject() {
     "use strict";
     this.init__ = function() {
-        this.fabricResponseObject_ = new DFabricObject(this);
-        this.fabricRequestObject_ = new UFabricObject(this);
+        this.fabricBaseObj_ = new FabricBaseObject(this);
         this.configObject_ = new GoConfigObject(this);
 
         this.setupHtmlInputFunc();
-        this.fabricResponseObject().setCallbackFunc(this.receiveFabricResponse, this);
+        this.dFabricObj().setCallbackFunc(this.receiveFabricResponse, this);
     };
 
     this.setupHtmlInputFunc = function() {
@@ -23,8 +22,8 @@ function GoEnsembleRootObject() {
             let komi = $(".config_section .go_config_section .komi").val();
             let handicap = $(".config_section .go_config_section .handicap").val();
             let theme_data = this0.configObject().encodeGoConfig(board_size, handicap, komi, initiator_color);
-            console.log("GoEnsembleHtmlObject.setupHtmlInputFun() board_size=" + board_size + " initiator_color=" + initiator_color + " komi=" + komi + " handicap=" + handicap + " myName=" + this0.linkObject().myName() + " second_fiddle=" + second_fiddle + " theme_data=" + theme_data);
-            this0.fabricRequestObject().setupSessionRequest(FE_DEF.THEME_IS_GO_GAME(), theme_data, FE_DEF.GROUP_MODE_ENSEMBLE(), "N/A");
+            console.log("GoEnsembleHtmlObject.setupHtmlInputFun() board_size=" + board_size + " initiator_color=" + initiator_color + " komi=" + komi + " handicap=" + handicap + " myName=" + this0.linkObj().myName() + " second_fiddle=" + second_fiddle + " theme_data=" + theme_data);
+            this0.uFabricObj().setupSessionRequest(FE_DEF.THEME_IS_GO_GAME(), theme_data, FE_DEF.GROUP_MODE_ENSEMBLE(), "N/A");
         });
     };
 
@@ -36,7 +35,7 @@ function GoEnsembleRootObject() {
         if (command_val === "get_link_data") {
             if (data_val.pending_session3 != "N/A") {
                 console.log("GoEnsemblePortObject.getLinkDataResponse() pending_session3=" + data_val.pending_session3);
-                this.fabricRequestObj().setupSession3Request(data_val.pending_session3);
+                this.uFabricObj().setupSession3Request(data_val.pending_session3);
             }
         }
 
@@ -47,10 +46,11 @@ function GoEnsembleRootObject() {
         else if (command_val === "get_link_data") {} else if (command_val === "get_name_list") {} else {console.log("bad command"); abend();}
     };
 
-    this.fabricResponseObject = () => this.fabricResponseObject_;
-    this.fabricRequestObject = () => this.fabricRequestObject_;
-    this.linkObject = () => this.fabricRequestObject().linkObj();
-    this.sessionObject = () => this.fabricRequestObject().sessionObj();
+    this.fabricBaseObj = () => this.fabricBaseObj_;
+    this.dFabricObj = () => this.fabricBaseObj().dFabricObj();
+    this.uFabricObj = () => this.fabricBaseObj().uFabricObj();
+    this.linkObj = () => this.uFabricObj().linkObj();
+    this.sessionObj = () => this.uFabricObj().sessionObj();
     this.htmlObject = () => this.htmlObject_;
     this.portObject = () => this.portObject_;
     this.configObject = () => this.configObject_;
