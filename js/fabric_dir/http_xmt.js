@@ -3,10 +3,10 @@
   Written by Paul Hwang
 */
 
-function HttpXmtClass(fabric_request_obj_val) {
+function UPortClass(u_fabric_obj_val) {
     "use strict";
-    this.init__ = function(fabric_request_obj_val) {
-        this.fabricRequestObj_ = fabric_request_obj_val;
+    this.init__ = function(u_fabric_obj_val) {
+        this.uFabricObj_ = u_fabric_obj_val;
         this.transmitQueueObj_ = new QueueClass();
         this.pendingSessionDataQueueObj_ = new QueueClass();
         this.clearPendingAjaxRequestCommand();
@@ -64,10 +64,10 @@ function HttpXmtClass(fabric_request_obj_val) {
                 //return;
             }
             if (this0.linkObj().serverNameListTag() !== this0.linkObj().nameListTag()) {
-                this0.fabricRequestObj().getNameListRequest();
+                this0.uFabricObj().getNameListRequest();
                 return;
             }
-            this0.fabricRequestObj().getLinkDataRequest();
+            this0.uFabricObj().getLinkDataRequest();
         }, 100, link_val);
     };
 
@@ -86,10 +86,10 @@ function HttpXmtClass(fabric_request_obj_val) {
         this.thePendingAjaxRequestCommand = command_val;
     };
 
-    this.fabricRequestObj = () => this.fabricRequestObj_;
-    this.linkObj = () => this.fabricRequestObj().linkObj();
-    this.httpReqObj = () => this.fabricRequestObj().httpReqObj();
+    this.uFabricObj = () => this.uFabricObj_;
+    this.linkObj = () => this.uFabricObj().linkObj();
+    this.httpReqObj = () => this.uFabricObj().httpReqObj();
     this.transmitQueueObj = () => this.transmitQueueObj_;
     this.pendingSessionDataQueueObj = () => this.pendingSessionDataQueueObj_;
-    this.init__(fabric_request_obj_val);
+    this.init__(u_fabric_obj_val);
 }

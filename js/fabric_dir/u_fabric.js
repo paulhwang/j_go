@@ -8,7 +8,7 @@ function UFabricObject(root_obj_val) {
      this.init__ = function(root_obj_val) {
         this.rootObj_ = root_obj_val;
 
-        this.httpXmtObj_ = new HttpXmtClass(this);
+        this.httpXmtObj_ = new UPortClass(this);
 
         this.linkObj_ = new FabricLinkObject();
 
