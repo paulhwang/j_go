@@ -83,14 +83,15 @@ function FabricResponseObject(root_obj_val) {
         const link_id = data.slice(index, index + FE_DEF.LINK_ID_SIZE());
         index += FE_DEF.LINK_ID_SIZE();
 
+        const time_stamp = data.slice(index, index + FE_DEF.FABRIC_TIME_STAMP_SIZE());
+        index += FE_DEF.FABRIC_TIME_STAMP_SIZE();
+        //console.log("time_stamp=" + time_stamp);
+
         const encoded_my_name = data.slice(index);
         const encoded_my_name_length = ENCODE.decodeStringGetLength(encoded_my_name);
         const my_name = ENCODE.decodeString(encoded_my_name);
         index += encoded_my_name_length;
         //console.log("my_name=" + my_name);
-
-        const time_stamp = data.slice(index);
-        console.log("time_stamp=" + time_stamp);
 
         if (result === FE_DEF.RESULT_SUCCEED()) {
             console.log("succeed");
