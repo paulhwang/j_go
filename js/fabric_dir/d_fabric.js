@@ -47,7 +47,7 @@ function DFabricObject(root_obj_val) {
             return;
         }
 
-        this.clearPendingAjaxRequestCommand();
+        this.uPortObj().clearPendingAjaxRequestCommand();
 
         func.bind(this)(data);
     };
@@ -409,14 +409,10 @@ function DFabricObject(root_obj_val) {
     this.datagramResponse = function(json_response_val) {
     };
 
-    this.clearPendingAjaxRequestCommand = function() {
-        this.httpXmtObj().clearPendingAjaxRequestCommand();
-    };
-
     this.rootObj = () => this.rootObj_;
     this.responseSwitchTable = () => this.responseSwitchTable_;
     this.uFabricObj = () => this.rootObj().uFabricObj();
-    this.httpXmtObj = () => this.uFabricObj().httpXmtObj();
+    this.uPortObj = () => this.uFabricObj().uPortObj();
     this.linkObj = () => this.uFabricObj().linkObj();
     this.httpReqObj = () => this.httpReqObj_;
     this.sessionObj = () => this.uFabricObj().sessionObj();
