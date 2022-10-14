@@ -39,6 +39,10 @@ function HttpXmtClass(u_fabric_obj_val) {
     };
 
     this.startWatchDog = function(link_val) {
+        if (this.watchDogId_ !== null) {
+            //abend();
+        }
+
         const this0 = this;
         this.watchDogId_ = setInterval(function (link_val) {
             if (this0.pendingAjaxRequestCommandExist()) {
@@ -65,6 +69,13 @@ function HttpXmtClass(u_fabric_obj_val) {
             }
             this0.uFabricObj().getLinkDataRequest();
         }, 100, link_val);
+    };
+
+    this.stopWatchDog = function() {
+        if (this.watchDogId() !== null) {
+            clearInterval(this.watchDogId());
+            this.watchDogId_ = null;
+        }
     };
 
     this.pendingAjaxRequestCommand = () => this.thePendingAjaxRequestCommand;
