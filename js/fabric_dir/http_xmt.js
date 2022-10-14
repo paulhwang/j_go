@@ -39,8 +39,8 @@ function HttpXmtClass(u_fabric_obj_val) {
     };
 
     this.startWatchDog = function(link_val) {
-        if (this.watchDogId_ !== null) {
-            //abend();
+        if (this.rootObj().validValue(this.watchDogId())) {
+            abend();
         }
 
         const this0 = this;
@@ -94,6 +94,7 @@ function HttpXmtClass(u_fabric_obj_val) {
     };
 
     this.uFabricObj = () => this.uFabricObj_;
+    this.rootObj = () => this.uFabricObj().rootObj();
     this.linkObj = () => this.uFabricObj().linkObj();
     this.httpReqObj = () => this.uFabricObj().httpReqObj();
     this.transmitQueueObj = () => this.transmitQueueObj_;

@@ -11,6 +11,7 @@ function FabricBaseObject(root_obj_val) {
         this.uFabricObj_ = new UFabricObject(this);
     };
 
+    this.validValue = (val) => {return (val !== null) && (val !== "null") && (val !== undefined);};
     this.validStorage = (val) => {const v = sessionStorage.getItem(val); return (v !== null) && (v !== "null") && (v !== undefined);};
     this.dFabricObj = () => this.dFabricObj_;
     this.uFabricObj = () => this.uFabricObj_;
