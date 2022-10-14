@@ -101,6 +101,7 @@ function DFabricObject(root_obj_val) {
             console.log("succeed");
             console.log("link_id=", link_id);
             this.linkObj().setLinkInfoIntoStorage(link_id, my_name, fabric_time_stamp, node_time_stamp);
+            this.linkObj().getLinkInfoFromStorage();
             window.history.go(-1);
         }
         else if (result === FE_DEF.RESULT_PASSWORD_NOT_MATCH()) {

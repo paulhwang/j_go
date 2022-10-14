@@ -51,19 +51,6 @@ function FabricLinkObject() {
         sessionStorage.setItem("node_time_stamp", node_time_stamp_val);
     };
 
-    this.alreadyLogin = () => {
-        console.log("this.linkId()=" + this.linkId());
-        if ((this.linkId() === null) || (this.linkId() === "null") || (this.linkId() === undefined)) {
-            console.log("is null");
-            return false;
-        }
-        else {
-            console.log("not null");
-            return true;
-        }
-
-    }
-
     this.linkId = () => this.linkId_;
     this.myName = () => this.myName_;
     this.fabricTimeStamp = () => this.fabricTimeStamp_;
@@ -78,5 +65,6 @@ function FabricLinkObject() {
     this.nameListLength = () => this.nameList().length;
     this.nameListElement = (index_val) => {return this.nameList()[index_val];};
     this.setNameListElement = (index_val, data_val) => {this.nameList()[index_val] = data_val;};
+
     this.init__();
 };

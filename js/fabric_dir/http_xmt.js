@@ -26,16 +26,12 @@ function HttpXmtClass(u_fabric_obj_val) {
         let data = output_val;
         const command = data.charAt(1);
 
-        if (command !== 'D') {
-            console.log("111HttpXmtClass.xmtAjaxRequest() data=" + data);
-        }
-
         if ((command !== 'R') && (command !== "I")) {
             data = this.linkObj().nodeTimeStamp() + this.linkObj().fabricTimeStamp() + data;
         }
 
         if (command !== 'D') {
-            console.log("222HttpXmtClass.xmtAjaxRequest() data=" + data);
+            console.log("HttpXmtClass.xmtAjaxRequest() data=" + data);
         }
 
         this.setPendingAjaxRequestCommand(command);

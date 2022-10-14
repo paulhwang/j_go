@@ -8,8 +8,8 @@ function UFabricObject(root_obj_val) {
      this.init__ = function(root_obj_val) {
         this.rootObj_ = root_obj_val;
         this.httpXmtObj_ = new HttpXmtClass(this);
-        this.linkObj_ = new FabricLinkObject();
 
+        this.linkObj_ = new FabricLinkObject();
         if (sessionStorage.getItem("link_id") !== null) {
             this.linkObj().getLinkInfoFromStorage();
             this.linkObj().printLinkInfo();
@@ -20,9 +20,7 @@ function UFabricObject(root_obj_val) {
                 this.sessionObj().printSessionInfo();
             }
 
-            if (this.linkObj().alreadyLogin()) {
-                this.httpXmtObj().startWatchDog();
-            }
+            this.httpXmtObj().startWatchDog();
          }
    };
 
