@@ -3,7 +3,7 @@
   Written by Paul Hwang
 */
 
-function FabricLinkObject() {
+function LinkObject() {
     "use strict";
     this.init__ = function() {
         this.nameList_ = [];
@@ -14,34 +14,34 @@ function FabricLinkObject() {
     this.getLinkInfoFromStorage = function() {
         this.linkId_ = sessionStorage.getItem("link_id");
         if (this.linkId_ === null) {
-            console.log("FabricLinkObject.getLinkInfoFromStorage() null link_id");
+            console.log("LinkObject.getLinkInfoFromStorage() null link_id");
             abend();
         }
 
         this.myName_ = sessionStorage.getItem("my_name");
         if (this.myName_ === null) {
-            console.log("FabricLinkObject.getLinkInfoFromStorage() null my_name");
+            console.log("LinkObject.getLinkInfoFromStorage() null my_name");
             abend();
         }
 
         this.fabricTimeStamp_ = sessionStorage.getItem("fabric_time_stamp");
         if (this.fabricTimeStamp_ === null) {
-            console.log("FabricLinkObject.getLinkInfoFromStorage() null fabric_time_stamp");
+            console.log("LinkObject.getLinkInfoFromStorage() null fabric_time_stamp");
             abend();
         }
 
         this.nodeTimeStamp_ = sessionStorage.getItem("node_time_stamp");
         if (this.nodeTimeStamp_ === null) {
-            console.log("FabricLinkObject.getLinkInfoFromStorage() null node_time_stamp");
+            console.log("LinkObject.getLinkInfoFromStorage() null node_time_stamp");
             abend();
         }
     };
 
     this.printLinkInfo = function() {
-        console.log("FabricLinkObject.printLinkInfo() link_id=" + this.linkId());
-        console.log("FabricLinkObject.printLinkInfo() my_name=" + this.myName());
-        console.log("FabricLinkObject.printLinkInfo() fabric_time_stamp=" + this.fabricTimeStamp());
-        console.log("FabricLinkObject.printLinkInfo() node_time_stamp=" + this.nodeTimeStamp());
+        console.log("LinkObject.printLinkInfo() link_id=" + this.linkId());
+        console.log("LinkObject.printLinkInfo() my_name=" + this.myName());
+        console.log("LinkObject.printLinkInfo() fabric_time_stamp=" + this.fabricTimeStamp());
+        console.log("LinkObject.printLinkInfo() node_time_stamp=" + this.nodeTimeStamp());
     }
 
     this.setLinkInfoIntoStorage = function(link_id_val, my_name_val, fabric_time_stamp_val, node_time_stamp_val) {
