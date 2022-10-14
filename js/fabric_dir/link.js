@@ -24,6 +24,7 @@ function LinkObject(root_obj_val) {
     };
 
     this.getLinkInfoFromStorage = function() {
+        /*
         this.linkId_ = sessionStorage.getItem("link_id");
         if (this.linkId_ === null) {
             console.log("LinkObject.getLinkInfoFromStorage() null link_id");
@@ -47,6 +48,7 @@ function LinkObject(root_obj_val) {
             console.log("LinkObject.getLinkInfoFromStorage() null node_time_stamp");
             abend();
         }
+        */
     };
 
     this.printLinkInfo = function() {
@@ -64,6 +66,10 @@ function LinkObject(root_obj_val) {
     };
 
     this.removeLinkInfoFromStorage = function() {
+        if (this.sessionObj() !== null) {
+            this.sessionObj().removeSessionInfoFromStorage();
+        }
+
         sessionStorage.removeItem("link_id");
         sessionStorage.removeItem("my_name");
         sessionStorage.removeItem("fabric_time_stamp");
@@ -76,10 +82,10 @@ function LinkObject(root_obj_val) {
 
     this.rootObj = () => this.rootObj_;
     this.sessionObj = () => this.sessionObj_;
-    this.linkId = () => this.linkId_;
-    this.myName = () => this.myName_;
-    this.fabricTimeStamp = () => this.fabricTimeStamp_;
-    this.nodeTimeStamp = () => this.nodeTimeStamp_;
+    this.linkId = () => sessionStorage.getItem("link_id");
+    this.myName = () => sessionStorage.getItem("my_name");
+    this.fabricTimeStamp = () => sessionStorage.getItem("fabric_time_stamp");
+    this.nodeTimeStamp = () => sessionStorage.getItem("node_time_stamp");
 
     this.nameListTag = () => this.nameListTag_;
     this.setNameListTag = (val) => {this.nameListTag_ = val;};

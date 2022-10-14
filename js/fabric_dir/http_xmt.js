@@ -5,14 +5,14 @@
 
 function HttpXmtClass(u_fabric_obj_val) {
     "use strict";
-    this.init__ = function(u_fabric_obj_val) {
+    this.init__ = (u_fabric_obj_val) => {
         this.uFabricObj_ = u_fabric_obj_val;
         this.transmitQueueObj_ = new QueueClass();
         this.pendingSessionDataQueueObj_ = new QueueClass();
         this.clearPendingAjaxRequestCommand();
     };
 
-    this.transmitAjaxRequest = function(output_val) {
+    this.transmitAjaxRequest = (output_val) => {
         if (this.pendingAjaxRequestCommandExist()) {
             console.log("HttpXmtClass.transmitAjaxRequest() enqueue " + output_val);  
             console.log("HttpXmtClass.transmitAjaxRequest() pending_command " + this.pendingAjaxRequestCommand());
@@ -22,12 +22,33 @@ function HttpXmtClass(u_fabric_obj_val) {
         this.xmtAjaxRequest(output_val); 
     };
 
-    this.xmtAjaxRequest = function (output_val) {
+    this.xmtAjaxRequest = (output_val) => {
         let data = output_val;
         const command = data.charAt(1);
 
+        if (command !== 'D') {
+            console.log("HttpXmtClass.xmtAjaxRequest() data=" + data);
+        }
+
         if ((command !== 'R') && (command !== "I")) {
-            data = this.linkObj().nodeTimeStamp() + this.linkObj().fabricTimeStamp() + data;
+            if (command === 'O') {
+                data = this.timeStampsForLogout() + data;
+            }
+            else {
+                if (!this.rootObj().validValue(this.linkObj().nodeTimeStamp())) {
+                    console.log("HttpXmtClass.xmtAjaxRequest() data=" + data);
+                    console.log("HttpXmtClass.xmtAjaxRequest() invalid nodeTimeStamp=" + this.linkObj().nodeTimeStamp());
+                    abend();
+                }
+
+                if (!this.rootObj().validValue(this.linkObj().fabricTimeStamp())) {
+                    console.log("HttpXmtClass.xmtAjaxRequest() data=" + data);
+                    console.log("HttpXmtClass.xmtAjaxRequest() invalid fabricTimeStamp" + this.linkObj().fabricTimeStamp());
+                    abend();
+                }
+
+                data = this.linkObj().nodeTimeStamp() + this.linkObj().fabricTimeStamp() + data;
+            }
         }
 
         if (command !== 'D') {
@@ -38,7 +59,7 @@ function HttpXmtClass(u_fabric_obj_val) {
         this.httpReqObj().sendAjaxRequest(data); 
     };
 
-    this.startWatchDog = function(link_val) {
+    this.startWatchDog = (link_val) => {
         if (this.rootObj().validValue(this.watchDogId())) {
             abend();
         }
@@ -71,7 +92,7 @@ function HttpXmtClass(u_fabric_obj_val) {
         }, 100, link_val);
     };
 
-    this.stopWatchDog = function() {
+    this.stopWatchDog = () => {
         if (this.watchDogId() !== null) {
             clearInterval(this.watchDogId());
             this.watchDogId_ = null;
@@ -80,12 +101,9 @@ function HttpXmtClass(u_fabric_obj_val) {
 
     this.pendingAjaxRequestCommand = () => this.thePendingAjaxRequestCommand;
     this.pendingAjaxRequestCommandExist = () => (this.pendingAjaxRequestCommand() !== "");
+    this.clearPendingAjaxRequestCommand = () => {this.thePendingAjaxRequestCommand = "";};
 
-    this.clearPendingAjaxRequestCommand = function() {
-        this.thePendingAjaxRequestCommand = "";
-    };
-
-    this.setPendingAjaxRequestCommand = function (command_val) {
+    this.setPendingAjaxRequestCommand = (command_val) => {
         if (this.pendingAjaxRequestCommand()) {
             console.log("HttpXmtClass.setPendingAjaxRequestCommand() old=" + this.pendingAjaxRequestCommand() + " new=" + command_val);
             abend();
@@ -100,5 +118,7 @@ function HttpXmtClass(u_fabric_obj_val) {
     this.transmitQueueObj = () => this.transmitQueueObj_;
     this.pendingSessionDataQueueObj = () => this.pendingSessionDataQueueObj_;
     this.watchDogId = () => this.watchDogId_;
+    this.timeStampsForLogout = () => this.timeStampsForLogout_;
+    this.setTimeStampsForLogout = (val) => {this.timeStampsForLogout_ = val;}
     this.init__(u_fabric_obj_val);
 }

@@ -31,15 +31,11 @@ function UFabricObject(root_obj_val) {
 
     this.logoutRequest = function() {
         const data = "1O" + this.linkObj().linkId();
-        console.log("UFabricObject.logoutRequest() sessionStorage link_id=" + sessionStorage.getItem("link_id"));
-        console.log("UFabricObject.logoutRequest() this.linkObj().linkId()=" + this.linkObj().linkId());
         console.log("UFabricObject.logoutRequest() data=" + data);
 
+        this.httpXmtObj().setTimeStampsForLogout(this.linkObj().nodeTimeStamp() + this.linkObj().fabricTimeStamp());
         this.httpXmtObj().stopWatchDog();
 
-        if (this.sessionObj() !== null) {
-            this.sessionObj().removeSessionInfoFromStorage();
-        }
         this.linkObj().removeLinkInfoFromStorage();
 
         this.httpXmtObj().transmitAjaxRequest(data); 
