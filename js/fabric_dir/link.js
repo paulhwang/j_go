@@ -5,7 +5,7 @@
 
 function LinkObject(root_obj_val) {
     "use strict";
-    this.init__ = function(root_obj_val) {
+    this.init__ = (root_obj_val) => {
         this.rootObj_ = root_obj_val;
         this.initNameList();
 
@@ -17,55 +17,27 @@ function LinkObject(root_obj_val) {
         }
     }
 
-    this.initNameList = function() {
+    this.initNameList = () => {
         this.nameList_ = [];
         this.nameListTag_ = ENCODE.encodePadInteger(0, FE_DEF.NAME_LIST_TAG_SIZE());
         this.serverNameListTag_ = ENCODE.encodePadInteger(0, FE_DEF.NAME_LIST_TAG_SIZE());
     };
 
-    this.getLinkInfoFromStorage = function() {
-        /*
-        this.linkId_ = sessionStorage.getItem("link_id");
-        if (this.linkId_ === null) {
-            console.log("LinkObject.getLinkInfoFromStorage() null link_id");
-            abend();
-        }
-
-        this.myName_ = sessionStorage.getItem("my_name");
-        if (this.myName_ === null) {
-            console.log("LinkObject.getLinkInfoFromStorage() null my_name");
-            abend();
-        }
-
-        this.fabricTimeStamp_ = sessionStorage.getItem("fabric_time_stamp");
-        if (this.fabricTimeStamp_ === null) {
-            console.log("LinkObject.getLinkInfoFromStorage() null fabric_time_stamp");
-            abend();
-        }
-
-        this.nodeTimeStamp_ = sessionStorage.getItem("node_time_stamp");
-        if (this.nodeTimeStamp_ === null) {
-            console.log("LinkObject.getLinkInfoFromStorage() null node_time_stamp");
-            abend();
-        }
-        */
-    };
-
-    this.printLinkInfo = function() {
+    this.printLinkInfo = () => {
         console.log("LinkObject.printLinkInfo() link_id=" + this.linkId());
         console.log("LinkObject.printLinkInfo() my_name=" + this.myName());
         console.log("LinkObject.printLinkInfo() fabric_time_stamp=" + this.fabricTimeStamp());
         console.log("LinkObject.printLinkInfo() node_time_stamp=" + this.nodeTimeStamp());
     }
 
-    this.setLinkInfoIntoStorage = function(link_id_val, my_name_val, fabric_time_stamp_val, node_time_stamp_val) {
+    this.setLinkInfoIntoStorage = (link_id_val, my_name_val, fabric_time_stamp_val, node_time_stamp_val) => {
         sessionStorage.setItem("link_id", link_id_val);
         sessionStorage.setItem("my_name", my_name_val);
         sessionStorage.setItem("fabric_time_stamp", fabric_time_stamp_val);
         sessionStorage.setItem("node_time_stamp", node_time_stamp_val);
     };
 
-    this.removeLinkInfoFromStorage = function() {
+    this.removeLinkInfoFromStorage = () => {
         if (this.sessionObj() !== null) {
             this.sessionObj().removeSessionInfoFromStorage();
         }

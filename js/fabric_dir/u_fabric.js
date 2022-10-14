@@ -5,14 +5,13 @@
 
 function UFabricObject(root_obj_val) {
     "use strict";
-     this.init__ = function(root_obj_val) {
+     this.init__ = (root_obj_val) => {
         this.rootObj_ = root_obj_val;
         this.httpXmtObj_ = new HttpXmtClass(this);
 
         this.linkObj_ = new LinkObject(root_obj_val);
         console.log("UFabricObject.init__() link_id=" + sessionStorage.getItem("link_id"));
         if (this.linkObj().validLinkId()) {
-            this.linkObj().getLinkInfoFromStorage();
             this.linkObj().printLinkInfo();
 
             this.httpXmtObj().startWatchDog();
@@ -24,12 +23,12 @@ function UFabricObject(root_obj_val) {
         this.httpXmtObj().transmitAjaxRequest(data); 
     };
 
-    this.loginRequest = function(my_name_val, password_val) {
+    this.loginRequest = (my_name_val, password_val) => {
         const data = "0I" + ENCODE.encodeString(my_name_val) + ENCODE.encodeString(password_val);
         this.httpXmtObj().transmitAjaxRequest(data); 
     };
 
-    this.logoutRequest = function() {
+    this.logoutRequest = () => {
         const data = "1O" + this.linkObj().linkId();
         console.log("UFabricObject.logoutRequest() data=" + data);
 
@@ -41,17 +40,17 @@ function UFabricObject(root_obj_val) {
         this.httpXmtObj().transmitAjaxRequest(data); 
      };
 
-    this.getLinkDataRequest = function() {
+    this.getLinkDataRequest = () => {
         const data = "1D" + this.linkObj().linkId();
         this.httpXmtObj().transmitAjaxRequest(data); 
     };
 
-    this.getNameListRequest = function(name_list_tag_val) {
+    this.getNameListRequest = (name_list_tag_val) => {
         const data = "1N" + this.linkObj().linkId() + name_list_tag_val;
         this.httpXmtObj().transmitAjaxRequest(data); 
     };
 
-    this.setupSessionRequest = function(theme_type_val, theme_data_val, group_mode_val, second_fiddle_val) {
+    this.setupSessionRequest = (theme_type_val, theme_data_val, group_mode_val, second_fiddle_val) => {
         const data = "1S" + this.linkObj().linkId()
                         + group_mode_val + theme_type_val
                         + ENCODE.encodeString(theme_data_val)
@@ -60,27 +59,27 @@ function UFabricObject(root_obj_val) {
         this.httpXmtObj().transmitAjaxRequest(data); 
     };
 
-    this.setupSession2Request = function(session_id_val, answer_val) {
+    this.setupSession2Request = (session_id_val, answer_val) => {
         const data = "2Y" + this.linkObj().linkId() + session_id_val + answer_val;
         this.httpXmtObj().transmitAjaxRequest(data); 
     };
 
-    this.setupSession3Request = function(session_id_val) {
+    this.setupSession3Request = (session_id_val) => {
         const data = "2Z" + this.linkObj().linkId() + session_id_val;
         this.httpXmtObj().transmitAjaxRequest(data); 
     };
 
-    this.putSessionDataRequest = function(data_val) {
+    this.putSessionDataRequest = (data_val) => {
         const data = "2P" + this.linkObj().linkId() + this.sessionObj().sessionId() + data_val;
         this.httpXmtObj().transmitAjaxRequest(data); 
     };
 
-    this.getSessionDataRequest = function(session_id_val) {
+    this.getSessionDataRequest = (session_id_val) => {
         const data = "2G" + this.linkObj().linkId() + session_id_val;
         this.httpXmtObj().transmitAjaxRequest(data); 
     };
 
-    this.datagramRequest = function() {
+    this.datagramRequest = () => {
     };
 
     this.rootObj = () => this.rootObj_;

@@ -5,7 +5,7 @@
 
 function FabricBaseObject(root_obj_val) {
     "use strict";
-     this.init__ = function(root_obj_val) {
+     this.init__ = (root_obj_val) => {
         this.rootObj_ = root_obj_val;
         this.dFabricObj_ = new DFabricObject(this);
         this.uFabricObj_ = new UFabricObject(this);

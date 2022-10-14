@@ -30,25 +30,22 @@ function HttpXmtClass(u_fabric_obj_val) {
             console.log("HttpXmtClass.xmtAjaxRequest() data=" + data);
         }
 
-        if ((command !== 'R') && (command !== "I")) {
-            if (command === 'O') {
-                data = this.timeStampsForLogout() + data;
+        if (command === 'O') {
+            data = this.timeStampsForLogout() + data;
+        }
+        else if ((command !== 'R') && (command !== "I")) {
+            if (!this.rootObj().validValue(this.linkObj().nodeTimeStamp())) {
+                console.log("HttpXmtClass.xmtAjaxRequest() data=" + data);
+                console.log("HttpXmtClass.xmtAjaxRequest() invalid nodeTimeStamp=" + this.linkObj().nodeTimeStamp());
+                abend();
             }
-            else {
-                if (!this.rootObj().validValue(this.linkObj().nodeTimeStamp())) {
-                    console.log("HttpXmtClass.xmtAjaxRequest() data=" + data);
-                    console.log("HttpXmtClass.xmtAjaxRequest() invalid nodeTimeStamp=" + this.linkObj().nodeTimeStamp());
-                    abend();
-                }
-
-                if (!this.rootObj().validValue(this.linkObj().fabricTimeStamp())) {
-                    console.log("HttpXmtClass.xmtAjaxRequest() data=" + data);
-                    console.log("HttpXmtClass.xmtAjaxRequest() invalid fabricTimeStamp" + this.linkObj().fabricTimeStamp());
-                    abend();
-                }
-
-                data = this.linkObj().nodeTimeStamp() + this.linkObj().fabricTimeStamp() + data;
+            if (!this.rootObj().validValue(this.linkObj().fabricTimeStamp())) {
+                console.log("HttpXmtClass.xmtAjaxRequest() data=" + data);
+                console.log("HttpXmtClass.xmtAjaxRequest() invalid fabricTimeStamp" + this.linkObj().fabricTimeStamp());
+                abend();
             }
+
+            data = this.linkObj().nodeTimeStamp() + this.linkObj().fabricTimeStamp() + data;
         }
 
         if (command !== 'D') {
