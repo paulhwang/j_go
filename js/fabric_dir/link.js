@@ -10,9 +10,8 @@ function LinkObject(root_obj_val) {
         this.initNameList();
 
         this.sessionObj_ = new SessionObject();
-        console.log("LinkObject.init__() session_id=" + sessionStorage.getItem("session_id"));
+        console.log("LinkObject.init__() session_id=" + this.sessionObj().sessionId());
         if (this.sessionObj().validSessionId()) {
-            this.sessionObj().getSessionInfoFromStorage();
             this.sessionObj().printSessionInfo();
         }
     }
@@ -48,10 +47,7 @@ function LinkObject(root_obj_val) {
         sessionStorage.removeItem("node_time_stamp");
     };
 
-    this.validLinkId = function () {
-        return this.rootObj().validStorage("link_id");
-    };
-
+    this.validLinkId = () => UTILS.validValue(this.linkId());
     this.rootObj = () => this.rootObj_;
     this.sessionObj = () => this.sessionObj_;
     this.linkId = () => sessionStorage.getItem("link_id");

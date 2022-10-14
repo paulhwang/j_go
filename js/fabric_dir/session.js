@@ -8,44 +8,6 @@ function SessionObject() {
     this.init__ = function() {
     }
 
-    this.getSessionInfoFromStorage = function() {
-        this.sessionId_ = sessionStorage.getItem("session_id");
-        if (this.sessionId_ === null) {
-            console.log("SessionObject.getSessionInfoFromStorage() null session_id");
-            abend();
-        }
-
-        this.groupMode_ = sessionStorage.getItem("group_mode");
-        if (this.groupMode_ === undefined) {
-            console.log("SessionObject.getSessionInfoFromStorage() undefined group_mode");
-            abend();
-        }
-
-        this.themeType_ = sessionStorage.getItem("theme_type");
-        if (this.themeType_ === null) {
-            console.log("SessionObject.getSessionInfoFromStorage() null theme_type");
-            abend();
-        }
-
-        this.themeData_ = sessionStorage.getItem("theme_data");
-        if (this.themeData_ === null) {
-            console.log("SessionObject.getSessionInfoFromStorage() null theme_data");
-            abend();
-        }
-
-        this.firstFiddle_ = sessionStorage.getItem("first_fiddle");
-        if (this.firstFiddle_ === null) {
-            console.log("SessionObject.getSessionInfoFromStorage() null first_fiddle");
-            abend();
-        }
-
-        this.secondFiddle_ = sessionStorage.getItem("second_fiddle");
-        if (this.secondFiddle_ === null) {
-            console.log("SessionObject.getSessionInfoFromStorage() null second_fiddle");
-            abend();
-        }
-    };
-
     this.printSessionInfo = function() {
         console.log("SessionObject.printSessionInfo() session_id="    + this.sessionId());
         console.log("SessionObject.printSessionInfo() group_mode="    + this.groupMode());
@@ -73,17 +35,12 @@ function SessionObject() {
         sessionStorage.removeItem("second_fiddle");
     };
 
-    this.validSessionId = function () {
-        const session_id = sessionStorage.getItem("session_id");
-        return ((session_id !== null) && (session_id !== "null") && (session_id !== undefined));
-
-    };
-
-    this.sessionId    = () => this.sessionId_;
-    this.groupMode    = () => this.groupMode_;
-    this.themeType    = () => this.themeType_;
-    this.themeData    = () => this.themeData_;
-    this.firstFiddle  = () => this.firstFiddle_;
-    this.secondFiddle = () => this.secondFiddle_;
+    this.validSessionId = () => UTILS.validValue(this.sessionId());
+    this.sessionId    = () => sessionStorage.getItem("session_id");
+    this.groupMode    = () => sessionStorage.getItem("group_mode");
+    this.themeType    = () => sessionStorage.getItem("theme_type");
+    this.themeData    = () => sessionStorage.getItem("theme_data");
+    this.firstFiddle  = () => sessionStorage.getItem("first_fiddle");
+    this.secondFiddle = () => sessionStorage.getItem("second_fiddle");
     this.init__();
 };

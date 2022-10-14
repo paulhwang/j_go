@@ -10,7 +10,7 @@ function UFabricObject(root_obj_val) {
         this.httpXmtObj_ = new HttpXmtClass(this);
 
         this.linkObj_ = new LinkObject(root_obj_val);
-        console.log("UFabricObject.init__() link_id=" + sessionStorage.getItem("link_id"));
+        console.log("UFabricObject.init__() link_id=" + this.linkObj().linkId());
         if (this.linkObj().validLinkId()) {
             this.linkObj().printLinkInfo();
 

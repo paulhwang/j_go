@@ -184,14 +184,5 @@ function ENCODE_OBJECT() {
         return output;
     };
 
-    this.sleepMilliseconds = function (milliseconds_val) {
-        var start = new Date().getTime();
-        for (var i = 0; i < 1e7; i++) {
-            if ((new Date().getTime() - start) > milliseconds_val){
-                break;
-            }
-        }
-    };
-
     this.init__();
 };

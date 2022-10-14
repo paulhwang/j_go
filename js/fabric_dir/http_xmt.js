@@ -34,12 +34,12 @@ function HttpXmtClass(u_fabric_obj_val) {
             data = this.timeStampsForLogout() + data;
         }
         else if ((command !== 'R') && (command !== "I")) {
-            if (!this.rootObj().validValue(this.linkObj().nodeTimeStamp())) {
+            if (!UTILS.validValue(this.linkObj().nodeTimeStamp())) {
                 console.log("HttpXmtClass.xmtAjaxRequest() data=" + data);
                 console.log("HttpXmtClass.xmtAjaxRequest() invalid nodeTimeStamp=" + this.linkObj().nodeTimeStamp());
                 abend();
             }
-            if (!this.rootObj().validValue(this.linkObj().fabricTimeStamp())) {
+            if (!UTILS.validValue(this.linkObj().fabricTimeStamp())) {
                 console.log("HttpXmtClass.xmtAjaxRequest() data=" + data);
                 console.log("HttpXmtClass.xmtAjaxRequest() invalid fabricTimeStamp" + this.linkObj().fabricTimeStamp());
                 abend();
@@ -57,7 +57,7 @@ function HttpXmtClass(u_fabric_obj_val) {
     };
 
     this.startWatchDog = (link_val) => {
-        if (this.rootObj().validValue(this.watchDogId())) {
+        if (UTILS.validValue(this.watchDogId())) {
             abend();
         }
 
