@@ -18,7 +18,7 @@ function UFabricObject(root_obj_val) {
          }
    };
 
-    this.registerRequest = function(my_name_val, password_val, email_val) {
+    this.registerRequest = (my_name_val, password_val, email_val) => {
         const data =  "0R" + ENCODE.encodeString(my_name_val) + ENCODE.encodeString(password_val) + ENCODE.encodeString(email_val);
         this.httpXmtObj().transmitAjaxRequest(data); 
     };

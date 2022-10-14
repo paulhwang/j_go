@@ -3,9 +3,10 @@
   Written by Paul Hwang
 */
 
-function SessionObject() {
+function SessionObject(link_obj_val) {
     "use strict";
-    this.init__ = () => {
+    this.init__ = (link_obj_val) => {
+        this.linkObj_ = link_obj_val;
     }
 
     this.printSessionInfo = () => {
@@ -42,5 +43,6 @@ function SessionObject() {
     this.themeData    = () => sessionStorage.getItem("theme_data");
     this.firstFiddle  = () => sessionStorage.getItem("first_fiddle");
     this.secondFiddle = () => sessionStorage.getItem("second_fiddle");
-    this.init__();
+    this.linkObj = () => this.linkObj_;
+    this.init__(link_obj_val);
 };

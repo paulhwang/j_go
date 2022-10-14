@@ -9,7 +9,7 @@ function LinkObject(root_obj_val) {
         this.rootObj_ = root_obj_val;
         this.initNameList();
 
-        this.sessionObj_ = new SessionObject();
+        this.sessionObj_ = new SessionObject(this);
         console.log("LinkObject.init__() session_id=" + this.sessionObj().sessionId());
         if (this.sessionObj().validSessionId()) {
             this.sessionObj().printSessionInfo();
