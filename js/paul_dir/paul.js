@@ -42,15 +42,23 @@ function PaulObject() {
 };
 
 $(document).ready(() => {
-    console.log(sessionStorage.getItem("ajax_packet_id"))
-    sessionStorage.setItem("ajax_packet_id", 100);
+    let ajax_packet_id = sessionStorage.getItem("ajax_packet_id");
+    if ((ajax_packet_id === null) || (ajax_packet_id === "null") || (ajax_packet_id === undefined)) {
+        sessionStorage.setItem("ajax_packet_id", 1);
+        ajax_packet_id = sessionStorage.getItem("ajax_packet_id");
+    }
+    console.log("ajax_packet_id=" + ajax_packet_id);
     new PaulObject();
 });
 
 /*
 document.addEventListener("DOMContentLoaded", function() {
-    console.log(sessionStorage.getItem("ajax_packet_id"))
-    sessionStorage.setItem("ajax_packet_id", 100);
+    let ajax_packet_id = sessionStorage.getItem("ajax_packet_id");
+    if ((ajax_packet_id === null) || (ajax_packet_id === "null") || (ajax_packet_id === undefined)) {
+        sessionStorage.setItem("ajax_packet_id", 1);
+        ajax_packet_id = sessionStorage.getItem("ajax_packet_id");
+    }
+    console.log("ajax_packet_id=" + ajax_packet_id);
     new PaulObject();
 });
 */
