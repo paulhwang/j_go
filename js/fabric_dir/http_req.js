@@ -27,20 +27,13 @@ function FabricHttpReqObject(callback_func_val, callback_obj_val) {
         this.xmlHttpRequest().setRequestHeader("X-Requested-With", "XMLHttpRequest");
         this.xmlHttpRequest().setRequestHeader("Content-Type", this.jsonContext());
         this.xmlHttpRequest().setRequestHeader("phwangajaxrequest", output_val);
-        this.xmlHttpRequest().setRequestHeader("phwangajaxpacketid", sessionStorage.ajax_packet_id);
+        this.xmlHttpRequest().setRequestHeader("phwangajaxpacketid", this.ajaxPacketId());
         this.incrementAjaxPacketId();
         this.xmlHttpRequest().send(null);
     };
 
-    this.incrementAjaxPacketId = () => {
-        //console.log("FabricHttpReqObject.incrementAjaxPacketId() ajax_packet_id=" + sessionStorage.ajax_packet_id);
-        const next_ajax_packet_id = Number(sessionStorage.ajax_packet_id) + 1;
-        if (next_ajax_packet_id !== 1 + Number(sessionStorage.ajax_packet_id)) {
-            this.abend("FabricHttpReqObject.incrementAjaxPacketId()", "fix it");
-        }
-        sessionStorage.ajax_packet_id = next_ajax_packet_id;
-    };
-
+    this.incrementAjaxPacketId = () => {sessionStorage.setItem("ajax_packet_id", Number(this.ajaxPacketId()) + 1);};
+    this.ajaxPacketId = () => sessionStorage.getItem("ajax_packet_id");
     this.xmlHttpRequest = () => this.xmlHttpRequest_;
     this.callBackFunc = () => this.callBackFunc_;
     this.callBackObj = () => this.callBackObj_;
