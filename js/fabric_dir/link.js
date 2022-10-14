@@ -6,10 +6,21 @@
 function LinkObject() {
     "use strict";
     this.init__ = function() {
+        this.initNameList();
+
+        this.sessionObj_ = new SessionObject();
+        console.log("LinkObject.init__() session_id=" + sessionStorage.getItem("session_id"));
+        if (this.sessionObj().validSessionId()) {
+            this.sessionObj().getSessionInfoFromStorage();
+            this.sessionObj().printSessionInfo();
+        }
+    }
+
+    this.initNameList = function() {
         this.nameList_ = [];
         this.nameListTag_ = ENCODE.encodePadInteger(0, FE_DEF.NAME_LIST_TAG_SIZE());
         this.serverNameListTag_ = ENCODE.encodePadInteger(0, FE_DEF.NAME_LIST_TAG_SIZE());
-    }
+    };
 
     this.getLinkInfoFromStorage = function() {
         this.linkId_ = sessionStorage.getItem("link_id");
@@ -64,6 +75,7 @@ function LinkObject() {
 
     };
 
+    this.sessionObj = () => this.sessionObj_;
     this.linkId = () => this.linkId_;
     this.myName = () => this.myName_;
     this.fabricTimeStamp = () => this.fabricTimeStamp_;

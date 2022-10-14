@@ -15,12 +15,6 @@ function UFabricObject(root_obj_val) {
             this.linkObj().getLinkInfoFromStorage();
             this.linkObj().printLinkInfo();
 
-            this.sessionObj_ = new SessionObject();
-            console.log("UFabricObject.init__() session_id=" + sessionStorage.getItem("session_id"));
-            if (this.sessionObj().validSessionId()) {
-                this.sessionObj().getSessionInfoFromStorage();
-                this.sessionObj().printSessionInfo();
-            }
 
             this.httpXmtObj().startWatchDog();
          }
@@ -97,7 +91,7 @@ function UFabricObject(root_obj_val) {
     this.rootObj = () => this.rootObj_;
     this.linkObj = () => this.linkObj_;
     this.httpXmtObj = () => this.httpXmtObj_;
-    this.sessionObj = () => this.sessionObj_;
+    this.sessionObj = () => this.linkObj().sessionObj();
     this.dFabricObj = () => this.rootObj().dFabricObj();
     this.httpReqObj = () => this.dFabricObj().httpReqObj();
     this.init__(root_obj_val);
