@@ -8,6 +8,9 @@ function AccountLogoutObject() {
     this.init__ = function() {
         this.fabricBaseObj_ = new FabricBaseObject(this);
 
+        console.log("AccountLogoutObject.init__() sessionStorage link_id=" + sessionStorage.getItem("link_id"));
+        console.log("AccountLogoutObject.init__() this.linkObj().linkId()=" + this.linkObj().linkId());
+
         this.setupHtmlInputFunc();
         this.dFabricObj().setCallbackFunc(this.receiveFabricResponse, this);
     };

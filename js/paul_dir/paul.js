@@ -41,9 +41,17 @@ function PaulObject() {
     });
 };
 
-document.addEventListener("DOMContentLoaded", function() {
-    sessionStorage.clear();
+$(document).ready(() => {
+    console.log(sessionStorage.getItem("ajax_packet_id"))
     sessionStorage.setItem("ajax_packet_id", 100);
     new PaulObject();
 });
+
+/*
+document.addEventListener("DOMContentLoaded", function() {
+    console.log(sessionStorage.getItem("ajax_packet_id"))
+    sessionStorage.setItem("ajax_packet_id", 100);
+    new PaulObject();
+});
+*/
 
