@@ -64,6 +64,15 @@ function FabricSessionObject() {
         sessionStorage.setItem("second_fiddle", second_fiddle_val);
     };
 
+    this.removeSessionInfoFromStorage = function() {
+        sessionStorage.removeItem("session_id");
+        sessionStorage.removeItem("group_mode");
+        sessionStorage.removeItem("theme_type");
+        sessionStorage.removeItem("theme_data");
+        sessionStorage.removeItem("first_fiddle");
+        sessionStorage.removeItem("second_fiddle");
+    };
+
     this.sessionId    = () => this.sessionId_;
     this.groupMode    = () => this.groupMode_;
     this.themeType    = () => this.themeType_;

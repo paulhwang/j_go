@@ -51,6 +51,13 @@ function FabricLinkObject() {
         sessionStorage.setItem("node_time_stamp", node_time_stamp_val);
     };
 
+    this.removeLinkInfoFromStorage = function() {
+        sessionStorage.removeItem("link_id");
+        sessionStorage.removeItem("my_name");
+        sessionStorage.removeItem("fabric_time_stamp");
+        sessionStorage.removeItem("node_time_stamp");
+    };
+
     this.linkId = () => this.linkId_;
     this.myName = () => this.myName_;
     this.fabricTimeStamp = () => this.fabricTimeStamp_;
