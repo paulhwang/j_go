@@ -3,9 +3,10 @@
   Written by Paul Hwang
 */
 
-function LinkObject() {
+function LinkObject(root_obj_val) {
     "use strict";
-    this.init__ = function() {
+    this.init__ = function(root_obj_val) {
+        this.rootObj_ = root_obj_val;
         this.initNameList();
 
         this.sessionObj_ = new SessionObject();
@@ -70,11 +71,10 @@ function LinkObject() {
     };
 
     this.validLinkId = function () {
-        const link_id = sessionStorage.getItem("link_id");
-        return ((link_id !== null) && (link_id !== "null") && (link_id !== undefined));
-
+        return this.rootObj().validStorage("link_id");
     };
 
+    this.rootObj = () => this.rootObj_;
     this.sessionObj = () => this.sessionObj_;
     this.linkId = () => this.linkId_;
     this.myName = () => this.myName_;
@@ -91,5 +91,5 @@ function LinkObject() {
     this.nameListElement = (index_val) => {return this.nameList()[index_val];};
     this.setNameListElement = (index_val, data_val) => {this.nameList()[index_val] = data_val;};
 
-    this.init__();
+    this.init__(root_obj_val);
 };

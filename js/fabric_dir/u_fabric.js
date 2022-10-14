@@ -9,12 +9,11 @@ function UFabricObject(root_obj_val) {
         this.rootObj_ = root_obj_val;
         this.httpXmtObj_ = new HttpXmtClass(this);
 
-        this.linkObj_ = new LinkObject();
+        this.linkObj_ = new LinkObject(root_obj_val);
         console.log("UFabricObject.init__() link_id=" + sessionStorage.getItem("link_id"));
         if (this.linkObj().validLinkId()) {
             this.linkObj().getLinkInfoFromStorage();
             this.linkObj().printLinkInfo();
-
 
             this.httpXmtObj().startWatchDog();
          }
