@@ -10,12 +10,16 @@ function UFabricObject(root_obj_val) {
         this.httpXmtObj_ = new HttpXmtClass(this);
 
         this.linkObj_ = new LinkObject();
-        if (sessionStorage.getItem("link_id") !== null) {
+        const link_id = sessionStorage.getItem("link_id");
+        console.log("UFabricObject.init__() link_id=" + link_id);
+        if ((link_id !== null) && (link_id !== "null") && (link_id !== undefined)) {
             this.linkObj().getLinkInfoFromStorage();
             this.linkObj().printLinkInfo();
 
             this.sessionObj_ = new SessionObject();
-            if (sessionStorage.getItem("session_id") !== null) {
+            const session_id = sessionStorage.getItem("session_id");
+            console.log("UFabricObject.init__() session_id=" + session_id);
+            if ((session_id !== null) && (session_id !== "null") && (session_id !== undefined)) {
                 this.sessionObj().getSessionInfoFromStorage();
                 this.sessionObj().printSessionInfo();
             }
@@ -40,6 +44,12 @@ function UFabricObject(root_obj_val) {
         console.log("UFabricObject.logoutRequest() this.linkObj().linkId()=" + this.linkObj().linkId());
         console.log("UFabricObject.logoutRequest() data=" + data);
         clearInterval(this.httpXmtObj().watchDogId());
+
+        if (this.sessionObj() !== null) {
+            this.sessionObj().removeSessionInfoFromStorage();
+        }
+        this.linkObj().removeLinkInfoFromStorage();
+
         this.httpXmtObj().transmitAjaxRequest(data); 
      };
 
