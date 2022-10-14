@@ -10,14 +10,15 @@ function UFabricObject(root_obj_val) {
         this.httpXmtObj_ = new HttpXmtClass(this);
         this.linkObj_ = new FabricLinkObject();
 
-        const link_id_ = sessionStorage.getItem("link_id");
-        if (link_id_ !== null) {
+        if (sessionStorage.getItem("link_id") !== null) {
             this.linkObj().getLinkInfoFromStorage();
             this.linkObj().printLinkInfo();
 
             this.sessionObj_ = new FabricSessionObject();
-            this.sessionObj().getSessionInfoFromStorage();
-            this.sessionObj().printSessionInfo();
+            if (sessionStorage.getItem("session_id") !== null) {
+                this.sessionObj().getSessionInfoFromStorage();
+                this.sessionObj().printSessionInfo();
+            }
 
             if (this.linkObj().alreadyLogin()) {
                 this.httpXmtObj().startWatchDog();

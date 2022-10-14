@@ -16,38 +16,32 @@ function FabricLinkObject() {
         if (this.linkId_ === null) {
             console.log("FabricLinkObject.getLinkInfoFromStorage() null link_id");
             abend();
-            return -1;
         }
 
         this.myName_ = sessionStorage.getItem("my_name");
         if (this.myName_ === null) {
             console.log("FabricLinkObject.getLinkInfoFromStorage() null my_name");
             abend();
-            return -1;
         }
 
         this.fabricTimeStamp_ = sessionStorage.getItem("fabric_time_stamp");
         if (this.fabricTimeStamp_ === null) {
             console.log("FabricLinkObject.getLinkInfoFromStorage() null fabric_time_stamp");
             abend();
-            return -1;
         }
 
         this.nodeTimeStamp_ = sessionStorage.getItem("node_time_stamp");
         if (this.nodeTimeStamp_ === null) {
             console.log("FabricLinkObject.getLinkInfoFromStorage() null node_time_stamp");
             abend();
-            return -1;
         }
-
-        return 0;
     };
 
     this.printLinkInfo = function() {
-        console.log("FabricLinkObject.getLinkInfoFromStorage() link_id=" + this.linkId());
-        console.log("FabricLinkObject.getLinkInfoFromStorage() my_name=" + this.myName());
-        console.log("FabricLinkObject.getLinkInfoFromStorage() fabric_time_stamp=" + this.fabricTimeStamp());
-        console.log("FabricLinkObject.getLinkInfoFromStorage() node_time_stamp=" + this.nodeTimeStamp());
+        console.log("FabricLinkObject.printLinkInfo() link_id=" + this.linkId());
+        console.log("FabricLinkObject.printLinkInfo() my_name=" + this.myName());
+        console.log("FabricLinkObject.printLinkInfo() fabric_time_stamp=" + this.fabricTimeStamp());
+        console.log("FabricLinkObject.printLinkInfo() node_time_stamp=" + this.nodeTimeStamp());
     }
 
     this.setLinkInfoIntoStorage = function(link_id_val, my_name_val, fabric_time_stamp_val, node_time_stamp_val) {
