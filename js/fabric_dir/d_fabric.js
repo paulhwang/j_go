@@ -179,8 +179,7 @@ function DFabricObject(root_obj_val) {
 
                 console.log("DFabricObject.getLinkDataResponse() session_id=" + session_id);
 
-                this.uFabricObj().getSessionDataRequest(session_id);
-
+                this.httpXmtObj().pendingSessionDataQueueObj().enqueueData(session_id);
             }
 
             else if (type === FE_DEF.GET_LINK_DATA_TYPE_PENDING_SESSION2()) {

@@ -54,10 +54,10 @@ function HttpXmtClass(u_fabric_obj_val) {
                 return;
             }
 
-            const link_session_id = this0.pendingSessionDataQueueObj().dequeueData();
-            if (link_session_id) {
-                //this0.getSessionData(link_val, link_session_id);
-                //return;
+            const session_id = this0.pendingSessionDataQueueObj().dequeueData();
+            if (session_id) {
+                this0.uFabricObj().getSessionDataRequest(session_id);
+                return;
             }
             if (this0.linkObj().serverNameListTag() !== this0.linkObj().nameListTag()) {
                 this0.uFabricObj().getNameListRequest(this0.linkObj().nameListTag());
