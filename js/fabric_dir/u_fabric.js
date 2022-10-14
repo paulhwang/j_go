@@ -36,6 +36,8 @@ function UFabricObject(root_obj_val) {
 
     this.logoutRequest = function() {
         const data = "1O" + this.linkObj().linkId();
+        console.log("UFabricObject.logoutRequest() data=" + data);
+        clearInterval(this.httpXmtObj().watchDogId());
         this.httpXmtObj().transmitAjaxRequest(data); 
      };
 
