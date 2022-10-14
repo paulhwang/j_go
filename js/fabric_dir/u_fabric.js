@@ -59,9 +59,8 @@ function UFabricObject(root_obj_val) {
         this.httpXmtObj().transmitAjaxRequest(data); 
     };
 
-    this.setupSession2Request = function(session_id_val) {
-        const answer = 'Y';
-        const data = "2Y" + this.linkObj().linkId() + session_id_val + answer;
+    this.setupSession2Request = function(session_id_val, answer_val) {
+        const data = "2Y" + this.linkObj().linkId() + session_id_val + answer_val;
         this.httpXmtObj().transmitAjaxRequest(data); 
     };
 
@@ -75,8 +74,8 @@ function UFabricObject(root_obj_val) {
         this.httpXmtObj().transmitAjaxRequest(data); 
     };
 
-    this.getSessionDataRequest = function() {
-        const data = "2G" + this.linkObj().linkId() + this.sessionObj().sessionId();
+    this.getSessionDataRequest = function(session_id_val) {
+        const data = "2G" + this.linkObj().linkId() + session_id_val;
         this.httpXmtObj().transmitAjaxRequest(data); 
     };
 

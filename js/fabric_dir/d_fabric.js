@@ -173,12 +173,13 @@ function DFabricObject(root_obj_val) {
             }
 
             else if (type === FE_DEF.GET_LINK_DATA_TYPE_PENDING_DATA()) {
-                let pending_data = remaining_data.slice(index, index + FE_DEF.SESSION_ID_SIZE());
+                let session_id = remaining_data.slice(index, index + FE_DEF.SESSION_ID_SIZE());
                 index += FE_DEF.SESSION_ID_SIZE();
 
-                this.uFabricObj().getSessionDataRequest();
+                console.log("DFabricObject.getLinkDataResponse() session_id=" + session_id);
 
-                console.log("DFabricObject.getLinkDataResponse() pending_data=" + pending_data);
+                this.uFabricObj().getSessionDataRequest(session_id);
+
             }
 
             else if (type === FE_DEF.GET_LINK_DATA_TYPE_PENDING_SESSION2()) {
@@ -190,7 +191,7 @@ function DFabricObject(root_obj_val) {
                 index += len;
 
                 const session_id = pending_session2.slice(0, FE_DEF.SESSION_ID_SIZE());
-                this.uFabricObj().setupSession2Request(session_id);
+                this.uFabricObj().setupSession2Request(session_id, 'Y');
 
                 console.log("DFabricObject.getLinkDataResponse() pending_session2=" + pending_session2);
             }
