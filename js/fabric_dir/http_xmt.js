@@ -60,7 +60,7 @@ function HttpXmtClass(u_fabric_obj_val) {
                 //return;
             }
             if (this0.linkObj().serverNameListTag() !== this0.linkObj().nameListTag()) {
-                this0.uFabricObj().getNameListRequest();
+                this0.uFabricObj().getNameListRequest(this0.linkObj().nameListTag());
                 return;
             }
             this0.uFabricObj().getLinkDataRequest();

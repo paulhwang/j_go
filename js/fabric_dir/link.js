@@ -7,8 +7,8 @@ function FabricLinkObject() {
     "use strict";
     this.init__ = function() {
         this.nameList_ = [];
-        this.nameListTag_ = ENCODE.encodePadInteger(0, 3);
-        this.serverNameListTag_ = ENCODE.encodePadInteger(0, 3);
+        this.nameListTag_ = ENCODE.encodePadInteger(0, FE_DEF.NAME_LIST_TAG_SIZE());
+        this.serverNameListTag_ = ENCODE.encodePadInteger(0, FE_DEF.NAME_LIST_TAG_SIZE());
     }
 
     this.getLinkInfoFromStorage = function() {
