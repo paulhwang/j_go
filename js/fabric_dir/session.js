@@ -73,6 +73,12 @@ function SessionObject() {
         sessionStorage.removeItem("second_fiddle");
     };
 
+    this.validSessionId = function () {
+        const session_id = sessionStorage.getItem("session_id");
+        return ((session_id !== null) && (session_id !== "null") && (session_id !== undefined));
+
+    };
+
     this.sessionId    = () => this.sessionId_;
     this.groupMode    = () => this.groupMode_;
     this.themeType    = () => this.themeType_;

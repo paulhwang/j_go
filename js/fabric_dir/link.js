@@ -58,6 +58,12 @@ function LinkObject() {
         sessionStorage.removeItem("node_time_stamp");
     };
 
+    this.validLinkId = function () {
+        const link_id = sessionStorage.getItem("link_id");
+        return ((link_id !== null) && (link_id !== "null") && (link_id !== undefined));
+
+    };
+
     this.linkId = () => this.linkId_;
     this.myName = () => this.myName_;
     this.fabricTimeStamp = () => this.fabricTimeStamp_;

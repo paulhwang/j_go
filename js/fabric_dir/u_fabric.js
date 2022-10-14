@@ -10,16 +10,14 @@ function UFabricObject(root_obj_val) {
         this.httpXmtObj_ = new HttpXmtClass(this);
 
         this.linkObj_ = new LinkObject();
-        const link_id = sessionStorage.getItem("link_id");
-        console.log("UFabricObject.init__() link_id=" + link_id);
-        if ((link_id !== null) && (link_id !== "null") && (link_id !== undefined)) {
+        console.log("UFabricObject.init__() link_id=" + sessionStorage.getItem("link_id"));
+        if (this.linkObj().validLinkId()) {
             this.linkObj().getLinkInfoFromStorage();
             this.linkObj().printLinkInfo();
 
             this.sessionObj_ = new SessionObject();
-            const session_id = sessionStorage.getItem("session_id");
-            console.log("UFabricObject.init__() session_id=" + session_id);
-            if ((session_id !== null) && (session_id !== "null") && (session_id !== undefined)) {
+            console.log("UFabricObject.init__() session_id=" + sessionStorage.getItem("session_id"));
+            if (this.sessionObj().validSessionId()) {
                 this.sessionObj().getSessionInfoFromStorage();
                 this.sessionObj().printSessionInfo();
             }
