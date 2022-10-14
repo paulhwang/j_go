@@ -5,18 +5,18 @@
 
 function DFabricObject(root_obj_val) {
     "use strict";
-     this.init__ = function(root_obj_val) {
+     this.init__ = (root_obj_val) => {
         this.rootObj_ = root_obj_val;
         this.initSwitchTable();
         this.httpReqObj_ = new FabricHttpReqObject(this.parseFabricResponse, this);
     };
 
-    this.setCallbackFunc = function(func_val, obj_val) {
+    this.setCallbackFunc = (func_val, obj_val) => {
         this.callbackFunc_ = func_val;
         this.callbackObj_ = obj_val;
     };
 
-    this.initSwitchTable = function() {
+    this.initSwitchTable = () => {
         this.responseSwitchTable_ = {
             'r': this.registerResponse,
             'i': this.loginResponse,
@@ -32,7 +32,7 @@ function DFabricObject(root_obj_val) {
         };
     };
 
-    this.parseFabricResponse = function(data_val) {
+    this.parseFabricResponse = (data_val) => {
         const command = data_val.charAt(0);
         const data = data_val.slice(1);
 
@@ -52,7 +52,7 @@ function DFabricObject(root_obj_val) {
         func.bind(this)(data);
     };
 
-    this.registerResponse = function(data_val) {
+    this.registerResponse = (data_val) => {
         const data = data_val;
         let index = 0;
 
@@ -73,7 +73,7 @@ function DFabricObject(root_obj_val) {
         }
     };
 
-    this.loginResponse = function(data_val) {
+    this.loginResponse = (data_val) => {
         const data = data_val;
         let index = 0;
 
@@ -114,7 +114,7 @@ function DFabricObject(root_obj_val) {
         }
     };
 
-    this.logoutResponse = function(data_val) {
+    this.logoutResponse = (data_val) => {
         const data = data_val;
         let index = 0;
 
@@ -145,7 +145,7 @@ function DFabricObject(root_obj_val) {
         }
     };
 
-    this.getLinkDataResponse = function(data_val) {
+    this.getLinkDataResponse = (data_val) => {
         const data = data_val;
         let index = 0;
 
@@ -217,7 +217,7 @@ function DFabricObject(root_obj_val) {
         }
     };
 
-    this.getNameListResponse = function(data_val) {
+    this.getNameListResponse = (data_val) => {
         const data = data_val;
         let index = 0;
 
@@ -242,7 +242,7 @@ function DFabricObject(root_obj_val) {
         this.callbackFunc().bind(this.callbackObj())("get_name_list", data_val);
     };
 
-    this.setupSessionResponse = function(data_val) {
+    this.setupSessionResponse = (data_val) => {
         const data = data_val;
         let index = 0;
 
@@ -274,7 +274,7 @@ function DFabricObject(root_obj_val) {
         }
     };
 
-    this.setupSession2Response = function(data_val) {
+    this.setupSession2Response = (data_val) => {
         const data = data_val;
         let index = 0;
 
@@ -305,7 +305,7 @@ function DFabricObject(root_obj_val) {
         }
     };
 
-    this.setupSession3Response = function(data_val) {
+    this.setupSession3Response = (data_val) => {
         const data = data_val;
         let index = 0;
 
@@ -356,7 +356,7 @@ function DFabricObject(root_obj_val) {
         }
     };
 
-    this.putSessionDataResponse = function(data_val) {
+    this.putSessionDataResponse = (data_val) => {
         const data = data_val;
         let index = 0;
 
@@ -386,7 +386,7 @@ function DFabricObject(root_obj_val) {
         }
     };
 
-    this.getSessionDataResponse = function(data_val) {
+    this.getSessionDataResponse = (data_val) => {
         const data = data_val;
         let index = 0;
 
@@ -410,7 +410,7 @@ function DFabricObject(root_obj_val) {
         }
     };
 
-    this.datagramResponse = function(json_response_val) {
+    this.datagramResponse = (json_response_val) => {
     };
 
     this.rootObj = () => this.rootObj_;

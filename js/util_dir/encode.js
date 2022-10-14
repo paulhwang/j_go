@@ -7,10 +7,10 @@ var ENCODE = new ENCODE_OBJECT;
 
 function ENCODE_OBJECT() {
     "use strict";
-    this.init__ = function() {
+    this.init__ = () => {
     }
 
-    this.decodeNumber = function(input_val, size_val) {
+    this.decodeNumber = (input_val, size_val) => {
         let output = 0;
         for (let index = 0; index < size_val; index++) {
             output *= 10;
@@ -19,7 +19,7 @@ function ENCODE_OBJECT() {
         return output;
     };
 
-    this.encodeString = function(input_val) {
+    this.encodeString = (input_val) => {
         if ((input_val === undefined) || (input_val === null)) {
             console.log("EncodeClass.encodeString() null_input_val");
             abend();
@@ -45,7 +45,7 @@ function ENCODE_OBJECT() {
         return header + length + input_val;
     };
 
-    this.encodedStringlength = function(input_val) {
+    this.encodedStringlength = (input_val) => {
         let length = 0;
 
         switch (input_val.charAt(0)) {
@@ -82,7 +82,7 @@ function ENCODE_OBJECT() {
         return buf;
     };
 
-    this.decodeString = function(input_val) {
+    this.decodeString = (input_val) => {
         let length = 0;
         let buf = "";
         let length_str;
@@ -125,7 +125,7 @@ function ENCODE_OBJECT() {
         }
     };
 
-    this.decodeStringGetLength = function(input_val) {
+    this.decodeStringGetLength = (input_val) => {
         let length = 0;
         let length_str;
 
@@ -162,7 +162,7 @@ function ENCODE_OBJECT() {
         }
     };
 
-    this.encodePadInteger = function(int_val, size_val) {
+    this.encodePadInteger = (int_val, size_val) => {
         if ((int_val === undefined) || (int_val === null)) {
             console.log("FabricLinkObject.encodePadInteger() null num_val");
             abend();
@@ -175,7 +175,7 @@ function ENCODE_OBJECT() {
         return str;
     };
 
-    this.decodePadInteger = function(int_str_val, size_val) {
+    this.decodePadInteger = (int_str_val, size_val) => {
         let output = 0;
         for (let index = 0; index < size_val; index++) {
             output *= 10;

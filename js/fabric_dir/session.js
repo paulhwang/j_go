@@ -5,10 +5,10 @@
 
 function SessionObject() {
     "use strict";
-    this.init__ = function() {
+    this.init__ = () => {
     }
 
-    this.printSessionInfo = function() {
+    this.printSessionInfo = () => {
         console.log("SessionObject.printSessionInfo() session_id="    + this.sessionId());
         console.log("SessionObject.printSessionInfo() group_mode="    + this.groupMode());
         console.log("SessionObject.printSessionInfo() theme_type="    + this.themeType());
@@ -17,7 +17,7 @@ function SessionObject() {
         console.log("SessionObject.printSessionInfo() second_fiddle=" + this.secondFiddle());
     }
 
-    this.setSessionInfoIntoStorage = function(session_id_val, group_mode_val, theme_type_val, theme_data_val, first_fiddle_val, second_fiddle_val) {
+    this.setSessionInfoIntoStorage = (session_id_val, group_mode_val, theme_type_val, theme_data_val, first_fiddle_val, second_fiddle_val) => {
         sessionStorage.setItem("session_id",    session_id_val);
         sessionStorage.setItem("group_mode",    group_mode_val);
         sessionStorage.setItem("theme_type",    theme_type_val);
@@ -26,7 +26,7 @@ function SessionObject() {
         sessionStorage.setItem("second_fiddle", second_fiddle_val);
     };
 
-    this.removeSessionInfoFromStorage = function() {
+    this.removeSessionInfoFromStorage = () => {
         sessionStorage.removeItem("session_id");
         sessionStorage.removeItem("group_mode");
         sessionStorage.removeItem("theme_type");
