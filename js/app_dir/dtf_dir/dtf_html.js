@@ -54,10 +54,9 @@ function DtfHtmlObject(root_object_val) {
 
     		let item = items[i];
     		for (let j = 0; j < item.length; j++) {
-    			console.log(item[j]);
         		let btn = document.createElement("button");
         		btn.innerHTML = item[j];
-        		btn.className = "item" + ENCODE.encodeNumber(j, 2) + "_item_button";
+        		btn.className = "item" + ENCODE.encodeNumber(i, 2)+ ENCODE.encodeNumber(j, 2) + "_item_button";
         		document.body.appendChild(btn);
     		}
 		}
@@ -67,7 +66,7 @@ function DtfHtmlObject(root_object_val) {
     	for (let i = 0; i < items.length; i++) {
     		let item = items[i];
     		for (let j = 0; j < item.length; j++) {
-	        	document.querySelector(".item" + ENCODE.encodeNumber(j, 2) + "_item_button").addEventListener("click", function() {
+	        	document.querySelector(".item" + ENCODE.encodeNumber(i, 2) + ENCODE.encodeNumber(j, 2) + "_item_button").addEventListener("click", function() {
             		window.open("go_solo.html", "_self");
         		});
     		}
