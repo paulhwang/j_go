@@ -103,33 +103,33 @@ function DtfHtmlObject(root_object_val) {
         }
     }
 
-let modal;
+    this.orderModel = () => this.orderModel_;
 
     this.bindModal = () => {
         document.addEventListener("click", (e) => {
             if (e.target.className === "modal-open") {
-                modal = document.getElementById(e.target.dataset.id);
-                this.openModal(modal);
+                this.orderModel_ = document.getElementById(e.target.dataset.id);
+                this.openModal(this.orderModel());
             } else if (e.target.className === "modal-close") {
-                this.closeModal(modal);
+                this.closeModal(this.orderModel());
             } else {
                 return;
             }
         });
     };
 
-    this.openModal = (modal) => {
+    this.openModal = (modal_val) => {
         document.body.style.overflow = "hidden";
-        modal.setAttribute("open", "true");
+        modal_val.setAttribute("open", "true");
         document.addEventListener("keydown", this.escClose);
         let overlay = document.createElement("div");
         overlay.id = "modal-overlay";
         document.body.appendChild(overlay);
     };
 
-    this.closeModal = (modal) => {
+    this.closeModal = (modal_val) => {
         document.body.style.overflow = "auto";
-        modal.removeAttribute("open");
+        modal_val.removeAttribute("open");
         document.removeEventListener("keydown", this.escClose);
         document.body.removeChild(document.getElementById("modal-overlay"));
     };
@@ -145,7 +145,7 @@ let modal;
         for (let i = 0; i < kind_items.length; i++) {
             document.querySelector(".kind" + ENCODE.encodeNumber(i, 2) + "_kind_button").addEventListener("click", function() {
                 //window.open("go_solo.html", "_self");
-                this0.openModal(modal);
+                this0.openModal(this0.orderModel());
             });
        }
     };
