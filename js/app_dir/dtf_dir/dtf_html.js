@@ -14,9 +14,8 @@ function DtfHtmlObject(root_object_val) {
     }
 
 
-    let kinds = ["素食", "開胃菜", "小籠包", "餃類&燒賣", "大包", "湯品", "盤菜", "湯麵", "乾拌麵", "炒飯", "餛飩"];
-    
-        let all_items = [[["素食"], ["烤麩", "涼拌雲耳", "香菇素餃", "迷你豆沙包", "迷你芋泥包", "松露鮮菇盅", "什蔬炒飯"]],
+
+    let all_items = [[["素食"], ["烤麩", "涼拌雲耳", "香菇素餃", "迷你豆沙包", "迷你芋泥包", "松露鮮菇盅", "什蔬炒飯"]],
                  [["開胃菜"], ["炸排骨", "紹興醉雞", "辣味黃瓜", "寧式黃芽菜", "乾煸四季豆"]],
                  [["小籠包"], ["小籠包", "蟹粉小籠包", "雞肉小籠包", "絲瓜蝦仁小籠包", "松露小籠包"]],
                  [["餃類&燒賣"], ["蝦肉煎餃", "蝦仁燒賣", "菜肉蒸餃", "鮮魚蒸餃", "羊肉蒸餃", "香菇素餃", "糯肉燒賣"]],
@@ -41,16 +40,18 @@ function DtfHtmlObject(root_object_val) {
      			 ["紅油抄手（蝦肉）", "紅油抄手（菜肉）", "餛飩乾拌（蝦肉）", "餛飩乾拌（菜肉）"]];
 
     this.createKinds = () => {
-        for (let i = 0; i < kinds.length; i++) {
+        for (let i = 0; i < all_items.length; i++) {
+            let all_item = all_items[i];
+            let kind = all_item[0];
             let btn = document.createElement("button");
-            btn.innerHTML = kinds[i];
+            btn.innerHTML = kind;
             btn.className = "kind" + ENCODE.encodeNumber(i, 2) + "_kind_button";
             document.body.appendChild(btn);
         }
     }
 
     this.setupKindsSelectors = () => {
-        for (let i = 0; i < kinds.length; i++) {
+        for (let i = 0; i < all_items.length; i++) {
 	        document.querySelector(".kind" + ENCODE.encodeNumber(i, 2) + "_kind_button").addEventListener("click", function() {
             	window.open("go_solo.html", "_self");
         	});
@@ -59,12 +60,8 @@ function DtfHtmlObject(root_object_val) {
 
     this.createItems = () => {
     	for (let i = 0; i < items.length; i++) {
-	        let p = document.createElement("p");
-    	    p.innerHTML = kinds[i];
-        	document.body.appendChild(p);
-
     		let all_item = all_items[i];
-            p = document.createElement("p");
+            let p = document.createElement("p");
             p.innerHTML = all_item[0];
             document.body.appendChild(p);
 
