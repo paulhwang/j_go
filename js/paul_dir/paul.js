@@ -28,6 +28,14 @@ function PaulObject() {
             window.open("go_base.html", "_self");
         });
 
+
+        document.querySelector(".dtf_button").addEventListener("click", function() {
+            window.open("dtf.html", "_self");
+        });
+
+
+
+
         document.querySelector(".old_go_button").addEventListener("click", function() {
             window.open("old_go_config.html", "_self");
         });
@@ -133,10 +141,10 @@ function PaulObject() {
         map_btn.className = "map_button";
         document.body.appendChild(map_btn);
 
-        let food_order_btn = document.createElement("button");
-        food_order_btn.innerHTML = "Food Order";
-        food_order_btn.className = "food_order_button";
-        document.body.appendChild(food_order_btn);
+        let dtf_btn = document.createElement("button");
+        dtf_btn.innerHTML = "鼎泰豐";
+        dtf_btn.className = "dtf_button";
+        document.body.appendChild(dtf_btn);
 
 
         let mmw_btn = document.createElement("button");
