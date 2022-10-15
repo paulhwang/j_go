@@ -15,45 +15,32 @@ function DtfHtmlObject(root_object_val) {
 
 
     let kinds = ["素食", "開胃菜", "小籠包", "餃類&燒賣", "大包", "湯品", "盤菜", "湯麵", "乾拌麵", "炒飯", "餛飩"];
-
-    let item0 = ["烤麩", "涼拌雲耳", "香菇素餃", "迷你豆沙包", "迷你芋泥包", "松露鮮菇盅", "什蔬炒飯"];
-    let item1 = ["炸排骨", "紹興醉雞", "辣味黃瓜", "寧式黃芽菜", "乾煸四季豆"];
-    let item2 = ["小籠包", "蟹粉小籠包", "雞肉小籠包", "絲瓜蝦仁小籠包", "松露小籠包"];
-    let item3 = ["小籠包", "蟹粉小籠包", "雞肉小籠包", "絲瓜蝦仁小籠包", "松露小籠包"];
-    let item4 = ["小籠包", "蟹粉小籠包", "雞肉小籠包", "絲瓜蝦仁小籠包", "松露小籠包"];
-    let item5 = ["小籠包", "蟹粉小籠包", "雞肉小籠包", "絲瓜蝦仁小籠包", "松露小籠包"];
-    let item6 = ["小籠包", "蟹粉小籠包", "雞肉小籠包", "絲瓜蝦仁小籠包", "松露小籠包"];
-    let item7 = ["小籠包", "蟹粉小籠包", "雞肉小籠包", "絲瓜蝦仁小籠包", "松露小籠包"];
-    let item8 = ["小籠包", "蟹粉小籠包", "雞肉小籠包", "絲瓜蝦仁小籠包", "松露小籠包"];
-    let item9 = ["小籠包", "蟹粉小籠包", "雞肉小籠包", "絲瓜蝦仁小籠包", "松露小籠包"];
-    let item10 = ["小籠包", "蟹粉小籠包", "雞肉小籠包", "絲瓜蝦仁小籠包", "松露小籠包"];
-    let item11 = ["小籠包", "蟹粉小籠包", "雞肉小籠包", "絲瓜蝦仁小籠包", "松露小籠包"];
     
     let items = [["烤麩", "涼拌雲耳", "香菇素餃", "迷你豆沙包", "迷你芋泥包", "松露鮮菇盅", "什蔬炒飯"],
-     ["炸排骨", "紹興醉雞", "辣味黃瓜", "寧式黃芽菜", "乾煸四季豆"],
-     ["小籠包", "蟹粉小籠包", "雞肉小籠包", "絲瓜蝦仁小籠包", "松露小籠包"],
-     ["小籠包", "蟹粉小籠包", "雞肉小籠包", "絲瓜蝦仁小籠包", "松露小籠包"],
-     ["小籠包", "蟹粉小籠包", "雞肉小籠包", "絲瓜蝦仁小籠包", "松露小籠包"],
-     ["小籠包", "蟹粉小籠包", "雞肉小籠包", "絲瓜蝦仁小籠包", "松露小籠包"],
-     ["小籠包", "蟹粉小籠包", "雞肉小籠包", "絲瓜蝦仁小籠包", "松露小籠包"],
-     ["小籠包", "蟹粉小籠包", "雞肉小籠包", "絲瓜蝦仁小籠包", "松露小籠包"],
-     ["小籠包", "蟹粉小籠包", "雞肉小籠包", "絲瓜蝦仁小籠包", "松露小籠包"],
-     ["小籠包", "蟹粉小籠包", "雞肉小籠包", "絲瓜蝦仁小籠包", "松露小籠包"],
-     ["小籠包", "蟹粉小籠包", "雞肉小籠包", "絲瓜蝦仁小籠包", "松露小籠包"],
-     ["小籠包", "蟹粉小籠包", "雞肉小籠包", "絲瓜蝦仁小籠包", "松露小籠包"]]
+    			 ["炸排骨", "紹興醉雞", "辣味黃瓜", "寧式黃芽菜", "乾煸四季豆"],
+     			 ["小籠包", "蟹粉小籠包", "雞肉小籠包", "絲瓜蝦仁小籠包", "松露小籠包"],
+     			 ["小籠包", "蟹粉小籠包", "雞肉小籠包", "絲瓜蝦仁小籠包", "松露小籠包"],
+     			 ["小籠包", "蟹粉小籠包", "雞肉小籠包", "絲瓜蝦仁小籠包", "松露小籠包"],
+     			 ["小籠包", "蟹粉小籠包", "雞肉小籠包", "絲瓜蝦仁小籠包", "松露小籠包"],
+     			 ["小籠包", "蟹粉小籠包", "雞肉小籠包", "絲瓜蝦仁小籠包", "松露小籠包"],
+     			 ["小籠包", "蟹粉小籠包", "雞肉小籠包", "絲瓜蝦仁小籠包", "松露小籠包"],
+     			 ["小籠包", "蟹粉小籠包", "雞肉小籠包", "絲瓜蝦仁小籠包", "松露小籠包"],
+     			 ["小籠包", "蟹粉小籠包", "雞肉小籠包", "絲瓜蝦仁小籠包", "松露小籠包"],
+     			 ["小籠包", "蟹粉小籠包", "雞肉小籠包", "絲瓜蝦仁小籠包", "松露小籠包"],
+ 			     ["小籠包", "蟹粉小籠包", "雞肉小籠包", "絲瓜蝦仁小籠包", "松露小籠包"]]
 
     this.createKinds = () => {
     	for (let i = 0; i < kinds.length; i++) {
         	let btn = document.createElement("button");
         	btn.innerHTML = kinds[i];
-        	btn.className = "k" + ENCODE.encodeNumber(i, 2) + "_kind_button";
+        	btn.className = "kind" + ENCODE.encodeNumber(i, 2) + "_kind_button";
         	document.body.appendChild(btn);
 	    }
 	}
 
     this.setupKindsSelectors = () => {
         for (let i = 0; i < kinds.length; i++) {
-	        document.querySelector(".k" + ENCODE.encodeNumber(i, 2) + "_kind_button").addEventListener("click", function() {
+	        document.querySelector(".kind" + ENCODE.encodeNumber(i, 2) + "_kind_button").addEventListener("click", function() {
             	window.open("go_solo.html", "_self");
         	});
 	    }
@@ -70,7 +57,7 @@ function DtfHtmlObject(root_object_val) {
     			console.log(item[j]);
         		let btn = document.createElement("button");
         		btn.innerHTML = item[j];
-        		btn.className = "i" + ENCODE.encodeNumber(j, 2) + "_item_button";
+        		btn.className = "item" + ENCODE.encodeNumber(j, 2) + "_item_button";
         		document.body.appendChild(btn);
     		}
 		}
@@ -80,7 +67,9 @@ function DtfHtmlObject(root_object_val) {
     	for (let i = 0; i < items.length; i++) {
     		let item = items[i];
     		for (let j = 0; j < item.length; j++) {
-    			//console.log(item[j]);
+	        	document.querySelector(".item" + ENCODE.encodeNumber(j, 2) + "_item_button").addEventListener("click", function() {
+            		window.open("go_solo.html", "_self");
+        		});
     		}
 		}
     };
