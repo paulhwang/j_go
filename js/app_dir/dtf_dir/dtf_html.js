@@ -18,36 +18,20 @@ function DtfHtmlObject(root_object_val) {
     this.createKinds = () => {
 
 
-    	for (let i = 0; i < 1; i++) {
+    	for (let i = 0; i < kinds.length; i++) {
         	let btn = document.createElement("button");
         	btn.innerHTML = kinds[i];
-        	btn.className = "register_button";
+        	btn.className = "s" + ENCODE.encodeNumber(i, 2) + "_kinds_button";
         	document.body.appendChild(btn);
 	    }
-/*
-        for (let i = 0; i < kinds.length; i++) {
-        	let btn = document.createElement("button");
-        	btn.innerHTML = kinds[i];
-        	btn.className = ENCODE.encodeNumber(i, 2) + "_kinds_button";
-        	console.log(btn.className);
-        	document.body.appendChild(btn);
-        }
-        */
 	}
 
     this.setupKindsSelectors = () => {
-        document.querySelector(".register_button").addEventListener("click", function() {
-            window.open("account_register.html", "_self");
-        });
-
-    	/*
         for (let i = 0; i < kinds.length; i++) {
-        	document.querySelector("." + ENCODE.encodeNumber(i, 2) + "_kinds_button").addEventListener("click", function() {
+	        document.querySelector(".s" + ENCODE.encodeNumber(i, 2) + "_kinds_button").addEventListener("click", function() {
             	window.open("go_solo.html", "_self");
         	});
-        }
-*/
-
+	    }
     };
 
 
