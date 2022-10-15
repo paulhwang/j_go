@@ -9,14 +9,8 @@ function DtfHtmlObject(root_object_val) {
         this.rootObject_ = root_object_val;
         this.createKinds();
         this.setupKindsSelectors();
-
-        //this.createItem2();
-        //this.setupItem2Selectors();
-
-        //this.createItem3();
-        //this.setupItem3Selectors();
-
         this.createItems();
+        this.setupItemsSelectors();
     }
 
 
@@ -52,14 +46,14 @@ function DtfHtmlObject(root_object_val) {
     	for (let i = 0; i < kinds.length; i++) {
         	let btn = document.createElement("button");
         	btn.innerHTML = kinds[i];
-        	btn.className = "k" + ENCODE.encodeNumber(i, 2) + "_kinds_button";
+        	btn.className = "k" + ENCODE.encodeNumber(i, 2) + "_kind_button";
         	document.body.appendChild(btn);
 	    }
 	}
 
     this.setupKindsSelectors = () => {
         for (let i = 0; i < kinds.length; i++) {
-	        document.querySelector(".k" + ENCODE.encodeNumber(i, 2) + "_kinds_button").addEventListener("click", function() {
+	        document.querySelector(".k" + ENCODE.encodeNumber(i, 2) + "_kind_button").addEventListener("click", function() {
             	window.open("go_solo.html", "_self");
         	});
 	    }
@@ -76,8 +70,17 @@ function DtfHtmlObject(root_object_val) {
     			console.log(item[j]);
         		let btn = document.createElement("button");
         		btn.innerHTML = item[j];
-        		//btn.className = "j" + ENCODE.encodeNumber(j, 2) + "_items_button";
+        		btn.className = "i" + ENCODE.encodeNumber(j, 2) + "_item_button";
         		document.body.appendChild(btn);
+    		}
+		}
+    };
+
+    this.setupItemsSelectors = () => {
+    	for (let i = 0; i < items.length; i++) {
+    		let item = items[i];
+    		for (let j = 0; j < item.length; j++) {
+    			//console.log(item[j]);
     		}
 		}
     };
