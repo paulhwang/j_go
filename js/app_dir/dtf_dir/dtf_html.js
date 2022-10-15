@@ -26,18 +26,6 @@ function DtfHtmlObject(root_object_val) {
                  [["乾拌麵"], ["炸醬麵", "擔擔麵", "麻醬麵", "紅油燃麵", "雪菜肉絲乾拌麵"]],
                  [["炒飯"], ["排骨蛋炒飯", "蝦仁蛋炒飯", "肉絲蛋炒飯", "蝦仁肉絲蛋炒飯", "什蔬蛋炒飯"]],
                  [["餛飩"], ["紅油抄手（蝦肉）", "紅油抄手（菜肉）", "餛飩乾拌（蝦肉）", "餛飩乾拌（菜肉）"]]];
-    
-    let items = [["烤麩", "涼拌雲耳", "香菇素餃", "迷你豆沙包", "迷你芋泥包", "松露鮮菇盅", "什蔬炒飯"],
-    			 ["炸排骨", "紹興醉雞", "辣味黃瓜", "寧式黃芽菜", "乾煸四季豆"],
-     			 ["小籠包", "蟹粉小籠包", "雞肉小籠包", "絲瓜蝦仁小籠包", "松露小籠包"],
-     			 ["蝦肉煎餃", "蝦仁燒賣", "菜肉蒸餃", "鮮魚蒸餃", "羊肉蒸餃", "香菇素餃", "糯肉燒賣"],
-     			 ["鮮肉大包", "菜肉大包", "香菇素包", "豆沙大包", "芝麻大包", "黃金流沙包"],
-     			 ["元盅雞湯", "元盅牛肉湯", "紅燒牛肉湯", "酸辣湯", "蝦肉餛飩湯", "菜肉餛飩湯"],
-     			 ["高麗菜", "空心菜", "地瓜葉", "莧菜", "莧菜腐竹"],
-     			 ["紅燒牛肉麵", "元盅雞麵", "元盅牛肉麵", "紅燒牛肉湯麵", "雪菜肉絲湯麵"],
-     			 ["炸醬麵", "擔擔麵", "麻醬麵", "紅油燃麵", "雪菜肉絲乾拌麵"],
-     			 ["排骨蛋炒飯", "蝦仁蛋炒飯", "肉絲蛋炒飯", "蝦仁肉絲蛋炒飯", "什蔬蛋炒飯"],
-     			 ["紅油抄手（蝦肉）", "紅油抄手（菜肉）", "餛飩乾拌（蝦肉）", "餛飩乾拌（菜肉）"]];
 
     this.createKinds = () => {
         for (let i = 0; i < kind_items.length; i++) {
@@ -82,8 +70,7 @@ function DtfHtmlObject(root_object_val) {
     	for (let i = 0; i < kind_items.length; i++) {
             let kind_item = kind_items[i];
             let kind = kind_item[0];
-            //let item = kind_item[1];
-    		let item = items[i];
+            let item = kind_item[1];
     		for (let j = 0; j < item.length; j++) {
 	        	document.querySelector(".item" + ENCODE.encodeNumber(i, 2) + ENCODE.encodeNumber(j, 2) + "_item_button").addEventListener("click", function() {
             		window.open("go_solo.html", "_self");
