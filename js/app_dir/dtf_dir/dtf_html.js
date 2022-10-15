@@ -43,6 +43,7 @@ function DtfHtmlObject(root_object_val) {
         for (let i = 0; i < kind_items.length; i++) {
             let kind_item = kind_items[i];
             let kind = kind_item[0];
+
             let btn = document.createElement("button");
             btn.innerHTML = kind;
             btn.className = "kind" + ENCODE.encodeNumber(i, 2) + "_kind_button";
@@ -59,10 +60,11 @@ function DtfHtmlObject(root_object_val) {
     };
 
     this.createItems = () => {
-    	for (let i = 0; i < items.length; i++) {
+    	for (let i = 0; i < kind_items.length; i++) {
     		let kind_item = kind_items[i];
             let kind = kind_item[0];
             let item = kind_item[1];
+
             let p = document.createElement("p");
             p.innerHTML = kind;
             document.body.appendChild(p);
@@ -77,7 +79,7 @@ function DtfHtmlObject(root_object_val) {
     };
 
     this.setupItemsSelectors = () => {
-    	for (let i = 0; i < items.length; i++) {
+    	for (let i = 0; i < kind_items.length; i++) {
     		let item = items[i];
     		for (let j = 0; j < item.length; j++) {
 	        	document.querySelector(".item" + ENCODE.encodeNumber(i, 2) + ENCODE.encodeNumber(j, 2) + "_item_button").addEventListener("click", function() {
