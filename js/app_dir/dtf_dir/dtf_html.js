@@ -9,33 +9,87 @@ function DtfHtmlObject(root_object_val) {
         this.rootObject_ = root_object_val;
         this.createKinds();
         this.setupKindsSelectors();
-        //this.setupQuerySelectors();
+
+        this.createItem2();
+        this.setupItem2Selectors();
+
+        this.createItem3();
+        this.setupItem3Selectors();
     }
 
 
     let kinds = ["素食", "開胃菜", "小籠包", "餃類&燒賣", "大包", "湯品", "盤菜", "湯麵", "乾拌麵", "炒飯", "餛飩"];
+    let item0 = ["小籠包", "蟹粉小籠包", "雞肉小籠包", "絲瓜蝦仁小籠包", "松露小籠包"];
+    let item1 = ["小籠包", "蟹粉小籠包", "雞肉小籠包", "絲瓜蝦仁小籠包", "松露小籠包"];
+    let item2 = ["小籠包", "蟹粉小籠包", "雞肉小籠包", "絲瓜蝦仁小籠包", "松露小籠包"];
+    let item3 = ["小籠包", "蟹粉小籠包", "雞肉小籠包", "絲瓜蝦仁小籠包", "松露小籠包"];
+    let item4 = ["小籠包", "蟹粉小籠包", "雞肉小籠包", "絲瓜蝦仁小籠包", "松露小籠包"];
+    let item5 = ["小籠包", "蟹粉小籠包", "雞肉小籠包", "絲瓜蝦仁小籠包", "松露小籠包"];
+    let item6 = ["小籠包", "蟹粉小籠包", "雞肉小籠包", "絲瓜蝦仁小籠包", "松露小籠包"];
+    let item7 = ["小籠包", "蟹粉小籠包", "雞肉小籠包", "絲瓜蝦仁小籠包", "松露小籠包"];
+    let item8 = ["小籠包", "蟹粉小籠包", "雞肉小籠包", "絲瓜蝦仁小籠包", "松露小籠包"];
+    let item9 = ["小籠包", "蟹粉小籠包", "雞肉小籠包", "絲瓜蝦仁小籠包", "松露小籠包"];
+    let item10 = ["小籠包", "蟹粉小籠包", "雞肉小籠包", "絲瓜蝦仁小籠包", "松露小籠包"];
+    let item11 = ["小籠包", "蟹粉小籠包", "雞肉小籠包", "絲瓜蝦仁小籠包", "松露小籠包"];
 
     this.createKinds = () => {
-
-
     	for (let i = 0; i < kinds.length; i++) {
         	let btn = document.createElement("button");
         	btn.innerHTML = kinds[i];
-        	btn.className = "s" + ENCODE.encodeNumber(i, 2) + "_kinds_button";
+        	btn.className = "k" + ENCODE.encodeNumber(i, 2) + "_kinds_button";
         	document.body.appendChild(btn);
 	    }
 	}
 
     this.setupKindsSelectors = () => {
         for (let i = 0; i < kinds.length; i++) {
-	        document.querySelector(".s" + ENCODE.encodeNumber(i, 2) + "_kinds_button").addEventListener("click", function() {
+	        document.querySelector(".k" + ENCODE.encodeNumber(i, 2) + "_kinds_button").addEventListener("click", function() {
             	window.open("go_solo.html", "_self");
         	});
 	    }
     };
 
+    this.createItem2 = () => {
+        let p = document.createElement("p");
+        p.innerHTML = kinds[2];
+        document.body.appendChild(p);
 
+    	for (let i = 0; i < item2.length; i++) {
+        	let btn = document.createElement("button");
+        	btn.innerHTML = item2[i];
+        	btn.className = "i2" + ENCODE.encodeNumber(i, 2) + "_items_button";
+        	document.body.appendChild(btn);
+	    }
+	}
 
+    this.setupItem2Selectors = () => {
+        for (let i = 0; i < item2.length; i++) {
+	        document.querySelector(".i2" + ENCODE.encodeNumber(i, 2) + "_items_button").addEventListener("click", function() {
+            	window.open("go_solo.html", "_self");
+        	});
+	    }
+    };
+
+    this.createItem3 = () => {
+        let p = document.createElement("p");
+        p.innerHTML = kinds[2];
+        document.body.appendChild(p);
+
+    	for (let i = 0; i < item3.length; i++) {
+        	let btn = document.createElement("button");
+        	btn.innerHTML = item3[i];
+        	btn.className = "i3" + ENCODE.encodeNumber(i, 2) + "_items_button";
+        	document.body.appendChild(btn);
+	    }
+	}
+
+    this.setupItem3Selectors = () => {
+        for (let i = 0; i < item3.length; i++) {
+	        document.querySelector(".i3" + ENCODE.encodeNumber(i, 2) + "_items_button").addEventListener("click", function() {
+            	window.open("go_solo.html", "_self");
+        	});
+	    }
+    };
 
 
 
