@@ -7,25 +7,45 @@ function DtfHtmlObject(root_object_val) {
     "use strict";
     this.init__ = function(root_object_val) {
         this.rootObject_ = root_object_val;
+        this.createPreludes();
         this.createKinds();
         this.setupKindsSelectors();
         this.createItems();
         this.setupItemsSelectors();
     }
 
+    const preludes = [
+        ["〈本店使用國產豬肉〉"],
+        ["每日上午6:00開放11:30後取餐的預點餐。"],
+        ["每餐廳營業時間開始後，才會開始製餐。"],
+        ["餐廳接單時間為11:00-20:00。"],
+        ["餐點均為現做，將視您所訂購的餐點數量調整取餐時間。"],
+        ["憑訂單編號，前往鼎泰豐信義店取餐。"],
+        ["基於餐點口味及品質，恕不提供客製化服務。"],
+        ["餐廳最後取餐時間為20:30。"]];
 
 
-    let kind_items = [[["素食"], ["烤麩", "涼拌雲耳", "香菇素餃", "迷你豆沙包", "迷你芋泥包", "松露鮮菇盅", "什蔬炒飯"]],
-                 [["開胃菜"], ["炸排骨", "紹興醉雞", "辣味黃瓜", "寧式黃芽菜", "乾煸四季豆"]],
-                 [["小籠包"], ["小籠包", "蟹粉小籠包", "雞肉小籠包", "絲瓜蝦仁小籠包", "松露小籠包"]],
-                 [["餃類&燒賣"], ["蝦肉煎餃", "蝦仁燒賣", "菜肉蒸餃", "鮮魚蒸餃", "羊肉蒸餃", "香菇素餃", "糯肉燒賣"]],
-                 [["大包"], ["鮮肉大包", "菜肉大包", "香菇素包", "豆沙大包", "芝麻大包", "黃金流沙包"]],
-                 [["湯品"], ["元盅雞湯", "元盅牛肉湯", "紅燒牛肉湯", "酸辣湯", "蝦肉餛飩湯", "菜肉餛飩湯"]],
-                 [["盤菜"], ["高麗菜", "空心菜", "地瓜葉", "莧菜", "莧菜腐竹"]],
-                 [["湯麵"], ["紅燒牛肉麵", "元盅雞麵", "元盅牛肉麵", "紅燒牛肉湯麵", "雪菜肉絲湯麵"]],
-                 [["乾拌麵"], ["炸醬麵", "擔擔麵", "麻醬麵", "紅油燃麵", "雪菜肉絲乾拌麵"]],
-                 [["炒飯"], ["排骨蛋炒飯", "蝦仁蛋炒飯", "肉絲蛋炒飯", "蝦仁肉絲蛋炒飯", "什蔬蛋炒飯"]],
-                 [["餛飩"], ["紅油抄手（蝦肉）", "紅油抄手（菜肉）", "餛飩乾拌（蝦肉）", "餛飩乾拌（菜肉）"]]];
+    const kind_items = [
+        [["素食"], ["烤麩", "涼拌雲耳", "香菇素餃", "迷你豆沙包", "迷你芋泥包", "松露鮮菇盅", "什蔬炒飯"]],
+        [["開胃菜"], ["炸排骨", "紹興醉雞", "辣味黃瓜", "寧式黃芽菜", "乾煸四季豆"]],
+        [["小籠包"], ["小籠包", "蟹粉小籠包", "雞肉小籠包", "絲瓜蝦仁小籠包", "松露小籠包"]],
+        [["餃類&燒賣"], ["蝦肉煎餃", "蝦仁燒賣", "菜肉蒸餃", "鮮魚蒸餃", "羊肉蒸餃", "香菇素餃", "糯肉燒賣"]],
+        [["大包"], ["鮮肉大包", "菜肉大包", "香菇素包", "豆沙大包", "芝麻大包", "黃金流沙包"]],
+        [["湯品"], ["元盅雞湯", "元盅牛肉湯", "紅燒牛肉湯", "酸辣湯", "蝦肉餛飩湯", "菜肉餛飩湯"]],
+        [["盤菜"], ["高麗菜", "空心菜", "地瓜葉", "莧菜", "莧菜腐竹"]],
+        [["湯麵"], ["紅燒牛肉麵", "元盅雞麵", "元盅牛肉麵", "紅燒牛肉湯麵", "雪菜肉絲湯麵"]],
+        [["乾拌麵"], ["炸醬麵", "擔擔麵", "麻醬麵", "紅油燃麵", "雪菜肉絲乾拌麵"]],
+        [["炒飯"], ["排骨蛋炒飯", "蝦仁蛋炒飯", "肉絲蛋炒飯", "蝦仁肉絲蛋炒飯", "什蔬蛋炒飯"]],
+        [["餛飩"], ["紅油抄手（蝦肉）", "紅油抄手（菜肉）", "餛飩乾拌（蝦肉）", "餛飩乾拌（菜肉）"]]];
+
+    this.createPreludes = () => {
+        for (let i = 0; i < preludes.length; i++) {
+            let prelude = preludes[i];
+            let p = document.createElement("p");
+            p.innerHTML = prelude;
+            document.body.appendChild(p);
+        }
+    };
 
     this.createKinds = () => {
         for (let i = 0; i < kind_items.length; i++) {
@@ -41,15 +61,15 @@ function DtfHtmlObject(root_object_val) {
 
     this.setupKindsSelectors = () => {
         for (let i = 0; i < kind_items.length; i++) {
-	        document.querySelector(".kind" + ENCODE.encodeNumber(i, 2) + "_kind_button").addEventListener("click", function() {
-            	window.open("go_solo.html", "_self");
-        	});
-	    }
+            document.querySelector(".kind" + ENCODE.encodeNumber(i, 2) + "_kind_button").addEventListener("click", function() {
+                window.open("go_solo.html", "_self");
+            });
+       }
     };
 
     this.createItems = () => {
-    	for (let i = 0; i < kind_items.length; i++) {
-    		let kind_item = kind_items[i];
+        for (let i = 0; i < kind_items.length; i++) {
+            let kind_item = kind_items[i];
             let kind = kind_item[0];
             let item = kind_item[1];
 
@@ -57,26 +77,26 @@ function DtfHtmlObject(root_object_val) {
             p.innerHTML = kind;
             document.body.appendChild(p);
 
-    		for (let j = 0; j < item.length; j++) {
-        		let btn = document.createElement("button");
-        		btn.innerHTML = item[j];
-        		btn.className = "item" + ENCODE.encodeNumber(i, 2)+ ENCODE.encodeNumber(j, 2) + "_item_button";
-        		document.body.appendChild(btn);
-    		}
-		}
+            for (let j = 0; j < item.length; j++) {
+                let btn = document.createElement("button");
+                btn.innerHTML = item[j];
+                btn.className = "item" + ENCODE.encodeNumber(i, 2)+ ENCODE.encodeNumber(j, 2) + "_item_button";
+                document.body.appendChild(btn);
+            }
+        }
     };
 
     this.setupItemsSelectors = () => {
-    	for (let i = 0; i < kind_items.length; i++) {
+        for (let i = 0; i < kind_items.length; i++) {
             let kind_item = kind_items[i];
             let kind = kind_item[0];
             let item = kind_item[1];
-    		for (let j = 0; j < item.length; j++) {
-	        	document.querySelector(".item" + ENCODE.encodeNumber(i, 2) + ENCODE.encodeNumber(j, 2) + "_item_button").addEventListener("click", function() {
-            		window.open("go_solo.html", "_self");
-        		});
-    		}
-		}
+            for (let j = 0; j < item.length; j++) {
+               document.querySelector(".item" + ENCODE.encodeNumber(i, 2) + ENCODE.encodeNumber(j, 2) + "_item_button").addEventListener("click", function() {
+                    window.open("go_solo.html", "_self");
+                });
+            }
+        }
     };
 
     this.setupQuerySelectors = function() {
