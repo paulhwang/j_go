@@ -10,11 +10,13 @@ function DtfHtmlObject(root_object_val) {
         this.createKinds();
         this.setupKindsSelectors();
 
-        this.createItem2();
-        this.setupItem2Selectors();
+        //this.createItem2();
+        //this.setupItem2Selectors();
 
-        this.createItem3();
-        this.setupItem3Selectors();
+        //this.createItem3();
+        //this.setupItem3Selectors();
+
+        this.createItems();
     }
 
 
@@ -63,52 +65,22 @@ function DtfHtmlObject(root_object_val) {
 	    }
     };
 
-    this.createItem2 = () => {
-        let p = document.createElement("p");
-        p.innerHTML = kinds[2];
-        document.body.appendChild(p);
+    this.createItems = () => {
+    	for (let i = 0; i < items.length; i++) {
+	        let p = document.createElement("p");
+    	    p.innerHTML = kinds[i];
+        	document.body.appendChild(p);
 
-    	for (let i = 0; i < item2.length; i++) {
-        	let btn = document.createElement("button");
-        	btn.innerHTML = item2[i];
-        	btn.className = "i2" + ENCODE.encodeNumber(i, 2) + "_items_button";
-        	document.body.appendChild(btn);
-	    }
-	}
-
-    this.setupItem2Selectors = () => {
-        for (let i = 0; i < item2.length; i++) {
-	        document.querySelector(".i2" + ENCODE.encodeNumber(i, 2) + "_items_button").addEventListener("click", function() {
-            	window.open("go_solo.html", "_self");
-        	});
-	    }
+    		let item = items[i];
+    		for (let j = 0; j < item.length; j++) {
+    			console.log(item[j]);
+        		let btn = document.createElement("button");
+        		btn.innerHTML = item[j];
+        		//btn.className = "j" + ENCODE.encodeNumber(j, 2) + "_items_button";
+        		document.body.appendChild(btn);
+    		}
+		}
     };
-
-    this.createItem3 = () => {
-        let p = document.createElement("p");
-        p.innerHTML = kinds[2];
-        document.body.appendChild(p);
-
-    	for (let i = 0; i < item3.length; i++) {
-        	let btn = document.createElement("button");
-        	btn.innerHTML = item3[i];
-        	btn.className = "i3" + ENCODE.encodeNumber(i, 2) + "_items_button";
-        	document.body.appendChild(btn);
-	    }
-	}
-
-    this.setupItem3Selectors = () => {
-        for (let i = 0; i < item3.length; i++) {
-	        document.querySelector(".i3" + ENCODE.encodeNumber(i, 2) + "_items_button").addEventListener("click", function() {
-            	window.open("go_solo.html", "_self");
-        	});
-	    }
-    };
-
-
-
-
-
 
     this.setupQuerySelectors = function() {
         const theme_type = FE_DEF.THEME_IS_GO_GAME();
