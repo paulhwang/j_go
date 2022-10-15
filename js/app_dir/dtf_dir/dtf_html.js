@@ -61,11 +61,12 @@ function DtfHtmlObject(root_object_val) {
     this.createItems = () => {
     	for (let i = 0; i < items.length; i++) {
     		let kind_item = kind_items[i];
+            let kind = kind_item[0];
+            let item = kind_item[1];
             let p = document.createElement("p");
-            p.innerHTML = kind_item[0];
+            p.innerHTML = kind;
             document.body.appendChild(p);
 
-            let item = items[i];
     		for (let j = 0; j < item.length; j++) {
         		let btn = document.createElement("button");
         		btn.innerHTML = item[j];
