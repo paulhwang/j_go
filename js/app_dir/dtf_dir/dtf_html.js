@@ -15,14 +15,15 @@ function DtfHtmlObject(root_object_val) {
     }
 
     const preludes = [
-        ["〈本店使用國產豬肉〉"],
-        ["每日上午6:00開放11:30後取餐的預點餐。"],
-        ["每餐廳營業時間開始後，才會開始製餐。"],
-        ["餐廳接單時間為11:00-20:00。"],
-        ["餐點均為現做，將視您所訂購的餐點數量調整取餐時間。"],
-        ["憑訂單編號，前往鼎泰豐信義店取餐。"],
-        ["基於餐點口味及品質，恕不提供客製化服務。"],
-        ["餐廳最後取餐時間為20:30。"]];
+        [["h1"], ["鼎泰豐"]],
+        [["h2"], ["〈本店使用國產豬肉〉"]],
+        [["p"], ["每日上午6:00開放11:30後取餐的預點餐。"]],
+        [["p"], ["每餐廳營業時間開始後，才會開始製餐。"]],
+        [["p"], ["餐廳接單時間為11:00-20:00。"]],
+        [["p"], ["餐點均為現做，將視您所訂購的餐點數量調整取餐時間。"]],
+        [["p"], ["憑訂單編號，前往鼎泰豐信義店取餐。"]],
+        [["p"], ["基於餐點口味及品質，恕不提供客製化服務。"]],
+        [["h2"], ["餐廳最後取餐時間為20:30。"]]];
 
 
     const kind_items = [
@@ -41,8 +42,10 @@ function DtfHtmlObject(root_object_val) {
     this.createPreludes = () => {
         for (let i = 0; i < preludes.length; i++) {
             let prelude = preludes[i];
-            let p = document.createElement("p");
-            p.innerHTML = prelude;
+            let tag = prelude[0];
+            let text = prelude[1];
+            let p = document.createElement(tag);
+            p.innerHTML = text;
             document.body.appendChild(p);
         }
     };
