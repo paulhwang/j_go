@@ -1,4 +1,4 @@
-let modal;
+/*let modal;
 document.addEventListener("click", (e) => {
   if (e.target.className === "modal-open") {
     modal = document.getElementById(e.target.dataset.id);
@@ -9,7 +9,9 @@ document.addEventListener("click", (e) => {
     return;
   }
 });
+*/
 
+/*
 const openModal = (modal) => {
   document.body.style.overflow = "hidden";
   modal.setAttribute("open", "true");
@@ -31,8 +33,7 @@ const escClose = (e) => {
     closeModal();
   }
 };
-
-
+*/
 
 
 
@@ -46,6 +47,7 @@ function DtfHtmlObject(root_object_val) {
     "use strict";
     this.init__ = function(root_object_val) {
         this.rootObject_ = root_object_val;
+        this.bindModal();
         this.createPreludes();
         this.createKinds();
         this.setupKindsSelectors();
@@ -101,11 +103,25 @@ function DtfHtmlObject(root_object_val) {
         }
     }
 
+let modal;
+
+    this.bindModal = () => {
+        document.addEventListener("click", (e) => {
+            if (e.target.className === "modal-open") {
+                modal = document.getElementById(e.target.dataset.id);
+                this.openModal(modal);
+            } else if (e.target.className === "modal-close") {
+                this.closeModal(modal);
+            } else {
+                return;
+            }
+        });
+    };
 
     this.openModal = (modal) => {
         document.body.style.overflow = "hidden";
         modal.setAttribute("open", "true");
-        document.addEventListener("keydown", escClose);
+        document.addEventListener("keydown", this.escClose);
         let overlay = document.createElement("div");
         overlay.id = "modal-overlay";
         document.body.appendChild(overlay);
@@ -114,7 +130,7 @@ function DtfHtmlObject(root_object_val) {
     this.closeModal = (modal) => {
         document.body.style.overflow = "auto";
         modal.removeAttribute("open");
-        document.removeEventListener("keydown", escClose);
+        document.removeEventListener("keydown", this.escClose);
         document.body.removeChild(document.getElementById("modal-overlay"));
     };
 
@@ -125,10 +141,11 @@ function DtfHtmlObject(root_object_val) {
     };
 
     this.setupKindsSelectors = () => {
+        const this0 = this;
         for (let i = 0; i < kind_items.length; i++) {
             document.querySelector(".kind" + ENCODE.encodeNumber(i, 2) + "_kind_button").addEventListener("click", function() {
                 //window.open("go_solo.html", "_self");
-                openModal(modal);
+                this0.openModal(modal);
             });
        }
     };
