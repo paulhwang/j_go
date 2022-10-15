@@ -80,6 +80,9 @@ function DtfHtmlObject(root_object_val) {
 
     this.setupItemsSelectors = () => {
     	for (let i = 0; i < kind_items.length; i++) {
+            let kind_item = kind_items[i];
+            let kind = kind_item[0];
+            //let item = kind_item[1];
     		let item = items[i];
     		for (let j = 0; j < item.length; j++) {
 	        	document.querySelector(".item" + ENCODE.encodeNumber(i, 2) + ENCODE.encodeNumber(j, 2) + "_item_button").addEventListener("click", function() {
