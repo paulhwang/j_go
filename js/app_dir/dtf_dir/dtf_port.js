@@ -3,7 +3,7 @@
   Written by Paul Hwang
 */
 
-function GoBasePortObject(root_val) {
+function DtfPortObject(root_val) {
     "use strict";
     this.init__ = function(root_val) {
         this.rootObj_ = root_val;

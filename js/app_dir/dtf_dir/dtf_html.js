@@ -3,12 +3,60 @@
   Written by Paul Hwang
 */
 
-function GoBaseHtmlObject(root_object_val) {
+function DtfHtmlObject(root_object_val) {
     "use strict";
     this.init__ = function(root_object_val) {
         this.rootObject_ = root_object_val;
-        this.setupQuerySelectors();
+        this.createKinds();
+        this.setupKindsSelectors();
+        //this.setupQuerySelectors();
     }
+
+
+    let kinds = ["素食", "開胃菜", "小籠包", "餃類&燒賣", "大包", "湯品", "盤菜", "湯麵", "乾拌麵", "炒飯", "餛飩"];
+
+    this.createKinds = () => {
+
+
+    	for (let i = 0; i < 1; i++) {
+        	let btn = document.createElement("button");
+        	btn.innerHTML = kinds[i];
+        	btn.className = "register_button";
+        	document.body.appendChild(btn);
+	    }
+/*
+        for (let i = 0; i < kinds.length; i++) {
+        	let btn = document.createElement("button");
+        	btn.innerHTML = kinds[i];
+        	btn.className = ENCODE.encodeNumber(i, 2) + "_kinds_button";
+        	console.log(btn.className);
+        	document.body.appendChild(btn);
+        }
+        */
+	}
+
+    this.setupKindsSelectors = () => {
+        document.querySelector(".register_button").addEventListener("click", function() {
+            window.open("account_register.html", "_self");
+        });
+
+    	/*
+        for (let i = 0; i < kinds.length; i++) {
+        	document.querySelector("." + ENCODE.encodeNumber(i, 2) + "_kinds_button").addEventListener("click", function() {
+            	window.open("go_solo.html", "_self");
+        	});
+        }
+*/
+
+    };
+
+
+
+
+
+
+
+
 
     this.setupQuerySelectors = function() {
         const theme_type = FE_DEF.THEME_IS_GO_GAME();

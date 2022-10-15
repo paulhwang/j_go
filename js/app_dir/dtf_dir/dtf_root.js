@@ -3,13 +3,13 @@
   Written by Paul Hwang
 */
 
-function GoBaseRootObject() {
+function DtfRootObject() {
     "use strict";
     this.init__ = function() {
         this.fabricBaseObj_ = new FabricBaseObject(this);
 
-        this.htmlObject_ = new GoBaseHtmlObject(this);
-        this.portObject_ = new GoBasePortObject(this);
+        this.htmlObject_ = new DtfHtmlObject(this);
+        this.portObject_ = new DtfPortObject(this);
     };
 
     this.fabricBaseObj = () => this.fabricBaseObj_;
@@ -22,4 +22,4 @@ function GoBaseRootObject() {
     this.init__();
 };
 
-$(document).ready(() => {new GoBaseRootObject();});
+$(document).ready(() => {new DtfRootObject();});
