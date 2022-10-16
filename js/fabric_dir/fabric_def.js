@@ -41,22 +41,22 @@ function FE_DEF_OBJECT() {
     this.MESSAGE_COMMAND           = () => 'M';
     this.MESSAGE_RESPONSE          = () => 'm';
 
-    this.REGISTER_COMMANDS          = () => this.REGISTER_COMMAND;
-    this.LOGIN_COMMANDS             = () => this.LOGIN_COMMAND;
-    this.LOGOUT_COMMANDS            = () => this.LOGOUT_COMMAND;
-    this.GET_LINK_DATA_COMMANDS     = () => this.GET_LINK_DATA_COMMAND;
-    this.GET_NAME_LIST_COMMANDS     = () => this.GET_NAME_LIST_COMMAND;
-    this.SETUP_SESSION_COMMANDS     = () => this.SETUP_SESSION_COMMAND;
-    this.SETUP_SESSION2_COMMANDS    = () => this.SETUP_SESSION2_COMMAND;
-    this.SETUP_SESSION3_COMMANDS    = () => this.SETUP_SESSION3_COMMAND;
-    this.FREE_SESSION_COMMANDS      = () => this.FREE_SESSION_COMMAND;
-    this.PUT_SESSION_DATA_COMMANDS  = () => this.PUT_SESSION_DATA_COMMAND;
-    this.GET_SESSION_DATA_COMMANDS  = () => this.GET_SESSION_DATA_COMMAND;
-    this.OPEN_FILE_COMMANDS         = () => this.OPEN_FILE_COMMAND;
-    this.CLOSE_FILE_COMMANDS        = () => this.CLOSE_FILE_COMMAND;
-    this.READ_FILE_COMMANDS         = () => this.READ_FILE_COMMAND;
-    this.WRITE_FILE_COMMANDS        = () => this.WRITE_FILE_COMMAND;
-    this.MESSAGE_COMMANDS           = () => this.MESSAGE_COMMAND;
+    this.REGISTER_COMMANDS          = () => "0" + this.REGISTER_COMMAND;
+    this.LOGIN_COMMANDS             = () => "0" + this.LOGIN_COMMAND;
+    this.LOGOUT_COMMANDS            = () => "1" + this.LOGOUT_COMMAND;
+    this.GET_LINK_DATA_COMMANDS     = () => "1" + this.GET_LINK_DATA_COMMAND;
+    this.GET_NAME_LIST_COMMANDS     = () => "1" + this.GET_NAME_LIST_COMMAND;
+    this.SETUP_SESSION_COMMANDS     = () => "1" + this.SETUP_SESSION_COMMAND;
+    this.SETUP_SESSION2_COMMANDS    = () => "2" + this.SETUP_SESSION2_COMMAND;
+    this.SETUP_SESSION3_COMMANDS    = () => "2" + this.SETUP_SESSION3_COMMAND;
+    this.FREE_SESSION_COMMANDS      = () => "2" + this.FREE_SESSION_COMMAND;
+    this.PUT_SESSION_DATA_COMMANDS  = () => "2" + this.PUT_SESSION_DATA_COMMAND;
+    this.GET_SESSION_DATA_COMMANDS  = () => "2" + this.GET_SESSION_DATA_COMMAND;
+    this.OPEN_FILE_COMMANDS         = () => "2" + this.OPEN_FILE_COMMAND;
+    this.CLOSE_FILE_COMMANDS        = () => "2" + this.CLOSE_FILE_COMMAND;
+    this.READ_FILE_COMMANDS         = () => "2" + this.READ_FILE_COMMAND;
+    this.WRITE_FILE_COMMANDS        = () => "2" + this.WRITE_FILE_COMMAND;
+    this.MESSAGE_COMMANDS           = () => "1" + this.MESSAGE_COMMAND;
 
 
     this.FABRIC_TIME_STAMP_SIZE = () => 10;
