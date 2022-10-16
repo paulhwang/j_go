@@ -53,10 +53,10 @@ function FE_DEF_OBJECT() {
     this.FREE_SESSION_COMMANDS      = () => "2" + this.FREE_SESSION_COMMAND();
     this.PUT_SESSION_DATA_COMMANDS  = () => "2" + this.PUT_SESSION_DATA_COMMAND();
     this.GET_SESSION_DATA_COMMANDS  = () => "2" + this.GET_SESSION_DATA_COMMAND();
-    this.OPEN_FILE_COMMANDS         = () => "2" + this.OPEN_FILE_COMMAND();
-    this.CLOSE_FILE_COMMANDS        = () => "2" + this.CLOSE_FILE_COMMAND();
-    this.READ_FILE_COMMANDS         = () => "2" + this.READ_FILE_COMMAND();
-    this.WRITE_FILE_COMMANDS        = () => "2" + this.WRITE_FILE_COMMAND();
+    this.OPEN_FILE_COMMANDS         = () => "0" + this.OPEN_FILE_COMMAND();
+    this.CLOSE_FILE_COMMANDS        = () => "0" + this.CLOSE_FILE_COMMAND();
+    this.READ_FILE_COMMANDS         = () => "0" + this.READ_FILE_COMMAND();
+    this.WRITE_FILE_COMMANDS        = () => "1" + this.WRITE_FILE_COMMAND();
     this.MESSAGE_COMMANDS           = () => "1" + this.MESSAGE_COMMAND();
 
     this.FAKE_LINK_ID_INDEX    = () => "99990000";

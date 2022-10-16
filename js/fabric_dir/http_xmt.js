@@ -24,6 +24,7 @@ function HttpXmtClass(u_fabric_obj_val) {
 
     this.xmtAjaxRequest = (output_val) => {
         let data = output_val;
+        const depth = data.charAt(0);
         const command = data.charAt(1);
 
         if (command !== FE_DEF.GET_LINK_DATA_COMMAND()) {
@@ -33,7 +34,9 @@ function HttpXmtClass(u_fabric_obj_val) {
         if (command === FE_DEF.LOGOUT_COMMAND()) {
             data = this.timeStampsForLogout() + data;
         }
-        else if ((command !== FE_DEF.REGISTER_COMMAND()) && (command !== FE_DEF.LOGIN_COMMAND())) {
+        else if ((command !== FE_DEF.REGISTER_COMMAND()) &&
+                 (command !== FE_DEF.OPEN_FILE_COMMAND()) &&
+                 (command !== FE_DEF.LOGIN_COMMAND())) {
             if (!UTILS.validValue(this.linkObj().nodeTimeStamp())) {
                 console.log("HttpXmtClass.xmtAjaxRequest() data=" + data);
                 console.log("HttpXmtClass.xmtAjaxRequest() invalid nodeTimeStamp=" + this.linkObj().nodeTimeStamp());
