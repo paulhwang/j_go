@@ -47,6 +47,7 @@ function DtfHtmlObject(root_object_val) {
     "use strict";
     this.init__ = function(root_object_val) {
         this.rootObject_ = root_object_val;
+        this.readInfo();
         this.bindModal();
         this.createPreludes();
         this.createKinds();
@@ -101,29 +102,6 @@ function DtfHtmlObject(root_object_val) {
         [["炒飯"], ["排骨蛋炒飯", "蝦仁蛋炒飯", "肉絲蛋炒飯", "蝦仁肉絲蛋炒飯", "什蔬蛋炒飯"]],
         [["餛飩"], ["紅油抄手（蝦肉）", "紅油抄手（菜肉）", "餛飩乾拌（蝦肉）", "餛飩乾拌（菜肉）"]]];
 
-    this.createPreludes = () => {
-        for (let i = 0; i < preludes.length; i++) {
-            let prelude = preludes[i];
-            let tag = prelude[0];
-            let text = prelude[1];
-            let p = document.createElement(tag);
-            p.innerHTML = text;
-            document.body.appendChild(p);
-        }
-    };
-
-    this.createKinds = () => {
-        for (let i = 0; i < kind_items.length; i++) {
-            let kind_item = kind_items[i];
-            let kind = kind_item[0];
-
-            let btn = document.createElement("button");
-            btn.innerHTML = kind;
-            btn.className = "kind" + ENCODE.encodeNumber(i, 2) + "_kind_button";
-            document.body.appendChild(btn);
-        }
-    }
-
     this.orderModel = () => this.orderModel_;
 
     this.bindModal = () => {
@@ -161,6 +139,21 @@ function DtfHtmlObject(root_object_val) {
         }
     };
 
+    this.readInfo = () => {
+    };
+
+    this.createKinds = () => {
+        for (let i = 0; i < kind_items.length; i++) {
+            let kind_item = kind_items[i];
+            let kind = kind_item[0];
+
+            let btn = document.createElement("button");
+            btn.innerHTML = kind;
+            btn.className = "kind" + ENCODE.encodeNumber(i, 2) + "_kind_button";
+            document.body.appendChild(btn);
+        }
+    }
+
     this.setupKindsSelectors = () => {
         const this0 = this;
         for (let i = 0; i < kind_items.length; i++) {
@@ -169,6 +162,17 @@ function DtfHtmlObject(root_object_val) {
                 this0.openModal(this0.orderModel());
             });
        }
+    };
+
+    this.createPreludes = () => {
+        for (let i = 0; i < preludes.length; i++) {
+            let prelude = preludes[i];
+            let tag = prelude[0];
+            let text = prelude[1];
+            let p = document.createElement(tag);
+            p.innerHTML = text;
+            document.body.appendChild(p);
+        }
     };
 
     this.createItems = () => {
