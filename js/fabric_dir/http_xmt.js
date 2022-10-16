@@ -26,14 +26,14 @@ function HttpXmtClass(u_fabric_obj_val) {
         let data = output_val;
         const command = data.charAt(1);
 
-        if (command !== 'D') {
+        if (command !== FE_DEF.GET_LINK_DATA_COMMAND()) {
             console.log("HttpXmtClass.xmtAjaxRequest() data=" + data);
         }
 
-        if (command === 'O') {
+        if (command === FE_DEF.LOGOUT_COMMAND()) {
             data = this.timeStampsForLogout() + data;
         }
-        else if ((command !== 'R') && (command !== "I")) {
+        else if ((command !== FE_DEF.REGISTER_COMMAND()) && (command !== FE_DEF.LOGIN_COMMAND())) {
             if (!UTILS.validValue(this.linkObj().nodeTimeStamp())) {
                 console.log("HttpXmtClass.xmtAjaxRequest() data=" + data);
                 console.log("HttpXmtClass.xmtAjaxRequest() invalid nodeTimeStamp=" + this.linkObj().nodeTimeStamp());
@@ -48,7 +48,7 @@ function HttpXmtClass(u_fabric_obj_val) {
             data = this.linkObj().nodeTimeStamp() + this.linkObj().fabricTimeStamp() + data;
         }
 
-        if (command !== 'D') {
+        if (command !== FE_DEF.GET_LINK_DATA_COMMAND()) {
             console.log("HttpXmtClass.xmtAjaxRequest() data=" + data);
         }
 
