@@ -79,6 +79,11 @@ function UFabricObject(root_obj_val) {
         this.httpXmtObj().transmitAjaxRequest(data); 
     };
 
+    this.readFileRequest = (session_id_val) => {
+        const data = "" + this.linkObj().linkId() + session_id_val;
+        this.httpXmtObj().transmitAjaxRequest(data); 
+    };
+
     this.datagramRequest = () => {
     };
 
