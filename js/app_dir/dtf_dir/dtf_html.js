@@ -53,6 +53,27 @@ function DtfHtmlObject(root_object_val) {
         this.setupKindsSelectors();
         this.createItems();
         this.setupItemsSelectors();
+
+/*
+        console.log(kind_items);
+
+        let json_kind_items_package = JSON.stringify({
+                        data: kind_items,
+                        });
+        console.log(json_kind_items_package);
+
+        let kind_items_package = JSON.parse(json_kind_items_package);
+        console.log(kind_items_package.data);
+
+
+        let json_kind_items = JSON.stringify({
+                        kind_items,
+                        });
+        console.log(json_kind_items);
+
+        let kind_items1 = JSON.parse(json_kind_items);
+        console.log(kind_items1);
+*/
     }
 
     const preludes = [
