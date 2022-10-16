@@ -7,6 +7,41 @@ var FE_DEF = new FE_DEF_OBJECT;
 
 function FE_DEF_OBJECT() {
     "use strict";
+
+    this.REGISTER_COMMAND          = () => 'R';
+    this.REGISTER_RESPONSE         = () => 'r';
+    this.LOGIN_COMMAND             = () => 'I';
+    this.LOGIN_RESPONSE            = () => 'i';
+    this.LOGOUT_COMMAND            = () => 'O';
+    this.LOGOUT_RESPONSE           = () => 'o';
+    this.GET_LINK_DATA_COMMAND     = () => 'D';
+    this.GET_LINK_DATA_RESPONSE    = () => 'd';
+    this.GET_NAME_LIST_COMMAND     = () => 'N';
+    this.GET_NAME_LIST_RESPONSE    = () => 'n';
+    this.SETUP_SESSION_COMMAND     = () => 'S';
+    this.SETUP_SESSION_RESPONSE    = () => 's';
+    this.SETUP_SESSION2_COMMAND    = () => 'Y';
+    this.SETUP_SESSION2_RESPONSE   = () => 'y';
+    this.SETUP_SESSION3_COMMAND    = () => 'Z';
+    this.SETUP_SESSION3_RESPONSE   = () => 'z';
+    this.FREE_SESSION_COMMAND      = () => 'V';
+    this.FREE_SESSION_RESPONSE     = () => 'v';
+    this.PUT_SESSION_DATA_COMMAND  = () => 'P';
+    this.PUT_SESSION_DATA_RESPONSE = () => 'p';
+    this.GET_SESSION_DATA_COMMAND  = () => 'G';
+    this.GET_SESSION_DATA_RESPONSE = () => 'g';
+    this.OPEN_FILE_COMMAND         = () => 'B';
+    this.OPEN_FILE_RESPONSE        = () => 'b';
+    this.CLOSE_FILE_COMMAND        = () => 'C';
+    this.CLOSE_FILE_RESPONSE       = () => 'c';
+    this.READ_FILE_COMMAND         = () => 'V';
+    this.READ_FILE_RESPONSE        = () => 'v';
+    this.WRITE_FILE_COMMAND        = () => 'W';
+    this.WRITE_FILE_RESPONSE       = () => 'w';
+    this.MESSAGE_COMMAND           = () => 'M';
+    this.MESSAGE_RESPONSE          = () => 'm';
+
+
     this.FABRIC_TIME_STAMP_SIZE = () => 10;
     this.LINK_ID_SIZE           = () => 8;
     this.SESSION_ID_SIZE        = () => 8;
