@@ -7,7 +7,6 @@ function DFabricObject(root_obj_val) {
     "use strict";
      this.init__ = (root_obj_val) => {
         this.rootObj_ = root_obj_val;
-        this.initSwitchTable();
         this.httpReqObj_ = new FabricHttpReqObject(this.parseFabricResponse, this);
     };
 
@@ -16,59 +15,35 @@ function DFabricObject(root_obj_val) {
         this.callbackObj_ = obj_val;
     };
 
-    this.initSwitchTable = () => {
-        this.responseSwitchTable_ = {
-            'r': this.registerResponse,
-            'i': this.loginResponse,
-            'o': this.logoutResponse,
-            'd': this.getLinkDataResponse,
-            'n': this.getNameListResponse,
-            's': this.setupSessionResponse,
-            'y': this.setupSession2Response,
-            'z': this.setupSession3Response,
-            'p': this.putSessionDataResponse,
-            'g': this.getSessionDataResponse,
-            'b': this.openFileResponse,
-            'c': this.closeFileResponse,
-            'v': this.readFileResponse,
-            'w': this.writeFileResponse,
-            'm': this.datagramResponse,
-        };
-    };
-
     this.parseFabricResponse = (data_val) => {
-        const command = data_val.charAt(0);
+        const response_command = data_val.charAt(0);
         const data = data_val.slice(1);
 
-        if (command !== FE_DEF.GET_LINK_DATA_RESPONSE()) {
-            console.log("DFabricObject.parseFabricResponse() command=" + command + " data=" + data_val);
+        if (response_command !== FE_DEF.GET_LINK_DATA_RESPONSE()) {
+            console.log("DFabricObject.parseFabricResponse() response_command=" + response_command + " data=" + data_val);
         }
 
-        let func;
-             if (command === FE_DEF.REGISTER_RESPONSE())         func = this.registerResponse;
-        else if (command === FE_DEF.LOGIN_RESPONSE())            func = this.loginResponse;
-        else if (command === FE_DEF.LOGOUT_RESPONSE())           func = this.logoutResponse;
-        else if (command === FE_DEF.GET_LINK_DATA_RESPONSE())    func = this.getLinkDataResponse;
-        else if (command === FE_DEF.GET_NAME_LIST_RESPONSE())    func = this.getNameListResponse;
-        else if (command === FE_DEF.SETUP_SESSION_RESPONSE())    func = this.setupSessionResponse;
-        else if (command === FE_DEF.SETUP_SESSION2_RESPONSE())   func = this.setupSession2Response;
-        else if (command === FE_DEF.SETUP_SESSION3_RESPONSE())   func = this.setupSession3Response;
-        else if (command === FE_DEF.PUT_SESSION_DATA_RESPONSE()) func = this.putSessionDataResponse;
-        else if (command === FE_DEF.GET_SESSION_DATA_RESPONSE()) func = this.getSessionDataResponse;
-        else if (command === FE_DEF.OPEN_FILE_RESPONSE())        func = this.openFileResponse;
-        else if (command === FE_DEF.CLOSE_FILE_RESPONSE())       func = this.closeFileResponse;
-        else if (command === FE_DEF.READ_FILE_RESPONSE())        func = this.readFileResponse;
-        else if (command === FE_DEF.WRITE_FILE_RESPONSE())       func = this.writeFileResponse;
-        else abend();
-/*
-        const func = this.responseSwitchTable()[command];
-        if (!func) {
-            console.log("DFabricObject.parseFabricResponse() bad_command=" + command);
+        if (response_command.charCodeAt(0) !== this.httpXmtObj().pendingAjaxRequestCommand().charCodeAt(0) + 32) {
             abend();
-            return;
         }
-*/
         this.httpXmtObj().clearPendingAjaxRequestCommand();
+
+        let func;
+             if (response_command === FE_DEF.REGISTER_RESPONSE())         func = this.registerResponse;
+        else if (response_command === FE_DEF.LOGIN_RESPONSE())            func = this.loginResponse;
+        else if (response_command === FE_DEF.LOGOUT_RESPONSE())           func = this.logoutResponse;
+        else if (response_command === FE_DEF.GET_LINK_DATA_RESPONSE())    func = this.getLinkDataResponse;
+        else if (response_command === FE_DEF.GET_NAME_LIST_RESPONSE())    func = this.getNameListResponse;
+        else if (response_command === FE_DEF.SETUP_SESSION_RESPONSE())    func = this.setupSessionResponse;
+        else if (response_command === FE_DEF.SETUP_SESSION2_RESPONSE())   func = this.setupSession2Response;
+        else if (response_command === FE_DEF.SETUP_SESSION3_RESPONSE())   func = this.setupSession3Response;
+        else if (response_command === FE_DEF.PUT_SESSION_DATA_RESPONSE()) func = this.putSessionDataResponse;
+        else if (response_command === FE_DEF.GET_SESSION_DATA_RESPONSE()) func = this.getSessionDataResponse;
+        else if (response_command === FE_DEF.OPEN_FILE_RESPONSE())        func = this.openFileResponse;
+        else if (response_command === FE_DEF.CLOSE_FILE_RESPONSE())       func = this.closeFileResponse;
+        else if (response_command === FE_DEF.READ_FILE_RESPONSE())        func = this.readFileResponse;
+        else if (response_command === FE_DEF.WRITE_FILE_RESPONSE())       func = this.writeFileResponse;
+        else abend();
 
         func.bind(this)(data);
     };

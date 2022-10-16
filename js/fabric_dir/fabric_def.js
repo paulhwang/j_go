@@ -40,7 +40,7 @@ function FE_DEF_OBJECT() {
     this.WRITE_FILE_RESPONSE       = () => 'w';
     this.MESSAGE_COMMAND           = () => 'M';
     this.MESSAGE_RESPONSE          = () => 'm';
-    this.NULL_COMMAND              = () => ' ';
+    this.NULL_COMMAND              = () => '?';
 
     this.REGISTER_COMMANDS          = () => "0" + this.REGISTER_COMMAND();
     this.LOGIN_COMMANDS             = () => "0" + this.LOGIN_COMMAND();
