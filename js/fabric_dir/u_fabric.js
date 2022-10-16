@@ -19,17 +19,17 @@ function UFabricObject(root_obj_val) {
    };
 
     this.registerRequest = (my_name_val, password_val, email_val) => {
-        const data =  "0R" + ENCODE.encodeString(my_name_val) + ENCODE.encodeString(password_val) + ENCODE.encodeString(email_val);
+        const data =  FE_DEF.REGISTER_COMMANDS() + ENCODE.encodeString(my_name_val) + ENCODE.encodeString(password_val) + ENCODE.encodeString(email_val);
         this.httpXmtObj().transmitAjaxRequest(data); 
     };
 
     this.loginRequest = (my_name_val, password_val) => {
-        const data = "0I" + ENCODE.encodeString(my_name_val) + ENCODE.encodeString(password_val);
+        const data = FE_DEF.LOGIN_COMMANDS() + ENCODE.encodeString(my_name_val) + ENCODE.encodeString(password_val);
         this.httpXmtObj().transmitAjaxRequest(data); 
     };
 
     this.logoutRequest = () => {
-        const data = "1O" + this.linkObj().linkId();
+        const data = FE_DEF.LOGOUT_COMMANDS() + this.linkObj().linkId();
         console.log("UFabricObject.logoutRequest() data=" + data);
 
         this.httpXmtObj().setTimeStampsForLogout(this.linkObj().nodeTimeStamp() + this.linkObj().fabricTimeStamp());
@@ -41,17 +41,17 @@ function UFabricObject(root_obj_val) {
      };
 
     this.getLinkDataRequest = () => {
-        const data = "1D" + this.linkObj().linkId();
+        const data = FE_DEF.GET_LINK_DATA_COMMANDS() + this.linkObj().linkId();
         this.httpXmtObj().transmitAjaxRequest(data); 
     };
 
     this.getNameListRequest = (name_list_tag_val) => {
-        const data = "1N" + this.linkObj().linkId() + name_list_tag_val;
+        const data = FE_DEF.GET_NAME_LIST_COMMANDS() + this.linkObj().linkId() + name_list_tag_val;
         this.httpXmtObj().transmitAjaxRequest(data); 
     };
 
     this.setupSessionRequest = (theme_type_val, theme_data_val, group_mode_val, second_fiddle_val) => {
-        const data = "1S" + this.linkObj().linkId()
+        const data = FE_DEF.SETUP_SESSION_COMMANDS() + this.linkObj().linkId()
                         + group_mode_val + theme_type_val
                         + ENCODE.encodeString(theme_data_val)
                         + ENCODE.encodeString(this.linkObj().myName())
@@ -60,27 +60,42 @@ function UFabricObject(root_obj_val) {
     };
 
     this.setupSession2Request = (session_id_val, answer_val) => {
-        const data = "2Y" + this.linkObj().linkId() + session_id_val + answer_val;
+        const data = FE_DEF.SETUP_SESSION2_COMMANDS() + this.linkObj().linkId() + session_id_val + answer_val;
         this.httpXmtObj().transmitAjaxRequest(data); 
     };
 
     this.setupSession3Request = (session_id_val) => {
-        const data = "2Z" + this.linkObj().linkId() + session_id_val;
+        const data = FE_DEF.SETUP_SESSION3_COMMANDS() + this.linkObj().linkId() + session_id_val;
         this.httpXmtObj().transmitAjaxRequest(data); 
     };
 
     this.putSessionDataRequest = (data_val) => {
-        const data = "2P" + this.linkObj().linkId() + this.sessionObj().sessionId() + data_val;
+        const data = FE_DEF.PUT_SESSION_DATA_COMMANDS() + this.linkObj().linkId() + this.sessionObj().sessionId() + data_val;
         this.httpXmtObj().transmitAjaxRequest(data); 
     };
 
     this.getSessionDataRequest = (session_id_val) => {
-        const data = "2G" + this.linkObj().linkId() + session_id_val;
+        const data = FE_DEF.GET_SESSION_DATA_COMMANDS() + this.linkObj().linkId() + session_id_val;
+        this.httpXmtObj().transmitAjaxRequest(data); 
+    };
+
+    this.openFileRequest = (session_id_val) => {
+        const data = FE_DEF.OPEN_FILE_COMMANDS() + this.linkObj().linkId() + session_id_val;
+        this.httpXmtObj().transmitAjaxRequest(data); 
+    };
+
+    this.closeFileRequest = (session_id_val) => {
+        const data = FE_DEF.CLOSE_FILE_COMMANDS() + this.linkObj().linkId() + session_id_val;
         this.httpXmtObj().transmitAjaxRequest(data); 
     };
 
     this.readFileRequest = (session_id_val) => {
-        const data = "" + this.linkObj().linkId() + session_id_val;
+        const data = FE_DEF.READ_FILE_COMMANDS() + this.linkObj().linkId() + session_id_val;
+        this.httpXmtObj().transmitAjaxRequest(data); 
+    };
+
+    this.writeFileRequest = (session_id_val) => {
+        const data = FE_DEF.WRITE_FILE_COMMANDS() + this.linkObj().linkId() + session_id_val;
         this.httpXmtObj().transmitAjaxRequest(data); 
     };
 
