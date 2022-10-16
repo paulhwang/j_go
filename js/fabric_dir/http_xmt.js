@@ -64,9 +64,9 @@ function HttpXmtClass(u_fabric_obj_val) {
         const this0 = this;
         this.watchDogId_ = setInterval(function (link_val) {
             if (this0.pendingAjaxRequestCommandExist()) {
-                if (this0.pendingAjaxRequestCommand() !== "get_link_data") {
+                //if (this0.pendingAjaxRequestCommand() !== FE_DEF.GET_LINK_DATA_COMMAND()) {
                     console.log("HttpXmtClass.startWatchDog() request is not transmitted because of pending_command=" + this0.pendingAjaxRequestCommand());
-                }
+                //}
                 return;
             }
 
@@ -97,11 +97,11 @@ function HttpXmtClass(u_fabric_obj_val) {
     };
 
     this.pendingAjaxRequestCommand = () => this.thePendingAjaxRequestCommand;
-    this.pendingAjaxRequestCommandExist = () => (this.pendingAjaxRequestCommand() !== "");
-    this.clearPendingAjaxRequestCommand = () => {this.thePendingAjaxRequestCommand = "";};
+    this.pendingAjaxRequestCommandExist = () => (this.pendingAjaxRequestCommand() !== FE_DEF.NULL_COMMAND());
+    this.clearPendingAjaxRequestCommand = () => {this.thePendingAjaxRequestCommand = FE_DEF.NULL_COMMAND();};
 
     this.setPendingAjaxRequestCommand = (command_val) => {
-        if (this.pendingAjaxRequestCommand()) {
+        if (this.pendingAjaxRequestCommandExist()) {
             console.log("HttpXmtClass.setPendingAjaxRequestCommand() old=" + this.pendingAjaxRequestCommand() + " new=" + command_val);
             abend();
         }
