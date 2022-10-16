@@ -40,7 +40,7 @@ function DFabricObject(root_obj_val) {
         const command = data_val.charAt(0);
         const data = data_val.slice(1);
 
-        if (command !== 'd') {
+        if (command !== FE_DEF.GET_LINK_DATA_RESPONSE()) {
             console.log("DFabricObject.parseFabricResponse() command=" + command + " data=" + data_val);
         }
 
