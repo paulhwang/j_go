@@ -108,35 +108,13 @@ function DtfHtmlObject(root_object_val) {
         document.addEventListener("click", (e) => {
             if (e.target.className === "modal-open") {
                 this.orderModel_ = document.getElementById(e.target.dataset.id);
-                this.openModal(this.orderModel());
+                UTILS.openModal(this.orderModel());
             } else if (e.target.className === "modal-close") {
-                this.closeModal(this.orderModel());
+                UTILS.closeModal(this.orderModel());
             } else {
                 return;
             }
         });
-    };
-
-    this.openModal = (modal_val) => {
-        document.body.style.overflow = "hidden";
-        modal_val.setAttribute("open", "true");
-        document.addEventListener("keydown", this.escClose);
-        let overlay = document.createElement("div");
-        overlay.id = "modal-overlay";
-        document.body.appendChild(overlay);
-    };
-
-    this.closeModal = (modal_val) => {
-        document.body.style.overflow = "auto";
-        modal_val.removeAttribute("open");
-        document.removeEventListener("keydown", this.escClose);
-        document.body.removeChild(document.getElementById("modal-overlay"));
-    };
-
-    this.escClose = (e) => {
-        if (e.keyCode == 27) {
-            closeModal();
-        }
     };
 
     this.readInfo = () => {
@@ -159,7 +137,7 @@ function DtfHtmlObject(root_object_val) {
         for (let i = 0; i < kind_items.length; i++) {
             document.querySelector(".kind" + ENCODE.encodeNumber(i, 2) + "_kind_button").addEventListener("click", function() {
                 //window.open("go_solo.html", "_self");
-                this0.openModal(this0.orderModel());
+                UTILS.openModal(this0.orderModel());
             });
        }
     };
