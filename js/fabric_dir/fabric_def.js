@@ -59,6 +59,9 @@ function FE_DEF_OBJECT() {
     this.WRITE_FILE_COMMANDS        = () => "2" + this.WRITE_FILE_COMMAND();
     this.MESSAGE_COMMANDS           = () => "1" + this.MESSAGE_COMMAND();
 
+    this.FAKE_LINK_ID_INDEX    = () => "99990000";
+    this.FAKE_SESSION_ID_INDEX = () => "99980000";
+
 
     this.FABRIC_TIME_STAMP_SIZE = () => 10;
     this.LINK_ID_SIZE           = () => 8;

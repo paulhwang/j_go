@@ -79,8 +79,8 @@ function UFabricObject(root_obj_val) {
         this.httpXmtObj().transmitAjaxRequest(data); 
     };
 
-    this.openFileRequest = (session_id_val) => {
-        const data = FE_DEF.OPEN_FILE_COMMANDS() + this.linkObj().linkId() + session_id_val;
+    this.openFileRequest = (session_id_val, mode_val, file_name_val) => {
+        const data = FE_DEF.OPEN_FILE_COMMANDS() + this.linkObj().linkId() + session_id_val + mode_val + ENCODE.encodeString(file_name_val);
         this.httpXmtObj().transmitAjaxRequest(data); 
     };
 

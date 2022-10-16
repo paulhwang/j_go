@@ -43,10 +43,10 @@ const escClose = (e) => {
   Written by Paul Hwang
 */
 
-function DtfHtmlObject(root_object_val) {
+function DtfHtmlObject(root_obj_val) {
     "use strict";
-    this.init__ = function(root_object_val) {
-        this.rootObject_ = root_object_val;
+    this.init__ = function(root_obj_val) {
+        this.rootObj_ = root_obj_val;
         this.readInfo();
         this.bindModal();
         this.createPreludes();
@@ -118,6 +118,7 @@ function DtfHtmlObject(root_object_val) {
     };
 
     this.readInfo = () => {
+        //this.uFabricObj().openFileRequest(FE_DEF.FAKE_SESSION_ID_INDEX(), 'r', "dtf.txt");
     };
 
     this.createKinds = () => {
@@ -216,9 +217,10 @@ function DtfHtmlObject(root_object_val) {
         return buf;
     };
 
-    this.rootObject = () => this.rootObject_;
-    this.linkObject = () => this.rootObject().linkObject();
-    this.fabricSessionSetupObject = () => this.rootObject().fabricSessionSetupObject();
-    this.portObject = () => this.rootObject().portObject();
-    this.init__(root_object_val);
+    this.rootObj = () => this.rootObj_;
+    this.linkObj = () => this.rootObj().linkObj();
+    this.uFabricObj = () => this.rootObj().uFabricObj();
+    this.dFabricObj = () => this.rootObj().dFabricObj();
+    this.portObj = () => this.rootObj().portObj();
+    this.init__(root_obj_val);
 };
