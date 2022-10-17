@@ -305,13 +305,13 @@ function DFabricObject(root_obj_val) {
         const data = data_val;
         let index = 0;
 
-        const result = data.slice(index, index + 2);
-        index += 2;
+        const result = data.slice(index, index + FE_DEF.RESULT_SIZE());
+        index += FE_DEF.RESULT_SIZE();
 
         const link_id = data.slice(index, index + FE_DEF.LINK_ID_SIZE());
         index += FE_DEF.LINK_ID_SIZE();
 
-        const session_id = data.slice(index, index + 8);
+        const session_id = data.slice(index, index + FE_DEF.SESSION_ID_SIZE());
         index += FE_DEF.SESSION_ID_SIZE();
 
         const room_status = data[index++];
@@ -356,8 +356,8 @@ function DFabricObject(root_obj_val) {
         const data = data_val;
         let index = 0;
 
-        const result = data.slice(index, index + 2);
-        index += 2;
+        const result = data.slice(index, index + FE_DEF.RESULT_SIZE());
+        index += FE_DEF.RESULT_SIZE();
 
         const link_id = data.slice(index, index + FE_DEF.LINK_ID_SIZE());
         index += FE_DEF.LINK_ID_SIZE();
@@ -386,8 +386,8 @@ function DFabricObject(root_obj_val) {
         const data = data_val;
         let index = 0;
 
-        const result = data.slice(index, index + 2);
-        index += 2;
+        const result = data.slice(index, index + FE_DEF.RESULT_SIZE());
+        index += FE_DEF.RESULT_SIZE();
 
         const link_id = data.slice(index, index + FE_DEF.LINK_ID_SIZE());
         index += FE_DEF.LINK_ID_SIZE();
@@ -410,8 +410,8 @@ function DFabricObject(root_obj_val) {
         const data = data_val;
         let index = 0;
 
-        const result = data.slice(index, index + 2);
-        index += 2;
+        const result = data.slice(index, index + FE_DEF.RESULT_SIZE());
+        index += FE_DEF.RESULT_SIZE();
 
         const link_id = data.slice(index, index + FE_DEF.LINK_ID_SIZE());
         index += FE_DEF.LINK_ID_SIZE();
@@ -434,8 +434,8 @@ function DFabricObject(root_obj_val) {
         const data = data_val;
         let index = 0;
 
-        const result = data.slice(index, index + 2);
-        index += 2;
+        const result = data.slice(index, index + FE_DEF.RESULT_SIZE());
+        index += FE_DEF.RESULT_SIZE();
 
         const link_id = data.slice(index, index + FE_DEF.LINK_ID_SIZE());
         index += FE_DEF.LINK_ID_SIZE();
@@ -458,8 +458,8 @@ function DFabricObject(root_obj_val) {
         const data = data_val;
         let index = 0;
 
-        const result = data.slice(index, index + 2);
-        index += 2;
+        const result = data.slice(index, index + FE_DEF.RESULT_SIZE());
+        index += FE_DEF.RESULT_SIZE();
 
         const more_data_exist = data.charAt(index);
         index += 1;
@@ -479,8 +479,8 @@ function DFabricObject(root_obj_val) {
         const data = data_val;
         let index = 0;
 
-        const result = data.slice(index, index + 2);
-        index += 2;
+        const result = data.slice(index, index + FE_DEF.RESULT_SIZE());
+        index += FE_DEF.RESULT_SIZE();
 
         const link_id = data.slice(index, index + FE_DEF.LINK_ID_SIZE());
         index += FE_DEF.LINK_ID_SIZE();
