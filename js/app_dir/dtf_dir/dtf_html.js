@@ -118,7 +118,7 @@ function DtfHtmlObject(root_obj_val) {
     };
 
     this.readInfo = () => {
-        this.uFabricObj().openFileRequest(FE_DEF.FAKE_SESSION_ID_INDEX(), "r", "dtf.txt");
+        this.uFabricObj().openFileRequest("r", "dtf.txt");
     };
 
     this.createKinds = () => {
