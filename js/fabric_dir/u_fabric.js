@@ -89,13 +89,13 @@ function UFabricObject(root_obj_val) {
         this.httpXmtObj().transmitAjaxRequest(data); 
     };
 
-    this.readFileRequest = (session_id_val) => {
-        const data = FE_DEF.READ_FILE_COMMANDS() + this.linkObj().linkId() + session_id_val;
+    this.readFileRequest = (file_name_val) => {
+        const data = FE_DEF.READ_FILE_COMMANDS() + ENCODE.encodeString(file_name_val);
         this.httpXmtObj().transmitAjaxRequest(data); 
     };
 
-    this.writeFileRequest = (session_id_val) => {
-        const data = FE_DEF.WRITE_FILE_COMMANDS() + this.linkObj().linkId() + session_id_val;
+    this.writeFileRequest = (file_name_val) => {
+        const data = FE_DEF.WRITE_FILE_COMMANDS() + ENCODE.encodeString(file_name_val);
         this.httpXmtObj().transmitAjaxRequest(data); 
     };
 

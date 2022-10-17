@@ -34,9 +34,7 @@ function HttpXmtClass(u_fabric_obj_val) {
         if (command === FE_DEF.LOGOUT_COMMAND()) {
             data = this.timeStampsForLogout() + data;
         }
-        else if ((command !== FE_DEF.REGISTER_COMMAND()) &&
-                 (command !== FE_DEF.OPEN_FILE_COMMAND()) &&
-                 (command !== FE_DEF.LOGIN_COMMAND())) {
+        else if (depth !== "0") {
             if (!UTILS.validValue(this.linkObj().nodeTimeStamp())) {
                 console.log("HttpXmtClass.xmtAjaxRequest() data=" + data);
                 console.log("HttpXmtClass.xmtAjaxRequest() invalid nodeTimeStamp=" + this.linkObj().nodeTimeStamp());
