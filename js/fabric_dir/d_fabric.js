@@ -461,9 +461,6 @@ function DFabricObject(root_obj_val) {
         const result = data.slice(index, index + 2);
         index += 2;
 
-        const link_id = data.slice(index, index + FE_DEF.LINK_ID_SIZE());
-        index += FE_DEF.LINK_ID_SIZE();
-
         const result_data = data.slice(index);
 
         if (result === FE_DEF.RESULT_SUCCEED()) {

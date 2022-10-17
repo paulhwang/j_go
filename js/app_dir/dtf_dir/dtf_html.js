@@ -118,7 +118,7 @@ function DtfHtmlObject(root_obj_val) {
     };
 
     this.readInfo = () => {
-        this.uFabricObj().readFileRequest("r", "dtf.txt");
+        this.uFabricObj().readFileRequest("dtf.txt");
     };
 
     this.createKinds = () => {
