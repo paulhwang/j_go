@@ -461,11 +461,14 @@ function DFabricObject(root_obj_val) {
         const result = data.slice(index, index + 2);
         index += 2;
 
+        const more_data_exist = data.charAt(index);
+        index += 1;
+
         const result_data = data.slice(index);
 
         if (result === FE_DEF.RESULT_SUCCEED()) {
             console.log("DFabricObject.readFileResponse() succeed! result_data=", result_data);
-            this.callbackFunc().bind(this.callbackObj())(FE_DEF.READ_FILE_RESPONSE(), result_data);
+            this.callbackFunc().bind(this.callbackObj())(FE_DEF.READ_FILE_RESPONSE(), result_data, more_data_exist);
         }
         else {
             console.log("DFabricObject.readFileResponse() invalid_result=" + result);
