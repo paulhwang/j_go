@@ -406,30 +406,6 @@ function DFabricObject(root_obj_val) {
         }
     };
 
-    this.openReadOnlyFileResponse = (data_val) => {
-        const data = data_val;
-        let index = 0;
-
-        const result = data.slice(index, index + 2);
-        index += 2;
-
-        const link_id = data.slice(index, index + FE_DEF.LINK_ID_SIZE());
-        index += FE_DEF.LINK_ID_SIZE();
-
-        const session_id = data.slice(index, index + FE_DEF.SESSION_ID_SIZE());
-        index += FE_DEF.SESSION_ID_SIZE();
-
-        const result_data = data.slice(index);
-
-        if (result === FE_DEF.RESULT_SUCCEED()) {
-            console.log("DFabricObject.openFileResponse() succeed!");
-            this.callbackFunc().bind(this.callbackObj())("openFileResponse");
-        }
-        else {
-            console.log("DFabricObject.openFileResponse() invalid_result=" + result);
-        }
-    };
-
     this.openFileResponse = (data_val) => {
         const data = data_val;
         let index = 0;
@@ -447,7 +423,7 @@ function DFabricObject(root_obj_val) {
 
         if (result === FE_DEF.RESULT_SUCCEED()) {
             console.log("DFabricObject.openFileResponse() succeed!");
-            this.callbackFunc().bind(this.callbackObj())("openFileResponse");
+            this.callbackFunc().bind(this.callbackObj())(FE_DEF.OPEN_FILE_RESPONSE());
         }
         else {
             console.log("DFabricObject.openFileResponse() invalid_result=" + result);
@@ -471,7 +447,7 @@ function DFabricObject(root_obj_val) {
 
         if (result === FE_DEF.RESULT_SUCCEED()) {
             console.log("DFabricObject.closeFileResponse() succeed!");
-            this.callbackFunc().bind(this.callbackObj())("closeFileResponse");
+            this.callbackFunc().bind(this.callbackObj())(FE_DEF.CLOSE_FILE_RESPONSE());
         }
         else {
             console.log("DFabricObject.closeFileResponse() invalid_result=" + result);
@@ -492,7 +468,7 @@ function DFabricObject(root_obj_val) {
 
         if (result === FE_DEF.RESULT_SUCCEED()) {
             console.log("DFabricObject.readFileResponse() succeed! result_data=", result_data);
-            this.callbackFunc().bind(this.callbackObj())("readFileResponse", result_data);
+            this.callbackFunc().bind(this.callbackObj())(FE_DEF.READ_FILE_RESPONSE(), result_data);
         }
         else {
             console.log("DFabricObject.readFileResponse() invalid_result=" + result);
@@ -516,7 +492,7 @@ function DFabricObject(root_obj_val) {
 
         if (result === FE_DEF.RESULT_SUCCEED()) {
             console.log("DFabricObject.writeFileResponse() succeed!");
-            this.callbackFunc().bind(this.callbackObj())("writeFileResponse");
+            this.callbackFunc().bind(this.callbackObj())(FE_DEF.WRITE_FILE_RESPONSE());
         }
         else {
             console.log("DFabricObject.writeFileResponse() invalid_result=" + result);

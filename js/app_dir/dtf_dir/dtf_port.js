@@ -11,34 +11,16 @@ function DtfPortObject(root_val) {
     };
 
     this.receiveFabricResponse = function(command_val, data_val) {
-        if (command_val !== "get_link_data") {
-            console.log("GoBasePortObject.receiveFabricResponse() command=" + command_val + " data=" + data_val);
+        if (command_val === FE_DEF.OPEN_FILE_RESPONSE()) {
+            console.log("DtfPortObject.receiveFabricResponse() command=" + command_val);
         }
 
-        if (command_val === "get_link_data") {
-            if (data_val.pending_session3 != "N/A") {
-                console.log("GoDuetPortObject.getLinkDataResponse() pending_session3=" + data_val.pending_session3);
-                this.uFabricObj().setupSession3Request(data_val.pending_session3);
-            }
-            if (data_val.pending_session2 != "N/A") {
-                console.log("GoDuetPortObject.getLinkDataResponse() pending_session2=" + data_val.pending_session2);
-                const pending_session2 = data_val.pending_session2;
-                const session_id = pending_session2.slice(0, 8);
-                this.uFabricObj().setupSession2Request(session_id);
-            }
-        }
-
-        else if (command_val === "setup_session3") {
-            window.open("go_play.html", "_self");
-        }
-
-        else if (command_val === "get_link_data") {} else if (command_val === "get_name_list") {} else {console.log("bad command"); abend();}
-
+        else if (command_val === FE_DEF.GET_LINK_DATA_RESPONSE()) {} else if (command_val === FE_DEF.GET_NAME_LIST_RESPONSE()) {} else {console.log("bad command=" + command_val); abend();}
     };
 
     this.getLinkDataResponse = function (data_val) {
         if (data_val.pending_session2 != "N/A") {
-            console.log("GoBasePortObject.getLinkDataResponse() data_val.pending_session2=" + data_val.pending_session2);
+            console.log("DtfPortObject.getLinkDataResponse() data_val.pending_session2=" + data_val.pending_session2);
             const pending_session2 = data_val.pending_session2;
             const session_id = pending_session2.slice(0, 8);
             const theme_type = pending_session2.charAt(8)
@@ -47,7 +29,7 @@ function DtfPortObject(root_val) {
             this.uFabricObj().setupSession2Request(session_id);
         }
         else if (data_val.pending_session3 != "N/A") {
-            console.log("GoBasePortObject.getLinkDataResponse() data_val.pending_session3=" + data_val.pending_session3);
+            console.log("DtfPortObject.getLinkDataResponse() data_val.pending_session3=" + data_val.pending_session3);
             const pending_session3 = data_val.pending_session3;
             const session_id = pending_session3.slice(0, 8);
             const theme_type = pending_session3.charAt(8)
