@@ -36,9 +36,8 @@ function GoDuetRootObject() {
 
     this.receiveFabricResponse = function(command_val, data_val) {
         if (command_val !== "get_link_data") {
-            console.log("GoPlayPortObject.receiveFabricResponse() command=" + command_val + " data=" + data_val);
+            console.log("GoDuetRootObject.receiveFabricResponse() command=" + command_val + " data=" + data_val);
         }
-
         if (command_val === "get_link_data") {
             if (data_val.pending_session3 != "N/A") {
                 console.log("GoDuetPortObject.getLinkDataResponse() pending_session3=" + data_val.pending_session3);
@@ -53,16 +52,18 @@ function GoDuetRootObject() {
             }
             */
         }
-
-        else if (command_val === "get_name_list") {
-            this.renderNameList();
-        }
-
-        else if (command_val === "setup_session3") {
+        else if (command_val === FE_DEF.SETUP_SESSION3_RESPONSE()) {
             window.open("go_play.html", "_self");
         }
-
-        else if (command_val === "get_link_data") {} else if (command_val === "get_name_list") {} else {console.log("bad command"); abend();}
+        else if (command_val === FE_DEF.GET_NAME_LIST_RESPONSE()) {
+            this.renderNameList();
+        }
+        else if (command_val === FE_DEF.GET_LINK_DATA_RESPONSE()) {
+        } 
+        else {
+            console.log("GoDuetRootObject.receiveFabricResponse() bad command=" + command_val);
+            abend();
+        }
     };
 
     this.fabricBaseObj = () => this.fabricBaseObj_;

@@ -236,7 +236,7 @@ function DFabricObject(root_obj_val) {
 
         this.linkObj().setNameListTag(name_list_tag);
         this.linkObj().setNameList(name_list_array);
-        this.callbackFunc().bind(this.callbackObj())("get_name_list", data_val);
+        this.callbackFunc().bind(this.callbackObj())(cmd_val, data_val);
     };
 
     this.setupSessionResponse = (cmd_val, data_val) => {
@@ -339,7 +339,7 @@ function DFabricObject(root_obj_val) {
             console.log("DFabricObject.setupSession3Response() succeed! session_id=", session_id);
             if (room_status === FE_DEF.ROOM_STATUS_READY()) {
                 this.sessionObj().setSessionInfoIntoStorage(session_id, group_mode, theme_type, theme_data, first_fiddle, second_fiddle);
-                this.callbackFunc().bind(this.callbackObj())("setup_session3");
+                this.callbackFunc().bind(this.callbackObj())(cmd_val);
             }
             else {
             }
@@ -376,7 +376,7 @@ function DFabricObject(root_obj_val) {
 
         if (result === FE_DEF.RESULT_SUCCEED()) {
             console.log("DFabricObject.putSessionDataResponse() succeed! session_id=", session_id);
-            this.callbackFunc().bind(this.callbackObject())("put_session_data", result_data);
+            this.callbackFunc().bind(this.callbackObj())(cmd_val, result_data);
         }
         else {
             console.log("DFabricObject.putSessionDataResponse() invalid_result=" + result);
@@ -400,7 +400,7 @@ function DFabricObject(root_obj_val) {
 
         if (result === FE_DEF.RESULT_SUCCEED()) {
             console.log("DFabricObject.getSessionDataResponse() succeed! session_id=", session_id);
-            this.callbackFunc().bind(this.callbackObj())("get_session_data", result_data);
+            this.callbackFunc().bind(this.callbackObj())(cmd_val, result_data);
         }
         else {
             console.log("DFabricObject.getSessionDataResponse() invalid_result=" + result);
@@ -424,7 +424,7 @@ function DFabricObject(root_obj_val) {
 
         if (result === FE_DEF.RESULT_SUCCEED()) {
             console.log("DFabricObject.openFileResponse() succeed!");
-            this.callbackFunc().bind(this.callbackObj())(FE_DEF.OPEN_FILE_RESPONSE());
+            this.callbackFunc().bind(cmd_val);
         }
         else {
             console.log("DFabricObject.openFileResponse() invalid_result=" + result);
@@ -448,7 +448,7 @@ function DFabricObject(root_obj_val) {
 
         if (result === FE_DEF.RESULT_SUCCEED()) {
             console.log("DFabricObject.closeFileResponse() succeed!");
-            this.callbackFunc().bind(this.callbackObj())(FE_DEF.CLOSE_FILE_RESPONSE());
+            this.callbackFunc().bind(cmd_val);
         }
         else {
             console.log("DFabricObject.closeFileResponse() invalid_result=" + result);
@@ -469,7 +469,7 @@ function DFabricObject(root_obj_val) {
 
         if (result === FE_DEF.RESULT_SUCCEED()) {
             console.log("DFabricObject.readFileResponse() succeed! result_data=", result_data);
-            this.callbackFunc().bind(this.callbackObj())(FE_DEF.READ_FILE_RESPONSE(), result, result_data, more_data_exist);
+            this.callbackFunc().bind(cmd_val, result, result_data, more_data_exist);
         }
         else {
             console.log("DFabricObject.readFileResponse() invalid_result=" + result);
@@ -493,7 +493,7 @@ function DFabricObject(root_obj_val) {
 
         if (result === FE_DEF.RESULT_SUCCEED()) {
             console.log("DFabricObject.writeFileResponse() succeed!");
-            this.callbackFunc().bind(this.callbackObj())(FE_DEF.WRITE_FILE_RESPONSE(), result);
+            this.callbackFunc().bind(cmd_val, result, result_data);
         }
         else {
             console.log("DFabricObject.writeFileResponse() invalid_result=" + result);

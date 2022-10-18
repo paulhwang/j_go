@@ -17,7 +17,7 @@ function DtfPortObject(root_val) {
             console.log("DtfPortObject.receiveFabricResponse() command=" + command_val + " data=" + data_val);
         }
 
-        else if (command_val === FE_DEF.WTITE_FILE_RESPONSE()) {
+        else if (command_val === FE_DEF.WRITE_FILE_RESPONSE()) {
             console.log("DtfPortObject.receiveFabricResponse() command=" + command_val + " data=" + data_val);
         }
 
