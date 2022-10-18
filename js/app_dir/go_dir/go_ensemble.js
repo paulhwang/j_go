@@ -27,23 +27,31 @@ function GoEnsembleRootObject() {
         });
     };
 
-    this.receiveFabricResponse = function(command_val, data_val) {
-        if (command_val !== "get_link_data") {
-            console.log("GoEnsemblePortObject.receiveFabricResponse() command=" + command_val + " data=" + data_val);
+    this.receiveFabricResponse = function(cmd_val, result_val, data1_val, data2_val, data3_val) {
+        if (cmd_val !== FE_DEF.GET_LINK_DATA_RESPONSE()) {
+            console.log("GoEnsemblePortObject.receiveFabricResponse() cmd=" + cmd_val + " result=" + result_val + " data1=" + data1_val + " data2=" + data2_val + " data3=" + data3_val);
         }
 
-        if (command_val === "get_link_data") {
+        if (cmd_val === "get_link_data") {
+            abend();
             if (data_val.pending_session3 != "N/A") {
                 console.log("GoEnsemblePortObject.getLinkDataResponse() pending_session3=" + data_val.pending_session3);
                 this.uFabricObj().setupSession3Request(data_val.pending_session3);
             }
         }
 
-        else if (command_val === "setup_session3") {
+        else if (cmd_val === FE_DEF.SETUP_SESSION3_RESPONSE()) {
             window.open("go_play.html", "_self");
         }
-
-        else if (command_val === "get_link_data") {} else if (command_val === "get_name_list") {} else {console.log("bad command"); abend();}
+        else if (cmd_val === FE_DEF.GET_NAME_LIST_RESPONSE()) {
+            //this.renderNameList();
+        }
+        else if (cmd_val === FE_DEF.GET_LINK_DATA_RESPONSE()) {
+        } 
+        else {
+            console.log("GoEnsemblePortObject.receiveFabricResponse() bad cmd=" + cmd_val);
+            abend();
+        }
     };
 
     this.fabricBaseObj = () => this.fabricBaseObj_;

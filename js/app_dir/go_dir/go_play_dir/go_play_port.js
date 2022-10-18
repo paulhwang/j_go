@@ -56,7 +56,7 @@ function GoPlayPortObject(root_val) {
         else if (cmd_val === FE_DEF.GET_LINK_DATA_RESPONSE()) {
         } 
         else {
-            console.log("GoPlayPortObject.receiveFabricResponse() bad cmd=" + cmd_val);
+            console.log("GoPlayPortObject.receiveFabricResponse() bad_cmd=" + cmd_val);
             abend();
         }
     };

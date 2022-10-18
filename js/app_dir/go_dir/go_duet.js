@@ -34,34 +34,37 @@ function GoDuetRootObject() {
         }
     };
 
-    this.receiveFabricResponse = function(command_val, data_val) {
-        if (command_val !== "get_link_data") {
-            console.log("GoDuetRootObject.receiveFabricResponse() command=" + command_val + " data=" + data_val);
+    this.receiveFabricResponse = function(cmd_val, result_val, data1_val, data2_val, data3_val) {
+        if (cmd_val !== FE_DEF.GET_LINK_DATA_RESPONSE()) {
+            console.log("GoDuetPortObject.receiveFabricResponse() cmd=" + cmd_val + " result=" + result_val + " data1=" + data1_val + " data2=" + data2_val + " data3=" + data3_val);
         }
-        if (command_val === "get_link_data") {
-            if (data_val.pending_session3 != "N/A") {
-                console.log("GoDuetPortObject.getLinkDataResponse() pending_session3=" + data_val.pending_session3);
-                this.fabricRequestObj().setupSession3Request(data_val.pending_session3);
+
+        if (cmd_val === "get_link_data") {
+            this.abend();
+            const data = data1_val;
+            if (data.pending_session3 != "N/A") {
+                console.log("GoDuetPortObject.getLinkDataResponse() pending_session3=" + data.pending_session3);
+                this.fabricRequestObj().setupSession3Request(data.pending_session3);
             }
             /*
-            if (data_val.pending_session2 != "N/A") {
-                console.log("GoDuetPortObject.getLinkDataResponse() pending_session2=" + data_val.pending_session2);
-                const pending_session2 = data_val.pending_session2;
+            if (data.pending_session2 != "N/A") {
+                console.log("GoDuetPortObject.getLinkDataResponse() pending_session2=" + data.pending_session2);
+                const pending_session2 = data.pending_session2;
                 const session_id = pending_session2.slice(0, 8);
                 this.fabricRequestObj().setupSession2Request(session_id);
             }
             */
         }
-        else if (command_val === FE_DEF.SETUP_SESSION3_RESPONSE()) {
+        else if (cmd_val === FE_DEF.SETUP_SESSION3_RESPONSE()) {
             window.open("go_play.html", "_self");
         }
-        else if (command_val === FE_DEF.GET_NAME_LIST_RESPONSE()) {
+        else if (cmd_val === FE_DEF.GET_NAME_LIST_RESPONSE()) {
             this.renderNameList();
         }
-        else if (command_val === FE_DEF.GET_LINK_DATA_RESPONSE()) {
+        else if (cmd_val === FE_DEF.GET_LINK_DATA_RESPONSE()) {
         } 
         else {
-            console.log("GoDuetRootObject.receiveFabricResponse() bad command=" + command_val);
+            console.log("GoDuetRootObject.receiveFabricResponse() bad cmd=" + cmd_val);
             abend();
         }
     };
