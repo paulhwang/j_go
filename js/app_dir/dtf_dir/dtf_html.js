@@ -47,7 +47,8 @@ function DtfHtmlObject(root_obj_val) {
     "use strict";
     this.init__ = function(root_obj_val) {
         this.rootObj_ = root_obj_val;
-        this.readInfo();
+        this.writeInfo(this.linkObj().linkId(), "dtf.txt");
+        this.readInfo("dtf.txt");
         this.bindModal();
         this.createPreludes();
         this.createKinds();
@@ -117,8 +118,12 @@ function DtfHtmlObject(root_obj_val) {
         });
     };
 
-    this.readInfo = () => {
-        this.uFabricObj().readFileRequest("dtf.txt");
+    this.writeInfo = (link_val, file_name_val) => {
+        this.uFabricObj().writeFileRequest(link_val, file_name_val);
+    };
+
+    this.readInfo = (file_name_val) => {
+        this.uFabricObj().readFileRequest(file_name_val);
     };
 
     this.createKinds = () => {
