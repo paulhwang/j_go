@@ -424,7 +424,7 @@ function DFabricObject(root_obj_val) {
 
         if (result === FE_DEF.RESULT_SUCCEED()) {
             console.log("DFabricObject.openFileResponse() succeed!");
-            this.callbackFunc().bind(cmd_val);
+            this.callbackFunc().bind(this.callbackObj())(cmd_val);
         }
         else {
             console.log("DFabricObject.openFileResponse() invalid_result=" + result);
@@ -448,7 +448,7 @@ function DFabricObject(root_obj_val) {
 
         if (result === FE_DEF.RESULT_SUCCEED()) {
             console.log("DFabricObject.closeFileResponse() succeed!");
-            this.callbackFunc().bind(cmd_val);
+            this.callbackFunc().bind(this.callbackObj())(cmd_val);
         }
         else {
             console.log("DFabricObject.closeFileResponse() invalid_result=" + result);
@@ -469,7 +469,7 @@ function DFabricObject(root_obj_val) {
 
         if (result === FE_DEF.RESULT_SUCCEED()) {
             console.log("DFabricObject.readFileResponse() succeed! result_data=", result_data);
-            this.callbackFunc().bind(cmd_val, result, result_data, more_data_exist);
+            this.callbackFunc().bind(this.callbackObj())(cmd_val, result, result_data, more_data_exist);
         }
         else {
             console.log("DFabricObject.readFileResponse() invalid_result=" + result);
@@ -483,17 +483,9 @@ function DFabricObject(root_obj_val) {
         const result = data.slice(index, index + FE_DEF.RESULT_SIZE());
         index += FE_DEF.RESULT_SIZE();
 
-        const link_id = data.slice(index, index + FE_DEF.LINK_ID_SIZE());
-        index += FE_DEF.LINK_ID_SIZE();
-
-        const session_id = data.slice(index, index + FE_DEF.SESSION_ID_SIZE());
-        index += FE_DEF.SESSION_ID_SIZE();
-
-        const result_data = data.slice(index);
-
         if (result === FE_DEF.RESULT_SUCCEED()) {
             console.log("DFabricObject.writeFileResponse() succeed!");
-            this.callbackFunc().bind(cmd_val, result, result_data);
+            this.callbackFunc().bind(this.callbackObj())(cmd_val, result);
         }
         else {
             console.log("DFabricObject.writeFileResponse() invalid_result=" + result);

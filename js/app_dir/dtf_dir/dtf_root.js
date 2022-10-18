@@ -6,10 +6,11 @@
 function DtfRootObject() {
     "use strict";
     this.init__ = function() {
+        console.log("DtfRootObject.init__(!!!!!!!!!!!!)");
         this.fabricBaseObj_ = new FabricBaseObject(this);
 
-        this.htmlObject_ = new DtfHtmlObject(this);
         this.portObject_ = new DtfPortObject(this);
+        this.htmlObject_ = new DtfHtmlObject(this);
     };
 
     this.fabricBaseObj = () => this.fabricBaseObj_;

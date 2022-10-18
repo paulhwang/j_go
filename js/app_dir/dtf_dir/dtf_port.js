@@ -10,19 +10,26 @@ function DtfPortObject(root_val) {
         this.dFabricObj().setCallbackFunc(this.receiveFabricResponse, this);
     };
 
-    this.receiveFabricResponse = function(command_val, result_val, data_val, more_data_exist_val) {
-        console.log("DtfPortObject.receiveFabricResponse() command=" + command_val + " result=" + result_val);
-
-        if (command_val === FE_DEF.READ_FILE_RESPONSE()) {
-            console.log("DtfPortObject.receiveFabricResponse() command=" + command_val + " data=" + data_val);
+    this.receiveFabricResponse = function(cmd_val, result_val, data1_val, data2_val, data3_val) {
+        if (cmd_val !== FE_DEF.GET_LINK_DATA_RESPONSE()) {
+            console.log("DtfPortObject.receiveFabricResponse() cmd=" + cmd_val + " result=" + result_val + " data1=" + data1_val + " data2=" + data2_val + " data3=" + data3_val);
         }
 
-        else if (command_val === FE_DEF.WRITE_FILE_RESPONSE()) {
-            console.log("DtfPortObject.receiveFabricResponse() command=" + command_val + " data=" + data_val);
+        if (cmd_val === FE_DEF.READ_FILE_RESPONSE()) {
+            const data = data1_val;
+            const more = data2_val
+            console.log("DtfPortObject.receiveFabricResponse() cmd=" + cmd_val + " data=" + data + " more=" + more);
         }
-
+        else if (cmd_val === FE_DEF.WRITE_FILE_RESPONSE()) {
+            console.log("DtfPortObject.receiveFabricResponse() cmd=" + cmd_val);
+        }
+        else if (cmd_val === FE_DEF.GET_NAME_LIST_RESPONSE()) {
+            //this.renderNameList();
+        }
+        else if (cmd_val === FE_DEF.GET_LINK_DATA_RESPONSE()) {
+        } 
         else {
-            console.log("DtfPortObject.receiveFabricResponse() bad command=" + command_val);
+            console.log("DtfPortObject.receiveFabricResponse() bad cmd=" + cmd_val);
             abend();
         }
     };

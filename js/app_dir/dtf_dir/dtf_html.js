@@ -47,8 +47,8 @@ function DtfHtmlObject(root_obj_val) {
     "use strict";
     this.init__ = function(root_obj_val) {
         this.rootObj_ = root_obj_val;
-        this.writeInfo(this.linkObj().linkId(), "dtf.txt");
         this.readInfo("dtf.txt");
+        this.writeInfo(this.linkObj().linkId(), "dtf.txt");
         this.bindModal();
         this.createPreludes();
         this.createKinds();
