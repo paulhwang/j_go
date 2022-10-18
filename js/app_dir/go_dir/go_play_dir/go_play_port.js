@@ -31,31 +31,32 @@ function GoPlayPortObject(root_val) {
         this.uFabricObj().putSessionDataRequest(data_val);
     };
 
-    this.receiveFabricResponse = function(command_val, data_val) {
-        if (command_val !== FE_DEF.GET_LINK_DATA_RESPONSE()) {
-            console.log("GoPlayPortObject.receiveFabricResponse() command=" + command_val + " data=" + data_val);
+    this.receiveFabricResponse = function(cmd_val, result_val, data1_val) {
+        if (cmd_val !== FE_DEF.GET_LINK_DATA_RESPONSE()) {
+            console.log("GoPlayPortObject.receiveFabricResponse() cmd=" + cmd_val + " result=" + result_val+ " data1=" + data1_val);
         }
 
-        if (command_val === FE_DEF.PUT_SESSION_DATA_RESPONSE()) {
+        if (cmd_val === FE_DEF.PUT_SESSION_DATA_RESPONSE()) {
         }
-        else if (command_val === FE_DEF.GET_SESSION_DATA_RESPONSE()) {
-            if (data_val.charAt(0) === GO_DEF.GO_PROTOCOL_GAME_INFO().charAt(0)) {
-                this.receiveGameData(data_val.slice(1));
+        else if (cmd_val === FE_DEF.GET_SESSION_DATA_RESPONSE()) {
+            const data = data1_val;
+            if (data.charAt(0) === GO_DEF.GO_PROTOCOL_GAME_INFO().charAt(0)) {
+                this.receiveGameData(data.slice(1));
                 return;
             }
-            if (data_val.charAt(0) === GO_DEF.GO_PROTOCOL_TIME_INFO().charAt(0)) {
+            if (data.charAt(0) === GO_DEF.GO_PROTOCOL_TIME_INFO().charAt(0)) {
                 return;
             }
-            if (data_val.charAt(0) === GO_DEF.GO_PROTOCOL_CHAT_INFO().charAt(0)) {
+            if (data.charAt(0) === GO_DEF.GO_PROTOCOL_CHAT_INFO().charAt(0)) {
                 return;
             }
         }
-        else if (command_val === FE_DEF.GET_NAME_LIST_RESPONSE()) {
+        else if (cmd_val === FE_DEF.GET_NAME_LIST_RESPONSE()) {
         }
-        else if (command_val === FE_DEF.GET_LINK_DATA_RESPONSE()) {
+        else if (cmd_val === FE_DEF.GET_LINK_DATA_RESPONSE()) {
         } 
         else {
-            console.log("GoPlayPortObject.receiveFabricResponse() bad command=" + command_val);
+            console.log("GoPlayPortObject.receiveFabricResponse() bad cmd=" + cmd_val);
             abend();
         }
     };

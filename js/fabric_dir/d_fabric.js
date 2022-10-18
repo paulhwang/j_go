@@ -376,7 +376,7 @@ function DFabricObject(root_obj_val) {
 
         if (result === FE_DEF.RESULT_SUCCEED()) {
             console.log("DFabricObject.putSessionDataResponse() succeed! session_id=", session_id);
-            this.callbackFunc().bind(this.callbackObj())(cmd_val, result_data);
+            this.callbackFunc().bind(this.callbackObj())(cmd_val, result, result_data);
         }
         else {
             console.log("DFabricObject.putSessionDataResponse() invalid_result=" + result);
@@ -400,7 +400,7 @@ function DFabricObject(root_obj_val) {
 
         if (result === FE_DEF.RESULT_SUCCEED()) {
             console.log("DFabricObject.getSessionDataResponse() succeed! session_id=", session_id);
-            this.callbackFunc().bind(this.callbackObj())(cmd_val, result_data);
+            this.callbackFunc().bind(this.callbackObj())(cmd_val, result, result_data);
         }
         else {
             console.log("DFabricObject.getSessionDataResponse() invalid_result=" + result);
