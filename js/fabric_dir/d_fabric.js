@@ -24,6 +24,7 @@ function DFabricObject(root_obj_val) {
         }
 
         if (response_command.charCodeAt(0) !== this.httpXmtObj().pendingAjaxRequestCommand().charCodeAt(0) + 32) {
+            console.log("DFabricObject.parseFabricResponse() response_command=" + response_command + " pinding_command=" + this.httpXmtObj().pendingAjaxRequestCommand());
             abend();
         }
         this.httpXmtObj().clearPendingAjaxRequestCommand();
