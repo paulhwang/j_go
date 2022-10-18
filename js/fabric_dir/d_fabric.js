@@ -16,40 +16,40 @@ function DFabricObject(root_obj_val) {
     };
 
     this.parseFabricResponse = (data_val) => {
-        const response_command = data_val.charAt(0);
+        const cmd = data_val.charAt(0);
         const data = data_val.slice(1);
 
-        if (response_command !== FE_DEF.GET_LINK_DATA_RESPONSE()) {
-            console.log("DFabricObject.parseFabricResponse() response_command=" + response_command + " data=" + data_val);
+        if (cmd !== FE_DEF.GET_LINK_DATA_RESPONSE()) {
+            console.log("DFabricObject.parseFabricResponse() cmd=" + cmd + " data=" + data_val);
         }
 
-        if (response_command.charCodeAt(0) !== this.httpXmtObj().pendingAjaxRequestCommand().charCodeAt(0) + 32) {
-            console.log("DFabricObject.parseFabricResponse() response_command=" + response_command + " pinding_command=" + this.httpXmtObj().pendingAjaxRequestCommand());
+        if (cmd.charCodeAt(0) !== this.httpXmtObj().pendingAjaxRequestCommand().charCodeAt(0) + 32) {
+            console.log("DFabricObject.parseFabricResponse() cmd=" + cmd + " pinding_cmd=" + this.httpXmtObj().pendingAjaxRequestCommand());
             abend();
         }
         this.httpXmtObj().clearPendingAjaxRequestCommand();
 
         let func;
-             if (response_command === FE_DEF.REGISTER_RESPONSE())         func = this.registerResponse;
-        else if (response_command === FE_DEF.LOGIN_RESPONSE())            func = this.loginResponse;
-        else if (response_command === FE_DEF.LOGOUT_RESPONSE())           func = this.logoutResponse;
-        else if (response_command === FE_DEF.GET_LINK_DATA_RESPONSE())    func = this.getLinkDataResponse;
-        else if (response_command === FE_DEF.GET_NAME_LIST_RESPONSE())    func = this.getNameListResponse;
-        else if (response_command === FE_DEF.SETUP_SESSION_RESPONSE())    func = this.setupSessionResponse;
-        else if (response_command === FE_DEF.SETUP_SESSION2_RESPONSE())   func = this.setupSession2Response;
-        else if (response_command === FE_DEF.SETUP_SESSION3_RESPONSE())   func = this.setupSession3Response;
-        else if (response_command === FE_DEF.PUT_SESSION_DATA_RESPONSE()) func = this.putSessionDataResponse;
-        else if (response_command === FE_DEF.GET_SESSION_DATA_RESPONSE()) func = this.getSessionDataResponse;
-        else if (response_command === FE_DEF.OPEN_FILE_RESPONSE())        func = this.openFileResponse;
-        else if (response_command === FE_DEF.CLOSE_FILE_RESPONSE())       func = this.closeFileResponse;
-        else if (response_command === FE_DEF.READ_FILE_RESPONSE())        func = this.readFileResponse;
-        else if (response_command === FE_DEF.WRITE_FILE_RESPONSE())       func = this.writeFileResponse;
+             if (cmd === FE_DEF.REGISTER_RESPONSE())         func = this.registerResponse;
+        else if (cmd === FE_DEF.LOGIN_RESPONSE())            func = this.loginResponse;
+        else if (cmd === FE_DEF.LOGOUT_RESPONSE())           func = this.logoutResponse;
+        else if (cmd === FE_DEF.GET_LINK_DATA_RESPONSE())    func = this.getLinkDataResponse;
+        else if (cmd === FE_DEF.GET_NAME_LIST_RESPONSE())    func = this.getNameListResponse;
+        else if (cmd === FE_DEF.SETUP_SESSION_RESPONSE())    func = this.setupSessionResponse;
+        else if (cmd === FE_DEF.SETUP_SESSION2_RESPONSE())   func = this.setupSession2Response;
+        else if (cmd === FE_DEF.SETUP_SESSION3_RESPONSE())   func = this.setupSession3Response;
+        else if (cmd === FE_DEF.PUT_SESSION_DATA_RESPONSE()) func = this.putSessionDataResponse;
+        else if (cmd === FE_DEF.GET_SESSION_DATA_RESPONSE()) func = this.getSessionDataResponse;
+        else if (cmd === FE_DEF.OPEN_FILE_RESPONSE())        func = this.openFileResponse;
+        else if (cmd === FE_DEF.CLOSE_FILE_RESPONSE())       func = this.closeFileResponse;
+        else if (cmd === FE_DEF.READ_FILE_RESPONSE())        func = this.readFileResponse;
+        else if (cmd === FE_DEF.WRITE_FILE_RESPONSE())       func = this.writeFileResponse;
         else abend();
 
-        func.bind(this)(data);
+        func.bind(this)(cmd, data);
     };
 
-    this.registerResponse = (data_val) => {
+    this.registerResponse = (cmd_val, data_val) => {
         const data = data_val;
         let index = 0;
 
@@ -70,7 +70,7 @@ function DFabricObject(root_obj_val) {
         }
     };
 
-    this.loginResponse = (data_val) => {
+    this.loginResponse = (cmd_val, data_val) => {
         const data = data_val;
         let index = 0;
 
@@ -111,7 +111,7 @@ function DFabricObject(root_obj_val) {
         }
     };
 
-    this.logoutResponse = (data_val) => {
+    this.logoutResponse = (cmd_val, data_val) => {
         const data = data_val;
         let index = 0;
 
@@ -142,7 +142,7 @@ function DFabricObject(root_obj_val) {
         }
     };
 
-    this.getLinkDataResponse = (data_val) => {
+    this.getLinkDataResponse = (cmd_val, data_val) => {
         const data = data_val;
         let index = 0;
 
@@ -214,7 +214,7 @@ function DFabricObject(root_obj_val) {
         }
     };
 
-    this.getNameListResponse = (data_val) => {
+    this.getNameListResponse = (cmd_val, data_val) => {
         const data = data_val;
         let index = 0;
 
@@ -239,7 +239,7 @@ function DFabricObject(root_obj_val) {
         this.callbackFunc().bind(this.callbackObj())("get_name_list", data_val);
     };
 
-    this.setupSessionResponse = (data_val) => {
+    this.setupSessionResponse = (cmd_val, data_val) => {
         const data = data_val;
         let index = 0;
 
@@ -271,7 +271,7 @@ function DFabricObject(root_obj_val) {
         }
     };
 
-    this.setupSession2Response = (data_val) => {
+    this.setupSession2Response = (cmd_val, data_val) => {
         const data = data_val;
         let index = 0;
 
@@ -302,7 +302,7 @@ function DFabricObject(root_obj_val) {
         }
     };
 
-    this.setupSession3Response = (data_val) => {
+    this.setupSession3Response = (cmd_val, data_val) => {
         const data = data_val;
         let index = 0;
 
@@ -353,7 +353,7 @@ function DFabricObject(root_obj_val) {
         }
     };
 
-    this.putSessionDataResponse = (data_val) => {
+    this.putSessionDataResponse = (cmd_val, data_val) => {
         const data = data_val;
         let index = 0;
 
@@ -383,7 +383,7 @@ function DFabricObject(root_obj_val) {
         }
     };
 
-    this.getSessionDataResponse = (data_val) => {
+    this.getSessionDataResponse = (cmd_val, data_val) => {
         const data = data_val;
         let index = 0;
 
@@ -407,7 +407,7 @@ function DFabricObject(root_obj_val) {
         }
     };
 
-    this.openFileResponse = (data_val) => {
+    this.openFileResponse = (cmd_val, data_val) => {
         const data = data_val;
         let index = 0;
 
@@ -431,7 +431,7 @@ function DFabricObject(root_obj_val) {
         }
     };
 
-    this.closeFileResponse = (data_val) => {
+    this.closeFileResponse = (cmd_val, data_val) => {
         const data = data_val;
         let index = 0;
 
@@ -455,7 +455,7 @@ function DFabricObject(root_obj_val) {
         }
     };
 
-    this.readFileResponse = (data_val) => {
+    this.readFileResponse = (cmd_val, data_val) => {
         const data = data_val;
         let index = 0;
 
@@ -469,14 +469,14 @@ function DFabricObject(root_obj_val) {
 
         if (result === FE_DEF.RESULT_SUCCEED()) {
             console.log("DFabricObject.readFileResponse() succeed! result_data=", result_data);
-            this.callbackFunc().bind(this.callbackObj())(FE_DEF.READ_FILE_RESPONSE(), result_data, more_data_exist);
+            this.callbackFunc().bind(this.callbackObj())(FE_DEF.READ_FILE_RESPONSE(), result, result_data, more_data_exist);
         }
         else {
             console.log("DFabricObject.readFileResponse() invalid_result=" + result);
         }
     };
 
-    this.writeFileResponse = (data_val) => {
+    this.writeFileResponse = (cmd_val, data_val) => {
         const data = data_val;
         let index = 0;
 
@@ -493,7 +493,7 @@ function DFabricObject(root_obj_val) {
 
         if (result === FE_DEF.RESULT_SUCCEED()) {
             console.log("DFabricObject.writeFileResponse() succeed!");
-            this.callbackFunc().bind(this.callbackObj())(FE_DEF.WRITE_FILE_RESPONSE());
+            this.callbackFunc().bind(this.callbackObj())(FE_DEF.WRITE_FILE_RESPONSE(), result);
         }
         else {
             console.log("DFabricObject.writeFileResponse() invalid_result=" + result);
