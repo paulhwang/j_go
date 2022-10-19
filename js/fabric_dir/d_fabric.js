@@ -254,6 +254,7 @@ function DFabricObject(root_obj_val) {
 
         if (result === FE_DEF.RESULT_SUCCEED()) {
             console.log("DFabricObject.setupSessionResponse() succeed! session_id=", data_val.session_id);
+            this.callbackFunc().bind(this.callbackObj())(cmd_val, result);
         }
         else if (result === FE_DEF.RESULT_ALMOST_SUCCEED()) {
             console.log("DFabricObject.setupSessionResponse() almost_succeed");
@@ -339,7 +340,7 @@ function DFabricObject(root_obj_val) {
             console.log("DFabricObject.setupSession3Response() succeed! session_id=", session_id);
             if (room_status === FE_DEF.ROOM_STATUS_READY()) {
                 this.sessionObj().setSessionInfoIntoStorage(session_id, group_mode, theme_type, theme_data, first_fiddle, second_fiddle);
-                this.callbackFunc().bind(this.callbackObj())(cmd_val);
+                this.callbackFunc().bind(this.callbackObj())(cmd_val, result);
             }
             else {
             }
