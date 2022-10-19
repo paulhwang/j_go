@@ -83,7 +83,7 @@ function DtfHtmlObject(root_obj_val) {
         console.log(kind_items1);
 */
 
-        this.writeInfo(this.linkObj().linkId(), "dtf.txt", "phwang");
+        //this.writeInfo(this.linkObj().linkId(), "dtf.txt", "phwang");
         this.readInfo("dtf.txt");
     }
 

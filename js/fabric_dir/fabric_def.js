@@ -8,8 +8,8 @@ var FE_DEF = new FE_DEF_OBJECT;
 function FE_DEF_OBJECT() {
     "use strict";
 
-    this.REGISTER_COMMAND          = () => 'R';
-    this.REGISTER_RESPONSE         = () => 'r';
+    this.REGISTER_COMMAND          = () => 'U';
+    this.REGISTER_RESPONSE         = () => 'u';
     this.LOGIN_COMMAND             = () => 'I';
     this.LOGIN_RESPONSE            = () => 'i';
     this.LOGOUT_COMMAND            = () => 'O';
@@ -34,8 +34,8 @@ function FE_DEF_OBJECT() {
     this.OPEN_FILE_RESPONSE        = () => 'b';
     this.CLOSE_FILE_COMMAND        = () => 'C';
     this.CLOSE_FILE_RESPONSE       = () => 'c';
-    this.READ_FILE_COMMAND         = () => 'V';
-    this.READ_FILE_RESPONSE        = () => 'v';
+    this.READ_FILE_COMMAND         = () => 'R';
+    this.READ_FILE_RESPONSE        = () => 'r';
     this.WRITE_FILE_COMMAND        = () => 'W';
     this.WRITE_FILE_RESPONSE       = () => 'w';
     this.MESSAGE_COMMAND           = () => 'M';
