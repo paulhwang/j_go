@@ -36,8 +36,18 @@ function GoSoloObject() {
             }
         }
 
+        else if (cmd_val === FE_DEF.SETUP_SESSION_RESPONSE()) {
+            if (result_val == FE_DEF.RESULT_SUCCEED()) {
+            }
+            else {
+            }
+        }
         else if (cmd_val === FE_DEF.SETUP_SESSION3_RESPONSE()) {
-            window.open("go_play.html", "_self");
+            if (result_val == FE_DEF.RESULT_SUCCEED()) {
+                window.open("go_play.html", "_self");
+            }
+            else {
+            }
         }
         else if (cmd_val === FE_DEF.GET_NAME_LIST_RESPONSE()) {
             //this.renderNameList();
