@@ -57,21 +57,24 @@ function DtfHtmlObject(root_obj_val) {
         //console.log("kind_items=" + kind_items);
 
         let json_kind_items_package = JSON.stringify({
-                        data: kind_items,
+                        a: kind_items,
                         });
-        //console.log("json_kind_items_package=" + json_kind_items_package);
+        console.log("json_kind_items_package=" + json_kind_items_package);
 
         let kind_items_package = JSON.parse(json_kind_items_package);
-        //console.log("kind_items_package=" + kind_items_package.data);
+        console.log("kind_items_package=" + kind_items_package.a);
 
         const data = json_kind_items_package;
 
         const encoded_data = encodeURIComponent(data);
-        //console.log("encoded_data=" + encoded_data);
-        //console.log("encoded_data.length=" + encoded_data.length);
+        console.log("encoded_data=" + encoded_data);
+        console.log("encoded_data.length=" + encoded_data.length);
 
         const decoded_data = decodeURIComponent(data);
-        //console.log("decoded_data=" + decoded_data);
+        console.log("decoded_data=" + decoded_data);
+
+        let kind_items_package1 = JSON.parse(decoded_data);
+        console.log("kind_items_package1=" + kind_items_package1.a);
 
 /*
         let json_kind_items = JSON.stringify({
