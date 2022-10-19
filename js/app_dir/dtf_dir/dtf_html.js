@@ -47,8 +47,6 @@ function DtfHtmlObject(root_obj_val) {
     "use strict";
     this.init__ = function(root_obj_val) {
         this.rootObj_ = root_obj_val;
-        this.readInfo("dtf.txt");
-        this.writeInfo(this.linkObj().linkId(), "dtf.txt");
         this.bindModal();
         this.createPreludes();
         this.createKinds();
@@ -56,18 +54,26 @@ function DtfHtmlObject(root_obj_val) {
         this.createItems();
         this.setupItemsSelectors();
 
-/*
-        console.log(kind_items);
+        //console.log("kind_items=" + kind_items);
 
         let json_kind_items_package = JSON.stringify({
                         data: kind_items,
                         });
-        console.log(json_kind_items_package);
+        //console.log("json_kind_items_package=" + json_kind_items_package);
 
         let kind_items_package = JSON.parse(json_kind_items_package);
-        console.log(kind_items_package.data);
+        //console.log("kind_items_package=" + kind_items_package.data);
 
+        const data = json_kind_items_package;
 
+        const encoded_data = encodeURIComponent(data);
+        //console.log("encoded_data=" + encoded_data);
+        //console.log("encoded_data.length=" + encoded_data.length);
+
+        const decoded_data = decodeURIComponent(data);
+        //console.log("decoded_data=" + decoded_data);
+
+/*
         let json_kind_items = JSON.stringify({
                         kind_items,
                         });
@@ -76,6 +82,9 @@ function DtfHtmlObject(root_obj_val) {
         let kind_items1 = JSON.parse(json_kind_items);
         console.log(kind_items1);
 */
+
+        this.writeInfo(this.linkObj().linkId(), "dtf.txt", "phwang");
+        this.readInfo("dtf.txt");
     }
 
     const preludes = [
@@ -118,8 +127,8 @@ function DtfHtmlObject(root_obj_val) {
         });
     };
 
-    this.writeInfo = (link_val, file_name_val) => {
-        this.uFabricObj().writeFileRequest(link_val, file_name_val);
+    this.writeInfo = (link_val, file_name_val, data_val) => {
+        this.uFabricObj().writeFileRequest(link_val, file_name_val, data_val);
     };
 
     this.readInfo = (file_name_val) => {
