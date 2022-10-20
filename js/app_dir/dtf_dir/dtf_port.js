@@ -24,6 +24,15 @@ function DtfPortObject(root_val) {
                 this.uFabricObj().readMoreFileRequest(fd);
             }
         }
+        else if (cmd_val === FE_DEF.READ_MORE_FILE_RESPONSE()) {
+            const data = data1_val;
+            const more = data2_val;
+            const fd = data3_val;
+            console.log("DtfPortObject.receiveFabricResponse() cmd=" + cmd_val + " data=" + data + " more=" + more + " fd=" + fd);
+            if (more === "Y") {
+                this.uFabricObj().readMoreFileRequest(fd);
+            }
+        }
         else if (cmd_val === FE_DEF.WRITE_FILE_RESPONSE()) {
             console.log("DtfPortObject.receiveFabricResponse() cmd=" + cmd_val);
         }
