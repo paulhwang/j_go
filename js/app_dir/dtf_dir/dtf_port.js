@@ -5,14 +5,14 @@
 
 function DtfPortObject(root_val) {
     "use strict";
+    let a;
+    let aa;
+    let aaa;
+
     this.init__ = function(root_val) {
         this.rootObj_ = root_val;
         this.dFabricObj().setCallbackFunc(this.receiveFabricResponse, this);
     };
-
-    let a;
-    let aa;
-    let aaa;
 
     this.receiveFabricResponse = function(cmd_val, result_val, data1_val, data2_val, data3_val) {
         if (cmd_val !== FE_DEF.GET_LINK_DATA_RESPONSE()) {
@@ -42,6 +42,7 @@ function DtfPortObject(root_val) {
                 aa = decodeURIComponent(a);
                 console.log("aa=" + aa);
                 aaa = JSON.parse(aa).a;
+                console.log("aaa=" + aaa);
                 console.log(aaa);
             }
         }
