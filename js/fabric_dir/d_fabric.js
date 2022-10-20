@@ -466,11 +466,17 @@ function DFabricObject(root_obj_val) {
         const more_data_exist = data.charAt(index);
         index += 1;
 
+        let fd;
+        if (more_data_exist === "Y") {
+            fd = data.slice(index, index + FE_DEF.FD_LEN_SIZE());
+            index += FE_DEF.FD_LEN_SIZE();
+        }
+
         const result_data = data.slice(index);
 
         if (result === FE_DEF.RESULT_SUCCEED()) {
-            console.log("DFabricObject.readFileResponse() succeed! result_data=" + result_data + " more=" + more_data_exist);
-            this.callbackFunc().bind(this.callbackObj())(cmd_val, result, result_data, more_data_exist);
+            console.log("DFabricObject.readFileResponse() succeed! result_data=" + result_data + " more=" + more_data_exist + " fd=" + fd);
+            this.callbackFunc().bind(this.callbackObj())(cmd_val, result, result_data, more_data_exist, fd);
         }
         else {
             console.log("DFabricObject.readFileResponse() invalid_result=" + result);

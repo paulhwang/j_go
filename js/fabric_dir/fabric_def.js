@@ -66,8 +66,8 @@ function FE_DEF_OBJECT() {
     this.FABRIC_TIME_STAMP_SIZE = () => 10;
     this.LINK_ID_SIZE           = () => 8;
     this.SESSION_ID_SIZE        = () => 8;
-
-    this.RESULT_SIZE     = () => 2;
+    this.FD_LEN_SIZE            = () => 5;
+    this.RESULT_SIZE            = () => 2;
 
     this.RESULT_SUCCEED                    = () => "00";
     this.RESULT_ACCOUNT_NAME_NOT_EXIST     = () => "01";

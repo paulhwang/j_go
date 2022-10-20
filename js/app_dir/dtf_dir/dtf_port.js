@@ -18,7 +18,8 @@ function DtfPortObject(root_val) {
         if (cmd_val === FE_DEF.READ_FILE_RESPONSE()) {
             const data = data1_val;
             const more = data2_val;
-            console.log("DtfPortObject.receiveFabricResponse() cmd=" + cmd_val + " more=" + more + " data=" + data);
+            const fd = data3_val;
+            console.log("DtfPortObject.receiveFabricResponse() cmd=" + cmd_val + " data=" + data + " more=" + more + " fd=" + fd);
         }
         else if (cmd_val === FE_DEF.WRITE_FILE_RESPONSE()) {
             console.log("DtfPortObject.receiveFabricResponse() cmd=" + cmd_val);
