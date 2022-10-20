@@ -469,7 +469,7 @@ function DFabricObject(root_obj_val) {
         const result_data = data.slice(index);
 
         if (result === FE_DEF.RESULT_SUCCEED()) {
-            console.log("DFabricObject.readFileResponse() succeed! result_data=", result_data);
+            console.log("DFabricObject.readFileResponse() succeed! result_data=" + result_data + " more=" + more_data_exist);
             this.callbackFunc().bind(this.callbackObj())(cmd_val, result, result_data, more_data_exist);
         }
         else {
