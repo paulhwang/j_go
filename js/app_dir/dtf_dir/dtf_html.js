@@ -67,14 +67,14 @@ function DtfHtmlObject(root_obj_val) {
         const data = json_kind_items_package;
 
         const encoded_data = encodeURIComponent(data);
-        console.log("encoded_data=" + encoded_data);
-        console.log("encoded_data.length=" + encoded_data.length);
+        //console.log("encoded_data=" + encoded_data);
+        //console.log("encoded_data.length=" + encoded_data.length);
 
         const decoded_data = decodeURIComponent(data);
-        console.log("decoded_data=" + decoded_data);
+        //console.log("decoded_data=" + decoded_data);
 
         let kind_items_package1 = JSON.parse(decoded_data);
-        console.log("kind_items_package1=" + kind_items_package1.a);
+        //console.log("kind_items_package1=" + kind_items_package1.a);
 
 /*
         let json_kind_items = JSON.stringify({
