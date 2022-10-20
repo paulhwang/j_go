@@ -42,7 +42,7 @@ function DtfPortObject(root_val) {
                 aa = decodeURIComponent(a);
                 console.log("aa=" + aa);
                 aaa = JSON.parse(aa).a;
-                console.log("aaa=" + aaa);
+                console.log(aaa);
             }
         }
         else if (cmd_val === FE_DEF.WRITE_FILE_RESPONSE()) {

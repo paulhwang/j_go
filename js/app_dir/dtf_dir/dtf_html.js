@@ -54,7 +54,8 @@ function DtfHtmlObject(root_obj_val) {
         this.createItems();
         this.setupItemsSelectors();
 
-        //console.log("kind_items=" + kind_items);
+        console.log(preludes);
+        console.log(kind_items);
 
         let json_kind_items_package = JSON.stringify({
                         a: kind_items,
@@ -62,7 +63,7 @@ function DtfHtmlObject(root_obj_val) {
         console.log("json_kind_items_package=" + json_kind_items_package);
 
         let kind_items_package = JSON.parse(json_kind_items_package);
-        console.log("kind_items_package=" + kind_items_package.a);
+        console.log(kind_items_package.a);
 
         const data = json_kind_items_package;
 
