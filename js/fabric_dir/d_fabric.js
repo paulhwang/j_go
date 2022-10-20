@@ -435,7 +435,7 @@ function DFabricObject(root_obj_val) {
         }
     };
 
-    this.reaeMoreFileResponse = (cmd_val, data_val) => {
+    this.readMoreFileResponse = (cmd_val, data_val) => {
         const data = data_val;
         let index = 0;
 
