@@ -19,7 +19,7 @@ function DtfPortObject(root_val) {
             const data = data1_val;
             const more = data2_val;
             const fd = data3_val;
-            console.log("DtfPortObject.receiveFabricResponse() cmd=" + cmd_val + " data=" + data + " more=" + more + " fd=" + fd);
+            console.log("DtfPortObject.receiveFabricResponse(read) cmd=" + cmd_val + " data=" + data + " more=" + more + " fd=" + fd);
             if (more === "Y") {
                 this.uFabricObj().readMoreFileRequest(fd);
             }
@@ -28,7 +28,7 @@ function DtfPortObject(root_val) {
             const data = data1_val;
             const more = data2_val;
             const fd = data3_val;
-            console.log("DtfPortObject.receiveFabricResponse() cmd=" + cmd_val + " data=" + data + " more=" + more + " fd=" + fd);
+            console.log("DtfPortObject.receiveFabricResponse(read more) cmd=" + cmd_val + " data=" + data + " more=" + more + " fd=" + fd);
             if (more === "Y") {
                 this.uFabricObj().readMoreFileRequest(fd);
             }
