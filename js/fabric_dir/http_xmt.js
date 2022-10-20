@@ -50,7 +50,7 @@ function HttpXmtClass(u_fabric_obj_val) {
         }
 
         if (command !== FE_DEF.GET_LINK_DATA_COMMAND()) {
-            console.log("HttpXmtClass.xmtAjaxRequest() data=" + data);
+            //console.log("HttpXmtClass.xmtAjaxRequest() data=" + data);
         }
 
         this.setPendingAjaxRequestCommand(command);

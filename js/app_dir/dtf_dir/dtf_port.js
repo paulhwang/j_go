@@ -10,16 +10,21 @@ function DtfPortObject(root_val) {
         this.dFabricObj().setCallbackFunc(this.receiveFabricResponse, this);
     };
 
+    let a;
+    let aa;
+    let aaa;
+
     this.receiveFabricResponse = function(cmd_val, result_val, data1_val, data2_val, data3_val) {
         if (cmd_val !== FE_DEF.GET_LINK_DATA_RESPONSE()) {
-            console.log("DtfPortObject.receiveFabricResponse() cmd=" + cmd_val + " result=" + result_val + " data1=" + data1_val + " data2=" + data2_val + " data3=" + data3_val);
+            //console.log("DtfPortObject.receiveFabricResponse() cmd=" + cmd_val + " result=" + result_val + " data1=" + data1_val + " data2=" + data2_val + " data3=" + data3_val);
         }
 
         if (cmd_val === FE_DEF.READ_FILE_RESPONSE()) {
             const data = data1_val;
             const more = data2_val;
             const fd = data3_val;
-            console.log("DtfPortObject.receiveFabricResponse(read) cmd=" + cmd_val + " data=" + data + " more=" + more + " fd=" + fd);
+            a = data;
+            //console.log("DtfPortObject.receiveFabricResponse(read) cmd=" + cmd_val + " data=" + data + " more=" + more + " fd=" + fd);
             if (more === "Y") {
                 this.uFabricObj().readMoreFileRequest(fd);
             }
@@ -28,9 +33,16 @@ function DtfPortObject(root_val) {
             const data = data1_val;
             const more = data2_val;
             const fd = data3_val;
-            console.log("DtfPortObject.receiveFabricResponse(read more) cmd=" + cmd_val + " data=" + data + " more=" + more + " fd=" + fd);
+            a = a + data;
+            //console.log("DtfPortObject.receiveFabricResponse(read more) cmd=" + cmd_val + " data=" + data + " more=" + more + " fd=" + fd);
             if (more === "Y") {
                 this.uFabricObj().readMoreFileRequest(fd);
+            }
+            else {
+                aa = decodeURIComponent(a);
+                console.log("aa=" + aa);
+                aaa = JSON.parse(aa).a;
+                console.log("aaa=" + aaa);
             }
         }
         else if (cmd_val === FE_DEF.WRITE_FILE_RESPONSE()) {
