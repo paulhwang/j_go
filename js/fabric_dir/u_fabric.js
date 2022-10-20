@@ -79,24 +79,24 @@ function UFabricObject(root_obj_val) {
         this.httpXmtObj().transmitAjaxRequest(data); 
     };
 
-    this.openFileRequest = (mode_val, file_name_val) => {
-        const data = FE_DEF.OPEN_FILE_COMMANDS() + mode_val + ENCODE.encodeString(file_name_val);
-        this.httpXmtObj().transmitAjaxRequest(data); 
-    };
-
-    this.closeFileRequest = (session_id_val) => {
-        const data = FE_DEF.CLOSE_FILE_COMMANDS() + this.linkObj().linkId() + session_id_val;
-        this.httpXmtObj().transmitAjaxRequest(data); 
-    };
-
     this.readFileRequest = (file_name_val) => {
         const data = FE_DEF.READ_FILE_COMMANDS() + ENCODE.encodeString(file_name_val);
+        this.httpXmtObj().transmitAjaxRequest(data); 
+    };
+
+    this.readMoreFileRequest = (fd_val) => {
+        const data = FE_DEF.READ_MORE_FILE_COMMANDS() + fd_val;
         this.httpXmtObj().transmitAjaxRequest(data); 
     };
 
     this.writeFileRequest = (link_val, file_name_val, data_val) => {
         console.log("UFabricObject.writeFileRequest() data=" + data_val);
         const data = FE_DEF.WRITE_FILE_COMMANDS() + link_val + ENCODE.encodeString(file_name_val) + data_val;
+        this.httpXmtObj().transmitAjaxRequest(data); 
+    };
+
+    this.writeMoreFileRequest = (fd_val) => {
+        const data = FE_DEF.WRITE_MORE_FILE_COMMANDS() + fd_val;
         this.httpXmtObj().transmitAjaxRequest(data); 
     };
 

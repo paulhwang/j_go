@@ -40,10 +40,10 @@ function DFabricObject(root_obj_val) {
         else if (cmd === FE_DEF.SETUP_SESSION3_RESPONSE())   func = this.setupSession3Response;
         else if (cmd === FE_DEF.PUT_SESSION_DATA_RESPONSE()) func = this.putSessionDataResponse;
         else if (cmd === FE_DEF.GET_SESSION_DATA_RESPONSE()) func = this.getSessionDataResponse;
-        else if (cmd === FE_DEF.OPEN_FILE_RESPONSE())        func = this.openFileResponse;
-        else if (cmd === FE_DEF.CLOSE_FILE_RESPONSE())       func = this.closeFileResponse;
         else if (cmd === FE_DEF.READ_FILE_RESPONSE())        func = this.readFileResponse;
+        else if (cmd === FE_DEF.READ_MORE_FILE_RESPONSE())   func = this.readMoreFileResponse;
         else if (cmd === FE_DEF.WRITE_FILE_RESPONSE())       func = this.writeFileResponse;
+        else if (cmd === FE_DEF.WRITE_MORE_FILE_RESPONSE())  func = this.writeMoreFileResponse;
         else abend();
 
         func.bind(this)(cmd, data);
@@ -408,54 +408,6 @@ function DFabricObject(root_obj_val) {
         }
     };
 
-    this.openFileResponse = (cmd_val, data_val) => {
-        const data = data_val;
-        let index = 0;
-
-        const result = data.slice(index, index + FE_DEF.RESULT_SIZE());
-        index += FE_DEF.RESULT_SIZE();
-
-        const link_id = data.slice(index, index + FE_DEF.LINK_ID_SIZE());
-        index += FE_DEF.LINK_ID_SIZE();
-
-        const session_id = data.slice(index, index + FE_DEF.SESSION_ID_SIZE());
-        index += FE_DEF.SESSION_ID_SIZE();
-
-        const result_data = data.slice(index);
-
-        if (result === FE_DEF.RESULT_SUCCEED()) {
-            console.log("DFabricObject.openFileResponse() succeed!");
-            this.callbackFunc().bind(this.callbackObj())(cmd_val);
-        }
-        else {
-            console.log("DFabricObject.openFileResponse() invalid_result=" + result);
-        }
-    };
-
-    this.closeFileResponse = (cmd_val, data_val) => {
-        const data = data_val;
-        let index = 0;
-
-        const result = data.slice(index, index + FE_DEF.RESULT_SIZE());
-        index += FE_DEF.RESULT_SIZE();
-
-        const link_id = data.slice(index, index + FE_DEF.LINK_ID_SIZE());
-        index += FE_DEF.LINK_ID_SIZE();
-
-        const session_id = data.slice(index, index + FE_DEF.SESSION_ID_SIZE());
-        index += FE_DEF.SESSION_ID_SIZE();
-
-        const result_data = data.slice(index);
-
-        if (result === FE_DEF.RESULT_SUCCEED()) {
-            console.log("DFabricObject.closeFileResponse() succeed!");
-            this.callbackFunc().bind(this.callbackObj())(cmd_val);
-        }
-        else {
-            console.log("DFabricObject.closeFileResponse() invalid_result=" + result);
-        }
-    };
-
     this.readFileResponse = (cmd_val, data_val) => {
         const data = data_val;
         let index = 0;
@@ -483,6 +435,30 @@ function DFabricObject(root_obj_val) {
         }
     };
 
+    this.reaeMoreFileResponse = (cmd_val, data_val) => {
+        const data = data_val;
+        let index = 0;
+
+        const result = data.slice(index, index + FE_DEF.RESULT_SIZE());
+        index += FE_DEF.RESULT_SIZE();
+
+        const link_id = data.slice(index, index + FE_DEF.LINK_ID_SIZE());
+        index += FE_DEF.LINK_ID_SIZE();
+
+        const session_id = data.slice(index, index + FE_DEF.SESSION_ID_SIZE());
+        index += FE_DEF.SESSION_ID_SIZE();
+
+        const result_data = data.slice(index);
+
+        if (result === FE_DEF.RESULT_SUCCEED()) {
+            console.log("DFabricObject.reaeMoreFileResponse() succeed!");
+            this.callbackFunc().bind(this.callbackObj())(cmd_val);
+        }
+        else {
+            console.log("DFabricObject.reaeMoreFileResponse() invalid_result=" + result);
+        }
+    };
+
     this.writeFileResponse = (cmd_val, data_val) => {
         const data = data_val;
         let index = 0;
@@ -496,6 +472,30 @@ function DFabricObject(root_obj_val) {
         }
         else {
             console.log("DFabricObject.writeFileResponse() invalid_result=" + result);
+        }
+    };
+
+    this.writeMoreFileResponse = (cmd_val, data_val) => {
+        const data = data_val;
+        let index = 0;
+
+        const result = data.slice(index, index + FE_DEF.RESULT_SIZE());
+        index += FE_DEF.RESULT_SIZE();
+
+        const link_id = data.slice(index, index + FE_DEF.LINK_ID_SIZE());
+        index += FE_DEF.LINK_ID_SIZE();
+
+        const session_id = data.slice(index, index + FE_DEF.SESSION_ID_SIZE());
+        index += FE_DEF.SESSION_ID_SIZE();
+
+        const result_data = data.slice(index);
+
+        if (result === FE_DEF.RESULT_SUCCEED()) {
+            console.log("DFabricObject.writeMoreFileResponse() succeed!");
+            this.callbackFunc().bind(this.callbackObj())(cmd_val);
+        }
+        else {
+            console.log("DFabricObject.writeMoreFileResponse() invalid_result=" + result);
         }
     };
 

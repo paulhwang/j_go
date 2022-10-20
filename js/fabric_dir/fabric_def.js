@@ -30,14 +30,14 @@ function FE_DEF_OBJECT() {
     this.PUT_SESSION_DATA_RESPONSE = () => 'p';
     this.GET_SESSION_DATA_COMMAND  = () => 'G';
     this.GET_SESSION_DATA_RESPONSE = () => 'g';
-    this.OPEN_FILE_COMMAND         = () => 'B';
-    this.OPEN_FILE_RESPONSE        = () => 'b';
-    this.CLOSE_FILE_COMMAND        = () => 'C';
-    this.CLOSE_FILE_RESPONSE       = () => 'c';
     this.READ_FILE_COMMAND         = () => 'R';
     this.READ_FILE_RESPONSE        = () => 'r';
+    this.READ_MORE_FILE_COMMAND    = () => 'B';
+    this.READ_MORE_FILE_RESPONSE   = () => 'b';
     this.WRITE_FILE_COMMAND        = () => 'W';
     this.WRITE_FILE_RESPONSE       = () => 'w';
+    this.WRITE_MORE_FILE_COMMAND   = () => 'C';
+    this.WRITE_MORE_FILE_RESPONSE  = () => 'c';
     this.MESSAGE_COMMAND           = () => 'M';
     this.MESSAGE_RESPONSE          = () => 'm';
     this.NULL_COMMAND              = () => '?';
@@ -53,10 +53,10 @@ function FE_DEF_OBJECT() {
     this.FREE_SESSION_COMMANDS      = () => "2" + this.FREE_SESSION_COMMAND();
     this.PUT_SESSION_DATA_COMMANDS  = () => "2" + this.PUT_SESSION_DATA_COMMAND();
     this.GET_SESSION_DATA_COMMANDS  = () => "2" + this.GET_SESSION_DATA_COMMAND();
-    this.OPEN_FILE_COMMANDS         = () => "0" + this.OPEN_FILE_COMMAND();
-    this.CLOSE_FILE_COMMANDS        = () => "0" + this.CLOSE_FILE_COMMAND();
     this.READ_FILE_COMMANDS         = () => "0" + this.READ_FILE_COMMAND();
+    this.READ_MORE_FILE_COMMANDS    = () => "0" + this.READ_MORE_FILE_COMMAND();
     this.WRITE_FILE_COMMANDS        = () => "1" + this.WRITE_FILE_COMMAND();
+    this.WRITE_MORE_FILE_COMMANDS   = () => "1" + this.WRITE_MORE_FILE_COMMAND();
     this.MESSAGE_COMMANDS           = () => "1" + this.MESSAGE_COMMAND();
 
     this.FAKE_LINK_ID_INDEX    = () => "99990000";
