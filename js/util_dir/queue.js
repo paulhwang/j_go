@@ -23,7 +23,7 @@ function QueueClass(max_queue_len_val) {
 
     this.dequeueData = () => {
         if (this.queueLen() === 0) {
-            return 0;
+            return null;
         }
         const data = this.queueArray()[0];
         this.decrementQueueLength();
