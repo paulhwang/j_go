@@ -48,8 +48,8 @@ function DtfHtmlObject(root_obj_val) {
     this.init__ = function(root_obj_val) {
         this.rootObj_ = root_obj_val;
 
-        this.preludes_ = orig_preludes;
-        this.kindItems_ = orig_kind_items;
+        this.setPreludes(orig_preludes);
+        this.setKindItems(orig_kind_items);
 
         this.bindModal();
         this.createPreludes();
@@ -241,7 +241,9 @@ function DtfHtmlObject(root_obj_val) {
 
     this.rootObj = () => this.rootObj_;
     this.preludes = () => this.preludes_;
+    this.setPreludes = (val) => {this.preludes_ = val;}
     this.kindItems = () => this.kindItems_;
+    this.setKindItems = (val) => {this.kindItems_ = val;}
     this.linkObj = () => this.rootObj().linkObj();
     this.uFabricObj = () => this.rootObj().uFabricObj();
     this.dFabricObj = () => this.rootObj().dFabricObj();
