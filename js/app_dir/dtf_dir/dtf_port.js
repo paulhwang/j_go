@@ -38,8 +38,17 @@ function DtfPortObject(root_val) {
             }
             else {
                 const aaa = ENCODE.decodeHtml(a);
-                this.htmlObj().setKindItems(aaa);
+
+                if (this.callbackFunc1() !== null) {
+                    this.callbackFunc1().bind(this)(aaa);
+                    this.clearCallbackFunc1();
+                }
+                else {
+                    abend();
+                }
+
                 this.htmlObj().startHtmlObject();
+
                 if (this.callbackFunc2() !== null) {
                     this.callbackFunc2().bind(this)();
                     this.clearCallbackFunc2();
