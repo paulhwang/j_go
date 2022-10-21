@@ -12,6 +12,9 @@ function DtfPortObject(root_val) {
     this.init__ = function(root_val) {
         this.rootObj_ = root_val;
         this.dFabricObj().setCallbackFunc(this.receiveFabricResponse, this);
+
+        //this.writeInfo(this.linkObj().linkId(), "dtf.txt", "phwang");
+        this.readInfo("dtf.txt");
     };
 
     this.receiveFabricResponse = function(cmd_val, result_val, data1_val, data2_val, data3_val) {

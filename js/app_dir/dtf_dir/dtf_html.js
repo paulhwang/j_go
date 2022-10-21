@@ -47,7 +47,9 @@ function DtfHtmlObject(root_obj_val) {
     "use strict";
     this.init__ = function(root_obj_val) {
         this.rootObj_ = root_obj_val;
+    };
 
+    this.startHtmlObject = () => {
         this.setPreludes(orig_preludes);
         this.setKindItems(orig_kind_items);
 
@@ -91,8 +93,6 @@ function DtfHtmlObject(root_obj_val) {
         console.log(kind_items1);
 */
 
-        //this.portObj().writeInfo(this.linkObj().linkId(), "dtf.txt", "phwang");
-        this.portObj().readInfo("dtf.txt");
     }
 
     const orig_preludes = [
