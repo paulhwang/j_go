@@ -20,6 +20,13 @@ function DtfWdObject(root_obj_val) {
 
     this.doService = () => {
         console.log("startWatchDogstartWatchDogstartWatchDogstartWatchDogstartWattWatchDogstartWatchDogstartWatchDog");
+
+        if (this.serviceQueue().queueLen() === 0) {
+            //if (val === "R") {
+                this.htmlObj().startHtmlObject();
+            //}
+        }
+
         let service = this.serviceQueue().dequeueData();
         if (service !== null) {
             const file_name = service[0];
