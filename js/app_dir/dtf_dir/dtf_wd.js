@@ -10,7 +10,7 @@ function DtfWdObject(root_obj_val) {
         this.rootObj_ = root_obj_val;
         this.serviceQueue_ = new QueueClass(1);
 
-        let a = ["dtf.txt", "R", this.htmlObj().setKindItems];
+        let a = ["kind_items", "R", this.htmlObj().setKindItems];
         this.enqueueService(a);
     };
 
