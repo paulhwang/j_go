@@ -3,41 +3,41 @@
   Written by Paul Hwang
 */
 
-function QueueClass() {
+function QueueClass(max_queue_len_val) {
     "use strict";
     this.init__ = () => {
-        this.theMaxQueueLength = 1;
-        this.theQueueLength = 0;
-        this.theQueueArray = [this.maxQueueLength()];
+        this.maxQueueLen_ = max_queue_len_val;
+        this.queueLen_ = 0;
+        this.queueArray_ = [this.maxQueueLen()];
     };
 
     this.enqueueData = (data_val) => {
-        if (this.queueLength() >= this.maxQueueLength()) {
+        if (this.queueLen() >= this.maxQueueLen()) {
             console.log("QueueClass.enqueueData() queue full");
             abend();
             return;
         }
-        this.queueArray()[this.queueLength()] = data_val;
+        this.queueArray()[this.queueLen()] = data_val;
         this.incrementQueueLength();
     };
 
     this.dequeueData = () => {
-        if (this.queueLength() === 0) {
+        if (this.queueLen() === 0) {
             return 0;
         }
         const data = this.queueArray()[0];
         this.decrementQueueLength();
 
-        for (let i = 0; i < this.queueLength(); i++) {
+        for (let i = 0; i < this.queueLen(); i++) {
             this.queueArray()[i] = this.queueArray()[i + 1];
         }
         return data;
     };
 
-    this.incrementQueueLength = () => {this.theQueueLength += 1};
-    this.decrementQueueLength = () => {this.theQueueLength -= 1};
-    this.maxQueueLength = () => this.theMaxQueueLength;
-    this.queueLength = () => this.theQueueLength;
-    this.queueArray = () => this.theQueueArray;
+    this.incrementQueueLength = () => {this.queueLen_ += 1};
+    this.decrementQueueLength = () => {this.queueLen_ -= 1};
+    this.maxQueueLen = () => this.maxQueueLen_;
+    this.queueLen = () => this.queueLen_;
+    this.queueArray = () => this.queueArray_;
     this.init__();
 }

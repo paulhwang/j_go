@@ -7,8 +7,8 @@ function HttpXmtClass(u_fabric_obj_val) {
     "use strict";
     this.init__ = (u_fabric_obj_val) => {
         this.uFabricObj_ = u_fabric_obj_val;
-        this.transmitQueueObj_ = new QueueClass();
-        this.pendingSessionDataQueueObj_ = new QueueClass();
+        this.transmitQueueObj_ = new QueueClass(1);
+        this.pendingSessionDataQueueObj_ = new QueueClass(1);
         this.clearPendingAjaxRequestCommand();
     };
 
