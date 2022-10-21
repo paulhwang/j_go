@@ -44,6 +44,9 @@ function DtfPortObject(root_val) {
                 aaa = JSON.parse(aa).a;
                 console.log("aaa=" + aaa);
                 console.log(aaa);
+                this.htmlObj().setKindItems(aaa);
+                console.log(this.htmlObj().kindItems());
+                console.log("=" + this.htmlObj().kindItems());
             }
         }
         else if (cmd_val === FE_DEF.WRITE_FILE_RESPONSE()) {
@@ -63,8 +66,17 @@ function DtfPortObject(root_val) {
     this.getLinkDataResponse = function (data_val) {
     };
 
+    this.writeInfo = (link_val, file_name_val, data_val) => {
+        this.uFabricObj().writeFileRequest(link_val, file_name_val, data_val);
+    };
+
+    this.readInfo = (file_name_val) => {
+        this.uFabricObj().readFileRequest(file_name_val);
+    };
+
     this.rootObj = () => this.rootObj_;
-    this.linkObj = () => this.rootObject().linkObject();
+    this.linkObj = () => this.rootObj().rootObj();
+    this.htmlObj = () => this.rootObj().htmlObj();
     this.dFabricObj = () => this.rootObj().dFabricObj();
     this.uFabricObj = () => this.rootObj().uFabricObj();
     this.init__(root_val);

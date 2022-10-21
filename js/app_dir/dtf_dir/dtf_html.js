@@ -91,8 +91,8 @@ function DtfHtmlObject(root_obj_val) {
         console.log(kind_items1);
 */
 
-        //this.writeInfo(this.linkObj().linkId(), "dtf.txt", "phwang");
-        //this.readInfo("dtf.txt");
+        //this.portObj().writeInfo(this.linkObj().linkId(), "dtf.txt", "phwang");
+        this.portObj().readInfo("dtf.txt");
     }
 
     const orig_preludes = [
@@ -133,14 +133,6 @@ function DtfHtmlObject(root_obj_val) {
                 return;
             }
         });
-    };
-
-    this.writeInfo = (link_val, file_name_val, data_val) => {
-        this.uFabricObj().writeFileRequest(link_val, file_name_val, data_val);
-    };
-
-    this.readInfo = (file_name_val) => {
-        this.uFabricObj().readFileRequest(file_name_val);
     };
 
     this.createKinds = () => {

@@ -9,8 +9,8 @@ function DtfRootObject() {
         console.log("DtfRootObject.init__(!!!!!!!!!!!!)");
         this.fabricBaseObj_ = new FabricBaseObject(this);
 
-        this.portObject_ = new DtfPortObject(this);
-        this.htmlObject_ = new DtfHtmlObject(this);
+        this.portObj_ = new DtfPortObject(this);
+        this.htmlObj_ = new DtfHtmlObject(this);
     };
 
     this.fabricBaseObj = () => this.fabricBaseObj_;
@@ -18,8 +18,8 @@ function DtfRootObject() {
     this.uFabricObj = () => this.fabricBaseObj().uFabricObj();
     this.linkObj = () => this.uFabricObj().linkObj();
     this.sessionObj = () => this.uFabricObj().sessionObj();
-    this.htmlObject = () => this.htmlObject_;
-    this.portObject = () => this.portObject_;
+    this.htmlObj = () => this.htmlObj_;
+    this.portObj = () => this.portObj_;
     this.init__();
 };
 
