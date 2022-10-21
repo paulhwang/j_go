@@ -10,9 +10,6 @@ function DtfPortObject(root_val) {
     this.init__ = function(root_val) {
         this.rootObj_ = root_val;
         this.dFabricObj().setCallbackFunc(this.receiveFabricResponse, this);
-
-        //this.writeInfo(this.linkObj().linkId(), "dtf.txt", "phwang");
-        this.readInfo("dtf.txt");
     };
 
     this.receiveFabricResponse = function(cmd_val, result_val, data1_val, data2_val, data3_val) {
@@ -43,6 +40,13 @@ function DtfPortObject(root_val) {
                 const aaa = ENCODE.decodeHtml(a);
                 this.htmlObj().setKindItems(aaa);
                 this.htmlObj().startHtmlObject();
+                if (this.callbackFunc2() !== null) {
+                    this.callbackFunc2().bind(this)();
+                    this.clearCallbackFunc2();
+                }
+                else {
+                    abend();
+                }
             }
         }
         else if (cmd_val === FE_DEF.WRITE_FILE_RESPONSE()) {
@@ -66,7 +70,9 @@ function DtfPortObject(root_val) {
         this.uFabricObj().writeFileRequest(link_val, file_name_val, data_val);
     };
 
-    this.readInfo = (file_name_val) => {
+    this.readInfo = (file_name_val, callback_func1_val, callback_func2_val) => {
+        this.callbackFunc1_ = callback_func1_val;
+        this.callbackFunc2_ = callback_func2_val;
         this.uFabricObj().readFileRequest(file_name_val);
     };
 
@@ -75,5 +81,9 @@ function DtfPortObject(root_val) {
     this.htmlObj = () => this.rootObj().htmlObj();
     this.dFabricObj = () => this.rootObj().dFabricObj();
     this.uFabricObj = () => this.rootObj().uFabricObj();
+    this.callbackFunc1 = () => this.callbackFunc1_;
+    this.callbackFunc2 = () => this.callbackFunc2_;
+    this.clearCallbackFunc1 = () => {this.callbackFunc1_ = null;}
+    this.clearCallbackFunc2 = () => {this.callbackFunc2_ = null;}
     this.init__(root_val);
 }

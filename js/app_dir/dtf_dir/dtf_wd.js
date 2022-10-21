@@ -10,7 +10,7 @@ function DtfWdObject(root_obj_val) {
         this.rootObj_ = root_obj_val;
         this.serviceQueue_ = new QueueClass(1);
 
-        let a = ["directory", "read", "function", "x", "y", "z"];
+        let a = ["dtf.txt", "R", "function"];
         this.enqueueService(a);
     };
 
@@ -19,18 +19,16 @@ function DtfWdObject(root_obj_val) {
     };
 
     this.startWatchDog = (val) => {
-        const this0 = this;
-        this.watchDogId_ = setInterval(function (val) {
-            let service = this0.serviceQueue().dequeueData();
-            if (service !== null) {
-                const dir = service[0];
-                const r_w = service[1];
-                const func = service[2];
-                console.log(dir);
-                console.log(r_w);
-                console.log(func);
+        console.log("startWatchDogstartWatchDogstartWatchDogstartWatchDogstartWattWatchDogstartWatchDogstartWatchDog");
+        let service = this.serviceQueue().dequeueData();
+        if (service !== null) {
+            const file_name = service[0];
+            const r_w = service[1];
+            const callback_func = service[2];
+            if (r_w === "R") {
+                this.portObj().readInfo(file_name, callback_func, this.startWatchDog);
             }
-        }, 1000, val);
+        }
     };
 
     this.stopWatchDog = () => {
@@ -45,6 +43,7 @@ function DtfWdObject(root_obj_val) {
     this.htmlObj = () => this.rootObj().htmlObj();
     this.dFabricObj = () => this.rootObj().dFabricObj();
     this.uFabricObj = () => this.rootObj().uFabricObj();
+    this.portObj = () => this.rootObj().portObj();
     this.watchDogId = () => this.watchDogId_;
     this.serviceQueue = () => this.serviceQueue_;
     this.init__(root_obj_val);

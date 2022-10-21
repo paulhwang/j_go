@@ -17,6 +17,7 @@ function QueueClass(max_queue_len_val) {
             abend();
             return;
         }
+
         this.queueArray()[this.queueLen()] = data_val;
         this.incrementQueueLength();
     };
@@ -25,6 +26,7 @@ function QueueClass(max_queue_len_val) {
         if (this.queueLen() === 0) {
             return null;
         }
+
         const data = this.queueArray()[0];
         this.decrementQueueLength();
 
