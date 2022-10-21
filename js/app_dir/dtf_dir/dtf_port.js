@@ -6,8 +6,6 @@
 function DtfPortObject(root_val) {
     "use strict";
     let a;
-    let aa;
-    let aaa;
 
     this.init__ = function(root_val) {
         this.rootObj_ = root_val;
@@ -42,11 +40,7 @@ function DtfPortObject(root_val) {
                 this.uFabricObj().readMoreFileRequest(fd);
             }
             else {
-                aa = decodeURIComponent(a);
-                console.log("aa=" + aa);
-                aaa = JSON.parse(aa).a;
-                console.log("aaa=" + aaa);
-                console.log(aaa);
+                const aaa = ENCODE.decodeHtml(a);
                 this.htmlObj().setKindItems(aaa);
                 console.log(this.htmlObj().kindItems());
                 console.log("=" + this.htmlObj().kindItems());

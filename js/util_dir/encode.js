@@ -194,5 +194,18 @@ function ENCODE_OBJECT() {
         return output;
     };
 
+    this.encodeHtml = (val) => {
+
+    };
+
+    this.decodeHtml = (val) => {
+        const aa = decodeURIComponent(val);
+        console.log("ENCODE_OBJECT.decodeHtml() aa=" + aa);
+        const aaa = JSON.parse(aa).a;
+        console.log("ENCODE_OBJECT.decodeHtml() aaa=" + aaa);
+        console.log(aaa);
+        return aaa;
+    };
+
     this.init__();
 };
