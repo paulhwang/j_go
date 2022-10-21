@@ -8,10 +8,10 @@ function DtfWdObject(root_obj_val) {
 
     this.init__ = function(root_obj_val) {
         this.rootObj_ = root_obj_val;
-        this.serviceQueue_ = new QueueClass(1);
+        this.serviceQueue_ = new QueueClass(2);
 
-        let a = ["kind_items", "R", this.htmlObj().setKindItems];
-        this.enqueueService(a);
+        this.enqueueService(["preludes",   "R", this.htmlObj().setPreludes]);
+        this.enqueueService(["kind_items", "R", this.htmlObj().setKindItems]);
     };
 
     this.enqueueService = (val) => {

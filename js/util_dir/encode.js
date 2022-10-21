@@ -195,7 +195,16 @@ function ENCODE_OBJECT() {
     };
 
     this.encodeHtml = (val) => {
+        const j = JSON.stringify({a: val,});
+        //console.log("ENCODE_OBJECT.encodeHtml() j=" + j);
 
+        //const v = JSON.parse(j);
+        //console.log(v.a);
+        //console.log("ENCODE_OBJECT.encodeHtml() v.a=" + v.a);
+
+        const jj = encodeURIComponent(j);
+        //console.log("ENCODE_OBJECT.encodeHtml() jj=" + jj);
+        return jj;
     };
 
     this.decodeHtml = (val) => {

@@ -47,10 +47,11 @@ function DtfHtmlObject(root_obj_val) {
     "use strict";
     this.init__ = function(root_obj_val) {
         this.rootObj_ = root_obj_val;
+        ENCODE.encodeHtml(orig_preludes);
     };
 
     this.startHtmlObject = () => {
-        this.setPreludes(orig_preludes);
+        //this.setPreludes(orig_preludes);
         //this.setKindItems(orig_kind_items);
 
         this.bindModal();
@@ -100,7 +101,7 @@ function DtfHtmlObject(root_obj_val) {
         [["h2"], ["〈本店使用國產豬肉〉"]],
         [["p"], ["每日上午6:00開放11:30後取餐的預點餐。"]],
         [["p"], ["每餐廳營業時間開始後，才會開始製餐。"]],
-        [["p"], ["餐廳接單時間為11:00-20:00。"]],
+        [["p"], ["餐廳接單時間為11:00~20:00。"]],
         [["p"], ["餐點均為現做，將視您所訂購的餐點數量調整取餐時間。"]],
         [["p"], ["憑訂單編號，前往鼎泰豐信義店取餐。"]],
         [["p"], ["基於餐點口味及品質，恕不提供客製化服務。"]],

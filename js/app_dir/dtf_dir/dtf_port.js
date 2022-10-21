@@ -49,7 +49,6 @@ function DtfPortObject(root_val) {
 
                 if (this.callbackFunc2() !== null) {
                     this.callbackFunc2().bind(this)(this.callbackParam2());
-                    this.clearCallbackFunc2();
                 }
                 else {
                     abend();
