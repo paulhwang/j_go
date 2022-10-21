@@ -47,7 +47,7 @@ function DtfHtmlObject(root_obj_val) {
     "use strict";
     this.init__ = function(root_obj_val) {
         this.rootObj_ = root_obj_val;
-        ENCODE.encodeHtml(orig_preludes);
+        //ENCODE.encodeHtml(orig_preludes);
     };
 
     this.startHtmlObject = () => {
@@ -96,7 +96,8 @@ function DtfHtmlObject(root_obj_val) {
 
     }
 
-    const orig_preludes = [
+/*
+     const orig_preludes = [
         [["h1"], ["鼎泰豐"]],
         [["h2"], ["〈本店使用國產豬肉〉"]],
         [["p"], ["每日上午6:00開放11:30後取餐的預點餐。"]],
@@ -107,8 +108,7 @@ function DtfHtmlObject(root_obj_val) {
         [["p"], ["基於餐點口味及品質，恕不提供客製化服務。"]],
         [["h2"], ["餐廳最後取餐時間為20:30。"]]];
 
-/*
-    const orig_kind_items = [
+   const orig_kind_items = [
         [["素食"], ["烤麩", "涼拌雲耳", "香菇素餃", "迷你豆沙包", "迷你芋泥包", "松露鮮菇盅", "什蔬炒飯"]],
         [["開胃菜"], ["炸排骨", "紹興醉雞", "辣味黃瓜", "寧式黃芽菜", "乾煸四季豆"]],
         [["小籠包"], ["小籠包", "蟹粉小籠包", "雞肉小籠包", "絲瓜蝦仁小籠包", "松露小籠包"]],
