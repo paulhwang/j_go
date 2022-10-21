@@ -18,13 +18,13 @@ function DtfWdObject(root_obj_val) {
         this.serviceQueue().enqueueData(val);
     };
 
-    this.doService = () => {
+    this.doService = (val) => {
         console.log("startWatchDogstartWatchDogstartWatchDogstartWatchDogstartWattWatchDogstartWatchDogstartWatchDog");
 
         if (this.serviceQueue().queueLen() === 0) {
-            //if (val === "R") {
+            if (val === "R") {
                 this.htmlObj().startHtmlObject();
-            //}
+            }
         }
 
         let service = this.serviceQueue().dequeueData();
@@ -33,7 +33,7 @@ function DtfWdObject(root_obj_val) {
             const r_w = service[1];
             const callback_func = service[2];
             if (r_w === "R") {
-                this.portObj().readInfo(file_name, callback_func, this.doService);
+                this.portObj().readInfo(file_name, callback_func, this.doService, val);
             }
         }
     };
