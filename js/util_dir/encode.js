@@ -200,10 +200,10 @@ function ENCODE_OBJECT() {
 
     this.decodeHtml = (val) => {
         const aa = decodeURIComponent(val);
-        console.log("ENCODE_OBJECT.decodeHtml() aa=" + aa);
+        //console.log("ENCODE_OBJECT.decodeHtml() aa=" + aa);
         const aaa = JSON.parse(aa).a;
-        console.log("ENCODE_OBJECT.decodeHtml() aaa=" + aaa);
-        console.log(aaa);
+        //console.log("ENCODE_OBJECT.decodeHtml() aaa=" + aaa);
+        //console.log(aaa);
         return aaa;
     };
 

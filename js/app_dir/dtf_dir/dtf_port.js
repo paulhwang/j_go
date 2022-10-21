@@ -42,8 +42,6 @@ function DtfPortObject(root_val) {
             else {
                 const aaa = ENCODE.decodeHtml(a);
                 this.htmlObj().setKindItems(aaa);
-                console.log(this.htmlObj().kindItems());
-                console.log("=" + this.htmlObj().kindItems());
                 this.htmlObj().startHtmlObject();
             }
         }
