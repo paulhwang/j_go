@@ -47,6 +47,10 @@ function DtfHtmlObject(root_obj_val) {
     "use strict";
     this.init__ = function(root_obj_val) {
         this.rootObj_ = root_obj_val;
+
+        this.preludes_ = orig_preludes;
+        this.kindItems_ = orig_kind_items;
+
         this.bindModal();
         this.createPreludes();
         this.createKinds();
@@ -54,27 +58,27 @@ function DtfHtmlObject(root_obj_val) {
         this.createItems();
         this.setupItemsSelectors();
 
-        console.log(preludes);
-        console.log(kind_items);
+        //console.log(preludes);
+        //console.log(kind_items);
 
-        let json_kind_items_package = JSON.stringify({
-                        a: kind_items,
-                        });
-        console.log("json_kind_items_package=" + json_kind_items_package);
+        //let json_kind_items_package = JSON.stringify({
+        //                a: kind_items,
+        //                });
+        //console.log("json_kind_items_package=" + json_kind_items_package);
 
-        let kind_items_package = JSON.parse(json_kind_items_package);
-        console.log(kind_items_package.a);
+        //let kind_items_package = JSON.parse(json_kind_items_package);
+        //console.log(kind_items_package.a);
 
-        const data = json_kind_items_package;
+        //const data = json_kind_items_package;
 
-        const encoded_data = encodeURIComponent(data);
+        //const encoded_data = encodeURIComponent(data);
         //console.log("encoded_data=" + encoded_data);
         //console.log("encoded_data.length=" + encoded_data.length);
 
-        const decoded_data = decodeURIComponent(data);
+        //const decoded_data = decodeURIComponent(data);
         //console.log("decoded_data=" + decoded_data);
 
-        let kind_items_package1 = JSON.parse(decoded_data);
+        //let kind_items_package1 = JSON.parse(decoded_data);
         //console.log("kind_items_package1=" + kind_items_package1.a);
 
 /*
@@ -88,10 +92,10 @@ function DtfHtmlObject(root_obj_val) {
 */
 
         //this.writeInfo(this.linkObj().linkId(), "dtf.txt", "phwang");
-        this.readInfo("dtf.txt");
+        //this.readInfo("dtf.txt");
     }
 
-    const preludes = [
+    const orig_preludes = [
         [["h1"], ["鼎泰豐"]],
         [["h2"], ["〈本店使用國產豬肉〉"]],
         [["p"], ["每日上午6:00開放11:30後取餐的預點餐。"]],
@@ -103,7 +107,7 @@ function DtfHtmlObject(root_obj_val) {
         [["h2"], ["餐廳最後取餐時間為20:30。"]]];
 
 
-    const kind_items = [
+    const orig_kind_items = [
         [["素食"], ["烤麩", "涼拌雲耳", "香菇素餃", "迷你豆沙包", "迷你芋泥包", "松露鮮菇盅", "什蔬炒飯"]],
         [["開胃菜"], ["炸排骨", "紹興醉雞", "辣味黃瓜", "寧式黃芽菜", "乾煸四季豆"]],
         [["小籠包"], ["小籠包", "蟹粉小籠包", "雞肉小籠包", "絲瓜蝦仁小籠包", "松露小籠包"]],
@@ -140,8 +144,8 @@ function DtfHtmlObject(root_obj_val) {
     };
 
     this.createKinds = () => {
-        for (let i = 0; i < kind_items.length; i++) {
-            let kind_item = kind_items[i];
+        for (let i = 0; i < this.kindItems().length; i++) {
+            let kind_item = this.kindItems()[i];
             let kind = kind_item[0];
 
             let btn = document.createElement("button");
@@ -153,7 +157,7 @@ function DtfHtmlObject(root_obj_val) {
 
     this.setupKindsSelectors = () => {
         const this0 = this;
-        for (let i = 0; i < kind_items.length; i++) {
+        for (let i = 0; i < this.kindItems().length; i++) {
             document.querySelector(".kind" + ENCODE.encodeNumber(i, 2) + "_kind_button").addEventListener("click", function() {
                 //window.open("go_solo.html", "_self");
                 UTILS.openModal(this0.orderModel());
@@ -162,8 +166,8 @@ function DtfHtmlObject(root_obj_val) {
     };
 
     this.createPreludes = () => {
-        for (let i = 0; i < preludes.length; i++) {
-            let prelude = preludes[i];
+        for (let i = 0; i < this.preludes().length; i++) {
+            let prelude = this.preludes()[i];
             let tag = prelude[0];
             let text = prelude[1];
             let p = document.createElement(tag);
@@ -173,8 +177,8 @@ function DtfHtmlObject(root_obj_val) {
     };
 
     this.createItems = () => {
-        for (let i = 0; i < kind_items.length; i++) {
-            let kind_item = kind_items[i];
+        for (let i = 0; i < this.kindItems().length; i++) {
+            let kind_item = this.kindItems()[i];
             let kind = kind_item[0];
             let item = kind_item[1];
 
@@ -192,8 +196,8 @@ function DtfHtmlObject(root_obj_val) {
     };
 
     this.setupItemsSelectors = () => {
-        for (let i = 0; i < kind_items.length; i++) {
-            let kind_item = kind_items[i];
+        for (let i = 0; i < this.kindItems().length; i++) {
+            let kind_item = this.kindItems()[i];
             let kind = kind_item[0];
             let item = kind_item[1];
             for (let j = 0; j < item.length; j++) {
@@ -236,6 +240,8 @@ function DtfHtmlObject(root_obj_val) {
     };
 
     this.rootObj = () => this.rootObj_;
+    this.preludes = () => this.preludes_;
+    this.kindItems = () => this.kindItems_;
     this.linkObj = () => this.rootObj().linkObj();
     this.uFabricObj = () => this.rootObj().uFabricObj();
     this.dFabricObj = () => this.rootObj().dFabricObj();
