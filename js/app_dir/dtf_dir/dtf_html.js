@@ -51,7 +51,7 @@ function DtfHtmlObject(root_obj_val) {
 
     this.startHtmlObject = () => {
         this.setPreludes(orig_preludes);
-        this.setKindItems(orig_kind_items);
+        //this.setKindItems(orig_kind_items);
 
         this.bindModal();
         this.createPreludes();
@@ -106,7 +106,7 @@ function DtfHtmlObject(root_obj_val) {
         [["p"], ["基於餐點口味及品質，恕不提供客製化服務。"]],
         [["h2"], ["餐廳最後取餐時間為20:30。"]]];
 
-
+/*
     const orig_kind_items = [
         [["素食"], ["烤麩", "涼拌雲耳", "香菇素餃", "迷你豆沙包", "迷你芋泥包", "松露鮮菇盅", "什蔬炒飯"]],
         [["開胃菜"], ["炸排骨", "紹興醉雞", "辣味黃瓜", "寧式黃芽菜", "乾煸四季豆"]],
@@ -119,7 +119,7 @@ function DtfHtmlObject(root_obj_val) {
         [["乾拌麵"], ["炸醬麵", "擔擔麵", "麻醬麵", "紅油燃麵", "雪菜肉絲乾拌麵"]],
         [["炒飯"], ["排骨蛋炒飯", "蝦仁蛋炒飯", "肉絲蛋炒飯", "蝦仁肉絲蛋炒飯", "什蔬蛋炒飯"]],
         [["餛飩"], ["紅油抄手（蝦肉）", "紅油抄手（菜肉）", "餛飩乾拌（蝦肉）", "餛飩乾拌（菜肉）"]]];
-
+*/
     this.orderModel = () => this.orderModel_;
 
     this.bindModal = () => {

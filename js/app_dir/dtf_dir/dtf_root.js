@@ -11,7 +11,6 @@ function DtfRootObject() {
 
         this.portObj_ = new DtfPortObject(this);
         this.htmlObj_ = new DtfHtmlObject(this);
-        this.htmlObj().startHtmlObject();
     };
 
     this.fabricBaseObj = () => this.fabricBaseObj_;

@@ -50,6 +50,7 @@ function DtfPortObject(root_val) {
                 this.htmlObj().setKindItems(aaa);
                 console.log(this.htmlObj().kindItems());
                 console.log("=" + this.htmlObj().kindItems());
+                this.htmlObj().startHtmlObject();
             }
         }
         else if (cmd_val === FE_DEF.WRITE_FILE_RESPONSE()) {
