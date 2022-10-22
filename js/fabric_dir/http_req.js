@@ -14,7 +14,7 @@ function FabricHttpReqObject(callback_func_val, callback_obj_val) {
 
     this.startAjaxWaiting = () => {
         const this0 = this;
-        this.xmlHttpRequest().onreadystatechange = function() {
+        this.xmlHttpRequest().onreadystatechange = () => {
             if ((this0.xmlHttpRequest().readyState === 4) &&
                 (this0.xmlHttpRequest().status === 200)) {
                 this0.callBackFunc().bind(this0.callBackObj())(this0.xmlHttpRequest().responseText);

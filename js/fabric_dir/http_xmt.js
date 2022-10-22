@@ -63,7 +63,7 @@ function HttpXmtClass(u_fabric_obj_val) {
         }
 
         const this0 = this;
-        this.watchDogId_ = setInterval(function (link_val) {
+        this.watchDogId_ = setInterval((link_val) => {
             if (this0.pendingAjaxRequestCommandExist()) {
                 //if (this0.pendingAjaxRequestCommand() !== FE_DEF.GET_LINK_DATA_COMMAND()) {
                     console.log("HttpXmtClass.startWatchDog() request is not transmitted because of pending_command=" + this0.pendingAjaxRequestCommand());

@@ -45,7 +45,7 @@ const escClose = (e) => {
 
 function DtfHtmlObject(root_obj_val) {
     "use strict";
-    this.init__ = function(root_obj_val) {
+    this.init__ = (root_obj_val) => {
         this.rootObj_ = root_obj_val;
         //ENCODE.encodeHtml(orig_preludes);
     };
@@ -151,7 +151,7 @@ function DtfHtmlObject(root_obj_val) {
     this.setupKindsSelectors = () => {
         const this0 = this;
         for (let i = 0; i < this.kindItems().length; i++) {
-            document.querySelector(".kind" + ENCODE.encodeNumber(i, 2) + "_kind_button").addEventListener("click", function() {
+            document.querySelector(".kind" + ENCODE.encodeNumber(i, 2) + "_kind_button").addEventListener("click", () => {
                 //window.open("go_solo.html", "_self");
                 UTILS.openModal(this0.orderModel());
             });
@@ -194,36 +194,36 @@ function DtfHtmlObject(root_obj_val) {
             let kind = kind_item[0];
             let item = kind_item[1];
             for (let j = 0; j < item.length; j++) {
-               document.querySelector(".item" + ENCODE.encodeNumber(i, 2) + ENCODE.encodeNumber(j, 2) + "_item_button").addEventListener("click", function() {
+               document.querySelector(".item" + ENCODE.encodeNumber(i, 2) + ENCODE.encodeNumber(j, 2) + "_item_button").addEventListener("click", () => {
                     window.open("go_solo.html", "_self");
                 });
             }
         }
     };
 
-    this.setupQuerySelectors = function() {
+    this.setupQuerySelectors = () => {
         const theme_type = FE_DEF.THEME_IS_GO_GAME();
         const theme_data = this.encodeGoConfig(19, 0, 0, 1);
 
         const this0 = this;
-        document.querySelector(".solo_button").addEventListener("click", function() {
+        document.querySelector(".solo_button").addEventListener("click", () => {
             window.open("go_solo.html", "_self");
         });
 
-        document.querySelector(".duet_button").addEventListener("click", function() {
+        document.querySelector(".duet_button").addEventListener("click", () => {
             window.open("go_duet.html", "_self");
         });
 
-        document.querySelector(".ensemble_button").addEventListener("click", function() {
+        document.querySelector(".ensemble_button").addEventListener("click", () => {
             window.open("go_ensemble.html", "_self");
         });
 
-        document.querySelector(".exit_button").addEventListener("click", function() {
+        document.querySelector(".exit_button").addEventListener("click", () => {
             window.history.go(-1);
         });
     };
 
-    this.encodeGoConfig = function(board_size_val, handicap_val, komi_val, initiator_color_val) {
+    this.encodeGoConfig = (board_size_val, handicap_val, komi_val, initiator_color_val) => {
         let buf = "";
         if (board_size_val < 10) buf = buf + 0; buf = buf + board_size_val;
         if (handicap_val < 10)   buf = buf + 0; buf = buf + handicap_val;

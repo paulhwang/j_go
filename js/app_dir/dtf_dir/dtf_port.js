@@ -7,12 +7,12 @@ function DtfPortObject(root_val) {
     "use strict";
     let encoded_html_data;
 
-    this.init__ = function(root_val) {
+    this.init__ = (root_val) => {
         this.rootObj_ = root_val;
         this.dFabricObj().setCallbackFunc(this.receiveFabricResponse, this);
     };
 
-    this.receiveFabricResponse = function(cmd_val, result_val, data1_val, data2_val, data3_val) {
+    this.receiveFabricResponse = (cmd_val, result_val, data1_val, data2_val, data3_val) => {
         if (cmd_val !== FE_DEF.GET_LINK_DATA_RESPONSE()) {
             //console.log("DtfPortObject.receiveFabricResponse() cmd=" + cmd_val + " result=" + result_val + " data1=" + data1_val + " data2=" + data2_val + " data3=" + data3_val);
         }
@@ -69,7 +69,7 @@ function DtfPortObject(root_val) {
         }
     };
 
-    this.getLinkDataResponse = function (data_val) {
+    this.getLinkDataResponse = (data_val) => {
     };
 
     this.writeInfo = (link_val, file_name_val, data_val) => {

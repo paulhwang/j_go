@@ -5,7 +5,7 @@
 
 function DtfRootObject() {
     "use strict";
-    this.init__ = function() {
+    this.init__ = () => {
         console.log("DtfRootObject.init__(!!!!!!!!!!!!)");
         this.fabricBaseObj_ = new FabricBaseObject(this);
 
