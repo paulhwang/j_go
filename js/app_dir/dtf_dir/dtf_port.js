@@ -78,9 +78,14 @@ function DtfPortObject(root_val) {
         this.uFabricObj().readFileRequest(file_name_val);
     };
 
-    this.writeInfo = (file_name_val, data_val, wd_func_val) => {
+    this.writeInfo = (mode_val, data_val, file_name_val, wd_func_val) => {
         this.wdFunc_ = wd_func_val;
-        this.uFabricObj().writeFileRequest(file_name_val, ENCODE.encodeHtml(data_val));
+        if (mode_val === "O") {
+            this.uFabricObj().writeFileRequest(file_name_val, data_val);
+        }
+        else {
+            this.uFabricObj().writeMoreFileRequest(fd, data_val);
+        }
     };
 
     this.rootObj = () => this.rootObj_;

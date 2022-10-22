@@ -95,8 +95,8 @@ function UFabricObject(root_obj_val) {
         this.httpXmtObj().transmitAjaxRequest(data); 
     };
 
-    this.writeMoreFileRequest = (fd_val) => {
-        const data = FE_DEF.WRITE_MORE_FILE_COMMANDS() + this.linkObj().linkId()  + fd_val;
+    this.writeMoreFileRequest = (fd_val, data_val) => {
+        const data = FE_DEF.WRITE_MORE_FILE_COMMANDS() + this.linkObj().linkId()  + fd_val + data_val;
         this.httpXmtObj().transmitAjaxRequest(data); 
     };
 

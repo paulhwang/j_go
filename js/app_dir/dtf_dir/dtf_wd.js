@@ -8,44 +8,58 @@ function DtfWdObject(root_obj_val) {
 
     this.init__ = (root_obj_val) => {
         this.rootObj_ = root_obj_val;
-        this.htmlQue_ = new QueueClass(2);
+        this.htmlReadQueue_ = new QueueClass(2);
+        this.htmlWriteQueue_ = new QueueClass(20);
         this.prepareReadHtml();
     };
 
     this.prepareReadHtml = () => {
-        this.htmlQue().enqueueData(["preludes",   this.htmlObj().setPreludes]);
-        this.htmlQue().enqueueData(["kind_items", this.htmlObj().setKindItems]);
+        this.htmlReadQueue().enqueueData(["preludes",   this.htmlObj().setPreludes]);
+        this.htmlReadQueue().enqueueData(["kind_items", this.htmlObj().setKindItems]);
     };
 
     this.doReadHtml = () => {
-        if (this.htmlQue().queueLen() === 0) {
+        if (this.htmlReadQueue().queueLen() === 0) {
             this.htmlObj().startHtmlObject();
         }
 
-        const e = this.htmlQue().dequeueData();
+        const e = this.htmlReadQueue().dequeueData();
         if (e !== null) {
             this.portObj().readInfo(e[0], e[1], this.doReadHtml);
         }
     };
 
     this.prepareAndDoWriteHtml = () => {
-        this.prepareWriteHtml();
+        this.prepareWriteHtml(this.htmlObj().preludes(), "preludes.new");
+        this.prepareWriteHtml(this.htmlObj().kindItems(), "kind_items.new");
         this.doWriteHtml();
     };
 
-    this.prepareWriteHtml = () => {
-        this.htmlQue().enqueueData(["preludes.new",   this.htmlObj().preludes()]);
-        this.htmlQue().enqueueData(["kind_items.new", this.htmlObj().kindItems()]);
+    this.prepareWriteHtml = (data_val, file_name_val) => {
+        const whole_data = ENCODE.encodeHtml(data_val);
+        if (whole_data.length <= FE_DEF.MAX_TCP_DATA_SIZE()) {
+            this.htmlWriteQueue().enqueueData(["O", whole_data, file_name_val]);
+        }
+        else {
+            let rest_data = whole_data;
+            while (rest_data.length > 0) {
+                if (rest_data.length <= FE_DEF.MAX_TCP_DATA_SIZE()) {
+                    this.htmlWriteQueue().enqueueData(["M", rest_data, null]);
+                }
+                else {
+                    let data = rest_data.slice(0, FE_DEF.MAX_TCP_DATA_SIZE());
+                    rest_data = rest_data.slice(FE_DEF.MAX_TCP_DATA_SIZE());
+                    this.htmlWriteQueue().enqueueData(["M", data, null]);
+                }
+            }
+        }
+
     };
 
     this.doWriteHtml = () => {
-        if (this.htmlQue().queueLen() === 0) {
-            this.htmlObj().startHtmlObject();
-        }
-
-        const e = this.htmlQue().dequeueData();
+        const e = this.htmlWriteQueue().dequeueData();
         if (e !== null) {
-            this.portObj().writeInfo(e[0], e[1], this.doWriteHtml);
+            this.portObj().writeInfo(e[0], e[1], e[2], this.doWriteHtml);
         }
     };
 
@@ -55,6 +69,7 @@ function DtfWdObject(root_obj_val) {
     this.dFabricObj = () => this.rootObj().dFabricObj();
     this.uFabricObj = () => this.rootObj().uFabricObj();
     this.portObj = () => this.rootObj().portObj();
-    this.htmlQue = () => this.htmlQue_;
+    this.htmlReadQueue = () => this.htmlReadQueue_;
+    this.htmlWriteQueue = () => this.htmlWriteQueue_;
     this.init__(root_obj_val);
 }

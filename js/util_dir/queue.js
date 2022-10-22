@@ -13,7 +13,7 @@ function QueueClass(max_queue_len_val) {
 
     this.enqueueData = (data_val) => {
         if (this.queueLen() >= this.maxQueueLen()) {
-            console.log("QueueClass.enqueueData() queue full");
+            console.log("QueueClass.enqueueData() queue full length=" + this.queueLen());
             abend();
             return;
         }

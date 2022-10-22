@@ -59,6 +59,16 @@ function FE_DEF_OBJECT() {
     this.WRITE_MORE_FILE_COMMANDS   = () => "1" + this.WRITE_MORE_FILE_COMMAND();
     this.MESSAGE_COMMANDS           = () => "1" + this.MESSAGE_COMMAND();
 
+    this.ETHERNET_MTU_SIZE = () => 1500;
+    this.TCP_HEADER_SIZE     = () => 20;
+    this.MAX_TCP_HEADER_SIZE = () => 60;
+    this.IP_HEADER_SIZE     = () => 20;
+    this.MAX_IP_HEADER_SIZE = () => 24;
+    this.TCP_IP_HEADER_SIZE     = () => this.    TCP_HEADER_SIZE() + this.    IP_HEADER_SIZE();
+    this.MAX_TCP_IP_HEADER_SIZE = () => this.MAX_TCP_HEADER_SIZE() + this.MAX_IP_HEADER_SIZE();
+    this.MAX_TCP_DATA_SIZE = () => this.ETHERNET_MTU_SIZE() - this.MAX_TCP_IP_HEADER_SIZE();
+    this.MAX_TCP_DATA_LEN_SIZE = () => 4;
+
     this.FAKE_LINK_ID_INDEX    = () => "99990000";
     this.FAKE_SESSION_ID_INDEX = () => "99980000";
 
