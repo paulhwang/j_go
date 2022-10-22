@@ -89,14 +89,14 @@ function UFabricObject(root_obj_val) {
         this.httpXmtObj().transmitAjaxRequest(data); 
     };
 
-    this.writeFileRequest = (link_val, file_name_val, data_val) => {
+    this.writeFileRequest = (file_name_val, data_val) => {
         console.log("UFabricObject.writeFileRequest() data=" + data_val);
-        const data = FE_DEF.WRITE_FILE_COMMANDS() + link_val + ENCODE.encodeString(file_name_val) + data_val;
+        const data = FE_DEF.WRITE_FILE_COMMANDS() + this.linkObj().linkId() + ENCODE.encodeString(file_name_val) + data_val;
         this.httpXmtObj().transmitAjaxRequest(data); 
     };
 
     this.writeMoreFileRequest = (fd_val) => {
-        const data = FE_DEF.WRITE_MORE_FILE_COMMANDS() + fd_val;
+        const data = FE_DEF.WRITE_MORE_FILE_COMMANDS() + this.linkObj().linkId()  + fd_val;
         this.httpXmtObj().transmitAjaxRequest(data); 
     };
 
