@@ -57,9 +57,7 @@ function DtfHtmlObject(root_obj_val) {
         this.createItems();
         this.setupItemsSelectors();
 
-
-        this.wdObj().prepareWriteHtml();
-        this.wdObj().doWriteHtml();
+        this.wdObj().prepareAndDoWriteHtml();
     };
 
 /*

@@ -28,6 +28,11 @@ function DtfWdObject(root_obj_val) {
         }
     };
 
+    this.prepareAndDoWriteHtml = () => {
+        this.prepareWriteHtml();
+        this.doWriteHtml();
+    };
+
     this.prepareWriteHtml = () => {
         this.htmlQue().enqueueData(["preludes.new",   this.htmlObj().preludes()]);
         this.htmlQue().enqueueData(["kind_items.new", this.htmlObj().kindItems()]);
