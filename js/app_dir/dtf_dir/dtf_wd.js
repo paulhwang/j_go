@@ -8,24 +8,24 @@ function DtfWdObject(root_obj_val) {
 
     this.init__ = (root_obj_val) => {
         this.rootObj_ = root_obj_val;
-        this.serviceQueue_ = new QueueClass(2);
+        this.htmlQueue_ = new QueueClass(2);
         this.prepareReadHtml();
     };
 
     this.prepareReadHtml = () => {
-        this.serviceQueue().enqueueData(["preludes",   this.htmlObj().setPreludes]);
-        this.serviceQueue().enqueueData(["kind_items", this.htmlObj().setKindItems]);
+        this.htmlQueue().enqueueData(["preludes",   this.htmlObj().setPreludes]);
+        this.htmlQueue().enqueueData(["kind_items", this.htmlObj().setKindItems]);
     };
 
     this.doReadHtml = () => {
-        if (this.serviceQueue().queueLen() === 0) {
+        if (this.htmlQueue().queueLen() === 0) {
             this.htmlObj().startHtmlObject();
         }
 
-        let service = this.serviceQueue().dequeueData();
-        if (service !== null) {
-            const file_name = service[0];
-            const callback_func = service[1];
+        let block = this.htmlQueue().dequeueData();
+        if (block !== null) {
+            const file_name = block[0];
+            const callback_func = block[1];
             this.portObj().readInfo(file_name, callback_func, this.doReadHtml);
         }
     };
@@ -36,6 +36,6 @@ function DtfWdObject(root_obj_val) {
     this.dFabricObj = () => this.rootObj().dFabricObj();
     this.uFabricObj = () => this.rootObj().uFabricObj();
     this.portObj = () => this.rootObj().portObj();
-    this.serviceQueue = () => this.serviceQueue_;
+    this.htmlQueue = () => this.htmlQueue_;
     this.init__(root_obj_val);
 }
