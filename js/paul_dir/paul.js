@@ -11,48 +11,48 @@ function PaulObject() {
     };
 
     this.bindSelectors = () => {
-        document.querySelector(".register_button").addEventListener("click", function() {
+        document.querySelector(".register_button").addEventListener("click", () => {
             window.open("account_register.html", "_self");
         });
 
-        document.querySelector(".login_button").addEventListener("click", function() {
+        document.querySelector(".login_button").addEventListener("click", () => {
             window.open("account_login.html", "_self");
         });
 
 
-        document.querySelector(".logout_button").addEventListener("click", function() {
+        document.querySelector(".logout_button").addEventListener("click", () => {
             window.open("account_logout.html", "_self");
         });
 
-        document.querySelector(".go_button").addEventListener("click", function() {
+        document.querySelector(".go_button").addEventListener("click", () => {
             window.open("go_base.html", "_self");
         });
 
 
-        document.querySelector(".dtf_button").addEventListener("click", function() {
+        document.querySelector(".dtf_button").addEventListener("click", () => {
             window.open("dtf.html", "_self");
         });
 
 
 
 
-        document.querySelector(".old_go_button").addEventListener("click", function() {
+        document.querySelector(".old_go_button").addEventListener("click", () => {
             window.open("old_go_config.html", "_self");
         });
 
-        document.querySelector(".old_login_button").addEventListener("click", function() {
+        document.querySelector(".old_login_button").addEventListener("click", () => {
             window.open("go_login.html", "_self");
         });
 
-        document.querySelector(".image_button").addEventListener("click", function() {
+        document.querySelector(".image_button").addEventListener("click", () => {
             window.open("image.html", "_self");
         });
 
-        document.querySelector(".mmw_button").addEventListener("click", function() {
+        document.querySelector(".mmw_button").addEventListener("click", () => {
             window.open("mmw.html", "_self");
         });
 
-        document.querySelector(".map_button").addEventListener("click", function() {
+        document.querySelector(".map_button").addEventListener("click", () => {
             window.open("map.html", "_self");
         });
     };
@@ -200,7 +200,7 @@ $(document).ready(() => {
 });
 
 /*
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", () => {
     let ajax_packet_id = sessionStorage.getItem("ajax_packet_id");
     if ((ajax_packet_id === null) || (ajax_packet_id === "null") || (ajax_packet_id === undefined)) {
         sessionStorage.setItem("ajax_packet_id", 1);

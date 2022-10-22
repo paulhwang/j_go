@@ -5,16 +5,16 @@
 
 function AccountRegisterObject() {
     "use strict";
-    this.init__ = function() {
+    this.init__ = () => {
         this.fabricBaseObj_ = new FabricBaseObject(this);
 
         this.setupHtmlInputFunc();
         this.dFabricObj().setCallbackFunc(this.receiveFabricResponse, this);
     };
 
-    this.setupHtmlInputFunc = function() {
+    this.setupHtmlInputFunc = () => {
         const this0 = this;
-        $(".register_section .register_button").on("click", function() {
+        $(".register_section .register_button").on("click", () => {
             let my_name = $(".register_section .register_account_name").val();
             let password = $(".register_section .register_password").val();
             let email = $(".register_section .register_email").val();
@@ -25,7 +25,7 @@ function AccountRegisterObject() {
         });
     };
 
-    this.receiveFabricResponse = function(command_val, data_val) {
+    this.receiveFabricResponse = (command_val, data_val) => {
     };
 
     this.fabricBaseObj = () => this.fabricBaseObj_;

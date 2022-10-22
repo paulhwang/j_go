@@ -5,7 +5,7 @@
 
 function AccountLogoutObject() {
     "use strict";
-    this.init__ = function() {
+    this.init__ = () => {
         this.fabricBaseObj_ = new FabricBaseObject(this);
 
         console.log("AccountLogoutObject.init__() sessionStorage link_id=" + sessionStorage.getItem("link_id"));
@@ -15,14 +15,14 @@ function AccountLogoutObject() {
         this.dFabricObj().setCallbackFunc(this.receiveFabricResponse, this);
     };
 
-    this.setupHtmlInputFunc = function() {
+    this.setupHtmlInputFunc = () => {
         const this0 = this;
-        $(".logout_section .logout_button").on("click", function() {
+        $(".logout_section .logout_button").on("click", () => {
             this0.uFabricObj().logoutRequest();
         });
     };
 
-    this.receiveFabricResponse = function(command_val, data_val) {
+    this.receiveFabricResponse = (command_val, data_val) => {
     };
 
     this.fabricBaseObj = () => this.fabricBaseObj_;

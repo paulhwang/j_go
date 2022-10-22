@@ -5,16 +5,16 @@
 
 function AccountLoginObject() {
     "use strict";
-    this.init__ = function() {
+    this.init__ = () => {
         this.fabricBaseObj_ = new FabricBaseObject(this);
 
         this.setupHtmlInputFunc();
         this.dFabricObj().setCallbackFunc(this.receiveFabricResponse, this);
     };
 
-    this.setupHtmlInputFunc = function() {
+    this.setupHtmlInputFunc = () => {
         const this0 = this;
-        $(".login_section .login_button").on("click", function() {
+        $(".login_section .login_button").on("click", () => {
             let my_name = $(".login_section .login_account_name").val();
             let password = $(".login_section .login_password").val();
             if (my_name !== null) {
@@ -24,7 +24,7 @@ function AccountLoginObject() {
         });
     };
 
-    this.receiveFabricResponse = function(command_val, data_val) {
+    this.receiveFabricResponse = (command_val, data_val) => {
     };
 
     this.fabricBaseObj = () => this.fabricBaseObj_;

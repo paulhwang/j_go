@@ -10,7 +10,7 @@ function ENCODE_OBJECT() {
     this.init__ = () => {
     }
 
-    this.encodeNumber = function(number_val, size_val) {
+    this.encodeNumber = (number_val, size_val) => {
         const str = number_val.toString();
         let buf = "";
         for (let i = str.length; i < size_val; i++) {
