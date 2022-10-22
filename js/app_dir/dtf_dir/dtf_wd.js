@@ -28,6 +28,22 @@ function DtfWdObject(root_obj_val) {
         }
     };
 
+    this.prepareWriteHtml = () => {
+        this.htmlQue().enqueueData(["preludes",   this.htmlObj().preludes()]);
+        this.htmlQue().enqueueData(["kind_items", this.htmlObj().kindItems()]);
+    };
+
+    this.doWriteHtml = () => {
+        if (this.htmlQue().queueLen() === 0) {
+            this.htmlObj().startHtmlObject();
+        }
+
+        const e = this.htmlQue().dequeueData();
+        if (e !== null) {
+            this.portObj().writeInfo(e[0], e[1], this.doWriteHtml);
+        }
+    };
+
     this.rootObj = () => this.rootObj_;
     this.linkObj = () => this.rootObj().rootObj();
     this.htmlObj = () => this.rootObj().htmlObj();
