@@ -9,15 +9,15 @@ function DtfWdObject(root_obj_val) {
     this.init__ = (root_obj_val) => {
         this.rootObj_ = root_obj_val;
         this.serviceQueue_ = new QueueClass(2);
-        this.prepareReadService();
+        this.prepareReadHtml();
     };
 
-    this.prepareReadService = () => {
-        this.serviceQueue().enqueueData(["preludes",   "R", this.htmlObj().setPreludes]);
-        this.serviceQueue().enqueueData(["kind_items", "R", this.htmlObj().setKindItems]);
+    this.prepareReadHtml = () => {
+        this.serviceQueue().enqueueData(["preludes",   this.htmlObj().setPreludes]);
+        this.serviceQueue().enqueueData(["kind_items", this.htmlObj().setKindItems]);
     };
 
-    this.doReadService = () => {
+    this.doReadHtml = () => {
         if (this.serviceQueue().queueLen() === 0) {
             this.htmlObj().startHtmlObject();
         }
@@ -25,11 +25,8 @@ function DtfWdObject(root_obj_val) {
         let service = this.serviceQueue().dequeueData();
         if (service !== null) {
             const file_name = service[0];
-            const r_w = service[1];
-            const callback_func = service[2];
-            if (r_w === "R") {
-                this.portObj().readInfo(file_name, callback_func, this.doReadService);
-            }
+            const callback_func = service[1];
+            this.portObj().readInfo(file_name, callback_func, this.doReadHtml);
         }
     };
 
