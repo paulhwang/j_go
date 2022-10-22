@@ -12,7 +12,7 @@ function DtfRootObject() {
         this.portObj_ = new DtfPortObject(this);
         this.htmlObj_ = new DtfHtmlObject(this);
         this.wdObj_ = new DtfWdObject(this);
-        this.wDObj().doService("R");
+        this.wDObj().doReadService("R");
     };
 
     this.fabricBaseObj = () => this.fabricBaseObj_;
