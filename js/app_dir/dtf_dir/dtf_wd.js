@@ -37,18 +37,23 @@ function DtfWdObject(root_obj_val) {
 
     this.prepareWriteHtml = (data_val, file_name_val) => {
         const whole_data = ENCODE.encodeHtml(data_val);
-        if (whole_data.length <= FE_DEF.MAX_TCP_DATA_SIZE()) {
+        if (whole_data.length <= FE_DEF.MAX_FILE_IO_BUF_SIZE()) {
             this.htmlWriteQueue().enqueueData(["O", whole_data, file_name_val]);
+            return;
         }
         else {
-            let rest_data = whole_data;
+            let data = whole_data.slice(0, FE_DEF.MAX_FILE_IO_BUF_SIZE());
+            this.htmlWriteQueue().enqueueData(["O", data, file_name_val]);
+            let rest_data = whole_data.slice(FE_DEF.MAX_FILE_IO_BUF_SIZE());
+
             while (rest_data.length > 0) {
-                if (rest_data.length <= FE_DEF.MAX_TCP_DATA_SIZE()) {
+                if (rest_data.length <= FE_DEF.MAX_FILE_IO_BUF_SIZE()) {
                     this.htmlWriteQueue().enqueueData(["M", rest_data, null]);
+                    return;
                 }
                 else {
-                    let data = rest_data.slice(0, FE_DEF.MAX_TCP_DATA_SIZE());
-                    rest_data = rest_data.slice(FE_DEF.MAX_TCP_DATA_SIZE());
+                    let data = rest_data.slice(0, FE_DEF.MAX_FILE_IO_BUF_SIZE());
+                    rest_data = rest_data.slice(FE_DEF.MAX_FILE_IO_BUF_SIZE());
                     this.htmlWriteQueue().enqueueData(["M", data, null]);
                 }
             }

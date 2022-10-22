@@ -69,9 +69,10 @@ function FE_DEF_OBJECT() {
     this.MAX_TCP_DATA_SIZE = () => this.ETHERNET_MTU_SIZE() - this.MAX_TCP_IP_HEADER_SIZE();
     this.MAX_TCP_DATA_LEN_SIZE = () => 4;
 
+    this.MAX_FILE_IO_BUF_SIZE = () => 1024;
+
     this.FAKE_LINK_ID_INDEX    = () => "99990000";
     this.FAKE_SESSION_ID_INDEX = () => "99980000";
-
 
     this.FABRIC_TIME_STAMP_SIZE = () => 10;
     this.LINK_ID_SIZE           = () => 8;
