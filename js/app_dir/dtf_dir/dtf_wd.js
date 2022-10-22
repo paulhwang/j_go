@@ -19,8 +19,6 @@ function DtfWdObject(root_obj_val) {
     };
 
     this.doService = (val) => {
-        console.log("startWatchDogstartWatchDogstartWatchDogstartWatchDogstartWattWatchDogstartWatchDogstartWatchDog");
-
         if (this.serviceQueue().queueLen() === 0) {
             if (val === "R") {
                 this.htmlObj().startHtmlObject();

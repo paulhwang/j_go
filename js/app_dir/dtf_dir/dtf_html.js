@@ -47,53 +47,15 @@ function DtfHtmlObject(root_obj_val) {
     "use strict";
     this.init__ = (root_obj_val) => {
         this.rootObj_ = root_obj_val;
-        //ENCODE.encodeHtml(orig_preludes);
     };
 
     this.startHtmlObject = () => {
-        //this.setPreludes(orig_preludes);
-        //this.setKindItems(orig_kind_items);
-
         this.bindModal();
         this.createPreludes();
         this.createKinds();
         this.setupKindsSelectors();
         this.createItems();
         this.setupItemsSelectors();
-
-        //console.log(preludes);
-        //console.log(kind_items);
-
-        //let json_kind_items_package = JSON.stringify({
-        //                a: kind_items,
-        //                });
-        //console.log("json_kind_items_package=" + json_kind_items_package);
-
-        //let kind_items_package = JSON.parse(json_kind_items_package);
-        //console.log(kind_items_package.a);
-
-        //const data = json_kind_items_package;
-
-        //const encoded_data = encodeURIComponent(data);
-        //console.log("encoded_data=" + encoded_data);
-        //console.log("encoded_data.length=" + encoded_data.length);
-
-        //const decoded_data = decodeURIComponent(data);
-        //console.log("decoded_data=" + decoded_data);
-
-        //let kind_items_package1 = JSON.parse(decoded_data);
-        //console.log("kind_items_package1=" + kind_items_package1.a);
-
-/*
-        let json_kind_items = JSON.stringify({
-                        kind_items,
-                        });
-        console.log(json_kind_items);
-
-        let kind_items1 = JSON.parse(json_kind_items);
-        console.log(kind_items1);
-*/
-
     }
 
 /*
