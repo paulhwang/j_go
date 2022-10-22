@@ -5,7 +5,7 @@
 
 function DtfPortObject(root_val) {
     "use strict";
-    let a;
+    let encoded_html_data;
 
     this.init__ = function(root_val) {
         this.rootObj_ = root_val;
@@ -21,7 +21,7 @@ function DtfPortObject(root_val) {
             const data = data1_val;
             const more = data2_val;
             const fd = data3_val;
-            a = data;
+            encoded_html_data = data;
             //console.log("DtfPortObject.receiveFabricResponse(read) cmd=" + cmd_val + " data=" + data + " more=" + more + " fd=" + fd);
             if (more === "Y") {
                 this.uFabricObj().readMoreFileRequest(fd);
@@ -31,16 +31,16 @@ function DtfPortObject(root_val) {
             const data = data1_val;
             const more = data2_val;
             const fd = data3_val;
-            a = a + data;
+            encoded_html_data = encoded_html_data + data;
             //console.log("DtfPortObject.receiveFabricResponse(read more) cmd=" + cmd_val + " data=" + data + " more=" + more + " fd=" + fd);
             if (more === "Y") {
                 this.uFabricObj().readMoreFileRequest(fd);
             }
             else {
-                const aaa = ENCODE.decodeHtml(a);
+                const html_data = ENCODE.decodeHtml(encoded_html_data);
 
                 if (this.htmlFunc() !== null) {
-                    this.htmlFunc().bind(this)(aaa);
+                    this.htmlFunc().bind(this)(html_data);
                     this.clearHtmlFunc();
                 }
                 else {
