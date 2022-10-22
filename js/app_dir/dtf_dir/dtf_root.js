@@ -12,7 +12,7 @@ function DtfRootObject() {
         this.portObj_ = new DtfPortObject(this);
         this.htmlObj_ = new DtfHtmlObject(this);
         this.wdObj_ = new DtfWdObject(this);
-        this.wDObj().doReadHtml();
+        this.wdObj().doReadHtml();
     };
 
     this.fabricBaseObj = () => this.fabricBaseObj_;
@@ -22,7 +22,7 @@ function DtfRootObject() {
     this.sessionObj = () => this.uFabricObj().sessionObj();
     this.htmlObj = () => this.htmlObj_;
     this.portObj = () => this.portObj_;
-    this.wDObj = () => this.wdObj_;
+    this.wdObj = () => this.wdObj_;
     this.init__();
 };
 

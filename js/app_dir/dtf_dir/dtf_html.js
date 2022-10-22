@@ -56,7 +56,11 @@ function DtfHtmlObject(root_obj_val) {
         this.setupKindsSelectors();
         this.createItems();
         this.setupItemsSelectors();
-    }
+
+
+        this.wdObj().prepareWriteHtml();
+        this.wdObj().doWriteHtml();
+    };
 
 /*
      const orig_preludes = [
@@ -203,5 +207,6 @@ function DtfHtmlObject(root_obj_val) {
     this.uFabricObj = () => this.rootObj().uFabricObj();
     this.dFabricObj = () => this.rootObj().dFabricObj();
     this.portObj = () => this.rootObj().portObj();
+    this.wdObj = () => this.rootObj().wdObj();
     this.init__(root_obj_val);
 };
