@@ -48,7 +48,7 @@ function DtfPortObject(root_val) {
                 }
 
                 if (this.wdFunc() !== null) {
-                    this.wdFunc().bind(this)(this.wdParam());
+                    this.wdFunc().bind(this)();
                 }
                 else {
                     abend();
@@ -76,10 +76,9 @@ function DtfPortObject(root_val) {
         this.uFabricObj().writeFileRequest(link_val, file_name_val, data_val);
     };
 
-    this.readInfo = (file_name_val, html_func_val, wd_func_val, wd_param_val) => {
+    this.readInfo = (file_name_val, html_func_val, wd_func_val) => {
         this.htmlFunc_ = html_func_val;
         this.wdFunc_ = wd_func_val;
-        this.wdParam_ = wd_param_val;
         this.uFabricObj().readFileRequest(file_name_val);
     };
 
