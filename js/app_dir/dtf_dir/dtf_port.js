@@ -53,10 +53,12 @@ function DtfPortObject(root_val) {
         else if (cmd_val === FE_DEF.WRITE_FILE_RESPONSE()) {
             const fd = data1_val;
             console.log("DtfPortObject.receiveFabricResponse() cmd=" + cmd_val + " fd=" + fd);
+            this.wdObj().doWriteHtml(fd);
         }
         else if (cmd_val === FE_DEF.WRITE_MORE_FILE_RESPONSE()) {
             const fd = data1_val;
             console.log("DtfPortObject.receiveFabricResponse() cmd=" + cmd_val + " fd=" + fd);
+            this.wdObj().doWriteHtml(fd);
         }
         else if (cmd_val === FE_DEF.GET_NAME_LIST_RESPONSE()) {
             //this.renderNameList();
@@ -77,12 +79,12 @@ function DtfPortObject(root_val) {
         this.uFabricObj().readFileRequest(file_name_val);
     };
 
-    this.writeInfo = (mode_val, eof_val, data_val, file_name_val) => {
+    this.writeInfo = (mode_val, eof_val, data_val, file_name_val, fd_val) => {
         if (mode_val === "O") {
             this.uFabricObj().writeFileRequest(file_name_val, eof_val, data_val);
         }
         else {
-            this.uFabricObj().writeMoreFileRequest(fd, eof_val, data_val);
+            this.uFabricObj().writeMoreFileRequest(fd_val, eof_val, data_val);
         }
     };
 

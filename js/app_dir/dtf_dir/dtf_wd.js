@@ -32,7 +32,7 @@ function DtfWdObject(root_obj_val) {
     this.prepareAndDoWriteHtml = () => {
         this.prepareWriteHtml(this.htmlObj().preludes(), "preludes.new");
         this.prepareWriteHtml(this.htmlObj().kindItems(), "kind_items.new");
-        this.doWriteHtml();
+        this.doWriteHtml(0);
     };
 
     this.prepareWriteHtml = (data_val, file_name_val) => {
@@ -61,10 +61,10 @@ function DtfWdObject(root_obj_val) {
 
     };
 
-    this.doWriteHtml = () => {
+    this.doWriteHtml = (fd_val) => {
         const e = this.htmlWriteQueue().dequeueData();
         if (e !== null) {
-            this.portObj().writeInfo(e[0], e[1], e[2], e[3]);
+            this.portObj().writeInfo(e[0], e[1], e[2], e[3], fd_val);
         }
     };
 
