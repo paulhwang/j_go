@@ -25,7 +25,7 @@ function DtfWdObject(root_obj_val) {
 
         const e = this.htmlReadQueue().dequeueData();
         if (e !== null) {
-            this.portObj().readInfo(e[0], e[1], this.doReadHtml);
+            this.portObj().readInfo(e[0], e[1]);
         }
     };
 
@@ -64,7 +64,7 @@ function DtfWdObject(root_obj_val) {
     this.doWriteHtml = () => {
         const e = this.htmlWriteQueue().dequeueData();
         if (e !== null) {
-            this.portObj().writeInfo(e[0], e[1], e[2], e[3], this.doWriteHtml);
+            this.portObj().writeInfo(e[0], e[1], e[2], e[3]);
         }
     };
 

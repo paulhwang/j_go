@@ -47,12 +47,7 @@ function DtfPortObject(root_val) {
                     abend();
                 }
 
-                if (this.wdFunc() !== null) {
-                    this.wdFunc().bind(this)();
-                }
-                else {
-                    abend();
-                }
+                this.wdObj().doReadHtml();
             }
         }
         else if (cmd_val === FE_DEF.WRITE_FILE_RESPONSE()) {
@@ -77,14 +72,12 @@ function DtfPortObject(root_val) {
     this.getLinkDataResponse = (data_val) => {
     };
 
-    this.readInfo = (file_name_val, html_func_val, wd_func_val) => {
+    this.readInfo = (file_name_val, html_func_val) => {
         this.htmlFunc_ = html_func_val;
-        this.wdFunc_ = wd_func_val;
         this.uFabricObj().readFileRequest(file_name_val);
     };
 
-    this.writeInfo = (mode_val, eof_val, data_val, file_name_val, wd_func_val) => {
-        this.wdFunc_ = wd_func_val;
+    this.writeInfo = (mode_val, eof_val, data_val, file_name_val) => {
         if (mode_val === "O") {
             this.uFabricObj().writeFileRequest(file_name_val, eof_val, data_val);
         }
@@ -96,11 +89,10 @@ function DtfPortObject(root_val) {
     this.rootObj = () => this.rootObj_;
     this.linkObj = () => this.rootObj().rootObj();
     this.htmlObj = () => this.rootObj().htmlObj();
+    this.wdObj = () => this.rootObj().wdObj();
     this.dFabricObj = () => this.rootObj().dFabricObj();
     this.uFabricObj = () => this.rootObj().uFabricObj();
     this.htmlFunc = () => this.htmlFunc_;
-    this.wdFunc = () => this.wdFunc_;
-    this.wdParam = () => this.wdParam_;
     this.clearHtmlFunc = () => {this.htmlFunc_ = null;}
     this.init__(root_val);
 }
