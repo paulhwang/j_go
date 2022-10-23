@@ -52,12 +52,12 @@ function DtfPortObject(root_val) {
         }
         else if (cmd_val === FE_DEF.WRITE_FILE_RESPONSE()) {
             const fd = data1_val;
-            console.log("DtfPortObject.receiveFabricResponse() cmd=" + cmd_val + " fd=" + fd);
+            console.log("DtfPortObject.receiveFabricResponse(write) cmd=" + cmd_val + " fd=" + fd);
             this.wdObj().doWriteHtml(fd);
         }
         else if (cmd_val === FE_DEF.WRITE_MORE_FILE_RESPONSE()) {
             const fd = data1_val;
-            console.log("DtfPortObject.receiveFabricResponse() cmd=" + cmd_val + " fd=" + fd);
+            console.log("DtfPortObject.receiveFabricResponse(write_more) cmd=" + cmd_val + " fd=" + fd);
             this.wdObj().doWriteHtml(fd);
         }
         else if (cmd_val === FE_DEF.GET_NAME_LIST_RESPONSE()) {

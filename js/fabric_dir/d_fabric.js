@@ -488,17 +488,12 @@ function DFabricObject(root_obj_val) {
         const result = data.slice(index, index + FE_DEF.RESULT_SIZE());
         index += FE_DEF.RESULT_SIZE();
 
-        const link_id = data.slice(index, index + FE_DEF.LINK_ID_SIZE());
-        index += FE_DEF.LINK_ID_SIZE();
-
-        const session_id = data.slice(index, index + FE_DEF.SESSION_ID_SIZE());
-        index += FE_DEF.SESSION_ID_SIZE();
-
-        const result_data = data.slice(index);
+        const fd = data.slice(index, index + FE_DEF.FD_LEN_SIZE());
+        index += FE_DEF.FD_LEN_SIZE();
 
         if (result === FE_DEF.RESULT_SUCCEED()) {
-            console.log("DFabricObject.writeMoreFileResponse() succeed!");
-            this.callbackFunc().bind(this.callbackObj())(cmd_val);
+            console.log("DFabricObject.writeMoreFileResponse() succeed! fd=" + fd);
+            this.callbackFunc().bind(this.callbackObj())(cmd_val, result, fd);
         }
         else {
             console.log("DFabricObject.writeMoreFileResponse() invalid_result=" + result);
